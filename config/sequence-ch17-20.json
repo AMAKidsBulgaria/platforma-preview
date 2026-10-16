@@ -1,0 +1,890 @@
+{
+ "version": "0.1",
+ "game": "sequence",
+ "spec": "истории по 4–5 стъпки; оценява се първото „Провери“; assessment – набори A/B/C, practice – първо невидени",
+ "stories": [
+  {
+   "id": "q01",
+   "title": "Иво сади цвете",
+   "steps": [
+    "Иво изкопа дупка в саксията.",
+    "Сложи едно семе в дупката.",
+    "Поля семето с вода.",
+    "След седмица поникна цвете."
+   ],
+   "hint_first": "Какво трябва да има в саксията, преди да сложиш семето?",
+   "kind": "процедура",
+   "level": "лесна",
+   "pictures": [
+    "assets/img/art/seq/q01_1.jpg?v=1",
+    "assets/img/art/seq/q01_2.jpg?v=1",
+    "assets/img/art/seq/q01_3.jpg?v=1",
+    "assets/img/art/seq/q01_4.jpg?v=1"
+   ],
+   "time_words": [
+    "След седмица"
+   ],
+   "pool": "practice",
+   "profile": {
+    "steps": 4,
+    "avg_words": 4.5,
+    "time_words": true,
+    "causal": null,
+    "order_obvious": null,
+    "kind": "процедура"
+   }
+  },
+  {
+   "id": "q02",
+   "title": "Сандвичът на Ани",
+   "steps": [
+    "Ани взе две филии хляб.",
+    "Намаза ги с масло.",
+    "Сложи сирене между тях.",
+    "После изяде сандвича."
+   ],
+   "hint_first": "Какво трябва да направи Ани, преди да сложи сиренето?",
+   "kind": "процедура",
+   "level": null,
+   "pictures": null,
+   "time_words": [
+    "После"
+   ],
+   "pool": "practice",
+   "profile": {
+    "steps": 4,
+    "avg_words": 4.0,
+    "time_words": true,
+    "causal": 0,
+    "order_obvious": "висока",
+    "kind": "процедура"
+   }
+  },
+  {
+   "id": "q03",
+   "title": "Снежният човек",
+   "steps": [
+    "Навън заваля сняг.",
+    "Мая облече топло яке.",
+    "Тя направи снежен човек.",
+    "Накрая му сложи морков за нос."
+   ],
+   "hint_first": "Защо Мая облече яке – какво стана навън?",
+   "kind": "процедура",
+   "level": "средна",
+   "pictures": [
+    "assets/img/art/seq/q03_1.jpg?v=1",
+    "assets/img/art/seq/q03_2.jpg?v=1",
+    "assets/img/art/seq/q03_3.jpg?v=1",
+    "assets/img/art/seq/q03_4.jpg?v=1"
+   ],
+   "time_words": [
+    "Накрая"
+   ],
+   "pool": "practice",
+   "profile": {
+    "steps": 4,
+    "avg_words": 4.2,
+    "time_words": true,
+    "causal": null,
+    "order_obvious": null,
+    "kind": "процедура"
+   }
+  },
+  {
+   "id": "q04",
+   "title": "Котето и кълбото",
+   "steps": [
+    "Котето видя кълбо прежда.",
+    "То започна да гони кълбото.",
+    "Преждата се размота по пода.",
+    "Уморено, котето заспа."
+   ],
+   "hint_first": "Какво трябва да види котето, преди да го гони?",
+   "kind": "причина–следствие",
+   "level": null,
+   "pictures": null,
+   "time_words": [],
+   "pool": "assessment",
+   "profile": {
+    "steps": 4,
+    "avg_words": 4.2,
+    "time_words": false,
+    "causal": 1,
+    "order_obvious": "средна",
+    "kind": "причина–следствие"
+   }
+  },
+  {
+   "id": "q05",
+   "title": "Писмо за баба",
+   "steps": [
+    "Иво написа писмо на баба.",
+    "Сложи писмото в плик.",
+    "Пусна плика в пощенската кутия.",
+    "Баба прочете писмото и се усмихна."
+   ],
+   "hint_first": "Какво трябва да има в плика, преди да го пусне в кутията?",
+   "kind": "процедура",
+   "level": null,
+   "pictures": null,
+   "time_words": [],
+   "pool": "assessment",
+   "profile": {
+    "steps": 4,
+    "avg_words": 5.0,
+    "time_words": false,
+    "causal": 0,
+    "order_obvious": "висока",
+    "kind": "процедура"
+   }
+  },
+  {
+   "id": "q06",
+   "title": "Кексът",
+   "steps": [
+    "Ани и мама смесиха брашно и яйца.",
+    "Сложиха сместа във формата.",
+    "Кексът се изпече във фурната.",
+    "Накрая всички опитаха кекса."
+   ],
+   "hint_first": "Какво трябва да стане, преди кексът да влезе във фурната?",
+   "kind": "процедура",
+   "level": null,
+   "pictures": null,
+   "time_words": [
+    "Накрая"
+   ],
+   "pool": "assessment",
+   "profile": {
+    "steps": 4,
+    "avg_words": 5.0,
+    "time_words": true,
+    "causal": 0,
+    "order_obvious": "висока",
+    "kind": "процедура"
+   }
+  },
+  {
+   "id": "q07",
+   "title": "Дъждът",
+   "steps": [
+    "Небето стана сиво.",
+    "Заваля силен дъжд.",
+    "Иво отвори чадъра си.",
+    "После излезе слънце и дъга."
+   ],
+   "hint_first": "Защо Иво отвори чадъра – какво стана преди това?",
+   "kind": "причина–следствие",
+   "level": "лесна",
+   "pictures": [
+    "assets/img/art/seq/q07_1.jpg?v=1",
+    "assets/img/art/seq/q07_2.jpg?v=1",
+    "assets/img/art/seq/q07_3.jpg?v=1",
+    "assets/img/art/seq/q07_4.jpg?v=1"
+   ],
+   "time_words": [
+    "После"
+   ],
+   "pool": "practice",
+   "profile": {
+    "steps": 4,
+    "avg_words": 3.8,
+    "time_words": true,
+    "causal": null,
+    "order_obvious": null,
+    "kind": "причина–следствие"
+   }
+  },
+  {
+   "id": "q08",
+   "title": "Чисти зъби",
+   "steps": [
+    "Мая взе четката за зъби.",
+    "Сложи паста върху четката.",
+    "Изми зъбите си добре.",
+    "Накрая изплакна устата си с вода."
+   ],
+   "hint_first": "Какво трябва да има на четката, преди да миеш зъбите?",
+   "kind": "процедура",
+   "level": null,
+   "pictures": null,
+   "time_words": [
+    "Накрая"
+   ],
+   "pool": "assessment",
+   "profile": {
+    "steps": 4,
+    "avg_words": 4.8,
+    "time_words": true,
+    "causal": 0,
+    "order_obvious": "висока",
+    "kind": "процедура"
+   }
+  },
+  {
+   "id": "q09",
+   "title": "Пилето",
+   "steps": [
+    "Кокошката снесе яйце.",
+    "Тя дълго топли яйцето.",
+    "Яйцето се пукна.",
+    "От него излезе малко пиле."
+   ],
+   "hint_first": "Откъде излиза пилето – какво трябва да има преди това?",
+   "kind": "природен процес",
+   "level": "лесна",
+   "pictures": [
+    "assets/img/art/seq/q09_1.jpg?v=1",
+    "assets/img/art/seq/q09_2.jpg?v=1",
+    "assets/img/art/seq/q09_3.jpg?v=1",
+    "assets/img/art/seq/q09_4.jpg?v=1"
+   ],
+   "time_words": [],
+   "pool": "practice",
+   "profile": {
+    "steps": 4,
+    "avg_words": 3.8,
+    "time_words": false,
+    "causal": null,
+    "order_obvious": null,
+    "kind": "природен процес"
+   }
+  },
+  {
+   "id": "q10",
+   "title": "Колелото",
+   "steps": [
+    "Иво падна от колелото.",
+    "Удари си коляното.",
+    "Татко му сложи лепенка.",
+    "Иво пак седна на колелото."
+   ],
+   "hint_first": "Защо татко сложи лепенка – какво стана преди това?",
+   "kind": "проблем–решение",
+   "level": null,
+   "pictures": null,
+   "time_words": [],
+   "pool": "assessment",
+   "profile": {
+    "steps": 4,
+    "avg_words": 4.0,
+    "time_words": false,
+    "causal": 2,
+    "order_obvious": "средна",
+    "kind": "проблем–решение"
+   }
+  },
+  {
+   "id": "q11",
+   "title": "В библиотеката",
+   "steps": [
+    "Ани отиде в библиотеката.",
+    "Избра книга за динозаври.",
+    "Показа книгата на библиотекарката.",
+    "Занесе книгата у дома.",
+    "Вечерта я прочете с мама."
+   ],
+   "hint_first": "Къде трябва да е Ани, за да избере книга?",
+   "kind": "процедура",
+   "level": null,
+   "pictures": null,
+   "time_words": [
+    "Вечерта"
+   ],
+   "pool": "assessment",
+   "profile": {
+    "steps": 5,
+    "avg_words": 4.2,
+    "time_words": true,
+    "causal": 0,
+    "order_obvious": "средна",
+    "kind": "процедура"
+   }
+  },
+  {
+   "id": "q12",
+   "title": "Изгубената топка",
+   "steps": [
+    "Иво игра с топка в двора.",
+    "Ритна топката много силно.",
+    "Топката падна в храстите.",
+    "Мая му помогна да я търси.",
+    "Двамата намериха топката."
+   ],
+   "hint_first": "Кое събитие кара Иво да започне да търси топката?",
+   "kind": "проблем–решение",
+   "level": null,
+   "pictures": null,
+   "time_words": [],
+   "pool": "assessment",
+   "profile": {
+    "steps": 5,
+    "avg_words": 4.6,
+    "time_words": false,
+    "causal": 2,
+    "order_obvious": "средна",
+    "kind": "проблем–решение"
+   }
+  },
+  {
+   "id": "q13",
+   "title": "Пеперудата",
+   "steps": [
+    "Пеперудата снесе яйце на едно листо.",
+    "От яйцето излезе гъсеница.",
+    "Гъсеницата яде листа и расте.",
+    "Тя се уви в какавида.",
+    "От какавидата излезе нова пеперуда."
+   ],
+   "hint_first": "Какво трябва да има, за да излезе гъсеница?",
+   "kind": "природен процес",
+   "level": null,
+   "pictures": null,
+   "time_words": [],
+   "pool": "assessment",
+   "profile": {
+    "steps": 5,
+    "avg_words": 5.0,
+    "time_words": false,
+    "causal": 1,
+    "order_obvious": "висока",
+    "kind": "природен процес"
+   }
+  },
+  {
+   "id": "q14",
+   "title": "Пикник",
+   "steps": [
+    "Семейството тръгна на пикник.",
+    "Татко постла одеяло на тревата.",
+    "Мама сложи сандвичите на одеялото.",
+    "Всички хапнаха и поиграха.",
+    "Вечерта се прибраха уморени."
+   ],
+   "hint_first": "Какво трябва да има на тревата, преди мама да сложи сандвичите?",
+   "kind": "социална история",
+   "level": null,
+   "pictures": null,
+   "time_words": [
+    "Вечерта"
+   ],
+   "pool": "assessment",
+   "profile": {
+    "steps": 5,
+    "avg_words": 4.4,
+    "time_words": true,
+    "causal": 0,
+    "order_obvious": "висока",
+    "kind": "социална история"
+   }
+  },
+  {
+   "id": "q15",
+   "title": "Чисти ръце",
+   "steps": [
+    "Ани си изцапа ръцете с пръст.",
+    "Тя насапуниса ръцете си.",
+    "Изплакна ги под чешмата.",
+    "Накрая ги избърса с кърпа."
+   ],
+   "hint_first": "Защо Ани мие ръцете си – какво стана преди това?",
+   "kind": "процедура",
+   "level": "лесна",
+   "pictures": [
+    "assets/img/art/seq/q15_1.jpg?v=1",
+    "assets/img/art/seq/q15_2.jpg?v=1",
+    "assets/img/art/seq/q15_3.jpg?v=1",
+    "assets/img/art/seq/q15_4.jpg?v=1"
+   ],
+   "time_words": [
+    "Накрая"
+   ],
+   "pool": "practice",
+   "profile": {
+    "steps": 4,
+    "avg_words": 4.8,
+    "time_words": true,
+    "causal": null,
+    "order_obvious": null,
+    "kind": "процедура"
+   }
+  },
+  {
+   "id": "q16",
+   "title": "Разлятото мляко",
+   "steps": [
+    "Иво носеше чаша мляко.",
+    "Чашата падна и млякото се разля.",
+    "Иво донесе парцал.",
+    "Той избърса пода."
+   ],
+   "hint_first": "Защо Иво донесе парцал – какво стана преди това?",
+   "kind": "проблем–решение",
+   "level": "средна",
+   "pictures": [
+    "assets/img/art/seq/q16_1.jpg?v=1",
+    "assets/img/art/seq/q16_2.jpg?v=1",
+    "assets/img/art/seq/q16_3.jpg?v=1",
+    "assets/img/art/seq/q16_4.jpg?v=1"
+   ],
+   "time_words": [],
+   "pool": "practice",
+   "profile": {
+    "steps": 4,
+    "avg_words": 4.0,
+    "time_words": false,
+    "causal": null,
+    "order_obvious": null,
+    "kind": "проблем–решение"
+   }
+  },
+  {
+   "id": "q17",
+   "title": "Подаръкът",
+   "steps": [
+    "Ани подари на Мая кутия с панделка.",
+    "Мая развърза панделката.",
+    "Тя отвори кутията и видя кукла.",
+    "Мая прегърна Ани."
+   ],
+   "hint_first": "Какво трябва да направи Мая, преди да отвори кутията?",
+   "kind": "социална история",
+   "level": "средна",
+   "pictures": [
+    "assets/img/art/seq/q17_1.jpg?v=1",
+    "assets/img/art/seq/q17_2.jpg?v=1",
+    "assets/img/art/seq/q17_3.jpg?v=1",
+    "assets/img/art/seq/q17_4.jpg?v=1"
+   ],
+   "time_words": [],
+   "pool": "practice",
+   "profile": {
+    "steps": 4,
+    "avg_words": 4.8,
+    "time_words": false,
+    "causal": null,
+    "order_obvious": null,
+    "kind": "социална история"
+   }
+  },
+  {
+   "id": "q18",
+   "title": "Супата",
+   "steps": [
+    "Мама наряза моркови.",
+    "Сложи морковите в тенджерата.",
+    "Супата завря на котлона.",
+    "Всички седнаха и ядоха супа."
+   ],
+   "hint_first": "Какво трябва да стане с морковите, преди да влязат в тенджерата?",
+   "kind": "процедура",
+   "level": "средна",
+   "pictures": [
+    "assets/img/art/seq/q18_1.jpg?v=1",
+    "assets/img/art/seq/q18_2.jpg?v=1",
+    "assets/img/art/seq/q18_3.jpg?v=1",
+    "assets/img/art/seq/q18_4.jpg?v=1"
+   ],
+   "time_words": [],
+   "pool": "practice",
+   "profile": {
+    "steps": 4,
+    "avg_words": 4.0,
+    "time_words": false,
+    "causal": null,
+    "order_obvious": null,
+    "kind": "процедура"
+   }
+  },
+  {
+   "id": "q19",
+   "title": "Ябълката",
+   "steps": [
+    "През пролетта ябълковото дърво цъфна.",
+    "От един цвят се появи малка зелена ябълка.",
+    "През лятото ябълката порасна и стана червена.",
+    "Ани откъсна ябълката и я сложи в кошницата."
+   ],
+   "hint_first": "От какво се появява малката ябълка?",
+   "kind": "природен процес",
+   "level": "трудна",
+   "pictures": [
+    "assets/img/art/seq/q19_1.jpg?v=1",
+    "assets/img/art/seq/q19_2.jpg?v=1",
+    "assets/img/art/seq/q19_3.jpg?v=1",
+    "assets/img/art/seq/q19_4.jpg?v=1"
+   ],
+   "time_words": [],
+   "pool": "practice",
+   "profile": {
+    "steps": 4,
+    "avg_words": 7.0,
+    "time_words": false,
+    "causal": null,
+    "order_obvious": null,
+    "kind": "природен процес"
+   }
+  },
+  {
+   "id": "q20",
+   "title": "Кулата",
+   "steps": [
+    "Иво построи висока кула от кубчета.",
+    "Котето дойде при кулата.",
+    "То бутна кулата с лапа.",
+    "Кубчетата паднаха по пода."
+   ],
+   "hint_first": "Какво трябва да има, за да може котето да го бутне?",
+   "kind": "причина–следствие",
+   "level": "трудна",
+   "pictures": [
+    "assets/img/art/seq/q20_1.jpg?v=1",
+    "assets/img/art/seq/q20_2.jpg?v=1",
+    "assets/img/art/seq/q20_3.jpg?v=1",
+    "assets/img/art/seq/q20_4.jpg?v=1"
+   ],
+   "time_words": [],
+   "pool": "practice",
+   "profile": {
+    "steps": 4,
+    "avg_words": 4.8,
+    "time_words": false,
+    "causal": null,
+    "order_obvious": null,
+    "kind": "причина–следствие"
+   }
+  },
+  {
+   "id": "q21",
+   "title": "Половин бисквита",
+   "steps": [
+    "Иво имаше голяма бисквита.",
+    "Той видя, че Мая е тъжна.",
+    "Иво счупи бисквитата на две.",
+    "Даде едната половина на Мая."
+   ],
+   "hint_first": "Защо Иво счупи бисквитата – кого видя преди това?",
+   "kind": "социална история",
+   "level": "трудна",
+   "pictures": [
+    "assets/img/art/seq/q21_1.jpg?v=1",
+    "assets/img/art/seq/q21_2.jpg?v=1",
+    "assets/img/art/seq/q21_3.jpg?v=1",
+    "assets/img/art/seq/q21_4.jpg?v=1"
+   ],
+   "time_words": [],
+   "pool": "practice",
+   "profile": {
+    "steps": 4,
+    "avg_words": 5.0,
+    "time_words": false,
+    "causal": null,
+    "order_obvious": null,
+    "kind": "социална история"
+   }
+  },
+  {
+   "id": "q22",
+   "title": "Хвърчилото",
+   "steps": [
+    "Иво пусна хвърчилото си.",
+    "Хвърчилото се закачи на едно дърво.",
+    "Иво повика татко.",
+    "Татко свали хвърчилото с дълга пръчка."
+   ],
+   "hint_first": "Защо Иво повика татко – какво стана преди това?",
+   "kind": "проблем–решение",
+   "level": "трудна",
+   "pictures": [
+    "assets/img/art/seq/q22_1.jpg?v=2",
+    "assets/img/art/seq/q22_2.jpg?v=2",
+    "assets/img/art/seq/q22_3.jpg?v=2",
+    "assets/img/art/seq/q22_4.jpg?v=2"
+   ],
+   "time_words": [],
+   "pool": "practice",
+   "profile": {
+    "steps": 4,
+    "avg_words": 4.8,
+    "time_words": false,
+    "causal": null,
+    "order_obvious": null,
+    "kind": "проблем–решение"
+   }
+  },
+  {
+   "id": "q23",
+   "title": "Рисунката",
+   "steps": [
+    "Мая взе лист и моливи.",
+    "Нарисува къща и дърво.",
+    "Оцвети слънцето в жълто.",
+    "Сложи рисунката в рамка.",
+    "Подари рисунката на баба."
+   ],
+   "hint_first": "Какво трябва да има Мая, за да започне да рисува?",
+   "kind": "процедура",
+   "level": null,
+   "pictures": null,
+   "time_words": [],
+   "pool": "assessment",
+   "profile": {
+    "steps": 5,
+    "avg_words": 4.2,
+    "time_words": false,
+    "causal": 0,
+    "order_obvious": "висока",
+    "kind": "процедура"
+   }
+  },
+  {
+   "id": "q24",
+   "title": "Рибката",
+   "steps": [
+    "Иво и татко купиха рибка от магазина.",
+    "Вкъщи татко напълни аквариума с вода.",
+    "Иво пусна рибката във водата.",
+    "Даде ѝ малко храна.",
+    "Рибката заплува весело."
+   ],
+   "hint_first": "Какво трябва да има в аквариума, преди да пуснеш рибката?",
+   "kind": "процедура",
+   "level": null,
+   "pictures": null,
+   "time_words": [],
+   "pool": "assessment",
+   "profile": {
+    "steps": 5,
+    "avg_words": 5.0,
+    "time_words": false,
+    "causal": 1,
+    "order_obvious": "средна",
+    "kind": "процедура"
+   }
+  },
+  {
+   "id": "q25",
+   "title": "Изгубеното коте",
+   "steps": [
+    "Котето избяга от двора.",
+    "Ани го потърси навсякъде.",
+    "Чу тихо мяукане от едно дърво.",
+    "Татко свали котето от клона.",
+    "Котето заспа до Ани."
+   ],
+   "hint_first": "Защо Ани търси котето – какво стана преди това?",
+   "kind": "проблем–решение",
+   "level": null,
+   "pictures": null,
+   "time_words": [],
+   "pool": "assessment",
+   "profile": {
+    "steps": 5,
+    "avg_words": 4.6,
+    "time_words": false,
+    "causal": 1,
+    "order_obvious": "средна",
+    "kind": "проблем–решение"
+   }
+  },
+  {
+   "id": "q26",
+   "title": "Хлябът",
+   "steps": [
+    "Баба смеси брашно, вода и мая.",
+    "Тя омеси тестото с ръце.",
+    "Тестото втаса и стана голямо.",
+    "Баба изпече хляба във фурната.",
+    "Накрая всички хапнаха топъл хляб."
+   ],
+   "hint_first": "Какво трябва да стане с тестото, преди да влезе във фурната?",
+   "kind": "процедура",
+   "level": null,
+   "pictures": null,
+   "time_words": [
+    "Накрая"
+   ],
+   "pool": "assessment",
+   "profile": {
+    "steps": 5,
+    "avg_words": 5.2,
+    "time_words": true,
+    "causal": 2,
+    "order_obvious": "средна",
+    "kind": "процедура"
+   }
+  },
+  {
+   "id": "q28",
+   "title": "Хранилката",
+   "steps": [
+    "Навън валеше сняг и беше студено.",
+    "Птичките не можеха да намерят храна.",
+    "Мая сложи семена в хранилката.",
+    "Накрая птичките долетяха и ядоха."
+   ],
+   "hint_first": "Защо птичките не можеха да намерят храна?",
+   "kind": "причина–следствие",
+   "level": null,
+   "pictures": null,
+   "time_words": [
+    "Накрая"
+   ],
+   "pool": "assessment",
+   "profile": {
+    "steps": 4,
+    "avg_words": 5.5,
+    "time_words": true,
+    "causal": 2,
+    "order_obvious": "средна",
+    "kind": "причина–следствие"
+   }
+  },
+  {
+   "id": "q27",
+   "title": "Счупената количка",
+   "steps": [
+    "Количката на Иво се счупи.",
+    "Едно колело падна на пода.",
+    "Иво занесе количката на дядо.",
+    "Дядо залепи колелото.",
+    "Иво пак игра с количката."
+   ],
+   "hint_first": "Защо Иво занесе количката на дядо – какво стана преди това?",
+   "kind": "проблем–решение",
+   "level": null,
+   "pictures": null,
+   "time_words": [],
+   "pool": "assessment",
+   "profile": {
+    "steps": 5,
+    "avg_words": 4.6,
+    "time_words": false,
+    "causal": 2,
+    "order_obvious": "средна",
+    "kind": "проблем–решение"
+   }
+  }
+ ],
+ "rounds": {
+  "CH17.Р2": {
+   "view": "sentences",
+   "pool": "practice",
+   "n": 3,
+   "steps": 4
+  },
+  "CH17.Р4": {
+   "view": "sentences",
+   "pool": "assessment",
+   "sets": {
+    "A": [
+     "q05",
+     "q28"
+    ],
+    "B": [
+     "q04",
+     "q06"
+    ],
+    "C": [
+     "q10",
+     "q08"
+    ]
+   }
+  },
+  "CH19.Р2": {
+   "view": "pictures",
+   "pool": "practice",
+   "groups": [
+    [
+     "q01",
+     "q07",
+     "q03",
+     "q09",
+     "q15"
+    ],
+    [
+     "q09",
+     "q15",
+     "q01",
+     "q07"
+    ],
+    [
+     "q03",
+     "q16",
+     "q17",
+     "q18",
+     "q19",
+     "q20",
+     "q21",
+     "q22"
+    ]
+   ],
+   "known_first": true
+  },
+  "CH19.Р3": {
+   "view": "sentences",
+   "pool": "assessment",
+   "sets": {
+    "A": [
+     "q11",
+     "q12",
+     "q13"
+    ],
+    "B": [
+     "q14",
+     "q27",
+     "q24"
+    ],
+    "C": [
+     "q26",
+     "q25",
+     "q23"
+    ]
+   }
+  },
+  "CH20.Р1": {
+   "view": "sentences",
+   "pool": "practice",
+   "n": 2,
+   "steps": 4
+  }
+ },
+ "pools": {
+  "practice": [
+   "q01",
+   "q02",
+   "q03",
+   "q07",
+   "q09",
+   "q15",
+   "q16",
+   "q17",
+   "q18",
+   "q19",
+   "q20",
+   "q21",
+   "q22"
+  ],
+  "assessment": [
+   "q04",
+   "q05",
+   "q06",
+   "q08",
+   "q10",
+   "q11",
+   "q12",
+   "q13",
+   "q14",
+   "q23",
+   "q24",
+   "q25",
+   "q26",
+   "q27",
+   "q28"
+  ]
+ },
+ "pictures_missing": [],
+ "checks": [],
+ "warnings": []
+}

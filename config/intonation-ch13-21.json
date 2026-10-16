@@ -1,0 +1,1012 @@
+{
+ "version": "0.1",
+ "game": "intonation",
+ "goals": [
+  "казва",
+  "пита",
+  "възкликва"
+ ],
+ "marks": {
+  "казва": ".",
+  "пита": "?",
+  "възкликва": "!"
+ },
+ "spec": "ситуация + изречение без знак → цел (казва/пита/възкликва); знакът се показва след избора; една задача = една оценка",
+ "items": [
+  {
+   "id": "t1_1",
+   "situation": "Мая гледа спокойно през прозореца.",
+   "words": "Вали дъжд",
+   "goal": "казва",
+   "pool": "practice",
+   "triple": "t1",
+   "sentence": "Вали дъжд.",
+   "hero": "Мая",
+   "feedback": "Мая казва",
+   "picture": "assets/img/art/inton/t1_1.jpg"
+  },
+  {
+   "id": "t1_2",
+   "situation": "Иво не вижда добре навън и не е сигурен.",
+   "words": "Вали ли дъжд",
+   "goal": "пита",
+   "pool": "practice",
+   "triple": "t1",
+   "sentence": "Вали ли дъжд?",
+   "hero": "Иво",
+   "feedback": "Иво пита",
+   "picture": "assets/img/art/inton/t1_2.jpg"
+  },
+  {
+   "id": "t1_3",
+   "situation": "Ани тича към прозореца изненадана.",
+   "words": "Вали дъжд",
+   "goal": "възкликва",
+   "pool": "practice",
+   "triple": "t1",
+   "sentence": "Вали дъжд!",
+   "hero": "Ани",
+   "feedback": "Ани възкликва",
+   "picture": "assets/img/art/inton/t1_3.jpg"
+  },
+  {
+   "id": "t2_1",
+   "situation": "Мама показва на Мая къде е мечето.",
+   "words": "Мечето е тук",
+   "goal": "казва",
+   "pool": "practice",
+   "triple": "t2",
+   "sentence": "Мечето е тук.",
+   "hero": "Мама",
+   "feedback": "Мама казва",
+   "picture": "assets/img/art/inton/t2_1.jpg"
+  },
+  {
+   "id": "t2_2",
+   "situation": "Мая не вижда мечето и се обръща към мама.",
+   "words": "Мечето тук ли е",
+   "goal": "пита",
+   "pool": "practice",
+   "triple": "t2",
+   "sentence": "Мечето тук ли е?",
+   "hero": "Мая",
+   "feedback": "Мая пита",
+   "picture": "assets/img/art/inton/t2_2.jpg"
+  },
+  {
+   "id": "t2_3",
+   "situation": "Мая най-сетне намира изгубеното си мече.",
+   "words": "Мечето е тук",
+   "goal": "възкликва",
+   "pool": "practice",
+   "triple": "t2",
+   "sentence": "Мечето е тук!",
+   "hero": "Мая",
+   "feedback": "Мая възкликва",
+   "picture": "assets/img/art/inton/t2_3.jpg"
+  },
+  {
+   "id": "t3_1",
+   "situation": "Баба гледа котето на възглавницата и говори на Ани.",
+   "words": "Котето спи",
+   "goal": "казва",
+   "pool": "practice",
+   "triple": "t3",
+   "sentence": "Котето спи.",
+   "hero": "Баба",
+   "feedback": "Баба казва",
+   "picture": "assets/img/art/inton/t3_1.jpg"
+  },
+  {
+   "id": "t3_2",
+   "situation": "Иво не чува котето и не знае какво прави то.",
+   "words": "Котето спи ли",
+   "goal": "пита",
+   "pool": "practice",
+   "triple": "t3",
+   "sentence": "Котето спи ли?",
+   "hero": "Иво",
+   "feedback": "Иво пита",
+   "picture": "assets/img/art/inton/t3_2.jpg"
+  },
+  {
+   "id": "t3_3",
+   "situation": "Ани намира котето заспало в обувката си.",
+   "words": "Котето спи",
+   "goal": "възкликва",
+   "pool": "practice",
+   "triple": "t3",
+   "sentence": "Котето спи!",
+   "hero": "Ани",
+   "feedback": "Ани възкликва",
+   "picture": "assets/img/art/inton/t3_3.jpg"
+  },
+  {
+   "id": "t4_1",
+   "situation": "Мама вижда кой влезе и обяснява на баба.",
+   "words": "Татко се върна",
+   "goal": "казва",
+   "pool": "practice",
+   "triple": "t4",
+   "sentence": "Татко се върна.",
+   "hero": "Мама",
+   "feedback": "Мама казва",
+   "picture": "assets/img/art/inton/t4_1.jpg"
+  },
+  {
+   "id": "t4_2",
+   "situation": "Мая чу вратата, но не вижда кой е.",
+   "words": "Татко върна ли се",
+   "goal": "пита",
+   "pool": "practice",
+   "triple": "t4",
+   "sentence": "Татко върна ли се?",
+   "hero": "Мая",
+   "feedback": "Мая пита",
+   "picture": "assets/img/art/inton/t4_2.jpg"
+  },
+  {
+   "id": "t4_3",
+   "situation": "Иво чака татко цял ден и го вижда на вратата.",
+   "words": "Татко се върна",
+   "goal": "възкликва",
+   "pool": "practice",
+   "triple": "t4",
+   "sentence": "Татко се върна!",
+   "hero": "Иво",
+   "feedback": "Иво възкликва",
+   "picture": "assets/img/art/inton/t4_3.jpg"
+  },
+  {
+   "id": "p1",
+   "situation": "Мама държи ябълка и гледа Иво.",
+   "words": "Искаш ли ябълка",
+   "goal": "пита",
+   "pool": "practice",
+   "sentence": "Искаш ли ябълка?",
+   "hero": "Мама",
+   "feedback": "Мама пита",
+   "picture": "assets/img/art/inton/p1.jpg"
+  },
+  {
+   "id": "p2",
+   "situation": "Ани вижда огромна торта за рождения си ден.",
+   "words": "Каква голяма торта",
+   "goal": "възкликва",
+   "pool": "practice",
+   "sentence": "Каква голяма торта!",
+   "hero": "Ани",
+   "feedback": "Ани възкликва",
+   "picture": "assets/img/art/inton/p2.jpg"
+  },
+  {
+   "id": "p3",
+   "situation": "Иво и дядо си говорят за сутринта.",
+   "words": "Сутрин отивам на училище",
+   "goal": "казва",
+   "pool": "practice",
+   "sentence": "Сутрин отивам на училище.",
+   "hero": "Иво",
+   "feedback": "Иво казва",
+   "picture": "assets/img/art/inton/p3.jpg"
+  },
+  {
+   "id": "p4",
+   "situation": "Мая търси молива си по масата.",
+   "words": "Къде е моливът ми",
+   "goal": "пита",
+   "pool": "practice",
+   "sentence": "Къде е моливът ми?",
+   "hero": "Мая",
+   "feedback": "Мая пита",
+   "picture": "assets/img/art/inton/p4.jpg"
+  },
+  {
+   "id": "p5",
+   "situation": "Иво се събужда и вижда, че навън всичко е бяло.",
+   "words": "Ура, сняг",
+   "goal": "възкликва",
+   "pool": "practice",
+   "sentence": "Ура, сняг!",
+   "hero": "Иво",
+   "feedback": "Иво възкликва",
+   "picture": "assets/img/art/inton/p5.jpg"
+  },
+  {
+   "id": "p6",
+   "situation": "Баба гледа котето и обяснява на Ани.",
+   "words": "Котето пие мляко",
+   "goal": "казва",
+   "pool": "practice",
+   "sentence": "Котето пие мляко.",
+   "hero": "Баба",
+   "feedback": "Баба казва",
+   "picture": "assets/img/art/inton/p6.jpg"
+  },
+  {
+   "id": "a1",
+   "situation": "Сутрин е. Мама гледа календара и говори на децата.",
+   "words": "Днес е неделя",
+   "goal": "казва",
+   "pool": "assessment",
+   "set": "A",
+   "sentence": "Днес е неделя.",
+   "hero": "Мама",
+   "feedback": "Мама казва",
+   "picture": "assets/img/art/inton/a1.jpg"
+  },
+  {
+   "id": "a2",
+   "situation": "Иво показва на баба къде е кучето.",
+   "words": "Кучето спи под масата",
+   "goal": "казва",
+   "pool": "assessment",
+   "set": "A",
+   "sentence": "Кучето спи под масата.",
+   "hero": "Иво",
+   "feedback": "Иво казва",
+   "picture": "assets/img/art/inton/a2.jpg"
+  },
+  {
+   "id": "a3",
+   "situation": "Ани вижда празна чиния и не знае кой е бил.",
+   "words": "Кой изяде бисквитите",
+   "goal": "пита",
+   "pool": "assessment",
+   "set": "A",
+   "sentence": "Кой изяде бисквитите?",
+   "hero": "Ани",
+   "feedback": "Ани пита",
+   "picture": "assets/img/art/inton/a3.jpg"
+  },
+  {
+   "id": "a4",
+   "situation": "Мая иска разрешение от мама.",
+   "words": "Може ли да играя навън",
+   "goal": "пита",
+   "pool": "assessment",
+   "set": "A",
+   "sentence": "Може ли да играя навън?",
+   "hero": "Мая",
+   "feedback": "Мая пита",
+   "picture": "assets/img/art/inton/a4.jpg"
+  },
+  {
+   "id": "a5",
+   "situation": "Колело идва бързо към Иво. Мая се плаши за него.",
+   "words": "Пази се",
+   "goal": "възкликва",
+   "pool": "assessment",
+   "set": "A",
+   "sentence": "Пази се!",
+   "hero": "Мая",
+   "feedback": "Мая възкликва",
+   "picture": "assets/img/art/inton/a5.jpg"
+  },
+  {
+   "id": "a6",
+   "situation": "Ани вижда дъга за първи път.",
+   "words": "Колко е красиво",
+   "goal": "възкликва",
+   "pool": "assessment",
+   "set": "A",
+   "sentence": "Колко е красиво!",
+   "hero": "Ани",
+   "feedback": "Ани възкликва",
+   "picture": "assets/img/art/inton/a6.jpg"
+  },
+  {
+   "id": "b1",
+   "situation": "Мая търси ябълките. Баба знае къде са.",
+   "words": "Ябълките са в кошницата",
+   "goal": "казва",
+   "pool": "assessment",
+   "set": "B",
+   "sentence": "Ябълките са в кошницата.",
+   "hero": "Баба",
+   "feedback": "Баба казва",
+   "picture": "assets/img/art/inton/b1.jpg"
+  },
+  {
+   "id": "b2",
+   "situation": "Татко се прибира. Мама гледа през прозореца към Иво.",
+   "words": "Иво играе с топка",
+   "goal": "казва",
+   "pool": "assessment",
+   "set": "B",
+   "sentence": "Иво играе с топка.",
+   "hero": "Мама",
+   "feedback": "Мама казва",
+   "picture": "assets/img/art/inton/b2.jpg"
+  },
+  {
+   "id": "b3",
+   "situation": "Дядо е забравил часовника си. Той не знае колко е часът.",
+   "words": "Колко е часът",
+   "goal": "пита",
+   "pool": "assessment",
+   "set": "B",
+   "sentence": "Колко е часът?",
+   "hero": "Дядо",
+   "feedback": "Дядо пита",
+   "picture": "assets/img/art/inton/b3.jpg"
+  },
+  {
+   "id": "b4",
+   "situation": "Мая иска Иво да отиде с нея в парка.",
+   "words": "Ще дойдеш ли с мен",
+   "goal": "пита",
+   "pool": "assessment",
+   "set": "B",
+   "sentence": "Ще дойдеш ли с мен?",
+   "hero": "Мая",
+   "feedback": "Мая пита",
+   "picture": "assets/img/art/inton/b4.jpg"
+  },
+  {
+   "id": "b5",
+   "situation": "Котето е на високо дърво и мяука. Ани се плаши за него.",
+   "words": "Помощ",
+   "goal": "възкликва",
+   "pool": "assessment",
+   "set": "B",
+   "sentence": "Помощ!",
+   "hero": "Ани",
+   "feedback": "Ани възкликва",
+   "picture": "assets/img/art/inton/b5.jpg"
+  },
+  {
+   "id": "b6",
+   "situation": "Иво подреди цялата си стая. Мама е много доволна.",
+   "words": "Браво",
+   "goal": "възкликва",
+   "pool": "assessment",
+   "set": "B",
+   "sentence": "Браво!",
+   "hero": "Мама",
+   "feedback": "Мама възкликва",
+   "picture": "assets/img/art/inton/b6.jpg"
+  },
+  {
+   "id": "c1",
+   "situation": "Татко поглежда през прозореца. Навън има скреж.",
+   "words": "Навън е студено",
+   "goal": "казва",
+   "pool": "assessment",
+   "set": "C",
+   "sentence": "Навън е студено.",
+   "hero": "Татко",
+   "feedback": "Татко казва",
+   "picture": "assets/img/art/inton/c1.jpg"
+  },
+  {
+   "id": "c2",
+   "situation": "Иво не знае къде е книгата. Ани я вижда на рафта.",
+   "words": "Книгата е на рафта",
+   "goal": "казва",
+   "pool": "assessment",
+   "set": "C",
+   "sentence": "Книгата е на рафта.",
+   "hero": "Ани",
+   "feedback": "Ани казва",
+   "picture": "assets/img/art/inton/c2.jpg"
+  },
+  {
+   "id": "c3",
+   "situation": "Мама не може да намери ключовете си.",
+   "words": "Къде са ключовете",
+   "goal": "пита",
+   "pool": "assessment",
+   "set": "C",
+   "sentence": "Къде са ключовете?",
+   "hero": "Мама",
+   "feedback": "Мама пита",
+   "picture": "assets/img/art/inton/c3.jpg"
+  },
+  {
+   "id": "c4",
+   "situation": "Иво държи чаша сок и гледа Мая.",
+   "words": "Искаш ли сок",
+   "goal": "пита",
+   "pool": "assessment",
+   "set": "C",
+   "sentence": "Искаш ли сок?",
+   "hero": "Иво",
+   "feedback": "Иво пита",
+   "picture": "assets/img/art/inton/c4.jpg"
+  },
+  {
+   "id": "c5",
+   "situation": "Мая се удари в ръба на масата.",
+   "words": "Ох, боли",
+   "goal": "възкликва",
+   "pool": "assessment",
+   "set": "C",
+   "sentence": "Ох, боли!",
+   "hero": "Мая",
+   "feedback": "Мая възкликва",
+   "picture": "assets/img/art/inton/c5.jpg"
+  },
+  {
+   "id": "c6",
+   "situation": "Децата чуха, че утре няма училище.",
+   "words": "Ура, ваканция",
+   "goal": "възкликва",
+   "pool": "assessment",
+   "set": "C",
+   "sentence": "Ура, ваканция!",
+   "hero": "Децата",
+   "feedback": "Децата възкликват",
+   "picture": "assets/img/art/inton/c6.jpg"
+  }
+ ],
+ "scenes": [
+  {
+   "id": "p1",
+   "title": "Ключът",
+   "speakers": [
+    "Иво",
+    "Мама"
+   ],
+   "situation": "Иво се връща от училище. Не може да намери ключа си.",
+   "picture": "assets/img/art/inton/sc_p1.jpg",
+   "pool": "practice",
+   "lines": [
+    {
+     "n": 0,
+     "who": "Иво",
+     "text": "Мамо, ключът ми го няма!",
+     "feeling": "уплашено",
+     "task": true,
+     "feedback": "Иво е уплашен.",
+     "check": null
+    },
+    {
+     "n": 1,
+     "who": "Мама",
+     "text": "Не се плаши. Погледни в джоба на якето.",
+     "feeling": null,
+     "task": false
+    },
+    {
+     "n": 2,
+     "who": "Иво",
+     "text": "Ето го! Намерих го!",
+     "feeling": "радостно",
+     "task": true,
+     "feedback": "Иво е радостен.",
+     "check": null
+    },
+    {
+     "n": 3,
+     "who": "Мама",
+     "text": "Ах, пак си оставил обувките насред пътя!",
+     "feeling": "ядосано",
+     "task": true,
+     "feedback": "Мама е ядосана.",
+     "check": null
+    }
+   ]
+  },
+  {
+   "id": "p2",
+   "title": "Кулата",
+   "speakers": [
+    "Мая",
+    "Иво"
+   ],
+   "situation": "Мая строи висока кула от кубчета. Иво тича наоколо и я събаря.",
+   "picture": "assets/img/art/inton/sc_p2.jpg",
+   "pool": "practice",
+   "lines": [
+    {
+     "n": 0,
+     "who": "Мая",
+     "text": "Иво! Ти събори кулата ми!",
+     "feeling": "ядосано",
+     "task": true,
+     "feedback": "Мая е ядосана.",
+     "check": null
+    },
+    {
+     "n": 1,
+     "who": "Иво",
+     "text": "Извинявай, Мая. Не исках.",
+     "feeling": "тъжно",
+     "task": true,
+     "feedback": "Иво е тъжен.",
+     "check": null
+    },
+    {
+     "n": 2,
+     "who": "Мая",
+     "text": "Добре. Ще я построим заедно.",
+     "feeling": null,
+     "task": false
+    },
+    {
+     "n": 3,
+     "who": "Иво",
+     "text": "Ура! Хайде!",
+     "feeling": "радостно",
+     "task": true,
+     "feedback": "Иво е радостен.",
+     "check": null
+    }
+   ]
+  },
+  {
+   "id": "p3",
+   "title": "Балонът",
+   "speakers": [
+    "Ани",
+    "Татко"
+   ],
+   "situation": "На празника Ани има голям червен балон. Вятърът духва силно.",
+   "picture": "assets/img/art/inton/sc_p3.jpg",
+   "pool": "practice",
+   "lines": [
+    {
+     "n": 0,
+     "who": "Ани",
+     "text": "Татко, балонът ми отлетя!",
+     "feeling": "тъжно",
+     "task": true,
+     "feedback": "Ани е тъжна.",
+     "check": null
+    },
+    {
+     "n": 1,
+     "who": "Татко",
+     "text": "Ето, купих ти нов балон.",
+     "feeling": null,
+     "task": false
+    },
+    {
+     "n": 2,
+     "who": "Ани",
+     "text": "Нов балон! Благодаря, татко!",
+     "feeling": "радостно",
+     "task": true,
+     "feedback": "Ани е радостна.",
+     "check": null
+    },
+    {
+     "n": 3,
+     "who": "Ани",
+     "text": "Ой! Какво гръмна така силно?",
+     "feeling": "уплашено",
+     "task": true,
+     "feedback": "Ани е уплашена.",
+     "check": null
+    },
+    {
+     "n": 4,
+     "who": "Татко",
+     "text": "Не се плаши. Спука се балонът на едно момче.",
+     "feeling": null,
+     "task": false
+    }
+   ]
+  },
+  {
+   "id": "p4",
+   "title": "Пързалката",
+   "speakers": [
+    "Мая",
+    "Иво"
+   ],
+   "situation": "Иво и Мая чакат на пързалката. Едно голямо момче се реди пред тях.",
+   "picture": "assets/img/art/inton/sc_p4.jpg",
+   "pool": "practice",
+   "lines": [
+    {
+     "n": 0,
+     "who": "Мая",
+     "text": "Ей, ние бяхме първи!",
+     "feeling": "ядосано",
+     "task": true,
+     "feedback": "Мая е ядосана.",
+     "check": null
+    },
+    {
+     "n": 1,
+     "who": "Иво",
+     "text": "Пързалката е много висока. Ами ако падна?",
+     "feeling": "уплашено",
+     "task": true,
+     "feedback": "Иво е уплашен.",
+     "check": null
+    },
+    {
+     "n": 2,
+     "who": "Мая",
+     "text": "Ще се спуснем заедно. Хайде!",
+     "feeling": null,
+     "task": false
+    },
+    {
+     "n": 3,
+     "who": "Иво",
+     "text": "Беше супер! Пак!",
+     "feeling": "радостно",
+     "task": true,
+     "feedback": "Иво е радостен.",
+     "check": null
+    }
+   ]
+  },
+  {
+   "id": "a1",
+   "title": "Тъмната стая",
+   "speakers": [
+    "Ани",
+    "Мама"
+   ],
+   "situation": "Вечер е. Изведнъж токът спира и става тъмно.",
+   "picture": "assets/img/art/inton/sc_a1.jpg",
+   "pool": "assessment",
+   "lines": [
+    {
+     "n": 0,
+     "who": "Ани",
+     "text": "Мамо, нищо не виждам!",
+     "feeling": "уплашено",
+     "task": true,
+     "feedback": "Ани е уплашена.",
+     "check": null
+    },
+    {
+     "n": 1,
+     "who": "Мама",
+     "text": "Не се плаши. Ето ти фенерче.",
+     "feeling": null,
+     "task": false
+    },
+    {
+     "n": 2,
+     "who": "Ани",
+     "text": "Ох, това фенерче пак не работи!",
+     "feeling": "ядосано",
+     "task": true,
+     "feedback": "Ани е ядосана.",
+     "check": null
+    },
+    {
+     "n": 3,
+     "who": "Мама",
+     "text": "Сложи му нова батерия.",
+     "feeling": null,
+     "task": false
+    },
+    {
+     "n": 4,
+     "who": "Ани",
+     "text": "Свети! Пак виждам всичко!",
+     "feeling": "радостно",
+     "task": true,
+     "feedback": "Ани е радостна.",
+     "check": null
+    }
+   ]
+  },
+  {
+   "id": "a2",
+   "title": "Вазата",
+   "speakers": [
+    "Мая",
+    "Иво"
+   ],
+   "situation": "Мая подари на баба красива ваза. Иво играе с топка вкъщи и вазата пада.",
+   "picture": "assets/img/art/inton/sc_a2.jpg",
+   "pool": "assessment",
+   "lines": [
+    {
+     "n": 0,
+     "who": "Иво",
+     "text": "Виж, Мая, хванах топката!",
+     "feeling": "радостно",
+     "task": true,
+     "feedback": "Иво е радостен.",
+     "check": null
+    },
+    {
+     "n": 1,
+     "who": "Мая",
+     "text": "Иво! Ти счупи вазата!",
+     "feeling": "ядосано",
+     "task": true,
+     "feedback": "Мая е ядосана.",
+     "check": null
+    },
+    {
+     "n": 2,
+     "who": "Иво",
+     "text": "Не исках... Сега баба ще се натъжи.",
+     "feeling": "тъжно",
+     "task": true,
+     "feedback": "Иво е тъжен.",
+     "check": "може да се чуе и като вина/притеснение; от четирите „тъжно“ е най-близо"
+    },
+    {
+     "n": 3,
+     "who": "Мая",
+     "text": "Хайде да я залепим заедно.",
+     "feeling": null,
+     "task": false
+    }
+   ]
+  },
+  {
+   "id": "b1",
+   "title": "Голямото куче",
+   "speakers": [
+    "Ани",
+    "Дядо"
+   ],
+   "situation": "Ани и дядо се разхождат със сладолед. Зад една ограда лае голямо куче.",
+   "picture": "assets/img/art/inton/sc_b1.jpg",
+   "pool": "assessment",
+   "lines": [
+    {
+     "n": 0,
+     "who": "Ани",
+     "text": "Дядо, кучето ще ме ухапе!",
+     "feeling": "уплашено",
+     "task": true,
+     "feedback": "Ани е уплашена.",
+     "check": null
+    },
+    {
+     "n": 1,
+     "who": "Дядо",
+     "text": "Не бой се. Кучето е зад оградата.",
+     "feeling": null,
+     "task": false
+    },
+    {
+     "n": 2,
+     "who": "Ани",
+     "text": "Ох, изпуснах си сладоледа...",
+     "feeling": "тъжно",
+     "task": true,
+     "feedback": "Ани е тъжна.",
+     "check": null
+    },
+    {
+     "n": 3,
+     "who": "Дядо",
+     "text": "Ще ти купя нов.",
+     "feeling": null,
+     "task": false
+    },
+    {
+     "n": 4,
+     "who": "Ани",
+     "text": "Наистина ли? Ура!",
+     "feeling": "радостно",
+     "task": true,
+     "feedback": "Ани е радостна.",
+     "check": null
+    }
+   ]
+  },
+  {
+   "id": "b2",
+   "title": "Последното парче",
+   "speakers": [
+    "Мая",
+    "Иво"
+   ],
+   "situation": "На масата има само едно парче торта. Иво го изяжда, докато Мая мие ръцете си.",
+   "picture": "assets/img/art/inton/sc_b2.jpg",
+   "pool": "assessment",
+   "lines": [
+    {
+     "n": 0,
+     "who": "Иво",
+     "text": "Мм, каква вкусна торта!",
+     "feeling": "радостно",
+     "task": true,
+     "feedback": "Иво е радостен.",
+     "check": null
+    },
+    {
+     "n": 1,
+     "who": "Мая",
+     "text": "Къде е моето парче? Ти го изяде!",
+     "feeling": "ядосано",
+     "task": true,
+     "feedback": "Мая е ядосана.",
+     "check": null
+    },
+    {
+     "n": 2,
+     "who": "Иво",
+     "text": "Съжалявам, Мая. Много съжалявам.",
+     "feeling": "тъжно",
+     "task": true,
+     "feedback": "Иво е тъжен.",
+     "check": null
+    },
+    {
+     "n": 3,
+     "who": "Иво",
+     "text": "Ще ти дам моята бисквита.",
+     "feeling": null,
+     "task": false
+    }
+   ]
+  },
+  {
+   "id": "c1",
+   "title": "Влакчето",
+   "speakers": [
+    "Иво",
+    "Татко"
+   ],
+   "situation": "Иво строи релси за влакчето си. Татко минава и без да иска стъпва върху тях.",
+   "picture": "assets/img/art/inton/sc_c1.jpg",
+   "pool": "assessment",
+   "lines": [
+    {
+     "n": 0,
+     "who": "Иво",
+     "text": "Виж, татко, построих дълги релси!",
+     "feeling": "радостно",
+     "task": true,
+     "feedback": "Иво е радостен.",
+     "check": null
+    },
+    {
+     "n": 1,
+     "who": "Иво",
+     "text": "Татко! Ти счупи релсите ми!",
+     "feeling": "ядосано",
+     "task": true,
+     "feedback": "Иво е ядосан.",
+     "check": null
+    },
+    {
+     "n": 2,
+     "who": "Татко",
+     "text": "Извинявай, Иво. Не ги видях.",
+     "feeling": null,
+     "task": false
+    },
+    {
+     "n": 3,
+     "who": "Иво",
+     "text": "Сега влакчето ми никога няма да тръгне...",
+     "feeling": "тъжно",
+     "task": true,
+     "feedback": "Иво е тъжен.",
+     "check": null
+    },
+    {
+     "n": 4,
+     "who": "Татко",
+     "text": "Ела, ще ги поправим заедно.",
+     "feeling": null,
+     "task": false
+    }
+   ]
+  },
+  {
+   "id": "c2",
+   "title": "Гръмотевицата",
+   "speakers": [
+    "Мая",
+    "Баба"
+   ],
+   "situation": "Мая и баба са в къщата. Навън вали и изведнъж силно гърми.",
+   "picture": "assets/img/art/inton/sc_c2.jpg",
+   "pool": "assessment",
+   "lines": [
+    {
+     "n": 0,
+     "who": "Мая",
+     "text": "Бабо, какво беше това? Не искам да съм сама!",
+     "feeling": "уплашено",
+     "task": true,
+     "feedback": "Мая е уплашена.",
+     "check": null
+    },
+    {
+     "n": 1,
+     "who": "Баба",
+     "text": "Това е гръмотевица. Ела при мен.",
+     "feeling": null,
+     "task": false
+    },
+    {
+     "n": 2,
+     "who": "Баба",
+     "text": "Ах, този котарак! Пак събори саксията!",
+     "feeling": "ядосано",
+     "task": true,
+     "feedback": "Баба е ядосана.",
+     "check": null
+    },
+    {
+     "n": 3,
+     "who": "Мая",
+     "text": "Виж, бабо, дъга! Колко е красива!",
+     "feeling": "радостно",
+     "task": true,
+     "feedback": "Мая е радостна.",
+     "check": null
+    }
+   ]
+  }
+ ],
+ "feelings": [
+  "радостно",
+  "тъжно",
+  "уплашено",
+  "ядосано"
+ ],
+ "rounds": {
+  "CH13.Р2": {
+   "view": "purpose",
+   "pool": "practice",
+   "n": 6,
+   "triples_first": 1
+  },
+  "CH13.Р3": {
+   "view": "purpose",
+   "pool": "assessment",
+   "sets": {
+    "A": [
+     "a1",
+     "a2",
+     "a3",
+     "a4",
+     "a5",
+     "a6"
+    ],
+    "B": [
+     "b1",
+     "b2",
+     "b3",
+     "b4",
+     "b5",
+     "b6"
+    ],
+    "C": [
+     "c1",
+     "c2",
+     "c3",
+     "c4",
+     "c5",
+     "c6"
+    ]
+   }
+  },
+  "CH21.Р2": {
+   "view": "scene",
+   "pool": "practice",
+   "n_scenes": 2
+  },
+  "CH21.Р3": {
+   "view": "scene",
+   "pool": "assessment",
+   "sets": {
+    "A": [
+     "a1",
+     "a2"
+    ],
+    "B": [
+     "b1",
+     "b2"
+    ],
+    "C": [
+     "c1",
+     "c2"
+    ]
+   }
+  }
+ },
+ "checks": [],
+ "pictures_missing": 0
+}

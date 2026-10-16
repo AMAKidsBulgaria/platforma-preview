@@ -1,0 +1,3855 @@
+{
+ "version": "0.3-pilot",
+ "game": "conformity",
+ "source_file": "content/clean/readica-dict/phrases-with-pairs-images/5.json",
+ "image_style": "Children's picture-book illustration, soft flat colors, warm friendly characters, plain light background, ONE clear scene, centered subject, no text, letters or digits in the image. Square format. Recurring characters (Mom, Dad, Granny, Grandpa, Ivo – boy with red sweater, Maya – girl with two braids, Ani – girl with short hair and glasses, 'the child' – gender-neutral child in yellow raincoat) look identical in every picture (one character sheet).",
+ "production_rules": [
+  "ЗАДЪЛЖИТЕЛНО: при двойки с предлог / позиция / посока (difference_type „предлог…“ или „посока…“) двете картинки имат една и съща композиция, фон и предмети; променя се само позицията (или посоката). Генерират се заедно от един visual_template_id.",
+  "Посока („Накъде?“): в картинката има силен визуален маркер – стрелка на движението, следи, отворена врата, герой, ясно обърнат към / от неподвижен предмет. Обратната посока не трябва да може да се прочете.",
+  "Всички останали двойки също се генерират от един visual_template_id (минимална двойка): същата рамка и фон, сменя се само елементът от difference_type.",
+  "Всяка картинка показва една сцена и не съдържа нищо, което пасва на другото изречение (вж. „Must NOT show“ в подсказката).",
+  "Количества: предметите са ясно разделени и се броят с един поглед; най-много 5 (за „много“ – поне 8); никакви цифри в картинката.",
+  "с/без: в картинката „без“ предметът липсва напълно (не е в ръка, на закачалка или на земята); останалият контекст (дъжд, училище, сняг) е същият.",
+  "Размяна на ролите: същите два героя и същата обстановка; сменят се само ролите; действието е ясно насочено (подаване с ръка, гонене с линии на движение). Без агресия.",
+  "Повтарящите се герои (мама, татко, баба, дядо, Иво, Мая, Ани, детето) изглеждат еднакво във всички картинки.",
+  "Без текст, букви, цифри; без нараняване, лов, чупене, плашещи сцени.",
+  "Произвеждат се и двете картинки на всяка двойка (и на ниво 2), за да могат „изречение“ и „двойка“ да се разменят.",
+  "pilot_status: draft → pilot → approved | revise | retired. Двойка в „retired“ излиза от пуловете; пуловете са оразмерени ≥1.5× нуждата на мерещите рундове, за да издържат отпадане след пилота.",
+  "Играта не повтаря двойка в мерещите рундове за едно и също дете; практиката и временните (fallback) рундове могат да повтарят."
+ ],
+ "fields": {
+  "id": "стабилен идентификатор (cf001…; новите от cf078)",
+  "level": "ниво на изречението: 1 = 3–5 думи, двете картинки; 2 = до 7 думи",
+  "phrase": "вярното изречение",
+  "pair": "изречението-двойка (дистрактор)",
+  "skill_code": "умение от картата: E7 (предлози/посока, CH08/CH09.Р1) или E8 (разбиране на изречение)",
+  "difference_type": "по какво се различават двете изречения/картинки",
+  "difficulty": "1/2/3 в рамките на нивото: сходство на сцените, дължина, лексика, граматична близост на двата отговора",
+  "reading_demand": "„ключова дума“ (решава се по една дума) | „отношение“ (предлог, посока, с/без, брой) | „цялостен смисъл“ (роли, свързване на признаци – трябва цялото изречение)",
+  "eligible_rounds": "рундове, от които двойката може да бъде изтеглена (общ пул + правила за допустимост)",
+  "visual_template_id": "шаблон на композицията; двете картинки се генерират заедно от него",
+  "pilot_status": "pilot (в пилота) → approved | revise | retired след пилота; retired излиза от пуловете",
+  "measurement_ok": "може ли да се ползва в мерещ рунд (false = само практика/резерв/fallback)",
+  "scene_phrase": "подсказка за картинката на phrase (англ.): какво се вижда и какво НЕ трябва да има",
+  "scene_pair": "подсказка за картинката на pair",
+  "source": "clean/<ниво>#<индекс> в 5.json или new",
+  "changed": "какво е променено спрямо източника / v0.1",
+  "edit_b": "кратка инструкция за редакцията a→b (английски); SHEET = нов постоянен герой, подава се и листът с героите",
+  "images": "пътищата на двете картинки в платформата (a = изречението, b = двойката)",
+  "production_ids": "производствен номер на всяка картинка: шаблон + _A/_B"
+ },
+ "slots": {
+  "BK14.Р4": {
+   "level": 1,
+   "items": 3,
+   "measurement": true,
+   "coverage_role": "TRANSFER",
+   "skill_code": "E8",
+   "skill_secondary": "E3",
+   "dos": [
+    "B1",
+    "B2",
+    "B3"
+   ],
+   "bank": "BK_14_sentences",
+   "order": 1,
+   "prefer": {
+    "difficulty": [
+     1,
+     2
+    ]
+   }
+  },
+  "CH04.Р3": {
+   "level": 1,
+   "items": 6,
+   "measurement": true,
+   "coverage_role": "PRIMARY_MEASUREMENT",
+   "skill_code": "E8",
+   "skill_secondary": "E6",
+   "dos": [
+    "B7"
+   ],
+   "bank": "CH_04_sent_pics",
+   "order": 1
+  },
+  "CH04.Р2": {
+   "fallback": true,
+   "measurement": false,
+   "is_measurement": false,
+   "level": 1,
+   "items": 6,
+   "from": "lessons<=CH04",
+   "replaces": "wordContext",
+   "coverage_role_planned": "PRACTICE",
+   "skill_code": "E6",
+   "dos": [
+    "B7"
+   ],
+   "rule": "двойки с eligible_rounds от уроци ≤ текущия и със същото ниво (вкл. measurement_ok=false); повторения са разрешени; не влияе на статуса на умението; без отделни двойки; рундът е преди мерещ рунд в същия урок – изключват се двойки, допустими за CH04.Р3 (без предварително излагане)",
+   "order": 2,
+   "exclude_eligible_for": [
+    "CH04.Р3"
+   ]
+  },
+  "CH05.Р1": {
+   "level": 1,
+   "items": 4,
+   "measurement": true,
+   "coverage_role": "RETRIEVAL",
+   "skill_code": "E8",
+   "skill_secondary": null,
+   "dos": [
+    "B7"
+   ],
+   "bank": "CH_04_sent_pics",
+   "order": 1
+  },
+  "CH07.Р4": {
+   "level": 2,
+   "items": 4,
+   "measurement": true,
+   "coverage_role": "TRANSFER",
+   "skill_code": "E8",
+   "skill_secondary": "E6",
+   "dos": [
+    "B6",
+    "B7"
+   ],
+   "bank": "CH_07_sent_pics",
+   "order": 1
+  },
+  "CH08.Р3": {
+   "level": 1,
+   "items": 6,
+   "measurement": true,
+   "coverage_role": "PRIMARY_MEASUREMENT",
+   "skill_code": "E7",
+   "skill_secondary": "E8",
+   "dos": [
+    "B6",
+    "B7"
+   ],
+   "bank": "CH_08_prepositions",
+   "order": 1
+  },
+  "CH08.Р2": {
+   "level": 1,
+   "items": 6,
+   "measurement": false,
+   "coverage_role": "PRACTICE",
+   "skill_code": "E7",
+   "skill_secondary": null,
+   "dos": [
+    "B6",
+    "B7"
+   ],
+   "bank": "CH_08_prepositions",
+   "order": 2
+  },
+  "CH09.Р4": {
+   "level": 2,
+   "items": 4,
+   "measurement": true,
+   "coverage_role": "TRANSFER",
+   "skill_code": "E8",
+   "skill_secondary": "E7",
+   "dos": [
+    "B8"
+   ],
+   "bank": "CH_09_sent_pics",
+   "order": 1
+  },
+  "CH09.Р1": {
+   "level": 1,
+   "items": 4,
+   "measurement": true,
+   "coverage_role": "RETRIEVAL",
+   "skill_code": "E7",
+   "skill_secondary": null,
+   "dos": [
+    "B8"
+   ],
+   "bank": "CH_08_prepositions",
+   "order": 2
+  },
+  "CH10.Р2": {
+   "level": 1,
+   "items": 6,
+   "measurement": false,
+   "coverage_role": "PRACTICE",
+   "skill_code": "E8",
+   "skill_secondary": null,
+   "dos": [
+    "B5",
+    "B6"
+   ],
+   "bank": "CH_10_sent_pics",
+   "order": 1
+  },
+  "CH10.Р3": {
+   "fallback": true,
+   "measurement": false,
+   "is_measurement": false,
+   "level": 1,
+   "items": 6,
+   "from": "lessons<=CH10",
+   "replaces": "text",
+   "coverage_role_planned": "PRIMARY_MEASUREMENT",
+   "skill_code": "E8",
+   "dos": [
+    "B5",
+    "B6"
+   ],
+   "rule": "двойки с eligible_rounds от уроци ≤ текущия и със същото ниво (вкл. measurement_ok=false); повторения са разрешени; не влияе на статуса на умението; без отделни двойки",
+   "order": 2
+  },
+  "CH11.Р1": {
+   "level": 2,
+   "items": 4,
+   "measurement": true,
+   "coverage_role": "RETRIEVAL",
+   "skill_code": "E8",
+   "skill_secondary": null,
+   "dos": [
+    "B7"
+   ],
+   "bank": "CH_10_sent_pics",
+   "order": 1,
+   "prefer": {
+    "reading_demand": [
+     "ключова дума"
+    ],
+    "strict": true,
+    "note": "само двойки „ключова дума“ (собствен филтър, не банката на CH10)"
+   }
+  },
+  "CH13.Р3": {
+   "fallback": true,
+   "measurement": false,
+   "is_measurement": false,
+   "level": 2,
+   "items": 6,
+   "from": "lessons<=CH13",
+   "replaces": "intonation",
+   "coverage_role_planned": "PRIMARY_MEASUREMENT",
+   "skill_code": "E7",
+   "dos": [],
+   "rule": "двойки с eligible_rounds от уроци ≤ текущия и със същото ниво (вкл. measurement_ok=false); повторения са разрешени; не влияе на статуса на умението; без отделни двойки",
+   "order": 1
+  },
+  "CH13.Р2": {
+   "fallback": true,
+   "measurement": false,
+   "is_measurement": false,
+   "level": 2,
+   "items": 6,
+   "from": "lessons<=CH13",
+   "replaces": "intonation",
+   "coverage_role_planned": "PRACTICE",
+   "skill_code": "E7",
+   "dos": [],
+   "rule": "двойки с eligible_rounds от уроци ≤ текущия и със същото ниво (вкл. measurement_ok=false); повторения са разрешени; не влияе на статуса на умението; без отделни двойки",
+   "order": 2
+  },
+  "CH14.Р4": {
+   "level": 2,
+   "items": 4,
+   "measurement": true,
+   "coverage_role": "TRANSFER",
+   "skill_code": "E8",
+   "skill_secondary": null,
+   "dos": [
+    "B3"
+   ],
+   "bank": "CH_14_sent_pics",
+   "order": 1
+  },
+  "CH16.Р3": {
+   "level": 2,
+   "items": 6,
+   "measurement": true,
+   "coverage_role": "PRIMARY_MEASUREMENT",
+   "skill_code": "E8",
+   "skill_secondary": "E7",
+   "dos": [
+    "B8"
+   ],
+   "bank": "CH_16_sent_pics",
+   "order": 1,
+   "prefer": {
+    "reading_demand": [
+     "отношение",
+     "цялостен смисъл"
+    ],
+    "min_share": 0.67,
+    "note": "поне 2/3 от пула и от изтеглените задачи – „отношение“/„цялостен смисъл“"
+   }
+  },
+  "CH16.Р2": {
+   "level": 1,
+   "items": 6,
+   "measurement": false,
+   "coverage_role": "PRACTICE",
+   "skill_code": "E8",
+   "skill_secondary": null,
+   "dos": [
+    "B8"
+   ],
+   "bank": "CH_16_sent_pics",
+   "order": 2
+  },
+  "CH16.Р4": {
+   "fallback": true,
+   "measurement": false,
+   "is_measurement": false,
+   "level": 2,
+   "items": 4,
+   "from": "lessons<=CH16",
+   "replaces": "text",
+   "coverage_role_planned": "TRANSFER",
+   "skill_code": "E8",
+   "dos": [
+    "B8"
+   ],
+   "rule": "двойки с eligible_rounds от уроци ≤ текущия и със същото ниво (вкл. measurement_ok=false); повторения са разрешени; не влияе на статуса на умението; без отделни двойки",
+   "order": 3
+  },
+  "CH17.Р1": {
+   "level": 2,
+   "items": 4,
+   "measurement": true,
+   "coverage_role": "RETRIEVAL",
+   "skill_code": "E8",
+   "skill_secondary": null,
+   "dos": [
+    "B5",
+    "B8"
+   ],
+   "bank": "CH_16_sent_pics",
+   "order": 1
+  },
+  "CH17.Р3": {
+   "fallback": true,
+   "measurement": false,
+   "is_measurement": false,
+   "level": 2,
+   "items": 6,
+   "from": "lessons<=CH17",
+   "replaces": "text",
+   "coverage_role_planned": "PRIMARY_MEASUREMENT",
+   "skill_code": "E8",
+   "dos": [
+    "B5",
+    "B8"
+   ],
+   "rule": "двойки с eligible_rounds от уроци ≤ текущия и със същото ниво (вкл. measurement_ok=false); повторения са разрешени; не влияе на статуса на умението; без отделни двойки",
+   "order": 2
+  },
+  "CH18.Р3": {
+   "fallback": true,
+   "measurement": false,
+   "is_measurement": false,
+   "level": 2,
+   "items": 6,
+   "from": "lessons<=CH18",
+   "replaces": "text",
+   "coverage_role_planned": "PRIMARY_MEASUREMENT",
+   "skill_code": "E8",
+   "dos": [],
+   "rule": "двойки с eligible_rounds от уроци ≤ текущия и със същото ниво (вкл. measurement_ok=false); повторения са разрешени; не влияе на статуса на умението; без отделни двойки",
+   "order": 1
+  },
+  "CH18.Р4": {
+   "fallback": true,
+   "measurement": false,
+   "is_measurement": false,
+   "level": 2,
+   "items": 4,
+   "from": "lessons<=CH18",
+   "replaces": "text",
+   "coverage_role_planned": "TRANSFER",
+   "skill_code": "E8",
+   "dos": [],
+   "rule": "двойки с eligible_rounds от уроци ≤ текущия и със същото ниво (вкл. measurement_ok=false); повторения са разрешени; не влияе на статуса на умението; без отделни двойки",
+   "order": 2
+  },
+  "CH18.Р1": {
+   "fallback": true,
+   "measurement": false,
+   "is_measurement": false,
+   "level": 2,
+   "items": 4,
+   "from": "lessons<=CH18",
+   "replaces": "text",
+   "coverage_role_planned": "RETRIEVAL",
+   "skill_code": "E8",
+   "dos": [],
+   "rule": "двойки с eligible_rounds от уроци ≤ текущия и със същото ниво (вкл. measurement_ok=false); повторения са разрешени; не влияе на статуса на умението; без отделни двойки",
+   "order": 3
+  },
+  "CH18.Р2": {
+   "fallback": true,
+   "measurement": false,
+   "is_measurement": false,
+   "level": 2,
+   "items": 6,
+   "from": "lessons<=CH18",
+   "replaces": "text",
+   "coverage_role_planned": "PRACTICE",
+   "skill_code": "E8",
+   "dos": [],
+   "rule": "двойки с eligible_rounds от уроци ≤ текущия и със същото ниво (вкл. measurement_ok=false); повторения са разрешени; не влияе на статуса на умението; без отделни двойки",
+   "order": 4
+  },
+  "CH19.Р4": {
+   "fallback": true,
+   "measurement": false,
+   "is_measurement": false,
+   "level": 2,
+   "items": 4,
+   "from": "lessons<=CH19",
+   "replaces": "text",
+   "coverage_role_planned": "TRANSFER",
+   "skill_code": "E9",
+   "dos": [],
+   "rule": "двойки с eligible_rounds от уроци ≤ текущия и със същото ниво (вкл. measurement_ok=false); повторения са разрешени; не влияе на статуса на умението; без отделни двойки",
+   "order": 1
+  },
+  "CH19.Р1": {
+   "fallback": true,
+   "measurement": false,
+   "is_measurement": false,
+   "level": 2,
+   "items": 4,
+   "from": "lessons<=CH19",
+   "replaces": "text",
+   "coverage_role_planned": "RETRIEVAL",
+   "skill_code": "E8",
+   "dos": [],
+   "rule": "двойки с eligible_rounds от уроци ≤ текущия и със същото ниво (вкл. measurement_ok=false); повторения са разрешени; не влияе на статуса на умението; без отделни двойки",
+   "order": 2
+  },
+  "CH20.Р3": {
+   "fallback": true,
+   "measurement": false,
+   "is_measurement": false,
+   "level": 2,
+   "items": 6,
+   "from": "lessons<=CH20",
+   "replaces": "text",
+   "coverage_role_planned": "PRIMARY_MEASUREMENT",
+   "skill_code": "E9",
+   "dos": [],
+   "rule": "двойки с eligible_rounds от уроци ≤ текущия и със същото ниво (вкл. measurement_ok=false); повторения са разрешени; не влияе на статуса на умението; без отделни двойки",
+   "order": 1
+  },
+  "CH20.Р4": {
+   "fallback": true,
+   "measurement": false,
+   "is_measurement": false,
+   "level": 2,
+   "items": 4,
+   "from": "lessons<=CH20",
+   "replaces": "text",
+   "coverage_role_planned": "TRANSFER",
+   "skill_code": "E9",
+   "dos": [],
+   "rule": "двойки с eligible_rounds от уроци ≤ текущия и със същото ниво (вкл. measurement_ok=false); повторения са разрешени; не влияе на статуса на умението; без отделни двойки",
+   "order": 2
+  },
+  "CH20.Р2": {
+   "fallback": true,
+   "measurement": false,
+   "is_measurement": false,
+   "level": 2,
+   "items": 6,
+   "from": "lessons<=CH20",
+   "replaces": "text",
+   "coverage_role_planned": "PRACTICE",
+   "skill_code": "E9",
+   "dos": [],
+   "rule": "двойки с eligible_rounds от уроци ≤ текущия и със същото ниво (вкл. measurement_ok=false); повторения са разрешени; не влияе на статуса на умението; без отделни двойки",
+   "order": 3
+  },
+  "CH21.Р3": {
+   "fallback": true,
+   "measurement": false,
+   "is_measurement": false,
+   "level": 2,
+   "items": 6,
+   "from": "lessons<=CH21",
+   "replaces": "intonation",
+   "coverage_role_planned": "PRIMARY_MEASUREMENT",
+   "skill_code": "E7",
+   "dos": [],
+   "rule": "двойки с eligible_rounds от уроци ≤ текущия и със същото ниво (вкл. measurement_ok=false); повторения са разрешени; не влияе на статуса на умението; без отделни двойки",
+   "order": 1
+  },
+  "CH21.Р1": {
+   "fallback": true,
+   "measurement": false,
+   "is_measurement": false,
+   "level": 2,
+   "items": 4,
+   "from": "lessons<=CH21",
+   "replaces": "text",
+   "coverage_role_planned": "RETRIEVAL",
+   "skill_code": "E8",
+   "dos": [],
+   "rule": "двойки с eligible_rounds от уроци ≤ текущия и със същото ниво (вкл. measurement_ok=false); повторения са разрешени; не влияе на статуса на умението; без отделни двойки",
+   "order": 2
+  },
+  "CH21.Р2": {
+   "fallback": true,
+   "measurement": false,
+   "is_measurement": false,
+   "level": 2,
+   "items": 6,
+   "from": "lessons<=CH21",
+   "replaces": "intonation",
+   "coverage_role_planned": "PRACTICE",
+   "skill_code": "E7",
+   "dos": [],
+   "rule": "двойки с eligible_rounds от уроци ≤ текущия и със същото ниво (вкл. measurement_ok=false); повторения са разрешени; не влияе на статуса на умението; без отделни двойки",
+   "order": 3
+  },
+  "CH22.Р4": {
+   "fallback": true,
+   "measurement": false,
+   "is_measurement": false,
+   "level": 2,
+   "items": 6,
+   "from": "lessons<=CH22",
+   "replaces": "text",
+   "coverage_role_planned": "TRANSFER",
+   "skill_code": "E8",
+   "dos": [],
+   "rule": "двойки с eligible_rounds от уроци ≤ текущия и със същото ниво (вкл. measurement_ok=false); повторения са разрешени; не влияе на статуса на умението; без отделни двойки",
+   "order": 1
+  },
+  "CH22.Р2": {
+   "fallback": true,
+   "measurement": false,
+   "is_measurement": false,
+   "level": 2,
+   "items": 6,
+   "from": "lessons<=CH22",
+   "replaces": "text",
+   "coverage_role_planned": "PRACTICE",
+   "skill_code": "E8",
+   "dos": [],
+   "rule": "двойки с eligible_rounds от уроци ≤ текущия и със същото ниво (вкл. measurement_ok=false); повторения са разрешени; не влияе на статуса на умението; без отделни двойки",
+   "order": 2
+  }
+ },
+ "pairs": [
+  {
+   "id": "cf001",
+   "level": 1,
+   "phrase": "Котето пие мляко.",
+   "pair": "Кучето пие мляко.",
+   "skill_code": "E8",
+   "difference_type": "животно",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "BK14.Р4",
+    "CH05.Р1",
+    "CH16.Р2"
+   ],
+   "visual_template_id": "PET_MILK_BOWL_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as PET_MILK_BOWL_01 (a bowl of milk on a kitchen floor, side view; only the animal changes). A small kitten laps milk from the bowl. Must NOT show: any dog or puppy.",
+   "scene_pair": "Same composition as PET_MILK_BOWL_01 (a bowl of milk on a kitchen floor, side view; only the animal changes). A small puppy laps milk from the bowl. Must NOT show: any cat or kitten.",
+   "source": "clean/1#95",
+   "changed": "текст като v0.1; от слот BK14.Р4 → пул BK14/CH05 + практика CH16.Р2",
+   "edit_b": "Replace the kitten with a small puppy drinking the milk from the same bowl. No cat anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf001a.jpg",
+    "b": "assets/img/art/sent/cf001b.jpg"
+   },
+   "production_ids": {
+    "a": "PET_MILK_BOWL_01_A",
+    "b": "PET_MILK_BOWL_01_B"
+   }
+  },
+  {
+   "id": "cf002",
+   "level": 1,
+   "phrase": "Заекът гризе зеле.",
+   "pair": "Заекът гризе морков.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "BK14.Р4",
+    "CH04.Р3"
+   ],
+   "visual_template_id": "RABBIT_EATS_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as RABBIT_EATS_01 (a rabbit sitting on grass, holding food in its paws; only the food changes). The rabbit nibbles a round green cabbage. Must NOT show: any carrot.",
+   "scene_pair": "Same composition as RABBIT_EATS_01 (a rabbit sitting on grass, holding food in its paws; only the food changes). The rabbit nibbles an orange carrot. Must NOT show: any cabbage.",
+   "source": "clean/1#62",
+   "changed": "текст като v0.1; + CH04.Р3",
+   "edit_b": "Replace the cabbage the rabbit is nibbling with a big orange carrot. No cabbage anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf002a.jpg",
+    "b": "assets/img/art/sent/cf002b.jpg"
+   },
+   "production_ids": {
+    "a": "RABBIT_EATS_01_A",
+    "b": "RABBIT_EATS_01_B"
+   }
+  },
+  {
+   "id": "cf003",
+   "level": 1,
+   "phrase": "Иво яде сладолед.",
+   "pair": "Иво яде ябълка.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "BK14.Р4",
+    "CH04.Р3",
+    "CH10.Р2"
+   ],
+   "visual_template_id": "IVO_EATS_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as IVO_EATS_01 (Ivo (recurring boy character) standing in a park, eating; only the food changes). Ivo licks an ice-cream cone. Must NOT show: any apple or other fruit.",
+   "scene_pair": "Same composition as IVO_EATS_01 (Ivo (recurring boy character) standing in a park, eating; only the food changes). Ivo bites a red apple. Must NOT show: any ice cream.",
+   "source": "clean/1#50",
+   "changed": "Денис → Иво (правило 6, кратки имена)",
+   "images": {
+    "a": "assets/img/art/sent/cf003a.jpg",
+    "b": "assets/img/art/sent/cf003b.jpg"
+   },
+   "production_ids": {
+    "a": "IVO_EATS_01_A",
+    "b": "IVO_EATS_01_B"
+   }
+  },
+  {
+   "id": "cf004",
+   "level": 1,
+   "phrase": "Чадърът е отворен.",
+   "pair": "Чадърът е затворен.",
+   "skill_code": "E8",
+   "difference_type": "състояние",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "BK14.Р4",
+    "CH04.Р3",
+    "CH16.Р2"
+   ],
+   "visual_template_id": "UMBRELLA_STATE_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as UMBRELLA_STATE_01 (one red umbrella standing in a stand by a door, nobody holding it; only the umbrella state changes). The umbrella is fully OPEN. Must NOT show: a closed or folded umbrella.",
+   "scene_pair": "Same composition as UMBRELLA_STATE_01 (one red umbrella standing in a stand by a door, nobody holding it; only the umbrella state changes). The umbrella is CLOSED and folded. Must NOT show: an open umbrella.",
+   "source": "clean/1#155",
+   "changed": "„Петя отвори/затвори чадъра“ → състояние в сегашно време (правило 5); без име",
+   "edit_b": "Close the umbrella: it is now a closed, folded umbrella standing in the same place. No open umbrella.",
+   "images": {
+    "a": "assets/img/art/sent/cf004a.jpg",
+    "b": "assets/img/art/sent/cf004b.jpg"
+   },
+   "production_ids": {
+    "a": "UMBRELLA_STATE_01_A",
+    "b": "UMBRELLA_STATE_01_B"
+   }
+  },
+  {
+   "id": "cf005",
+   "level": 1,
+   "phrase": "Щъркелът държи пръчка.",
+   "pair": "Щъркелът държи червей.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH04.Р3",
+    "CH05.Р1"
+   ],
+   "visual_template_id": "STORK_BEAK_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as STORK_BEAK_01 (a stork standing by its nest, close-up so the beak is large; only the object in the beak changes). The stork holds a long brown twig in its beak. Must NOT show: any worm.",
+   "scene_pair": "Same composition as STORK_BEAK_01 (a stork standing by its nest, close-up so the beak is large; only the object in the beak changes). The stork holds a pink wiggly worm in its beak. Must NOT show: any twig or stick.",
+   "source": "clean/1#1",
+   "changed": "от слот CH04.Р3 → пул CH04/CH05",
+   "edit_b": "Replace the stick in the stork's beak with a pink earthworm. No stick anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf005a.jpg",
+    "b": "assets/img/art/sent/cf005b.jpg"
+   },
+   "production_ids": {
+    "a": "STORK_BEAK_01_A",
+    "b": "STORK_BEAK_01_B"
+   }
+  },
+  {
+   "id": "cf006",
+   "level": 1,
+   "phrase": "Мама държи черпак.",
+   "pair": "Мама държи чаша.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH04.Р3",
+    "CH10.Р2"
+   ],
+   "visual_template_id": "MOM_KITCHEN_HOLDS_01",
+   "pilot_status": "pilot",
+   "scene_phrase": "Close-up of Mom from the waist up at a kitchen stove, holding a LARGE soup ladle up in front of her at chest height, so the ladle is big and clearly visible. Must NOT show: any cup or mug.",
+   "scene_pair": "Close-up of Mom from the waist up at a kitchen stove, holding a LARGE white cup up in front of her at chest height, so the cup is big and clearly visible. Must NOT show: any ladle or spoon.",
+   "source": "clean/1#132",
+   "changed": "„Елена взе“ → „Мама държи“ (без минало време и дълго име)",
+   "edit_b": "Replace the ladle in Mom's hand with a big white cup held the same way at chest height. No ladle anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf006a.jpg",
+    "b": "assets/img/art/sent/cf006b.jpg"
+   },
+   "production_ids": {
+    "a": "MOM_KITCHEN_HOLDS_01_A",
+    "b": "MOM_KITCHEN_HOLDS_01_B"
+   },
+   "picture_note": "прерисувано в едър план (2026-10-16)"
+  },
+  {
+   "id": "cf007",
+   "level": 1,
+   "phrase": "Мая мие чиниите.",
+   "pair": "Мая бърше чиниите.",
+   "skill_code": "E8",
+   "difference_type": "действие",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH04.Р3"
+   ],
+   "visual_template_id": "MAYA_WASHES_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as MAYA_WASHES_01 (Maya (recurring girl) at a sink with running water; only what she washes changes). Maya washes dishes in the sink. Must NOT show: wet or soapy hair.",
+   "scene_pair": "Same composition as MAYA_WASHES_01 (Maya at the kitchen sink; only the action changes). Maya dries a clean plate with a kitchen towel; the tap is off. Must NOT show: a sponge, foam or running water.",
+   "source": "clean/1#61",
+   "changed": "Саша → Мая; „мие чинии“ → „мие чиниите“; v0.3: двойката „си мие косата“ → „бърше чиниите“ (моделът не рисува миене на коса; действието е ясно)",
+   "edit_b": "Turn the tap off and remove all foam and the sponge. Maya now holds a white kitchen towel in one hand and wipes the plate with it; the towel must be large and clearly visible.",
+   "images": {
+    "a": "assets/img/art/sent/cf007a.jpg",
+    "b": "assets/img/art/sent/cf007b.jpg"
+   },
+   "production_ids": {
+    "a": "MAYA_WASHES_01_A",
+    "b": "MAYA_WASHES_01_B"
+   }
+  },
+  {
+   "id": "cf008",
+   "level": 1,
+   "phrase": "Татко кара колата.",
+   "pair": "Татко мие колата.",
+   "skill_code": "E8",
+   "difference_type": "действие",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH04.Р3",
+    "CH10.Р2"
+   ],
+   "visual_template_id": "DAD_CAR_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as DAD_CAR_01 (Dad and a blue family car in front of a house; only Dad's action changes). Dad sits at the steering wheel driving the car on the road. Must NOT show: a sponge, bucket or water.",
+   "scene_pair": "Same composition as DAD_CAR_01 (Dad and a blue family car in front of a house; only Dad's action changes). Dad stands outside the parked car washing it with a sponge and a bucket. Must NOT show: Dad inside the car.",
+   "source": "clean/1#144",
+   "changed": "текст като v0.1",
+   "edit_b": "Change the action: Dad is now standing OUTSIDE the car washing it with a big sponge and a bucket of soapy water. Nobody sits in the car.",
+   "images": {
+    "a": "assets/img/art/sent/cf008a.jpg",
+    "b": "assets/img/art/sent/cf008b.jpg"
+   },
+   "production_ids": {
+    "a": "DAD_CAR_01_A",
+    "b": "DAD_CAR_01_B"
+   }
+  },
+  {
+   "id": "cf009",
+   "level": 1,
+   "phrase": "Ани яде с лъжица.",
+   "pair": "Ани яде с вилица.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH04.Р3"
+   ],
+   "visual_template_id": "ANI_EATS_TABLE_01",
+   "pilot_status": "pilot",
+   "scene_phrase": "Close-up of Ani (recurring girl, short black hair, red glasses) at a table with a plate, holding a LARGE spoon up near her face, the spoon big and clearly visible. Must NOT show: any fork.",
+   "scene_pair": "Close-up of Ani (recurring girl, short black hair, red glasses) at a table with a plate, holding a LARGE fork with four clear prongs up near her face. Must NOT show: any spoon.",
+   "source": "clean/1#178",
+   "changed": "„Стоян държи лъжица/вилица“ → „Ани яде с лъжица/вилица“ (кратко име, действие)",
+   "difference_detail": "инструмент",
+   "edit_b": "Replace the spoon with a large fork with four clearly visible prongs, held the same way. No spoon anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf009a.jpg",
+    "b": "assets/img/art/sent/cf009b.jpg"
+   },
+   "production_ids": {
+    "a": "ANI_EATS_TABLE_01_A",
+    "b": "ANI_EATS_TABLE_01_B"
+   },
+   "picture_note": "прерисувано в едър план (2026-10-16)"
+  },
+  {
+   "id": "cf010",
+   "level": 1,
+   "phrase": "Детето яде ягоди.",
+   "pair": "Детето бере ягоди.",
+   "skill_code": "E8",
+   "difference_type": "действие",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH04.Р3",
+    "CH10.Р2"
+   ],
+   "visual_template_id": "CHILD_STRAWBERRY_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as CHILD_STRAWBERRY_01 (a child in a strawberry patch with a small basket; only the action changes). The child puts a strawberry into the mouth. Must NOT show: picking from a plant.",
+   "scene_pair": "Same composition as CHILD_STRAWBERRY_01 (a child in a strawberry patch with a small basket; only the action changes). The child bends down and picks a strawberry from the plant into the basket. Must NOT show: eating.",
+   "source": "clean/1#17",
+   "changed": "Ася → Детето",
+   "edit_b": "Change the action: the child now picks strawberries from the plants and puts them in a small basket, not eating. No strawberry at the mouth.",
+   "images": {
+    "a": "assets/img/art/sent/cf010a.jpg",
+    "b": "assets/img/art/sent/cf010b.jpg"
+   },
+   "production_ids": {
+    "a": "CHILD_STRAWBERRY_01_A",
+    "b": "CHILD_STRAWBERRY_01_B"
+   }
+  },
+  {
+   "id": "cf011",
+   "level": 1,
+   "phrase": "Баба мие прозореца.",
+   "pair": "Баба мие пода.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH04.Р3",
+    "CH05.Р1"
+   ],
+   "visual_template_id": "GRANNY_CLEANS_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as GRANNY_CLEANS_01 (Granny with a sponge and a bucket in a living room; only what she washes changes). Granny washes the window glass. Must NOT show: Granny on her knees by the floor.",
+   "scene_pair": "Same composition as GRANNY_CLEANS_01 (Granny with a sponge and a bucket in a living room; only what she washes changes). Granny washes the floor with a mop. Must NOT show: Granny at the window.",
+   "source": "clean/1#127",
+   "changed": "Яна → Баба; + CH05.Р1 (какво?)",
+   "edit_b": "Change what Granny washes: she now washes the floor with a mop and a bucket. She does not touch the window.",
+   "images": {
+    "a": "assets/img/art/sent/cf011a.jpg",
+    "b": "assets/img/art/sent/cf011b.jpg"
+   },
+   "production_ids": {
+    "a": "GRANNY_CLEANS_01_A",
+    "b": "GRANNY_CLEANS_01_B"
+   }
+  },
+  {
+   "id": "cf012",
+   "level": 1,
+   "phrase": "Кравата пасе трева.",
+   "pair": "Козата пасе трева.",
+   "skill_code": "E8",
+   "difference_type": "животно",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH05.Р1",
+    "BK14.Р4"
+   ],
+   "visual_template_id": "MEADOW_GRAZE_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as MEADOW_GRAZE_01 (a green meadow with a fence; only the animal changes). A cow grazes grass. Must NOT show: any goat.",
+   "scene_pair": "Same composition as MEADOW_GRAZE_01 (a green meadow with a fence; only the animal changes). A goat grazes grass. Must NOT show: any cow.",
+   "source": "clean/1#89",
+   "changed": "+ BK14.Р4",
+   "edit_b": "Replace the cow with a goat grazing the grass in the same place. No cow anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf012a.jpg",
+    "b": "assets/img/art/sent/cf012b.jpg"
+   },
+   "production_ids": {
+    "a": "MEADOW_GRAZE_01_A",
+    "b": "MEADOW_GRAZE_01_B"
+   }
+  },
+  {
+   "id": "cf013",
+   "level": 1,
+   "phrase": "Кокошката кълве зърна.",
+   "pair": "Врабчето кълве зърна.",
+   "skill_code": "E8",
+   "difference_type": "животно",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH05.Р1"
+   ],
+   "visual_template_id": "YARD_GRAINS_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as YARD_GRAINS_01 (a farmyard with grains on the ground; only the bird changes). A hen pecks grains. Must NOT show: any small sparrow.",
+   "scene_pair": "Same composition as YARD_GRAINS_01 (a farmyard with grains on the ground; only the bird changes). A small sparrow pecks grains. Must NOT show: any hen.",
+   "source": "clean/1#98",
+   "changed": "текст като v0.1",
+   "edit_b": "Replace the hen with a small sparrow pecking the grains. No hen anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf013a.jpg",
+    "b": "assets/img/art/sent/cf013b.jpg"
+   },
+   "production_ids": {
+    "a": "YARD_GRAINS_01_A",
+    "b": "YARD_GRAINS_01_B"
+   }
+  },
+  {
+   "id": "cf014",
+   "level": 1,
+   "phrase": "Багерът копае дупка.",
+   "pair": "Къртицата копае дупка.",
+   "skill_code": "E8",
+   "difference_type": "кой",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH05.Р1"
+   ],
+   "visual_template_id": "DIG_HOLE_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as DIG_HOLE_01 (a field with a fresh hole in the ground; only who digs changes). A yellow excavator digs the hole. Must NOT show: any mole or animal.",
+   "scene_pair": "Same composition as DIG_HOLE_01 (a field with a fresh hole in the ground; only who digs changes). A cute mole digs the hole with its paws. Must NOT show: any machine.",
+   "source": "clean/1#133",
+   "changed": "текст като v0.1",
+   "edit_b": "Replace the excavator with a mole digging the same hole. No excavator anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf014a.jpg",
+    "b": "assets/img/art/sent/cf014b.jpg"
+   },
+   "production_ids": {
+    "a": "DIG_HOLE_01_A",
+    "b": "DIG_HOLE_01_B"
+   }
+  },
+  {
+   "id": "cf015",
+   "level": 1,
+   "phrase": "Мама пържи кюфтета.",
+   "pair": "Татко пържи кюфтета.",
+   "skill_code": "E8",
+   "difference_type": "кой",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH05.Р1"
+   ],
+   "visual_template_id": "STOVE_FRY_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as STOVE_FRY_01 (a kitchen stove with a frying pan of meatballs; only the person changes). Mom fries the meatballs. Must NOT show: Dad.",
+   "scene_pair": "Same composition as STOVE_FRY_01 (a kitchen stove with a frying pan of meatballs; only the person changes). Dad fries the meatballs. Must NOT show: Mom.",
+   "source": "clean/1#199",
+   "changed": "текст като v0.1",
+   "difference_detail": "лице",
+   "edit_b": "SHEET Replace Mom with Dad (exactly as DAD on the second picture, the character sheet), frying the same meatballs at the same stove. No Mom.",
+   "images": {
+    "a": "assets/img/art/sent/cf015a.jpg",
+    "b": "assets/img/art/sent/cf015b.jpg"
+   },
+   "production_ids": {
+    "a": "STOVE_FRY_01_A",
+    "b": "STOVE_FRY_01_B"
+   }
+  },
+  {
+   "id": "cf016",
+   "level": 1,
+   "phrase": "Мишките ядат сирене.",
+   "pair": "Мишките ядат хляб.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH05.Р1",
+    "BK14.Р4"
+   ],
+   "visual_template_id": "MICE_EAT_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as MICE_EAT_01 (three mice around a wooden board; only the food changes). The mice eat a yellow wedge of cheese with holes. Must NOT show: any bread.",
+   "scene_pair": "Same composition as MICE_EAT_01 (three mice around a wooden board; only the food changes). The mice eat a loaf of bread. Must NOT show: any cheese.",
+   "source": "clean/1#121",
+   "changed": "+ BK14.Р4",
+   "edit_b": "Replace the cheese the mice are eating with a loaf of bread. No cheese anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf016a.jpg",
+    "b": "assets/img/art/sent/cf016b.jpg"
+   },
+   "production_ids": {
+    "a": "MICE_EAT_01_A",
+    "b": "MICE_EAT_01_B"
+   }
+  },
+  {
+   "id": "cf017",
+   "level": 2,
+   "phrase": "На клона висят червени ябълки.",
+   "pair": "На клона висят жълти ябълки.",
+   "skill_code": "E8",
+   "difference_type": "признак",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH07.Р4"
+   ],
+   "visual_template_id": "APPLE_BRANCH_COLOR_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as APPLE_BRANCH_COLOR_01 (one apple-tree branch with four apples; only the colour of the apples changes). All apples are RED. Must NOT show: any yellow apple.",
+   "scene_pair": "Same composition as APPLE_BRANCH_COLOR_01 (one apple-tree branch with four apples; only the colour of the apples changes). All apples are YELLOW. Must NOT show: any red apple.",
+   "source": "clean/2#55",
+   "changed": "текст като v0.1",
+   "difference_detail": "цвят",
+   "edit_b": "Make all the apples on the branch yellow instead of red. No red apples.",
+   "images": {
+    "a": "assets/img/art/sent/cf017a.jpg",
+    "b": "assets/img/art/sent/cf017b.jpg"
+   },
+   "production_ids": {
+    "a": "APPLE_BRANCH_COLOR_01_A",
+    "b": "APPLE_BRANCH_COLOR_01_B"
+   }
+  },
+  {
+   "id": "cf018",
+   "level": 2,
+   "phrase": "Бели облаци плуват по небето.",
+   "pair": "Сиви облаци плуват по небето.",
+   "skill_code": "E8",
+   "difference_type": "признак",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH07.Р4"
+   ],
+   "visual_template_id": "CLOUDS_COLOR_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as CLOUDS_COLOR_01 (a sky over a green hill; only the colour of the clouds changes). White fluffy clouds on a blue sky. Must NOT show: grey clouds or rain.",
+   "scene_pair": "Same composition as CLOUDS_COLOR_01 (a sky over a green hill; only the colour of the clouds changes). Grey heavy clouds. Must NOT show: white clouds; no rain drops either.",
+   "source": "clean/2#138",
+   "changed": "текст като v0.1",
+   "difference_detail": "цвят",
+   "edit_b": "Make all the clouds grey instead of white.",
+   "images": {
+    "a": "assets/img/art/sent/cf018a.jpg",
+    "b": "assets/img/art/sent/cf018b.jpg"
+   },
+   "production_ids": {
+    "a": "CLOUDS_COLOR_01_A",
+    "b": "CLOUDS_COLOR_01_B"
+   }
+  },
+  {
+   "id": "cf019",
+   "level": 2,
+   "phrase": "Мечето държи голям балон.",
+   "pair": "Мечето държи малък балон.",
+   "skill_code": "E8",
+   "difference_type": "признак",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH07.Р4"
+   ],
+   "visual_template_id": "TEDDY_BALLOON_SIZE_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as TEDDY_BALLOON_SIZE_01 (a teddy bear holding one balloon on a string; only the balloon size changes). The balloon is BIG, larger than the teddy. Must NOT show: a small balloon.",
+   "scene_pair": "Same composition as TEDDY_BALLOON_SIZE_01 (a teddy bear holding one balloon on a string; only the balloon size changes). The balloon is SMALL, smaller than the teddy's head. Must NOT show: a big balloon.",
+   "source": "new",
+   "changed": "текст като v0.1",
+   "difference_detail": "размер",
+   "edit_b": "Make the balloon the teddy bear holds very small (about the size of the bear's head). No big balloon.",
+   "images": {
+    "a": "assets/img/art/sent/cf019a.jpg",
+    "b": "assets/img/art/sent/cf019b.jpg"
+   },
+   "production_ids": {
+    "a": "TEDDY_BALLOON_SIZE_01_A",
+    "b": "TEDDY_BALLOON_SIZE_01_B"
+   }
+  },
+  {
+   "id": "cf020",
+   "level": 2,
+   "phrase": "Кулата от кубчета е висока.",
+   "pair": "Кулата от кубчета е ниска.",
+   "skill_code": "E8",
+   "difference_type": "признак",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH07.Р4"
+   ],
+   "visual_template_id": "BLOCK_TOWER_HEIGHT_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as BLOCK_TOWER_HEIGHT_01 (a block tower on a rug with a sitting child beside it for scale; only the tower height changes). The tower is TALL, higher than the child's head. Must NOT show: a short tower.",
+   "scene_pair": "Same composition as BLOCK_TOWER_HEIGHT_01 (a block tower on a rug with a sitting child beside it for scale; only the tower height changes). The tower is LOW, only three blocks. Must NOT show: a tall tower.",
+   "source": "new",
+   "changed": "„Момчето построи висока/ниска кула“ → състояние, без минало време",
+   "difference_detail": "размер",
+   "edit_b": "Make the block tower low: only two or three blocks high. No tall tower.",
+   "images": {
+    "a": "assets/img/art/sent/cf020a.jpg",
+    "b": "assets/img/art/sent/cf020b.jpg"
+   },
+   "production_ids": {
+    "a": "BLOCK_TOWER_HEIGHT_01_A",
+    "b": "BLOCK_TOWER_HEIGHT_01_B"
+   }
+  },
+  {
+   "id": "cf021",
+   "level": 2,
+   "phrase": "Момичето е с дълга коса.",
+   "pair": "Момичето е с къса коса.",
+   "skill_code": "E8",
+   "difference_type": "признак",
+   "difficulty": 3,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH07.Р4"
+   ],
+   "visual_template_id": "GIRL_HAIR_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as GIRL_HAIR_01 (a girl, front view, plain background; only the hair length changes). Long hair reaching the waist. Must NOT show: short hair.",
+   "scene_pair": "Same composition as GIRL_HAIR_01 (a girl, front view, plain background; only the hair length changes). Short hair above the ears. Must NOT show: long hair.",
+   "source": "new",
+   "changed": "текст като v0.1; трудност 3 (пример на методиста)",
+   "edit_b": "Make the girl's hair short (chin length). No long hair.",
+   "images": {
+    "a": "assets/img/art/sent/cf021a.jpg",
+    "b": "assets/img/art/sent/cf021b.jpg"
+   },
+   "production_ids": {
+    "a": "GIRL_HAIR_01_A",
+    "b": "GIRL_HAIR_01_B"
+   }
+  },
+  {
+   "id": "cf022",
+   "level": 2,
+   "phrase": "На масата има пълна чаша.",
+   "pair": "На масата има празна чаша.",
+   "skill_code": "E8",
+   "difference_type": "признак",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH07.Р4"
+   ],
+   "visual_template_id": "GLASS_TABLE_FULL_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as GLASS_TABLE_FULL_01 (one glass on a table; only the content changes). The glass is FULL of orange juice. Must NOT show: an empty glass.",
+   "scene_pair": "Same composition as GLASS_TABLE_FULL_01 (one glass on a table; only the content changes). The glass is EMPTY and clear. Must NOT show: any juice in the glass.",
+   "source": "new",
+   "changed": "текст като v0.1",
+   "edit_b": "Make the glass on the table completely empty: no drink in it at all.",
+   "images": {
+    "a": "assets/img/art/sent/cf022a.jpg",
+    "b": "assets/img/art/sent/cf022b.jpg"
+   },
+   "production_ids": {
+    "a": "GLASS_TABLE_FULL_01_A",
+    "b": "GLASS_TABLE_FULL_01_B"
+   }
+  },
+  {
+   "id": "cf023",
+   "level": 1,
+   "phrase": "Котката е на стола.",
+   "pair": "Котката е под стола.",
+   "skill_code": "E7",
+   "difference_type": "предлог",
+   "difficulty": 2,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH08.Р2",
+    "CH08.Р3",
+    "CH09.Р1"
+   ],
+   "visual_template_id": "CAT_CHAIR_POSITION_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as CAT_CHAIR_POSITION_01 (one cat and one wooden chair in a plain room, side view; only the cat's position changes). The cat sits ON the seat of the chair. Must NOT show: the cat under or beside the chair.",
+   "scene_pair": "Same composition as CAT_CHAIR_POSITION_01 (one cat and one wooden chair in a plain room, side view; only the cat's position changes). The cat lies on the floor UNDER the chair, between the legs. Must NOT show: the cat on the seat.",
+   "source": "new",
+   "changed": "без промяна в текста; пул CH08.Р2/Р3 + CH09.Р1",
+   "difference_detail": "на/под",
+   "images": {
+    "a": "assets/img/art/sent/cf023a.jpg",
+    "b": "assets/img/art/sent/cf023b.jpg"
+   },
+   "production_ids": {
+    "a": "CAT_CHAIR_POSITION_01_A",
+    "b": "CAT_CHAIR_POSITION_01_B"
+   }
+  },
+  {
+   "id": "cf024",
+   "level": 1,
+   "phrase": "Топката е в кутията.",
+   "pair": "Топката е до кутията.",
+   "skill_code": "E7",
+   "difference_type": "предлог",
+   "difficulty": 1,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH08.Р2",
+    "CH08.Р3",
+    "CH09.Р1"
+   ],
+   "visual_template_id": "BALL_BOX_POSITION_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as BALL_BOX_POSITION_01 (one open cardboard box and one red ball on the floor; only the ball's position changes). The ball is INSIDE the open box, visible over the edge. Must NOT show: the ball outside the box.",
+   "scene_pair": "Same composition as BALL_BOX_POSITION_01 (one open cardboard box and one red ball on the floor; only the ball's position changes). The ball lies on the floor right NEXT TO the box; box empty. Must NOT show: the ball inside the box.",
+   "source": "new",
+   "changed": "без промяна в текста",
+   "difference_detail": "в/до",
+   "images": {
+    "a": "assets/img/art/sent/cf024a.jpg",
+    "b": "assets/img/art/sent/cf024b.jpg"
+   },
+   "production_ids": {
+    "a": "BALL_BOX_POSITION_01_A",
+    "b": "BALL_BOX_POSITION_01_B"
+   }
+  },
+  {
+   "id": "cf025",
+   "level": 1,
+   "phrase": "Мечето е на леглото.",
+   "pair": "Мечето е под леглото.",
+   "skill_code": "E7",
+   "difference_type": "предлог",
+   "difficulty": 2,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH08.Р2",
+    "CH08.Р3",
+    "CH09.Р1"
+   ],
+   "visual_template_id": "TEDDY_BED_POSITION_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as TEDDY_BED_POSITION_01 (a child's bed in a bedroom, side view; only the teddy bear's position changes). The teddy bear sits ON the bed. Must NOT show: a teddy under the bed.",
+   "scene_pair": "Same composition as TEDDY_BED_POSITION_01 (a child's bed in a bedroom, side view; only the teddy bear's position changes). The teddy bear lies on the floor UNDER the bed, clearly visible. Must NOT show: a teddy on the bed.",
+   "source": "new",
+   "changed": "без промяна в текста",
+   "difference_detail": "на/под",
+   "images": {
+    "a": "assets/img/art/sent/cf025a.jpg",
+    "b": "assets/img/art/sent/cf025b.jpg"
+   },
+   "production_ids": {
+    "a": "TEDDY_BED_POSITION_01_A",
+    "b": "TEDDY_BED_POSITION_01_B"
+   }
+  },
+  {
+   "id": "cf026",
+   "level": 1,
+   "phrase": "Ябълката е в купата.",
+   "pair": "Ябълката е до купата.",
+   "skill_code": "E7",
+   "difference_type": "предлог",
+   "difficulty": 1,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH08.Р2",
+    "CH08.Р3",
+    "CH09.Р1"
+   ],
+   "visual_template_id": "APPLE_BOWL_POSITION_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as APPLE_BOWL_POSITION_01 (one bowl and one red apple on a table; only the apple's position changes). The apple is IN the bowl. Must NOT show: the apple outside the bowl.",
+   "scene_pair": "Same composition as APPLE_BOWL_POSITION_01 (one bowl and one red apple on a table; only the apple's position changes). The apple lies on the table NEXT TO the bowl; bowl empty. Must NOT show: the apple in the bowl.",
+   "source": "new",
+   "changed": "без промяна в текста",
+   "difference_detail": "в/до",
+   "images": {
+    "a": "assets/img/art/sent/cf026a.jpg",
+    "b": "assets/img/art/sent/cf026b.jpg"
+   },
+   "production_ids": {
+    "a": "APPLE_BOWL_POSITION_01_A",
+    "b": "APPLE_BOWL_POSITION_01_B"
+   }
+  },
+  {
+   "id": "cf027",
+   "level": 1,
+   "phrase": "Момчето е зад дървото.",
+   "pair": "Момчето е пред дървото.",
+   "skill_code": "E7",
+   "difference_type": "предлог",
+   "difficulty": 3,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH08.Р2",
+    "CH08.Р3",
+    "CH09.Р1"
+   ],
+   "visual_template_id": "BOY_TREE_POSITION_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as BOY_TREE_POSITION_01 (one thick tree in a park, front view; only the boy's position changes). The boy stands BEHIND the tree, partly hidden, peeking out from the side. Must NOT show: the boy in front of the trunk.",
+   "scene_pair": "Same composition as BOY_TREE_POSITION_01 (one thick tree in a park, front view; only the boy's position changes). The boy stands IN FRONT OF the tree, fully visible, trunk behind him. Must NOT show: the boy hidden behind the trunk.",
+   "source": "new",
+   "changed": "без промяна в текста; трудност 3 (дълбочина на сцената)",
+   "difference_detail": "зад/пред",
+   "images": {
+    "a": "assets/img/art/sent/cf027a.jpg",
+    "b": "assets/img/art/sent/cf027b.jpg"
+   },
+   "production_ids": {
+    "a": "BOY_TREE_POSITION_01_A",
+    "b": "BOY_TREE_POSITION_01_B"
+   }
+  },
+  {
+   "id": "cf028",
+   "level": 1,
+   "phrase": "Птичето е в клетката.",
+   "pair": "Птичето е на клетката.",
+   "skill_code": "E7",
+   "difference_type": "предлог",
+   "difficulty": 2,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH08.Р2",
+    "CH08.Р3",
+    "CH09.Р1"
+   ],
+   "visual_template_id": "BIRD_CAGE_POSITION_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as BIRD_CAGE_POSITION_01 (one round birdcage with an open door; only the bird's position changes). The bird sits INSIDE the cage on the perch. Must NOT show: a bird on the cage roof.",
+   "scene_pair": "Same composition as BIRD_CAGE_POSITION_01 (one round birdcage with an open door; only the bird's position changes). The bird sits ON TOP of the cage roof; cage empty. Must NOT show: a bird inside the cage.",
+   "source": "new",
+   "changed": "без промяна в текста",
+   "difference_detail": "в/на",
+   "images": {
+    "a": "assets/img/art/sent/cf028a.jpg",
+    "b": "assets/img/art/sent/cf028b.jpg"
+   },
+   "production_ids": {
+    "a": "BIRD_CAGE_POSITION_01_A",
+    "b": "BIRD_CAGE_POSITION_01_B"
+   }
+  },
+  {
+   "id": "cf029",
+   "level": 1,
+   "phrase": "Кучето е в колибата.",
+   "pair": "Кучето е пред колибата.",
+   "skill_code": "E7",
+   "difference_type": "предлог",
+   "difficulty": 2,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH08.Р2",
+    "CH08.Р3",
+    "CH09.Р1"
+   ],
+   "visual_template_id": "DOG_KENNEL_POSITION_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as DOG_KENNEL_POSITION_01 (one wooden kennel in a yard, front view; only the dog's position changes). The dog lies INSIDE the kennel, head visible in the doorway. Must NOT show: the dog outside.",
+   "scene_pair": "Same composition as DOG_KENNEL_POSITION_01 (one wooden kennel in a yard, front view; only the dog's position changes). The dog lies on the grass IN FRONT OF the kennel; kennel empty. Must NOT show: the dog inside.",
+   "source": "clean/2#180",
+   "changed": "без промяна в текста",
+   "difference_detail": "в/пред",
+   "images": {
+    "a": "assets/img/art/sent/cf029a.jpg",
+    "b": "assets/img/art/sent/cf029b.jpg"
+   },
+   "production_ids": {
+    "a": "DOG_KENNEL_POSITION_01_A",
+    "b": "DOG_KENNEL_POSITION_01_B"
+   }
+  },
+  {
+   "id": "cf030",
+   "level": 1,
+   "phrase": "Балонът е над къщата.",
+   "pair": "Балонът е до къщата.",
+   "skill_code": "E7",
+   "difference_type": "предлог",
+   "difficulty": 2,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH08.Р2",
+    "CH08.Р3",
+    "CH09.Р1"
+   ],
+   "visual_template_id": "BALLOON_HOUSE_POSITION_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as BALLOON_HOUSE_POSITION_01 (one small house and one red balloon; only the balloon's position changes). The balloon floats ABOVE the roof. Must NOT show: the balloon beside the house.",
+   "scene_pair": "Same composition as BALLOON_HOUSE_POSITION_01 (one small house and one red balloon; only the balloon's position changes). The balloon is tied NEXT TO the house at the side, at window height. Must NOT show: the balloon above the roof.",
+   "source": "new",
+   "changed": "без промяна в текста",
+   "difference_detail": "над/до",
+   "images": {
+    "a": "assets/img/art/sent/cf030a.jpg",
+    "b": "assets/img/art/sent/cf030b.jpg"
+   },
+   "production_ids": {
+    "a": "BALLOON_HOUSE_POSITION_01_A",
+    "b": "BALLOON_HOUSE_POSITION_01_B"
+   }
+  },
+  {
+   "id": "cf031",
+   "level": 1,
+   "phrase": "Зайчето е в шапката.",
+   "pair": "Зайчето е до шапката.",
+   "skill_code": "E7",
+   "difference_type": "предлог",
+   "difficulty": 1,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH08.Р2",
+    "CH08.Р3",
+    "CH09.Р1"
+   ],
+   "visual_template_id": "BUNNY_HAT_POSITION_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as BUNNY_HAT_POSITION_01 (one upturned top hat on a table; only the bunny's position changes). The bunny sits INSIDE the hat, head and ears out. Must NOT show: the bunny outside the hat.",
+   "scene_pair": "Same composition as BUNNY_HAT_POSITION_01 (one upturned top hat on a table; only the bunny's position changes). The bunny sits on the table NEXT TO the hat; hat empty. Must NOT show: the bunny in the hat.",
+   "source": "new",
+   "changed": "без промяна в текста",
+   "difference_detail": "в/до",
+   "images": {
+    "a": "assets/img/art/sent/cf031a.jpg",
+    "b": "assets/img/art/sent/cf031b.jpg"
+   },
+   "production_ids": {
+    "a": "BUNNY_HAT_POSITION_01_A",
+    "b": "BUNNY_HAT_POSITION_01_B"
+   }
+  },
+  {
+   "id": "cf032",
+   "level": 1,
+   "phrase": "Книгите са на бюрото.",
+   "pair": "Книгите са в чантата.",
+   "skill_code": "E7",
+   "difference_type": "място",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH08.Р2",
+    "CH10.Р2"
+   ],
+   "visual_template_id": "BOOKS_DESK_BAG_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as BOOKS_DESK_BAG_01 (a child's room with a desk and a school bag beside it; only where the books are changes). A stack of books lies ON the desk; the bag is empty and flat. Must NOT show: books in the bag.",
+   "scene_pair": "Same composition as BOOKS_DESK_BAG_01 (a child's room with a desk and a school bag beside it; only where the books are changes). The books stick out of the open school bag; the desk is empty. Must NOT show: books on the desk.",
+   "source": "clean/2#169",
+   "changed": "Учебниците → Книгите; само практика (сменят се предлог и място)",
+   "difference_secondary": "предлог",
+   "images": {
+    "a": "assets/img/art/sent/cf032a.jpg",
+    "b": "assets/img/art/sent/cf032b.jpg"
+   },
+   "production_ids": {
+    "a": "BOOKS_DESK_BAG_01_A",
+    "b": "BOOKS_DESK_BAG_01_B"
+   }
+  },
+  {
+   "id": "cf033",
+   "level": 1,
+   "phrase": "Моливите са в раницата.",
+   "pair": "Моливите са на масата.",
+   "skill_code": "E7",
+   "difference_type": "място",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH08.Р2",
+    "CH10.Р2"
+   ],
+   "visual_template_id": "PENCILS_TABLE_BAG_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as PENCILS_TABLE_BAG_01 (a table with an open backpack on a chair beside it; only where the pencils are changes). Coloured pencils stick out of the open backpack; the table is empty. Must NOT show: pencils on the table.",
+   "scene_pair": "Same composition as PENCILS_TABLE_BAG_01 (a table with an open backpack on a chair beside it; only where the pencils are changes). Coloured pencils lie on the table; the backpack is empty. Must NOT show: pencils in the backpack.",
+   "source": "clean/2#21",
+   "changed": "само практика",
+   "difference_secondary": "предлог",
+   "images": {
+    "a": "assets/img/art/sent/cf033a.jpg",
+    "b": "assets/img/art/sent/cf033b.jpg"
+   },
+   "production_ids": {
+    "a": "PENCILS_TABLE_BAG_01_A",
+    "b": "PENCILS_TABLE_BAG_01_B"
+   }
+  },
+  {
+   "id": "cf034",
+   "level": 1,
+   "phrase": "Плодовете са в купата.",
+   "pair": "Плодовете са в хладилника.",
+   "skill_code": "E8",
+   "difference_type": "място",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH08.Р2",
+    "CH10.Р2"
+   ],
+   "visual_template_id": "FRUIT_KITCHEN_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as FRUIT_KITCHEN_01 (a kitchen with a table and an open fridge; only where the fruit is changes). The fruit is in a bowl on the table; fridge shelves show no fruit. Must NOT show: fruit in the fridge.",
+   "scene_pair": "Same composition as FRUIT_KITCHEN_01 (a kitchen with a table and an open fridge; only where the fruit is changes). The fruit is on a fridge shelf (fridge door open); the bowl on the table is empty. Must NOT show: fruit in the bowl.",
+   "source": "clean/2#167",
+   "changed": "само практика",
+   "edit_b": "Move the fruit: the bowl is empty and the fruit is now inside the open fridge, clearly visible on its shelves.",
+   "images": {
+    "a": "assets/img/art/sent/cf034a.jpg",
+    "b": "assets/img/art/sent/cf034b.jpg"
+   },
+   "production_ids": {
+    "a": "FRUIT_KITCHEN_01_A",
+    "b": "FRUIT_KITCHEN_01_B"
+   }
+  },
+  {
+   "id": "cf035",
+   "level": 1,
+   "phrase": "Книгата е на масата.",
+   "pair": "Книгата е под масата.",
+   "skill_code": "E7",
+   "difference_type": "предлог",
+   "difficulty": 2,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH08.Р2",
+    "CH08.Р3",
+    "CH09.Р1"
+   ],
+   "visual_template_id": "BOOK_TABLE_POSITION_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as BOOK_TABLE_POSITION_01 (one small table in a room, side view; only the book's position changes). The book lies ON the table top. Must NOT show: a book under the table.",
+   "scene_pair": "Same composition as BOOK_TABLE_POSITION_01 (one small table in a room, side view; only the book's position changes). The book lies on the floor UNDER the table. Must NOT show: a book on the table.",
+   "source": "new",
+   "changed": "от CH09.Р1 → общ предложен пул CH08/CH09",
+   "difference_detail": "на/под",
+   "images": {
+    "a": "assets/img/art/sent/cf035a.jpg",
+    "b": "assets/img/art/sent/cf035b.jpg"
+   },
+   "production_ids": {
+    "a": "BOOK_TABLE_POSITION_01_A",
+    "b": "BOOK_TABLE_POSITION_01_B"
+   }
+  },
+  {
+   "id": "cf036",
+   "level": 1,
+   "phrase": "Лампата е над масата.",
+   "pair": "Лампата е на масата.",
+   "skill_code": "E7",
+   "difference_type": "предлог",
+   "difficulty": 3,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH08.Р2",
+    "CH08.Р3",
+    "CH09.Р1"
+   ],
+   "visual_template_id": "LAMP_TABLE_POSITION_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as LAMP_TABLE_POSITION_01 (one table with a lamp; only the lamp's position changes). The lamp HANGS from the ceiling ABOVE the table; table top empty. Must NOT show: a lamp standing on the table.",
+   "scene_pair": "Same composition as LAMP_TABLE_POSITION_01 (one table with a lamp; only the lamp's position changes). A desk lamp STANDS ON the table top; no ceiling lamp. Must NOT show: a hanging lamp.",
+   "source": "new",
+   "changed": "трудност 3: над/на се различават с една буква",
+   "difference_detail": "над/на",
+   "images": {
+    "a": "assets/img/art/sent/cf036a.jpg",
+    "b": "assets/img/art/sent/cf036b.jpg"
+   },
+   "production_ids": {
+    "a": "LAMP_TABLE_POSITION_01_A",
+    "b": "LAMP_TABLE_POSITION_01_B"
+   }
+  },
+  {
+   "id": "cf037",
+   "level": 1,
+   "phrase": "Колата е в гаража.",
+   "pair": "Колата е пред гаража.",
+   "skill_code": "E7",
+   "difference_type": "предлог",
+   "difficulty": 2,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH08.Р2",
+    "CH08.Р3",
+    "CH09.Р1"
+   ],
+   "visual_template_id": "CAR_GARAGE_POSITION_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as CAR_GARAGE_POSITION_01 (one garage with an open door, front view; only the car's position changes). The car is INSIDE the garage, seen through the open door. Must NOT show: a car outside.",
+   "scene_pair": "Same composition as CAR_GARAGE_POSITION_01 (one garage with an open door, front view; only the car's position changes). The car stands IN FRONT OF the garage; garage empty. Must NOT show: a car inside.",
+   "source": "new",
+   "changed": "без промяна в текста",
+   "difference_detail": "в/пред",
+   "images": {
+    "a": "assets/img/art/sent/cf037a.jpg",
+    "b": "assets/img/art/sent/cf037b.jpg"
+   },
+   "production_ids": {
+    "a": "CAR_GARAGE_POSITION_01_A",
+    "b": "CAR_GARAGE_POSITION_01_B"
+   }
+  },
+  {
+   "id": "cf038",
+   "level": 1,
+   "phrase": "Врабчето е на клона.",
+   "pair": "Врабчето е на покрива.",
+   "skill_code": "E8",
+   "difference_type": "място",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH08.Р2",
+    "CH09.Р1"
+   ],
+   "visual_template_id": "SPARROW_PLACE_01",
+   "pilot_status": "pilot",
+   "scene_phrase": "A small house and a tree seen up close; a BIG sparrow, large in the frame, sits on a low tree branch next to the roof; the roof is empty. Must NOT show: a bird on the roof.",
+   "scene_pair": "A small house and a tree seen up close; a BIG sparrow, large in the frame, sits on the roof of the house; the branch is empty. Must NOT show: a bird on the tree.",
+   "source": "clean/2#32",
+   "changed": "„кацна“ → „е“ (правило 5: без минало време на ниво 1)",
+   "edit_b": "Move the big sparrow from the branch to the roof of the house; the branch is empty.",
+   "images": {
+    "a": "assets/img/art/sent/cf038a.jpg",
+    "b": "assets/img/art/sent/cf038b.jpg"
+   },
+   "production_ids": {
+    "a": "SPARROW_PLACE_01_A",
+    "b": "SPARROW_PLACE_01_B"
+   },
+   "picture_note": "прерисувано в едър план (2026-10-16)"
+  },
+  {
+   "id": "cf039",
+   "level": 1,
+   "phrase": "Котето спи на стола.",
+   "pair": "Котето спи на пода.",
+   "skill_code": "E8",
+   "difference_type": "място",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH08.Р2",
+    "CH09.Р1"
+   ],
+   "visual_template_id": "KITTEN_SLEEP_PLACE_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as KITTEN_SLEEP_PLACE_01 (a room with one chair; only where the kitten sleeps changes). The kitten sleeps curled ON the chair seat. Must NOT show: a kitten on the floor.",
+   "scene_pair": "Same composition as KITTEN_SLEEP_PLACE_01 (a room with one chair; only where the kitten sleeps changes). The kitten sleeps curled on the floor rug; chair empty. Must NOT show: a kitten on the chair.",
+   "source": "clean/2#65",
+   "changed": "от резерв CH08 → пул CH08.Р2/CH09.Р1",
+   "edit_b": "Move the kitten from the chair to the floor next to the chair, still sleeping; the chair seat is empty.",
+   "images": {
+    "a": "assets/img/art/sent/cf039a.jpg",
+    "b": "assets/img/art/sent/cf039b.jpg"
+   },
+   "production_ids": {
+    "a": "KITTEN_SLEEP_PLACE_01_A",
+    "b": "KITTEN_SLEEP_PLACE_01_B"
+   }
+  },
+  {
+   "id": "cf040",
+   "level": 2,
+   "phrase": "Мая облича рокля на куклата.",
+   "pair": "Мая облича рокля на мечето.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH09.Р4"
+   ],
+   "visual_template_id": "MAYA_DRESSES_TOY_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as MAYA_DRESSES_TOY_01 (Maya sitting on a rug putting a pink dress on a toy; only the toy changes). The toy is a doll. Must NOT show: any teddy bear.",
+   "scene_pair": "Same composition as MAYA_DRESSES_TOY_01 (Maya sitting on a rug putting a pink dress on a toy; only the toy changes). The toy is a teddy bear. Must NOT show: any doll.",
+   "source": "clean/2#51",
+   "changed": "„Катя и Таня обличат“ → „Мая облича рокля на…“ (едно кратко име)",
+   "edit_b": "Replace the doll Maya is dressing with a teddy bear wearing the same dress. No doll anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf040a.jpg",
+    "b": "assets/img/art/sent/cf040b.jpg"
+   },
+   "production_ids": {
+    "a": "MAYA_DRESSES_TOY_01_A",
+    "b": "MAYA_DRESSES_TOY_01_B"
+   }
+  },
+  {
+   "id": "cf041",
+   "level": 2,
+   "phrase": "Мама слага ябълките в кошницата.",
+   "pair": "Мама слага ябълките в торбата.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH09.Р4",
+    "CH14.Р4"
+   ],
+   "visual_template_id": "MOM_APPLES_CONTAINER_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as MOM_APPLES_CONTAINER_01 (Mom at a kitchen table with apples; only the container changes). Mom puts apples into a wicker basket. Must NOT show: any bag.",
+   "scene_pair": "Same composition as MOM_APPLES_CONTAINER_01 (Mom at a kitchen table with apples; only the container changes). Mom puts apples into a cloth shopping bag. Must NOT show: any basket.",
+   "source": "clean/2#191",
+   "changed": "„Тони и Ани сложиха рибата“ → „Мама слага ябълките“ (без минало време, без риболов)",
+   "difference_detail": "съд",
+   "edit_b": "Replace the basket with a cloth shopping bag; Mom puts the apples into the bag. No basket anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf041a.jpg",
+    "b": "assets/img/art/sent/cf041b.jpg"
+   },
+   "production_ids": {
+    "a": "MOM_APPLES_CONTAINER_01_A",
+    "b": "MOM_APPLES_CONTAINER_01_B"
+   }
+  },
+  {
+   "id": "cf042",
+   "level": 2,
+   "phrase": "На масата има ваза с цветя.",
+   "pair": "На масата има купа с плодове.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH09.Р4",
+    "CH14.Р4"
+   ],
+   "visual_template_id": "TABLE_CENTER_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as TABLE_CENTER_01 (a round table, front view; only the object in the middle changes). A vase with flowers. Must NOT show: any fruit.",
+   "scene_pair": "Same composition as TABLE_CENTER_01 (a round table, front view; only the object in the middle changes). A bowl with fruit. Must NOT show: any vase or flowers.",
+   "source": "clean/2#121",
+   "changed": "текст като v0.1",
+   "edit_b": "Replace the vase with flowers with a bowl full of fruit. No flowers, no vase.",
+   "images": {
+    "a": "assets/img/art/sent/cf042a.jpg",
+    "b": "assets/img/art/sent/cf042b.jpg"
+   },
+   "production_ids": {
+    "a": "TABLE_CENTER_01_A",
+    "b": "TABLE_CENTER_01_B"
+   }
+  },
+  {
+   "id": "cf043",
+   "level": 2,
+   "phrase": "Дядо Коледа носи торба с подаръци.",
+   "pair": "Мечката носи торба с подаръци.",
+   "skill_code": "E8",
+   "difference_type": "кой",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH09.Р4"
+   ],
+   "visual_template_id": "GIFT_SACK_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as GIFT_SACK_01 (a snowy path, a big sack of presents being carried; only the carrier changes). Santa Claus carries the sack. Must NOT show: any bear.",
+   "scene_pair": "Same composition as GIFT_SACK_01 (a snowy path, a big sack of presents being carried; only the carrier changes). A brown bear carries the sack. Must NOT show: Santa Claus.",
+   "source": "clean/2#39",
+   "changed": "текст като v0.1",
+   "edit_b": "Replace Santa Claus with a big friendly brown bear carrying the same sack of presents. No Santa.",
+   "images": {
+    "a": "assets/img/art/sent/cf043a.jpg",
+    "b": "assets/img/art/sent/cf043b.jpg"
+   },
+   "production_ids": {
+    "a": "GIFT_SACK_01_A",
+    "b": "GIFT_SACK_01_B"
+   }
+  },
+  {
+   "id": "cf044",
+   "level": 2,
+   "phrase": "Кучето тича след топката.",
+   "pair": "Котката тича след топката.",
+   "skill_code": "E8",
+   "difference_type": "животно",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH09.Р4",
+    "CH17.Р1"
+   ],
+   "visual_template_id": "CHASE_BALL_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as CHASE_BALL_01 (a garden lawn, a rolling ball; only the animal running after it changes). A dog runs after the ball. Must NOT show: any cat.",
+   "scene_pair": "Same composition as CHASE_BALL_01 (a garden lawn, a rolling ball; only the animal running after it changes). A cat runs after the ball. Must NOT show: any dog.",
+   "source": "clean/2#181",
+   "changed": "+ CH17.Р1",
+   "edit_b": "Replace the dog with a cat running after the same ball. No dog anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf044a.jpg",
+    "b": "assets/img/art/sent/cf044b.jpg"
+   },
+   "production_ids": {
+    "a": "CHASE_BALL_01_A",
+    "b": "CHASE_BALL_01_B"
+   }
+  },
+  {
+   "id": "cf045",
+   "level": 1,
+   "phrase": "Ани държи балон.",
+   "pair": "Ани държи торта.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH10.Р2",
+    "CH04.Р3"
+   ],
+   "visual_template_id": "ANI_HOLDS_PARTY_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as ANI_HOLDS_PARTY_01 (Ani at a birthday party room; only what she holds changes). Ani holds a balloon on a string. Must NOT show: any cake.",
+   "scene_pair": "Same composition as ANI_HOLDS_PARTY_01 (Ani at a birthday party room; only what she holds changes). Ani holds a cake on a plate. Must NOT show: any balloon.",
+   "source": "clean/1#16",
+   "changed": "Артур → Ани",
+   "edit_b": "Replace the balloon in Ani's hands with a birthday cake. No balloon anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf045a.jpg",
+    "b": "assets/img/art/sent/cf045b.jpg"
+   },
+   "production_ids": {
+    "a": "ANI_HOLDS_PARTY_01_A",
+    "b": "ANI_HOLDS_PARTY_01_B"
+   }
+  },
+  {
+   "id": "cf046",
+   "level": 1,
+   "phrase": "Татко пуска хвърчило.",
+   "pair": "Татко пуска самолетче.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH10.Р2"
+   ],
+   "visual_template_id": "DAD_FLIES_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as DAD_FLIES_01 (Dad on a windy hill; only the flying toy changes). Dad flies a kite on a string. Must NOT show: any paper plane.",
+   "scene_pair": "Same composition as DAD_FLIES_01 (Dad on a windy hill; only the flying toy changes). Dad throws a white paper plane. Must NOT show: any kite.",
+   "source": "clean/1#25",
+   "changed": "Васил → Татко; „хартиен самолет“ → „самолетче“ (ниво 1)",
+   "edit_b": "Replace the kite with a small toy paper airplane that Dad launches from his hand. No kite, no string.",
+   "images": {
+    "a": "assets/img/art/sent/cf046a.jpg",
+    "b": "assets/img/art/sent/cf046b.jpg"
+   },
+   "production_ids": {
+    "a": "DAD_FLIES_01_A",
+    "b": "DAD_FLIES_01_B"
+   }
+  },
+  {
+   "id": "cf047",
+   "level": 1,
+   "phrase": "Детето държи котенце.",
+   "pair": "Детето държи кученце.",
+   "skill_code": "E8",
+   "difference_type": "животно",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH10.Р2",
+    "CH05.Р1"
+   ],
+   "visual_template_id": "CHILD_HOLDS_PET_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as CHILD_HOLDS_PET_01 (a child holding a small pet in the arms; only the pet changes). The child holds a kitten. Must NOT show: any puppy.",
+   "scene_pair": "Same composition as CHILD_HOLDS_PET_01 (a child holding a small pet in the arms; only the pet changes). The child holds a puppy. Must NOT show: any kitten.",
+   "source": "clean/1#176",
+   "changed": "Саша → Детето; котенце/кученце са графично близки",
+   "edit_b": "Replace the kitten in the child's arms with a puppy. No cat anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf047a.jpg",
+    "b": "assets/img/art/sent/cf047b.jpg"
+   },
+   "production_ids": {
+    "a": "CHILD_HOLDS_PET_01_A",
+    "b": "CHILD_HOLDS_PET_01_B"
+   }
+  },
+  {
+   "id": "cf048",
+   "level": 1,
+   "phrase": "Баба полива цветя.",
+   "pair": "Баба бере цветя.",
+   "skill_code": "E8",
+   "difference_type": "действие",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH10.Р2",
+    "CH04.Р3"
+   ],
+   "visual_template_id": "GRANNY_FLOWERS_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as GRANNY_FLOWERS_01 (Granny in a flower garden; only her action changes). Granny waters the flowers with a watering can. Must NOT show: flowers in her hand.",
+   "scene_pair": "Same composition as GRANNY_FLOWERS_01 (Granny in a flower garden; only her action changes). Granny picks flowers and holds a small bouquet. Must NOT show: any watering can.",
+   "source": "clean/1#73",
+   "changed": "Ирина → Баба; „купува“ → „бере“ (купуването не се рисува еднозначно)",
+   "edit_b": "Remove the watering can. Granny now bends down and picks flowers: she holds a small bouquet of freshly picked flowers in her hand.",
+   "images": {
+    "a": "assets/img/art/sent/cf048a.jpg",
+    "b": "assets/img/art/sent/cf048b.jpg"
+   },
+   "production_ids": {
+    "a": "GRANNY_FLOWERS_01_A",
+    "b": "GRANNY_FLOWERS_01_B"
+   }
+  },
+  {
+   "id": "cf049",
+   "level": 1,
+   "phrase": "Децата берат ябълки.",
+   "pair": "Децата берат гъби.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH10.Р2",
+    "CH04.Р3"
+   ],
+   "visual_template_id": "KIDS_PICK_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as KIDS_PICK_01 (two children with baskets outdoors; only what they pick changes). The children pick apples from an apple tree. Must NOT show: any mushrooms.",
+   "scene_pair": "Same composition as KIDS_PICK_01 (two children with baskets outdoors; only what they pick changes). The children pick mushrooms in the forest. Must NOT show: any apples.",
+   "source": "clean/1#186",
+   "changed": "текст като v0.1",
+   "edit_b": "Replace all the apples (on the tree, in the baskets and in the hands) with brown mushrooms. Both children now kneel and pick mushrooms from the grass under the tree. No apples anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf049a.jpg",
+    "b": "assets/img/art/sent/cf049b.jpg"
+   },
+   "production_ids": {
+    "a": "KIDS_PICK_01_A",
+    "b": "KIDS_PICK_01_B"
+   }
+  },
+  {
+   "id": "cf050",
+   "level": 1,
+   "phrase": "Момичето хвърля листа.",
+   "pair": "Момичето събира листа.",
+   "skill_code": "E8",
+   "difference_type": "действие",
+   "difficulty": 3,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH10.Р2"
+   ],
+   "visual_template_id": "GIRL_LEAVES_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as GIRL_LEAVES_01 (a girl in an autumn park; only the action changes). The girl throws autumn leaves up into the air, leaves flying. Must NOT show: a pile in a basket.",
+   "scene_pair": "Same composition as GIRL_LEAVES_01 (a girl in an autumn park; only the action changes). The girl gathers leaves from the ground into a basket. Must NOT show: leaves flying in the air.",
+   "source": "clean/1#109",
+   "changed": "само практика (сцените са по-трудни за еднозначно рисуване)",
+   "edit_b": "Change the action: the girl now bends down and gathers the leaves into a pile with her hands; no leaves in the air.",
+   "images": {
+    "a": "assets/img/art/sent/cf050a.jpg",
+    "b": "assets/img/art/sent/cf050b.jpg"
+   },
+   "production_ids": {
+    "a": "GIRL_LEAVES_01_A",
+    "b": "GIRL_LEAVES_01_B"
+   }
+  },
+  {
+   "id": "cf051",
+   "level": 2,
+   "phrase": "Иво свири на цигулка.",
+   "pair": "Иво свири на китара.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH11.Р1"
+   ],
+   "visual_template_id": "IVO_INSTRUMENT_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as IVO_INSTRUMENT_01 (Ivo on a small stage; only the instrument changes). Ivo plays a violin with a bow. Must NOT show: any guitar.",
+   "scene_pair": "Same composition as IVO_INSTRUMENT_01 (Ivo on a small stage; only the instrument changes). Ivo plays a guitar. Must NOT show: any violin or bow.",
+   "source": "clean/2#10",
+   "changed": "Атанас → Иво",
+   "difference_detail": "точна дума",
+   "edit_b": "Replace the violin with a guitar that Ivo plays. No violin, no bow.",
+   "images": {
+    "a": "assets/img/art/sent/cf051a.jpg",
+    "b": "assets/img/art/sent/cf051b.jpg"
+   },
+   "production_ids": {
+    "a": "IVO_INSTRUMENT_01_A",
+    "b": "IVO_INSTRUMENT_01_B"
+   }
+  },
+  {
+   "id": "cf052",
+   "level": 2,
+   "phrase": "Детето кара ски.",
+   "pair": "Детето кара шейна.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH11.Р1"
+   ],
+   "visual_template_id": "SNOW_SLOPE_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as SNOW_SLOPE_01 (a child on a snowy slope; only the equipment changes). The child skis down on skis with poles. Must NOT show: any sled.",
+   "scene_pair": "Same composition as SNOW_SLOPE_01 (a child on a snowy slope; only the equipment changes). The child rides down on a wooden sled. Must NOT show: any skis.",
+   "source": "clean/2#131",
+   "changed": "Оля → Детето; „се пързаля на ски/шейна“ → „кара ски/шейна“",
+   "difference_detail": "точна дума",
+   "edit_b": "Replace the skis with a wooden sled the child sits on, sliding down. No skis, no poles.",
+   "images": {
+    "a": "assets/img/art/sent/cf052a.jpg",
+    "b": "assets/img/art/sent/cf052b.jpg"
+   },
+   "production_ids": {
+    "a": "SNOW_SLOPE_01_A",
+    "b": "SNOW_SLOPE_01_B"
+   }
+  },
+  {
+   "id": "cf053",
+   "level": 2,
+   "phrase": "Мая кара кънки.",
+   "pair": "Мая кара ролери.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 3,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH11.Р1"
+   ],
+   "visual_template_id": "MAYA_SKATES_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as MAYA_SKATES_01 (Maya skating, full figure; only the skates and surface change). Ice skates with blades, on an ice rink. Must NOT show: any wheels.",
+   "scene_pair": "Same composition as MAYA_SKATES_01 (Maya skating, full figure; only the skates and surface change). Roller skates with wheels, on a park path. Must NOT show: any ice or blades.",
+   "source": "clean/2#26",
+   "changed": "Вики → Мая; двете изречения с едно и също „кара“",
+   "difference_detail": "точна дума",
+   "edit_b": "Replace the ice skates with roller skates (wheels), on a path instead of ice. No ice skates.",
+   "images": {
+    "a": "assets/img/art/sent/cf053a.jpg",
+    "b": "assets/img/art/sent/cf053b.jpg"
+   },
+   "production_ids": {
+    "a": "MAYA_SKATES_01_A",
+    "b": "MAYA_SKATES_01_B"
+   }
+  },
+  {
+   "id": "cf054",
+   "level": 2,
+   "phrase": "Ани рисува в албума.",
+   "pair": "Ани рисува на дъската.",
+   "skill_code": "E8",
+   "difference_type": "място",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH11.Р1",
+    "CH14.Р4"
+   ],
+   "visual_template_id": "ANI_DRAWS_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as ANI_DRAWS_01 (Ani drawing a sun picture in a classroom; only where she draws changes). Ani draws in a sketchbook on her desk with crayons. Must NOT show: drawing on the board.",
+   "scene_pair": "Same composition as ANI_DRAWS_01 (Ani drawing a sun picture in a classroom; only where she draws changes). Ani draws on the blackboard with chalk. Must NOT show: any sketchbook.",
+   "source": "clean/2#49",
+   "changed": "Ирина → Ани",
+   "difference_detail": "точна дума",
+   "edit_b": "Change where Ani draws: she now stands drawing with chalk on a green chalkboard. No sketchbook.",
+   "images": {
+    "a": "assets/img/art/sent/cf054a.jpg",
+    "b": "assets/img/art/sent/cf054b.jpg"
+   },
+   "production_ids": {
+    "a": "ANI_DRAWS_01_A",
+    "b": "ANI_DRAWS_01_B"
+   }
+  },
+  {
+   "id": "cf055",
+   "level": 2,
+   "phrase": "Момчето кара колело.",
+   "pair": "Момчето кара тротинетка.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH11.Р1"
+   ],
+   "visual_template_id": "BOY_RIDES_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as BOY_RIDES_01 (a boy on a park path; only the vehicle changes). The boy rides a bicycle. Must NOT show: any scooter.",
+   "scene_pair": "Same composition as BOY_RIDES_01 (a boy on a park path; only the vehicle changes). The boy rides a kick scooter. Must NOT show: any bicycle.",
+   "source": "clean/2#108",
+   "changed": "Мишо → Момчето",
+   "difference_detail": "точна дума",
+   "edit_b": "Replace the bicycle with a kick scooter the boy rides. No bicycle.",
+   "images": {
+    "a": "assets/img/art/sent/cf055a.jpg",
+    "b": "assets/img/art/sent/cf055b.jpg"
+   },
+   "production_ids": {
+    "a": "BOY_RIDES_01_A",
+    "b": "BOY_RIDES_01_B"
+   }
+  },
+  {
+   "id": "cf056",
+   "level": 2,
+   "phrase": "Баба събира гъби в кошница.",
+   "pair": "Баба събира ябълки в кошница.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH14.Р4"
+   ],
+   "visual_template_id": "GRANNY_BASKET_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as GRANNY_BASKET_01 (Granny with a basket outdoors; only what she gathers changes). Granny gathers mushrooms in a forest. Must NOT show: any apples.",
+   "scene_pair": "Same composition as GRANNY_BASKET_01 (Granny with a basket outdoors; only what she gathers changes). Granny gathers apples under an apple tree. Must NOT show: any mushrooms.",
+   "source": "clean/2#6",
+   "changed": "Ана → Баба",
+   "edit_b": "Replace the mushrooms in Granny's basket and hand with red apples. No mushrooms anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf056a.jpg",
+    "b": "assets/img/art/sent/cf056b.jpg"
+   },
+   "production_ids": {
+    "a": "GRANNY_BASKET_01_A",
+    "b": "GRANNY_BASKET_01_B"
+   }
+  },
+  {
+   "id": "cf057",
+   "level": 2,
+   "phrase": "Под дървото има гъба.",
+   "pair": "Под дървото има таралеж.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH14.Р4",
+    "CH17.Р1"
+   ],
+   "visual_template_id": "UNDER_TREE_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as UNDER_TREE_01 (one tree in a meadow; only what is under it changes). One mushroom under the tree. Must NOT show: any animal.",
+   "scene_pair": "Same composition as UNDER_TREE_01 (one tree in a meadow; only what is under it changes). One hedgehog under the tree. Must NOT show: any mushroom.",
+   "source": "clean/2#94",
+   "changed": "„Марк намери…“ → „Под дървото има…“ (без минало време и име)",
+   "difference_secondary": "животно",
+   "edit_b": "Replace the mushroom under the tree with a small hedgehog. No mushroom anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf057a.jpg",
+    "b": "assets/img/art/sent/cf057b.jpg"
+   },
+   "production_ids": {
+    "a": "UNDER_TREE_01_A",
+    "b": "UNDER_TREE_01_B"
+   }
+  },
+  {
+   "id": "cf058",
+   "level": 2,
+   "phrase": "Момчето държи в ръцете си диня.",
+   "pair": "Момчето държи в ръцете си торта.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH14.Р4"
+   ],
+   "visual_template_id": "BOY_HOLDS_BIG_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as BOY_HOLDS_BIG_01 (a boy, front view, holding something big with both hands; only the object changes). A big watermelon. Must NOT show: any cake.",
+   "scene_pair": "Same composition as BOY_HOLDS_BIG_01 (a boy, front view, holding something big with both hands; only the object changes). A big birthday cake. Must NOT show: any watermelon.",
+   "source": "clean/2#187",
+   "changed": "текст като v0.1",
+   "edit_b": "Replace the watermelon in the boy's hands with a big cake. No watermelon anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf058a.jpg",
+    "b": "assets/img/art/sent/cf058b.jpg"
+   },
+   "production_ids": {
+    "a": "BOY_HOLDS_BIG_01_A",
+    "b": "BOY_HOLDS_BIG_01_B"
+   }
+  },
+  {
+   "id": "cf059",
+   "level": 2,
+   "phrase": "Детето носи таралеж в шапката.",
+   "pair": "Детето носи коте в шапката.",
+   "skill_code": "E8",
+   "difference_type": "животно",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH14.Р4"
+   ],
+   "visual_template_id": "CHILD_HAT_CARRY_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as CHILD_HAT_CARRY_01 (a child carrying an upturned hat with both hands; only the animal in it changes). A hedgehog in the hat. Must NOT show: any kitten.",
+   "scene_pair": "Same composition as CHILD_HAT_CARRY_01 (a child carrying an upturned hat with both hands; only the animal in it changes). A kitten in the hat. Must NOT show: any hedgehog.",
+   "source": "clean/2#161",
+   "changed": "Борис → Детето",
+   "edit_b": "Replace the hedgehog in the hat with a small kitten. No hedgehog anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf059a.jpg",
+    "b": "assets/img/art/sent/cf059b.jpg"
+   },
+   "production_ids": {
+    "a": "CHILD_HAT_CARRY_01_A",
+    "b": "CHILD_HAT_CARRY_01_B"
+   }
+  },
+  {
+   "id": "cf061",
+   "level": 1,
+   "phrase": "Гъската протяга шия.",
+   "pair": "Жирафът протяга шия.",
+   "skill_code": "E8",
+   "difference_type": "животно",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH16.Р2",
+    "CH05.Р1"
+   ],
+   "visual_template_id": "STRETCH_NECK_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as STRETCH_NECK_01 (a sunny field with one tree; only the animal stretching its neck changes). A white goose stretches its neck up. Must NOT show: any giraffe.",
+   "scene_pair": "Same composition as STRETCH_NECK_01 (a sunny field with one tree; only the animal stretching its neck changes). A giraffe stretches its neck up to the tree. Must NOT show: any goose.",
+   "source": "clean/1#45",
+   "changed": "+ CH05.Р1 (кой?)",
+   "edit_b": "Replace the goose with a giraffe stretching its long neck. No goose anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf061a.jpg",
+    "b": "assets/img/art/sent/cf061b.jpg"
+   },
+   "production_ids": {
+    "a": "STRETCH_NECK_01_A",
+    "b": "STRETCH_NECK_01_B"
+   }
+  },
+  {
+   "id": "cf062",
+   "level": 1,
+   "phrase": "Котката търкаля кълбо.",
+   "pair": "Кучето търкаля кълбо.",
+   "skill_code": "E8",
+   "difference_type": "животно",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH16.Р2",
+    "CH05.Р1"
+   ],
+   "visual_template_id": "ROLL_YARN_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as ROLL_YARN_01 (a living room rug with a ball of yarn; only the animal changes). A cat rolls the ball of yarn with its paw. Must NOT show: any dog.",
+   "scene_pair": "Same composition as ROLL_YARN_01 (a living room rug with a ball of yarn; only the animal changes). A dog rolls the ball of yarn with its nose. Must NOT show: any cat.",
+   "source": "clean/1#93",
+   "changed": "+ CH05.Р1",
+   "edit_b": "Replace the cat with a dog rolling the same ball of yarn. No cat anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf062a.jpg",
+    "b": "assets/img/art/sent/cf062b.jpg"
+   },
+   "production_ids": {
+    "a": "ROLL_YARN_01_A",
+    "b": "ROLL_YARN_01_B"
+   }
+  },
+  {
+   "id": "cf063",
+   "level": 1,
+   "phrase": "Хамстерът върти колело.",
+   "pair": "Катерицата върти колело.",
+   "skill_code": "E8",
+   "difference_type": "животно",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH16.Р2"
+   ],
+   "visual_template_id": "WHEEL_RUN_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as WHEEL_RUN_01 (a big running wheel in a cage; only the animal changes). A small hamster runs in the wheel. Must NOT show: any squirrel or bushy tail.",
+   "scene_pair": "Same composition as WHEEL_RUN_01 (a big running wheel in a cage; only the animal changes). A squirrel with a bushy tail runs in the wheel. Must NOT show: any hamster.",
+   "source": "clean/1#135",
+   "changed": "текст като v0.1",
+   "edit_b": "Replace the hamster with a squirrel running in the same wheel. No hamster anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf063a.jpg",
+    "b": "assets/img/art/sent/cf063b.jpg"
+   },
+   "production_ids": {
+    "a": "WHEEL_RUN_01_A",
+    "b": "WHEEL_RUN_01_B"
+   }
+  },
+  {
+   "id": "cf064",
+   "level": 1,
+   "phrase": "Орелът разперва криле.",
+   "pair": "Пеперудата разперва криле.",
+   "skill_code": "E8",
+   "difference_type": "животно",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH16.Р2"
+   ],
+   "visual_template_id": "SPREAD_WINGS_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as SPREAD_WINGS_01 (a rock against the sky; only the animal spreading wings changes). An eagle spreads its wings on the rock. Must NOT show: any butterfly.",
+   "scene_pair": "Same composition as SPREAD_WINGS_01 (a rock against the sky; only the animal spreading wings changes). A big colourful butterfly spreads its wings on the rock. Must NOT show: any bird.",
+   "source": "clean/1#154",
+   "changed": "текст като v0.1",
+   "edit_b": "Replace the eagle with a big colorful butterfly spreading its wings. No eagle, no bird.",
+   "images": {
+    "a": "assets/img/art/sent/cf064a.jpg",
+    "b": "assets/img/art/sent/cf064b.jpg"
+   },
+   "production_ids": {
+    "a": "SPREAD_WINGS_01_A",
+    "b": "SPREAD_WINGS_01_B"
+   }
+  },
+  {
+   "id": "cf065",
+   "level": 1,
+   "phrase": "Момчето прави снежни топки.",
+   "pair": "Момчето прави снежен човек.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH16.Р2",
+    "CH10.Р2"
+   ],
+   "visual_template_id": "BOY_SNOW_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as BOY_SNOW_01 (a boy in a snowy yard; only what he makes changes). The boy makes snowballs; a small pile of snowballs beside him. Must NOT show: any snowman.",
+   "scene_pair": "Same composition as BOY_SNOW_01 (a boy in a snowy yard; only what he makes changes). The boy builds a snowman with a carrot nose. Must NOT show: a pile of snowballs.",
+   "source": "clean/1#38",
+   "changed": "Влади → Момчето",
+   "edit_b": "Replace the snowballs with a snowman the boy is building. No snowballs in his hands.",
+   "images": {
+    "a": "assets/img/art/sent/cf065a.jpg",
+    "b": "assets/img/art/sent/cf065b.jpg"
+   },
+   "production_ids": {
+    "a": "BOY_SNOW_01_A",
+    "b": "BOY_SNOW_01_B"
+   }
+  },
+  {
+   "id": "cf066",
+   "level": 1,
+   "phrase": "Мечката събира гъби.",
+   "pair": "Таралежът събира гъби.",
+   "skill_code": "E8",
+   "difference_type": "животно",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH16.Р2",
+    "CH05.Р1"
+   ],
+   "visual_template_id": "FOREST_MUSHROOMS_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as FOREST_MUSHROOMS_01 (a forest clearing with mushrooms; only the animal changes). A brown bear gathers mushrooms. Must NOT show: any hedgehog.",
+   "scene_pair": "Same composition as FOREST_MUSHROOMS_01 (a forest clearing with mushrooms; only the animal changes). A hedgehog gathers mushrooms. Must NOT show: any bear.",
+   "source": "clean/1#116",
+   "changed": "+ CH05.Р1",
+   "edit_b": "Replace the bear with a hedgehog gathering the same mushrooms. No bear anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf066a.jpg",
+    "b": "assets/img/art/sent/cf066b.jpg"
+   },
+   "production_ids": {
+    "a": "FOREST_MUSHROOMS_01_A",
+    "b": "FOREST_MUSHROOMS_01_B"
+   }
+  },
+  {
+   "id": "cf067",
+   "level": 2,
+   "phrase": "Пеперудата лети над цветето.",
+   "pair": "Пчелата лети над цветето.",
+   "skill_code": "E8",
+   "difference_type": "животно",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH16.Р3",
+    "CH17.Р1"
+   ],
+   "visual_template_id": "OVER_FLOWER_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as OVER_FLOWER_01 (one big flower; only the insect flying above it changes). A butterfly flies above the flower. Must NOT show: any bee.",
+   "scene_pair": "Same composition as OVER_FLOWER_01 (one big flower; only the insect flying above it changes). A bee flies above the flower. Must NOT show: any butterfly.",
+   "source": "clean/2#12",
+   "changed": "текст като v0.1",
+   "edit_b": "Replace the butterfly with a bee flying over the same flower. No butterfly anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf067a.jpg",
+    "b": "assets/img/art/sent/cf067b.jpg"
+   },
+   "production_ids": {
+    "a": "OVER_FLOWER_01_A",
+    "b": "OVER_FLOWER_01_B"
+   }
+  },
+  {
+   "id": "cf068",
+   "level": 2,
+   "phrase": "Децата играят шах.",
+   "pair": "Децата играят футбол.",
+   "skill_code": "E8",
+   "difference_type": "действие",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH16.Р3",
+    "CH17.Р1"
+   ],
+   "visual_template_id": "KIDS_PLAY_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as KIDS_PLAY_01 (two children playing together; only the game changes). Two children play chess at a table. Must NOT show: any ball.",
+   "scene_pair": "Same composition as KIDS_PLAY_01 (two children playing together; only the game changes). Two children play football on grass. Must NOT show: any chessboard.",
+   "source": "clean/2#80",
+   "changed": "„играят на шах/футбол“ → „играят шах/футбол“ (единно с cf093)",
+   "difference_secondary": "предмет",
+   "edit_b": "Change the game: the children now play football with a ball on grass; no chess board anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf068a.jpg",
+    "b": "assets/img/art/sent/cf068b.jpg"
+   },
+   "production_ids": {
+    "a": "KIDS_PLAY_01_A",
+    "b": "KIDS_PLAY_01_B"
+   }
+  },
+  {
+   "id": "cf069",
+   "level": 2,
+   "phrase": "Синигерът свива гнездо на дървото.",
+   "pair": "Синигерът свива гнездо на покрива.",
+   "skill_code": "E8",
+   "difference_type": "място",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH16.Р3",
+    "CH17.Р1"
+   ],
+   "visual_template_id": "TIT_NEST_PLACE_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as TIT_NEST_PLACE_01 (a house with a tree beside it, a great tit with a twig; only where the nest is changes). The tit builds a nest in the tree fork. Must NOT show: a nest on the roof.",
+   "scene_pair": "Same composition as TIT_NEST_PLACE_01 (a house with a tree beside it, a great tit with a twig; only where the nest is changes). The tit builds a nest on the roof by the chimney. Must NOT show: a nest in the tree.",
+   "source": "clean/2#183",
+   "changed": "текст като v0.1",
+   "edit_b": "Move the bird and its nest from the tree to the roof of a small house; nothing in the tree.",
+   "images": {
+    "a": "assets/img/art/sent/cf069a.jpg",
+    "b": "assets/img/art/sent/cf069b.jpg"
+   },
+   "production_ids": {
+    "a": "TIT_NEST_PLACE_01_A",
+    "b": "TIT_NEST_PLACE_01_B"
+   }
+  },
+  {
+   "id": "cf070",
+   "level": 2,
+   "phrase": "На масата има една ябълка.",
+   "pair": "На масата има три ябълки.",
+   "skill_code": "E8",
+   "difference_type": "брой",
+   "difficulty": 1,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH16.Р3",
+    "CH17.Р1"
+   ],
+   "visual_template_id": "APPLES_TABLE_COUNT_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as APPLES_TABLE_COUNT_01 (a table, front view; only the number of apples changes). Exactly ONE apple on the table. Must NOT show: more apples.",
+   "scene_pair": "Same composition as APPLES_TABLE_COUNT_01 (a table, front view; only the number of apples changes). Exactly THREE apples, clearly separated. Must NOT show: one, two or four apples.",
+   "source": "new",
+   "changed": "без промяна; брой – отношение (число + форма на съществителното)",
+   "difference_detail": "1/3",
+   "edit_b": "Make it exactly THREE apples on the table, clearly separated. Not one.",
+   "images": {
+    "a": "assets/img/art/sent/cf070a.jpg",
+    "b": "assets/img/art/sent/cf070b.jpg"
+   },
+   "production_ids": {
+    "a": "APPLES_TABLE_COUNT_01_A",
+    "b": "APPLES_TABLE_COUNT_01_B"
+   }
+  },
+  {
+   "id": "cf071",
+   "level": 2,
+   "phrase": "В езерото плуват патици.",
+   "pair": "В езерото плуват лебеди.",
+   "skill_code": "E8",
+   "difference_type": "животно",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH16.Р3",
+    "CH17.Р1"
+   ],
+   "visual_template_id": "LAKE_BIRDS_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as LAKE_BIRDS_01 (a small lake with reeds; only the swimming birds change). Three ducks swim. Must NOT show: any swans.",
+   "scene_pair": "Same composition as LAKE_BIRDS_01 (a small lake with reeds; only the swimming birds change). Three white swans swim. Must NOT show: any ducks.",
+   "source": "clean/2#117",
+   "changed": "текст като v0.1",
+   "edit_b": "Replace the ducks with white swans swimming in the same lake. No ducks anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf071a.jpg",
+    "b": "assets/img/art/sent/cf071b.jpg"
+   },
+   "production_ids": {
+    "a": "LAKE_BIRDS_01_A",
+    "b": "LAKE_BIRDS_01_B"
+   }
+  },
+  {
+   "id": "cf072",
+   "level": 2,
+   "phrase": "Котката играе с кълбо в кухнята.",
+   "pair": "Котката играе с топка в кухнята.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH14.Р4",
+    "CH17.Р1"
+   ],
+   "visual_template_id": "CAT_KITCHEN_PLAY_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as CAT_KITCHEN_PLAY_01 (a cat playing on a kitchen floor; only the toy changes). The cat plays with a ball of yarn. Must NOT show: any ball.",
+   "scene_pair": "Same composition as CAT_KITCHEN_PLAY_01 (a cat playing on a kitchen floor; only the toy changes). The cat plays with a small rubber ball. Must NOT show: any yarn.",
+   "source": "clean/2#63",
+   "changed": "„лови мишка/муха“ → „играе с кълбо/топка“ (без лов)",
+   "edit_b": "Replace the ball of yarn with a small bouncy ball the cat plays with. No yarn anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf072a.jpg",
+    "b": "assets/img/art/sent/cf072b.jpg"
+   },
+   "production_ids": {
+    "a": "CAT_KITCHEN_PLAY_01_A",
+    "b": "CAT_KITCHEN_PLAY_01_B"
+   }
+  },
+  {
+   "id": "cf073",
+   "level": 2,
+   "phrase": "Влакът минава по моста.",
+   "pair": "Автобусът минава по моста.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH17.Р1"
+   ],
+   "visual_template_id": "BRIDGE_VEHICLE_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as BRIDGE_VEHICLE_01 (a bridge over a river; only the vehicle changes). A train crosses the bridge. Must NOT show: any bus.",
+   "scene_pair": "Same composition as BRIDGE_VEHICLE_01 (a bridge over a river; only the vehicle changes). A bus crosses the bridge. Must NOT show: any train or rails.",
+   "source": "clean/2#139",
+   "changed": "текст като v0.1",
+   "difference_detail": "превозно средство",
+   "edit_b": "Replace the train with a bus driving over the same bridge. No train, no rails.",
+   "images": {
+    "a": "assets/img/art/sent/cf073a.jpg",
+    "b": "assets/img/art/sent/cf073b.jpg"
+   },
+   "production_ids": {
+    "a": "BRIDGE_VEHICLE_01_A",
+    "b": "BRIDGE_VEHICLE_01_B"
+   }
+  },
+  {
+   "id": "cf074",
+   "level": 2,
+   "phrase": "В гнездото има две яйца.",
+   "pair": "В гнездото има три яйца.",
+   "skill_code": "E8",
+   "difference_type": "брой",
+   "difficulty": 3,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH17.Р1",
+    "CH16.Р3"
+   ],
+   "visual_template_id": "NEST_EGGS_COUNT_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as NEST_EGGS_COUNT_01 (one nest seen from above; only the number of eggs changes). Exactly TWO eggs, clearly separated. Must NOT show: one or three eggs.",
+   "scene_pair": "Same composition as NEST_EGGS_COUNT_01 (one nest seen from above; only the number of eggs changes). Exactly THREE eggs, clearly separated. Must NOT show: two or four eggs.",
+   "source": "new",
+   "changed": "едно/три → две/три (правило 9)",
+   "difference_detail": "2/3",
+   "edit_b": "Make it exactly THREE eggs in the nest, clearly separated. Not two.",
+   "images": {
+    "a": "assets/img/art/sent/cf074a.jpg",
+    "b": "assets/img/art/sent/cf074b.jpg"
+   },
+   "production_ids": {
+    "a": "NEST_EGGS_COUNT_01_A",
+    "b": "NEST_EGGS_COUNT_01_B"
+   }
+  },
+  {
+   "id": "cf075",
+   "level": 2,
+   "phrase": "Иво излиза навън с шапка.",
+   "pair": "Иво излиза навън без шапка.",
+   "skill_code": "E8",
+   "difference_type": "с/без",
+   "difficulty": 2,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH16.Р3",
+    "CH17.Р1",
+    "CH07.Р4"
+   ],
+   "visual_template_id": "IVO_GOES_OUT_HAT_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as IVO_GOES_OUT_HAT_01 (Ivo stepping out of the front door into a snowy yard; only the hat changes). Ivo wears a blue knitted hat. Must NOT show: a bare head.",
+   "scene_pair": "Same composition as IVO_GOES_OUT_HAT_01 (Ivo stepping out of the front door into a snowy yard; only the hat changes). Ivo's head is bare; no hat anywhere (not in hand, not on a hook). Must NOT show: any hat.",
+   "source": "new",
+   "changed": "„Момчето излезе“ → „Иво излиза“ (сегашно време, кратко име)",
+   "edit_b": "Remove the hat from Ivo's head: he goes out bareheaded. No hat anywhere.",
+   "edit_a_from_b": "Put a warm red knitted hat with a pompom on Ivo's head.",
+   "images": {
+    "a": "assets/img/art/sent/cf075a.jpg",
+    "b": "assets/img/art/sent/cf075b.jpg"
+   },
+   "production_ids": {
+    "a": "IVO_GOES_OUT_HAT_01_A",
+    "b": "IVO_GOES_OUT_HAT_01_B"
+   }
+  },
+  {
+   "id": "cf076",
+   "level": 2,
+   "phrase": "От дървото падат листа.",
+   "pair": "От дървото падат ябълки.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH17.Р1"
+   ],
+   "visual_template_id": "TREE_FALLING_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as TREE_FALLING_01 (one tree, things falling to the ground; only what falls changes). Yellow leaves fall. Must NOT show: any apples.",
+   "scene_pair": "Same composition as TREE_FALLING_01 (one tree, things falling to the ground; only what falls changes). Red apples fall. Must NOT show: falling leaves.",
+   "source": "clean/2#133",
+   "changed": "текст като v0.1",
+   "edit_b": "Replace the falling leaves with falling red apples. No falling leaves.",
+   "images": {
+    "a": "assets/img/art/sent/cf076a.jpg",
+    "b": "assets/img/art/sent/cf076b.jpg"
+   },
+   "production_ids": {
+    "a": "TREE_FALLING_01_A",
+    "b": "TREE_FALLING_01_B"
+   }
+  },
+  {
+   "id": "cf077",
+   "level": 2,
+   "phrase": "В небето лети самолет.",
+   "pair": "В небето лети балон.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH17.Р1"
+   ],
+   "visual_template_id": "SKY_FLYING_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as SKY_FLYING_01 (a blue sky over a town; only the flying object changes). An airplane flies. Must NOT show: any balloon.",
+   "scene_pair": "Same composition as SKY_FLYING_01 (a blue sky over a town; only the flying object changes). A hot-air balloon flies. Must NOT show: any airplane.",
+   "source": "clean/2#148",
+   "changed": "текст като v0.1",
+   "edit_b": "Replace the airplane with a hot-air balloon in the sky. No airplane anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf077a.jpg",
+    "b": "assets/img/art/sent/cf077b.jpg"
+   },
+   "production_ids": {
+    "a": "SKY_FLYING_01_A",
+    "b": "SKY_FLYING_01_B"
+   }
+  },
+  {
+   "id": "cf078",
+   "level": 1,
+   "phrase": "Момчето влиза в къщата.",
+   "pair": "Момчето излиза от къщата.",
+   "skill_code": "E7",
+   "difference_type": "посока",
+   "difficulty": 3,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH08.Р2"
+   ],
+   "visual_template_id": "BOY_HOUSE_DIRECTION_01",
+   "pilot_status": "pilot",
+   "measurement_ok": false,
+   "scene_phrase": "Same composition as BOY_HOUSE_DIRECTION_01 (a small house with an OPEN front door and a path with footprints, side-front view; only the boy's direction changes). The boy steps INTO the house: back turned to the viewer, one foot on the threshold, footprints lead TO the door, a curved arrow points into the door. Must NOT show: the boy facing out or walking away.",
+   "scene_pair": "Same composition as BOY_HOUSE_DIRECTION_01 (a small house with an OPEN front door and a path with footprints, side-front view; only the boy's direction changes). The boy steps OUT of the house: facing the viewer, one foot on the path, footprints lead AWAY from the door, a curved arrow points away from the door. Must NOT show: the boy facing the door.",
+   "source": "new",
+   "changed": "нова: посока „Накъде?“ (правило 8) със стрелка и следи; v0.3: само практика до пилота (pilot_only)",
+   "difference_detail": "в/от",
+   "pilot_only": true,
+   "images": {
+    "a": "assets/img/art/sent/cf078a.jpg",
+    "b": "assets/img/art/sent/cf078b.jpg"
+   },
+   "production_ids": {
+    "a": "BOY_HOUSE_DIRECTION_01_A",
+    "b": "BOY_HOUSE_DIRECTION_01_B"
+   }
+  },
+  {
+   "id": "cf079",
+   "level": 1,
+   "phrase": "Котето се качва по стълбата.",
+   "pair": "Котето слиза по стълбата.",
+   "skill_code": "E7",
+   "difference_type": "посока",
+   "difficulty": 3,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH08.Р2"
+   ],
+   "visual_template_id": "KITTEN_STAIRS_DIRECTION_01",
+   "pilot_status": "pilot",
+   "measurement_ok": false,
+   "scene_phrase": "Same composition as KITTEN_STAIRS_DIRECTION_01 (a short wooden staircase, side view, kitten in the middle step; only the direction changes). The kitten climbs UP: head pointing up the stairs, paw on the higher step, an upward arrow. Must NOT show: kitten facing down.",
+   "scene_pair": "Same composition as KITTEN_STAIRS_DIRECTION_01 (a short wooden staircase, side view, kitten in the middle step; only the direction changes). The kitten goes DOWN: head pointing down the stairs, paw on the lower step, a downward arrow. Must NOT show: kitten facing up.",
+   "source": "new",
+   "changed": "нова: посока нагоре/надолу (правило 8); v0.3: само практика до пилота (pilot_only)",
+   "difference_detail": "нагоре/надолу",
+   "pilot_only": true,
+   "images": {
+    "a": "assets/img/art/sent/cf079a.jpg",
+    "b": "assets/img/art/sent/cf079b.jpg"
+   },
+   "production_ids": {
+    "a": "KITTEN_STAIRS_DIRECTION_01_A",
+    "b": "KITTEN_STAIRS_DIRECTION_01_B"
+   }
+  },
+  {
+   "id": "cf080",
+   "level": 1,
+   "phrase": "Мишката влиза в дупката.",
+   "pair": "Мишката излиза от дупката.",
+   "skill_code": "E7",
+   "difference_type": "посока",
+   "difficulty": 3,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH08.Р2"
+   ],
+   "visual_template_id": "MOUSE_HOLE_DIRECTION_01",
+   "pilot_status": "pilot",
+   "measurement_ok": false,
+   "scene_phrase": "Same composition as MOUSE_HOLE_DIRECTION_01 (an arched mouse hole in a wall at floor level; only the mouse's direction changes). The mouse goes INTO the hole: only its back half and tail are visible outside, motion lines toward the hole. Must NOT show: the mouse's face.",
+   "scene_pair": "Same composition as MOUSE_HOLE_DIRECTION_01 (an arched mouse hole in a wall at floor level; only the mouse's direction changes). The mouse comes OUT of the hole: head and front paws out, facing the viewer, motion lines away from the hole. Must NOT show: the mouse's tail outside.",
+   "source": "new",
+   "changed": "нова: посока в/от (правило 8); v0.3: само практика до пилота (pilot_only)",
+   "difference_detail": "в/от",
+   "pilot_only": true,
+   "images": {
+    "a": "assets/img/art/sent/cf080a.jpg",
+    "b": "assets/img/art/sent/cf080b.jpg"
+   },
+   "production_ids": {
+    "a": "MOUSE_HOLE_DIRECTION_01_A",
+    "b": "MOUSE_HOLE_DIRECTION_01_B"
+   }
+  },
+  {
+   "id": "cf081",
+   "level": 1,
+   "phrase": "Птичето е в гнездото.",
+   "pair": "Птичето е над гнездото.",
+   "skill_code": "E7",
+   "difference_type": "предлог",
+   "difficulty": 2,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH08.Р2",
+    "CH08.Р3",
+    "CH09.Р1"
+   ],
+   "visual_template_id": "BIRD_NEST_POSITION_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as BIRD_NEST_POSITION_01 (one nest on a branch, side view; only the bird's position changes). The bird sits IN the nest. Must NOT show: a bird flying.",
+   "scene_pair": "Same composition as BIRD_NEST_POSITION_01 (one nest on a branch, side view; only the bird's position changes). The bird flies ABOVE the nest with wings spread; nest empty. Must NOT show: a bird in the nest.",
+   "source": "new",
+   "changed": "нова: в/над",
+   "difference_detail": "в/над",
+   "images": {
+    "a": "assets/img/art/sent/cf081a.jpg",
+    "b": "assets/img/art/sent/cf081b.jpg"
+   },
+   "production_ids": {
+    "a": "BIRD_NEST_POSITION_01_A",
+    "b": "BIRD_NEST_POSITION_01_B"
+   }
+  },
+  {
+   "id": "cf082",
+   "level": 1,
+   "phrase": "Мечето яде мед.",
+   "pair": "Мечето яде ягоди.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "BK14.Р4",
+    "CH04.Р3"
+   ],
+   "visual_template_id": "BEAR_EATS_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as BEAR_EATS_01 (a teddy-like bear cub sitting under a tree; only the food changes). The bear cub eats honey from a honey pot. Must NOT show: any strawberries.",
+   "scene_pair": "Same composition as BEAR_EATS_01 (a teddy-like bear cub sitting under a tree; only the food changes). The bear cub eats red strawberries from a bowl. Must NOT show: any honey pot.",
+   "source": "clean/1#120",
+   "changed": "нова от резерва: Мечо → Мечето; ягоди",
+   "edit_b": "Replace the honey pot with a bowl of strawberries the teddy eats. No honey anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf082a.jpg",
+    "b": "assets/img/art/sent/cf082b.jpg"
+   },
+   "production_ids": {
+    "a": "BEAR_EATS_01_A",
+    "b": "BEAR_EATS_01_B"
+   }
+  },
+  {
+   "id": "cf083",
+   "level": 1,
+   "phrase": "Татко чете книга.",
+   "pair": "Татко чете вестник.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH04.Р3",
+    "CH10.Р2"
+   ],
+   "visual_template_id": "DAD_ARMCHAIR_READS_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as DAD_ARMCHAIR_READS_01 (Dad sitting in an armchair reading; only what he reads changes). Dad reads a thick book with a colourful cover. Must NOT show: any newspaper.",
+   "scene_pair": "Same composition as DAD_ARMCHAIR_READS_01 (Dad sitting in an armchair reading; only what he reads changes). Dad reads a large unfolded newspaper (grey pages, no readable text). Must NOT show: any book.",
+   "source": "clean/1#37",
+   "changed": "нова от резерва: Виктор → Татко",
+   "edit_b": "Replace the book Dad reads with a big open newspaper. No book anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf083a.jpg",
+    "b": "assets/img/art/sent/cf083b.jpg"
+   },
+   "production_ids": {
+    "a": "DAD_ARMCHAIR_READS_01_A",
+    "b": "DAD_ARMCHAIR_READS_01_B"
+   }
+  },
+  {
+   "id": "cf084",
+   "level": 1,
+   "phrase": "Татко мете пода.",
+   "pair": "Татко мие пода.",
+   "skill_code": "E8",
+   "difference_type": "действие",
+   "difficulty": 3,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH04.Р3"
+   ],
+   "visual_template_id": "DAD_FLOOR_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as DAD_FLOOR_01 (Dad cleaning a kitchen floor; only the tool/action changes). Dad sweeps the floor with a broom and dustpan, dry floor. Must NOT show: any mop, bucket or water.",
+   "scene_pair": "Same composition as DAD_FLOOR_01 (Dad cleaning a kitchen floor; only the tool/action changes). Dad mops the floor with a wet mop and a bucket of water. Must NOT show: any broom.",
+   "source": "clean/1#39",
+   "changed": "нова от резерва: Боби → Татко; „мете подовете“ → „мете пода“; мете/мие са графично близки",
+   "edit_b": "Change the action: Dad now mops the floor with a mop and a bucket of water. No broom anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf084a.jpg",
+    "b": "assets/img/art/sent/cf084b.jpg"
+   },
+   "production_ids": {
+    "a": "DAD_FLOOR_01_A",
+    "b": "DAD_FLOOR_01_B"
+   }
+  },
+  {
+   "id": "cf085",
+   "level": 1,
+   "phrase": "Иво отваря хладилника.",
+   "pair": "Иво отваря прозореца.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH04.Р3"
+   ],
+   "visual_template_id": "IVO_OPENS_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as IVO_OPENS_01 (Ivo in a kitchen that has both a fridge and a window; only what he opens changes). Ivo opens the fridge door. Must NOT show: an open window.",
+   "scene_pair": "Same composition as IVO_OPENS_01 (Ivo in a kitchen that has both a fridge and a window; only what he opens changes). Ivo opens the window. Must NOT show: an open fridge.",
+   "source": "clean/1#34",
+   "changed": "нова от резерва: Виктор → Иво",
+   "edit_b": "Change what Ivo opens: he now opens the window. The fridge is closed.",
+   "images": {
+    "a": "assets/img/art/sent/cf085a.jpg",
+    "b": "assets/img/art/sent/cf085b.jpg"
+   },
+   "production_ids": {
+    "a": "IVO_OPENS_01_A",
+    "b": "IVO_OPENS_01_B"
+   }
+  },
+  {
+   "id": "cf086",
+   "level": 1,
+   "phrase": "Гъсеницата яде листо.",
+   "pair": "Охлювът яде листо.",
+   "skill_code": "E8",
+   "difference_type": "животно",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH05.Р1",
+    "CH16.Р2"
+   ],
+   "visual_template_id": "LEAF_EATER_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as LEAF_EATER_01 (one big green leaf, close-up; only the small animal eating it changes). A green caterpillar eats the leaf. Must NOT show: any snail.",
+   "scene_pair": "Same composition as LEAF_EATER_01 (one big green leaf, close-up; only the small animal eating it changes). A snail with a shell eats the leaf. Must NOT show: any caterpillar.",
+   "source": "clean/1#184",
+   "changed": "нова от резерва: Бръмбар → Охлювът (по-разпознаваем), членувани",
+   "edit_b": "Replace the caterpillar with a snail eating the same leaf. No caterpillar anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf086a.jpg",
+    "b": "assets/img/art/sent/cf086b.jpg"
+   },
+   "production_ids": {
+    "a": "LEAF_EATER_01_A",
+    "b": "LEAF_EATER_01_B"
+   }
+  },
+  {
+   "id": "cf087",
+   "level": 1,
+   "phrase": "Баба бърше праха.",
+   "pair": "Дядо бърше праха.",
+   "skill_code": "E8",
+   "difference_type": "кой",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH05.Р1"
+   ],
+   "visual_template_id": "DUSTING_SHELF_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as DUSTING_SHELF_01 (a bookshelf in a living room; only the person dusting changes). Granny dusts the shelf with a cloth. Must NOT show: Grandpa.",
+   "scene_pair": "Same composition as DUSTING_SHELF_01 (a bookshelf in a living room; only the person dusting changes). Grandpa dusts the shelf with a cloth. Must NOT show: Granny.",
+   "source": "clean/1#76",
+   "changed": "нова от резерва: Катя → Дядо (кой: баба/дядо)",
+   "difference_detail": "лице",
+   "edit_b": "SHEET Replace Granny with Grandpa (exactly as GRANDPA on the second picture, the character sheet), dusting the same shelf. No Granny.",
+   "images": {
+    "a": "assets/img/art/sent/cf087a.jpg",
+    "b": "assets/img/art/sent/cf087b.jpg"
+   },
+   "production_ids": {
+    "a": "DUSTING_SHELF_01_A",
+    "b": "DUSTING_SHELF_01_B"
+   }
+  },
+  {
+   "id": "cf088",
+   "level": 1,
+   "phrase": "Детето е с шапка.",
+   "pair": "Детето е без шапка.",
+   "skill_code": "E8",
+   "difference_type": "с/без",
+   "difficulty": 2,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH16.Р2",
+    "CH10.Р2"
+   ],
+   "visual_template_id": "CHILD_HAT_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as CHILD_HAT_01 (a child standing in a snowy yard, front view; only the hat changes). The child wears a red knitted hat. Must NOT show: a bare head or a hat held in hand.",
+   "scene_pair": "Same composition as CHILD_HAT_01 (a child standing in a snowy yard, front view; only the hat changes). The child has a bare head, hair visible. Must NOT show: any hat anywhere in the picture.",
+   "source": "new",
+   "changed": "нова: с/без, ниво 1 (правило 10)",
+   "edit_b": "Remove the hat from the child's head: bareheaded. No hat anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf088a.jpg",
+    "b": "assets/img/art/sent/cf088b.jpg"
+   },
+   "production_ids": {
+    "a": "CHILD_HAT_01_A",
+    "b": "CHILD_HAT_01_B"
+   }
+  },
+  {
+   "id": "cf089",
+   "level": 1,
+   "phrase": "В купата има една круша.",
+   "pair": "В купата има две круши.",
+   "skill_code": "E8",
+   "difference_type": "брой",
+   "difficulty": 2,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH16.Р2",
+    "CH10.Р2"
+   ],
+   "visual_template_id": "PEAR_BOWL_COUNT_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as PEAR_BOWL_COUNT_01 (one glass bowl on a table, close-up; only the number of pears changes). Exactly ONE pear in the bowl. Must NOT show: a second pear.",
+   "scene_pair": "Same composition as PEAR_BOWL_COUNT_01 (one glass bowl on a table, close-up; only the number of pears changes). Exactly TWO pears in the bowl, clearly separated. Must NOT show: one or three pears.",
+   "source": "new",
+   "changed": "нова: количество една/две (правило 9)",
+   "difference_detail": "1/2",
+   "edit_b": "Make it exactly TWO pears in the bowl, clearly separated. Not one.",
+   "images": {
+    "a": "assets/img/art/sent/cf089a.jpg",
+    "b": "assets/img/art/sent/cf089b.jpg"
+   },
+   "production_ids": {
+    "a": "PEAR_BOWL_COUNT_01_A",
+    "b": "PEAR_BOWL_COUNT_01_B"
+   }
+  },
+  {
+   "id": "cf090",
+   "level": 1,
+   "phrase": "Момчетата строят замък.",
+   "pair": "Момичетата строят замък.",
+   "skill_code": "E8",
+   "difference_type": "кой",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH10.Р2",
+    "CH16.Р2"
+   ],
+   "visual_template_id": "KIDS_SANDCASTLE_01",
+   "pilot_status": "pilot",
+   "measurement_ok": false,
+   "scene_phrase": "Same composition as KIDS_SANDCASTLE_01 (a sandy beach with a sandcastle; only the group of children changes). Three boys build the sandcastle. Must NOT show: any girls.",
+   "scene_pair": "Same composition as KIDS_SANDCASTLE_01 (a sandy beach with a sandcastle; only the group of children changes). Three girls build the sandcastle. Must NOT show: any boys.",
+   "source": "clean/1#197",
+   "changed": "нова от слабите: само практика/резерв, measurement_ok=false (правило 7)",
+   "difference_detail": "момчета/момичета",
+   "edit_b": "Replace the boys with girls building the same sand castle. No boys.",
+   "images": {
+    "a": "assets/img/art/sent/cf090a.jpg",
+    "b": "assets/img/art/sent/cf090b.jpg"
+   },
+   "production_ids": {
+    "a": "KIDS_SANDCASTLE_01_A",
+    "b": "KIDS_SANDCASTLE_01_B"
+   }
+  },
+  {
+   "id": "cf091",
+   "level": 2,
+   "phrase": "Мая рисува с четка.",
+   "pair": "Мая рисува с молив.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH11.Р1"
+   ],
+   "visual_template_id": "MAYA_PAINTS_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as MAYA_PAINTS_01 (Maya drawing a flower on paper at an easel; only the tool changes). Maya paints with a brush, paint pots beside her. Must NOT show: any pencil.",
+   "scene_pair": "Same composition as MAYA_PAINTS_01 (Maya drawing a flower on paper at an easel; only the tool changes). Maya draws with a pencil. Must NOT show: any brush or paint.",
+   "source": "clean/1#47",
+   "changed": "нова от резерва: Деси → Мая",
+   "difference_detail": "точна дума",
+   "edit_b": "Replace the paintbrush in Maya's hand with a long yellow pencil; she draws the flower with the pencil. Remove the paint jars. No brush anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf091a.jpg",
+    "b": "assets/img/art/sent/cf091b.jpg"
+   },
+   "production_ids": {
+    "a": "MAYA_PAINTS_01_A",
+    "b": "MAYA_PAINTS_01_B"
+   }
+  },
+  {
+   "id": "cf092",
+   "level": 2,
+   "phrase": "Баба плете шал.",
+   "pair": "Баба плете чорап.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH11.Р1"
+   ],
+   "visual_template_id": "GRANNY_KNITS_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as GRANNY_KNITS_01 (Granny in a rocking chair knitting with yarn; only the item changes). Granny knits a long striped scarf. Must NOT show: any sock.",
+   "scene_pair": "Same composition as GRANNY_KNITS_01 (Granny in a rocking chair knitting with yarn; only the item changes). Granny knits a sock on needles. Must NOT show: any scarf.",
+   "source": "clean/1#160",
+   "changed": "нова от резерва: Райна → Баба",
+   "difference_detail": "точна дума",
+   "edit_b": "Change what Granny knits: a small sock instead of a scarf. No scarf anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf092a.jpg",
+    "b": "assets/img/art/sent/cf092b.jpg"
+   },
+   "production_ids": {
+    "a": "GRANNY_KNITS_01_A",
+    "b": "GRANNY_KNITS_01_B"
+   }
+  },
+  {
+   "id": "cf093",
+   "level": 2,
+   "phrase": "Иво играе футбол.",
+   "pair": "Иво играе баскетбол.",
+   "skill_code": "E8",
+   "difference_type": "предмет",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH11.Р1"
+   ],
+   "visual_template_id": "IVO_SPORT_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as IVO_SPORT_01 (Ivo in a sports yard; only the game changes). Ivo kicks a football toward a goal. Must NOT show: any basket or hoop.",
+   "scene_pair": "Same composition as IVO_SPORT_01 (Ivo in a sports yard; only the game changes). Ivo throws a basketball toward a hoop. Must NOT show: any goal or football.",
+   "source": "clean/2#19",
+   "changed": "нова от резерва: Борис → Иво",
+   "difference_detail": "точна дума",
+   "edit_b": "Change the game: Ivo now plays basketball, holding an orange basketball near a basketball hoop. No football.",
+   "images": {
+    "a": "assets/img/art/sent/cf093a.jpg",
+    "b": "assets/img/art/sent/cf093b.jpg"
+   },
+   "production_ids": {
+    "a": "IVO_SPORT_01_A",
+    "b": "IVO_SPORT_01_B"
+   }
+  },
+  {
+   "id": "cf094",
+   "level": 2,
+   "phrase": "Татко върви в дъжда с чадър.",
+   "pair": "Татко върви в дъжда без чадър.",
+   "skill_code": "E8",
+   "difference_type": "с/без",
+   "difficulty": 1,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH16.Р3",
+    "CH17.Р1",
+    "CH07.Р4"
+   ],
+   "visual_template_id": "DAD_RAIN_UMBRELLA_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as DAD_RAIN_UMBRELLA_01 (Dad walking on a street in heavy rain; only the umbrella changes). Dad holds an open umbrella over his head. Must NOT show: a wet head.",
+   "scene_pair": "Same composition as DAD_RAIN_UMBRELLA_01 (Dad walking on a street in heavy rain; only the umbrella changes). Dad walks with no umbrella, wet hair; no umbrella anywhere. Must NOT show: any umbrella.",
+   "source": "new",
+   "changed": "нова: с/без (правило 10)",
+   "edit_b": "Remove the umbrella: Dad walks in the rain without an umbrella, raindrops on him. No umbrella anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf094a.jpg",
+    "b": "assets/img/art/sent/cf094b.jpg"
+   },
+   "production_ids": {
+    "a": "DAD_RAIN_UMBRELLA_01_A",
+    "b": "DAD_RAIN_UMBRELLA_01_B"
+   }
+  },
+  {
+   "id": "cf095",
+   "level": 2,
+   "phrase": "Мая отива на училище с раница.",
+   "pair": "Мая отива на училище без раница.",
+   "skill_code": "E8",
+   "difference_type": "с/без",
+   "difficulty": 2,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH16.Р3",
+    "CH17.Р1",
+    "CH07.Р4"
+   ],
+   "visual_template_id": "MAYA_SCHOOL_BAG_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as MAYA_SCHOOL_BAG_01 (Maya walking toward a school building, side view; only the backpack changes). Maya wears a backpack on her back. Must NOT show: empty shoulders.",
+   "scene_pair": "Same composition as MAYA_SCHOOL_BAG_01 (Maya walking toward a school building, side view; only the backpack changes). Maya walks with no backpack; no bag anywhere. Must NOT show: any backpack or bag.",
+   "source": "new",
+   "changed": "нова: с/без (правило 10)",
+   "edit_b": "Remove the backpack: Maya walks to school without a backpack. No backpack anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf095a.jpg",
+    "b": "assets/img/art/sent/cf095b.jpg"
+   },
+   "production_ids": {
+    "a": "MAYA_SCHOOL_BAG_01_A",
+    "b": "MAYA_SCHOOL_BAG_01_B"
+   }
+  },
+  {
+   "id": "cf096",
+   "level": 2,
+   "phrase": "На клона има две птички.",
+   "pair": "На клона има пет птички.",
+   "skill_code": "E8",
+   "difference_type": "брой",
+   "difficulty": 2,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH16.Р3",
+    "CH17.Р1"
+   ],
+   "visual_template_id": "BIRDS_BRANCH_COUNT_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as BIRDS_BRANCH_COUNT_01 (one long bare branch; only the number of birds changes). Exactly TWO birds, spaced apart. Must NOT show: more birds.",
+   "scene_pair": "Same composition as BIRDS_BRANCH_COUNT_01 (one long bare branch; only the number of birds changes). Exactly FIVE birds, spaced apart in a row. Must NOT show: two or more than five birds.",
+   "source": "new",
+   "changed": "нова: две/пет (правило 9)",
+   "difference_detail": "2/5",
+   "edit_b": "Make it exactly FIVE birds on the branch, clearly separated. Not two.",
+   "images": {
+    "a": "assets/img/art/sent/cf096a.jpg",
+    "b": "assets/img/art/sent/cf096b.jpg"
+   },
+   "production_ids": {
+    "a": "BIRDS_BRANCH_COUNT_01_A",
+    "b": "BIRDS_BRANCH_COUNT_01_B"
+   }
+  },
+  {
+   "id": "cf097",
+   "level": 2,
+   "phrase": "На небето има едно облаче.",
+   "pair": "На небето има много облаци.",
+   "skill_code": "E8",
+   "difference_type": "брой",
+   "difficulty": 1,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH16.Р3",
+    "CH17.Р1"
+   ],
+   "visual_template_id": "SKY_CLOUDS_COUNT_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as SKY_CLOUDS_COUNT_01 (a blue sky over a meadow; only the number of clouds changes). Exactly ONE small cloud. Must NOT show: more clouds.",
+   "scene_pair": "Same composition as SKY_CLOUDS_COUNT_01 (a blue sky over a meadow; only the number of clouds changes). Many clouds (at least eight) filling the sky. Must NOT show: a single cloud.",
+   "source": "new",
+   "changed": "нова: едно/много (правило 9)",
+   "difference_detail": "1/много",
+   "edit_b": "Fill the sky with many clouds (at least eight). Not one cloud.",
+   "images": {
+    "a": "assets/img/art/sent/cf097a.jpg",
+    "b": "assets/img/art/sent/cf097b.jpg"
+   },
+   "production_ids": {
+    "a": "SKY_CLOUDS_COUNT_01_A",
+    "b": "SKY_CLOUDS_COUNT_01_B"
+   }
+  },
+  {
+   "id": "cf098",
+   "level": 2,
+   "phrase": "Мама дава ябълка на детето.",
+   "pair": "Детето дава ябълка на мама.",
+   "skill_code": "E8",
+   "difference_type": "роли",
+   "difficulty": 3,
+   "reading_demand": "цялостен смисъл",
+   "eligible_rounds": [
+    "CH16.Р3",
+    "CH17.Р1"
+   ],
+   "visual_template_id": "GIVE_APPLE_ROLES_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as GIVE_APPLE_ROLES_01 (Mom and a child facing each other in a kitchen, one apple; only who gives and who receives changes). Mom holds out the apple; the child reaches with open hands. Must NOT show: the child holding the apple.",
+   "scene_pair": "Same composition as GIVE_APPLE_ROLES_01 (Mom and a child facing each other in a kitchen, one apple; only who gives and who receives changes). The child holds out the apple; Mom reaches with open hands. Must NOT show: Mom holding the apple.",
+   "source": "new",
+   "changed": "нова: размяна на ролите (цялостен смисъл)",
+   "difference_detail": "кой на кого",
+   "edit_b": "Swap the roles: now the child gives the apple to Mom; the child holds out the apple and Mom receives it.",
+   "images": {
+    "a": "assets/img/art/sent/cf098a.jpg",
+    "b": "assets/img/art/sent/cf098b.jpg"
+   },
+   "production_ids": {
+    "a": "GIVE_APPLE_ROLES_01_A",
+    "b": "GIVE_APPLE_ROLES_01_B"
+   }
+  },
+  {
+   "id": "cf099",
+   "level": 2,
+   "phrase": "Кучето гони котката в двора.",
+   "pair": "Котката гони кучето в двора.",
+   "skill_code": "E8",
+   "difference_type": "роли",
+   "difficulty": 3,
+   "reading_demand": "цялостен смисъл",
+   "eligible_rounds": [
+    "CH16.Р3",
+    "CH17.Р1"
+   ],
+   "visual_template_id": "CHASE_ROLES_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as CHASE_ROLES_01 (a yard with a fence, playful chase from left to right with motion lines; only who chases whom changes). The dog runs BEHIND, chasing the cat that runs ahead. Must NOT show: the cat behind the dog.",
+   "scene_pair": "Same composition as CHASE_ROLES_01 (a yard with a fence, playful chase from left to right with motion lines; only who chases whom changes). The cat runs BEHIND, chasing the dog that runs ahead. Must NOT show: the dog behind the cat.",
+   "source": "new",
+   "changed": "нова: размяна на ролите (игрива гоненица, без агресия)",
+   "difference_detail": "кой кого",
+   "edit_b": "Swap the roles: now the cat chases the dog; the dog runs ahead and the cat runs behind it.",
+   "images": {
+    "a": "assets/img/art/sent/cf099a.jpg",
+    "b": "assets/img/art/sent/cf099b.jpg"
+   },
+   "production_ids": {
+    "a": "CHASE_ROLES_01_A",
+    "b": "CHASE_ROLES_01_B"
+   }
+  },
+  {
+   "id": "cf100",
+   "level": 2,
+   "phrase": "Кучето спи, а котката играе.",
+   "pair": "Котката спи, а кучето играе.",
+   "skill_code": "E8",
+   "difference_type": "роли",
+   "difficulty": 3,
+   "reading_demand": "цялостен смисъл",
+   "eligible_rounds": [
+    "CH16.Р3",
+    "CH17.Р1"
+   ],
+   "visual_template_id": "PETS_SLEEP_PLAY_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as PETS_SLEEP_PLAY_01 (a living room with a dog bed and a ball of yarn; only who sleeps and who plays changes). The dog sleeps in its bed; the cat plays with yarn. Must NOT show: a sleeping cat.",
+   "scene_pair": "Same composition as PETS_SLEEP_PLAY_01 (a living room with a dog bed and a ball of yarn; only who sleeps and who plays changes). The cat sleeps in the bed; the dog plays with a ball. Must NOT show: a sleeping dog.",
+   "source": "new",
+   "changed": "нова: две действия, размяна (цялостен смисъл)",
+   "difference_detail": "две действия",
+   "edit_b": "Swap the roles: now the cat sleeps curled up and the dog plays with a ball.",
+   "images": {
+    "a": "assets/img/art/sent/cf100a.jpg",
+    "b": "assets/img/art/sent/cf100b.jpg"
+   },
+   "production_ids": {
+    "a": "PETS_SLEEP_PLAY_01_A",
+    "b": "PETS_SLEEP_PLAY_01_B"
+   }
+  },
+  {
+   "id": "cf101",
+   "level": 2,
+   "phrase": "Червената топка е в синята кутия.",
+   "pair": "Синята топка е в червената кутия.",
+   "skill_code": "E8",
+   "difference_type": "признак",
+   "difficulty": 3,
+   "reading_demand": "цялостен смисъл",
+   "eligible_rounds": [
+    "CH07.Р4",
+    "CH16.Р3",
+    "CH17.Р1"
+   ],
+   "visual_template_id": "BALLS_BOXES_BIND_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "A single RED ball lies inside a single open BLUE box. Only ONE ball and ONE box in the picture. Must NOT show: a second box or a second ball.",
+   "scene_pair": "Same composition as BALLS_BOXES_BIND_01 (two open boxes side by side (one red, one blue) and two balls (one red, one blue); only which ball is in which box changes). The BLUE ball is inside the RED box; the red ball is inside the blue box. Must NOT show: a blue ball in a blue box.",
+   "source": "new",
+   "changed": "нова: свързване на признак с предмет (цялостен смисъл)",
+   "difference_secondary": "свързване",
+   "edit_b": "Make the ball blue and the box red. Keep only one ball and one box.",
+   "images": {
+    "a": "assets/img/art/sent/cf101a.jpg",
+    "b": "assets/img/art/sent/cf101b.jpg"
+   },
+   "production_ids": {
+    "a": "BALLS_BOXES_BIND_01_A",
+    "b": "BALLS_BOXES_BIND_01_B"
+   }
+  },
+  {
+   "id": "cf102",
+   "level": 2,
+   "phrase": "Зайчето е в голямата кутия.",
+   "pair": "Зайчето е в малката кутия.",
+   "skill_code": "E8",
+   "difference_type": "признак",
+   "difficulty": 2,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH07.Р4",
+    "CH16.Р3",
+    "CH17.Р1"
+   ],
+   "visual_template_id": "BUNNY_BOXES_SIZE_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as BUNNY_BOXES_SIZE_01 (a big box and a small box side by side; only which box the bunny is in changes). The bunny peeks out of the BIG box; small box empty. Must NOT show: a bunny in the small box.",
+   "scene_pair": "Same composition as BUNNY_BOXES_SIZE_01 (a big box and a small box side by side; only which box the bunny is in changes). The bunny peeks out of the SMALL box; big box empty. Must NOT show: a bunny in the big box.",
+   "source": "new",
+   "changed": "нова: признак, свързан с място (отношение)",
+   "difference_secondary": "предлог",
+   "edit_b": "Move the bunny into the small box; the big box is empty.",
+   "images": {
+    "a": "assets/img/art/sent/cf102a.jpg",
+    "b": "assets/img/art/sent/cf102b.jpg"
+   },
+   "production_ids": {
+    "a": "BUNNY_BOXES_SIZE_01_A",
+    "b": "BUNNY_BOXES_SIZE_01_B"
+   }
+  },
+  {
+   "id": "cf103",
+   "level": 2,
+   "phrase": "Котето спи в кошницата с прежда.",
+   "pair": "Котето спи до кошницата с прежда.",
+   "skill_code": "E7",
+   "difference_type": "предлог",
+   "difficulty": 2,
+   "reading_demand": "отношение",
+   "eligible_rounds": [
+    "CH09.Р4",
+    "CH16.Р3",
+    "CH17.Р1"
+   ],
+   "visual_template_id": "KITTEN_YARN_BASKET_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as KITTEN_YARN_BASKET_01 (one basket full of balls of yarn on a rug; only the kitten's position changes). The kitten sleeps INSIDE the basket among the yarn balls. Must NOT show: a kitten on the rug.",
+   "scene_pair": "Same composition as KITTEN_YARN_BASKET_01 (one basket full of balls of yarn on a rug; only the kitten's position changes). The kitten sleeps on the rug NEXT TO the basket. Must NOT show: a kitten inside the basket.",
+   "source": "new",
+   "changed": "нова: предлог в разширено изречение (B8)",
+   "difference_detail": "в/до",
+   "images": {
+    "a": "assets/img/art/sent/cf103a.jpg",
+    "b": "assets/img/art/sent/cf103b.jpg"
+   },
+   "production_ids": {
+    "a": "KITTEN_YARN_BASKET_01_A",
+    "b": "KITTEN_YARN_BASKET_01_B"
+   }
+  },
+  {
+   "id": "cf104",
+   "level": 2,
+   "phrase": "Кученцето седи на прага на къщата.",
+   "pair": "Котенцето седи на прага на къщата.",
+   "skill_code": "E8",
+   "difference_type": "животно",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH09.Р4"
+   ],
+   "visual_template_id": "DOORSTEP_PET_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as DOORSTEP_PET_01 (the doorstep of a house with an open door; only the animal changes). A puppy sits on the doorstep. Must NOT show: any kitten.",
+   "scene_pair": "Same composition as DOORSTEP_PET_01 (the doorstep of a house with an open door; only the animal changes). A kitten sits on the doorstep. Must NOT show: any puppy.",
+   "source": "clean/2#164",
+   "changed": "нова от резерва; „праг“ – речник (B7)",
+   "edit_b": "Replace the puppy with a kitten sitting on the same doorstep. No dog anywhere.",
+   "images": {
+    "a": "assets/img/art/sent/cf104a.jpg",
+    "b": "assets/img/art/sent/cf104b.jpg"
+   },
+   "production_ids": {
+    "a": "DOORSTEP_PET_01_A",
+    "b": "DOORSTEP_PET_01_B"
+   }
+  },
+  {
+   "id": "cf105",
+   "level": 2,
+   "phrase": "На стола спи бяло коте.",
+   "pair": "На стола спи черно коте.",
+   "skill_code": "E8",
+   "difference_type": "признак",
+   "difficulty": 1,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH07.Р4"
+   ],
+   "visual_template_id": "KITTEN_CHAIR_COLOR_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as KITTEN_CHAIR_COLOR_01 (one chair with a sleeping kitten; only the kitten's colour changes). A WHITE kitten sleeps on the chair. Must NOT show: a black kitten.",
+   "scene_pair": "Same composition as KITTEN_CHAIR_COLOR_01 (one chair with a sleeping kitten; only the kitten's colour changes). A BLACK kitten sleeps on the chair. Must NOT show: a white kitten.",
+   "source": "new",
+   "changed": "нова: признак цвят",
+   "difference_detail": "цвят",
+   "edit_b": "Make the kitten black instead of white.",
+   "images": {
+    "a": "assets/img/art/sent/cf105a.jpg",
+    "b": "assets/img/art/sent/cf105b.jpg"
+   },
+   "production_ids": {
+    "a": "KITTEN_CHAIR_COLOR_01_A",
+    "b": "KITTEN_CHAIR_COLOR_01_B"
+   }
+  },
+  {
+   "id": "cf106",
+   "level": 2,
+   "phrase": "Детето е с чисти обувки.",
+   "pair": "Детето е с кални обувки.",
+   "skill_code": "E8",
+   "difference_type": "признак",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH07.Р4",
+    "CH14.Р4"
+   ],
+   "visual_template_id": "CHILD_SHOES_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as CHILD_SHOES_01 (a child standing on a doormat, shoes in focus; only the shoes change). Shiny clean shoes. Must NOT show: any mud.",
+   "scene_pair": "Same composition as CHILD_SHOES_01 (a child standing on a doormat, shoes in focus; only the shoes change). Shoes covered in brown mud, muddy footprints. Must NOT show: clean shoes.",
+   "source": "new",
+   "changed": "нова: признак (B6 описание)",
+   "edit_b": "Make the child's shoes very muddy, covered with brown mud. No clean shoes.",
+   "images": {
+    "a": "assets/img/art/sent/cf106a.jpg",
+    "b": "assets/img/art/sent/cf106b.jpg"
+   },
+   "production_ids": {
+    "a": "CHILD_SHOES_01_A",
+    "b": "CHILD_SHOES_01_B"
+   }
+  },
+  {
+   "id": "cf107",
+   "level": 2,
+   "phrase": "Дядо полива цветята в градината.",
+   "pair": "Баба полива цветята в градината.",
+   "skill_code": "E8",
+   "difference_type": "кой",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH14.Р4"
+   ],
+   "visual_template_id": "GARDEN_WATERING_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as GARDEN_WATERING_01 (a flower garden with a watering can; only the person changes). Grandpa waters the flowers. Must NOT show: Granny.",
+   "scene_pair": "Same composition as GARDEN_WATERING_01 (a flower garden with a watering can; only the person changes). Granny waters the flowers. Must NOT show: Grandpa.",
+   "source": "clean/2#13",
+   "changed": "нова от резерва: „се грижи за“ → „полива“ (рисува се)",
+   "difference_detail": "лице",
+   "edit_b": "SHEET Replace Grandpa with Granny (exactly as GRANNY on the second picture, the character sheet), watering the same flowers. No Grandpa.",
+   "images": {
+    "a": "assets/img/art/sent/cf107a.jpg",
+    "b": "assets/img/art/sent/cf107b.jpg"
+   },
+   "production_ids": {
+    "a": "GARDEN_WATERING_01_A",
+    "b": "GARDEN_WATERING_01_B"
+   }
+  },
+  {
+   "id": "cf108",
+   "level": 2,
+   "phrase": "Мама чете на дивана.",
+   "pair": "Мама спи на дивана.",
+   "skill_code": "E8",
+   "difference_type": "действие",
+   "difficulty": 2,
+   "reading_demand": "ключова дума",
+   "eligible_rounds": [
+    "CH09.Р4",
+    "CH14.Р4"
+   ],
+   "visual_template_id": "MOM_SOFA_01",
+   "pilot_status": "pilot",
+   "measurement_ok": true,
+   "scene_phrase": "Same composition as MOM_SOFA_01 (Mom on a sofa in a living room; only her action changes). Mom sits on the sofa reading a book, eyes open. Must NOT show: closed eyes.",
+   "scene_pair": "Same composition as MOM_SOFA_01 (Mom on a sofa in a living room; only her action changes). Mom lies on the sofa asleep, eyes closed, book closed on the table. Must NOT show: Mom reading.",
+   "source": "new",
+   "changed": "нова: действие",
+   "edit_b": "Change the action: Mom is now asleep on the sofa with closed eyes; no book.",
+   "images": {
+    "a": "assets/img/art/sent/cf108a.jpg",
+    "b": "assets/img/art/sent/cf108b.jpg"
+   },
+   "production_ids": {
+    "a": "MOM_SOFA_01_A",
+    "b": "MOM_SOFA_01_B"
+   }
+  },
+  {
+   "id": "cf109",
+   "level": 1,
+   "phrase": "Мечето люлее зайчето.",
+   "pair": "Зайчето люлее мечето.",
+   "skill_code": "E8",
+   "difference_type": "роли",
+   "difference_detail": "кой кого",
+   "difficulty": 3,
+   "reading_demand": "цялостен смисъл",
+   "eligible_rounds": [
+    "CH10.Р2",
+    "CH16.Р2"
+   ],
+   "visual_template_id": "SWING_ROLES_01",
+   "pilot_status": "pilot",
+   "measurement_ok": false,
+   "practice_only": true,
+   "scene_phrase": "Same composition as SWING_ROLES_01 (a garden swing, two plush toys; only who pushes and who sits changes). The teddy bear stands behind the swing pushing it; the bunny sits on the swing. Must NOT show: the bunny pushing or the bear sitting.",
+   "scene_pair": "Same composition as SWING_ROLES_01 (a garden swing, two plush toys; only who pushes and who sits changes). The bunny stands behind the swing pushing it; the teddy bear sits on the swing. Must NOT show: the bear pushing or the bunny sitting.",
+   "source": "new",
+   "changed": "v0.3: размяна на ролите, само практика на ниво 1 (решение 7)",
+   "edit_b": "Swap the roles: now the bunny pushes the swing from behind and the teddy bear sits on the swing.",
+   "images": {
+    "a": "assets/img/art/sent/cf109a.jpg",
+    "b": "assets/img/art/sent/cf109b.jpg"
+   },
+   "production_ids": {
+    "a": "SWING_ROLES_01_A",
+    "b": "SWING_ROLES_01_B"
+   }
+  },
+  {
+   "id": "cf110",
+   "level": 1,
+   "phrase": "Мая реше Ани.",
+   "pair": "Ани реше Мая.",
+   "skill_code": "E8",
+   "difference_type": "роли",
+   "difference_detail": "кой кого",
+   "difficulty": 3,
+   "reading_demand": "цялостен смисъл",
+   "eligible_rounds": [
+    "CH10.Р2",
+    "CH16.Р2"
+   ],
+   "visual_template_id": "COMB_ROLES_01",
+   "pilot_status": "rejected",
+   "measurement_ok": false,
+   "practice_only": true,
+   "scene_phrase": "Same composition as COMB_ROLES_01 (two girls by a mirror; only who combs whom changes). Maya (two braids) stands and combs the hair of Ani (short hair, glasses) who sits on a stool. Must NOT show: Ani holding the comb.",
+   "scene_pair": "Same composition as COMB_ROLES_01 (two girls by a mirror; only who combs whom changes). Ani (short hair, glasses) stands and combs the hair of Maya (two braids) who sits on a stool. Must NOT show: Maya holding the comb.",
+   "source": "new",
+   "changed": "v0.3: размяна на ролите, само практика на ниво 1 (решение 7)",
+   "edit_b": "Swap the roles: now Ani (short black bob, red glasses) stands and combs the hair of Maya (two braids) who sits on the stool.",
+   "images": {
+    "a": "assets/img/art/sent/cf110a.jpg",
+    "b": "assets/img/art/sent/cf110b.jpg"
+   },
+   "production_ids": {
+    "a": "COMB_ROLES_01_A",
+    "b": "COMB_ROLES_01_B"
+   },
+   "free_play": false,
+   "picture_note": "махнато: разликата е само кое момиче е Мая и кое Ани – без познати герои картинките изглеждат еднакви"
+  }
+ ],
+ "dropped_from_v01": [
+  {
+   "id": "cf060",
+   "text": "Котката пие мляко от купа. / Мишката пие мляко от купа.",
+   "reason": "повтаря темата на cf001 (BK14); мишка, която пие мляко, е неестествена сцена"
+  }
+ ],
+ "selection_rules": [
+  "Първо се тегли само от нивото на рунда; ако невидените валидни двойки не стигат, се допуска по-ниското ниво, маркирано fallback (lower_level).",
+  "Двойка с pilot_only или practice_only не влиза в измерване.",
+  "Преговорните рундове (CH05 Р1, CH17 Р1) споделят пула на предходното занятие; видяното от детето в измерване се пропуска.",
+  "Посока: допуска се в измерване след пилот с ≥90 % еднозначно разбиране без обяснение."
+ ]
+}
