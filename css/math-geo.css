@@ -1,0 +1,74 @@
+/* Нови игри по математика, вълна 2: „Линии и измерване“ (lines.js), „Фигури“ (shapes.js), „Графична диктовка“ (gridDictation.js). */
+.wt-geo { gap: 18px; padding-top: 118px; }
+.geo-q { position: relative; z-index: 1; display: flex; align-items: center; gap: 12px; font-family: var(--display); font-weight: 700; font-size: clamp(22px, 2.6vw, 32px); color: #3B2A14; background: #FFF4D1; border: 4px solid #C4A580; border-radius: 18px; padding: 6px 22px 6px 8px; box-shadow: 0 6px 0 #B08A5E; }
+.geo-say { width: 52px; height: 52px; flex: none; border-radius: 50%; border: 3px solid #C4A580; background: #fff; font-size: 26px; cursor: pointer; }
+.geo-card { position: relative; z-index: 1; background: #fff; border: 5px solid #C4A580; border-radius: 24px; padding: 14px; box-shadow: 0 8px 0 #B08A5E, 0 14px 24px rgba(0,0,0,.18); max-width: min(100%, 1000px); }
+.geo-opts .wtile.geo-opt { min-width: 120px; font-size: 44px; }
+.wt-geo .used { opacity: .45; }
+/* линии */
+.geo-lsvg { display: block; width: min(56vw, 50vh, 420px); height: auto; }
+.geo-lopt svg { width: 110px; height: 55px; display: block; }
+.geo-msvg { display: block; max-width: 100%; height: auto; }
+.geo-rows { position: relative; z-index: 1; display: grid; gap: 12px; width: min(100%, 920px); }
+.geo-row { background: #fff; border: 4px solid #C4A580; border-radius: 18px; padding: 8px 12px; box-shadow: 0 6px 0 #B08A5E; cursor: pointer; display: flex; justify-content: flex-start; }
+.geo-row svg { display: block; height: auto; }
+.geo-row.good, .geo-tall.good { border-color: var(--good); box-shadow: 0 6px 0 #B08A5E, 0 0 0 5px rgba(34,165,106,.45); }
+.geo-row.bad, .geo-tall.bad { border-color: var(--bad); }
+.geo-row.hint, .geo-tall.hint { animation: azhint 1s ease-in-out infinite; box-shadow: 0 0 0 5px #FFD34D, 0 6px 0 #B08A5E; }
+.geo-pair { gap: 40px; }
+.geo-tall { width: clamp(160px, 22vw, 240px); background: #fff; border: 4px solid #C4A580; border-radius: 20px; padding: 6px; box-shadow: 0 6px 0 #B08A5E; cursor: pointer; }
+.geo-tall svg { display: block; width: 100%; height: auto; }
+/* фигури */
+.pcard.sh-opt svg { width: 82%; height: 82%; display: block; margin: auto; }
+.sh-four .pcard.sh-big { flex-basis: clamp(140px, 18vw, 190px); width: clamp(140px, 18vw, 190px); height: clamp(140px, 18vw, 190px); background: #fff; }
+.sh-scene svg { display: block; width: min(60vw, 52vh, 480px); height: auto; }
+.sh-obj svg { display: block; width: min(40vw, 240px); height: auto; }
+.sh-icon { background: #fff; }
+/* графична диктовка */
+.wt-gd { gap: 12px; padding-top: 104px; }
+.gd-top { position: relative; z-index: 1; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px 22px; }
+.gd-cmds { display: flex; gap: 8px; background: #FFF4D1; border: 4px solid #C4A580; border-radius: 16px; padding: 6px 10px; }
+.gd-chip { display: inline-flex; align-items: center; gap: 2px; padding: 2px 6px; border-radius: 10px; font-family: var(--display); font-size: 24px; color: #3B2A14; opacity: .75; }
+.gd-chip.now { background: #FFD34D; opacity: 1; box-shadow: 0 0 0 3px #E0A800; }
+.gd-chip.past { opacity: .3; }
+.gd-now { display: flex; align-items: center; gap: 14px; background: #fff; border: 4px solid #C4A580; border-radius: 20px; padding: 6px 18px 6px 8px; box-shadow: 0 6px 0 #B08A5E; }
+.gd-big { display: inline-flex; align-items: center; gap: 6px; }
+.gd-big b { font-family: var(--display); font-size: 64px; line-height: 1; color: #3B2A14; }
+.gd-card { padding: 8px; }
+.gd-svg { display: block; width: min(76vw, 52vh, 460px); height: auto; touch-action: none; }
+.gd-dot { cursor: pointer; }
+.gd-pt { fill: #8A6A3A; }
+.gd-dot:hover .gd-pt { fill: #2F7FE0; }
+.gd-dot.bad .gd-pt { fill: var(--bad); r: 13; }
+.gd-dot.hint .gd-pt { fill: #FFC93C; r: 15; animation: azhint 1s ease-in-out infinite; }
+.gd-star { fill: #F5C320; stroke: #C99A10; stroke-width: 2; pointer-events: none; }
+.gd-seg { stroke: #E2493F; stroke-width: 9; stroke-linecap: round; }
+.gd-seg.helped { stroke: #F08A24; stroke-dasharray: 2 14; }
+@media (max-width: 700px) { .wt-geo { gap: 12px; } .geo-q { font-size: 20px; } .gd-big b { font-size: 48px; } .gd-chip { font-size: 18px; } }
+/* хоризонтален екран (таблет): командите вляво, мрежата вдясно – иначе мрежата се отрязва отдолу */
+@media (min-aspect-ratio: 5/4) {
+  .wt-gd { flex-direction: row; flex-wrap: nowrap; align-items: center; justify-content: center; gap: 24px; }
+  .wt-gd .gd-top { flex-direction: column; flex-wrap: nowrap; gap: 14px; }
+  .wt-gd .gd-cmds { flex-direction: column; }
+  .wt-gd .gd-svg { width: min(46vw, calc(100vh - 420px), 460px); min-width: 280px; }
+}
+/* ниски екрани (таблет 1024×768, лаптоп): картинките се смаляват по височина, за да се виждат бутоните с отговорите */
+@media (max-height: 920px) {
+  .wt-geo { gap: 10px; padding-top: 112px; }
+  .geo-q { font-size: clamp(18px, 2.2vw, 26px); padding: 3px 16px 3px 6px; box-shadow: 0 4px 0 #B08A5E; }
+  .geo-say { width: 42px; height: 42px; font-size: 21px; }
+  .geo-card { padding: 8px; border-width: 4px; }
+  .geo-lsvg { width: min(56vw, calc(100vh - 480px), 420px); min-width: 150px; }
+  .geo-msvg { max-height: calc(100vh - 480px); width: auto; }
+  .geo-opts .wtile.geo-opt { font-size: 34px; min-width: 96px; padding-block: 6px; }
+  .geo-lopt svg { width: 90px; height: 42px; }
+  .geo-row { padding: 3px 10px; }
+  .wt-geo .geo-row svg { height: calc((100vh - 470px) / 3 - 14px); width: auto; max-width: 100%; }
+  .geo-rows { gap: 6px; }
+  .geo-tall { width: clamp(130px, 18vw, 200px); }
+  .geo-tall svg { max-height: calc(100vh - 480px); width: auto; margin: auto; }
+  .sh-scene svg { width: min(60vw, calc(100vh - 480px), 480px); min-width: 150px; }
+  .wt-geo .sh-obj svg { width: auto; height: calc(100vh - 530px); min-height: 110px; max-width: 40vw; }
+  .wt-geo .sh-four .pcard.sh-big { flex-basis: clamp(100px, calc(100vh - 580px), 190px); width: clamp(100px, calc(100vh - 580px), 190px); height: clamp(100px, calc(100vh - 580px), 190px); }
+  .wt-geo .pcard.sh-opt { width: clamp(76px, calc((100vh - 420px) / 3), 150px); height: clamp(76px, calc((100vh - 420px) / 3), 150px); flex-basis: auto; }
+}

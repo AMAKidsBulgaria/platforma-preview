@@ -10,9 +10,14 @@
   class OrderGame extends BaseGame {
     get gameId() { return "order"; }
     get skillName() { return Number(this.s.level) === 2 ? `Подреждане на числа до ${this.s.range}` : `Числова редица до ${this.s.range}`; }
+    // В домашната задачите идват от банката на рунда (config/math-banks.json, tools/math_banks/order.py):
+    //   ниво 1: {"row": [5, 6, 7, 8, 9], "gaps": [1, 3]} – редицата в реда на показване и индексите на празните клетки.
+    start() { (window.MATH_BANK ? MATH_BANK.attach(this) : Promise.resolve()).then(() => super.start()); }
+    bankUnit() { const u = this.mb && this.level === 1 && this.mb.units.length ? this.mb.units[this.idx % this.mb.units.length] : null; return u && u.row && u.gaps ? u : null; }
     render() {
       this.level = Number(this.s.level || 1); this.range = Number(this.s.range || 3);
       this.n = Math.min(Number(this.s.row || 3), this.range); this.back = this.s.dir === "back";
+      const u0 = this.bankUnit(); if (u0) this.n = u0.row.length;
       this.shell.arena.innerHTML = `
         <svg class="sea" viewBox="0 0 1200 760" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><use href="#scene-crowsnest"/></svg>
         <div class="ord">
@@ -26,6 +31,7 @@
 
     // ---- ниво 1 ----
     makeSequence() {
+      const u = this.bankUnit(); if (u) return { seq: u.row.slice(), gaps: new Set(u.gaps) };
       // както при тях: тръгва от случайно число и расте нагоре, при таван слиза надолу
       const seq = [randInt(1, this.range)];
       while (seq.length < this.n) { const hi = Math.max(...seq) + 1, lo = Math.min(...seq) - 1; if (hi <= this.range) seq.push(hi); if (lo >= 1 && seq.length < this.n) seq.push(lo); }
@@ -38,7 +44,7 @@
     roundFill() {
       const { seq, gaps } = this.makeSequence();
       this.ex = { seq, gaps }; this.current = { text: seq.map((v, i) => gaps.has(i) ? "_" : v).join(" "), answer: seq.join(" ") };
-      this.shell.setLabel("Попълни липсващите числа"); this.say(this.back ? "Попълни липсващите числа. Редицата е назад." : "Попълни липсващите числа");
+      this.shell.setLabel("Попълни липсващите числа"); this.prompt(this.back ? "Попълни липсващите числа. Редицата е назад." : "Попълни липсващите числа");
       const inputs = [];
       seq.forEach((v, i) => {
         const c = document.createElement("div"); c.className = "ocell" + (gaps.has(i) ? " gap" : "");
@@ -59,7 +65,7 @@
     selectGap(c) { this.gapCells.forEach(g => g.classList.remove("sel")); this.sel = c; c.classList.add("sel"); }
     typeKey(k) {
       if (!this.sel || this.locked) return;
-      this.sel.querySelector("span").textContent = k; this.say(String(k));
+      this.sel.querySelector("span").textContent = k; this.prompt(String(k));
       const next = this.gapCells.find(g => g !== this.sel && !g.querySelector("span").textContent);
       if (next) this.selectGap(next);
     }
@@ -87,7 +93,7 @@
       const rowNums = shuffle([...nums]), sorted = [...nums].sort((a, b) => this.back ? b - a : a - b);
       this.current = { text: rowNums.join(" "), answer: sorted.join(" ") };
       this.shell.setLabel(this.back ? "Подреди: голямо → малко" : "Подреди: малко → голямо");
-      this.say(this.back ? "Подреди числата от най-голямо към най-малко" : "Подреди числата от най-малко към най-голямо");
+      this.prompt(this.back ? "Подреди числата от най-голямо към най-малко" : "Подреди числата от най-малко към най-голямо");
       for (let k = 0; k < this.n; k++) { const s = document.createElement("div"); s.className = "ocell slot"; this.top.appendChild(s); }
       let step = 0, wrongInRound = 0;
       rowNums.forEach(v => {
@@ -95,7 +101,7 @@
         c.addEventListener("pointerdown", e => {
           e.preventDefault(); if (c.disabled || this.locked) return;
           if (v === sorted[step]) {
-            c.disabled = true; const slot = this.top.children[step]; slot.textContent = v; slot.classList.add("filled"); c.classList.add("gone"); this.say(String(v)); step++;
+            c.disabled = true; const slot = this.top.children[step]; slot.textContent = v; slot.classList.add("filled"); c.classList.add("gone"); this.prompt(String(v)); step++;
             if (step === this.n) {
               const ok = wrongInRound === 0;
               this.answer(ok, { text: this.current.text, answer: this.current.answer, given: ok ? this.current.answer : "с грешки" });

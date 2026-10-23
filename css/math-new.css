@@ -1,0 +1,25 @@
+/* Нови игри по математика: „Закономерности“ (patterns.js) и „Субитизация“ (subitize.js). */
+.wt-pt, .wt-sb { gap: 26px; padding-top: 128px; }
+/* Закономерности */
+.pt-row { position: relative; z-index: 1; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px; max-width: min(1100px, 100%); background: #FFF4D1; border: 5px solid #C4A580; border-radius: 22px; padding: 16px 22px; box-shadow: 0 8px 0 #B08A5E, 0 14px 24px rgba(0,0,0,.18); }
+.pt-tok { display: inline-grid; place-items: center; width: clamp(54px, 7vw, 92px); aspect-ratio: 1; flex: 0 0 auto; }
+.pt-c::before { content: ""; width: 82%; aspect-ratio: 1; border-radius: 50%; background: var(--c); box-shadow: inset 0 -6px 0 rgba(0,0,0,.15); }
+.pt-s svg { width: 86%; height: 86%; fill: #7B5CE0; }
+.pt-o img { width: 88%; pointer-events: none; }
+.pt-q { border: 4px dashed #C4A580; border-radius: 16px; font-family: var(--display); font-weight: 700; font-size: clamp(32px, 4vw, 52px); color: #B08A5E; }
+.pt-new { animation: azpop .4s ease reverse; }
+.pt-opts .wtile.pt-opt { min-width: 0; padding: 10px 16px; }
+.pt-opt .pt-tok { width: clamp(64px, 8vw, 100px); }
+/* Субитизация */
+.sb-wrap { position: relative; z-index: 1; }
+.sb-card { display: grid; gap: 10px; background: #fff; border: 5px solid #C4A580; border-radius: 24px; padding: 20px; box-shadow: 0 8px 0 #B08A5E, 0 14px 24px rgba(0,0,0,.18); }
+.sb-dice { grid-template-columns: repeat(3, clamp(54px, 7vw, 84px)); }
+.sb-row { grid-auto-flow: column; grid-auto-columns: clamp(44px, 6vw, 76px); }
+.sb-frame { grid-template-columns: repeat(5, clamp(54px, 7vw, 84px)); gap: 0; padding: 14px; }
+.sb-frame .sb-cell { border: 3px solid #C4A580; margin: -1.5px; }
+.sb-cell { display: grid; place-items: center; aspect-ratio: 1; }
+.sb-dot { display: block; width: 76%; aspect-ratio: 1; border-radius: 50%; background: #E2493F; box-shadow: inset 0 -5px 0 rgba(0,0,0,.18); }
+.sb-cover { display: none; position: absolute; inset: 0; place-items: center; background: #FFF4D1; border: 5px solid #C4A580; border-radius: 24px; font-family: var(--display); font-weight: 700; font-size: 64px; color: #B08A5E; }
+.sb-wrap.hidden .sb-cover { display: grid; }
+.sb-opts .wtile.sb-opt { min-width: 110px; font-size: 44px; }
+@media (max-width: 700px) { .wt-pt, .wt-sb { gap: 16px; } .pt-row { padding: 10px 12px; gap: 6px; } .sb-card { padding: 12px; gap: 6px; } }

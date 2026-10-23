@@ -1,0 +1,12771 @@
+{
+ "version": "0.1",
+ "generated": "2026-10-18",
+ "slots": {
+  "MW01.Р1/cleanShipRoom": {
+   "game": "cleanShipRoom",
+   "role": "BASELINE",
+   "level": 1,
+   "items": 4,
+   "sets": {
+    "A": [
+     {
+      "n": "мече",
+      "g": "Играчки",
+      "boxes": [
+       "Играчки",
+       "Дрехи"
+      ]
+     },
+     {
+      "n": "шапка",
+      "g": "Дрехи",
+      "boxes": [
+       "Играчки",
+       "Дрехи"
+      ]
+     },
+     {
+      "n": "топка",
+      "g": "Играчки",
+      "boxes": [
+       "Играчки",
+       "Дрехи"
+      ]
+     },
+     {
+      "n": "тениска",
+      "g": "Дрехи",
+      "boxes": [
+       "Играчки",
+       "Дрехи"
+      ]
+     }
+    ],
+    "B": [
+     {
+      "n": "кукла",
+      "g": "Играчки",
+      "boxes": [
+       "Играчки",
+       "Дрехи"
+      ]
+     },
+     {
+      "n": "чорапи",
+      "g": "Дрехи",
+      "boxes": [
+       "Играчки",
+       "Дрехи"
+      ]
+     },
+     {
+      "n": "количка",
+      "g": "Играчки",
+      "boxes": [
+       "Играчки",
+       "Дрехи"
+      ]
+     },
+     {
+      "n": "яке",
+      "g": "Дрехи",
+      "boxes": [
+       "Играчки",
+       "Дрехи"
+      ]
+     }
+    ]
+   }
+  },
+  "MW01.Р2/patterns": {
+   "game": "patterns",
+   "role": "PRACTICE",
+   "level": null,
+   "items": 6,
+   "practice": [
+    {
+     "rule": "AB",
+     "seq": [
+      "c:red",
+      "c:blue",
+      "c:red",
+      "c:blue"
+     ],
+     "answer": "c:red",
+     "opts": [
+      "c:red",
+      "c:blue",
+      "c:yellow"
+     ]
+    },
+    {
+     "rule": "AB",
+     "seq": [
+      "c:yellow",
+      "c:green",
+      "c:yellow",
+      "c:green",
+      "c:yellow"
+     ],
+     "answer": "c:green",
+     "opts": [
+      "c:yellow",
+      "c:green",
+      "c:red"
+     ]
+    },
+    {
+     "rule": "AB",
+     "seq": [
+      "s:circle",
+      "s:square",
+      "s:circle",
+      "s:square"
+     ],
+     "answer": "s:circle",
+     "opts": [
+      "s:circle",
+      "s:square",
+      "s:triangle"
+     ]
+    },
+    {
+     "rule": "AB",
+     "seq": [
+      "s:star",
+      "s:triangle",
+      "s:star",
+      "s:triangle",
+      "s:star"
+     ],
+     "answer": "s:triangle",
+     "opts": [
+      "s:star",
+      "s:triangle",
+      "s:circle"
+     ]
+    },
+    {
+     "rule": "AB",
+     "seq": [
+      "c:purple",
+      "c:yellow",
+      "c:purple",
+      "c:yellow"
+     ],
+     "answer": "c:purple",
+     "opts": [
+      "c:purple",
+      "c:yellow",
+      "c:blue"
+     ]
+    },
+    {
+     "rule": "AB",
+     "seq": [
+      "o:apple",
+      "o:pear",
+      "o:apple",
+      "o:pear"
+     ],
+     "answer": "o:apple",
+     "opts": [
+      "o:apple",
+      "o:pear",
+      "o:banana"
+     ]
+    },
+    {
+     "rule": "AABB",
+     "seq": [
+      "c:blue",
+      "c:blue",
+      "c:red",
+      "c:red",
+      "c:blue",
+      "c:blue"
+     ],
+     "answer": "c:red",
+     "opts": [
+      "c:blue",
+      "c:red",
+      "c:green"
+     ]
+    },
+    {
+     "rule": "ABC",
+     "seq": [
+      "c:red",
+      "c:yellow",
+      "c:blue",
+      "c:red",
+      "c:yellow"
+     ],
+     "answer": "c:blue",
+     "opts": [
+      "c:red",
+      "c:yellow",
+      "c:blue"
+     ]
+    },
+    {
+     "rule": "AABB",
+     "seq": [
+      "o:strawberry",
+      "o:strawberry",
+      "o:lemon",
+      "o:lemon",
+      "o:strawberry",
+      "o:strawberry"
+     ],
+     "answer": "o:lemon",
+     "opts": [
+      "o:strawberry",
+      "o:lemon",
+      "o:cherries"
+     ]
+    }
+   ]
+  },
+  "MW02.Р2/cobweb": {
+   "game": "cobweb",
+   "role": "PRACTICE",
+   "level": 1,
+   "max": 3,
+   "practice": [
+    {
+     "f": [
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "f": [
+      [
+       3,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       1,
+       2
+      ]
+     ]
+    },
+    {
+     "f": [
+      [
+       1,
+       2
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "f": [
+      [
+       2,
+       1
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "f": [
+      [
+       1,
+       2
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       2,
+       2
+      ]
+     ]
+    },
+    {
+     "f": [
+      [
+       3,
+       3
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       2,
+       3
+      ]
+     ]
+    },
+    {
+     "f": [
+      [
+       2,
+       2
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       3,
+       1
+      ]
+     ]
+    },
+    {
+     "f": [
+      [
+       1,
+       2
+      ],
+      [
+       3,
+       3
+      ],
+      [
+       2,
+       3
+      ]
+     ]
+    }
+   ]
+  },
+  "MW02.Р3/cobweb": {
+   "game": "cobweb",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": 1,
+   "max": 3,
+   "sets": {
+    "A": [
+     {
+      "f": [
+       [
+        1,
+        1
+       ],
+       [
+        2,
+        3
+       ],
+       [
+        3,
+        2
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        1,
+        3
+       ],
+       [
+        2,
+        2
+       ],
+       [
+        3,
+        2
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        1,
+        2
+       ],
+       [
+        2,
+        3
+       ],
+       [
+        3,
+        3
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        2,
+        3
+       ],
+       [
+        3,
+        2
+       ],
+       [
+        1,
+        1
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        2,
+        2
+       ],
+       [
+        3,
+        1
+       ],
+       [
+        1,
+        2
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        2,
+        1
+       ],
+       [
+        3,
+        3
+       ],
+       [
+        1,
+        3
+       ]
+      ]
+     }
+    ],
+    "B": [
+     {
+      "f": [
+       [
+        3,
+        2
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        2,
+        3
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        3,
+        1
+       ],
+       [
+        1,
+        2
+       ],
+       [
+        2,
+        2
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        3,
+        3
+       ],
+       [
+        1,
+        2
+       ],
+       [
+        2,
+        1
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        1,
+        1
+       ],
+       [
+        3,
+        2
+       ],
+       [
+        2,
+        1
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        3,
+        2
+       ],
+       [
+        2,
+        2
+       ],
+       [
+        1,
+        3
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        1,
+        3
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        3,
+        3
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "MW03.Р1/cobweb": {
+   "game": "cobweb",
+   "role": "RETRIEVAL",
+   "level": 1,
+   "max": 3,
+   "note": "припомняне на MW02.Р3: същите позиции/вид, нови задачи",
+   "sets": {
+    "A": [
+     {
+      "f": [
+       [
+        2,
+        3
+       ],
+       [
+        3,
+        3
+       ],
+       [
+        1,
+        2
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        1,
+        1
+       ],
+       [
+        3,
+        1
+       ],
+       [
+        2,
+        3
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        3,
+        2
+       ],
+       [
+        1,
+        3
+       ],
+       [
+        2,
+        2
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        3,
+        3
+       ],
+       [
+        2,
+        3
+       ],
+       [
+        1,
+        2
+       ]
+      ]
+     }
+    ],
+    "B": [
+     {
+      "f": [
+       [
+        2,
+        1
+       ],
+       [
+        1,
+        2
+       ],
+       [
+        3,
+        3
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        2,
+        3
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        3,
+        1
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        2,
+        2
+       ],
+       [
+        1,
+        3
+       ],
+       [
+        3,
+        2
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        2,
+        1
+       ],
+       [
+        3,
+        3
+       ],
+       [
+        1,
+        2
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "MW03.Р2/numberComposition": {
+   "game": "numberComposition",
+   "role": "PRACTICE",
+   "max": 3,
+   "practice": [
+    {
+     "n": 3,
+     "a": 1
+    },
+    {
+     "n": 3,
+     "a": 2
+    },
+    {
+     "n": 3,
+     "b": 1
+    },
+    {
+     "n": 3,
+     "b": 2
+    },
+    {
+     "a": 1,
+     "b": 2
+    },
+    {
+     "a": 2,
+     "b": 1
+    }
+   ]
+  },
+  "MW03.Р3/numberComposition": {
+   "game": "numberComposition",
+   "role": "PRIMARY_MEASUREMENT",
+   "max": 5,
+   "sets": {
+    "A": [
+     {
+      "n": 4,
+      "a": 1
+     },
+     {
+      "n": 4,
+      "b": 2
+     },
+     {
+      "n": 5,
+      "a": 2
+     },
+     {
+      "n": 5,
+      "b": 1
+     },
+     {
+      "n": 5,
+      "a": 4
+     },
+     {
+      "n": 5,
+      "b": 3
+     }
+    ],
+    "B": [
+     {
+      "n": 4,
+      "b": 1
+     },
+     {
+      "n": 4,
+      "a": 2
+     },
+     {
+      "n": 5,
+      "b": 2
+     },
+     {
+      "n": 5,
+      "a": 1
+     },
+     {
+      "n": 5,
+      "b": 4
+     },
+     {
+      "n": 5,
+      "a": 3
+     }
+    ]
+   }
+  },
+  "MW03.Р4/numberLine": {
+   "game": "numberLine",
+   "role": "TRANSFER",
+   "level": 2,
+   "max": 5,
+   "note": "права до 5, ниво 2 (преди/след): 8 различни задачи → A/B по 4",
+   "sets": {
+    "A": [
+     {
+      "n": 2,
+      "ask": "after"
+     },
+     {
+      "n": 4,
+      "ask": "before"
+     },
+     {
+      "n": 1,
+      "ask": "after"
+     },
+     {
+      "n": 3,
+      "ask": "before"
+     }
+    ],
+    "B": [
+     {
+      "n": 3,
+      "ask": "after"
+     },
+     {
+      "n": 2,
+      "ask": "before"
+     },
+     {
+      "n": 4,
+      "ask": "after"
+     },
+     {
+      "n": 5,
+      "ask": "before"
+     }
+    ]
+   }
+  },
+  "MW04.Р1/numberComposition": {
+   "game": "numberComposition",
+   "role": "RETRIEVAL",
+   "max": 5,
+   "sets": {
+    "A": [
+     {
+      "n": 3,
+      "a": 1
+     },
+     {
+      "n": 4,
+      "a": 3
+     },
+     {
+      "n": 3,
+      "b": 2
+     },
+     {
+      "a": 2,
+      "b": 3
+     }
+    ],
+    "B": [
+     {
+      "n": 3,
+      "b": 1
+     },
+     {
+      "n": 4,
+      "b": 3
+     },
+     {
+      "n": 3,
+      "a": 2
+     },
+     {
+      "a": 1,
+      "b": 4
+     }
+    ]
+   }
+  },
+  "MW04.Р2/pirateCipher": {
+   "game": "pirateCipher",
+   "role": "PRACTICE",
+   "level": 1,
+   "items": 6,
+   "practice": [
+    {
+     "n": 3,
+     "dir": "под",
+     "place": "p/grozde",
+     "ref": 1,
+     "items": [
+      [
+       1,
+       "p/gaba"
+      ],
+      [
+       0,
+       "p/krusha"
+      ],
+      [
+       5,
+       "p/yabalka"
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "dir": "над",
+     "place": "p/grozde",
+     "ref": 3,
+     "items": [
+      [
+       3,
+       "p/zayche"
+      ],
+      [
+       1,
+       "p/iglika"
+      ],
+      [
+       5,
+       "p/lale"
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "dir": "под",
+     "place": "p/chereshi",
+     "ref": 5,
+     "items": [
+      [
+       5,
+       "p/yagoda"
+      ],
+      [
+       0,
+       "p/grozde"
+      ],
+      [
+       4,
+       "p/gaba"
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "dir": "под",
+     "place": "p/krusha",
+     "ref": 3,
+     "items": [
+      [
+       3,
+       "p/patitsa"
+      ],
+      [
+       1,
+       "p/iglika"
+      ],
+      [
+       2,
+       "p/pchela"
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "dir": "над",
+     "place": "p/krusha",
+     "ref": 8,
+     "items": [
+      [
+       8,
+       "p/zhaba"
+      ],
+      [
+       3,
+       "p/iglika"
+      ],
+      [
+       7,
+       "p/patitsa"
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "dir": "под",
+     "place": "p/yabalka",
+     "ref": 1,
+     "items": [
+      [
+       1,
+       "p/zayche"
+      ],
+      [
+       0,
+       "p/grozde"
+      ],
+      [
+       7,
+       "p/iglika"
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "dir": "над",
+     "place": "p/lale",
+     "ref": 5,
+     "items": [
+      [
+       5,
+       "p/roza"
+      ],
+      [
+       7,
+       "p/gaba"
+      ],
+      [
+       8,
+       "p/chereshi"
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "dir": "над",
+     "place": "p/gaba",
+     "ref": 4,
+     "items": [
+      [
+       4,
+       "p/pchela"
+      ],
+      [
+       0,
+       "p/chereshi"
+      ],
+      [
+       8,
+       "p/roza"
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "dir": "под",
+     "place": "p/lale",
+     "ref": 0,
+     "items": [
+      [
+       0,
+       "p/grozde"
+      ],
+      [
+       7,
+       "p/peperuda"
+      ],
+      [
+       8,
+       "p/yagoda"
+      ]
+     ]
+    }
+   ]
+  },
+  "MW04.Р3/pirateCipher": {
+   "game": "pirateCipher",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": 1,
+   "items": 6,
+   "sets": {
+    "A": [
+     {
+      "n": 3,
+      "dir": "над",
+      "place": "p/krusha",
+      "ref": 3,
+      "items": [
+       [
+        3,
+        "p/patitsa"
+       ],
+       [
+        7,
+        "p/peperuda"
+       ],
+       [
+        8,
+        "p/roza"
+       ]
+      ]
+     },
+     {
+      "n": 3,
+      "dir": "под",
+      "place": "p/gaba",
+      "ref": 5,
+      "items": [
+       [
+        5,
+        "p/pchela"
+       ],
+       [
+        1,
+        "p/iglika"
+       ],
+       [
+        2,
+        "p/krusha"
+       ]
+      ]
+     },
+     {
+      "n": 3,
+      "dir": "над",
+      "place": "p/yabalka",
+      "ref": 7,
+      "items": [
+       [
+        7,
+        "p/chereshi"
+       ],
+       [
+        1,
+        "p/krusha"
+       ],
+       [
+        8,
+        "p/peperuda"
+       ]
+      ]
+     },
+     {
+      "n": 3,
+      "dir": "над",
+      "place": "p/yabalka",
+      "ref": 8,
+      "items": [
+       [
+        8,
+        "p/tikva"
+       ],
+       [
+        0,
+        "p/yagoda"
+       ],
+       [
+        2,
+        "p/zhaba"
+       ]
+      ]
+     },
+     {
+      "n": 3,
+      "dir": "под",
+      "place": "p/yabalka",
+      "ref": 0,
+      "items": [
+       [
+        0,
+        "p/iglika"
+       ],
+       [
+        2,
+        "p/morkov"
+       ],
+       [
+        4,
+        "p/zayche"
+       ]
+      ]
+     },
+     {
+      "n": 3,
+      "dir": "под",
+      "place": "p/morkov",
+      "ref": 4,
+      "items": [
+       [
+        4,
+        "p/peperuda"
+       ],
+       [
+        0,
+        "p/iglika"
+       ],
+       [
+        6,
+        "p/zhaba"
+       ]
+      ]
+     }
+    ],
+    "B": [
+     {
+      "n": 3,
+      "dir": "над",
+      "place": "p/chereshi",
+      "ref": 5,
+      "items": [
+       [
+        5,
+        "p/iglika"
+       ],
+       [
+        7,
+        "p/zhaba"
+       ],
+       [
+        8,
+        "p/tikva"
+       ]
+      ]
+     },
+     {
+      "n": 3,
+      "dir": "под",
+      "place": "p/gaba",
+      "ref": 3,
+      "items": [
+       [
+        3,
+        "p/pchela"
+       ],
+       [
+        2,
+        "p/chereshi"
+       ],
+       [
+        7,
+        "p/lale"
+       ]
+      ]
+     },
+     {
+      "n": 3,
+      "dir": "над",
+      "place": "p/tikva",
+      "ref": 4,
+      "items": [
+       [
+        4,
+        "p/iglika"
+       ],
+       [
+        3,
+        "p/gaba"
+       ],
+       [
+        6,
+        "p/pchela"
+       ]
+      ]
+     },
+     {
+      "n": 3,
+      "dir": "над",
+      "place": "p/lale",
+      "ref": 6,
+      "items": [
+       [
+        6,
+        "p/tikva"
+       ],
+       [
+        2,
+        "p/zhaba"
+       ],
+       [
+        8,
+        "p/grozde"
+       ]
+      ]
+     },
+     {
+      "n": 3,
+      "dir": "под",
+      "place": "p/roza",
+      "ref": 2,
+      "items": [
+       [
+        2,
+        "p/zhaba"
+       ],
+       [
+        7,
+        "p/pchela"
+       ],
+       [
+        8,
+        "p/zayche"
+       ]
+      ]
+     },
+     {
+      "n": 3,
+      "dir": "под",
+      "place": "p/krusha",
+      "ref": 1,
+      "items": [
+       [
+        1,
+        "p/zayche"
+       ],
+       [
+        0,
+        "p/yabalka"
+       ],
+       [
+        5,
+        "p/tikva"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "MW04.Р4/numberLine": {
+   "game": "numberLine",
+   "role": "TRANSFER",
+   "level": 2,
+   "max": 5,
+   "sets": {
+    "A": [
+     {
+      "n": 1,
+      "ask": "after"
+     },
+     {
+      "n": 3,
+      "ask": "before"
+     },
+     {
+      "n": 3,
+      "ask": "after"
+     },
+     {
+      "n": 5,
+      "ask": "before"
+     }
+    ],
+    "B": [
+     {
+      "n": 2,
+      "ask": "before"
+     },
+     {
+      "n": 2,
+      "ask": "after"
+     },
+     {
+      "n": 4,
+      "ask": "before"
+     },
+     {
+      "n": 4,
+      "ask": "after"
+     }
+    ]
+   }
+  },
+  "MW05.Р1/pirateCipher": {
+   "game": "pirateCipher",
+   "role": "RETRIEVAL",
+   "level": 1,
+   "items": 4,
+   "sets": {
+    "A": [
+     {
+      "n": 3,
+      "dir": "под",
+      "place": "p/krusha",
+      "ref": 4,
+      "items": [
+       [
+        4,
+        "p/yagoda"
+       ],
+       [
+        1,
+        "p/lale"
+       ],
+       [
+        3,
+        "p/peperuda"
+       ]
+      ]
+     },
+     {
+      "n": 3,
+      "dir": "над",
+      "place": "p/roza",
+      "ref": 3,
+      "items": [
+       [
+        3,
+        "p/zayche"
+       ],
+       [
+        1,
+        "p/yabalka"
+       ],
+       [
+        2,
+        "p/peperuda"
+       ]
+      ]
+     },
+     {
+      "n": 3,
+      "dir": "над",
+      "place": "p/chereshi",
+      "ref": 4,
+      "items": [
+       [
+        4,
+        "p/pchela"
+       ],
+       [
+        2,
+        "p/gaba"
+       ],
+       [
+        5,
+        "p/yabalka"
+       ]
+      ]
+     },
+     {
+      "n": 3,
+      "dir": "под",
+      "place": "p/krusha",
+      "ref": 2,
+      "items": [
+       [
+        2,
+        "p/grozde"
+       ],
+       [
+        1,
+        "p/roza"
+       ],
+       [
+        8,
+        "p/pchela"
+       ]
+      ]
+     }
+    ],
+    "B": [
+     {
+      "n": 3,
+      "dir": "над",
+      "place": "p/roza",
+      "ref": 7,
+      "items": [
+       [
+        7,
+        "p/morkov"
+       ],
+       [
+        0,
+        "p/tikva"
+       ],
+       [
+        6,
+        "p/krusha"
+       ]
+      ]
+     },
+     {
+      "n": 3,
+      "dir": "над",
+      "place": "p/yagoda",
+      "ref": 8,
+      "items": [
+       [
+        8,
+        "p/peperuda"
+       ],
+       [
+        1,
+        "p/patitsa"
+       ],
+       [
+        3,
+        "p/gaba"
+       ]
+      ]
+     },
+     {
+      "n": 3,
+      "dir": "под",
+      "place": "p/morkov",
+      "ref": 3,
+      "items": [
+       [
+        3,
+        "p/peperuda"
+       ],
+       [
+        1,
+        "p/iglika"
+       ],
+       [
+        2,
+        "p/gaba"
+       ]
+      ]
+     },
+     {
+      "n": 3,
+      "dir": "под",
+      "place": "p/krusha",
+      "ref": 4,
+      "items": [
+       [
+        4,
+        "p/morkov"
+       ],
+       [
+        0,
+        "p/yabalka"
+       ],
+       [
+        8,
+        "p/peperuda"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "MW05.Р2/cobweb": {
+   "game": "cobweb",
+   "role": "PRACTICE",
+   "level": 1,
+   "max": 5,
+   "practice": [
+    {
+     "f": [
+      [
+       2,
+       1
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       1,
+       3
+      ]
+     ]
+    },
+    {
+     "f": [
+      [
+       5,
+       5
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       4
+      ]
+     ]
+    },
+    {
+     "f": [
+      [
+       4,
+       3
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       1,
+       1
+      ]
+     ]
+    },
+    {
+     "f": [
+      [
+       3,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       4,
+       1
+      ]
+     ]
+    },
+    {
+     "f": [
+      [
+       4,
+       1
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       5,
+       5
+      ]
+     ]
+    },
+    {
+     "f": [
+      [
+       1,
+       2
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       5,
+       1
+      ]
+     ]
+    },
+    {
+     "f": [
+      [
+       2,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       4,
+       4
+      ]
+     ]
+    },
+    {
+     "f": [
+      [
+       3,
+       2
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       4,
+       3
+      ]
+     ]
+    }
+   ]
+  },
+  "MW05.Р2/subitize": {
+   "game": "subitize",
+   "role": "PRACTICE",
+   "level": null,
+   "items": 4,
+   "settings": {
+    "max": 5
+   },
+   "scope": "extension",
+   "practice": [
+    {
+     "n": 4,
+     "layout": "dice",
+     "opts": [
+      3,
+      4,
+      5
+     ]
+    },
+    {
+     "n": 5,
+     "layout": "dice",
+     "opts": [
+      3,
+      4,
+      5
+     ]
+    },
+    {
+     "n": 3,
+     "layout": "row",
+     "opts": [
+      2,
+      3,
+      4
+     ]
+    },
+    {
+     "n": 5,
+     "layout": "frame5",
+     "opts": [
+      3,
+      4,
+      5
+     ]
+    },
+    {
+     "n": 4,
+     "layout": "frame5",
+     "opts": [
+      3,
+      4,
+      5
+     ]
+    },
+    {
+     "n": 4,
+     "layout": "row",
+     "opts": [
+      2,
+      3,
+      4
+     ]
+    },
+    {
+     "n": 5,
+     "layout": "row",
+     "opts": [
+      3,
+      4,
+      5
+     ]
+    },
+    {
+     "n": 3,
+     "layout": "dice",
+     "opts": [
+      2,
+      3,
+      4
+     ]
+    }
+   ]
+  },
+  "MW05.Р3/cobweb": {
+   "game": "cobweb",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": 1,
+   "max": 5,
+   "sets": {
+    "A": [
+     {
+      "f": [
+       [
+        4,
+        4
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        5,
+        1
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        2,
+        3
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        5,
+        5
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        4,
+        2
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        2,
+        1
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        2,
+        5
+       ],
+       [
+        3,
+        3
+       ],
+       [
+        4,
+        3
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        5,
+        5
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        1,
+        2
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        1,
+        5
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        4,
+        4
+       ]
+      ]
+     }
+    ],
+    "B": [
+     {
+      "f": [
+       [
+        5,
+        1
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        2,
+        1
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        5,
+        5
+       ],
+       [
+        1,
+        2
+       ],
+       [
+        2,
+        1
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        5,
+        3
+       ],
+       [
+        2,
+        3
+       ],
+       [
+        1,
+        1
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        5,
+        2
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        3,
+        3
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        1,
+        2
+       ],
+       [
+        5,
+        5
+       ],
+       [
+        3,
+        1
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        4,
+        4
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        2,
+        1
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "MW05.Р4/numberComposition": {
+   "game": "numberComposition",
+   "role": "TRANSFER",
+   "max": 5,
+   "sets": {
+    "A": [
+     {
+      "n": 5,
+      "a": 1
+     },
+     {
+      "n": 5,
+      "a": 3
+     },
+     {
+      "n": 5,
+      "b": 2
+     },
+     {
+      "n": 5,
+      "b": 4
+     }
+    ],
+    "B": [
+     {
+      "n": 5,
+      "a": 2
+     },
+     {
+      "n": 5,
+      "a": 4
+     },
+     {
+      "n": 5,
+      "b": 1
+     },
+     {
+      "n": 5,
+      "b": 3
+     }
+    ]
+   }
+  },
+  "MW06.Р1/cobweb": {
+   "game": "cobweb",
+   "role": "RETRIEVAL",
+   "level": 1,
+   "max": 5,
+   "note": "припомняне на MW05.Р3",
+   "sets": {
+    "A": [
+     {
+      "f": [
+       [
+        5,
+        3
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        1,
+        1
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        4,
+        4
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        1,
+        2
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        4,
+        5
+       ],
+       [
+        5,
+        5
+       ],
+       [
+        2,
+        1
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        3,
+        3
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        5,
+        1
+       ]
+      ]
+     }
+    ],
+    "B": [
+     {
+      "f": [
+       [
+        1,
+        1
+       ],
+       [
+        4,
+        5
+       ],
+       [
+        3,
+        1
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        1,
+        2
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        3,
+        2
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        4,
+        3
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        5,
+        5
+       ]
+      ]
+     },
+     {
+      "f": [
+       [
+        5,
+        1
+       ],
+       [
+        3,
+        3
+       ],
+       [
+        4,
+        5
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "MW06.Р2/pirateCipher": {
+   "game": "pirateCipher",
+   "role": "PRACTICE",
+   "level": 2,
+   "items": 6,
+   "practice": [
+    {
+     "n": 3,
+     "dir": "вляво от",
+     "place": "p/roza",
+     "ref": 1,
+     "items": [
+      [
+       1,
+       "p/gaba"
+      ],
+      [
+       6,
+       "p/morkov"
+      ],
+      [
+       8,
+       "p/grozde"
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "dir": "вдясно от",
+     "place": "p/lale",
+     "ref": 4,
+     "items": [
+      [
+       4,
+       "p/zhaba"
+      ],
+      [
+       0,
+       "p/grozde"
+      ],
+      [
+       8,
+       "p/pchela"
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "dir": "вляво от",
+     "place": "p/krusha",
+     "ref": 8,
+     "items": [
+      [
+       8,
+       "p/zhaba"
+      ],
+      [
+       3,
+       "p/iglika"
+      ],
+      [
+       6,
+       "p/tikva"
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "dir": "вдясно от",
+     "place": "p/morkov",
+     "ref": 0,
+     "items": [
+      [
+       0,
+       "p/pchela"
+      ],
+      [
+       2,
+       "p/gaba"
+      ],
+      [
+       8,
+       "p/peperuda"
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "dir": "вляво от",
+     "place": "p/tikva",
+     "ref": 4,
+     "items": [
+      [
+       4,
+       "p/iglika"
+      ],
+      [
+       1,
+       "p/pchela"
+      ],
+      [
+       5,
+       "p/grozde"
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "dir": "вдясно от",
+     "place": "p/lale",
+     "ref": 7,
+     "items": [
+      [
+       7,
+       "p/patitsa"
+      ],
+      [
+       5,
+       "p/peperuda"
+      ],
+      [
+       6,
+       "p/morkov"
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "dir": "вляво от",
+     "place": "p/roza",
+     "ref": 5,
+     "items": [
+      [
+       5,
+       "p/zhaba"
+      ],
+      [
+       0,
+       "p/iglika"
+      ],
+      [
+       6,
+       "p/morkov"
+      ]
+     ]
+    },
+    {
+     "n": 3,
+     "dir": "вдясно от",
+     "place": "p/gaba",
+     "ref": 6,
+     "items": [
+      [
+       6,
+       "p/yagoda"
+      ],
+      [
+       4,
+       "p/iglika"
+      ],
+      [
+       5,
+       "p/morkov"
+      ]
+     ]
+    }
+   ]
+  },
+  "MW06.Р3/pirateCipher": {
+   "game": "pirateCipher",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": 2,
+   "items": 6,
+   "sets": {
+    "A": [
+     {
+      "n": 4,
+      "dir": "вляво от",
+      "place": "p/tikva",
+      "ref": 1,
+      "items": [
+       [
+        1,
+        "p/zayche"
+       ],
+       [
+        2,
+        "p/krusha"
+       ],
+       [
+        8,
+        "p/iglika"
+       ],
+       [
+        15,
+        "p/gaba"
+       ]
+      ]
+     },
+     {
+      "n": 4,
+      "dir": "вдясно от",
+      "place": "p/morkov",
+      "ref": 6,
+      "items": [
+       [
+        6,
+        "p/yabalka"
+       ],
+       [
+        1,
+        "p/zhaba"
+       ],
+       [
+        13,
+        "p/iglika"
+       ],
+       [
+        14,
+        "p/yagoda"
+       ]
+      ]
+     },
+     {
+      "n": 4,
+      "dir": "вляво от",
+      "place": "p/grozde",
+      "ref": 10,
+      "items": [
+       [
+        10,
+        "p/iglika"
+       ],
+       [
+        2,
+        "p/zhaba"
+       ],
+       [
+        6,
+        "p/zayche"
+       ],
+       [
+        12,
+        "p/chereshi"
+       ]
+      ]
+     },
+     {
+      "n": 4,
+      "dir": "вдясно от",
+      "place": "p/chereshi",
+      "ref": 13,
+      "items": [
+       [
+        13,
+        "p/iglika"
+       ],
+       [
+        2,
+        "p/morkov"
+       ],
+       [
+        5,
+        "p/yabalka"
+       ],
+       [
+        12,
+        "p/zhaba"
+       ]
+      ]
+     },
+     {
+      "n": 4,
+      "dir": "вляво от",
+      "place": "p/lale",
+      "ref": 7,
+      "items": [
+       [
+        7,
+        "p/zayche"
+       ],
+       [
+        0,
+        "p/patitsa"
+       ],
+       [
+        4,
+        "p/pchela"
+       ],
+       [
+        9,
+        "p/gaba"
+       ]
+      ]
+     },
+     {
+      "n": 4,
+      "dir": "вдясно от",
+      "place": "p/gaba",
+      "ref": 14,
+      "items": [
+       [
+        14,
+        "p/yabalka"
+       ],
+       [
+        4,
+        "p/grozde"
+       ],
+       [
+        10,
+        "p/zayche"
+       ],
+       [
+        12,
+        "p/lale"
+       ]
+      ]
+     }
+    ],
+    "B": [
+     {
+      "n": 4,
+      "dir": "вдясно от",
+      "place": "p/tikva",
+      "ref": 2,
+      "items": [
+       [
+        2,
+        "p/patitsa"
+       ],
+       [
+        6,
+        "p/zayche"
+       ],
+       [
+        7,
+        "p/grozde"
+       ],
+       [
+        13,
+        "p/peperuda"
+       ]
+      ]
+     },
+     {
+      "n": 4,
+      "dir": "вляво от",
+      "place": "p/yabalka",
+      "ref": 5,
+      "items": [
+       [
+        5,
+        "p/iglika"
+       ],
+       [
+        0,
+        "p/chereshi"
+       ],
+       [
+        7,
+        "p/krusha"
+       ],
+       [
+        8,
+        "p/roza"
+       ]
+      ]
+     },
+     {
+      "n": 4,
+      "dir": "вдясно от",
+      "place": "p/tikva",
+      "ref": 9,
+      "items": [
+       [
+        9,
+        "p/zayche"
+       ],
+       [
+        0,
+        "p/roza"
+       ],
+       [
+        3,
+        "p/gaba"
+       ],
+       [
+        14,
+        "p/krusha"
+       ]
+      ]
+     },
+     {
+      "n": 4,
+      "dir": "вляво от",
+      "place": "p/yabalka",
+      "ref": 14,
+      "items": [
+       [
+        14,
+        "p/iglika"
+       ],
+       [
+        1,
+        "p/peperuda"
+       ],
+       [
+        2,
+        "p/zayche"
+       ],
+       [
+        5,
+        "p/roza"
+       ]
+      ]
+     },
+     {
+      "n": 4,
+      "dir": "вдясно от",
+      "place": "p/roza",
+      "ref": 4,
+      "items": [
+       [
+        4,
+        "p/patitsa"
+       ],
+       [
+        10,
+        "p/zhaba"
+       ],
+       [
+        12,
+        "p/lale"
+       ],
+       [
+        15,
+        "p/peperuda"
+       ]
+      ]
+     },
+     {
+      "n": 4,
+      "dir": "вляво от",
+      "place": "p/grozde",
+      "ref": 13,
+      "items": [
+       [
+        13,
+        "p/tikva"
+       ],
+       [
+        1,
+        "p/roza"
+       ],
+       [
+        10,
+        "p/iglika"
+       ],
+       [
+        15,
+        "p/morkov"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "MW06.Р4/cobweb": {
+   "game": "cobweb",
+   "role": "TRANSFER",
+   "level": 2,
+   "max": 5,
+   "sets": {
+    "A": [
+     {
+      "c": [
+       1,
+       2,
+       3
+      ]
+     },
+     {
+      "c": [
+       3,
+       4,
+       5
+      ]
+     },
+     {
+      "c": [
+       1,
+       3,
+       4
+      ]
+     },
+     {
+      "c": [
+       2,
+       4,
+       5
+      ]
+     }
+    ],
+    "B": [
+     {
+      "c": [
+       1,
+       2,
+       5
+      ]
+     },
+     {
+      "c": [
+       1,
+       4,
+       5
+      ]
+     },
+     {
+      "c": [
+       2,
+       3,
+       4
+      ]
+     },
+     {
+      "c": [
+       2,
+       3,
+       5
+      ]
+     }
+    ]
+   }
+  },
+  "MW07.Р1/pirateCipher": {
+   "game": "pirateCipher",
+   "role": "RETRIEVAL",
+   "level": 2,
+   "items": 4,
+   "sets": {
+    "A": [
+     {
+      "n": 4,
+      "dir": "вляво от",
+      "place": "p/tikva",
+      "ref": 2,
+      "items": [
+       [
+        2,
+        "p/gaba"
+       ],
+       [
+        4,
+        "p/iglika"
+       ],
+       [
+        5,
+        "p/lale"
+       ],
+       [
+        6,
+        "p/zhaba"
+       ]
+      ]
+     },
+     {
+      "n": 4,
+      "dir": "вдясно от",
+      "place": "p/lale",
+      "ref": 10,
+      "items": [
+       [
+        10,
+        "p/yagoda"
+       ],
+       [
+        1,
+        "p/krusha"
+       ],
+       [
+        9,
+        "p/gaba"
+       ],
+       [
+        13,
+        "p/morkov"
+       ]
+      ]
+     },
+     {
+      "n": 4,
+      "dir": "вляво от",
+      "place": "p/lale",
+      "ref": 9,
+      "items": [
+       [
+        9,
+        "p/zhaba"
+       ],
+       [
+        2,
+        "p/peperuda"
+       ],
+       [
+        6,
+        "p/zayche"
+       ],
+       [
+        10,
+        "p/iglika"
+       ]
+      ]
+     },
+     {
+      "n": 4,
+      "dir": "вдясно от",
+      "place": "p/lale",
+      "ref": 5,
+      "items": [
+       [
+        5,
+        "p/krusha"
+       ],
+       [
+        1,
+        "p/yabalka"
+       ],
+       [
+        3,
+        "p/patitsa"
+       ],
+       [
+        15,
+        "p/peperuda"
+       ]
+      ]
+     }
+    ],
+    "B": [
+     {
+      "n": 4,
+      "dir": "вдясно от",
+      "place": "p/chereshi",
+      "ref": 1,
+      "items": [
+       [
+        1,
+        "p/yagoda"
+       ],
+       [
+        4,
+        "p/peperuda"
+       ],
+       [
+        11,
+        "p/tikva"
+       ],
+       [
+        13,
+        "p/yabalka"
+       ]
+      ]
+     },
+     {
+      "n": 4,
+      "dir": "вляво от",
+      "place": "p/yagoda",
+      "ref": 6,
+      "items": [
+       [
+        6,
+        "p/iglika"
+       ],
+       [
+        0,
+        "p/tikva"
+       ],
+       [
+        3,
+        "p/zayche"
+       ],
+       [
+        8,
+        "p/gaba"
+       ]
+      ]
+     },
+     {
+      "n": 4,
+      "dir": "вдясно от",
+      "place": "p/lale",
+      "ref": 14,
+      "items": [
+       [
+        14,
+        "p/chereshi"
+       ],
+       [
+        0,
+        "p/peperuda"
+       ],
+       [
+        3,
+        "p/krusha"
+       ],
+       [
+        4,
+        "p/grozde"
+       ]
+      ]
+     },
+     {
+      "n": 4,
+      "dir": "вляво от",
+      "place": "p/morkov",
+      "ref": 11,
+      "items": [
+       [
+        11,
+        "p/lale"
+       ],
+       [
+        6,
+        "p/pchela"
+       ],
+       [
+        14,
+        "p/krusha"
+       ],
+       [
+        15,
+        "p/peperuda"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "MW07.Р2/brainCrush": {
+   "game": "brainCrush",
+   "role": "PRACTICE",
+   "level": 1,
+   "range": 5,
+   "practice": [
+    {
+     "a": 2,
+     "op": "-",
+     "b": 1,
+     "obj": "obj/banana"
+    },
+    {
+     "a": 3,
+     "op": "-",
+     "b": 1,
+     "obj": "fish_red"
+    },
+    {
+     "a": 3,
+     "op": "-",
+     "b": 2,
+     "obj": "obj/apple"
+    },
+    {
+     "a": 4,
+     "op": "-",
+     "b": 1,
+     "obj": "obj/lemon"
+    },
+    {
+     "a": 4,
+     "op": "-",
+     "b": 3,
+     "obj": "obj/strawberry"
+    },
+    {
+     "a": 5,
+     "op": "-",
+     "b": 2,
+     "obj": "obj/cookie"
+    },
+    {
+     "a": 5,
+     "op": "-",
+     "b": 3,
+     "obj": "fish_green"
+    },
+    {
+     "a": 5,
+     "op": "-",
+     "b": 4,
+     "obj": "obj/pear"
+    }
+   ]
+  },
+  "MW07.Р3/brainCrush": {
+   "game": "brainCrush",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": 1,
+   "range": 5,
+   "sets": {
+    "A": [
+     {
+      "a": 5,
+      "op": "-",
+      "b": 1,
+      "obj": "obj/apple"
+     },
+     {
+      "a": 4,
+      "op": "-",
+      "b": 1,
+      "obj": "obj/pear"
+     },
+     {
+      "a": 4,
+      "op": "-",
+      "b": 2,
+      "obj": "obj/strawberry"
+     },
+     {
+      "a": 3,
+      "op": "-",
+      "b": 2,
+      "obj": "fish_blue"
+     },
+     {
+      "a": 5,
+      "op": "-",
+      "b": 4,
+      "obj": "obj/cookie"
+     },
+     {
+      "a": 5,
+      "op": "-",
+      "b": 3,
+      "obj": "obj/lemon"
+     }
+    ],
+    "B": [
+     {
+      "a": 5,
+      "op": "-",
+      "b": 2,
+      "obj": "obj/orange"
+     },
+     {
+      "a": 3,
+      "op": "-",
+      "b": 1,
+      "obj": "obj/carrot"
+     },
+     {
+      "a": 4,
+      "op": "-",
+      "b": 3,
+      "obj": "obj/cupcake"
+     },
+     {
+      "a": 2,
+      "op": "-",
+      "b": 1,
+      "obj": "obj/mushroom"
+     },
+     {
+      "a": 5,
+      "op": "-",
+      "b": 1,
+      "obj": "obj/tomato",
+      "repeat_fact": true
+     },
+     {
+      "a": 4,
+      "op": "-",
+      "b": 2,
+      "obj": "obj/cherries",
+      "repeat_fact": true
+     }
+    ]
+   }
+  },
+  "MW07.Р4/numberComposition": {
+   "game": "numberComposition",
+   "role": "TRANSFER",
+   "max": 5,
+   "sets": {
+    "A": [
+     {
+      "n": 3,
+      "a": 2
+     },
+     {
+      "n": 4,
+      "b": 1
+     },
+     {
+      "n": 5,
+      "a": 3
+     },
+     {
+      "n": 5,
+      "b": 1
+     }
+    ],
+    "B": [
+     {
+      "n": 3,
+      "b": 1
+     },
+     {
+      "n": 4,
+      "a": 3
+     },
+     {
+      "n": 5,
+      "b": 2
+     },
+     {
+      "n": 5,
+      "a": 1
+     }
+    ]
+   }
+  },
+  "MW08.Р1/brainCrush": {
+   "game": "brainCrush",
+   "role": "RETRIEVAL",
+   "level": 1,
+   "range": 5,
+   "sets": {
+    "A": [
+     {
+      "a": 5,
+      "op": "-",
+      "b": 3,
+      "obj": "obj/banana",
+      "repeat_fact": true
+     },
+     {
+      "a": 4,
+      "op": "-",
+      "b": 1,
+      "obj": "fish_orange",
+      "repeat_fact": true
+     },
+     {
+      "a": 2,
+      "op": "-",
+      "b": 1,
+      "obj": "obj/cherries",
+      "repeat_fact": true
+     },
+     {
+      "a": 5,
+      "op": "-",
+      "b": 1,
+      "obj": "obj/strawberry",
+      "repeat_fact": true
+     }
+    ],
+    "B": [
+     {
+      "a": 4,
+      "op": "-",
+      "b": 2,
+      "obj": "obj/mushroom",
+      "repeat_fact": true
+     },
+     {
+      "a": 5,
+      "op": "-",
+      "b": 2,
+      "obj": "obj/apple",
+      "repeat_fact": true
+     },
+     {
+      "a": 5,
+      "op": "-",
+      "b": 4,
+      "obj": "obj/lemon",
+      "repeat_fact": true
+     },
+     {
+      "a": 3,
+      "op": "-",
+      "b": 1,
+      "obj": "obj/pear",
+      "repeat_fact": true
+     }
+    ]
+   }
+  },
+  "MW08.Р2/cobweb": {
+   "game": "cobweb",
+   "role": "PRACTICE",
+   "level": 2,
+   "max": 7,
+   "practice": [
+    {
+     "c": [
+      6,
+      2,
+      1
+     ]
+    },
+    {
+     "c": [
+      6,
+      3,
+      1
+     ]
+    },
+    {
+     "c": [
+      4,
+      2,
+      1
+     ]
+    },
+    {
+     "c": [
+      7,
+      1,
+      4
+     ]
+    },
+    {
+     "c": [
+      5,
+      7,
+      4
+     ]
+    },
+    {
+     "c": [
+      3,
+      1,
+      7
+     ]
+    },
+    {
+     "c": [
+      6,
+      5,
+      4
+     ]
+    },
+    {
+     "c": [
+      1,
+      6,
+      4
+     ]
+    }
+   ]
+  },
+  "MW08.Р3/numberLine": {
+   "game": "numberLine",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": 2,
+   "max": 7,
+   "sets": {
+    "A": [
+     {
+      "n": 1,
+      "ask": "after"
+     },
+     {
+      "n": 4,
+      "ask": "before"
+     },
+     {
+      "n": 6,
+      "ask": "after"
+     },
+     {
+      "n": 3,
+      "ask": "before"
+     },
+     {
+      "n": 3,
+      "ask": "after"
+     },
+     {
+      "n": 6,
+      "ask": "before"
+     }
+    ],
+    "B": [
+     {
+      "n": 2,
+      "ask": "before"
+     },
+     {
+      "n": 4,
+      "ask": "after"
+     },
+     {
+      "n": 7,
+      "ask": "before"
+     },
+     {
+      "n": 2,
+      "ask": "after"
+     },
+     {
+      "n": 5,
+      "ask": "before"
+     },
+     {
+      "n": 5,
+      "ask": "after"
+     }
+    ]
+   }
+  },
+  "MW08.Р4/numberComposition": {
+   "game": "numberComposition",
+   "role": "TRANSFER",
+   "max": 7,
+   "sets": {
+    "A": [
+     {
+      "n": 6,
+      "a": 2
+     },
+     {
+      "n": 7,
+      "a": 5
+     },
+     {
+      "n": 7,
+      "b": 1
+     },
+     {
+      "n": 5,
+      "b": 2
+     }
+    ],
+    "B": [
+     {
+      "n": 7,
+      "a": 3
+     },
+     {
+      "n": 6,
+      "b": 4
+     },
+     {
+      "n": 7,
+      "a": 1
+     },
+     {
+      "n": 4,
+      "b": 1
+     }
+    ]
+   }
+  },
+  "MW09.Р1/numberLine": {
+   "game": "numberLine",
+   "role": "RETRIEVAL",
+   "level": 2,
+   "max": 9,
+   "note": "права до 9 (8 и 9 са учени в Ч9): нови задачи спрямо MW08.Р3",
+   "sets": {
+    "A": [
+     {
+      "n": 8,
+      "ask": "after"
+     },
+     {
+      "n": 3,
+      "ask": "before"
+     },
+     {
+      "n": 6,
+      "ask": "after"
+     },
+     {
+      "n": 9,
+      "ask": "before"
+     }
+    ],
+    "B": [
+     {
+      "n": 7,
+      "ask": "after"
+     },
+     {
+      "n": 8,
+      "ask": "before"
+     },
+     {
+      "n": 2,
+      "ask": "after"
+     },
+     {
+      "n": 5,
+      "ask": "before"
+     }
+    ]
+   }
+  },
+  "MW09.Р2/cobweb": {
+   "game": "cobweb",
+   "role": "PRACTICE",
+   "level": 1,
+   "max": 9,
+   "practice": [
+    {
+     "f": [
+      [
+       3,
+       6
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       8,
+       8
+      ]
+     ]
+    },
+    {
+     "f": [
+      [
+       9,
+       9
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       7,
+       5
+      ]
+     ]
+    },
+    {
+     "f": [
+      [
+       3,
+       9
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       1
+      ]
+     ]
+    },
+    {
+     "f": [
+      [
+       3,
+       2
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       5,
+       5
+      ]
+     ]
+    },
+    {
+     "f": [
+      [
+       5,
+       4
+      ],
+      [
+       9,
+       9
+      ],
+      [
+       8,
+       2
+      ]
+     ]
+    },
+    {
+     "f": [
+      [
+       8,
+       8
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       2,
+       4
+      ]
+     ]
+    },
+    {
+     "f": [
+      [
+       3,
+       3
+      ],
+      [
+       5,
+       7
+      ],
+      [
+       1,
+       2
+      ]
+     ]
+    },
+    {
+     "f": [
+      [
+       1,
+       8
+      ],
+      [
+       8,
+       7
+      ],
+      [
+       7,
+       7
+      ]
+     ]
+    }
+   ]
+  },
+  "MW09.Р3/order": {
+   "game": "order",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": 1,
+   "range": 9,
+   "row": 5,
+   "sets": {
+    "A": [
+     {
+      "row": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "gaps": [
+       0,
+       2
+      ]
+     },
+     {
+      "row": [
+       5,
+       6,
+       7,
+       8,
+       9
+      ],
+      "gaps": [
+       0,
+       4
+      ]
+     },
+     {
+      "row": [
+       2,
+       3,
+       4,
+       5,
+       6
+      ],
+      "gaps": [
+       2,
+       3
+      ]
+     },
+     {
+      "row": [
+       3,
+       4,
+       5,
+       6,
+       7
+      ],
+      "gaps": [
+       0,
+       3
+      ]
+     },
+     {
+      "row": [
+       3,
+       4,
+       5,
+       6,
+       7
+      ],
+      "gaps": [
+       0,
+       2
+      ]
+     },
+     {
+      "row": [
+       4,
+       5,
+       6,
+       7,
+       8
+      ],
+      "gaps": [
+       1,
+       4
+      ]
+     }
+    ],
+    "B": [
+     {
+      "row": [
+       5,
+       6,
+       7,
+       8,
+       9
+      ],
+      "gaps": [
+       2,
+       4
+      ]
+     },
+     {
+      "row": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "gaps": [
+       0,
+       4
+      ]
+     },
+     {
+      "row": [
+       4,
+       5,
+       6,
+       7,
+       8
+      ],
+      "gaps": [
+       1,
+       2
+      ]
+     },
+     {
+      "row": [
+       3,
+       4,
+       5,
+       6,
+       7
+      ],
+      "gaps": [
+       1,
+       4
+      ]
+     },
+     {
+      "row": [
+       3,
+       4,
+       5,
+       6,
+       7
+      ],
+      "gaps": [
+       2,
+       4
+      ]
+     },
+     {
+      "row": [
+       2,
+       3,
+       4,
+       5,
+       6
+      ],
+      "gaps": [
+       0,
+       3
+      ]
+     }
+    ]
+   }
+  },
+  "MW09.Р4/numberComposition": {
+   "game": "numberComposition",
+   "role": "TRANSFER",
+   "max": 9,
+   "sets": {
+    "A": [
+     {
+      "n": 8,
+      "a": 3
+     },
+     {
+      "n": 9,
+      "b": 2
+     },
+     {
+      "n": 9,
+      "a": 6
+     },
+     {
+      "n": 7,
+      "b": 5
+     }
+    ],
+    "B": [
+     {
+      "n": 9,
+      "a": 4
+     },
+     {
+      "n": 8,
+      "b": 1
+     },
+     {
+      "n": 8,
+      "a": 5
+     },
+     {
+      "n": 6,
+      "b": 4
+     }
+    ]
+   }
+  },
+  "MW10.Р1/order": {
+   "game": "order",
+   "role": "RETRIEVAL",
+   "level": 1,
+   "range": 9,
+   "row": 5,
+   "note": "припомняне на MW09.Р3 (без 0)",
+   "sets": {
+    "A": [
+     {
+      "row": [
+       5,
+       6,
+       7,
+       8,
+       9
+      ],
+      "gaps": [
+       1,
+       3
+      ]
+     },
+     {
+      "row": [
+       5,
+       6,
+       7,
+       8,
+       9
+      ],
+      "gaps": [
+       0,
+       2
+      ]
+     },
+     {
+      "row": [
+       4,
+       5,
+       6,
+       7,
+       8
+      ],
+      "gaps": [
+       0,
+       1
+      ]
+     },
+     {
+      "row": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "gaps": [
+       1,
+       4
+      ]
+     }
+    ],
+    "B": [
+     {
+      "row": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "gaps": [
+       1,
+       3
+      ]
+     },
+     {
+      "row": [
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "gaps": [
+       2,
+       4
+      ]
+     },
+     {
+      "row": [
+       2,
+       3,
+       4,
+       5,
+       6
+      ],
+      "gaps": [
+       3,
+       4
+      ]
+     },
+     {
+      "row": [
+       5,
+       6,
+       7,
+       8,
+       9
+      ],
+      "gaps": [
+       0,
+       3
+      ]
+     }
+    ]
+   }
+  },
+  "MW10.Р2/numberLine": {
+   "game": "numberLine",
+   "role": "PRACTICE",
+   "level": 1,
+   "max": 10,
+   "practice": [
+    {
+     "n": 1
+    },
+    {
+     "n": 2
+    },
+    {
+     "n": 3
+    },
+    {
+     "n": 4
+    },
+    {
+     "n": 6
+    },
+    {
+     "n": 7
+    },
+    {
+     "n": 8
+    },
+    {
+     "n": 9
+    }
+   ]
+  },
+  "MW10.Р3/order": {
+   "game": "order",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": 1,
+   "range": 10,
+   "row": 6,
+   "sets": {
+    "A": [
+     {
+      "row": [
+       2,
+       3,
+       4,
+       5,
+       6,
+       7
+      ],
+      "gaps": [
+       1,
+       5
+      ]
+     },
+     {
+      "row": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6
+      ],
+      "gaps": [
+       0,
+       1
+      ]
+     },
+     {
+      "row": [
+       3,
+       4,
+       5,
+       6,
+       7,
+       8
+      ],
+      "gaps": [
+       1,
+       5
+      ]
+     },
+     {
+      "row": [
+       0,
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "gaps": [
+       0,
+       5
+      ]
+     },
+     {
+      "row": [
+       4,
+       5,
+       6,
+       7,
+       8,
+       9
+      ],
+      "gaps": [
+       0,
+       2
+      ]
+     },
+     {
+      "row": [
+       5,
+       6,
+       7,
+       8,
+       9,
+       10
+      ],
+      "gaps": [
+       2,
+       5
+      ]
+     }
+    ],
+    "B": [
+     {
+      "row": [
+       3,
+       4,
+       5,
+       6,
+       7,
+       8
+      ],
+      "gaps": [
+       0,
+       4
+      ]
+     },
+     {
+      "row": [
+       4,
+       5,
+       6,
+       7,
+       8,
+       9
+      ],
+      "gaps": [
+       4,
+       5
+      ]
+     },
+     {
+      "row": [
+       2,
+       3,
+       4,
+       5,
+       6,
+       7
+      ],
+      "gaps": [
+       0,
+       4
+      ]
+     },
+     {
+      "row": [
+       5,
+       6,
+       7,
+       8,
+       9,
+       10
+      ],
+      "gaps": [
+       0,
+       5
+      ]
+     },
+     {
+      "row": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6
+      ],
+      "gaps": [
+       3,
+       5
+      ]
+     },
+     {
+      "row": [
+       0,
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "gaps": [
+       0,
+       3
+      ]
+     }
+    ]
+   }
+  },
+  "MW10.Р4/numberComposition": {
+   "game": "numberComposition",
+   "role": "TRANSFER",
+   "max": 10,
+   "sets": {
+    "A": [
+     {
+      "n": 10,
+      "a": 4
+     },
+     {
+      "n": 10,
+      "b": 2
+     },
+     {
+      "n": 8,
+      "a": 8
+     },
+     {
+      "n": 9,
+      "b": 6
+     }
+    ],
+    "B": [
+     {
+      "n": 10,
+      "b": 4
+     },
+     {
+      "n": 10,
+      "a": 2
+     },
+     {
+      "n": 9,
+      "b": 9
+     },
+     {
+      "n": 8,
+      "a": 5
+     }
+    ]
+   }
+  },
+  "MW11.Р1/order": {
+   "game": "order",
+   "role": "RETRIEVAL",
+   "level": 1,
+   "range": 10,
+   "row": 6,
+   "note": "припомняне на MW10.Р3",
+   "sets": {
+    "A": [
+     {
+      "row": [
+       4,
+       5,
+       6,
+       7,
+       8,
+       9
+      ],
+      "gaps": [
+       0,
+       5
+      ]
+     },
+     {
+      "row": [
+       4,
+       5,
+       6,
+       7,
+       8,
+       9
+      ],
+      "gaps": [
+       0,
+       3
+      ]
+     },
+     {
+      "row": [
+       0,
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "gaps": [
+       0,
+       2
+      ]
+     },
+     {
+      "row": [
+       5,
+       6,
+       7,
+       8,
+       9,
+       10
+      ],
+      "gaps": [
+       1,
+       5
+      ]
+     }
+    ],
+    "B": [
+     {
+      "row": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6
+      ],
+      "gaps": [
+       0,
+       5
+      ]
+     },
+     {
+      "row": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6
+      ],
+      "gaps": [
+       2,
+       5
+      ]
+     },
+     {
+      "row": [
+       5,
+       6,
+       7,
+       8,
+       9,
+       10
+      ],
+      "gaps": [
+       3,
+       5
+      ]
+     },
+     {
+      "row": [
+       0,
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "gaps": [
+       0,
+       4
+      ]
+     }
+    ]
+   }
+  },
+  "MW11.Р2/intellectScales": {
+   "game": "intellectScales",
+   "role": "PRACTICE",
+   "level": 1,
+   "practice": [
+    {
+     "l": 3,
+     "r": 7,
+     "ask": "more"
+    },
+    {
+     "l": 8,
+     "r": 4,
+     "ask": "less"
+    },
+    {
+     "l": 2,
+     "r": 7,
+     "ask": "less"
+    },
+    {
+     "l": 9,
+     "r": 4,
+     "ask": "more"
+    },
+    {
+     "l": 5,
+     "r": 6,
+     "ask": "more"
+    },
+    {
+     "l": 10,
+     "r": 7,
+     "ask": "less"
+    },
+    {
+     "l": 1,
+     "r": 4,
+     "ask": "more"
+    },
+    {
+     "l": 6,
+     "r": 3,
+     "ask": "less"
+    }
+   ]
+  },
+  "MW11.Р3/intellectScales": {
+   "game": "intellectScales",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": 1,
+   "sets": {
+    "A": [
+     {
+      "l": 6,
+      "r": 2,
+      "ask": "more"
+     },
+     {
+      "l": 3,
+      "r": 9,
+      "ask": "less"
+     },
+     {
+      "l": 4,
+      "r": 8,
+      "ask": "more"
+     },
+     {
+      "l": 7,
+      "r": 6,
+      "ask": "less"
+     },
+     {
+      "l": 2,
+      "r": 5,
+      "ask": "less"
+     },
+     {
+      "l": 8,
+      "r": 10,
+      "ask": "more"
+     }
+    ],
+    "B": [
+     {
+      "l": 7,
+      "r": 3,
+      "ask": "more"
+     },
+     {
+      "l": 4,
+      "r": 10,
+      "ask": "less"
+     },
+     {
+      "l": 5,
+      "r": 9,
+      "ask": "more"
+     },
+     {
+      "l": 8,
+      "r": 7,
+      "ask": "less"
+     },
+     {
+      "l": 3,
+      "r": 6,
+      "ask": "less"
+     },
+     {
+      "l": 7,
+      "r": 9,
+      "ask": "more"
+     }
+    ]
+   }
+  },
+  "MW11.Р4/intellectScales": {
+   "game": "intellectScales",
+   "role": "PRACTICE",
+   "level": 2,
+   "practice": [
+    {
+     "l": 7,
+     "r": 4
+    },
+    {
+     "l": 3,
+     "r": 8
+    },
+    {
+     "l": 5,
+     "r": 5
+    },
+    {
+     "l": 10,
+     "r": 9
+    },
+    {
+     "l": 2,
+     "r": 6
+    },
+    {
+     "l": 6,
+     "r": 6
+    },
+    {
+     "l": 8,
+     "r": 5
+    },
+    {
+     "l": 4,
+     "r": 9
+    }
+   ],
+   "scope": "extension"
+  },
+  "MW11.Р4/numberLine": {
+   "game": "numberLine",
+   "role": "TRANSFER",
+   "level": 2,
+   "max": 10,
+   "sets": {
+    "A": [
+     {
+      "n": 1,
+      "ask": "before"
+     },
+     {
+      "n": 4,
+      "ask": "after"
+     },
+     {
+      "n": 7,
+      "ask": "before"
+     },
+     {
+      "n": 9,
+      "ask": "after"
+     }
+    ],
+    "B": [
+     {
+      "n": 0,
+      "ask": "after"
+     },
+     {
+      "n": 4,
+      "ask": "before"
+     },
+     {
+      "n": 6,
+      "ask": "after"
+     },
+     {
+      "n": 10,
+      "ask": "before"
+     }
+    ]
+   }
+  },
+  "MW12.Р1/intellectScales": {
+   "game": "intellectScales",
+   "role": "RETRIEVAL",
+   "level": 1,
+   "sets": {
+    "A": [
+     {
+      "l": 9,
+      "r": 5,
+      "ask": "more"
+     },
+     {
+      "l": 2,
+      "r": 6,
+      "ask": "less"
+     },
+     {
+      "l": 4,
+      "r": 7,
+      "ask": "more"
+     },
+     {
+      "l": 10,
+      "r": 8,
+      "ask": "less"
+     }
+    ],
+    "B": [
+     {
+      "l": 10,
+      "r": 6,
+      "ask": "more"
+     },
+     {
+      "l": 1,
+      "r": 5,
+      "ask": "less"
+     },
+     {
+      "l": 2,
+      "r": 8,
+      "ask": "more"
+     },
+     {
+      "l": 9,
+      "r": 7,
+      "ask": "less"
+     }
+    ]
+   }
+  },
+  "MW12.Р2/numberComposition": {
+   "game": "numberComposition",
+   "role": "SECONDARY_MEASUREMENT",
+   "max": 10,
+   "sets": {
+    "A": [
+     {
+      "n": 10,
+      "a": 7
+     },
+     {
+      "n": 9,
+      "b": 4
+     },
+     {
+      "n": 8,
+      "a": 1
+     },
+     {
+      "n": 7,
+      "b": 3
+     }
+    ],
+    "B": [
+     {
+      "n": 10,
+      "b": 7
+     },
+     {
+      "n": 9,
+      "a": 4
+     },
+     {
+      "n": 8,
+      "b": 1
+     },
+     {
+      "n": 7,
+      "a": 3
+     }
+    ]
+   }
+  },
+  "MW12.Р2/order": {
+   "game": "order",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": 1,
+   "range": 10,
+   "row": 6,
+   "sets": {
+    "A": [
+     {
+      "row": [
+       2,
+       3,
+       4,
+       5,
+       6,
+       7
+      ],
+      "gaps": [
+       0,
+       2
+      ]
+     },
+     {
+      "row": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6
+      ],
+      "gaps": [
+       0,
+       3
+      ]
+     },
+     {
+      "row": [
+       5,
+       6,
+       7,
+       8,
+       9,
+       10
+      ],
+      "gaps": [
+       4,
+       5
+      ]
+     },
+     {
+      "row": [
+       5,
+       6,
+       7,
+       8,
+       9,
+       10
+      ],
+      "gaps": [
+       1,
+       4
+      ]
+     }
+    ],
+    "B": [
+     {
+      "row": [
+       3,
+       4,
+       5,
+       6,
+       7,
+       8
+      ],
+      "gaps": [
+       3,
+       5
+      ]
+     },
+     {
+      "row": [
+       4,
+       5,
+       6,
+       7,
+       8,
+       9
+      ],
+      "gaps": [
+       2,
+       5
+      ]
+     },
+     {
+      "row": [
+       0,
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "gaps": [
+       0,
+       1
+      ]
+     },
+     {
+      "row": [
+       0,
+       1,
+       2,
+       3,
+       4,
+       5
+      ],
+      "gaps": [
+       1,
+       4
+      ]
+     }
+    ]
+   }
+  },
+  "MW12.Р3/brainCrush": {
+   "game": "brainCrush",
+   "role": "SECONDARY_MEASUREMENT",
+   "level": 2,
+   "range": 10,
+   "sets": {
+    "A": [
+     {
+      "a": 6,
+      "op": "+",
+      "b": 3
+     },
+     {
+      "a": 10,
+      "op": "-",
+      "b": 4
+     },
+     {
+      "a": 2,
+      "op": "+",
+      "b": 5
+     },
+     {
+      "a": 8,
+      "op": "-",
+      "b": 8
+     }
+    ],
+    "B": [
+     {
+      "a": 5,
+      "op": "+",
+      "b": 4
+     },
+     {
+      "a": 9,
+      "op": "-",
+      "b": 3
+     },
+     {
+      "a": 3,
+      "op": "+",
+      "b": 4
+     },
+     {
+      "a": 6,
+      "op": "-",
+      "b": 6
+     }
+    ]
+   }
+  },
+  "MW12.Р3/cobweb": {
+   "game": "cobweb",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": 2,
+   "max": 10,
+   "sets": {
+    "A": [
+     {
+      "c": [
+       9,
+       1,
+       3
+      ]
+     },
+     {
+      "c": [
+       2,
+       9,
+       5
+      ]
+     },
+     {
+      "c": [
+       6,
+       9,
+       4
+      ]
+     },
+     {
+      "c": [
+       10,
+       2,
+       7
+      ]
+     },
+     {
+      "c": [
+       6,
+       5,
+       8
+      ]
+     },
+     {
+      "c": [
+       3,
+       4,
+       8
+      ]
+     }
+    ],
+    "B": [
+     {
+      "c": [
+       4,
+       2,
+       10
+      ]
+     },
+     {
+      "c": [
+       4,
+       8,
+       1
+      ]
+     },
+     {
+      "c": [
+       5,
+       7,
+       10
+      ]
+     },
+     {
+      "c": [
+       6,
+       9,
+       1
+      ]
+     },
+     {
+      "c": [
+       7,
+       9,
+       6
+      ]
+     },
+     {
+      "c": [
+       2,
+       3,
+       7
+      ]
+     }
+    ]
+   }
+  },
+  "MW13.Р1/cobweb": {
+   "game": "cobweb",
+   "role": "RETRIEVAL",
+   "level": 2,
+   "max": 10,
+   "sets": {
+    "A": [
+     {
+      "c": [
+       9,
+       2,
+       7
+      ]
+     },
+     {
+      "c": [
+       3,
+       10,
+       5
+      ]
+     },
+     {
+      "c": [
+       8,
+       1,
+       6
+      ]
+     },
+     {
+      "c": [
+       6,
+       4,
+       10
+      ]
+     }
+    ],
+    "B": [
+     {
+      "c": [
+       8,
+       3,
+       7
+      ]
+     },
+     {
+      "c": [
+       9,
+       5,
+       4
+      ]
+     },
+     {
+      "c": [
+       2,
+       7,
+       6
+      ]
+     },
+     {
+      "c": [
+       3,
+       9,
+       8
+      ]
+     }
+    ]
+   }
+  },
+  "MW13.Р2/lines": {
+   "game": "lines",
+   "role": "PRACTICE",
+   "level": null,
+   "items": 6,
+   "settings": {
+    "view": "line_kind"
+   },
+   "practice": [
+    {
+     "kind": "straight",
+     "form": "line",
+     "angle": 0,
+     "color": "#2F7FE0",
+     "obj": null
+    },
+    {
+     "kind": "curved",
+     "form": "wave",
+     "angle": 0,
+     "color": "#E2493F",
+     "obj": null
+    },
+    {
+     "kind": "straight",
+     "form": "line",
+     "angle": 0,
+     "color": "#7A7A7A",
+     "obj": "road"
+    },
+    {
+     "kind": "curved",
+     "form": "s",
+     "angle": 10,
+     "color": "#7A7A7A",
+     "obj": "road"
+    },
+    {
+     "kind": "straight",
+     "form": "line",
+     "angle": -20,
+     "color": "#B07A3A",
+     "obj": "rope"
+    },
+    {
+     "kind": "curved",
+     "form": "wave",
+     "angle": 0,
+     "color": "#B07A3A",
+     "obj": "rope"
+    },
+    {
+     "kind": "straight",
+     "form": "line",
+     "angle": 15,
+     "color": "#22A56A",
+     "obj": "snake"
+    },
+    {
+     "kind": "curved",
+     "form": "s",
+     "angle": 0,
+     "color": "#22A56A",
+     "obj": "snake"
+    },
+    {
+     "kind": "curved",
+     "form": "arc",
+     "angle": 0,
+     "color": "#E2493F",
+     "obj": "rainbow"
+    },
+    {
+     "kind": "straight",
+     "form": "line",
+     "angle": 0,
+     "color": "#F5C320",
+     "obj": "ruler"
+    }
+   ]
+  },
+  "MW13.Р3/lines": {
+   "game": "lines",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": null,
+   "items": 6,
+   "settings": {
+    "view": "line_kind"
+   },
+   "sets": {
+    "A": [
+     {
+      "kind": "straight",
+      "form": "line",
+      "angle": 0,
+      "color": "#E2493F",
+      "obj": null
+     },
+     {
+      "kind": "curved",
+      "form": "wave",
+      "angle": 0,
+      "color": "#2F7FE0",
+      "obj": null
+     },
+     {
+      "kind": "straight",
+      "form": "line",
+      "angle": 35,
+      "color": "#22A56A",
+      "obj": null
+     },
+     {
+      "kind": "curved",
+      "form": "arc",
+      "angle": -20,
+      "color": "#8E5CE0",
+      "obj": null
+     },
+     {
+      "kind": "curved",
+      "form": "bend",
+      "angle": 0,
+      "color": "#F08A24",
+      "obj": null
+     },
+     {
+      "kind": "straight",
+      "form": "line",
+      "angle": 90,
+      "color": "#2F7FE0",
+      "obj": null
+     }
+    ],
+    "B": [
+     {
+      "kind": "curved",
+      "form": "wave",
+      "angle": 15,
+      "color": "#E2493F",
+      "obj": null
+     },
+     {
+      "kind": "straight",
+      "form": "line",
+      "angle": 0,
+      "color": "#8E5CE0",
+      "obj": null
+     },
+     {
+      "kind": "curved",
+      "form": "bend",
+      "angle": 30,
+      "color": "#22A56A",
+      "obj": null
+     },
+     {
+      "kind": "straight",
+      "form": "line",
+      "angle": -35,
+      "color": "#F08A24",
+      "obj": null
+     },
+     {
+      "kind": "straight",
+      "form": "line",
+      "angle": 90,
+      "color": "#E2493F",
+      "obj": null
+     },
+     {
+      "kind": "curved",
+      "form": "arc",
+      "angle": 20,
+      "color": "#2F7FE0",
+      "obj": null
+     }
+    ]
+   }
+  },
+  "MW13.Р4/numberLine": {
+   "game": "numberLine",
+   "role": "TRANSFER",
+   "level": 2,
+   "max": 10,
+   "sets": {
+    "A": [
+     {
+      "n": 0,
+      "ask": "after",
+      "repeat_fact": true
+     },
+     {
+      "n": 10,
+      "ask": "before",
+      "repeat_fact": true
+     },
+     {
+      "n": 7,
+      "ask": "after",
+      "repeat_fact": true
+     },
+     {
+      "n": 8,
+      "ask": "before",
+      "repeat_fact": true
+     }
+    ],
+    "B": [
+     {
+      "n": 9,
+      "ask": "after",
+      "repeat_fact": true
+     },
+     {
+      "n": 1,
+      "ask": "before",
+      "repeat_fact": true
+     },
+     {
+      "n": 3,
+      "ask": "after",
+      "repeat_fact": true
+     },
+     {
+      "n": 7,
+      "ask": "before",
+      "repeat_fact": true
+     }
+    ]
+   }
+  },
+  "MW14.Р1/lines": {
+   "game": "lines",
+   "role": "RETRIEVAL",
+   "level": null,
+   "items": 4,
+   "settings": {
+    "view": "line_kind"
+   },
+   "sets": {
+    "A": [
+     {
+      "kind": "curved",
+      "form": "s",
+      "angle": 0,
+      "color": "#22A56A",
+      "obj": null
+     },
+     {
+      "kind": "straight",
+      "form": "line",
+      "angle": -45,
+      "color": "#E2493F",
+      "obj": null
+     },
+     {
+      "kind": "straight",
+      "form": "line",
+      "angle": 0,
+      "color": "#F08A24",
+      "obj": null
+     },
+     {
+      "kind": "curved",
+      "form": "hook",
+      "angle": 0,
+      "color": "#2F7FE0",
+      "obj": null
+     }
+    ],
+    "B": [
+     {
+      "kind": "straight",
+      "form": "line",
+      "angle": 45,
+      "color": "#2F7FE0",
+      "obj": null
+     },
+     {
+      "kind": "curved",
+      "form": "hook",
+      "angle": 0,
+      "color": "#E2493F",
+      "obj": null
+     },
+     {
+      "kind": "curved",
+      "form": "s",
+      "angle": 20,
+      "color": "#8E5CE0",
+      "obj": null
+     },
+     {
+      "kind": "straight",
+      "form": "line",
+      "angle": 0,
+      "color": "#22A56A",
+      "obj": null
+     }
+    ]
+   }
+  },
+  "MW14.Р2/lines": {
+   "game": "lines",
+   "role": "PRACTICE",
+   "level": null,
+   "items": 6,
+   "settings": {
+    "view": "compare"
+   },
+   "practice": [
+    {
+     "q": "longer",
+     "obj": "ribbon",
+     "sizes": [
+      8,
+      4
+     ],
+     "align": true,
+     "answer": 0,
+     "stage": 1
+    },
+    {
+     "q": "taller",
+     "obj": "tower",
+     "sizes": [
+      3,
+      6
+     ],
+     "align": true,
+     "answer": 1,
+     "stage": 1
+    },
+    {
+     "q": "wider",
+     "obj": "door",
+     "sizes": [
+      5,
+      3
+     ],
+     "align": true,
+     "answer": 0,
+     "stage": 1
+    },
+    {
+     "q": "shorter",
+     "obj": "scarf",
+     "sizes": [
+      7,
+      5
+     ],
+     "align": true,
+     "answer": 1,
+     "stage": 2
+    },
+    {
+     "q": "longer",
+     "obj": "train",
+     "sizes": [
+      4,
+      6
+     ],
+     "align": false,
+     "answer": 1,
+     "stage": 2
+    },
+    {
+     "q": "shorter",
+     "obj": "snake",
+     "sizes": [
+      8,
+      6
+     ],
+     "align": false,
+     "answer": 1,
+     "stage": 2
+    },
+    {
+     "q": "lower",
+     "obj": "tree",
+     "sizes": [
+      5,
+      4
+     ],
+     "align": true,
+     "answer": 1,
+     "stage": 2
+    },
+    {
+     "q": "narrower",
+     "obj": "window",
+     "sizes": [
+      4,
+      3
+     ],
+     "align": true,
+     "answer": 1,
+     "stage": 2
+    },
+    {
+     "q": "longer",
+     "obj": "ribbon",
+     "sizes": [
+      6,
+      7
+     ],
+     "align": false,
+     "answer": 1,
+     "stage": 2
+    },
+    {
+     "q": "shorter",
+     "obj": "train",
+     "sizes": [
+      5,
+      4
+     ],
+     "align": false,
+     "answer": 1,
+     "stage": 2
+    }
+   ]
+  },
+  "MW14.Р3/lines": {
+   "game": "lines",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": null,
+   "items": 6,
+   "settings": {
+    "view": "measure"
+   },
+   "sets": {
+    "A": [
+     {
+      "obj": "ribbon",
+      "unit": "cube",
+      "len": 4,
+      "opts": [
+       3,
+       4,
+       5
+      ]
+     },
+     {
+      "obj": "scarf",
+      "unit": "clip",
+      "len": 6,
+      "opts": [
+       6,
+       7,
+       8
+      ]
+     },
+     {
+      "obj": "train",
+      "unit": "cube",
+      "len": 7,
+      "opts": [
+       5,
+       6,
+       7
+      ]
+     },
+     {
+      "obj": "stick",
+      "unit": "clip",
+      "len": 3,
+      "opts": [
+       3,
+       4,
+       5
+      ]
+     },
+     {
+      "obj": "caterpillar",
+      "unit": "cube",
+      "len": 9,
+      "opts": [
+       7,
+       8,
+       9
+      ]
+     },
+     {
+      "obj": "spoon",
+      "unit": "clip",
+      "len": 5,
+      "opts": [
+       4,
+       5,
+       6
+      ]
+     }
+    ],
+    "B": [
+     {
+      "obj": "stick",
+      "unit": "cube",
+      "len": 5,
+      "opts": [
+       5,
+       6,
+       7
+      ]
+     },
+     {
+      "obj": "caterpillar",
+      "unit": "clip",
+      "len": 4,
+      "opts": [
+       3,
+       4,
+       5
+      ]
+     },
+     {
+      "obj": "scarf",
+      "unit": "cube",
+      "len": 8,
+      "opts": [
+       6,
+       7,
+       8
+      ]
+     },
+     {
+      "obj": "ribbon",
+      "unit": "clip",
+      "len": 6,
+      "opts": [
+       5,
+       6,
+       7
+      ]
+     },
+     {
+      "obj": "spoon",
+      "unit": "cube",
+      "len": 3,
+      "opts": [
+       1,
+       2,
+       3
+      ]
+     },
+     {
+      "obj": "train",
+      "unit": "clip",
+      "len": 7,
+      "opts": [
+       7,
+       8,
+       9
+      ]
+     }
+    ]
+   }
+  },
+  "MW14.Р4/intellectScales": {
+   "game": "intellectScales",
+   "role": "TRANSFER",
+   "level": 1,
+   "sets": {
+    "A": [
+     {
+      "wl": "art/pics/pic_slon",
+      "wr": "art/pics/pic_mishka",
+      "ask": "heavy",
+      "heavy": "l"
+     },
+     {
+      "wl": "art/pics/pic_dinya",
+      "wr": "art/pics/pic_pero",
+      "ask": "light",
+      "heavy": "l"
+     },
+     {
+      "wl": "art/pics/pic_yabalka",
+      "wr": "art/pics/pic_balon",
+      "ask": "heavy",
+      "big": "r",
+      "heavy": "l"
+     },
+     {
+      "wl": "art/pics/pic_stol",
+      "wr": "art/pics/pic_list",
+      "ask": "light",
+      "heavy": "l"
+     }
+    ],
+    "B": [
+     {
+      "wl": "art/pics/pic_shapka_vazana",
+      "wr": "art/pics/pic_kola",
+      "ask": "heavy",
+      "heavy": "r"
+     },
+     {
+      "wl": "art/pics/pic_sapun",
+      "wr": "art/pics/pic_motor",
+      "ask": "light",
+      "heavy": "r"
+     },
+     {
+      "wl": "art/pics/pic_topka",
+      "wr": "art/pics/pic_chuk",
+      "ask": "heavy",
+      "big": "l",
+      "heavy": "r"
+     },
+     {
+      "wl": "art/pics/pic_shokolad",
+      "wr": "art/pics/pic_kolelo",
+      "ask": "light",
+      "heavy": "r"
+     }
+    ]
+   }
+  },
+  "MW15.Р1/lines": {
+   "game": "lines",
+   "role": "RETRIEVAL",
+   "level": null,
+   "items": 4,
+   "settings": {
+    "view": "measure"
+   },
+   "sets": {
+    "A": [
+     {
+      "obj": "caterpillar",
+      "unit": "clip",
+      "len": 6,
+      "opts": [
+       5,
+       6,
+       7
+      ]
+     },
+     {
+      "obj": "stick",
+      "unit": "cube",
+      "len": 8,
+      "opts": [
+       7,
+       8,
+       9
+      ]
+     },
+     {
+      "obj": "ribbon",
+      "unit": "clip",
+      "len": 2,
+      "opts": [
+       2,
+       3,
+       4
+      ]
+     },
+     {
+      "obj": "train",
+      "unit": "cube",
+      "len": 5,
+      "opts": [
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    "B": [
+     {
+      "obj": "train",
+      "unit": "clip",
+      "len": 4,
+      "opts": [
+       4,
+       5,
+       6
+      ]
+     },
+     {
+      "obj": "spoon",
+      "unit": "cube",
+      "len": 6,
+      "opts": [
+       5,
+       6,
+       7
+      ]
+     },
+     {
+      "obj": "scarf",
+      "unit": "clip",
+      "len": 9,
+      "opts": [
+       7,
+       8,
+       9
+      ]
+     },
+     {
+      "obj": "ribbon",
+      "unit": "cube",
+      "len": 3,
+      "opts": [
+       2,
+       3,
+       4
+      ]
+     }
+    ]
+   }
+  },
+  "MW15.Р2/brainCrush": {
+   "game": "brainCrush",
+   "role": "PRACTICE",
+   "level": 2,
+   "range": 10,
+   "practice": [
+    {
+     "a": 4,
+     "op": "+",
+     "b": 5
+    },
+    {
+     "a": 9,
+     "op": "-",
+     "b": 3
+    },
+    {
+     "a": 2,
+     "op": "+",
+     "b": 5
+    },
+    {
+     "a": 10,
+     "op": "-",
+     "b": 4
+    },
+    {
+     "a": 3,
+     "op": "+",
+     "b": 4
+    },
+    {
+     "a": 5,
+     "op": "-",
+     "b": 2
+    },
+    {
+     "a": 6,
+     "op": "+",
+     "b": 3
+    },
+    {
+     "a": 7,
+     "op": "-",
+     "b": 7
+    }
+   ]
+  },
+  "MW15.Р3/brainCrush": {
+   "game": "brainCrush",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": 2,
+   "range": 10,
+   "sets": {
+    "A": [
+     {
+      "a": 2,
+      "op": "+",
+      "b": 7
+     },
+     {
+      "a": 9,
+      "op": "-",
+      "b": 4
+     },
+     {
+      "a": 3,
+      "op": "+",
+      "b": 3
+     },
+     {
+      "a": 8,
+      "op": "-",
+      "b": 3
+     },
+     {
+      "a": 4,
+      "op": "+",
+      "b": 6
+     },
+     {
+      "a": 7,
+      "op": "-",
+      "b": 5
+     },
+     {
+      "a": 1,
+      "op": "+",
+      "b": 5
+     },
+     {
+      "a": 10,
+      "op": "-",
+      "b": 6
+     }
+    ],
+    "B": [
+     {
+      "a": 2,
+      "op": "+",
+      "b": 6
+     },
+     {
+      "a": 9,
+      "op": "-",
+      "b": 5
+     },
+     {
+      "a": 4,
+      "op": "+",
+      "b": 4
+     },
+     {
+      "a": 8,
+      "op": "-",
+      "b": 4
+     },
+     {
+      "a": 3,
+      "op": "+",
+      "b": 7
+     },
+     {
+      "a": 7,
+      "op": "-",
+      "b": 4
+     },
+     {
+      "a": 1,
+      "op": "+",
+      "b": 6
+     },
+     {
+      "a": 10,
+      "op": "-",
+      "b": 7
+     }
+    ]
+   }
+  },
+  "MW15.Р4/numberComposition": {
+   "game": "numberComposition",
+   "role": "TRANSFER",
+   "max": 10,
+   "sets": {
+    "A": [
+     {
+      "n": 6,
+      "a": 1
+     },
+     {
+      "n": 8,
+      "b": 2
+     },
+     {
+      "n": 9,
+      "a": 8
+     },
+     {
+      "n": 10,
+      "b": 5
+     }
+    ],
+    "B": [
+     {
+      "n": 6,
+      "b": 1
+     },
+     {
+      "n": 8,
+      "a": 2
+     },
+     {
+      "n": 9,
+      "b": 8
+     },
+     {
+      "n": 10,
+      "a": 5
+     }
+    ]
+   }
+  },
+  "MW16.Р1/brainCrush": {
+   "game": "brainCrush",
+   "role": "RETRIEVAL",
+   "level": 2,
+   "range": 10,
+   "sets": {
+    "A": [
+     {
+      "a": 2,
+      "op": "+",
+      "b": 3
+     },
+     {
+      "a": 6,
+      "op": "-",
+      "b": 2
+     },
+     {
+      "a": 1,
+      "op": "+",
+      "b": 7
+     },
+     {
+      "a": 10,
+      "op": "-",
+      "b": 3
+     }
+    ],
+    "B": [
+     {
+      "a": 1,
+      "op": "+",
+      "b": 4
+     },
+     {
+      "a": 6,
+      "op": "-",
+      "b": 3
+     },
+     {
+      "a": 1,
+      "op": "+",
+      "b": 8
+     },
+     {
+      "a": 10,
+      "op": "-",
+      "b": 2
+     }
+    ]
+   }
+  },
+  "MW16.Р4/brainstorm": {
+   "game": "brainstorm",
+   "role": "TRANSFER",
+   "level": 1,
+   "range": 10,
+   "sets": {
+    "A": [
+     {
+      "q": "Иван имаше 4 топки и получи още 3. Колко топки има Иван сега?",
+      "pre": "Иван има общо",
+      "post": "топки",
+      "a": 4,
+      "op": "+",
+      "b": 3
+     },
+     {
+      "q": "На масата имаше 8 бисквити. Ани изяде 2. Колко бисквити останаха?",
+      "pre": "Останаха",
+      "post": "бисквити",
+      "a": 8,
+      "op": "-",
+      "b": 2
+     },
+     {
+      "q": "В кошницата имаше 5 круши. Баба сложи още 4. Колко круши има в кошницата?",
+      "pre": "В кошницата има",
+      "post": "круши",
+      "a": 5,
+      "op": "+",
+      "b": 4
+     },
+     {
+      "q": "Калин хвана 6 риби, но 3 избягаха. Колко риби останаха при Калин?",
+      "pre": "При Калин останаха",
+      "post": "риби",
+      "a": 6,
+      "op": "-",
+      "b": 3
+     }
+    ],
+    "B": [
+     {
+      "q": "Мила събра 2 ягоди сутринта и 5 следобед. Колко ягоди събра Мила общо?",
+      "pre": "Мила събра общо",
+      "post": "ягоди",
+      "a": 2,
+      "op": "+",
+      "b": 5
+     },
+     {
+      "q": "Петър имаше 9 монети и подари 3. Колко монети останаха на Петър?",
+      "pre": "На Петър останаха",
+      "post": "монети",
+      "a": 9,
+      "op": "-",
+      "b": 3
+     },
+     {
+      "q": "Ема имаше 6 книги и получи още 3. Колко книги има Ема сега?",
+      "pre": "Ема има общо",
+      "post": "книги",
+      "a": 6,
+      "op": "+",
+      "b": 3
+     },
+     {
+      "q": "На полицата имаше 7 кукли. Дядо прибра 4. Колко кукли останаха на полицата?",
+      "pre": "На полицата останаха",
+      "post": "кукли",
+      "a": 7,
+      "op": "-",
+      "b": 4
+     }
+    ]
+   },
+   "scope": "extension"
+  },
+  "MW17.Р2/intellectScales": {
+   "game": "intellectScales",
+   "role": "PRACTICE",
+   "level": 2,
+   "practice": [
+    {
+     "l": 9,
+     "r": 6
+    },
+    {
+     "l": 3,
+     "r": 10
+    },
+    {
+     "l": 7,
+     "r": 7
+    },
+    {
+     "l": 1,
+     "r": 8
+    },
+    {
+     "l": 10,
+     "r": 3
+    },
+    {
+     "l": 4,
+     "r": 4
+    },
+    {
+     "l": 1,
+     "r": 9
+    },
+    {
+     "l": 8,
+     "r": 2
+    }
+   ]
+  },
+  "MW17.Р3/brainstorm": {
+   "game": "brainstorm",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": 3,
+   "range": 10,
+   "sets": {
+    "A": [
+     {
+      "kind": "diff",
+      "obj": "apple",
+      "top": 5,
+      "bottom": 8,
+      "ask": "more",
+      "q": "С колко са повече зелените ябълки?",
+      "a": 3
+     },
+     {
+      "kind": "diff",
+      "obj": "fish",
+      "top": 7,
+      "bottom": 5,
+      "ask": "less",
+      "q": "С колко са по-малко оранжевите рибки?",
+      "a": 2
+     },
+     {
+      "kind": "diff",
+      "obj": "flower",
+      "top": 2,
+      "bottom": 6,
+      "ask": "more",
+      "q": "С колко са повече розовите цветя?",
+      "a": 4
+     },
+     {
+      "kind": "diff",
+      "obj": "apple",
+      "top": 9,
+      "bottom": 8,
+      "ask": "less",
+      "q": "С колко са по-малко зелените ябълки?",
+      "a": 1
+     },
+     {
+      "kind": "diff",
+      "obj": "fish",
+      "top": 3,
+      "bottom": 8,
+      "ask": "more",
+      "q": "С колко са повече оранжевите рибки?",
+      "a": 5
+     },
+     {
+      "kind": "diff",
+      "obj": "flower",
+      "top": 7,
+      "bottom": 9,
+      "ask": "less",
+      "q": "С колко са по-малко жълтите цветя?",
+      "a": 2
+     }
+    ],
+    "B": [
+     {
+      "kind": "diff",
+      "obj": "flower",
+      "top": 8,
+      "bottom": 4,
+      "ask": "more",
+      "q": "С колко са повече жълтите цветя?",
+      "a": 4
+     },
+     {
+      "kind": "diff",
+      "obj": "apple",
+      "top": 4,
+      "bottom": 7,
+      "ask": "less",
+      "q": "С колко са по-малко червените ябълки?",
+      "a": 3
+     },
+     {
+      "kind": "diff",
+      "obj": "fish",
+      "top": 9,
+      "bottom": 6,
+      "ask": "more",
+      "q": "С колко са повече сините рибки?",
+      "a": 3
+     },
+     {
+      "kind": "diff",
+      "obj": "flower",
+      "top": 3,
+      "bottom": 5,
+      "ask": "less",
+      "q": "С колко са по-малко жълтите цветя?",
+      "a": 2
+     },
+     {
+      "kind": "diff",
+      "obj": "apple",
+      "top": 10,
+      "bottom": 6,
+      "ask": "more",
+      "q": "С колко са повече червените ябълки?",
+      "a": 4
+     },
+     {
+      "kind": "diff",
+      "obj": "fish",
+      "top": 4,
+      "bottom": 1,
+      "ask": "less",
+      "q": "С колко са по-малко оранжевите рибки?",
+      "a": 3
+     }
+    ]
+   }
+  },
+  "MW17.Р4/brainCrush": {
+   "game": "brainCrush",
+   "role": "TRANSFER",
+   "level": 2,
+   "range": 10,
+   "sets": {
+    "A": [
+     {
+      "a": 2,
+      "op": "+",
+      "b": 2
+     },
+     {
+      "a": 9,
+      "op": "-",
+      "b": 7
+     },
+     {
+      "a": 1,
+      "op": "+",
+      "b": 9
+     },
+     {
+      "a": 8,
+      "op": "-",
+      "b": 6
+     }
+    ],
+    "B": [
+     {
+      "a": 1,
+      "op": "+",
+      "b": 3
+     },
+     {
+      "a": 6,
+      "op": "-",
+      "b": 4
+     },
+     {
+      "a": 5,
+      "op": "+",
+      "b": 5
+     },
+     {
+      "a": 7,
+      "op": "-",
+      "b": 6
+     }
+    ]
+   }
+  },
+  "MW18.Р1/intellectScales": {
+   "game": "intellectScales",
+   "role": "RETRIEVAL",
+   "level": 2,
+   "sets": {
+    "A": [
+     {
+      "l": 8,
+      "r": 3
+     },
+     {
+      "l": 2,
+      "r": 9
+     },
+     {
+      "l": 3,
+      "r": 3
+     },
+     {
+      "l": 0,
+      "r": 4
+     }
+    ],
+    "B": [
+     {
+      "l": 9,
+      "r": 2
+     },
+     {
+      "l": 6,
+      "r": 10
+     },
+     {
+      "l": 8,
+      "r": 8
+     },
+     {
+      "l": 1,
+      "r": 7
+     }
+    ]
+   }
+  },
+  "MW18.Р4/numberLine": {
+   "game": "numberLine",
+   "role": "TRANSFER",
+   "level": 1,
+   "max": 12,
+   "scope": "extension",
+   "note": "11 може да е само в единия набор (A/B без обща задача); B има 9 на същото разстояние от опората 10",
+   "sets": {
+    "A": [
+     {
+      "n": 11
+     },
+     {
+      "n": 8
+     },
+     {
+      "n": 3
+     },
+     {
+      "n": 6
+     }
+    ],
+    "B": [
+     {
+      "n": 9
+     },
+     {
+      "n": 2
+     },
+     {
+      "n": 7
+     },
+     {
+      "n": 4
+     }
+    ]
+   }
+  },
+  "MW19.Р2/shapes": {
+   "game": "shapes",
+   "role": "PRACTICE",
+   "level": null,
+   "items": 6,
+   "settings": {
+    "view": "find_shape"
+   },
+   "practice": [
+    {
+     "target": "circle",
+     "cards": [
+      {
+       "s": "square",
+       "v": "normal",
+       "w": 80,
+       "h": 80,
+       "rot": 0,
+       "c": "#2F7FE0"
+      },
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 85,
+       "h": 85,
+       "rot": 0,
+       "c": "#E2493F"
+      },
+      {
+       "s": "triangle",
+       "v": "up",
+       "w": 96,
+       "h": 84,
+       "rot": 0,
+       "c": "#22A56A"
+      },
+      {
+       "s": "rect",
+       "v": "horizontal",
+       "w": 116,
+       "h": 64,
+       "rot": 0,
+       "c": "#F5C320"
+      }
+     ],
+     "answer": 1
+    },
+    {
+     "target": "triangle",
+     "cards": [
+      {
+       "s": "triangle",
+       "v": "up",
+       "w": 96,
+       "h": 84,
+       "rot": 0,
+       "c": "#8E5CE0"
+      },
+      {
+       "s": "rect",
+       "v": "vertical",
+       "w": 60,
+       "h": 112,
+       "rot": 0,
+       "c": "#F08A24"
+      },
+      {
+       "s": "circle",
+       "v": "s",
+       "w": 60,
+       "h": 60,
+       "rot": 0,
+       "c": "#2F7FE0"
+      },
+      {
+       "s": "square",
+       "v": "normal",
+       "w": 80,
+       "h": 80,
+       "rot": 0,
+       "c": "#22A56A"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "target": "square",
+     "cards": [
+      {
+       "s": "rect",
+       "v": "horizontal",
+       "w": 116,
+       "h": 64,
+       "rot": 0,
+       "c": "#E2493F"
+      },
+      {
+       "s": "triangle",
+       "v": "up",
+       "w": 96,
+       "h": 84,
+       "rot": 0,
+       "c": "#F5C320"
+      },
+      {
+       "s": "square",
+       "v": "normal",
+       "w": 96,
+       "h": 96,
+       "rot": 0,
+       "c": "#8E5CE0"
+      },
+      {
+       "s": "circle",
+       "v": "l",
+       "w": 105,
+       "h": 105,
+       "rot": 0,
+       "c": "#22A56A"
+      }
+     ],
+     "answer": 2
+    },
+    {
+     "target": "rect",
+     "cards": [
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 85,
+       "h": 85,
+       "rot": 0,
+       "c": "#F5C320"
+      },
+      {
+       "s": "square",
+       "v": "normal",
+       "w": 80,
+       "h": 80,
+       "rot": 0,
+       "c": "#F08A24"
+      },
+      {
+       "s": "triangle",
+       "v": "wide",
+       "w": 120,
+       "h": 56,
+       "rot": 0,
+       "c": "#2F7FE0"
+      },
+      {
+       "s": "rect",
+       "v": "horizontal",
+       "w": 116,
+       "h": 64,
+       "rot": 0,
+       "c": "#22A56A"
+      }
+     ],
+     "answer": 3
+    },
+    {
+     "target": "triangle",
+     "cards": [
+      {
+       "s": "square",
+       "v": "rotated",
+       "w": 76,
+       "h": 76,
+       "rot": 45,
+       "c": "#E2493F"
+      },
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 85,
+       "h": 85,
+       "rot": 0,
+       "c": "#22A56A"
+      },
+      {
+       "s": "rect",
+       "v": "horizontal",
+       "w": 116,
+       "h": 64,
+       "rot": 0,
+       "c": "#2F7FE0"
+      },
+      {
+       "s": "triangle",
+       "v": "down",
+       "w": 96,
+       "h": 84,
+       "rot": 180,
+       "c": "#F5C320"
+      }
+     ],
+     "answer": 3
+    },
+    {
+     "target": "square",
+     "cards": [
+      {
+       "s": "circle",
+       "v": "s",
+       "w": 60,
+       "h": 60,
+       "rot": 0,
+       "c": "#8E5CE0"
+      },
+      {
+       "s": "square",
+       "v": "rotated",
+       "w": 76,
+       "h": 76,
+       "rot": 45,
+       "c": "#22A56A"
+      },
+      {
+       "s": "rect",
+       "v": "long",
+       "w": 128,
+       "h": 44,
+       "rot": 0,
+       "c": "#E2493F"
+      },
+      {
+       "s": "triangle",
+       "v": "narrow",
+       "w": 50,
+       "h": 104,
+       "rot": 0,
+       "c": "#F08A24"
+      }
+     ],
+     "answer": 1
+    },
+    {
+     "target": "rect",
+     "cards": [
+      {
+       "s": "triangle",
+       "v": "side",
+       "w": 96,
+       "h": 84,
+       "rot": 90,
+       "c": "#22A56A"
+      },
+      {
+       "s": "rect",
+       "v": "vertical",
+       "w": 60,
+       "h": 112,
+       "rot": 0,
+       "c": "#E2493F"
+      },
+      {
+       "s": "square",
+       "v": "normal",
+       "w": 64,
+       "h": 64,
+       "rot": 0,
+       "c": "#2F7FE0"
+      },
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 85,
+       "h": 85,
+       "rot": 0,
+       "c": "#F08A24"
+      }
+     ],
+     "answer": 1
+    },
+    {
+     "target": "triangle",
+     "cards": [
+      {
+       "s": "rect",
+       "v": "horizontal",
+       "w": 116,
+       "h": 64,
+       "rot": 0,
+       "c": "#8E5CE0"
+      },
+      {
+       "s": "triangle",
+       "v": "right",
+       "w": 88,
+       "h": 88,
+       "rot": 0,
+       "c": "#2F7FE0"
+      },
+      {
+       "s": "circle",
+       "v": "l",
+       "w": 105,
+       "h": 105,
+       "rot": 0,
+       "c": "#F5C320"
+      },
+      {
+       "s": "square",
+       "v": "normal",
+       "w": 80,
+       "h": 80,
+       "rot": 0,
+       "c": "#E2493F"
+      }
+     ],
+     "answer": 1
+    },
+    {
+     "target": "circle",
+     "cards": [
+      {
+       "s": "triangle",
+       "v": "wide",
+       "w": 120,
+       "h": 56,
+       "rot": 0,
+       "c": "#F08A24"
+      },
+      {
+       "s": "square",
+       "v": "rotated",
+       "w": 76,
+       "h": 76,
+       "rot": 45,
+       "c": "#F5C320"
+      },
+      {
+       "s": "circle",
+       "v": "s",
+       "w": 60,
+       "h": 60,
+       "rot": 0,
+       "c": "#22A56A"
+      },
+      {
+       "s": "rect",
+       "v": "vertical",
+       "w": 60,
+       "h": 112,
+       "rot": 0,
+       "c": "#8E5CE0"
+      }
+     ],
+     "answer": 2
+    },
+    {
+     "target": "rect",
+     "cards": [
+      {
+       "s": "square",
+       "v": "normal",
+       "w": 80,
+       "h": 80,
+       "rot": 0,
+       "c": "#F5C320"
+      },
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 85,
+       "h": 85,
+       "rot": 0,
+       "c": "#2F7FE0"
+      },
+      {
+       "s": "rect",
+       "v": "long",
+       "w": 128,
+       "h": 44,
+       "rot": 0,
+       "c": "#8E5CE0"
+      },
+      {
+       "s": "triangle",
+       "v": "up",
+       "w": 96,
+       "h": 84,
+       "rot": 0,
+       "c": "#E2493F"
+      }
+     ],
+     "answer": 2
+    }
+   ]
+  },
+  "MW19.Р3/shapes": {
+   "game": "shapes",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": null,
+   "items": 6,
+   "settings": {
+    "view": "find_shape"
+   },
+   "sets": {
+    "A": [
+     {
+      "target": "triangle",
+      "cards": [
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 85,
+        "h": 85,
+        "rot": 0,
+        "c": "#22A56A"
+       },
+       {
+        "s": "triangle",
+        "v": "up",
+        "w": 96,
+        "h": 84,
+        "rot": 0,
+        "c": "#E2493F"
+       },
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 116,
+        "h": 64,
+        "rot": 0,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 80,
+        "h": 80,
+        "rot": 0,
+        "c": "#F5C320"
+       }
+      ],
+      "answer": 1
+     },
+     {
+      "target": "square",
+      "cards": [
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 128,
+        "h": 70,
+        "rot": 0,
+        "c": "#8E5CE0"
+       },
+       {
+        "s": "square",
+        "v": "rotated",
+        "w": 76,
+        "h": 76,
+        "rot": 45,
+        "c": "#F08A24"
+       },
+       {
+        "s": "triangle",
+        "v": "wide",
+        "w": 120,
+        "h": 56,
+        "rot": 0,
+        "c": "#22A56A"
+       },
+       {
+        "s": "circle",
+        "v": "s",
+        "w": 60,
+        "h": 60,
+        "rot": 0,
+        "c": "#2F7FE0"
+       }
+      ],
+      "answer": 1
+     },
+     {
+      "target": "rect",
+      "cards": [
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 80,
+        "h": 80,
+        "rot": 0,
+        "c": "#E2493F"
+       },
+       {
+        "s": "circle",
+        "v": "l",
+        "w": 105,
+        "h": 105,
+        "rot": 0,
+        "c": "#F5C320"
+       },
+       {
+        "s": "triangle",
+        "v": "up",
+        "w": 96,
+        "h": 84,
+        "rot": 0,
+        "c": "#8E5CE0"
+       },
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 60,
+        "h": 112,
+        "rot": 0,
+        "c": "#22A56A"
+       }
+      ],
+      "answer": 3
+     },
+     {
+      "target": "circle",
+      "cards": [
+       {
+        "s": "circle",
+        "v": "s",
+        "w": 60,
+        "h": 60,
+        "rot": 0,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "rect",
+        "v": "long",
+        "w": 128,
+        "h": 44,
+        "rot": 0,
+        "c": "#F08A24"
+       },
+       {
+        "s": "square",
+        "v": "rotated",
+        "w": 76,
+        "h": 76,
+        "rot": 45,
+        "c": "#E2493F"
+       },
+       {
+        "s": "triangle",
+        "v": "narrow",
+        "w": 50,
+        "h": 104,
+        "rot": 0,
+        "c": "#F5C320"
+       }
+      ],
+      "answer": 0
+     },
+     {
+      "target": "triangle",
+      "cards": [
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 80,
+        "h": 80,
+        "rot": 0,
+        "c": "#22A56A"
+       },
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 60,
+        "h": 112,
+        "rot": 0,
+        "c": "#F5C320"
+       },
+       {
+        "s": "triangle",
+        "v": "down",
+        "w": 96,
+        "h": 84,
+        "rot": 180,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 85,
+        "h": 85,
+        "rot": 0,
+        "c": "#8E5CE0"
+       }
+      ],
+      "answer": 2
+     },
+     {
+      "target": "square",
+      "cards": [
+       {
+        "s": "triangle",
+        "v": "side",
+        "w": 96,
+        "h": 84,
+        "rot": 90,
+        "c": "#F08A24"
+       },
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 64,
+        "h": 64,
+        "rot": 0,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 85,
+        "h": 85,
+        "rot": 0,
+        "c": "#E2493F"
+       },
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 128,
+        "h": 70,
+        "rot": 0,
+        "c": "#22A56A"
+       }
+      ],
+      "answer": 1
+     }
+    ],
+    "B": [
+     {
+      "target": "circle",
+      "cards": [
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 60,
+        "h": 112,
+        "rot": 0,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "triangle",
+        "v": "wide",
+        "w": 120,
+        "h": 56,
+        "rot": 0,
+        "c": "#E2493F"
+       },
+       {
+        "s": "circle",
+        "v": "l",
+        "w": 105,
+        "h": 105,
+        "rot": 0,
+        "c": "#22A56A"
+       },
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 80,
+        "h": 80,
+        "rot": 0,
+        "c": "#8E5CE0"
+       }
+      ],
+      "answer": 2
+     },
+     {
+      "target": "triangle",
+      "cards": [
+       {
+        "s": "triangle",
+        "v": "side",
+        "w": 96,
+        "h": 84,
+        "rot": 90,
+        "c": "#F5C320"
+       },
+       {
+        "s": "square",
+        "v": "rotated",
+        "w": 76,
+        "h": 76,
+        "rot": 45,
+        "c": "#22A56A"
+       },
+       {
+        "s": "circle",
+        "v": "s",
+        "w": 60,
+        "h": 60,
+        "rot": 0,
+        "c": "#F08A24"
+       },
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 116,
+        "h": 64,
+        "rot": 0,
+        "c": "#E2493F"
+       }
+      ],
+      "answer": 0
+     },
+     {
+      "target": "square",
+      "cards": [
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 85,
+        "h": 85,
+        "rot": 0,
+        "c": "#F5C320"
+       },
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 128,
+        "h": 70,
+        "rot": 0,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 88,
+        "h": 88,
+        "rot": 0,
+        "c": "#E2493F"
+       },
+       {
+        "s": "triangle",
+        "v": "narrow",
+        "w": 50,
+        "h": 104,
+        "rot": 0,
+        "c": "#22A56A"
+       }
+      ],
+      "answer": 2
+     },
+     {
+      "target": "rect",
+      "cards": [
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 60,
+        "h": 112,
+        "rot": 0,
+        "c": "#F08A24"
+       },
+       {
+        "s": "triangle",
+        "v": "up",
+        "w": 96,
+        "h": 84,
+        "rot": 0,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 80,
+        "h": 80,
+        "rot": 0,
+        "c": "#22A56A"
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 85,
+        "h": 85,
+        "rot": 0,
+        "c": "#E2493F"
+       }
+      ],
+      "answer": 0
+     },
+     {
+      "target": "square",
+      "cards": [
+       {
+        "s": "triangle",
+        "v": "up",
+        "w": 96,
+        "h": 84,
+        "rot": 0,
+        "c": "#E2493F"
+       },
+       {
+        "s": "circle",
+        "v": "s",
+        "w": 60,
+        "h": 60,
+        "rot": 0,
+        "c": "#8E5CE0"
+       },
+       {
+        "s": "rect",
+        "v": "long",
+        "w": 128,
+        "h": 44,
+        "rot": 0,
+        "c": "#F5C320"
+       },
+       {
+        "s": "square",
+        "v": "rotated",
+        "w": 76,
+        "h": 76,
+        "rot": 45,
+        "c": "#2F7FE0"
+       }
+      ],
+      "answer": 3
+     },
+     {
+      "target": "triangle",
+      "cards": [
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 116,
+        "h": 64,
+        "rot": 0,
+        "c": "#22A56A"
+       },
+       {
+        "s": "circle",
+        "v": "l",
+        "w": 105,
+        "h": 105,
+        "rot": 0,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 80,
+        "h": 80,
+        "rot": 0,
+        "c": "#F08A24"
+       },
+       {
+        "s": "triangle",
+        "v": "up",
+        "w": 96,
+        "h": 84,
+        "rot": 0,
+        "c": "#8E5CE0"
+       }
+      ],
+      "answer": 3
+     }
+    ]
+   }
+  },
+  "MW19.Р4/numberLine": {
+   "game": "numberLine",
+   "role": "TRANSFER",
+   "level": 2,
+   "max": 12,
+   "scope": "extension",
+   "sets": {
+    "A": [
+     {
+      "n": 10,
+      "ask": "after"
+     },
+     {
+      "n": 12,
+      "ask": "before"
+     },
+     {
+      "n": 2,
+      "ask": "after",
+      "repeat_fact": true
+     },
+     {
+      "n": 4,
+      "ask": "before",
+      "repeat_fact": true
+     }
+    ],
+    "B": [
+     {
+      "n": 11,
+      "ask": "after"
+     },
+     {
+      "n": 11,
+      "ask": "before"
+     },
+     {
+      "n": 6,
+      "ask": "after",
+      "repeat_fact": true
+     },
+     {
+      "n": 3,
+      "ask": "before",
+      "repeat_fact": true
+     }
+    ]
+   }
+  },
+  "MW20.Р1/shapes": {
+   "game": "shapes",
+   "role": "RETRIEVAL",
+   "level": null,
+   "items": 4,
+   "settings": {
+    "view": "find_shape"
+   },
+   "sets": {
+    "A": [
+     {
+      "target": "triangle",
+      "cards": [
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 80,
+        "h": 80,
+        "rot": 0,
+        "c": "#F5C320"
+       },
+       {
+        "s": "triangle",
+        "v": "narrow",
+        "w": 50,
+        "h": 104,
+        "rot": 0,
+        "c": "#E2493F"
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 85,
+        "h": 85,
+        "rot": 0,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 116,
+        "h": 64,
+        "rot": 0,
+        "c": "#22A56A"
+       }
+      ],
+      "answer": 1
+     },
+     {
+      "target": "rect",
+      "cards": [
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 116,
+        "h": 64,
+        "rot": 0,
+        "c": "#8E5CE0"
+       },
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 80,
+        "h": 80,
+        "rot": 0,
+        "c": "#F08A24"
+       },
+       {
+        "s": "triangle",
+        "v": "down",
+        "w": 96,
+        "h": 84,
+        "rot": 180,
+        "c": "#22A56A"
+       },
+       {
+        "s": "circle",
+        "v": "s",
+        "w": 60,
+        "h": 60,
+        "rot": 0,
+        "c": "#F5C320"
+       }
+      ],
+      "answer": 0
+     },
+     {
+      "target": "square",
+      "cards": [
+       {
+        "s": "circle",
+        "v": "l",
+        "w": 105,
+        "h": 105,
+        "rot": 0,
+        "c": "#E2493F"
+       },
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 60,
+        "h": 112,
+        "rot": 0,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "triangle",
+        "v": "up",
+        "w": 96,
+        "h": 84,
+        "rot": 0,
+        "c": "#F5C320"
+       },
+       {
+        "s": "square",
+        "v": "rotated",
+        "w": 76,
+        "h": 76,
+        "rot": 45,
+        "c": "#22A56A"
+       }
+      ],
+      "answer": 3
+     },
+     {
+      "target": "circle",
+      "cards": [
+       {
+        "s": "triangle",
+        "v": "side",
+        "w": 96,
+        "h": 84,
+        "rot": 90,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 85,
+        "h": 85,
+        "rot": 0,
+        "c": "#F08A24"
+       },
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 80,
+        "h": 80,
+        "rot": 0,
+        "c": "#8E5CE0"
+       },
+       {
+        "s": "rect",
+        "v": "long",
+        "w": 128,
+        "h": 44,
+        "rot": 0,
+        "c": "#E2493F"
+       }
+      ],
+      "answer": 1
+     }
+    ],
+    "B": [
+     {
+      "target": "square",
+      "cards": [
+       {
+        "s": "square",
+        "v": "rotated",
+        "w": 76,
+        "h": 76,
+        "rot": 45,
+        "c": "#F08A24"
+       },
+       {
+        "s": "triangle",
+        "v": "wide",
+        "w": 120,
+        "h": 56,
+        "rot": 0,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 116,
+        "h": 64,
+        "rot": 0,
+        "c": "#E2493F"
+       },
+       {
+        "s": "circle",
+        "v": "s",
+        "w": 60,
+        "h": 60,
+        "rot": 0,
+        "c": "#22A56A"
+       }
+      ],
+      "answer": 0
+     },
+     {
+      "target": "triangle",
+      "cards": [
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 85,
+        "h": 85,
+        "rot": 0,
+        "c": "#F5C320"
+       },
+       {
+        "s": "rect",
+        "v": "long",
+        "w": 128,
+        "h": 44,
+        "rot": 0,
+        "c": "#22A56A"
+       },
+       {
+        "s": "triangle",
+        "v": "wide",
+        "w": 120,
+        "h": 56,
+        "rot": 0,
+        "c": "#8E5CE0"
+       },
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 80,
+        "h": 80,
+        "rot": 0,
+        "c": "#E2493F"
+       }
+      ],
+      "answer": 2
+     },
+     {
+      "target": "circle",
+      "cards": [
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 60,
+        "h": 112,
+        "rot": 0,
+        "c": "#E2493F"
+       },
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 80,
+        "h": 80,
+        "rot": 0,
+        "c": "#F5C320"
+       },
+       {
+        "s": "triangle",
+        "v": "narrow",
+        "w": 50,
+        "h": 104,
+        "rot": 0,
+        "c": "#F08A24"
+       },
+       {
+        "s": "circle",
+        "v": "l",
+        "w": 105,
+        "h": 105,
+        "rot": 0,
+        "c": "#2F7FE0"
+       }
+      ],
+      "answer": 3
+     },
+     {
+      "target": "rect",
+      "cards": [
+       {
+        "s": "triangle",
+        "v": "up",
+        "w": 96,
+        "h": 84,
+        "rot": 0,
+        "c": "#22A56A"
+       },
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 116,
+        "h": 64,
+        "rot": 0,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 85,
+        "h": 85,
+        "rot": 0,
+        "c": "#8E5CE0"
+       },
+       {
+        "s": "square",
+        "v": "rotated",
+        "w": 76,
+        "h": 76,
+        "rot": 45,
+        "c": "#F5C320"
+       }
+      ],
+      "answer": 1
+     }
+    ]
+   }
+  },
+  "MW20.Р2/forestKingdom": {
+   "game": "forestKingdom",
+   "role": "PRACTICE",
+   "theme": "animals",
+   "practice": [
+    {
+     "y": "Коте",
+     "a": "Котка",
+     "opts": [
+      "Котка",
+      "Лъв",
+      "Куче",
+      "Заек"
+     ]
+    },
+    {
+     "y": "Кученце",
+     "a": "Куче",
+     "opts": [
+      "Куче",
+      "Лисица",
+      "Котка",
+      "Овца"
+     ]
+    },
+    {
+     "y": "Агне",
+     "a": "Овца",
+     "opts": [
+      "Овца",
+      "Коза",
+      "Крава",
+      "Прасе"
+     ]
+    },
+    {
+     "y": "Теле",
+     "a": "Крава",
+     "opts": [
+      "Крава",
+      "Кон",
+      "Овца",
+      "Магаре"
+     ]
+    },
+    {
+     "y": "Прасенце",
+     "a": "Прасе",
+     "opts": [
+      "Прасе",
+      "Мечка",
+      "Коза",
+      "Патица"
+     ]
+    },
+    {
+     "y": "Зайче",
+     "a": "Заек",
+     "opts": [
+      "Заек",
+      "Котка",
+      "Лисица",
+      "Магаре"
+     ]
+    },
+    {
+     "y": "Патенце",
+     "a": "Патица",
+     "opts": [
+      "Патица",
+      "Куче",
+      "Прасе",
+      "Коза"
+     ]
+    },
+    {
+     "y": "Лъвче",
+     "a": "Лъв",
+     "opts": [
+      "Лъв",
+      "Котка",
+      "Мечка",
+      "Куче"
+     ]
+    },
+    {
+     "y": "Мече",
+     "a": "Мечка",
+     "opts": [
+      "Мечка",
+      "Лъв",
+      "Прасе",
+      "Заек"
+     ]
+    },
+    {
+     "y": "Жребче",
+     "a": "Кон",
+     "opts": [
+      "Кон",
+      "Магаре",
+      "Крава",
+      "Лисица"
+     ]
+    }
+   ]
+  },
+  "MW20.Р4/order": {
+   "game": "order",
+   "role": "TRANSFER",
+   "level": 1,
+   "range": 14,
+   "row": 5,
+   "scope": "extension",
+   "note": "числата 13–14 са сред липсващите и в A, и в B",
+   "sets": {
+    "A": [
+     {
+      "row": [
+       10,
+       11,
+       12,
+       13,
+       14
+      ],
+      "gaps": [
+       1,
+       3
+      ]
+     },
+     {
+      "row": [
+       6,
+       7,
+       8,
+       9,
+       10
+      ],
+      "gaps": [
+       0,
+       2
+      ]
+     },
+     {
+      "row": [
+       8,
+       9,
+       10,
+       11,
+       12
+      ],
+      "gaps": [
+       3,
+       4
+      ]
+     },
+     {
+      "row": [
+       9,
+       10,
+       11,
+       12,
+       13
+      ],
+      "gaps": [
+       0,
+       4
+      ]
+     }
+    ],
+    "B": [
+     {
+      "row": [
+       10,
+       11,
+       12,
+       13,
+       14
+      ],
+      "gaps": [
+       2,
+       4
+      ]
+     },
+     {
+      "row": [
+       4,
+       5,
+       6,
+       7,
+       8
+      ],
+      "gaps": [
+       0,
+       3
+      ]
+     },
+     {
+      "row": [
+       8,
+       9,
+       10,
+       11,
+       12
+      ],
+      "gaps": [
+       1,
+       2
+      ]
+     },
+     {
+      "row": [
+       9,
+       10,
+       11,
+       12,
+       13
+      ],
+      "gaps": [
+       3,
+       4
+      ]
+     }
+    ]
+   }
+  },
+  "MW21.Р2/shapes": {
+   "game": "shapes",
+   "role": "PRACTICE",
+   "level": null,
+   "items": 6,
+   "settings": {
+    "view": "compose"
+   },
+   "practice": [
+    {
+     "scene": "house",
+     "parts": [
+      {
+       "s": "square",
+       "v": "normal",
+       "w": 150,
+       "h": 150,
+       "rot": 0,
+       "c": "#F5C320",
+       "x": 200,
+       "y": 205
+      },
+      {
+       "s": "triangle",
+       "v": "up",
+       "w": 190,
+       "h": 90,
+       "rot": 0,
+       "c": "#E2493F",
+       "x": 200,
+       "y": 85
+      },
+      {
+       "s": "rect",
+       "v": "vertical",
+       "w": 44,
+       "h": 80,
+       "rot": 0,
+       "c": "#2F7FE0",
+       "x": 230,
+       "y": 240
+      },
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 40,
+       "h": 40,
+       "rot": 0,
+       "c": "#8E5CE0",
+       "x": 160,
+       "y": 180
+      }
+     ],
+     "missing": 1,
+     "opts": [
+      {
+       "s": "triangle",
+       "v": "up",
+       "w": 190,
+       "h": 90,
+       "rot": 0,
+       "c": "#E2493F"
+      },
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 85,
+       "h": 85,
+       "rot": 0,
+       "c": "#22A56A"
+      },
+      {
+       "s": "square",
+       "v": "normal",
+       "w": 80,
+       "h": 80,
+       "rot": 0,
+       "c": "#2F7FE0"
+      }
+     ],
+     "answer": 0,
+     "match": "exact"
+    },
+    {
+     "scene": "train",
+     "parts": [
+      {
+       "s": "rect",
+       "v": "horizontal",
+       "w": 150,
+       "h": 80,
+       "rot": 0,
+       "c": "#E2493F",
+       "x": 150,
+       "y": 180
+      },
+      {
+       "s": "square",
+       "v": "normal",
+       "w": 70,
+       "h": 70,
+       "rot": 0,
+       "c": "#2F7FE0",
+       "x": 265,
+       "y": 185
+      },
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 50,
+       "h": 50,
+       "rot": 0,
+       "c": "#8E5CE0",
+       "x": 110,
+       "y": 245
+      },
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 50,
+       "h": 50,
+       "rot": 0,
+       "c": "#8E5CE0",
+       "x": 190,
+       "y": 245
+      },
+      {
+       "s": "triangle",
+       "v": "up",
+       "w": 50,
+       "h": 40,
+       "rot": 90,
+       "c": "#22A56A",
+       "x": 330,
+       "y": 205
+      }
+     ],
+     "missing": 2,
+     "opts": [
+      {
+       "s": "rect",
+       "v": "horizontal",
+       "w": 116,
+       "h": 64,
+       "rot": 0,
+       "c": "#F5C320"
+      },
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 50,
+       "h": 50,
+       "rot": 0,
+       "c": "#8E5CE0"
+      },
+      {
+       "s": "triangle",
+       "v": "up",
+       "w": 96,
+       "h": 84,
+       "rot": 0,
+       "c": "#F08A24"
+      }
+     ],
+     "answer": 1,
+     "match": "exact"
+    },
+    {
+     "scene": "rocket",
+     "parts": [
+      {
+       "s": "rect",
+       "v": "vertical",
+       "w": 80,
+       "h": 170,
+       "rot": 0,
+       "c": "#2F7FE0",
+       "x": 200,
+       "y": 160
+      },
+      {
+       "s": "triangle",
+       "v": "up",
+       "w": 80,
+       "h": 70,
+       "rot": 0,
+       "c": "#E2493F",
+       "x": 200,
+       "y": 40
+      },
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 46,
+       "h": 46,
+       "rot": 0,
+       "c": "#F5C320",
+       "x": 200,
+       "y": 135
+      },
+      {
+       "s": "triangle",
+       "v": "side",
+       "w": 50,
+       "h": 60,
+       "rot": -30,
+       "c": "#22A56A",
+       "x": 140,
+       "y": 225
+      },
+      {
+       "s": "triangle",
+       "v": "side",
+       "w": 50,
+       "h": 60,
+       "rot": 30,
+       "c": "#22A56A",
+       "x": 260,
+       "y": 225
+      }
+     ],
+     "missing": 0,
+     "opts": [
+      {
+       "s": "circle",
+       "v": "l",
+       "w": 105,
+       "h": 105,
+       "rot": 0,
+       "c": "#E2493F"
+      },
+      {
+       "s": "triangle",
+       "v": "up",
+       "w": 96,
+       "h": 84,
+       "rot": 0,
+       "c": "#F5C320"
+      },
+      {
+       "s": "rect",
+       "v": "vertical",
+       "w": 80,
+       "h": 170,
+       "rot": 0,
+       "c": "#2F7FE0"
+      }
+     ],
+     "answer": 2,
+     "match": "exact"
+    },
+    {
+     "scene": "cat",
+     "parts": [
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 140,
+       "h": 140,
+       "rot": 0,
+       "c": "#F08A24",
+       "x": 200,
+       "y": 175
+      },
+      {
+       "s": "triangle",
+       "v": "up",
+       "w": 50,
+       "h": 60,
+       "rot": 0,
+       "c": "#F08A24",
+       "x": 150,
+       "y": 95
+      },
+      {
+       "s": "triangle",
+       "v": "up",
+       "w": 50,
+       "h": 60,
+       "rot": 0,
+       "c": "#F08A24",
+       "x": 250,
+       "y": 95
+      },
+      {
+       "s": "triangle",
+       "v": "down",
+       "w": 26,
+       "h": 20,
+       "rot": 180,
+       "c": "#E2493F",
+       "x": 200,
+       "y": 195
+      }
+     ],
+     "missing": 0,
+     "opts": [
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 140,
+       "h": 140,
+       "rot": 0,
+       "c": "#F08A24"
+      },
+      {
+       "s": "square",
+       "v": "normal",
+       "w": 80,
+       "h": 80,
+       "rot": 0,
+       "c": "#22A56A"
+      },
+      {
+       "s": "triangle",
+       "v": "up",
+       "w": 96,
+       "h": 84,
+       "rot": 0,
+       "c": "#2F7FE0"
+      }
+     ],
+     "answer": 0,
+     "match": "exact"
+    },
+    {
+     "scene": "robot",
+     "parts": [
+      {
+       "s": "square",
+       "v": "normal",
+       "w": 100,
+       "h": 100,
+       "rot": 0,
+       "c": "#2F7FE0",
+       "x": 200,
+       "y": 80
+      },
+      {
+       "s": "rect",
+       "v": "horizontal",
+       "w": 150,
+       "h": 96,
+       "rot": 0,
+       "c": "#22A56A",
+       "x": 200,
+       "y": 195
+      },
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 24,
+       "h": 24,
+       "rot": 0,
+       "c": "#F5C320",
+       "x": 178,
+       "y": 75
+      },
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 24,
+       "h": 24,
+       "rot": 0,
+       "c": "#F5C320",
+       "x": 222,
+       "y": 75
+      },
+      {
+       "s": "rect",
+       "v": "vertical",
+       "w": 30,
+       "h": 90,
+       "rot": 0,
+       "c": "#8E5CE0",
+       "x": 115,
+       "y": 200
+      }
+     ],
+     "missing": 0,
+     "opts": [
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 85,
+       "h": 85,
+       "rot": 0,
+       "c": "#F08A24"
+      },
+      {
+       "s": "square",
+       "v": "normal",
+       "w": 100,
+       "h": 100,
+       "rot": 0,
+       "c": "#2F7FE0"
+      },
+      {
+       "s": "triangle",
+       "v": "up",
+       "w": 96,
+       "h": 84,
+       "rot": 0,
+       "c": "#E2493F"
+      }
+     ],
+     "answer": 1,
+     "match": "exact"
+    },
+    {
+     "scene": "snowman",
+     "parts": [
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 130,
+       "h": 130,
+       "rot": 0,
+       "c": "#2F7FE0",
+       "x": 200,
+       "y": 220
+      },
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 90,
+       "h": 90,
+       "rot": 0,
+       "c": "#2F7FE0",
+       "x": 200,
+       "y": 115
+      },
+      {
+       "s": "triangle",
+       "v": "side",
+       "w": 30,
+       "h": 40,
+       "rot": 90,
+       "c": "#F08A24",
+       "x": 200,
+       "y": 120
+      },
+      {
+       "s": "rect",
+       "v": "horizontal",
+       "w": 80,
+       "h": 48,
+       "rot": 0,
+       "c": "#8E5CE0",
+       "x": 200,
+       "y": 48
+      }
+     ],
+     "missing": 3,
+     "opts": [
+      {
+       "s": "triangle",
+       "v": "up",
+       "w": 96,
+       "h": 84,
+       "rot": 0,
+       "c": "#22A56A"
+      },
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 85,
+       "h": 85,
+       "rot": 0,
+       "c": "#F5C320"
+      },
+      {
+       "s": "rect",
+       "v": "horizontal",
+       "w": 80,
+       "h": 48,
+       "rot": 0,
+       "c": "#8E5CE0"
+      }
+     ],
+     "answer": 2,
+     "match": "exact"
+    },
+    {
+     "scene": "car",
+     "parts": [
+      {
+       "s": "rect",
+       "v": "horizontal",
+       "w": 240,
+       "h": 70,
+       "rot": 0,
+       "c": "#E2493F",
+       "x": 200,
+       "y": 190
+      },
+      {
+       "s": "square",
+       "v": "normal",
+       "w": 70,
+       "h": 70,
+       "rot": 0,
+       "c": "#2F7FE0",
+       "x": 170,
+       "y": 125
+      },
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 56,
+       "h": 56,
+       "rot": 0,
+       "c": "#8E5CE0",
+       "x": 125,
+       "y": 235
+      },
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 56,
+       "h": 56,
+       "rot": 0,
+       "c": "#8E5CE0",
+       "x": 275,
+       "y": 235
+      },
+      {
+       "s": "triangle",
+       "v": "side",
+       "w": 40,
+       "h": 34,
+       "rot": 90,
+       "c": "#F5C320",
+       "x": 330,
+       "y": 165
+      }
+     ],
+     "missing": 1,
+     "opts": [
+      {
+       "s": "square",
+       "v": "normal",
+       "w": 70,
+       "h": 70,
+       "rot": 0,
+       "c": "#2F7FE0"
+      },
+      {
+       "s": "triangle",
+       "v": "up",
+       "w": 96,
+       "h": 84,
+       "rot": 0,
+       "c": "#8E5CE0"
+      },
+      {
+       "s": "circle",
+       "v": "s",
+       "w": 60,
+       "h": 60,
+       "rot": 0,
+       "c": "#E2493F"
+      }
+     ],
+     "answer": 0,
+     "match": "exact"
+    },
+    {
+     "scene": "tree",
+     "parts": [
+      {
+       "s": "rect",
+       "v": "vertical",
+       "w": 40,
+       "h": 80,
+       "rot": 0,
+       "c": "#F08A24",
+       "x": 200,
+       "y": 250
+      },
+      {
+       "s": "triangle",
+       "v": "wide",
+       "w": 180,
+       "h": 130,
+       "rot": 0,
+       "c": "#22A56A",
+       "x": 200,
+       "y": 140
+      },
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 60,
+       "h": 60,
+       "rot": 0,
+       "c": "#F5C320",
+       "x": 330,
+       "y": 55
+      },
+      {
+       "s": "square",
+       "v": "normal",
+       "w": 70,
+       "h": 70,
+       "rot": 0,
+       "c": "#E2493F",
+       "x": 80,
+       "y": 250
+      }
+     ],
+     "missing": 1,
+     "opts": [
+      {
+       "s": "square",
+       "v": "normal",
+       "w": 80,
+       "h": 80,
+       "rot": 0,
+       "c": "#F08A24"
+      },
+      {
+       "s": "triangle",
+       "v": "wide",
+       "w": 180,
+       "h": 130,
+       "rot": 0,
+       "c": "#22A56A"
+      },
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 85,
+       "h": 85,
+       "rot": 0,
+       "c": "#2F7FE0"
+      }
+     ],
+     "answer": 1,
+     "match": "exact"
+    }
+   ]
+  },
+  "MW21.Р3/shapes": {
+   "game": "shapes",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": null,
+   "items": 6,
+   "settings": {
+    "view": "compose"
+   },
+   "sets": {
+    "A": [
+     {
+      "scene": "house",
+      "parts": [
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 150,
+        "h": 150,
+        "rot": 0,
+        "c": "#F5C320",
+        "x": 200,
+        "y": 205
+       },
+       {
+        "s": "triangle",
+        "v": "up",
+        "w": 190,
+        "h": 90,
+        "rot": 0,
+        "c": "#E2493F",
+        "x": 200,
+        "y": 85
+       },
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 44,
+        "h": 80,
+        "rot": 0,
+        "c": "#2F7FE0",
+        "x": 230,
+        "y": 240
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 40,
+        "h": 40,
+        "rot": 0,
+        "c": "#8E5CE0",
+        "x": 160,
+        "y": 180
+       }
+      ],
+      "missing": 0,
+      "opts": [
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 128,
+        "h": 70,
+        "rot": 0,
+        "c": "#F5C320"
+       },
+       {
+        "s": "square",
+        "v": "rotated",
+        "w": 76,
+        "h": 76,
+        "rot": 45,
+        "c": "#F5C320"
+       },
+       {
+        "s": "circle",
+        "v": "l",
+        "w": 105,
+        "h": 105,
+        "rot": 0,
+        "c": "#F5C320"
+       }
+      ],
+      "answer": 1,
+      "match": "recognize"
+     },
+     {
+      "scene": "house",
+      "parts": [
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 150,
+        "h": 150,
+        "rot": 0,
+        "c": "#F5C320",
+        "x": 200,
+        "y": 205
+       },
+       {
+        "s": "triangle",
+        "v": "up",
+        "w": 190,
+        "h": 90,
+        "rot": 0,
+        "c": "#E2493F",
+        "x": 200,
+        "y": 85
+       },
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 44,
+        "h": 80,
+        "rot": 0,
+        "c": "#2F7FE0",
+        "x": 230,
+        "y": 240
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 40,
+        "h": 40,
+        "rot": 0,
+        "c": "#8E5CE0",
+        "x": 160,
+        "y": 180
+       }
+      ],
+      "missing": 1,
+      "opts": [
+       {
+        "s": "rect",
+        "v": "long",
+        "w": 128,
+        "h": 44,
+        "rot": 0,
+        "c": "#E2493F"
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 85,
+        "h": 85,
+        "rot": 0,
+        "c": "#E2493F"
+       },
+       {
+        "s": "triangle",
+        "v": "down",
+        "w": 96,
+        "h": 84,
+        "rot": 180,
+        "c": "#E2493F"
+       }
+      ],
+      "answer": 2,
+      "match": "recognize"
+     },
+     {
+      "scene": "train",
+      "parts": [
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 150,
+        "h": 80,
+        "rot": 0,
+        "c": "#E2493F",
+        "x": 150,
+        "y": 180
+       },
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 70,
+        "h": 70,
+        "rot": 0,
+        "c": "#2F7FE0",
+        "x": 265,
+        "y": 185
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 50,
+        "h": 50,
+        "rot": 0,
+        "c": "#8E5CE0",
+        "x": 110,
+        "y": 245
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 50,
+        "h": 50,
+        "rot": 0,
+        "c": "#8E5CE0",
+        "x": 190,
+        "y": 245
+       },
+       {
+        "s": "triangle",
+        "v": "up",
+        "w": 50,
+        "h": 40,
+        "rot": 90,
+        "c": "#22A56A",
+        "x": 330,
+        "y": 205
+       }
+      ],
+      "missing": 0,
+      "opts": [
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 88,
+        "h": 88,
+        "rot": 0,
+        "c": "#E2493F"
+       },
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 60,
+        "h": 112,
+        "rot": 0,
+        "c": "#E2493F"
+       },
+       {
+        "s": "triangle",
+        "v": "wide",
+        "w": 120,
+        "h": 56,
+        "rot": 0,
+        "c": "#E2493F"
+       }
+      ],
+      "answer": 1,
+      "match": "recognize"
+     },
+     {
+      "scene": "rocket",
+      "parts": [
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 80,
+        "h": 170,
+        "rot": 0,
+        "c": "#2F7FE0",
+        "x": 200,
+        "y": 160
+       },
+       {
+        "s": "triangle",
+        "v": "up",
+        "w": 80,
+        "h": 70,
+        "rot": 0,
+        "c": "#E2493F",
+        "x": 200,
+        "y": 40
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 46,
+        "h": 46,
+        "rot": 0,
+        "c": "#F5C320",
+        "x": 200,
+        "y": 135
+       },
+       {
+        "s": "triangle",
+        "v": "side",
+        "w": 50,
+        "h": 60,
+        "rot": -30,
+        "c": "#22A56A",
+        "x": 140,
+        "y": 225
+       },
+       {
+        "s": "triangle",
+        "v": "side",
+        "w": 50,
+        "h": 60,
+        "rot": 30,
+        "c": "#22A56A",
+        "x": 260,
+        "y": 225
+       }
+      ],
+      "missing": 2,
+      "opts": [
+       {
+        "s": "circle",
+        "v": "s",
+        "w": 60,
+        "h": 60,
+        "rot": 0,
+        "c": "#F5C320"
+       },
+       {
+        "s": "square",
+        "v": "rotated",
+        "w": 53,
+        "h": 53,
+        "rot": 45,
+        "c": "#F5C320"
+       },
+       {
+        "s": "triangle",
+        "v": "up",
+        "w": 58,
+        "h": 50,
+        "rot": 0,
+        "c": "#F5C320"
+       }
+      ],
+      "answer": 0,
+      "match": "recognize"
+     },
+     {
+      "scene": "tree",
+      "parts": [
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 40,
+        "h": 80,
+        "rot": 0,
+        "c": "#F08A24",
+        "x": 200,
+        "y": 250
+       },
+       {
+        "s": "triangle",
+        "v": "wide",
+        "w": 180,
+        "h": 130,
+        "rot": 0,
+        "c": "#22A56A",
+        "x": 200,
+        "y": 140
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 60,
+        "h": 60,
+        "rot": 0,
+        "c": "#F5C320",
+        "x": 330,
+        "y": 55
+       },
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 70,
+        "h": 70,
+        "rot": 0,
+        "c": "#E2493F",
+        "x": 80,
+        "y": 250
+       }
+      ],
+      "missing": 1,
+      "opts": [
+       {
+        "s": "triangle",
+        "v": "narrow",
+        "w": 50,
+        "h": 104,
+        "rot": 0,
+        "c": "#22A56A"
+       },
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 116,
+        "h": 64,
+        "rot": 0,
+        "c": "#22A56A"
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 85,
+        "h": 85,
+        "rot": 0,
+        "c": "#22A56A"
+       }
+      ],
+      "answer": 0,
+      "match": "recognize"
+     },
+     {
+      "scene": "robot",
+      "parts": [
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 100,
+        "h": 100,
+        "rot": 0,
+        "c": "#2F7FE0",
+        "x": 200,
+        "y": 80
+       },
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 150,
+        "h": 96,
+        "rot": 0,
+        "c": "#22A56A",
+        "x": 200,
+        "y": 195
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 24,
+        "h": 24,
+        "rot": 0,
+        "c": "#F5C320",
+        "x": 178,
+        "y": 75
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 24,
+        "h": 24,
+        "rot": 0,
+        "c": "#F5C320",
+        "x": 222,
+        "y": 75
+       },
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 30,
+        "h": 90,
+        "rot": 0,
+        "c": "#8E5CE0",
+        "x": 115,
+        "y": 200
+       }
+      ],
+      "missing": 4,
+      "opts": [
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 72,
+        "h": 72,
+        "rot": 0,
+        "c": "#8E5CE0"
+       },
+       {
+        "s": "triangle",
+        "v": "side",
+        "w": 96,
+        "h": 84,
+        "rot": 90,
+        "c": "#8E5CE0"
+       },
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 116,
+        "h": 64,
+        "rot": 0,
+        "c": "#8E5CE0"
+       }
+      ],
+      "answer": 2,
+      "match": "recognize"
+     }
+    ],
+    "B": [
+     {
+      "scene": "car",
+      "parts": [
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 240,
+        "h": 70,
+        "rot": 0,
+        "c": "#E2493F",
+        "x": 200,
+        "y": 190
+       },
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 70,
+        "h": 70,
+        "rot": 0,
+        "c": "#2F7FE0",
+        "x": 170,
+        "y": 125
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 56,
+        "h": 56,
+        "rot": 0,
+        "c": "#8E5CE0",
+        "x": 125,
+        "y": 235
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 56,
+        "h": 56,
+        "rot": 0,
+        "c": "#8E5CE0",
+        "x": 275,
+        "y": 235
+       },
+       {
+        "s": "triangle",
+        "v": "side",
+        "w": 40,
+        "h": 34,
+        "rot": 90,
+        "c": "#F5C320",
+        "x": 330,
+        "y": 165
+       }
+      ],
+      "missing": 1,
+      "opts": [
+       {
+        "s": "square",
+        "v": "rotated",
+        "w": 76,
+        "h": 76,
+        "rot": 45,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 66,
+        "h": 123,
+        "rot": 0,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "circle",
+        "v": "l",
+        "w": 105,
+        "h": 105,
+        "rot": 0,
+        "c": "#2F7FE0"
+       }
+      ],
+      "answer": 0,
+      "match": "recognize"
+     },
+     {
+      "scene": "cat",
+      "parts": [
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 140,
+        "h": 140,
+        "rot": 0,
+        "c": "#F08A24",
+        "x": 200,
+        "y": 175
+       },
+       {
+        "s": "triangle",
+        "v": "up",
+        "w": 50,
+        "h": 60,
+        "rot": 0,
+        "c": "#F08A24",
+        "x": 150,
+        "y": 95
+       },
+       {
+        "s": "triangle",
+        "v": "up",
+        "w": 50,
+        "h": 60,
+        "rot": 0,
+        "c": "#F08A24",
+        "x": 250,
+        "y": 95
+       },
+       {
+        "s": "triangle",
+        "v": "down",
+        "w": 26,
+        "h": 20,
+        "rot": 180,
+        "c": "#E2493F",
+        "x": 200,
+        "y": 195
+       }
+      ],
+      "missing": 1,
+      "opts": [
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 64,
+        "h": 64,
+        "rot": 0,
+        "c": "#F08A24"
+       },
+       {
+        "s": "triangle",
+        "v": "down",
+        "w": 96,
+        "h": 84,
+        "rot": 180,
+        "c": "#F08A24"
+       },
+       {
+        "s": "rect",
+        "v": "long",
+        "w": 128,
+        "h": 44,
+        "rot": 0,
+        "c": "#F08A24"
+       }
+      ],
+      "answer": 1,
+      "match": "recognize"
+     },
+     {
+      "scene": "car",
+      "parts": [
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 240,
+        "h": 70,
+        "rot": 0,
+        "c": "#E2493F",
+        "x": 200,
+        "y": 190
+       },
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 70,
+        "h": 70,
+        "rot": 0,
+        "c": "#2F7FE0",
+        "x": 170,
+        "y": 125
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 56,
+        "h": 56,
+        "rot": 0,
+        "c": "#8E5CE0",
+        "x": 125,
+        "y": 235
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 56,
+        "h": 56,
+        "rot": 0,
+        "c": "#8E5CE0",
+        "x": 275,
+        "y": 235
+       },
+       {
+        "s": "triangle",
+        "v": "side",
+        "w": 40,
+        "h": 34,
+        "rot": 90,
+        "c": "#F5C320",
+        "x": 330,
+        "y": 165
+       }
+      ],
+      "missing": 0,
+      "opts": [
+       {
+        "s": "triangle",
+        "v": "wide",
+        "w": 120,
+        "h": 56,
+        "rot": 0,
+        "c": "#E2493F"
+       },
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 88,
+        "h": 88,
+        "rot": 0,
+        "c": "#E2493F"
+       },
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 60,
+        "h": 112,
+        "rot": 0,
+        "c": "#E2493F"
+       }
+      ],
+      "answer": 2,
+      "match": "recognize"
+     },
+     {
+      "scene": "snowman",
+      "parts": [
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 130,
+        "h": 130,
+        "rot": 0,
+        "c": "#2F7FE0",
+        "x": 200,
+        "y": 220
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 90,
+        "h": 90,
+        "rot": 0,
+        "c": "#2F7FE0",
+        "x": 200,
+        "y": 115
+       },
+       {
+        "s": "triangle",
+        "v": "side",
+        "w": 30,
+        "h": 40,
+        "rot": 90,
+        "c": "#F08A24",
+        "x": 200,
+        "y": 120
+       },
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 80,
+        "h": 48,
+        "rot": 0,
+        "c": "#8E5CE0",
+        "x": 200,
+        "y": 48
+       }
+      ],
+      "missing": 1,
+      "opts": [
+       {
+        "s": "square",
+        "v": "rotated",
+        "w": 61,
+        "h": 61,
+        "rot": 45,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "circle",
+        "v": "l",
+        "w": 105,
+        "h": 105,
+        "rot": 0,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "triangle",
+        "v": "up",
+        "w": 67,
+        "h": 59,
+        "rot": 0,
+        "c": "#2F7FE0"
+       }
+      ],
+      "answer": 1,
+      "match": "recognize"
+     },
+     {
+      "scene": "boat",
+      "parts": [
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 220,
+        "h": 50,
+        "rot": 0,
+        "c": "#F08A24",
+        "x": 200,
+        "y": 245
+       },
+       {
+        "s": "triangle",
+        "v": "narrow",
+        "w": 110,
+        "h": 140,
+        "rot": 0,
+        "c": "#F5C320",
+        "x": 210,
+        "y": 140
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 54,
+        "h": 54,
+        "rot": 0,
+        "c": "#E2493F",
+        "x": 70,
+        "y": 60
+       },
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 8,
+        "h": 150,
+        "rot": 0,
+        "c": "#2F7FE0",
+        "x": 200,
+        "y": 145
+       }
+      ],
+      "missing": 1,
+      "opts": [
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 60,
+        "h": 112,
+        "rot": 0,
+        "c": "#F5C320"
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 85,
+        "h": 85,
+        "rot": 0,
+        "c": "#F5C320"
+       },
+       {
+        "s": "triangle",
+        "v": "side",
+        "w": 96,
+        "h": 84,
+        "rot": 90,
+        "c": "#F5C320"
+       }
+      ],
+      "answer": 2,
+      "match": "recognize"
+     },
+     {
+      "scene": "tree",
+      "parts": [
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 40,
+        "h": 80,
+        "rot": 0,
+        "c": "#F08A24",
+        "x": 200,
+        "y": 250
+       },
+       {
+        "s": "triangle",
+        "v": "wide",
+        "w": 180,
+        "h": 130,
+        "rot": 0,
+        "c": "#22A56A",
+        "x": 200,
+        "y": 140
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 60,
+        "h": 60,
+        "rot": 0,
+        "c": "#F5C320",
+        "x": 330,
+        "y": 55
+       },
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 70,
+        "h": 70,
+        "rot": 0,
+        "c": "#E2493F",
+        "x": 80,
+        "y": 250
+       }
+      ],
+      "missing": 0,
+      "opts": [
+       {
+        "s": "triangle",
+        "v": "narrow",
+        "w": 50,
+        "h": 104,
+        "rot": 0,
+        "c": "#F08A24"
+       },
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 72,
+        "h": 72,
+        "rot": 0,
+        "c": "#F08A24"
+       },
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 116,
+        "h": 64,
+        "rot": 0,
+        "c": "#F08A24"
+       }
+      ],
+      "answer": 2,
+      "match": "recognize"
+     }
+    ]
+   }
+  },
+  "MW21.Р4/numberLine": {
+   "game": "numberLine",
+   "role": "TRANSFER",
+   "level": 1,
+   "max": 14,
+   "scope": "extension",
+   "sets": {
+    "A": [
+     {
+      "n": 13
+     },
+     {
+      "n": 7
+     },
+     {
+      "n": 2
+     },
+     {
+      "n": 11
+     }
+    ],
+    "B": [
+     {
+      "n": 12
+     },
+     {
+      "n": 8
+     },
+     {
+      "n": 6
+     },
+     {
+      "n": 4
+     }
+    ]
+   }
+  },
+  "MW22.Р1/shapes": {
+   "game": "shapes",
+   "role": "RETRIEVAL",
+   "level": null,
+   "items": 4,
+   "settings": {
+    "view": "compose"
+   },
+   "sets": {
+    "A": [
+     {
+      "scene": "fish",
+      "parts": [
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 150,
+        "h": 150,
+        "rot": 0,
+        "c": "#F08A24",
+        "x": 170,
+        "y": 150
+       },
+       {
+        "s": "triangle",
+        "v": "side",
+        "w": 90,
+        "h": 80,
+        "rot": -90,
+        "c": "#E2493F",
+        "x": 300,
+        "y": 150
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 26,
+        "h": 26,
+        "rot": 0,
+        "c": "#2F7FE0",
+        "x": 125,
+        "y": 125
+       },
+       {
+        "s": "square",
+        "v": "rotated",
+        "w": 40,
+        "h": 40,
+        "rot": 45,
+        "c": "#F5C320",
+        "x": 175,
+        "y": 200
+       }
+      ],
+      "missing": 1,
+      "opts": [
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 85,
+        "h": 85,
+        "rot": 0,
+        "c": "#E2493F"
+       },
+       {
+        "s": "triangle",
+        "v": "down",
+        "w": 96,
+        "h": 84,
+        "rot": 180,
+        "c": "#E2493F"
+       },
+       {
+        "s": "square",
+        "v": "rotated",
+        "w": 61,
+        "h": 61,
+        "rot": 45,
+        "c": "#E2493F"
+       }
+      ],
+      "answer": 1,
+      "match": "recognize"
+     },
+     {
+      "scene": "boat",
+      "parts": [
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 220,
+        "h": 50,
+        "rot": 0,
+        "c": "#F08A24",
+        "x": 200,
+        "y": 245
+       },
+       {
+        "s": "triangle",
+        "v": "narrow",
+        "w": 110,
+        "h": 140,
+        "rot": 0,
+        "c": "#F5C320",
+        "x": 210,
+        "y": 140
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 54,
+        "h": 54,
+        "rot": 0,
+        "c": "#E2493F",
+        "x": 70,
+        "y": 60
+       },
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 8,
+        "h": 150,
+        "rot": 0,
+        "c": "#2F7FE0",
+        "x": 200,
+        "y": 145
+       }
+      ],
+      "missing": 0,
+      "opts": [
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 72,
+        "h": 72,
+        "rot": 0,
+        "c": "#F08A24"
+       },
+       {
+        "s": "triangle",
+        "v": "wide",
+        "w": 120,
+        "h": 56,
+        "rot": 0,
+        "c": "#F08A24"
+       },
+       {
+        "s": "rect",
+        "v": "long",
+        "w": 128,
+        "h": 44,
+        "rot": 0,
+        "c": "#F08A24"
+       }
+      ],
+      "answer": 2,
+      "match": "recognize"
+     },
+     {
+      "scene": "snowman",
+      "parts": [
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 130,
+        "h": 130,
+        "rot": 0,
+        "c": "#2F7FE0",
+        "x": 200,
+        "y": 220
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 90,
+        "h": 90,
+        "rot": 0,
+        "c": "#2F7FE0",
+        "x": 200,
+        "y": 115
+       },
+       {
+        "s": "triangle",
+        "v": "side",
+        "w": 30,
+        "h": 40,
+        "rot": 90,
+        "c": "#F08A24",
+        "x": 200,
+        "y": 120
+       },
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 80,
+        "h": 48,
+        "rot": 0,
+        "c": "#8E5CE0",
+        "x": 200,
+        "y": 48
+       }
+      ],
+      "missing": 0,
+      "opts": [
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 116,
+        "h": 64,
+        "rot": 0,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "circle",
+        "v": "s",
+        "w": 60,
+        "h": 60,
+        "rot": 0,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "triangle",
+        "v": "up",
+        "w": 96,
+        "h": 84,
+        "rot": 0,
+        "c": "#2F7FE0"
+       }
+      ],
+      "answer": 1,
+      "match": "recognize"
+     },
+     {
+      "scene": "train",
+      "parts": [
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 150,
+        "h": 80,
+        "rot": 0,
+        "c": "#E2493F",
+        "x": 150,
+        "y": 180
+       },
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 70,
+        "h": 70,
+        "rot": 0,
+        "c": "#2F7FE0",
+        "x": 265,
+        "y": 185
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 50,
+        "h": 50,
+        "rot": 0,
+        "c": "#8E5CE0",
+        "x": 110,
+        "y": 245
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 50,
+        "h": 50,
+        "rot": 0,
+        "c": "#8E5CE0",
+        "x": 190,
+        "y": 245
+       },
+       {
+        "s": "triangle",
+        "v": "up",
+        "w": 50,
+        "h": 40,
+        "rot": 90,
+        "c": "#22A56A",
+        "x": 330,
+        "y": 205
+       }
+      ],
+      "missing": 1,
+      "opts": [
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 66,
+        "h": 123,
+        "rot": 0,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 85,
+        "h": 85,
+        "rot": 0,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "square",
+        "v": "rotated",
+        "w": 76,
+        "h": 76,
+        "rot": 45,
+        "c": "#2F7FE0"
+       }
+      ],
+      "answer": 2,
+      "match": "recognize"
+     }
+    ],
+    "B": [
+     {
+      "scene": "rocket",
+      "parts": [
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 80,
+        "h": 170,
+        "rot": 0,
+        "c": "#2F7FE0",
+        "x": 200,
+        "y": 160
+       },
+       {
+        "s": "triangle",
+        "v": "up",
+        "w": 80,
+        "h": 70,
+        "rot": 0,
+        "c": "#E2493F",
+        "x": 200,
+        "y": 40
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 46,
+        "h": 46,
+        "rot": 0,
+        "c": "#F5C320",
+        "x": 200,
+        "y": 135
+       },
+       {
+        "s": "triangle",
+        "v": "side",
+        "w": 50,
+        "h": 60,
+        "rot": -30,
+        "c": "#22A56A",
+        "x": 140,
+        "y": 225
+       },
+       {
+        "s": "triangle",
+        "v": "side",
+        "w": 50,
+        "h": 60,
+        "rot": 30,
+        "c": "#22A56A",
+        "x": 260,
+        "y": 225
+       }
+      ],
+      "missing": 1,
+      "opts": [
+       {
+        "s": "square",
+        "v": "rotated",
+        "w": 76,
+        "h": 76,
+        "rot": 45,
+        "c": "#E2493F"
+       },
+       {
+        "s": "triangle",
+        "v": "down",
+        "w": 96,
+        "h": 84,
+        "rot": 180,
+        "c": "#E2493F"
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 85,
+        "h": 85,
+        "rot": 0,
+        "c": "#E2493F"
+       }
+      ],
+      "answer": 1,
+      "match": "recognize"
+     },
+     {
+      "scene": "robot",
+      "parts": [
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 100,
+        "h": 100,
+        "rot": 0,
+        "c": "#2F7FE0",
+        "x": 200,
+        "y": 80
+       },
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 150,
+        "h": 96,
+        "rot": 0,
+        "c": "#22A56A",
+        "x": 200,
+        "y": 195
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 24,
+        "h": 24,
+        "rot": 0,
+        "c": "#F5C320",
+        "x": 178,
+        "y": 75
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 24,
+        "h": 24,
+        "rot": 0,
+        "c": "#F5C320",
+        "x": 222,
+        "y": 75
+       },
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 30,
+        "h": 90,
+        "rot": 0,
+        "c": "#8E5CE0",
+        "x": 115,
+        "y": 200
+       }
+      ],
+      "missing": 1,
+      "opts": [
+       {
+        "s": "triangle",
+        "v": "wide",
+        "w": 120,
+        "h": 56,
+        "rot": 0,
+        "c": "#22A56A"
+       },
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 72,
+        "h": 72,
+        "rot": 0,
+        "c": "#22A56A"
+       },
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 60,
+        "h": 112,
+        "rot": 0,
+        "c": "#22A56A"
+       }
+      ],
+      "answer": 2,
+      "match": "recognize"
+     },
+     {
+      "scene": "cat",
+      "parts": [
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 140,
+        "h": 140,
+        "rot": 0,
+        "c": "#F08A24",
+        "x": 200,
+        "y": 175
+       },
+       {
+        "s": "triangle",
+        "v": "up",
+        "w": 50,
+        "h": 60,
+        "rot": 0,
+        "c": "#F08A24",
+        "x": 150,
+        "y": 95
+       },
+       {
+        "s": "triangle",
+        "v": "up",
+        "w": 50,
+        "h": 60,
+        "rot": 0,
+        "c": "#F08A24",
+        "x": 250,
+        "y": 95
+       },
+       {
+        "s": "triangle",
+        "v": "down",
+        "w": 26,
+        "h": 20,
+        "rot": 180,
+        "c": "#E2493F",
+        "x": 200,
+        "y": 195
+       }
+      ],
+      "missing": 0,
+      "opts": [
+       {
+        "s": "circle",
+        "v": "s",
+        "w": 60,
+        "h": 60,
+        "rot": 0,
+        "c": "#F08A24"
+       },
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 116,
+        "h": 64,
+        "rot": 0,
+        "c": "#F08A24"
+       },
+       {
+        "s": "triangle",
+        "v": "side",
+        "w": 96,
+        "h": 84,
+        "rot": 90,
+        "c": "#F08A24"
+       }
+      ],
+      "answer": 0,
+      "match": "recognize"
+     },
+     {
+      "scene": "tree",
+      "parts": [
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 40,
+        "h": 80,
+        "rot": 0,
+        "c": "#F08A24",
+        "x": 200,
+        "y": 250
+       },
+       {
+        "s": "triangle",
+        "v": "wide",
+        "w": 180,
+        "h": 130,
+        "rot": 0,
+        "c": "#22A56A",
+        "x": 200,
+        "y": 140
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 60,
+        "h": 60,
+        "rot": 0,
+        "c": "#F5C320",
+        "x": 330,
+        "y": 55
+       },
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 70,
+        "h": 70,
+        "rot": 0,
+        "c": "#E2493F",
+        "x": 80,
+        "y": 250
+       }
+      ],
+      "missing": 3,
+      "opts": [
+       {
+        "s": "square",
+        "v": "rotated",
+        "w": 76,
+        "h": 76,
+        "rot": 45,
+        "c": "#E2493F"
+       },
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 128,
+        "h": 70,
+        "rot": 0,
+        "c": "#E2493F"
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 85,
+        "h": 85,
+        "rot": 0,
+        "c": "#E2493F"
+       }
+      ],
+      "answer": 0,
+      "match": "recognize"
+     }
+    ]
+   }
+  },
+  "MW22.Р2/gridDictation": {
+   "game": "gridDictation",
+   "role": "PRACTICE",
+   "level": 1,
+   "items": 6,
+   "practice": [
+    {
+     "name": "стълбичка",
+     "start": [
+      0,
+      4
+     ],
+     "cmds": [
+      [
+       "R",
+       1
+      ],
+      [
+       "U",
+       1
+      ],
+      [
+       "R",
+       1
+      ],
+      [
+       "U",
+       1
+      ]
+     ],
+     "level": 1
+    },
+    {
+     "name": "кутийка",
+     "start": [
+      1,
+      4
+     ],
+     "cmds": [
+      [
+       "U",
+       2
+      ],
+      [
+       "R",
+       2
+      ],
+      [
+       "D",
+       2
+      ],
+      [
+       "L",
+       2
+      ]
+     ],
+     "level": 1
+    },
+    {
+     "name": "змийче",
+     "start": [
+      0,
+      1
+     ],
+     "cmds": [
+      [
+       "R",
+       2
+      ],
+      [
+       "D",
+       1
+      ],
+      [
+       "L",
+       2
+      ]
+     ],
+     "level": 1
+    },
+    {
+     "name": "пътечка",
+     "start": [
+      1,
+      0
+     ],
+     "cmds": [
+      [
+       "D",
+       2
+      ],
+      [
+       "R",
+       2
+      ],
+      [
+       "D",
+       1
+      ]
+     ],
+     "level": 1
+    },
+    {
+     "name": "кукичка",
+     "start": [
+      4,
+      1
+     ],
+     "cmds": [
+      [
+       "D",
+       2
+      ],
+      [
+       "L",
+       2
+      ],
+      [
+       "U",
+       1
+      ]
+     ],
+     "level": 1
+    },
+    {
+     "name": "стъпало",
+     "start": [
+      1,
+      3
+     ],
+     "cmds": [
+      [
+       "R",
+       2
+      ],
+      [
+       "D",
+       1
+      ],
+      [
+       "R",
+       1
+      ]
+     ],
+     "level": 1
+    },
+    {
+     "name": "вратичка",
+     "start": [
+      2,
+      5
+     ],
+     "cmds": [
+      [
+       "U",
+       2
+      ],
+      [
+       "R",
+       2
+      ],
+      [
+       "D",
+       2
+      ]
+     ],
+     "level": 1
+    },
+    {
+     "name": "знаменце",
+     "start": [
+      2,
+      4
+     ],
+     "cmds": [
+      [
+       "U",
+       2
+      ],
+      [
+       "R",
+       2
+      ],
+      [
+       "D",
+       1
+      ]
+     ],
+     "level": 1
+    }
+   ]
+  },
+  "MW22.Р3/gridDictation": {
+   "game": "gridDictation",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": 2,
+   "items": 6,
+   "sets": {
+    "A": [
+     {
+      "name": "стълба",
+      "start": [
+       0,
+       5
+      ],
+      "cmds": [
+       [
+        "R",
+        2
+       ],
+       [
+        "U",
+        2
+       ],
+       [
+        "R",
+        2
+       ],
+       [
+        "U",
+        2
+       ],
+       [
+        "L",
+        1
+       ]
+      ],
+      "level": 2
+     },
+     {
+      "name": "куче",
+      "start": [
+       1,
+       1
+      ],
+      "cmds": [
+       [
+        "R",
+        3
+       ],
+       [
+        "D",
+        2
+       ],
+       [
+        "L",
+        1
+       ],
+       [
+        "U",
+        1
+       ],
+       [
+        "L",
+        1
+       ]
+      ],
+      "level": 2
+     },
+     {
+      "name": "пътека до къщата",
+      "start": [
+       0,
+       0
+      ],
+      "cmds": [
+       [
+        "D",
+        3
+       ],
+       [
+        "R",
+        3
+       ],
+       [
+        "U",
+        1
+       ],
+       [
+        "L",
+        1
+       ]
+      ],
+      "level": 2
+     },
+     {
+      "name": "змия",
+      "start": [
+       5,
+       0
+      ],
+      "cmds": [
+       [
+        "L",
+        3
+       ],
+       [
+        "D",
+        1
+       ],
+       [
+        "R",
+        2
+       ],
+       [
+        "D",
+        2
+       ],
+       [
+        "L",
+        3
+       ]
+      ],
+      "level": 2
+     },
+     {
+      "name": "ключ",
+      "start": [
+       0,
+       2
+      ],
+      "cmds": [
+       [
+        "R",
+        3
+       ],
+       [
+        "D",
+        1
+       ],
+       [
+        "R",
+        2
+       ],
+       [
+        "D",
+        2
+       ],
+       [
+        "L",
+        1
+       ]
+      ],
+      "level": 2
+     },
+     {
+      "name": "кула",
+      "start": [
+       1,
+       5
+      ],
+      "cmds": [
+       [
+        "U",
+        3
+       ],
+       [
+        "R",
+        2
+       ],
+       [
+        "U",
+        1
+       ],
+       [
+        "L",
+        1
+       ],
+       [
+        "U",
+        1
+       ]
+      ],
+      "level": 2
+     }
+    ],
+    "B": [
+     {
+      "name": "стълба",
+      "start": [
+       5,
+       5
+      ],
+      "cmds": [
+       [
+        "L",
+        2
+       ],
+       [
+        "U",
+        2
+       ],
+       [
+        "L",
+        2
+       ],
+       [
+        "U",
+        2
+       ],
+       [
+        "R",
+        1
+       ]
+      ],
+      "level": 2
+     },
+     {
+      "name": "куче",
+      "start": [
+       4,
+       1
+      ],
+      "cmds": [
+       [
+        "L",
+        3
+       ],
+       [
+        "D",
+        2
+       ],
+       [
+        "R",
+        1
+       ],
+       [
+        "U",
+        1
+       ],
+       [
+        "R",
+        1
+       ]
+      ],
+      "level": 2
+     },
+     {
+      "name": "пътека до къщата",
+      "start": [
+       5,
+       0
+      ],
+      "cmds": [
+       [
+        "D",
+        3
+       ],
+       [
+        "L",
+        3
+       ],
+       [
+        "U",
+        1
+       ],
+       [
+        "R",
+        1
+       ]
+      ],
+      "level": 2
+     },
+     {
+      "name": "змия",
+      "start": [
+       0,
+       0
+      ],
+      "cmds": [
+       [
+        "R",
+        3
+       ],
+       [
+        "D",
+        1
+       ],
+       [
+        "L",
+        2
+       ],
+       [
+        "D",
+        2
+       ],
+       [
+        "R",
+        3
+       ]
+      ],
+      "level": 2
+     },
+     {
+      "name": "ключ",
+      "start": [
+       5,
+       2
+      ],
+      "cmds": [
+       [
+        "L",
+        3
+       ],
+       [
+        "D",
+        1
+       ],
+       [
+        "L",
+        2
+       ],
+       [
+        "D",
+        2
+       ],
+       [
+        "R",
+        1
+       ]
+      ],
+      "level": 2
+     },
+     {
+      "name": "кула",
+      "start": [
+       4,
+       5
+      ],
+      "cmds": [
+       [
+        "U",
+        3
+       ],
+       [
+        "L",
+        2
+       ],
+       [
+        "U",
+        1
+       ],
+       [
+        "R",
+        1
+       ],
+       [
+        "U",
+        1
+       ]
+      ],
+      "level": 2
+     }
+    ]
+   }
+  },
+  "MW22.Р4/numberLine": {
+   "game": "numberLine",
+   "role": "TRANSFER",
+   "level": 2,
+   "max": 14,
+   "scope": "extension",
+   "sets": {
+    "A": [
+     {
+      "n": 12,
+      "ask": "after"
+     },
+     {
+      "n": 14,
+      "ask": "before"
+     },
+     {
+      "n": 1,
+      "ask": "after",
+      "repeat_fact": true
+     },
+     {
+      "n": 5,
+      "ask": "before",
+      "repeat_fact": true
+     }
+    ],
+    "B": [
+     {
+      "n": 13,
+      "ask": "after"
+     },
+     {
+      "n": 13,
+      "ask": "before"
+     },
+     {
+      "n": 4,
+      "ask": "after",
+      "repeat_fact": true
+     },
+     {
+      "n": 2,
+      "ask": "before",
+      "repeat_fact": true
+     }
+    ]
+   }
+  },
+  "MW23.Р1/gridDictation": {
+   "game": "gridDictation",
+   "role": "RETRIEVAL",
+   "level": 2,
+   "items": 4,
+   "sets": {
+    "A": [
+     {
+      "name": "лодка",
+      "start": [
+       0,
+       3
+      ],
+      "cmds": [
+       [
+        "R",
+        3
+       ],
+       [
+        "U",
+        2
+       ],
+       [
+        "L",
+        1
+       ],
+       [
+        "D",
+        1
+       ]
+      ],
+      "level": 2
+     },
+     {
+      "name": "кука",
+      "start": [
+       4,
+       0
+      ],
+      "cmds": [
+       [
+        "D",
+        3
+       ],
+       [
+        "L",
+        2
+       ],
+       [
+        "U",
+        1
+       ],
+       [
+        "R",
+        1
+       ]
+      ],
+      "level": 2
+     },
+     {
+      "name": "зигзаг",
+      "start": [
+       0,
+       0
+      ],
+      "cmds": [
+       [
+        "R",
+        2
+       ],
+       [
+        "D",
+        2
+       ],
+       [
+        "R",
+        2
+       ],
+       [
+        "D",
+        2
+       ],
+       [
+        "L",
+        3
+       ]
+      ],
+      "level": 2
+     },
+     {
+      "name": "мост",
+      "start": [
+       0,
+       4
+      ],
+      "cmds": [
+       [
+        "U",
+        2
+       ],
+       [
+        "R",
+        3
+       ],
+       [
+        "D",
+        2
+       ],
+       [
+        "L",
+        1
+       ]
+      ],
+      "level": 2
+     }
+    ],
+    "B": [
+     {
+      "name": "лодка",
+      "start": [
+       5,
+       3
+      ],
+      "cmds": [
+       [
+        "L",
+        3
+       ],
+       [
+        "U",
+        2
+       ],
+       [
+        "R",
+        1
+       ],
+       [
+        "D",
+        1
+       ]
+      ],
+      "level": 2
+     },
+     {
+      "name": "кука",
+      "start": [
+       1,
+       0
+      ],
+      "cmds": [
+       [
+        "D",
+        3
+       ],
+       [
+        "R",
+        2
+       ],
+       [
+        "U",
+        1
+       ],
+       [
+        "L",
+        1
+       ]
+      ],
+      "level": 2
+     },
+     {
+      "name": "зигзаг",
+      "start": [
+       5,
+       0
+      ],
+      "cmds": [
+       [
+        "L",
+        2
+       ],
+       [
+        "D",
+        2
+       ],
+       [
+        "L",
+        2
+       ],
+       [
+        "D",
+        2
+       ],
+       [
+        "R",
+        3
+       ]
+      ],
+      "level": 2
+     },
+     {
+      "name": "мост",
+      "start": [
+       5,
+       4
+      ],
+      "cmds": [
+       [
+        "U",
+        2
+       ],
+       [
+        "L",
+        3
+       ],
+       [
+        "D",
+        2
+       ],
+       [
+        "R",
+        1
+       ]
+      ],
+      "level": 2
+     }
+    ]
+   }
+  },
+  "MW23.Р4/numberComposition": {
+   "game": "numberComposition",
+   "role": "TRANSFER",
+   "max": 10,
+   "sets": {
+    "A": [
+     {
+      "n": 6,
+      "b": 3
+     },
+     {
+      "n": 10,
+      "a": 1
+     },
+     {
+      "n": 7,
+      "b": 0
+     },
+     {
+      "n": 9,
+      "a": 7,
+      "repeat_fact": true
+     }
+    ],
+    "B": [
+     {
+      "n": 6,
+      "a": 3
+     },
+     {
+      "n": 10,
+      "b": 1
+     },
+     {
+      "n": 7,
+      "a": 0
+     },
+     {
+      "n": 9,
+      "b": 7,
+      "repeat_fact": true
+     }
+    ]
+   }
+  },
+  "MW23.Р4/order": {
+   "game": "order",
+   "role": "TRANSFER",
+   "level": 1,
+   "range": 16,
+   "row": 5,
+   "scope": "extension",
+   "note": "числата 15–16",
+   "sets": {
+    "A": [
+     {
+      "row": [
+       12,
+       13,
+       14,
+       15,
+       16
+      ],
+      "gaps": [
+       1,
+       3
+      ]
+     },
+     {
+      "row": [
+       8,
+       9,
+       10,
+       11,
+       12
+      ],
+      "gaps": [
+       0,
+       2
+      ]
+     },
+     {
+      "row": [
+       11,
+       12,
+       13,
+       14,
+       15
+      ],
+      "gaps": [
+       3,
+       4
+      ]
+     },
+     {
+      "row": [
+       6,
+       7,
+       8,
+       9,
+       10
+      ],
+      "gaps": [
+       1,
+       4
+      ]
+     }
+    ],
+    "B": [
+     {
+      "row": [
+       12,
+       13,
+       14,
+       15,
+       16
+      ],
+      "gaps": [
+       0,
+       4
+      ]
+     },
+     {
+      "row": [
+       9,
+       10,
+       11,
+       12,
+       13
+      ],
+      "gaps": [
+       1,
+       3
+      ]
+     },
+     {
+      "row": [
+       11,
+       12,
+       13,
+       14,
+       15
+      ],
+      "gaps": [
+       0,
+       2
+      ]
+     },
+     {
+      "row": [
+       4,
+       5,
+       6,
+       7,
+       8
+      ],
+      "gaps": [
+       2,
+       3
+      ]
+     }
+    ]
+   }
+  },
+  "MW24.Р2/shapes": {
+   "game": "shapes",
+   "role": "PRACTICE",
+   "level": null,
+   "items": 6,
+   "settings": {
+    "view": "real_shape"
+   },
+   "practice": [
+    {
+     "obj": "cookie",
+     "answer": "circle",
+     "opts": [
+      "circle",
+      "square",
+      "triangle",
+      "rect"
+     ]
+    },
+    {
+     "obj": "note",
+     "answer": "square",
+     "opts": [
+      "circle",
+      "square",
+      "triangle",
+      "rect"
+     ]
+    },
+    {
+     "obj": "sandwich",
+     "answer": "triangle",
+     "opts": [
+      "circle",
+      "square",
+      "triangle",
+      "rect"
+     ]
+    },
+    {
+     "obj": "ticket",
+     "answer": "rect",
+     "opts": [
+      "circle",
+      "square",
+      "triangle",
+      "rect"
+     ]
+    },
+    {
+     "obj": "coin",
+     "answer": "circle",
+     "opts": [
+      "circle",
+      "square",
+      "triangle",
+      "rect"
+     ]
+    },
+    {
+     "obj": "napkin",
+     "answer": "square",
+     "opts": [
+      "circle",
+      "square",
+      "triangle",
+      "rect"
+     ]
+    },
+    {
+     "obj": "pennant",
+     "answer": "triangle",
+     "opts": [
+      "circle",
+      "square",
+      "triangle",
+      "rect"
+     ]
+    },
+    {
+     "obj": "book",
+     "answer": "rect",
+     "opts": [
+      "circle",
+      "square",
+      "triangle",
+      "rect"
+     ]
+    }
+   ]
+  },
+  "MW24.Р3/shapes": {
+   "game": "shapes",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": null,
+   "items": 6,
+   "settings": {
+    "view": "real_shape"
+   },
+   "sets": {
+    "A": [
+     {
+      "obj": "clock",
+      "answer": "circle",
+      "opts": [
+       "circle",
+       "square",
+       "triangle",
+       "rect"
+      ]
+     },
+     {
+      "obj": "chessboard",
+      "answer": "square",
+      "opts": [
+       "circle",
+       "square",
+       "triangle",
+       "rect"
+      ]
+     },
+     {
+      "obj": "door",
+      "answer": "rect",
+      "opts": [
+       "circle",
+       "square",
+       "triangle",
+       "rect"
+      ]
+     },
+     {
+      "obj": "pizza",
+      "answer": "triangle",
+      "opts": [
+       "circle",
+       "square",
+       "triangle",
+       "rect"
+      ]
+     },
+     {
+      "obj": "tile",
+      "answer": "square",
+      "opts": [
+       "circle",
+       "square",
+       "triangle",
+       "rect"
+      ]
+     },
+     {
+      "obj": "envelope",
+      "answer": "rect",
+      "opts": [
+       "circle",
+       "square",
+       "triangle",
+       "rect"
+      ]
+     }
+    ],
+    "B": [
+     {
+      "obj": "board",
+      "answer": "rect",
+      "opts": [
+       "circle",
+       "square",
+       "triangle",
+       "rect"
+      ]
+     },
+     {
+      "obj": "plate",
+      "answer": "circle",
+      "opts": [
+       "circle",
+       "square",
+       "triangle",
+       "rect"
+      ]
+     },
+     {
+      "obj": "frame",
+      "answer": "square",
+      "opts": [
+       "circle",
+       "square",
+       "triangle",
+       "rect"
+      ]
+     },
+     {
+      "obj": "sign",
+      "answer": "triangle",
+      "opts": [
+       "circle",
+       "square",
+       "triangle",
+       "rect"
+      ]
+     },
+     {
+      "obj": "book",
+      "answer": "rect",
+      "opts": [
+       "circle",
+       "square",
+       "triangle",
+       "rect"
+      ]
+     },
+     {
+      "obj": "napkin",
+      "answer": "square",
+      "opts": [
+       "circle",
+       "square",
+       "triangle",
+       "rect"
+      ]
+     }
+    ]
+   }
+  },
+  "MW24.Р4/lines": {
+   "game": "lines",
+   "role": "TRANSFER",
+   "level": null,
+   "items": 4,
+   "settings": {
+    "view": "measure_check"
+   },
+   "sets": {
+    "A": [
+     {
+      "obj": "ribbon",
+      "unit": "cube",
+      "len": 5,
+      "rows": [
+       "gap",
+       "ok",
+       "overlap"
+      ],
+      "answer": 1
+     },
+     {
+      "obj": "scarf",
+      "unit": "clip",
+      "len": 4,
+      "rows": [
+       "ok",
+       "offset",
+       "gap"
+      ],
+      "answer": 0
+     },
+     {
+      "obj": "stick",
+      "unit": "cube",
+      "len": 6,
+      "rows": [
+       "overlap",
+       "offset",
+       "ok"
+      ],
+      "answer": 2
+     },
+     {
+      "obj": "train",
+      "unit": "clip",
+      "len": 5,
+      "rows": [
+       "overlap",
+       "ok",
+       "gap"
+      ],
+      "answer": 1
+     }
+    ],
+    "B": [
+     {
+      "obj": "caterpillar",
+      "unit": "cube",
+      "len": 5,
+      "rows": [
+       "ok",
+       "overlap",
+       "gap"
+      ],
+      "answer": 0
+     },
+     {
+      "obj": "spoon",
+      "unit": "clip",
+      "len": 4,
+      "rows": [
+       "gap",
+       "offset",
+       "ok"
+      ],
+      "answer": 2
+     },
+     {
+      "obj": "ribbon",
+      "unit": "cube",
+      "len": 6,
+      "rows": [
+       "offset",
+       "ok",
+       "overlap"
+      ],
+      "answer": 1
+     },
+     {
+      "obj": "stick",
+      "unit": "clip",
+      "len": 5,
+      "rows": [
+       "gap",
+       "overlap",
+       "ok"
+      ],
+      "answer": 2
+     }
+    ]
+   }
+  },
+  "MW25.Р1/shapes": {
+   "game": "shapes",
+   "role": "RETRIEVAL",
+   "level": null,
+   "items": 4,
+   "settings": {
+    "view": "real_shape"
+   },
+   "sets": {
+    "A": [
+     {
+      "obj": "button",
+      "answer": "circle",
+      "opts": [
+       "circle",
+       "square",
+       "triangle",
+       "rect"
+      ]
+     },
+     {
+      "obj": "ticket",
+      "answer": "rect",
+      "opts": [
+       "circle",
+       "square",
+       "triangle",
+       "rect"
+      ]
+     },
+     {
+      "obj": "sandwich",
+      "answer": "triangle",
+      "opts": [
+       "circle",
+       "square",
+       "triangle",
+       "rect"
+      ]
+     },
+     {
+      "obj": "note",
+      "answer": "square",
+      "opts": [
+       "circle",
+       "square",
+       "triangle",
+       "rect"
+      ]
+     }
+    ],
+    "B": [
+     {
+      "obj": "pennant",
+      "answer": "triangle",
+      "opts": [
+       "circle",
+       "square",
+       "triangle",
+       "rect"
+      ]
+     },
+     {
+      "obj": "cookie",
+      "answer": "circle",
+      "opts": [
+       "circle",
+       "square",
+       "triangle",
+       "rect"
+      ]
+     },
+     {
+      "obj": "tile",
+      "answer": "square",
+      "opts": [
+       "circle",
+       "square",
+       "triangle",
+       "rect"
+      ]
+     },
+     {
+      "obj": "door",
+      "answer": "rect",
+      "opts": [
+       "circle",
+       "square",
+       "triangle",
+       "rect"
+      ]
+     }
+    ]
+   }
+  },
+  "MW25.Р4/brainCrush": {
+   "game": "brainCrush",
+   "role": "TRANSFER",
+   "level": 2,
+   "range": 10,
+   "sets": {
+    "A": [
+     {
+      "a": 1,
+      "op": "+",
+      "b": 2
+     },
+     {
+      "a": 10,
+      "op": "-",
+      "b": 5
+     },
+     {
+      "a": 7,
+      "op": "-",
+      "b": 3
+     },
+     {
+      "a": 9,
+      "op": "-",
+      "b": 8
+     }
+    ],
+    "B": [
+     {
+      "a": 1,
+      "op": "+",
+      "b": 1
+     },
+     {
+      "a": 6,
+      "op": "-",
+      "b": 1
+     },
+     {
+      "a": 7,
+      "op": "-",
+      "b": 2
+     },
+     {
+      "a": 8,
+      "op": "-",
+      "b": 7
+     }
+    ]
+   }
+  },
+  "MW25.Р4/brainCrush/MW_25_arith16": {
+   "game": "brainCrush",
+   "role": "TRANSFER",
+   "level": 2,
+   "range": 16,
+   "sets": {
+    "A": [
+     {
+      "a": 11,
+      "op": "+",
+      "b": 3
+     },
+     {
+      "a": 15,
+      "op": "-",
+      "b": 2
+     },
+     {
+      "a": 10,
+      "op": "+",
+      "b": 6
+     },
+     {
+      "a": 16,
+      "op": "-",
+      "b": 6
+     }
+    ],
+    "B": [
+     {
+      "a": 12,
+      "op": "+",
+      "b": 2
+     },
+     {
+      "a": 14,
+      "op": "-",
+      "b": 1
+     },
+     {
+      "a": 10,
+      "op": "+",
+      "b": 5
+     },
+     {
+      "a": 15,
+      "op": "-",
+      "b": 5
+     }
+    ]
+   },
+   "scope": "extension"
+  },
+  "MW26.Р4/order": {
+   "game": "order",
+   "role": "TRANSFER",
+   "level": 1,
+   "range": 18,
+   "row": 5,
+   "scope": "extension",
+   "note": "числата 17–18",
+   "sets": {
+    "A": [
+     {
+      "row": [
+       14,
+       15,
+       16,
+       17,
+       18
+      ],
+      "gaps": [
+       1,
+       3
+      ]
+     },
+     {
+      "row": [
+       10,
+       11,
+       12,
+       13,
+       14
+      ],
+      "gaps": [
+       0,
+       4
+      ]
+     },
+     {
+      "row": [
+       13,
+       14,
+       15,
+       16,
+       17
+      ],
+      "gaps": [
+       2,
+       3
+      ]
+     },
+     {
+      "row": [
+       7,
+       8,
+       9,
+       10,
+       11
+      ],
+      "gaps": [
+       1,
+       2
+      ]
+     }
+    ],
+    "B": [
+     {
+      "row": [
+       14,
+       15,
+       16,
+       17,
+       18
+      ],
+      "gaps": [
+       0,
+       4
+      ]
+     },
+     {
+      "row": [
+       11,
+       12,
+       13,
+       14,
+       15
+      ],
+      "gaps": [
+       1,
+       3
+      ]
+     },
+     {
+      "row": [
+       13,
+       14,
+       15,
+       16,
+       17
+      ],
+      "gaps": [
+       1,
+       4
+      ]
+     },
+     {
+      "row": [
+       6,
+       7,
+       8,
+       9,
+       10
+      ],
+      "gaps": [
+       2,
+       4
+      ]
+     }
+    ]
+   }
+  },
+  "MW27.Р4/numberComposition": {
+   "game": "numberComposition",
+   "role": "TRANSFER",
+   "max": 10,
+   "sets": {
+    "A": [
+     {
+      "n": 10,
+      "a": 0
+     },
+     {
+      "n": 7,
+      "b": 6,
+      "repeat_fact": true
+     },
+     {
+      "n": 9,
+      "a": 3,
+      "repeat_fact": true
+     },
+     {
+      "n": 10,
+      "b": 8,
+      "repeat_fact": true
+     }
+    ],
+    "B": [
+     {
+      "n": 10,
+      "b": 0
+     },
+     {
+      "n": 7,
+      "a": 6,
+      "repeat_fact": true
+     },
+     {
+      "n": 9,
+      "b": 3,
+      "repeat_fact": true
+     },
+     {
+      "n": 10,
+      "a": 8,
+      "repeat_fact": true
+     }
+    ]
+   }
+  },
+  "MW27.Р4/numberLine": {
+   "game": "numberLine",
+   "role": "TRANSFER",
+   "level": 1,
+   "max": 20,
+   "scope": "extension",
+   "sets": {
+    "A": [
+     {
+      "n": 19
+     },
+     {
+      "n": 13
+     },
+     {
+      "n": 8
+     },
+     {
+      "n": 16
+     }
+    ],
+    "B": [
+     {
+      "n": 18
+     },
+     {
+      "n": 12
+     },
+     {
+      "n": 4
+     },
+     {
+      "n": 11
+     }
+    ]
+   }
+  },
+  "MW28.Р4/brainCrush": {
+   "game": "brainCrush",
+   "role": "TRANSFER",
+   "level": 2,
+   "range": 10,
+   "sets": {
+    "A": [
+     {
+      "a": 3,
+      "op": "+",
+      "b": 6,
+      "repeat_fact": true
+     },
+     {
+      "a": 8,
+      "op": "-",
+      "b": 2
+     },
+     {
+      "a": 10,
+      "op": "-",
+      "b": 9
+     },
+     {
+      "a": 5,
+      "op": "-",
+      "b": 5
+     }
+    ],
+    "B": [
+     {
+      "a": 4,
+      "op": "+",
+      "b": 5,
+      "repeat_fact": true
+     },
+     {
+      "a": 7,
+      "op": "-",
+      "b": 1
+     },
+     {
+      "a": 10,
+      "op": "-",
+      "b": 8
+     },
+     {
+      "a": 7,
+      "op": "-",
+      "b": 7
+     }
+    ]
+   }
+  },
+  "MW28.Р4/brainCrush/MW_28_change20": {
+   "game": "brainCrush",
+   "role": "TRANSFER",
+   "level": 2,
+   "range": 20,
+   "sets": {
+    "A": [
+     {
+      "a": 14,
+      "op": "+",
+      "b": 5
+     },
+     {
+      "a": 18,
+      "op": "-",
+      "b": 3
+     },
+     {
+      "a": 10,
+      "op": "+",
+      "b": 8
+     },
+     {
+      "a": 17,
+      "op": "-",
+      "b": 7
+     }
+    ],
+    "B": [
+     {
+      "a": 13,
+      "op": "+",
+      "b": 6
+     },
+     {
+      "a": 19,
+      "op": "-",
+      "b": 4
+     },
+     {
+      "a": 10,
+      "op": "+",
+      "b": 9
+     },
+     {
+      "a": 19,
+      "op": "-",
+      "b": 9
+     }
+    ]
+   },
+   "scope": "extension"
+  },
+  "MW29.Р4/brainstorm": {
+   "game": "brainstorm",
+   "role": "TRANSFER",
+   "level": 1,
+   "range": 10,
+   "sets": {
+    "A": [
+     {
+      "q": "Мила имаше 6 цветя и получи още 4. Колко цветя има Мила сега?",
+      "pre": "Мила има общо",
+      "post": "цветя",
+      "a": 6,
+      "op": "+",
+      "b": 4
+     },
+     {
+      "q": "В купата имаше 10 ябълки. Децата изядоха 7. Колко ябълки останаха?",
+      "pre": "Останаха",
+      "post": "ябълки",
+      "a": 10,
+      "op": "-",
+      "b": 7
+     },
+     {
+      "q": "Петър намери 7 миди сутринта и 1 следобед. Колко миди намери Петър общо?",
+      "pre": "Петър намери общо",
+      "post": "миди",
+      "a": 7,
+      "op": "+",
+      "b": 1
+     },
+     {
+      "q": "Баба опече 9 бисквити и даде 5 на съседите. Колко бисквити останаха?",
+      "pre": "Останаха",
+      "post": "бисквити",
+      "a": 9,
+      "op": "-",
+      "b": 5
+     }
+    ],
+    "B": [
+     {
+      "q": "Ема имаше 7 монети и получи още 3. Колко монети има Ема сега?",
+      "pre": "Ема има общо",
+      "post": "монети",
+      "a": 7,
+      "op": "+",
+      "b": 3
+     },
+     {
+      "q": "На двора имаше 9 топки. Децата прибраха 6. Колко топки останаха на двора?",
+      "pre": "На двора останаха",
+      "post": "топки",
+      "a": 9,
+      "op": "-",
+      "b": 6
+     },
+     {
+      "q": "Иван нарисува 2 круши, а после още 6. Колко круши нарисува Иван общо?",
+      "pre": "Иван нарисува общо",
+      "post": "круши",
+      "a": 2,
+      "op": "+",
+      "b": 6
+     },
+     {
+      "q": "Калин имаше 8 ягоди и изяде 4. Колко ягоди останаха на Калин?",
+      "pre": "На Калин останаха",
+      "post": "ягоди",
+      "a": 8,
+      "op": "-",
+      "b": 4
+     }
+    ]
+   },
+   "scope": "extension"
+  },
+  "MW30.Р4/brainCrush": {
+   "game": "brainCrush",
+   "role": "TRANSFER",
+   "level": 2,
+   "range": 10,
+   "sets": {
+    "A": [
+     {
+      "a": 8,
+      "op": "+",
+      "b": 0
+     },
+     {
+      "a": 9,
+      "op": "-",
+      "b": 2
+     },
+     {
+      "a": 6,
+      "op": "-",
+      "b": 5
+     },
+     {
+      "a": 10,
+      "op": "-",
+      "b": 1
+     }
+    ],
+    "B": [
+     {
+      "a": 0,
+      "op": "+",
+      "b": 7
+     },
+     {
+      "a": 8,
+      "op": "-",
+      "b": 1
+     },
+     {
+      "a": 3,
+      "op": "-",
+      "b": 3
+     },
+     {
+      "a": 9,
+      "op": "-",
+      "b": 1
+     }
+    ]
+   }
+  },
+  "MW30.Р4/brainCrush/MW_30_arith20": {
+   "game": "brainCrush",
+   "role": "TRANSFER",
+   "level": 2,
+   "range": 20,
+   "sets": {
+    "A": [
+     {
+      "a": 15,
+      "op": "+",
+      "b": 3
+     },
+     {
+      "a": 17,
+      "op": "-",
+      "b": 4
+     },
+     {
+      "a": 12,
+      "op": "+",
+      "b": 6
+     },
+     {
+      "a": 20,
+      "op": "-",
+      "b": 10
+     }
+    ],
+    "B": [
+     {
+      "a": 16,
+      "op": "+",
+      "b": 2
+     },
+     {
+      "a": 18,
+      "op": "-",
+      "b": 5
+     },
+     {
+      "a": 11,
+      "op": "+",
+      "b": 7
+     },
+     {
+      "a": 18,
+      "op": "-",
+      "b": 8
+     }
+    ]
+   },
+   "scope": "extension"
+  },
+  "MW31.Р1/numberLine": {
+   "game": "numberLine",
+   "role": "PRACTICE",
+   "level": 2,
+   "max": 10,
+   "practice": [
+    {
+     "n": 1,
+     "ask": "after"
+    },
+    {
+     "n": 4,
+     "ask": "after"
+    },
+    {
+     "n": 6,
+     "ask": "after"
+    },
+    {
+     "n": 2,
+     "ask": "before"
+    },
+    {
+     "n": 3,
+     "ask": "before"
+    },
+    {
+     "n": 5,
+     "ask": "before"
+    }
+   ]
+  },
+  "MW31.Р2/piratesTreasures": {
+   "game": "piratesTreasures",
+   "role": "PRACTICE",
+   "range": 10,
+   "practice": [
+    {
+     "a": 3,
+     "op": "+",
+     "b": 4,
+     "coins": [
+      "3",
+      "+",
+      "4",
+      "1",
+      "6",
+      "9",
+      "2",
+      "8"
+     ]
+    },
+    {
+     "a": 5,
+     "op": "+",
+     "b": 3,
+     "coins": [
+      "5",
+      "+",
+      "3",
+      "0",
+      "7",
+      "2",
+      "9",
+      "4"
+     ]
+    },
+    {
+     "a": 6,
+     "op": "+",
+     "b": 4,
+     "coins": [
+      "6",
+      "+",
+      "4",
+      "1",
+      "8",
+      "3",
+      "5",
+      "2"
+     ]
+    },
+    {
+     "a": 2,
+     "op": "+",
+     "b": 7,
+     "coins": [
+      "2",
+      "+",
+      "7",
+      "5",
+      "0",
+      "6",
+      "3",
+      "10"
+     ]
+    },
+    {
+     "a": 4,
+     "op": "+",
+     "b": 2,
+     "coins": [
+      "4",
+      "+",
+      "2",
+      "7",
+      "1",
+      "9",
+      "8",
+      "0"
+     ]
+    },
+    {
+     "a": 1,
+     "op": "+",
+     "b": 5,
+     "coins": [
+      "1",
+      "+",
+      "5",
+      "3",
+      "8",
+      "10",
+      "4",
+      "7"
+     ]
+    }
+   ]
+  },
+  "MW31.Р3/brainCrush": {
+   "game": "brainCrush",
+   "role": "PRACTICE",
+   "level": 2,
+   "range": 10,
+   "practice": [
+    {
+     "a": 4,
+     "op": "+",
+     "b": 2
+    },
+    {
+     "a": 7,
+     "op": "-",
+     "b": 5
+    },
+    {
+     "a": 3,
+     "op": "+",
+     "b": 6
+    },
+    {
+     "a": 10,
+     "op": "-",
+     "b": 4
+    },
+    {
+     "a": 5,
+     "op": "+",
+     "b": 5
+    }
+   ]
+  },
+  "MW31.Р3/intellectScales": {
+   "game": "intellectScales",
+   "role": "PRACTICE",
+   "level": 2,
+   "practice": [
+    {
+     "l": 10,
+     "r": 6
+    },
+    {
+     "l": 3,
+     "r": 7
+    },
+    {
+     "l": 9,
+     "r": 9
+    },
+    {
+     "l": 5,
+     "r": 1
+    }
+   ]
+  },
+  "MW31.Р3/lines": {
+   "game": "lines",
+   "role": "PRACTICE",
+   "level": null,
+   "items": 2,
+   "settings": {
+    "view": "measure"
+   },
+   "practice": [
+    {
+     "obj": "scarf",
+     "unit": "cube",
+     "len": 6,
+     "opts": [
+      4,
+      5,
+      6
+     ]
+    },
+    {
+     "obj": "spoon",
+     "unit": "clip",
+     "len": 7,
+     "opts": [
+      6,
+      7,
+      8
+     ]
+    },
+    {
+     "obj": "caterpillar",
+     "unit": "cube",
+     "len": 4,
+     "opts": [
+      4,
+      5,
+      6
+     ]
+    },
+    {
+     "obj": "train",
+     "unit": "clip",
+     "len": 3,
+     "opts": [
+      3,
+      4,
+      5
+     ]
+    }
+   ]
+  },
+  "MW31.Р3/shapes": {
+   "game": "shapes",
+   "role": "PRACTICE",
+   "level": null,
+   "items": 2,
+   "settings": {
+    "view": "find_shape"
+   },
+   "practice": [
+    {
+     "target": "triangle",
+     "cards": [
+      {
+       "s": "rect",
+       "v": "vertical",
+       "w": 60,
+       "h": 112,
+       "rot": 0,
+       "c": "#22A56A"
+      },
+      {
+       "s": "circle",
+       "v": "m",
+       "w": 85,
+       "h": 85,
+       "rot": 0,
+       "c": "#E2493F"
+      },
+      {
+       "s": "triangle",
+       "v": "side",
+       "w": 96,
+       "h": 84,
+       "rot": 90,
+       "c": "#2F7FE0"
+      },
+      {
+       "s": "square",
+       "v": "normal",
+       "w": 80,
+       "h": 80,
+       "rot": 0,
+       "c": "#F5C320"
+      }
+     ],
+     "answer": 2
+    },
+    {
+     "target": "square",
+     "cards": [
+      {
+       "s": "square",
+       "v": "rotated",
+       "w": 76,
+       "h": 76,
+       "rot": 45,
+       "c": "#8E5CE0"
+      },
+      {
+       "s": "rect",
+       "v": "horizontal",
+       "w": 116,
+       "h": 64,
+       "rot": 0,
+       "c": "#F08A24"
+      },
+      {
+       "s": "triangle",
+       "v": "up",
+       "w": 96,
+       "h": 84,
+       "rot": 0,
+       "c": "#22A56A"
+      },
+      {
+       "s": "circle",
+       "v": "s",
+       "w": 60,
+       "h": 60,
+       "rot": 0,
+       "c": "#E2493F"
+      }
+     ],
+     "answer": 0
+    },
+    {
+     "target": "rect",
+     "cards": [
+      {
+       "s": "circle",
+       "v": "l",
+       "w": 105,
+       "h": 105,
+       "rot": 0,
+       "c": "#8E5CE0"
+      },
+      {
+       "s": "triangle",
+       "v": "narrow",
+       "w": 50,
+       "h": 104,
+       "rot": 0,
+       "c": "#F5C320"
+      },
+      {
+       "s": "square",
+       "v": "normal",
+       "w": 80,
+       "h": 80,
+       "rot": 0,
+       "c": "#E2493F"
+      },
+      {
+       "s": "rect",
+       "v": "vertical",
+       "w": 60,
+       "h": 112,
+       "rot": 0,
+       "c": "#2F7FE0"
+      }
+     ],
+     "answer": 3
+    },
+    {
+     "target": "circle",
+     "cards": [
+      {
+       "s": "square",
+       "v": "normal",
+       "w": 80,
+       "h": 80,
+       "rot": 0,
+       "c": "#22A56A"
+      },
+      {
+       "s": "rect",
+       "v": "long",
+       "w": 128,
+       "h": 44,
+       "rot": 0,
+       "c": "#2F7FE0"
+      },
+      {
+       "s": "circle",
+       "v": "s",
+       "w": 60,
+       "h": 60,
+       "rot": 0,
+       "c": "#F5C320"
+      },
+      {
+       "s": "triangle",
+       "v": "down",
+       "w": 96,
+       "h": 84,
+       "rot": 180,
+       "c": "#F08A24"
+      }
+     ],
+     "answer": 2
+    }
+   ]
+  },
+  "MW31.Р4/soonToSchool": {
+   "game": "soonToSchool",
+   "role": "PRACTICE",
+   "practice": [
+    {
+     "school": [
+      "молив",
+      "тетрадка",
+      "гума"
+     ],
+     "other": [
+      "топка",
+      "лъжица",
+      "пъзел"
+     ]
+    },
+    {
+     "school": [
+      "буквар",
+      "линийка",
+      "раница"
+     ],
+     "other": [
+      "кукла",
+      "чаша",
+      "конструктор"
+     ]
+    },
+    {
+     "school": [
+      "острилка",
+      "несесер",
+      "лепило"
+     ],
+     "other": [
+      "плюшено мече",
+      "телефон",
+      "балон"
+     ]
+    },
+    {
+     "school": [
+      "ножица",
+      "флумастери",
+      "химикалка"
+     ],
+     "other": [
+      "количка",
+      "възглавница",
+      "шапка"
+     ]
+    },
+    {
+     "school": [
+      "цветни моливи",
+      "чин",
+      "тетрадка"
+     ],
+     "other": [
+      "хвърчило",
+      "чорап",
+      "пъзел"
+     ]
+    },
+    {
+     "school": [
+      "линийка",
+      "гума",
+      "буквар"
+     ],
+     "other": [
+      "конструктор",
+      "лъжица",
+      "кукла"
+     ]
+    },
+    {
+     "school": [
+      "лепило",
+      "молив",
+      "острилка"
+     ],
+     "other": [
+      "балон",
+      "чаша",
+      "топка"
+     ]
+    }
+   ]
+  },
+  "MW32.Р1/cobweb": {
+   "game": "cobweb",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": 2,
+   "max": 10,
+   "sets": {
+    "A": [
+     {
+      "c": [
+       10,
+       5,
+       8
+      ]
+     }
+    ],
+    "B": [
+     {
+      "c": [
+       7,
+       10,
+       6
+      ]
+     }
+    ]
+   }
+  },
+  "MW32.Р1/intellectScales": {
+   "game": "intellectScales",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": 2,
+   "sets": {
+    "A": [
+     {
+      "l": 5,
+      "r": 8
+     }
+    ],
+    "B": [
+     {
+      "l": 6,
+      "r": 9
+     }
+    ]
+   }
+  },
+  "MW32.Р1/numberLine": {
+   "game": "numberLine",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": 2,
+   "max": 10,
+   "sets": {
+    "A": [
+     {
+      "n": 5,
+      "ask": "after",
+      "repeat_fact": true
+     },
+     {
+      "n": 6,
+      "ask": "before",
+      "repeat_fact": true
+     }
+    ],
+    "B": [
+     {
+      "n": 8,
+      "ask": "after",
+      "repeat_fact": true
+     },
+     {
+      "n": 9,
+      "ask": "before",
+      "repeat_fact": true
+     }
+    ]
+   }
+  },
+  "MW32.Р2/brainCrush": {
+   "game": "brainCrush",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": 2,
+   "range": 10,
+   "sets": {
+    "A": [
+     {
+      "a": 3,
+      "op": "+",
+      "b": 5
+     },
+     {
+      "a": 9,
+      "op": "-",
+      "b": 6
+     }
+    ],
+    "B": [
+     {
+      "a": 2,
+      "op": "+",
+      "b": 8
+     },
+     {
+      "a": 8,
+      "op": "-",
+      "b": 5
+     }
+    ]
+   }
+  },
+  "MW32.Р2/numberComposition": {
+   "game": "numberComposition",
+   "role": "PRIMARY_MEASUREMENT",
+   "max": 10,
+   "sets": {
+    "A": [
+     {
+      "n": 8,
+      "a": 4
+     }
+    ],
+    "B": [
+     {
+      "n": 8,
+      "b": 4
+     }
+    ]
+   }
+  },
+  "MW32.Р2/pirateCipher": {
+   "game": "pirateCipher",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": 2,
+   "items": 1,
+   "sets": {
+    "A": [
+     {
+      "n": 4,
+      "dir": "вдясно от",
+      "place": "p/morkov",
+      "ref": 5,
+      "items": [
+       [
+        5,
+        "p/iglika"
+       ],
+       [
+        0,
+        "p/roza"
+       ],
+       [
+        8,
+        "p/zhaba"
+       ],
+       [
+        14,
+        "p/zayche"
+       ]
+      ]
+     }
+    ],
+    "B": [
+     {
+      "n": 4,
+      "dir": "вдясно от",
+      "place": "p/morkov",
+      "ref": 8,
+      "items": [
+       [
+        8,
+        "p/yabalka"
+       ],
+       [
+        5,
+        "p/krusha"
+       ],
+       [
+        7,
+        "p/pchela"
+       ],
+       [
+        13,
+        "p/gaba"
+       ]
+      ]
+     }
+    ]
+   }
+  },
+  "MW32.Р3/lines": {
+   "game": "lines",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": null,
+   "items": 1,
+   "settings": {
+    "view": "measure"
+   },
+   "sets": {
+    "A": [
+     {
+      "obj": "stick",
+      "unit": "cube",
+      "len": 7,
+      "opts": [
+       6,
+       7,
+       8
+      ]
+     }
+    ],
+    "B": [
+     {
+      "obj": "ribbon",
+      "unit": "cube",
+      "len": 8,
+      "opts": [
+       6,
+       7,
+       8
+      ]
+     }
+    ]
+   }
+  },
+  "MW32.Р3/shapes": {
+   "game": "shapes",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": null,
+   "items": 1,
+   "settings": {
+    "view": "find_shape"
+   },
+   "sets": {
+    "A": [
+     {
+      "target": "triangle",
+      "cards": [
+       {
+        "s": "square",
+        "v": "normal",
+        "w": 80,
+        "h": 80,
+        "rot": 0,
+        "c": "#F08A24"
+       },
+       {
+        "s": "circle",
+        "v": "m",
+        "w": 85,
+        "h": 85,
+        "rot": 0,
+        "c": "#2F7FE0"
+       },
+       {
+        "s": "rect",
+        "v": "horizontal",
+        "w": 116,
+        "h": 64,
+        "rot": 0,
+        "c": "#F5C320"
+       },
+       {
+        "s": "triangle",
+        "v": "wide",
+        "w": 120,
+        "h": 56,
+        "rot": 0,
+        "c": "#22A56A"
+       }
+      ],
+      "answer": 3
+     }
+    ],
+    "B": [
+     {
+      "target": "triangle",
+      "cards": [
+       {
+        "s": "circle",
+        "v": "l",
+        "w": 105,
+        "h": 105,
+        "rot": 0,
+        "c": "#F5C320"
+       },
+       {
+        "s": "triangle",
+        "v": "narrow",
+        "w": 50,
+        "h": 104,
+        "rot": 0,
+        "c": "#F08A24"
+       },
+       {
+        "s": "rect",
+        "v": "vertical",
+        "w": 60,
+        "h": 112,
+        "rot": 0,
+        "c": "#22A56A"
+       },
+       {
+        "s": "square",
+        "v": "rotated",
+        "w": 76,
+        "h": 76,
+        "rot": 45,
+        "c": "#8E5CE0"
+       }
+      ],
+      "answer": 1
+     }
+    ]
+   }
+  },
+  "MW32.Р4/brainCrush": {
+   "game": "brainCrush",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": 2,
+   "range": 20,
+   "sets": {
+    "A": [
+     {
+      "a": 13,
+      "op": "+",
+      "b": 4
+     },
+     {
+      "a": 19,
+      "op": "-",
+      "b": 6
+     }
+    ],
+    "B": [
+     {
+      "a": 14,
+      "op": "+",
+      "b": 3
+     },
+     {
+      "a": 16,
+      "op": "-",
+      "b": 3
+     }
+    ]
+   },
+   "scope": "extension"
+  },
+  "MW32.Р4/numberLine": {
+   "game": "numberLine",
+   "role": "PRIMARY_MEASUREMENT",
+   "level": 1,
+   "max": 20,
+   "scope": "extension",
+   "sets": {
+    "A": [
+     {
+      "n": 17
+     },
+     {
+      "n": 9
+     }
+    ],
+    "B": [
+     {
+      "n": 14
+     },
+     {
+      "n": 2
+     }
+    ]
+   }
+  }
+ }
+}

@@ -10,7 +10,7 @@
      book          – книжките в „Кулата на историите“ и представяне (без оценка)
    Без аудиозаписи на деца (v1). Мнението и устните продукти не се оценяват: бележките на възрастния се пазят като наблюдение. */
 (function () {
-  const URL = "config/story-maya.json";
+  const URL = "config/story-maya.json?v=2";
   let data = null; const load = () => data || (data = fetch(URL).then(r => r.json()));
   const BOOKS = "platforma.books.v1";
   const books = () => { try { return JSON.parse(localStorage.getItem(BOOKS) || "[]"); } catch (e) { return []; } };
@@ -18,25 +18,16 @@
   const SPK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 010 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
 
   // глас: изречение по изречение, с onLine за подчертаване; уважава изключения звук
-  function speakSeq(lines, onLine, onEnd) {
-    if (!("speechSynthesis" in window) || localStorage.getItem("platforma.sound") === "off") { onEnd && onEnd(); return () => {}; }
-    speechSynthesis.cancel(); let i = 0, stop = false;
-    const v = speechSynthesis.getVoices().find(v => v.lang && v.lang.toLowerCase().startsWith("bg"));
-    const next = () => {
-      if (stop) return; if (i >= lines.length) { onLine && onLine(-1); onEnd && onEnd(); return; }
-      onLine && onLine(i); const u = new SpeechSynthesisUtterance(lines[i].replace(/^—\s*/, "")); u.lang = "bg-BG"; u.rate = 0.9; if (v) u.voice = v;
-      u.onend = () => { i++; setTimeout(next, 250); }; speechSynthesis.speak(u);
-    };
-    next(); return () => { stop = true; speechSynthesis.cancel(); };
-  }
+  function speakSeq(lines, onLine, onEnd) { return window.VOICE.speak(lines, { onLine, onEnd, gap: 250 }); }
+
 
   class StoryGame extends CardGame {
     constructor(...a) { super(...a); this.view = this.s.view || "quiz"; this.stopVoice = () => {}; }
     get gameId() { return "story"; }
     get skillName() { return ({ read_order4: "Разбирам история", quiz: "Разбирам история", order4_pics: "Последователност в сюжета", order5: "Последователност в сюжета", lines: "Герои и реплики", structure: "Части на историята", create: "Създавам своя история", book: "Кулата на историите" })[this.view] || "История"; }
     destroy() { this.stopVoice(); super.destroy(); }
-    start() { load().then(d => { this.d = d; this.prepare(); if (this.view === "read_order4") this.readStory(() => super.start()); else super.start(); }).catch(() => { this.shell.arena.innerHTML = '<p class="bk-err">Историята не се зареди.</p>'; }); }
-    img(id) { return `${this.d.img}${id}.jpg`; }
+    start() { load().then(d => { this.d = d; this.prepare(); { const mi = this.modeInfo(), t = document.getElementById("game-title"); if (mi && t && !document.documentElement.classList.contains("look2")) t.textContent = mi[0]; } /* заглавието и докато историята се чете */ if (this.view === "read_order4") this.readStory(() => super.start()); else super.start(); }).catch(() => { this.shell.arena.innerHTML = '<p class="bk-err">Историята не се зареди.</p>'; }); }
+    img(id) { return `${this.d.img}${id}.jpg?v=2`; } // v=2: картина 1 без възрастните (канон, 17.10.2026)
     prepare() {
       const d = this.d, m = this.view;
       if (m === "quiz") { const ids = this.s.q ? String(this.s.q).split(",") : d.questions.map(q => q.id); this.items = ids.map(id => d.questions.find(q => q.id === id)).filter(Boolean).map(q => ({ type: "mcq", q })); this.after = this.s.q ? null : "opinion"; }
@@ -88,8 +79,9 @@
       if (ok) { b.classList.add("good"); this.done(answer, 1100); return; }
       this.miss(answer, given); b.classList.add("bad"); this.shake(b);
       this.box.querySelectorAll(".st-opt").forEach(x => { if (x.textContent === answer) x.classList.add("hint"); });
+      // крайният запис – ПРЕДИ да мине на следващата задача (иначе uid-ът е на следващия въпрос)
+      this.log.push(this.event(false, { text: answer, answer, given, ok: false, ms: Date.now() - this.roundStart, adapt: 0, first_attempt_correct: false })); // краен запис, не „опит“
       this.shell.flash("Вярното е отбелязано", "bad"); this.roundOk.push(false); this.idx++; this.renderProgress();
-      this.log.push(this.event(false, { text: answer, answer, given, ok: false, ms: 0, adapt: 0, attempt: true }));
       this.later(() => { this.shell.hideFlash(); this.nextRound(); }, 1800);
     }
 
@@ -106,13 +98,15 @@
       };
       const check = () => {
         const ok = slots.every((id, i) => id === ids[i]);
+        this.decisions = { task_count: 1, scored_decision_count: ids.length, correct_scored_decisions: slots.filter((id, i) => id === ids[i]).length };
         if (ok) { this.box.querySelectorAll(".st-slot").forEach(s => s.classList.add("good")); this.done(ids.join(","), 1400); return; }
         this.locked = true; this.miss(ids.join(","), slots.join(","));
         this.box.querySelectorAll(".st-slot").forEach((s, i) => s.classList.add(slots[i] === ids[i] ? "good" : "bad"));
         this.shell.flash("Ето правилния ред", "bad");
         this.later(() => { slots.splice(0, slots.length, ...ids); draw(); this.box.querySelectorAll(".st-slot").forEach(s => s.classList.add("hint")); }, 1300);
+        // крайният запис – ПРЕДИ преминаването (иначе uid-ът е на следващата задача)
+        this.log.push(this.event(false, { text: ids.join(","), answer: ids.join(","), given: slots.join(","), ok: false, ms: Date.now() - this.roundStart, adapt: 0, first_attempt_correct: false })); // краен запис, не „опит“
         this.roundOk.push(false); this.idx++; this.renderProgress();
-        this.log.push(this.event(false, { text: ids.join(","), answer: ids.join(","), given: slots.join(","), ok: false, ms: 0, adapt: 0, attempt: true }));
         this.later(() => { this.shell.hideFlash(); this.nextRound(); }, 3400);
       };
       draw();
@@ -143,7 +137,7 @@
         <div class="st-nav"><button type="button" class="st-btn ghost" id="st-skip">Няма родител до мен сега</button><button type="button" class="st-btn" id="st-done">Готово</button></div></div>`;
       const fin = heard => { const got = [...this.box.querySelectorAll("[data-c]")].map(i => i.checked); this.log.push(Object.assign(this.event(true, { text: kind, answer: kind, given: heard ? "heard" : "skipped", ms: 0 }), { obs: kind, obs_heard: heard, obs_checks: got, obs_labels: checks, obs_by: "parent", is_measurement_item: false, attempt: true })); this.finish(false); };
       this.box.querySelector("#st-done").onclick = () => fin(true); this.box.querySelector("#st-skip").onclick = () => fin(false);
-      this.say(ask);
+      this.prompt(ask);
     }
 
     // CH24: три карти → разказ пред възрастен → заглавие и 3 бележки → книжка

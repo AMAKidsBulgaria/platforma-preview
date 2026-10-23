@@ -85,7 +85,7 @@
       const grid = this.box.querySelector("#grid"); this.tiles = {};
       shuffle(ALPHA.slice()).forEach(l => {
         const b = document.createElement("button"); b.type = "button"; b.className = `az-tile az-mo mo${1 + rnd(6)}`;
-        b.innerHTML = `<svg class="mo" viewBox="0 0 120 90" aria-hidden="true"><use href="#mo-${1 + rnd(6)}"/></svg><span>${l}</span>`;
+        b.innerHTML = `${(window.MO_ART && window.MO_ART()) || `<svg class="mo" viewBox="0 0 120 90" aria-hidden="true"><use href="#mo-${1 + rnd(6)}"/></svg>`}<span>${l}</span>`;
         b.setAttribute("aria-label", `Буква ${l}`);
         b.addEventListener("pointerdown", e => { e.preventDefault(); this.tapL1(b, l); });
         grid.appendChild(b); this.tiles[l] = b;
@@ -187,7 +187,7 @@
       const path = (d, cls) => { const p = document.createElementNS(svgNS, "path"); p.setAttribute("d", d); p.setAttribute("class", cls); svg.appendChild(p); return p; };
       ds.forEach(d => path(d, "road-blob")); ds.forEach(d => path(d, "road")); const inner = ds.map(d => path(d, "road-in"));
       svg.insertAdjacentHTML("beforeend", `<g class="flag"><rect x="44" y="230" width="6" height="70" fill="#6B3A16"/><path d="M50 232 l44 12 -44 12z" fill="#5CC24A"/></g><g class="flag"><rect x="1142" y="230" width="6" height="70" fill="#6B3A16"/><path d="M1148 232 l44 12 -44 12z" fill="#E2493F"/></g>`);
-      const placed = [], free = (x, y, d = 62) => placed.every(([px, py]) => Math.hypot(px - x, py - y) > d);
+      /* знамената старт/финал – без камъчета върху тях */ const placed = [[50, 262], [1146, 262]], free = (x, y, d = 62) => placed.every(([px, py]) => Math.hypot(px - x, py - y) > d);
       const put = (x, y, l, real, i) => {
         placed.push([x, y]);
         const g = document.createElementNS(svgNS, "g"); g.setAttribute("class", "lt"); g.setAttribute("transform", `translate(${x.toFixed(1)} ${y.toFixed(1)})`);
@@ -209,6 +209,8 @@
         }
       });
       BUSHES.forEach(([x, y]) => { if (free(x, y, 48)) svg.insertAdjacentHTML("beforeend", `<g class="flag" transform="translate(${x} ${y})"><ellipse cx="0" cy="10" rx="24" ry="7" fill="#5FA84A" opacity=".5"/><circle cx="-11" cy="0" r="12" fill="#5CB24A"/><circle cx="9" cy="-4" r="14" fill="#6BC24A"/><circle cx="0" cy="6" r="11" fill="#4E9A3A"/></g>`); });
+      svg.querySelectorAll(":scope > g.flag:not([transform])").forEach(f => svg.appendChild(f));   // знамената старт/финал – над камъчетата
+      if (window.LOOK2_LAB) window.LOOK2_LAB(svg);
       this.shell.setLabel("Следвай пътя");
     }
     startL4() { this.cur = ALPHA[this.idx]; this.roundStart = Date.now(); if (this.idx === 0) this.say("Намери пътеката с азбуката и докосвай буквите по ред. Започни с а."); }

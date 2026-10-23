@@ -8,6 +8,8 @@
   class PiratesTreasuresGame extends BaseGame {
     get gameId() { return "piratesTreasures"; }
     get skillName() { return `Съставяне на пример до ${this.s.range}`; }
+    // Домашна: задачите идват от банката на рунда (tools/math_banks/piratesTreasures.py): {a, op, b, coins: [8 монети]}.
+    start() { MATH_BANK.attach(this).then(() => { if (this.mb && !this.mb.units.length) this.mb = null; super.start(); }); }
     render() {
       this.range = Number(this.s.range || 6);
       this.shell.arena.innerHTML = `<svg class="sea" viewBox="0 0 1200 760" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><use href="#scene-treasure"/></svg>
@@ -16,13 +18,16 @@
       this.slots.forEach(s => s.addEventListener("pointerdown", e => { e.preventDefault(); if (s.dataset.coin) this.returnCoin(s); }));
     }
     startRound() {
-      this.ex = example(this.range, this.s.op); this.current = { text: `? ? ? = ${this.ex.ans}`, answer: `${this.ex.a} ${this.ex.op} ${this.ex.b}` };
-      const vals = [String(this.ex.a), String(this.ex.b), this.ex.op]; if (this.s.op === "mix") vals.push(this.ex.op === "+" ? "−" : "+");
+      const mu = this.mb && this.mb.units[this.idx % this.mb.units.length];
+      this.ex = mu ? { a: mu.a, b: mu.b, op: mu.op === "+" ? "+" : "−", ans: mu.op === "+" ? mu.a + mu.b : mu.a - mu.b } : example(this.range, this.s.op);
+      this.current = { text: `? ? ? = ${this.ex.ans}`, answer: `${this.ex.a} ${this.ex.op} ${this.ex.b}` };
+      let vals = [String(this.ex.a), String(this.ex.b), this.ex.op]; if (this.s.op === "mix") vals.push(this.ex.op === "+" ? "−" : "+");
+      if (mu && mu.coins) vals = mu.coins.map(v => v === "-" ? "−" : v);
       while (vals.length < 8) { const v = String(rnd(this.range + 1)); if (!vals.includes(v)) vals.push(v); }
       this.coins.innerHTML = ""; shuffle(vals).forEach((v, i) => { const c = document.createElement("button"); c.type = "button"; c.className = "tr-coin"; c.textContent = v; c.style.setProperty("--i", i); c.addEventListener("pointerdown", e => this.pressCoin(e, c)); this.coins.appendChild(c); });
       this.slots.forEach(s => { s.textContent = ""; s.dataset.coin = ""; s.className = "tr-slot" + (s.dataset.i === "1" ? " op" : ""); });
       this.target.textContent = this.ex.ans; this.chest.className = "tr-chest"; this.pirate.className = "tr-left calm";
-      this.shell.setLabel(`Направи ${this.ex.ans}`); this.say(`Събери от монетите пример, който прави ${this.ex.ans}`);
+      this.shell.setLabel(`Направи ${this.ex.ans}`); this.prompt(`Събери от монетите пример, който прави ${this.ex.ans}`);
     }
     // Докосване (основно): монетата лети до мястото си. Влачене (алтернатива): ако пръстът се премести, монетата следва и се пуска върху място.
     pressCoin(e, coin) {
@@ -48,7 +53,7 @@
       // анимация: монетата лети от мястото си до слота
       const cr = coin.getBoundingClientRect(), sr = slot.getBoundingClientRect();
       const fly = document.createElement("div"); fly.className = "tr-ghost fly"; fly.textContent = coin.textContent; fly.style.left = (cr.x + cr.width / 2) + "px"; fly.style.top = (cr.y + cr.height / 2) + "px"; document.body.appendChild(fly);
-      coin.disabled = true; coin.classList.add("used"); slot.dataset.coin = coin.textContent; this.say(coin.textContent.replace("+", "плюс").replace("−", "минус"));
+      coin.disabled = true; coin.classList.add("used"); slot.dataset.coin = coin.textContent; this.prompt(coin.textContent.replace("+", "плюс").replace("−", "минус"));
       requestAnimationFrame(() => { fly.style.left = (sr.x + sr.width / 2) + "px"; fly.style.top = (sr.y + sr.height / 2) + "px"; fly.style.transform = "translate(-50%,-50%) scale(.9) rotate(360deg)"; });
       setTimeout(() => { fly.remove(); slot.textContent = coin.textContent; slot.classList.add("landed"); setTimeout(() => slot.classList.remove("landed"), 300); if (this.slots.every(s => s.dataset.coin)) this.check(); }, 380);
     }
@@ -57,7 +62,7 @@
       const a = Number(this.slots[0].dataset.coin), op = this.slots[1].dataset.coin, b = Number(this.slots[2].dataset.coin);
       const res = op === "+" ? a + b : a - b; const ok = res === this.ex.ans && res >= 0;
       if (!this.answer(ok, { text: this.current.text, answer: this.current.answer, given: `${a} ${op} ${b}` })) return;
-      if (ok) { this.pirate.className = "tr-left happy"; this.chest.classList.add("full"); this.slots.forEach(s => s.classList.add("right")); this.shell.flash("Точно така!", "good"); this.say(`Точно така! ${a} ${op === "+" ? "плюс" : "минус"} ${b} е ${this.ex.ans}`); this.advance(1500); }
+      if (ok) { this.pirate.className = "tr-left happy"; this.chest.classList.add("full"); this.slots.forEach(s => s.classList.add("right")); this.shell.flash("Точно така!", "good"); this.say("Точно така!"); this.advance(1500); }
       else { this.pirate.className = "tr-left sad"; this.slots.forEach(s => s.classList.add("wrong")); this.shell.flash(`${a} ${op} ${b} = ${res}, а трябва ${this.ex.ans}`, "bad"); this.say(`Не. ${a} ${op === "+" ? "плюс" : "минус"} ${b} е ${res}, а трябва ${this.ex.ans}`); this.advance(2600); }
     }
   }

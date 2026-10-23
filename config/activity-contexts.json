@@ -1,0 +1,8451 @@
+{
+"version": 3,
+"generated": "2026-10-23",
+"contexts": {
+"BK01.R1.phonemicHearing.1": {
+"context_id": "BK01.R1.phonemicHearing.1",
+"lesson": "BK01",
+"round": 1,
+"game": "phonemicHearing",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E1",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 8,
+"role": "BASELINE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK01.R2.alphabet.1": {
+"context_id": "BK01.R2.alphabet.1",
+"lesson": "BK01",
+"round": 2,
+"game": "alphabet",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"letters": "АУИ",
+"level": "1"
+},
+"assessed_skill": "E1",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 12,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"BK01.R3.soundLetterParsing.1": {
+"context_id": "BK01.R3.soundLetterParsing.1",
+"lesson": "BK01",
+"round": 3,
+"game": "soundLetterParsing",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E1",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 10,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK01.R4.phonemicHearing.2": {
+"context_id": "BK01.R4.phonemicHearing.2",
+"lesson": "BK01",
+"round": 4,
+"game": "phonemicHearing",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E1",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK01.R4.letterOfElements.1": {
+"context_id": "BK01.R4.letterOfElements.1",
+"lesson": "BK01",
+"round": 4,
+"game": "letterOfElements",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"letters": "АУИ",
+"level": "1"
+},
+"assessed_skill": "E1",
+"secondary_skill": "E10",
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK02.R1.phonemicHearing.1": {
+"context_id": "BK02.R1.phonemicHearing.1",
+"lesson": "BK02",
+"round": 1,
+"game": "phonemicHearing",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E1",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 8,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK02.R2.alphabet.1": {
+"context_id": "BK02.R2.alphabet.1",
+"lesson": "BK02",
+"round": 2,
+"game": "alphabet",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"letters": "АУИОЕЪ",
+"level": "1"
+},
+"assessed_skill": "E1",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 12,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"BK02.R3.soundLetterParsing.1": {
+"context_id": "BK02.R3.soundLetterParsing.1",
+"lesson": "BK02",
+"round": 3,
+"game": "soundLetterParsing",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E1",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 10,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK02.R4.phonemicHearing.2": {
+"context_id": "BK02.R4.phonemicHearing.2",
+"lesson": "BK02",
+"round": 4,
+"game": "phonemicHearing",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E1",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK02.R4.letterOfElements.1": {
+"context_id": "BK02.R4.letterOfElements.1",
+"lesson": "BK02",
+"round": 4,
+"game": "letterOfElements",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"letters": "АУИОЕЪ",
+"level": "1"
+},
+"assessed_skill": "E1",
+"secondary_skill": "E10",
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK03.R1.phonemicHearing.1": {
+"context_id": "BK03.R1.phonemicHearing.1",
+"lesson": "BK03",
+"round": 1,
+"game": "phonemicHearing",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E1",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 8,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK03.R2.constructor.1": {
+"context_id": "BK03.R2.constructor.1",
+"lesson": "BK03",
+"round": 2,
+"game": "constructor",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E2",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 12,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"BK03.R3.soundLetterParsing.2": {
+"context_id": "BK03.R3.soundLetterParsing.2",
+"lesson": "BK03",
+"round": 3,
+"game": "soundLetterParsing",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E2",
+"secondary_skill": "E1",
+"measurement": true,
+"planned_items": 10,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK03.R4.constructor.1": {
+"context_id": "BK03.R4.constructor.1",
+"lesson": "BK03",
+"round": 4,
+"game": "constructor",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK03.R4.letterOfElements.2": {
+"context_id": "BK03.R4.letterOfElements.2",
+"lesson": "BK03",
+"round": 4,
+"game": "letterOfElements",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"letters": "МН",
+"level": "2"
+},
+"assessed_skill": "E1",
+"secondary_skill": "E10",
+"measurement": true,
+"planned_items": 4,
+"role": "SECONDARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK04.R1.constructor.1": {
+"context_id": "BK04.R1.constructor.1",
+"lesson": "BK04",
+"round": 1,
+"game": "constructor",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 8,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK04.R2.wordOrder.1": {
+"context_id": "BK04.R2.wordOrder.1",
+"lesson": "BK04",
+"round": 2,
+"game": "wordOrder",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E2",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 12,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"BK04.R3.trueWords.1": {
+"context_id": "BK04.R3.trueWords.1",
+"lesson": "BK04",
+"round": 3,
+"game": "trueWords",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 10,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK04.R4.constructor.2": {
+"context_id": "BK04.R4.constructor.2",
+"lesson": "BK04",
+"round": 4,
+"game": "constructor",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E3",
+"secondary_skill": "E2",
+"measurement": true,
+"planned_items": 6,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK04.R4.letterOfElements.2": {
+"context_id": "BK04.R4.letterOfElements.2",
+"lesson": "BK04",
+"round": 4,
+"game": "letterOfElements",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"letters": "ЛР",
+"level": "2"
+},
+"assessed_skill": "E1",
+"secondary_skill": "E10",
+"measurement": true,
+"planned_items": 4,
+"role": "SECONDARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK05.R1.trueWords.1": {
+"context_id": "BK05.R1.trueWords.1",
+"lesson": "BK05",
+"round": 1,
+"game": "trueWords",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 8,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK05.R2.phonemicHearing.1": {
+"context_id": "BK05.R2.phonemicHearing.1",
+"lesson": "BK05",
+"round": 2,
+"game": "phonemicHearing",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E1",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 12,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"BK05.R3.phonemicHearing.2": {
+"context_id": "BK05.R3.phonemicHearing.2",
+"lesson": "BK05",
+"round": 3,
+"game": "phonemicHearing",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E1",
+"secondary_skill": "E2",
+"measurement": true,
+"planned_items": 10,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK05.R4.constructor.3": {
+"context_id": "BK05.R4.constructor.3",
+"lesson": "BK05",
+"round": 4,
+"game": "constructor",
+"settings": {
+"level": "3"
+},
+"map_settings": {
+"level": "3"
+},
+"assessed_skill": "E3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK05.R4.letterOfElements.2": {
+"context_id": "BK05.R4.letterOfElements.2",
+"lesson": "BK05",
+"round": 4,
+"game": "letterOfElements",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"letters": "ЙЮЯ",
+"level": "2"
+},
+"assessed_skill": "E1",
+"secondary_skill": "E10",
+"measurement": true,
+"planned_items": 4,
+"role": "SECONDARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK06.R1.trueWords.2": {
+"context_id": "BK06.R1.trueWords.2",
+"lesson": "BK06",
+"round": 1,
+"game": "trueWords",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 8,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK06.R2.phonetics.2": {
+"context_id": "BK06.R2.phonetics.2",
+"lesson": "BK06",
+"round": 2,
+"game": "phonetics",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E1",
+"secondary_skill": "E4",
+"measurement": false,
+"planned_items": 12,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"BK06.R3.trueWords.2": {
+"context_id": "BK06.R3.trueWords.2",
+"lesson": "BK06",
+"round": 3,
+"game": "trueWords",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E4",
+"secondary_skill": "E3",
+"measurement": true,
+"planned_items": 10,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK06.R4.wordOrder.4": {
+"context_id": "BK06.R4.wordOrder.4",
+"lesson": "BK06",
+"round": 4,
+"game": "wordOrder",
+"settings": {
+"level": "4"
+},
+"map_settings": {
+"level": "4"
+},
+"assessed_skill": "E4",
+"secondary_skill": "E3",
+"measurement": true,
+"planned_items": 8,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK06.R4.soundLetterParsing.3": {
+"context_id": "BK06.R4.soundLetterParsing.3",
+"lesson": "BK06",
+"round": 4,
+"game": "soundLetterParsing",
+"settings": {
+"level": "3"
+},
+"map_settings": {
+"level": "3"
+},
+"assessed_skill": "E1",
+"secondary_skill": "E2",
+"measurement": true,
+"planned_items": 4,
+"role": "SECONDARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK07.R1.trueWords.2": {
+"context_id": "BK07.R1.trueWords.2",
+"lesson": "BK07",
+"round": 1,
+"game": "trueWords",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 8,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK07.R2.phonetics.2": {
+"context_id": "BK07.R2.phonetics.2",
+"lesson": "BK07",
+"round": 2,
+"game": "phonetics",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E1",
+"secondary_skill": "E4",
+"measurement": false,
+"planned_items": 12,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"BK07.R3.constructor.3": {
+"context_id": "BK07.R3.constructor.3",
+"lesson": "BK07",
+"round": 3,
+"game": "constructor",
+"settings": {
+"level": "3"
+},
+"map_settings": {
+"level": "3"
+},
+"assessed_skill": "E3",
+"secondary_skill": "E4",
+"measurement": true,
+"planned_items": 10,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK07.R4.wordOrder.3": {
+"context_id": "BK07.R4.wordOrder.3",
+"lesson": "BK07",
+"round": 4,
+"game": "wordOrder",
+"settings": {
+"level": "3"
+},
+"map_settings": {
+"level": "3"
+},
+"assessed_skill": "E3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK07.R4.letterOfElements.2": {
+"context_id": "BK07.R4.letterOfElements.2",
+"lesson": "BK07",
+"round": 4,
+"game": "letterOfElements",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"letters": "БП",
+"level": "2"
+},
+"assessed_skill": "E1",
+"secondary_skill": "E10",
+"measurement": true,
+"planned_items": 4,
+"role": "SECONDARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK08.R1.constructor.3": {
+"context_id": "BK08.R1.constructor.3",
+"lesson": "BK08",
+"round": 1,
+"game": "constructor",
+"settings": {
+"level": "3"
+},
+"map_settings": {
+"level": "3"
+},
+"assessed_skill": "E3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 8,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK08.R2.phonetics.2": {
+"context_id": "BK08.R2.phonetics.2",
+"lesson": "BK08",
+"round": 2,
+"game": "phonetics",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E1",
+"secondary_skill": "E4",
+"measurement": false,
+"planned_items": 12,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"BK08.R3.trueWords.2": {
+"context_id": "BK08.R3.trueWords.2",
+"lesson": "BK08",
+"round": 3,
+"game": "trueWords",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E3",
+"secondary_skill": "E4",
+"measurement": true,
+"planned_items": 10,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK08.R4.wordOrder.3": {
+"context_id": "BK08.R4.wordOrder.3",
+"lesson": "BK08",
+"round": 4,
+"game": "wordOrder",
+"settings": {
+"level": "3"
+},
+"map_settings": {
+"level": "3"
+},
+"assessed_skill": "E3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK08.R4.letterOfElements.2": {
+"context_id": "BK08.R4.letterOfElements.2",
+"lesson": "BK08",
+"round": 4,
+"game": "letterOfElements",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"letters": "ГК",
+"level": "2"
+},
+"assessed_skill": "E1",
+"secondary_skill": "E10",
+"measurement": true,
+"planned_items": 4,
+"role": "SECONDARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK09.R1.trueWords.2": {
+"context_id": "BK09.R1.trueWords.2",
+"lesson": "BK09",
+"round": 1,
+"game": "trueWords",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 8,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK09.R2.phonetics.2": {
+"context_id": "BK09.R2.phonetics.2",
+"lesson": "BK09",
+"round": 2,
+"game": "phonetics",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E1",
+"secondary_skill": "E4",
+"measurement": false,
+"planned_items": 12,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"BK09.R3.wordOrder.4": {
+"context_id": "BK09.R3.wordOrder.4",
+"lesson": "BK09",
+"round": 3,
+"game": "wordOrder",
+"settings": {
+"level": "4"
+},
+"map_settings": {
+"level": "4"
+},
+"assessed_skill": "E4",
+"secondary_skill": "E3",
+"measurement": true,
+"planned_items": 10,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK09.R4.constructor.3": {
+"context_id": "BK09.R4.constructor.3",
+"lesson": "BK09",
+"round": 4,
+"game": "constructor",
+"settings": {
+"level": "3"
+},
+"map_settings": {
+"level": "3"
+},
+"assessed_skill": "E3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK09.R4.letterOfElements.2": {
+"context_id": "BK09.R4.letterOfElements.2",
+"lesson": "BK09",
+"round": 4,
+"game": "letterOfElements",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"letters": "ЗС",
+"level": "2"
+},
+"assessed_skill": "E1",
+"secondary_skill": "E10",
+"measurement": true,
+"planned_items": 4,
+"role": "SECONDARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK10.R1.wordOrder.4": {
+"context_id": "BK10.R1.wordOrder.4",
+"lesson": "BK10",
+"round": 1,
+"game": "wordOrder",
+"settings": {
+"level": "4"
+},
+"map_settings": {
+"level": "4"
+},
+"assessed_skill": "E4",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 8,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK10.R2.phonetics.2": {
+"context_id": "BK10.R2.phonetics.2",
+"lesson": "BK10",
+"round": 2,
+"game": "phonetics",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E1",
+"secondary_skill": "E4",
+"measurement": false,
+"planned_items": 12,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"BK10.R3.constructor.4": {
+"context_id": "BK10.R3.constructor.4",
+"lesson": "BK10",
+"round": 3,
+"game": "constructor",
+"settings": {
+"level": "4"
+},
+"map_settings": {
+"level": "4"
+},
+"assessed_skill": "E3",
+"secondary_skill": "E4",
+"measurement": true,
+"planned_items": 10,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK10.R4.buildSentence": {
+"context_id": "BK10.R4.buildSentence",
+"lesson": "BK10",
+"round": 4,
+"game": "buildSentence",
+"settings": {},
+"map_settings": {
+"dataComplexity": "1"
+},
+"assessed_skill": "E7",
+"secondary_skill": "E3",
+"measurement": true,
+"planned_items": 10,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK11.R1.constructor.3": {
+"context_id": "BK11.R1.constructor.3",
+"lesson": "BK11",
+"round": 1,
+"game": "constructor",
+"settings": {
+"level": "3"
+},
+"map_settings": {
+"level": "3"
+},
+"assessed_skill": "E3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 8,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK11.R2.phonetics.2": {
+"context_id": "BK11.R2.phonetics.2",
+"lesson": "BK11",
+"round": 2,
+"game": "phonetics",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E1",
+"secondary_skill": "E4",
+"measurement": false,
+"planned_items": 12,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"BK11.R3.trueWords.2": {
+"context_id": "BK11.R3.trueWords.2",
+"lesson": "BK11",
+"round": 3,
+"game": "trueWords",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E4",
+"secondary_skill": "E3",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK11.R3.words.1": {
+"context_id": "BK11.R3.words.1",
+"lesson": "BK11",
+"round": 3,
+"game": "words",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E6",
+"secondary_skill": "E3",
+"measurement": true,
+"planned_items": 6,
+"role": "SECONDARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK11.R4.wordOrder.5": {
+"context_id": "BK11.R4.wordOrder.5",
+"lesson": "BK11",
+"round": 4,
+"game": "wordOrder",
+"settings": {
+"level": "5"
+},
+"map_settings": {
+"level": "5"
+},
+"assessed_skill": "E4",
+"secondary_skill": "E7",
+"measurement": true,
+"planned_items": 6,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK11.R4.letterOfElements.2": {
+"context_id": "BK11.R4.letterOfElements.2",
+"lesson": "BK11",
+"round": 4,
+"game": "letterOfElements",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"letters": "ЖШ",
+"level": "2"
+},
+"assessed_skill": "E1",
+"secondary_skill": "E10",
+"measurement": true,
+"planned_items": 4,
+"role": "SECONDARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK12.R1.trueWords.2": {
+"context_id": "BK12.R1.trueWords.2",
+"lesson": "BK12",
+"round": 1,
+"game": "trueWords",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E4",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 8,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK12.R2.phonemicHearing.1": {
+"context_id": "BK12.R2.phonemicHearing.1",
+"lesson": "BK12",
+"round": 2,
+"game": "phonemicHearing",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E1",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 12,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"BK12.R3.constructor.3": {
+"context_id": "BK12.R3.constructor.3",
+"lesson": "BK12",
+"round": 3,
+"game": "constructor",
+"settings": {
+"level": "3"
+},
+"map_settings": {
+"level": "3"
+},
+"assessed_skill": "E3",
+"secondary_skill": "E4",
+"measurement": true,
+"planned_items": 10,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK12.R4.soundLetterParsing.2": {
+"context_id": "BK12.R4.soundLetterParsing.2",
+"lesson": "BK12",
+"round": 4,
+"game": "soundLetterParsing",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E2",
+"secondary_skill": "E1",
+"measurement": true,
+"planned_items": 6,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK12.R4.letterOfElements.2": {
+"context_id": "BK12.R4.letterOfElements.2",
+"lesson": "BK12",
+"round": 4,
+"game": "letterOfElements",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"letters": "ХЧЦ",
+"level": "2"
+},
+"assessed_skill": "E1",
+"secondary_skill": "E10",
+"measurement": true,
+"planned_items": 4,
+"role": "SECONDARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK13.R1.constructor.3": {
+"context_id": "BK13.R1.constructor.3",
+"lesson": "BK13",
+"round": 1,
+"game": "constructor",
+"settings": {
+"level": "3"
+},
+"map_settings": {
+"level": "3"
+},
+"assessed_skill": "E3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 8,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK13.R2.wordOrder.2": {
+"context_id": "BK13.R2.wordOrder.2",
+"lesson": "BK13",
+"round": 2,
+"game": "wordOrder",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E2",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 12,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"BK13.R3.trueWords.2": {
+"context_id": "BK13.R3.trueWords.2",
+"lesson": "BK13",
+"round": 3,
+"game": "trueWords",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E4",
+"secondary_skill": "E3",
+"measurement": true,
+"planned_items": 10,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK13.R4.wordOrder.4": {
+"context_id": "BK13.R4.wordOrder.4",
+"lesson": "BK13",
+"round": 4,
+"game": "wordOrder",
+"settings": {
+"level": "4"
+},
+"map_settings": {
+"level": "4"
+},
+"assessed_skill": "E4",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK13.R4.letterOfElements.2": {
+"context_id": "BK13.R4.letterOfElements.2",
+"lesson": "BK13",
+"round": 4,
+"game": "letterOfElements",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"letters": "Щь",
+"level": "2"
+},
+"assessed_skill": "E1",
+"secondary_skill": "E10",
+"measurement": true,
+"planned_items": 4,
+"role": "SECONDARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK14.R1.alphabet.1": {
+"context_id": "BK14.R1.alphabet.1",
+"lesson": "BK14",
+"round": 1,
+"game": "alphabet",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E1",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 20,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK14.R1.letterOfElements.2": {
+"context_id": "BK14.R1.letterOfElements.2",
+"lesson": "BK14",
+"round": 1,
+"game": "letterOfElements",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"letters": "all",
+"level": "2"
+},
+"assessed_skill": "E1",
+"secondary_skill": "E10",
+"measurement": true,
+"planned_items": 4,
+"role": "SECONDARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK14.R2.phonemicHearing.2": {
+"context_id": "BK14.R2.phonemicHearing.2",
+"lesson": "BK14",
+"round": 2,
+"game": "phonemicHearing",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E1",
+"secondary_skill": "E4",
+"measurement": true,
+"planned_items": 8,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK14.R3.constructor.1": {
+"context_id": "BK14.R3.constructor.1",
+"lesson": "BK14",
+"round": 3,
+"game": "constructor",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "SECONDARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK14.R3.trueWords.1": {
+"context_id": "BK14.R3.trueWords.1",
+"lesson": "BK14",
+"round": 3,
+"game": "trueWords",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E3",
+"secondary_skill": "E4",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK14.R4.conformity.1": {
+"context_id": "BK14.R4.conformity.1",
+"lesson": "BK14",
+"round": 4,
+"game": "conformity",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E8",
+"secondary_skill": "E3",
+"measurement": true,
+"planned_items": 3,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"BK14.R4.buildSentence": {
+"context_id": "BK14.R4.buildSentence",
+"lesson": "BK14",
+"round": 4,
+"game": "buildSentence",
+"settings": {},
+"map_settings": {
+"dataComplexity": "1"
+},
+"assessed_skill": "E7",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 3,
+"role": "SECONDARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH01.R1.constructor.1": {
+"context_id": "CH01.R1.constructor.1",
+"lesson": "CH01",
+"round": 1,
+"game": "constructor",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "BASELINE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH01.R2.wordOrder.2": {
+"context_id": "CH01.R2.wordOrder.2",
+"lesson": "CH01",
+"round": 2,
+"game": "wordOrder",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E2",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH01.R3.trueWords.1": {
+"context_id": "CH01.R3.trueWords.1",
+"lesson": "CH01",
+"round": 3,
+"game": "trueWords",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH01.R4.constructor.3": {
+"context_id": "CH01.R4.constructor.3",
+"lesson": "CH01",
+"round": 4,
+"game": "constructor",
+"settings": {
+"level": "3"
+},
+"map_settings": {
+"level": "3"
+},
+"assessed_skill": "E3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH02.R1.trueWords.1": {
+"context_id": "CH02.R1.trueWords.1",
+"lesson": "CH02",
+"round": 1,
+"game": "trueWords",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH02.R2.wordOrder.4": {
+"context_id": "CH02.R2.wordOrder.4",
+"lesson": "CH02",
+"round": 2,
+"game": "wordOrder",
+"settings": {
+"level": "4"
+},
+"map_settings": {
+"level": "4"
+},
+"assessed_skill": "E4",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH02.R3.trueWords.2": {
+"context_id": "CH02.R3.trueWords.2",
+"lesson": "CH02",
+"round": 3,
+"game": "trueWords",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E4",
+"secondary_skill": "E3",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH02.R4.wordOrder.5": {
+"context_id": "CH02.R4.wordOrder.5",
+"lesson": "CH02",
+"round": 4,
+"game": "wordOrder",
+"settings": {
+"level": "5"
+},
+"map_settings": {
+"level": "5"
+},
+"assessed_skill": "E4",
+"secondary_skill": "E7",
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH03.R1.wordOrder.4": {
+"context_id": "CH03.R1.wordOrder.4",
+"lesson": "CH03",
+"round": 1,
+"game": "wordOrder",
+"settings": {
+"level": "4"
+},
+"map_settings": {
+"level": "4"
+},
+"assessed_skill": "E4",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH03.R2.accents": {
+"context_id": "CH03.R2.accents",
+"lesson": "CH03",
+"round": 2,
+"game": "accents",
+"settings": {},
+"map_settings": {
+"syllables": "2"
+},
+"assessed_skill": "E5",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH03.R3.accents": {
+"context_id": "CH03.R3.accents",
+"lesson": "CH03",
+"round": 3,
+"game": "accents",
+"settings": {},
+"map_settings": {
+"syllables": "2"
+},
+"assessed_skill": "E5",
+"secondary_skill": "E3",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH03.R4.constructor.4": {
+"context_id": "CH03.R4.constructor.4",
+"lesson": "CH03",
+"round": 4,
+"game": "constructor",
+"settings": {
+"level": "4"
+},
+"map_settings": {
+"level": "4"
+},
+"assessed_skill": "E3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH04.R1.accents": {
+"context_id": "CH04.R1.accents",
+"lesson": "CH04",
+"round": 1,
+"game": "accents",
+"settings": {},
+"map_settings": {},
+"assessed_skill": "E5",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH04.R2.wordContext": {
+"context_id": "CH04.R2.wordContext",
+"lesson": "CH04",
+"round": 2,
+"game": "wordContext",
+"settings": {},
+"map_settings": {},
+"assessed_skill": "E6",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH04.R3.conformity.1": {
+"context_id": "CH04.R3.conformity.1",
+"lesson": "CH04",
+"round": 3,
+"game": "conformity",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E8",
+"secondary_skill": "E6",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH04.R4.words.1": {
+"context_id": "CH04.R4.words.1",
+"lesson": "CH04",
+"round": 4,
+"game": "words",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E6",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH05.R1.conformity.1": {
+"context_id": "CH05.R1.conformity.1",
+"lesson": "CH05",
+"round": 1,
+"game": "conformity",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E8",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH05.R2.words.3": {
+"context_id": "CH05.R2.words.3",
+"lesson": "CH05",
+"round": 2,
+"game": "words",
+"settings": {
+"level": "3"
+},
+"map_settings": {
+"level": "3"
+},
+"assessed_skill": "E6",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH05.R3.words.3": {
+"context_id": "CH05.R3.words.3",
+"lesson": "CH05",
+"round": 3,
+"game": "words",
+"settings": {
+"level": "3"
+},
+"map_settings": {
+"level": "3"
+},
+"assessed_skill": "E6",
+"secondary_skill": "E7",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH05.R4.buildSentence": {
+"context_id": "CH05.R4.buildSentence",
+"lesson": "CH05",
+"round": 4,
+"game": "buildSentence",
+"settings": {},
+"map_settings": {
+"dataComplexity": "1"
+},
+"assessed_skill": "E7",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH06.R1.words.3": {
+"context_id": "CH06.R1.words.3",
+"lesson": "CH06",
+"round": 1,
+"game": "words",
+"settings": {
+"level": "3"
+},
+"map_settings": {
+"level": "3"
+},
+"assessed_skill": "E6",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH06.R2.words.action.1": {
+"context_id": "CH06.R2.words.action.1",
+"lesson": "CH06",
+"round": 2,
+"game": "words",
+"settings": {
+"theme": "action",
+"level": "1"
+},
+"map_settings": {
+"theme": "action",
+"level": "1"
+},
+"assessed_skill": "E6",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH06.R3.words.2": {
+"context_id": "CH06.R3.words.2",
+"lesson": "CH06",
+"round": 3,
+"game": "words",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E6",
+"secondary_skill": "E7",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH06.R4.buildSentence": {
+"context_id": "CH06.R4.buildSentence",
+"lesson": "CH06",
+"round": 4,
+"game": "buildSentence",
+"settings": {},
+"map_settings": {
+"dataComplexity": "1"
+},
+"assessed_skill": "E7",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH07.R1.words.2": {
+"context_id": "CH07.R1.words.2",
+"lesson": "CH07",
+"round": 1,
+"game": "words",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E6",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH07.R2.words.sign.1": {
+"context_id": "CH07.R2.words.sign.1",
+"lesson": "CH07",
+"round": 2,
+"game": "words",
+"settings": {
+"theme": "sign",
+"level": "1"
+},
+"map_settings": {
+"theme": "sign",
+"level": "1"
+},
+"assessed_skill": "E6",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH07.R3.words.2": {
+"context_id": "CH07.R3.words.2",
+"lesson": "CH07",
+"round": 3,
+"game": "words",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E6",
+"secondary_skill": "E7",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH07.R4.conformity.2": {
+"context_id": "CH07.R4.conformity.2",
+"lesson": "CH07",
+"round": 4,
+"game": "conformity",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E8",
+"secondary_skill": "E6",
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH08.R1.words.2": {
+"context_id": "CH08.R1.words.2",
+"lesson": "CH08",
+"round": 1,
+"game": "words",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E6",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH08.R2.conformity.1": {
+"context_id": "CH08.R2.conformity.1",
+"lesson": "CH08",
+"round": 2,
+"game": "conformity",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E7",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH08.R3.conformity.1": {
+"context_id": "CH08.R3.conformity.1",
+"lesson": "CH08",
+"round": 3,
+"game": "conformity",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E7",
+"secondary_skill": "E8",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH08.R4.buildSentence": {
+"context_id": "CH08.R4.buildSentence",
+"lesson": "CH08",
+"round": 4,
+"game": "buildSentence",
+"settings": {},
+"map_settings": {
+"dataComplexity": "2"
+},
+"assessed_skill": "E7",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH09.R1.conformity.1": {
+"context_id": "CH09.R1.conformity.1",
+"lesson": "CH09",
+"round": 1,
+"game": "conformity",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E7",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH09.R2.buildSentence": {
+"context_id": "CH09.R2.buildSentence",
+"lesson": "CH09",
+"round": 2,
+"game": "buildSentence",
+"settings": {},
+"map_settings": {
+"dataComplexity": "1"
+},
+"assessed_skill": "E7",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH09.R3.buildSentence": {
+"context_id": "CH09.R3.buildSentence",
+"lesson": "CH09",
+"round": 3,
+"game": "buildSentence",
+"settings": {},
+"map_settings": {
+"dataComplexity": "2"
+},
+"assessed_skill": "E7",
+"secondary_skill": "E8",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH09.R4.conformity.2": {
+"context_id": "CH09.R4.conformity.2",
+"lesson": "CH09",
+"round": 4,
+"game": "conformity",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E8",
+"secondary_skill": "E7",
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH10.R1.trueWords.1": {
+"context_id": "CH10.R1.trueWords.1",
+"lesson": "CH10",
+"round": 1,
+"game": "trueWords",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH10.R2.conformity.1": {
+"context_id": "CH10.R2.conformity.1",
+"lesson": "CH10",
+"round": 2,
+"game": "conformity",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E8",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH10.R3.text.question_evidence": {
+"context_id": "CH10.R3.text.question_evidence",
+"lesson": "CH10",
+"round": 3,
+"game": "text",
+"settings": {
+"task": "question_evidence"
+},
+"map_settings": {
+"task": "question_evidence"
+},
+"assessed_skill": "E8",
+"secondary_skill": "E9",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH10.R4.buildSentence": {
+"context_id": "CH10.R4.buildSentence",
+"lesson": "CH10",
+"round": 4,
+"game": "buildSentence",
+"settings": {},
+"map_settings": {
+"dataComplexity": "2"
+},
+"assessed_skill": "E7",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH11.R1.conformity.2": {
+"context_id": "CH11.R1.conformity.2",
+"lesson": "CH11",
+"round": 1,
+"game": "conformity",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E8",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH11.R2.sayDifferently.1": {
+"context_id": "CH11.R2.sayDifferently.1",
+"lesson": "CH11",
+"round": 2,
+"game": "sayDifferently",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E6",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH11.R3.sayDifferently.2": {
+"context_id": "CH11.R3.sayDifferently.2",
+"lesson": "CH11",
+"round": 3,
+"game": "sayDifferently",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E6",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH11.R4.wordContext": {
+"context_id": "CH11.R4.wordContext",
+"lesson": "CH11",
+"round": 4,
+"game": "wordContext",
+"settings": {},
+"map_settings": {},
+"assessed_skill": "E6",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH12.R1.sayDifferently.2": {
+"context_id": "CH12.R1.sayDifferently.2",
+"lesson": "CH12",
+"round": 1,
+"game": "sayDifferently",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E6",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH12.R2.buildSentence": {
+"context_id": "CH12.R2.buildSentence",
+"lesson": "CH12",
+"round": 2,
+"game": "buildSentence",
+"settings": {},
+"map_settings": {
+"dataComplexity": "1"
+},
+"assessed_skill": "E7",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH12.R3.buildSentence": {
+"context_id": "CH12.R3.buildSentence",
+"lesson": "CH12",
+"round": 3,
+"game": "buildSentence",
+"settings": {},
+"map_settings": {
+"dataComplexity": "2"
+},
+"assessed_skill": "E7",
+"secondary_skill": "E8",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH12.R4.wordOrder.5": {
+"context_id": "CH12.R4.wordOrder.5",
+"lesson": "CH12",
+"round": 4,
+"game": "wordOrder",
+"settings": {
+"level": "5"
+},
+"map_settings": {
+"level": "5"
+},
+"assessed_skill": "E4",
+"secondary_skill": "E7",
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH13.R1.buildSentence": {
+"context_id": "CH13.R1.buildSentence",
+"lesson": "CH13",
+"round": 1,
+"game": "buildSentence",
+"settings": {},
+"map_settings": {
+"dataComplexity": "1"
+},
+"assessed_skill": "E7",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH13.R2.intonation": {
+"context_id": "CH13.R2.intonation",
+"lesson": "CH13",
+"round": 2,
+"game": "intonation",
+"settings": {},
+"map_settings": {},
+"assessed_skill": "E7",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH13.R3.intonation": {
+"context_id": "CH13.R3.intonation",
+"lesson": "CH13",
+"round": 3,
+"game": "intonation",
+"settings": {},
+"map_settings": {},
+"assessed_skill": "E7",
+"secondary_skill": "E5",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH13.R4.buildSentence": {
+"context_id": "CH13.R4.buildSentence",
+"lesson": "CH13",
+"round": 4,
+"game": "buildSentence",
+"settings": {},
+"map_settings": {
+"dataComplexity": "2"
+},
+"assessed_skill": "E7",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH14.R1.buildSentence": {
+"context_id": "CH14.R1.buildSentence",
+"lesson": "CH14",
+"round": 1,
+"game": "buildSentence",
+"settings": {},
+"map_settings": {
+"dataComplexity": "1"
+},
+"assessed_skill": "E7",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH14.R2.conventions": {
+"context_id": "CH14.R2.conventions",
+"lesson": "CH14",
+"round": 2,
+"game": "conventions",
+"settings": {},
+"map_settings": {},
+"assessed_skill": "E10",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH14.R3.conventions": {
+"context_id": "CH14.R3.conventions",
+"lesson": "CH14",
+"round": 3,
+"game": "conventions",
+"settings": {},
+"map_settings": {},
+"assessed_skill": "E10",
+"secondary_skill": "E7",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH14.R4.conformity.2": {
+"context_id": "CH14.R4.conformity.2",
+"lesson": "CH14",
+"round": 4,
+"game": "conformity",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E8",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH15.R1.wordOrder.5": {
+"context_id": "CH15.R1.wordOrder.5",
+"lesson": "CH15",
+"round": 1,
+"game": "wordOrder",
+"settings": {
+"level": "5"
+},
+"map_settings": {
+"level": "5"
+},
+"assessed_skill": "E4",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH15.R2.editSentence": {
+"context_id": "CH15.R2.editSentence",
+"lesson": "CH15",
+"round": 2,
+"game": "editSentence",
+"settings": {},
+"map_settings": {},
+"assessed_skill": "E4",
+"secondary_skill": "E7",
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH15.R3.editSentence": {
+"context_id": "CH15.R3.editSentence",
+"lesson": "CH15",
+"round": 3,
+"game": "editSentence",
+"settings": {},
+"map_settings": {},
+"assessed_skill": "E4",
+"secondary_skill": "E7",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH15.R4.editSentence": {
+"context_id": "CH15.R4.editSentence",
+"lesson": "CH15",
+"round": 4,
+"game": "editSentence",
+"settings": {},
+"map_settings": {},
+"assessed_skill": "E4",
+"secondary_skill": "E7",
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH16.R1.trueWords.2": {
+"context_id": "CH16.R1.trueWords.2",
+"lesson": "CH16",
+"round": 1,
+"game": "trueWords",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E4",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH16.R2.conformity.1": {
+"context_id": "CH16.R2.conformity.1",
+"lesson": "CH16",
+"round": 2,
+"game": "conformity",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "E8",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH16.R3.conformity.2": {
+"context_id": "CH16.R3.conformity.2",
+"lesson": "CH16",
+"round": 3,
+"game": "conformity",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E8",
+"secondary_skill": "E7",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH16.R4.text.question_evidence": {
+"context_id": "CH16.R4.text.question_evidence",
+"lesson": "CH16",
+"round": 4,
+"game": "text",
+"settings": {
+"task": "question_evidence"
+},
+"map_settings": {
+"task": "question_evidence"
+},
+"assessed_skill": "E8",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH17.R1.conformity.2": {
+"context_id": "CH17.R1.conformity.2",
+"lesson": "CH17",
+"round": 1,
+"game": "conformity",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "E8",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH17.R2.sequence.sentences": {
+"context_id": "CH17.R2.sequence.sentences",
+"lesson": "CH17",
+"round": 2,
+"game": "sequence",
+"settings": {
+"view": "sentences"
+},
+"map_settings": {
+"view": "sentences"
+},
+"assessed_skill": "E9",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 3,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH17.R3.text.title_question": {
+"context_id": "CH17.R3.text.title_question",
+"lesson": "CH17",
+"round": 3,
+"game": "text",
+"settings": {
+"task": "title_question"
+},
+"map_settings": {
+"task": "title_question"
+},
+"assessed_skill": "E8",
+"secondary_skill": "E9",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH17.R4.sequence.sentences": {
+"context_id": "CH17.R4.sequence.sentences",
+"lesson": "CH17",
+"round": 4,
+"game": "sequence",
+"settings": {
+"view": "sentences"
+},
+"map_settings": {
+"view": "sentences"
+},
+"assessed_skill": "E9",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 2,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH18.R1.text.question_evidence": {
+"context_id": "CH18.R1.text.question_evidence",
+"lesson": "CH18",
+"round": 1,
+"game": "text",
+"settings": {
+"task": "question_evidence"
+},
+"map_settings": {
+"task": "question_evidence"
+},
+"assessed_skill": "E8",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 2,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH18.R2.text.keywords": {
+"context_id": "CH18.R2.text.keywords",
+"lesson": "CH18",
+"round": 2,
+"game": "text",
+"settings": {
+"task": "keywords"
+},
+"map_settings": {
+"task": "keywords"
+},
+"assessed_skill": "E8",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 4,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH18.R3.text.title": {
+"context_id": "CH18.R3.text.title",
+"lesson": "CH18",
+"round": 3,
+"game": "text",
+"settings": {
+"task": "title"
+},
+"map_settings": {
+"task": "title"
+},
+"assessed_skill": "E8",
+"secondary_skill": "E9",
+"measurement": true,
+"planned_items": 4,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH18.R4.text.keywords": {
+"context_id": "CH18.R4.text.keywords",
+"lesson": "CH18",
+"round": 4,
+"game": "text",
+"settings": {
+"task": "keywords"
+},
+"map_settings": {
+"task": "keywords"
+},
+"assessed_skill": "E8",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH19.R1.text.keywords": {
+"context_id": "CH19.R1.text.keywords",
+"lesson": "CH19",
+"round": 1,
+"game": "text",
+"settings": {
+"task": "keywords"
+},
+"map_settings": {
+"task": "keywords"
+},
+"assessed_skill": "E8",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 2,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH19.R2.sequence.pictures": {
+"context_id": "CH19.R2.sequence.pictures",
+"lesson": "CH19",
+"round": 2,
+"game": "sequence",
+"settings": {
+"view": "pictures"
+},
+"map_settings": {
+"view": "pictures"
+},
+"assessed_skill": "E9",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 3,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH19.R3.sequence.sentences": {
+"context_id": "CH19.R3.sequence.sentences",
+"lesson": "CH19",
+"round": 3,
+"game": "sequence",
+"settings": {
+"view": "sentences"
+},
+"map_settings": {
+"view": "sentences"
+},
+"assessed_skill": "E9",
+"secondary_skill": "E8",
+"measurement": true,
+"planned_items": 3,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH19.R4.text.find_evidence": {
+"context_id": "CH19.R4.text.find_evidence",
+"lesson": "CH19",
+"round": 4,
+"game": "text",
+"settings": {
+"task": "find_evidence"
+},
+"map_settings": {
+"task": "find_evidence"
+},
+"assessed_skill": "E9",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH20.R1.sequence.sentences": {
+"context_id": "CH20.R1.sequence.sentences",
+"lesson": "CH20",
+"round": 1,
+"game": "sequence",
+"settings": {
+"view": "sentences"
+},
+"map_settings": {
+"view": "sentences"
+},
+"assessed_skill": "E9",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 1,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH20.R2.text.find_evidence": {
+"context_id": "CH20.R2.text.find_evidence",
+"lesson": "CH20",
+"round": 2,
+"game": "text",
+"settings": {
+"task": "find_evidence"
+},
+"map_settings": {
+"task": "find_evidence"
+},
+"assessed_skill": "E9",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 3,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH20.R3.text.question_evidence": {
+"context_id": "CH20.R3.text.question_evidence",
+"lesson": "CH20",
+"round": 3,
+"game": "text",
+"settings": {
+"task": "question_evidence"
+},
+"map_settings": {
+"task": "question_evidence"
+},
+"assessed_skill": "E9",
+"secondary_skill": "E8",
+"measurement": true,
+"planned_items": 5,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH20.R4.text.ask_question": {
+"context_id": "CH20.R4.text.ask_question",
+"lesson": "CH20",
+"round": 4,
+"game": "text",
+"settings": {
+"task": "ask_question"
+},
+"map_settings": {
+"task": "ask_question"
+},
+"assessed_skill": "E9",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 3,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH21.R1.text.question_evidence": {
+"context_id": "CH21.R1.text.question_evidence",
+"lesson": "CH21",
+"round": 1,
+"game": "text",
+"settings": {
+"task": "question_evidence"
+},
+"map_settings": {
+"task": "question_evidence"
+},
+"assessed_skill": "E8",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 2,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH21.R2.intonation.scene": {
+"context_id": "CH21.R2.intonation.scene",
+"lesson": "CH21",
+"round": 2,
+"game": "intonation",
+"settings": {
+"view": "scene"
+},
+"map_settings": {
+"view": "scene"
+},
+"assessed_skill": "E7",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH21.R3.intonation.scene": {
+"context_id": "CH21.R3.intonation.scene",
+"lesson": "CH21",
+"round": 3,
+"game": "intonation",
+"settings": {
+"view": "scene"
+},
+"map_settings": {
+"view": "scene"
+},
+"assessed_skill": "E7",
+"secondary_skill": "E5",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH21.R4.accents": {
+"context_id": "CH21.R4.accents",
+"lesson": "CH21",
+"round": 4,
+"game": "accents",
+"settings": {},
+"map_settings": {
+"syllables": "3"
+},
+"assessed_skill": "E5",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH22.R1.accents": {
+"context_id": "CH22.R1.accents",
+"lesson": "CH22",
+"round": 1,
+"game": "accents",
+"settings": {},
+"map_settings": {
+"syllables": "3"
+},
+"assessed_skill": "E5",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH22.R2.story.read_order4": {
+"context_id": "CH22.R2.story.read_order4",
+"lesson": "CH22",
+"round": 2,
+"game": "story",
+"settings": {
+"view": "read_order4"
+},
+"map_settings": {
+"view": "read_order4"
+},
+"assessed_skill": "E8",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 1,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH22.R3.story.quiz": {
+"context_id": "CH22.R3.story.quiz",
+"lesson": "CH22",
+"round": 3,
+"game": "story",
+"settings": {
+"view": "quiz"
+},
+"map_settings": {
+"view": "quiz"
+},
+"assessed_skill": "E8",
+"secondary_skill": "E9",
+"measurement": true,
+"planned_items": 4,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH22.R4.story.order4_pics": {
+"context_id": "CH22.R4.story.order4_pics",
+"lesson": "CH22",
+"round": 4,
+"game": "story",
+"settings": {
+"view": "order4_pics"
+},
+"map_settings": {
+"view": "order4_pics"
+},
+"assessed_skill": "E9",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 1,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH23.R1.story.quiz": {
+"context_id": "CH23.R1.story.quiz",
+"lesson": "CH23",
+"round": 1,
+"game": "story",
+"settings": {
+"view": "quiz"
+},
+"map_settings": {
+"view": "quiz",
+"q": "q1,q2,q3,q4"
+},
+"assessed_skill": "E8",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH23.R2.story.order5": {
+"context_id": "CH23.R2.story.order5",
+"lesson": "CH23",
+"round": 2,
+"game": "story",
+"settings": {
+"view": "order5"
+},
+"map_settings": {
+"view": "order5"
+},
+"assessed_skill": "E9",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 1,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH23.R3.story.lines": {
+"context_id": "CH23.R3.story.lines",
+"lesson": "CH23",
+"round": 3,
+"game": "story",
+"settings": {
+"view": "lines"
+},
+"map_settings": {
+"view": "lines"
+},
+"assessed_skill": "E9",
+"secondary_skill": "E7",
+"measurement": true,
+"planned_items": 5,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH23.R4.story.order5": {
+"context_id": "CH23.R4.story.order5",
+"lesson": "CH23",
+"round": 4,
+"game": "story",
+"settings": {
+"view": "order5"
+},
+"map_settings": {
+"view": "order5",
+"retell": "1"
+},
+"assessed_skill": "E9",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 1,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH24.R1.story.order5": {
+"context_id": "CH24.R1.story.order5",
+"lesson": "CH24",
+"round": 1,
+"game": "story",
+"settings": {
+"view": "order5"
+},
+"map_settings": {
+"view": "order5"
+},
+"assessed_skill": "E9",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 1,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH24.R2.story.structure": {
+"context_id": "CH24.R2.story.structure",
+"lesson": "CH24",
+"round": 2,
+"game": "story",
+"settings": {
+"view": "structure"
+},
+"map_settings": {
+"view": "structure"
+},
+"assessed_skill": "E9",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 4,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"CH24.R3.story.create": {
+"context_id": "CH24.R3.story.create",
+"lesson": "CH24",
+"round": 3,
+"game": "story",
+"settings": {
+"view": "create"
+},
+"map_settings": {
+"view": "create"
+},
+"assessed_skill": "E10",
+"secondary_skill": "E8",
+"measurement": true,
+"planned_items": 1,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"CH24.R4.story.book": {
+"context_id": "CH24.R4.story.book",
+"lesson": "CH24",
+"round": 4,
+"game": "story",
+"settings": {
+"view": "book"
+},
+"map_settings": {
+"view": "book"
+},
+"assessed_skill": "E10",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 1,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW01.R1.cleanShipRoom.1": {
+"context_id": "MW01.R1.cleanShipRoom.1",
+"lesson": "MW01",
+"round": 1,
+"game": "cleanShipRoom",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "M1",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "BASELINE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW01.R2.patterns": {
+"context_id": "MW01.R2.patterns",
+"lesson": "MW01",
+"round": 2,
+"game": "patterns",
+"settings": {},
+"map_settings": {},
+"assessed_skill": "M1",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW01.R3.sorting.classify.features": {
+"context_id": "MW01.R3.sorting.classify.features",
+"lesson": "MW01",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "features",
+"task": "classify",
+"why": "1"
+},
+"map_settings": {
+"theme": "features",
+"task": "classify",
+"why": "1"
+},
+"assessed_skill": "M1",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW01.R3.sorting.classify.features.why": {
+"context_id": "MW01.R3.sorting.classify.features.why",
+"lesson": "MW01",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "features",
+"task": "classify",
+"why": "1"
+},
+"map_settings": {
+"theme": "features",
+"task": "classify",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW01.R4.sorting.judge_polite.rules_politeness": {
+"context_id": "MW01.R4.sorting.judge_polite.rules_politeness",
+"lesson": "MW01",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "rules_politeness",
+"task": "judge_polite",
+"why": "1"
+},
+"map_settings": {
+"theme": "rules_politeness",
+"task": "judge_polite",
+"why": "1"
+},
+"assessed_skill": "S1",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW01.R4.sorting.judge_polite.rules_politeness.why": {
+"context_id": "MW01.R4.sorting.judge_polite.rules_politeness.why",
+"lesson": "MW01",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "rules_politeness",
+"task": "judge_polite",
+"why": "1"
+},
+"map_settings": {
+"theme": "rules_politeness",
+"task": "judge_polite",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW02.R1.sorting.classify.features": {
+"context_id": "MW02.R1.sorting.classify.features",
+"lesson": "MW02",
+"round": 1,
+"game": "sorting",
+"settings": {
+"theme": "features",
+"task": "classify",
+"why": "1"
+},
+"map_settings": {
+"theme": "features",
+"task": "classify",
+"why": "1"
+},
+"assessed_skill": "M1",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW02.R1.sorting.classify.features.why": {
+"context_id": "MW02.R1.sorting.classify.features.why",
+"lesson": "MW02",
+"round": 1,
+"game": "sorting",
+"settings": {
+"theme": "features",
+"task": "classify",
+"why": "1"
+},
+"map_settings": {
+"theme": "features",
+"task": "classify",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW02.R2.cobweb.1": {
+"context_id": "MW02.R2.cobweb.1",
+"lesson": "MW02",
+"round": 2,
+"game": "cobweb",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"fields": "3",
+"max": "3",
+"level": "1"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW02.R3.cobweb.1": {
+"context_id": "MW02.R3.cobweb.1",
+"lesson": "MW02",
+"round": 3,
+"game": "cobweb",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"fields": "3",
+"max": "3",
+"level": "1"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW02.R4.sorting.who_does.family": {
+"context_id": "MW02.R4.sorting.who_does.family",
+"lesson": "MW02",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "family",
+"task": "who_does",
+"why": "1"
+},
+"map_settings": {
+"theme": "family",
+"task": "who_does",
+"why": "1"
+},
+"assessed_skill": "S1",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW02.R4.sorting.who_does.family.why": {
+"context_id": "MW02.R4.sorting.who_does.family.why",
+"lesson": "MW02",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "family",
+"task": "who_does",
+"why": "1"
+},
+"map_settings": {
+"theme": "family",
+"task": "who_does",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW03.R1.cobweb.1": {
+"context_id": "MW03.R1.cobweb.1",
+"lesson": "MW03",
+"round": 1,
+"game": "cobweb",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"fields": "3",
+"max": "3",
+"level": "1"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW03.R2.numberComposition": {
+"context_id": "MW03.R2.numberComposition",
+"lesson": "MW03",
+"round": 2,
+"game": "numberComposition",
+"settings": {},
+"map_settings": {
+"numbers": "3",
+"complexity": "1"
+},
+"assessed_skill": "M3",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW03.R3.numberComposition": {
+"context_id": "MW03.R3.numberComposition",
+"lesson": "MW03",
+"round": 3,
+"game": "numberComposition",
+"settings": {},
+"map_settings": {
+"numbers": "5",
+"complexity": "2"
+},
+"assessed_skill": "M3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW03.R4.numberLine.2": {
+"context_id": "MW03.R4.numberLine.2",
+"lesson": "MW03",
+"round": 4,
+"game": "numberLine",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"max": "5",
+"level": "2"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW03.R4.sorting.choose_helper.helping": {
+"context_id": "MW03.R4.sorting.choose_helper.helping",
+"lesson": "MW03",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "helping",
+"task": "choose_helper",
+"why": "1"
+},
+"map_settings": {
+"theme": "helping",
+"task": "choose_helper",
+"why": "1"
+},
+"assessed_skill": "S1",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW03.R4.sorting.choose_helper.helping.why": {
+"context_id": "MW03.R4.sorting.choose_helper.helping.why",
+"lesson": "MW03",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "helping",
+"task": "choose_helper",
+"why": "1"
+},
+"map_settings": {
+"theme": "helping",
+"task": "choose_helper",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW04.R1.numberComposition": {
+"context_id": "MW04.R1.numberComposition",
+"lesson": "MW04",
+"round": 1,
+"game": "numberComposition",
+"settings": {},
+"map_settings": {
+"numbers": "5",
+"complexity": "2"
+},
+"assessed_skill": "M3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW04.R2.pirateCipher.1": {
+"context_id": "MW04.R2.pirateCipher.1",
+"lesson": "MW04",
+"round": 2,
+"game": "pirateCipher",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"field": "3x3",
+"level": "1"
+},
+"assessed_skill": "M6",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW04.R3.pirateCipher.1": {
+"context_id": "MW04.R3.pirateCipher.1",
+"lesson": "MW04",
+"round": 3,
+"game": "pirateCipher",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"field": "3x3",
+"level": "1"
+},
+"assessed_skill": "M6",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW04.R4.numberLine.2": {
+"context_id": "MW04.R4.numberLine.2",
+"lesson": "MW04",
+"round": 4,
+"game": "numberLine",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"max": "5",
+"level": "2"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW04.R4.sorting.cause.body_parts": {
+"context_id": "MW04.R4.sorting.cause.body_parts",
+"lesson": "MW04",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "body_parts",
+"task": "cause",
+"why": "1"
+},
+"map_settings": {
+"theme": "body_parts",
+"task": "cause",
+"why": "1"
+},
+"assessed_skill": "S2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW04.R4.sorting.cause.body_parts.why": {
+"context_id": "MW04.R4.sorting.cause.body_parts.why",
+"lesson": "MW04",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "body_parts",
+"task": "cause",
+"why": "1"
+},
+"map_settings": {
+"theme": "body_parts",
+"task": "cause",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW05.R1.pirateCipher.1": {
+"context_id": "MW05.R1.pirateCipher.1",
+"lesson": "MW05",
+"round": 1,
+"game": "pirateCipher",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"field": "3x3",
+"level": "1"
+},
+"assessed_skill": "M6",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW05.R2.cobweb.1": {
+"context_id": "MW05.R2.cobweb.1",
+"lesson": "MW05",
+"round": 2,
+"game": "cobweb",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"fields": "3",
+"max": "5",
+"level": "1"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 4,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW05.R2.subitize": {
+"context_id": "MW05.R2.subitize",
+"lesson": "MW05",
+"round": 2,
+"game": "subitize",
+"settings": {},
+"map_settings": {
+"max": "5"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 4,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW05.R3.cobweb.1": {
+"context_id": "MW05.R3.cobweb.1",
+"lesson": "MW05",
+"round": 3,
+"game": "cobweb",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"fields": "3",
+"max": "5",
+"level": "1"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW05.R4.numberComposition": {
+"context_id": "MW05.R4.numberComposition",
+"lesson": "MW05",
+"round": 4,
+"game": "numberComposition",
+"settings": {},
+"map_settings": {
+"numbers": "5",
+"complexity": "1"
+},
+"assessed_skill": "M3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW05.R4.sorting.action.safety": {
+"context_id": "MW05.R4.sorting.action.safety",
+"lesson": "MW05",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "safety",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "safety",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": "S2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW05.R4.sorting.action.safety.why": {
+"context_id": "MW05.R4.sorting.action.safety.why",
+"lesson": "MW05",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "safety",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "safety",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW06.R1.cobweb.1": {
+"context_id": "MW06.R1.cobweb.1",
+"lesson": "MW06",
+"round": 1,
+"game": "cobweb",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"fields": "3",
+"max": "5",
+"level": "1"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW06.R2.pirateCipher.2": {
+"context_id": "MW06.R2.pirateCipher.2",
+"lesson": "MW06",
+"round": 2,
+"game": "pirateCipher",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"field": "3x3",
+"level": "2"
+},
+"assessed_skill": "M6",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW06.R3.pirateCipher.2": {
+"context_id": "MW06.R3.pirateCipher.2",
+"lesson": "MW06",
+"round": 3,
+"game": "pirateCipher",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"field": "4x4",
+"level": "2"
+},
+"assessed_skill": "M6",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW06.R4.cobweb.2": {
+"context_id": "MW06.R4.cobweb.2",
+"lesson": "MW06",
+"round": 4,
+"game": "cobweb",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"fields": "3",
+"max": "5",
+"level": "2"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW06.R4.sorting.choose_sense.senses": {
+"context_id": "MW06.R4.sorting.choose_sense.senses",
+"lesson": "MW06",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "senses",
+"task": "choose_sense",
+"why": "1"
+},
+"map_settings": {
+"theme": "senses",
+"task": "choose_sense",
+"why": "1"
+},
+"assessed_skill": "S2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW06.R4.sorting.choose_sense.senses.why": {
+"context_id": "MW06.R4.sorting.choose_sense.senses.why",
+"lesson": "MW06",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "senses",
+"task": "choose_sense",
+"why": "1"
+},
+"map_settings": {
+"theme": "senses",
+"task": "choose_sense",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW07.R1.pirateCipher.2": {
+"context_id": "MW07.R1.pirateCipher.2",
+"lesson": "MW07",
+"round": 1,
+"game": "pirateCipher",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"field": "4x4",
+"level": "2"
+},
+"assessed_skill": "M6",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW07.R2.brainCrush.sub.5.1": {
+"context_id": "MW07.R2.brainCrush.sub.5.1",
+"lesson": "MW07",
+"round": 2,
+"game": "brainCrush",
+"settings": {
+"op": "sub",
+"range": "5",
+"level": "1"
+},
+"map_settings": {
+"op": "sub",
+"range": "5",
+"level": "1"
+},
+"assessed_skill": "M4",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW07.R3.brainCrush.sub.5.1": {
+"context_id": "MW07.R3.brainCrush.sub.5.1",
+"lesson": "MW07",
+"round": 3,
+"game": "brainCrush",
+"settings": {
+"op": "sub",
+"range": "5",
+"level": "1"
+},
+"map_settings": {
+"op": "sub",
+"range": "5",
+"level": "1"
+},
+"assessed_skill": "M4",
+"secondary_skill": "M3",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW07.R4.numberComposition": {
+"context_id": "MW07.R4.numberComposition",
+"lesson": "MW07",
+"round": 4,
+"game": "numberComposition",
+"settings": {},
+"map_settings": {
+"numbers": "5",
+"complexity": "2"
+},
+"assessed_skill": "M3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW07.R4.sorting.action.hygiene": {
+"context_id": "MW07.R4.sorting.action.hygiene",
+"lesson": "MW07",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "hygiene",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "hygiene",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": "S2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW07.R4.sorting.action.hygiene.why": {
+"context_id": "MW07.R4.sorting.action.hygiene.why",
+"lesson": "MW07",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "hygiene",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "hygiene",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW08.R1.brainCrush.sub.5.1": {
+"context_id": "MW08.R1.brainCrush.sub.5.1",
+"lesson": "MW08",
+"round": 1,
+"game": "brainCrush",
+"settings": {
+"op": "sub",
+"range": "5",
+"level": "1"
+},
+"map_settings": {
+"op": "sub",
+"range": "5",
+"level": "1"
+},
+"assessed_skill": "M4",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW08.R2.cobweb.2": {
+"context_id": "MW08.R2.cobweb.2",
+"lesson": "MW08",
+"round": 2,
+"game": "cobweb",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"fields": "3",
+"max": "7",
+"level": "2"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW08.R3.numberLine.2": {
+"context_id": "MW08.R3.numberLine.2",
+"lesson": "MW08",
+"round": 3,
+"game": "numberLine",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"max": "7",
+"level": "2"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW08.R4.numberComposition": {
+"context_id": "MW08.R4.numberComposition",
+"lesson": "MW08",
+"round": 4,
+"game": "numberComposition",
+"settings": {},
+"map_settings": {
+"numbers": "7",
+"complexity": "2"
+},
+"assessed_skill": "M3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW08.R4.sorting.sequence.day_parts": {
+"context_id": "MW08.R4.sorting.sequence.day_parts",
+"lesson": "MW08",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "day_parts",
+"task": "sequence",
+"why": "1"
+},
+"map_settings": {
+"theme": "day_parts",
+"task": "sequence",
+"why": "1"
+},
+"assessed_skill": "S3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW08.R4.sorting.sequence.day_parts.why": {
+"context_id": "MW08.R4.sorting.sequence.day_parts.why",
+"lesson": "MW08",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "day_parts",
+"task": "sequence",
+"why": "1"
+},
+"map_settings": {
+"theme": "day_parts",
+"task": "sequence",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW09.R1.numberLine.2": {
+"context_id": "MW09.R1.numberLine.2",
+"lesson": "MW09",
+"round": 1,
+"game": "numberLine",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"max": "9",
+"level": "2"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW09.R2.cobweb.1": {
+"context_id": "MW09.R2.cobweb.1",
+"lesson": "MW09",
+"round": 2,
+"game": "cobweb",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"fields": "3",
+"max": "9",
+"level": "1"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW09.R3.order.9.1": {
+"context_id": "MW09.R3.order.9.1",
+"lesson": "MW09",
+"round": 3,
+"game": "order",
+"settings": {
+"range": "9",
+"level": "1"
+},
+"map_settings": {
+"range": "9",
+"row": "5",
+"level": "1"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW09.R4.numberComposition": {
+"context_id": "MW09.R4.numberComposition",
+"lesson": "MW09",
+"round": 4,
+"game": "numberComposition",
+"settings": {},
+"map_settings": {
+"numbers": "9",
+"complexity": "2"
+},
+"assessed_skill": "M3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW09.R4.sorting.order_days.week": {
+"context_id": "MW09.R4.sorting.order_days.week",
+"lesson": "MW09",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "week",
+"task": "order_days",
+"why": "1"
+},
+"map_settings": {
+"theme": "week",
+"task": "order_days",
+"why": "1"
+},
+"assessed_skill": "S3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW09.R4.sorting.order_days.week.why": {
+"context_id": "MW09.R4.sorting.order_days.week.why",
+"lesson": "MW09",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "week",
+"task": "order_days",
+"why": "1"
+},
+"map_settings": {
+"theme": "week",
+"task": "order_days",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW10.R1.order.9.1": {
+"context_id": "MW10.R1.order.9.1",
+"lesson": "MW10",
+"round": 1,
+"game": "order",
+"settings": {
+"range": "9",
+"level": "1"
+},
+"map_settings": {
+"range": "9",
+"row": "5",
+"level": "1"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW10.R2.numberLine.1": {
+"context_id": "MW10.R2.numberLine.1",
+"lesson": "MW10",
+"round": 2,
+"game": "numberLine",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"max": "10",
+"level": "1"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW10.R3.order.10.1": {
+"context_id": "MW10.R3.order.10.1",
+"lesson": "MW10",
+"round": 3,
+"game": "order",
+"settings": {
+"range": "10",
+"level": "1"
+},
+"map_settings": {
+"range": "10",
+"row": "6",
+"level": "1"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW10.R4.numberComposition": {
+"context_id": "MW10.R4.numberComposition",
+"lesson": "MW10",
+"round": 4,
+"game": "numberComposition",
+"settings": {},
+"map_settings": {
+"numbers": "10",
+"complexity": "2"
+},
+"assessed_skill": "M3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW10.R4.sorting.sequence.months_seasons": {
+"context_id": "MW10.R4.sorting.sequence.months_seasons",
+"lesson": "MW10",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "months_seasons",
+"task": "sequence",
+"why": "1"
+},
+"map_settings": {
+"theme": "months_seasons",
+"task": "sequence",
+"why": "1"
+},
+"assessed_skill": "S3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW10.R4.sorting.sequence.months_seasons.why": {
+"context_id": "MW10.R4.sorting.sequence.months_seasons.why",
+"lesson": "MW10",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "months_seasons",
+"task": "sequence",
+"why": "1"
+},
+"map_settings": {
+"theme": "months_seasons",
+"task": "sequence",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW11.R1.order.10.1": {
+"context_id": "MW11.R1.order.10.1",
+"lesson": "MW11",
+"round": 1,
+"game": "order",
+"settings": {
+"range": "10",
+"level": "1"
+},
+"map_settings": {
+"range": "10",
+"row": "6",
+"level": "1"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW11.R2.intellectScales.1": {
+"context_id": "MW11.R2.intellectScales.1",
+"lesson": "MW11",
+"round": 2,
+"game": "intellectScales",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "M5",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW11.R3.intellectScales.10.1": {
+"context_id": "MW11.R3.intellectScales.10.1",
+"lesson": "MW11",
+"round": 3,
+"game": "intellectScales",
+"settings": {
+"range": "10",
+"level": "1"
+},
+"map_settings": {
+"range": "10",
+"level": "1"
+},
+"assessed_skill": "M5",
+"secondary_skill": "M2",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW11.R4.numberLine.2": {
+"context_id": "MW11.R4.numberLine.2",
+"lesson": "MW11",
+"round": 4,
+"game": "numberLine",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"max": "10",
+"level": "2"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW11.R4.sorting.explain.living_nonliving": {
+"context_id": "MW11.R4.sorting.explain.living_nonliving",
+"lesson": "MW11",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "living_nonliving",
+"task": "explain",
+"why": "1"
+},
+"map_settings": {
+"theme": "living_nonliving",
+"task": "explain",
+"why": "1"
+},
+"assessed_skill": "S6",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW11.R4.sorting.explain.living_nonliving.why": {
+"context_id": "MW11.R4.sorting.explain.living_nonliving.why",
+"lesson": "MW11",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "living_nonliving",
+"task": "explain",
+"why": "1"
+},
+"map_settings": {
+"theme": "living_nonliving",
+"task": "explain",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW11.R4.intellectScales.10.2": {
+"context_id": "MW11.R4.intellectScales.10.2",
+"lesson": "MW11",
+"round": 4,
+"game": "intellectScales",
+"settings": {
+"range": "10",
+"level": "2"
+},
+"map_settings": {
+"range": "10",
+"level": "2"
+},
+"assessed_skill": "M5",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 4,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW12.R1.intellectScales.10.1": {
+"context_id": "MW12.R1.intellectScales.10.1",
+"lesson": "MW12",
+"round": 1,
+"game": "intellectScales",
+"settings": {
+"range": "10",
+"level": "1"
+},
+"map_settings": {
+"range": "10",
+"level": "1"
+},
+"assessed_skill": "M5",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW12.R2.order.10.1": {
+"context_id": "MW12.R2.order.10.1",
+"lesson": "MW12",
+"round": 2,
+"game": "order",
+"settings": {
+"range": "10",
+"level": "1"
+},
+"map_settings": {
+"range": "10",
+"row": "6",
+"level": "1"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW12.R2.numberComposition": {
+"context_id": "MW12.R2.numberComposition",
+"lesson": "MW12",
+"round": 2,
+"game": "numberComposition",
+"settings": {},
+"map_settings": {
+"numbers": "10",
+"complexity": "2"
+},
+"assessed_skill": "M3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "SECONDARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW12.R3.cobweb.2": {
+"context_id": "MW12.R3.cobweb.2",
+"lesson": "MW12",
+"round": 3,
+"game": "cobweb",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"fields": "3",
+"max": "10",
+"level": "2"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW12.R3.brainCrush.mix.10.2": {
+"context_id": "MW12.R3.brainCrush.mix.10.2",
+"lesson": "MW12",
+"round": 3,
+"game": "brainCrush",
+"settings": {
+"op": "mix",
+"range": "10",
+"level": "2"
+},
+"map_settings": {
+"op": "mix",
+"range": "10",
+"level": "2"
+},
+"assessed_skill": "M4",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "SECONDARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW12.R4.sorting.choose_season.nature_changes": {
+"context_id": "MW12.R4.sorting.choose_season.nature_changes",
+"lesson": "MW12",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "nature_changes",
+"task": "choose_season",
+"why": "1"
+},
+"map_settings": {
+"theme": "nature_changes",
+"task": "choose_season",
+"why": "1"
+},
+"assessed_skill": "S3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW12.R4.sorting.choose_season.nature_changes.why": {
+"context_id": "MW12.R4.sorting.choose_season.nature_changes.why",
+"lesson": "MW12",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "nature_changes",
+"task": "choose_season",
+"why": "1"
+},
+"map_settings": {
+"theme": "nature_changes",
+"task": "choose_season",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW13.R1.cobweb.2": {
+"context_id": "MW13.R1.cobweb.2",
+"lesson": "MW13",
+"round": 1,
+"game": "cobweb",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"fields": "3",
+"max": "10",
+"level": "2"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW13.R2.lines.line_kind": {
+"context_id": "MW13.R2.lines.line_kind",
+"lesson": "MW13",
+"round": 2,
+"game": "lines",
+"settings": {
+"view": "line_kind"
+},
+"map_settings": {
+"view": "line_kind"
+},
+"assessed_skill": "M7",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW13.R3.lines.line_kind": {
+"context_id": "MW13.R3.lines.line_kind",
+"lesson": "MW13",
+"round": 3,
+"game": "lines",
+"settings": {
+"view": "line_kind"
+},
+"map_settings": {
+"view": "line_kind"
+},
+"assessed_skill": "M7",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW13.R4.numberLine.2": {
+"context_id": "MW13.R4.numberLine.2",
+"lesson": "MW13",
+"round": 4,
+"game": "numberLine",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"max": "10",
+"level": "2"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW13.R4.sorting.classify.transport": {
+"context_id": "MW13.R4.sorting.classify.transport",
+"lesson": "MW13",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "transport",
+"task": "classify",
+"why": "1"
+},
+"map_settings": {
+"theme": "transport",
+"task": "classify",
+"why": "1"
+},
+"assessed_skill": "S4",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW13.R4.sorting.classify.transport.why": {
+"context_id": "MW13.R4.sorting.classify.transport.why",
+"lesson": "MW13",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "transport",
+"task": "classify",
+"why": "1"
+},
+"map_settings": {
+"theme": "transport",
+"task": "classify",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW14.R1.lines.line_kind": {
+"context_id": "MW14.R1.lines.line_kind",
+"lesson": "MW14",
+"round": 1,
+"game": "lines",
+"settings": {
+"view": "line_kind"
+},
+"map_settings": {
+"view": "line_kind"
+},
+"assessed_skill": "M7",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW14.R2.lines.compare": {
+"context_id": "MW14.R2.lines.compare",
+"lesson": "MW14",
+"round": 2,
+"game": "lines",
+"settings": {
+"view": "compare"
+},
+"map_settings": {
+"view": "compare"
+},
+"assessed_skill": "M7",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW14.R3.lines.measure": {
+"context_id": "MW14.R3.lines.measure",
+"lesson": "MW14",
+"round": 3,
+"game": "lines",
+"settings": {
+"view": "measure"
+},
+"map_settings": {
+"view": "measure"
+},
+"assessed_skill": "M7",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW14.R4.intellectScales.1": {
+"context_id": "MW14.R4.intellectScales.1",
+"lesson": "MW14",
+"round": 4,
+"game": "intellectScales",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "M5",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW14.R4.sorting.action.pedestrian_safety": {
+"context_id": "MW14.R4.sorting.action.pedestrian_safety",
+"lesson": "MW14",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "pedestrian_safety",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "pedestrian_safety",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": "S4",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW14.R4.sorting.action.pedestrian_safety.why": {
+"context_id": "MW14.R4.sorting.action.pedestrian_safety.why",
+"lesson": "MW14",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "pedestrian_safety",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "pedestrian_safety",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW15.R1.lines.measure": {
+"context_id": "MW15.R1.lines.measure",
+"lesson": "MW15",
+"round": 1,
+"game": "lines",
+"settings": {
+"view": "measure"
+},
+"map_settings": {
+"view": "measure"
+},
+"assessed_skill": "M7",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW15.R2.brainCrush.mix.10.2": {
+"context_id": "MW15.R2.brainCrush.mix.10.2",
+"lesson": "MW15",
+"round": 2,
+"game": "brainCrush",
+"settings": {
+"op": "mix",
+"range": "10",
+"level": "2"
+},
+"map_settings": {
+"op": "mix",
+"range": "10",
+"level": "2"
+},
+"assessed_skill": "M4",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW15.R3.brainCrush.mix.10.2": {
+"context_id": "MW15.R3.brainCrush.mix.10.2",
+"lesson": "MW15",
+"round": 3,
+"game": "brainCrush",
+"settings": {
+"op": "mix",
+"range": "10",
+"level": "2"
+},
+"map_settings": {
+"op": "mix",
+"range": "10",
+"level": "2"
+},
+"assessed_skill": "M4",
+"secondary_skill": "M3",
+"measurement": true,
+"planned_items": 8,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW15.R4.numberComposition": {
+"context_id": "MW15.R4.numberComposition",
+"lesson": "MW15",
+"round": 4,
+"game": "numberComposition",
+"settings": {},
+"map_settings": {
+"numbers": "10",
+"complexity": "2"
+},
+"assessed_skill": "M3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW15.R4.sorting.classify.plants": {
+"context_id": "MW15.R4.sorting.classify.plants",
+"lesson": "MW15",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "plants",
+"task": "classify",
+"why": "1"
+},
+"map_settings": {
+"theme": "plants",
+"task": "classify",
+"why": "1"
+},
+"assessed_skill": "S5",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW15.R4.sorting.classify.plants.why": {
+"context_id": "MW15.R4.sorting.classify.plants.why",
+"lesson": "MW15",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "plants",
+"task": "classify",
+"why": "1"
+},
+"map_settings": {
+"theme": "plants",
+"task": "classify",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW16.R1.brainCrush.mix.10.2": {
+"context_id": "MW16.R1.brainCrush.mix.10.2",
+"lesson": "MW16",
+"round": 1,
+"game": "brainCrush",
+"settings": {
+"op": "mix",
+"range": "10",
+"level": "2"
+},
+"map_settings": {
+"op": "mix",
+"range": "10",
+"level": "2"
+},
+"assessed_skill": "M4",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW16.R2.sorting.cause.plant_needs": {
+"context_id": "MW16.R2.sorting.cause.plant_needs",
+"lesson": "MW16",
+"round": 2,
+"game": "sorting",
+"settings": {
+"theme": "plant_needs",
+"task": "cause",
+"why": "1"
+},
+"map_settings": {
+"theme": "plant_needs",
+"task": "cause",
+"why": "1"
+},
+"assessed_skill": "S5",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW16.R2.sorting.cause.plant_needs.why": {
+"context_id": "MW16.R2.sorting.cause.plant_needs.why",
+"lesson": "MW16",
+"round": 2,
+"game": "sorting",
+"settings": {
+"theme": "plant_needs",
+"task": "cause",
+"why": "1"
+},
+"map_settings": {
+"theme": "plant_needs",
+"task": "cause",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW16.R3.sorting.sequence.plant_growth": {
+"context_id": "MW16.R3.sorting.sequence.plant_growth",
+"lesson": "MW16",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "plant_growth",
+"task": "sequence",
+"why": "1"
+},
+"map_settings": {
+"theme": "plant_growth",
+"task": "sequence",
+"why": "1"
+},
+"assessed_skill": "S5",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW16.R3.sorting.sequence.plant_growth.why": {
+"context_id": "MW16.R3.sorting.sequence.plant_growth.why",
+"lesson": "MW16",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "plant_growth",
+"task": "sequence",
+"why": "1"
+},
+"map_settings": {
+"theme": "plant_growth",
+"task": "sequence",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "PRIMARY_MEASUREMENT",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW16.R4.brainstorm.10.1": {
+"context_id": "MW16.R4.brainstorm.10.1",
+"lesson": "MW16",
+"round": 4,
+"game": "brainstorm",
+"settings": {
+"range": "10",
+"level": "1"
+},
+"map_settings": {
+"range": "10",
+"level": "1"
+},
+"assessed_skill": "M8",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW17.R1.sorting.sequence.plant_growth": {
+"context_id": "MW17.R1.sorting.sequence.plant_growth",
+"lesson": "MW17",
+"round": 1,
+"game": "sorting",
+"settings": {
+"theme": "plant_growth",
+"task": "sequence",
+"why": "1"
+},
+"map_settings": {
+"theme": "plant_growth",
+"task": "sequence",
+"why": "1"
+},
+"assessed_skill": "S5",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW17.R1.sorting.sequence.plant_growth.why": {
+"context_id": "MW17.R1.sorting.sequence.plant_growth.why",
+"lesson": "MW17",
+"round": 1,
+"game": "sorting",
+"settings": {
+"theme": "plant_growth",
+"task": "sequence",
+"why": "1"
+},
+"map_settings": {
+"theme": "plant_growth",
+"task": "sequence",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW17.R2.intellectScales.10.2": {
+"context_id": "MW17.R2.intellectScales.10.2",
+"lesson": "MW17",
+"round": 2,
+"game": "intellectScales",
+"settings": {
+"range": "10",
+"level": "2"
+},
+"map_settings": {
+"range": "10",
+"level": "2"
+},
+"assessed_skill": "M5",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW17.R3.brainstorm.10.2": {
+"context_id": "MW17.R3.brainstorm.10.2",
+"lesson": "MW17",
+"round": 3,
+"game": "brainstorm",
+"settings": {
+"range": "10",
+"level": "2"
+},
+"map_settings": {
+"range": "10",
+"level": "2"
+},
+"assessed_skill": "M5",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW17.R4.brainCrush.mix.10.2": {
+"context_id": "MW17.R4.brainCrush.mix.10.2",
+"lesson": "MW17",
+"round": 4,
+"game": "brainCrush",
+"settings": {
+"op": "mix",
+"range": "10",
+"level": "2"
+},
+"map_settings": {
+"op": "mix",
+"range": "10",
+"level": "2"
+},
+"assessed_skill": "M4",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW17.R4.sorting.food_source.food_plants": {
+"context_id": "MW17.R4.sorting.food_source.food_plants",
+"lesson": "MW17",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "food_plants",
+"task": "food_source",
+"why": "1"
+},
+"map_settings": {
+"theme": "food_plants",
+"task": "food_source",
+"why": "1"
+},
+"assessed_skill": "S5",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW17.R4.sorting.food_source.food_plants.why": {
+"context_id": "MW17.R4.sorting.food_source.food_plants.why",
+"lesson": "MW17",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "food_plants",
+"task": "food_source",
+"why": "1"
+},
+"map_settings": {
+"theme": "food_plants",
+"task": "food_source",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW18.R1.intellectScales.10.2": {
+"context_id": "MW18.R1.intellectScales.10.2",
+"lesson": "MW18",
+"round": 1,
+"game": "intellectScales",
+"settings": {
+"range": "10",
+"level": "2"
+},
+"map_settings": {
+"range": "10",
+"level": "2"
+},
+"assessed_skill": "M5",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW18.R2.sorting.classify.animals": {
+"context_id": "MW18.R2.sorting.classify.animals",
+"lesson": "MW18",
+"round": 2,
+"game": "sorting",
+"settings": {
+"theme": "animals",
+"task": "classify",
+"why": "1"
+},
+"map_settings": {
+"theme": "animals",
+"task": "classify",
+"why": "1"
+},
+"assessed_skill": "S5",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW18.R2.sorting.classify.animals.why": {
+"context_id": "MW18.R2.sorting.classify.animals.why",
+"lesson": "MW18",
+"round": 2,
+"game": "sorting",
+"settings": {
+"theme": "animals",
+"task": "classify",
+"why": "1"
+},
+"map_settings": {
+"theme": "animals",
+"task": "classify",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW18.R3.sorting.animal_winter.animals_seasons": {
+"context_id": "MW18.R3.sorting.animal_winter.animals_seasons",
+"lesson": "MW18",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "animals_seasons",
+"task": "animal_winter",
+"why": "1"
+},
+"map_settings": {
+"theme": "animals_seasons",
+"task": "animal_winter",
+"why": "1"
+},
+"assessed_skill": "S5",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW18.R3.sorting.animal_winter.animals_seasons.why": {
+"context_id": "MW18.R3.sorting.animal_winter.animals_seasons.why",
+"lesson": "MW18",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "animals_seasons",
+"task": "animal_winter",
+"why": "1"
+},
+"map_settings": {
+"theme": "animals_seasons",
+"task": "animal_winter",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW18.R4.numberLine.1": {
+"context_id": "MW18.R4.numberLine.1",
+"lesson": "MW18",
+"round": 4,
+"game": "numberLine",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"max": "12",
+"level": "1"
+},
+"assessed_skill": "M10",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW19.R1.sorting.animal_winter.animals_seasons": {
+"context_id": "MW19.R1.sorting.animal_winter.animals_seasons",
+"lesson": "MW19",
+"round": 1,
+"game": "sorting",
+"settings": {
+"theme": "animals_seasons",
+"task": "animal_winter",
+"why": "1"
+},
+"map_settings": {
+"theme": "animals_seasons",
+"task": "animal_winter",
+"why": "1"
+},
+"assessed_skill": "S5",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW19.R1.sorting.animal_winter.animals_seasons.why": {
+"context_id": "MW19.R1.sorting.animal_winter.animals_seasons.why",
+"lesson": "MW19",
+"round": 1,
+"game": "sorting",
+"settings": {
+"theme": "animals_seasons",
+"task": "animal_winter",
+"why": "1"
+},
+"map_settings": {
+"theme": "animals_seasons",
+"task": "animal_winter",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW19.R2.shapes.find_shape": {
+"context_id": "MW19.R2.shapes.find_shape",
+"lesson": "MW19",
+"round": 2,
+"game": "shapes",
+"settings": {
+"view": "find_shape"
+},
+"map_settings": {
+"view": "find_shape"
+},
+"assessed_skill": "M9",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW19.R3.shapes.find_shape": {
+"context_id": "MW19.R3.shapes.find_shape",
+"lesson": "MW19",
+"round": 3,
+"game": "shapes",
+"settings": {
+"view": "find_shape"
+},
+"map_settings": {
+"view": "find_shape"
+},
+"assessed_skill": "M9",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW19.R4.sorting.classify.domestic_wild": {
+"context_id": "MW19.R4.sorting.classify.domestic_wild",
+"lesson": "MW19",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "domestic_wild",
+"task": "classify",
+"why": "1"
+},
+"map_settings": {
+"theme": "domestic_wild",
+"task": "classify",
+"why": "1"
+},
+"assessed_skill": "S5",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW19.R4.sorting.classify.domestic_wild.why": {
+"context_id": "MW19.R4.sorting.classify.domestic_wild.why",
+"lesson": "MW19",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "domestic_wild",
+"task": "classify",
+"why": "1"
+},
+"map_settings": {
+"theme": "domestic_wild",
+"task": "classify",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW19.R4.numberLine.2": {
+"context_id": "MW19.R4.numberLine.2",
+"lesson": "MW19",
+"round": 4,
+"game": "numberLine",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"max": "12",
+"level": "2"
+},
+"assessed_skill": "M10",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW20.R1.shapes.find_shape": {
+"context_id": "MW20.R1.shapes.find_shape",
+"lesson": "MW20",
+"round": 1,
+"game": "shapes",
+"settings": {
+"view": "find_shape"
+},
+"map_settings": {
+"view": "find_shape"
+},
+"assessed_skill": "M9",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW20.R2.forestKingdom.animals": {
+"context_id": "MW20.R2.forestKingdom.animals",
+"lesson": "MW20",
+"round": 2,
+"game": "forestKingdom",
+"settings": {
+"theme": "animals"
+},
+"map_settings": {
+"theme": "animals"
+},
+"assessed_skill": "S5",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW20.R3.sorting.find_young.parents_young": {
+"context_id": "MW20.R3.sorting.find_young.parents_young",
+"lesson": "MW20",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "parents_young",
+"task": "find_young",
+"why": "1"
+},
+"map_settings": {
+"theme": "parents_young",
+"task": "find_young",
+"why": "1"
+},
+"assessed_skill": "S5",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW20.R3.sorting.find_young.parents_young.why": {
+"context_id": "MW20.R3.sorting.find_young.parents_young.why",
+"lesson": "MW20",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "parents_young",
+"task": "find_young",
+"why": "1"
+},
+"map_settings": {
+"theme": "parents_young",
+"task": "find_young",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW20.R4.order.14.1": {
+"context_id": "MW20.R4.order.14.1",
+"lesson": "MW20",
+"round": 4,
+"game": "order",
+"settings": {
+"range": "14",
+"level": "1"
+},
+"map_settings": {
+"range": "14",
+"row": "5",
+"level": "1"
+},
+"assessed_skill": "M10",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW21.R1.sorting.find_young.parents_young": {
+"context_id": "MW21.R1.sorting.find_young.parents_young",
+"lesson": "MW21",
+"round": 1,
+"game": "sorting",
+"settings": {
+"theme": "parents_young",
+"task": "find_young",
+"why": "1"
+},
+"map_settings": {
+"theme": "parents_young",
+"task": "find_young",
+"why": "1"
+},
+"assessed_skill": "S5",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW21.R1.sorting.find_young.parents_young.why": {
+"context_id": "MW21.R1.sorting.find_young.parents_young.why",
+"lesson": "MW21",
+"round": 1,
+"game": "sorting",
+"settings": {
+"theme": "parents_young",
+"task": "find_young",
+"why": "1"
+},
+"map_settings": {
+"theme": "parents_young",
+"task": "find_young",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW21.R2.shapes.compose": {
+"context_id": "MW21.R2.shapes.compose",
+"lesson": "MW21",
+"round": 2,
+"game": "shapes",
+"settings": {
+"view": "compose"
+},
+"map_settings": {
+"view": "compose"
+},
+"assessed_skill": "M9",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW21.R3.shapes.compose": {
+"context_id": "MW21.R3.shapes.compose",
+"lesson": "MW21",
+"round": 3,
+"game": "shapes",
+"settings": {
+"view": "compose"
+},
+"map_settings": {
+"view": "compose"
+},
+"assessed_skill": "M9",
+"secondary_skill": "M1",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW21.R4.sorting.classify.birds_fish_insects": {
+"context_id": "MW21.R4.sorting.classify.birds_fish_insects",
+"lesson": "MW21",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "birds_fish_insects",
+"task": "classify",
+"why": "1"
+},
+"map_settings": {
+"theme": "birds_fish_insects",
+"task": "classify",
+"why": "1"
+},
+"assessed_skill": "S5",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW21.R4.sorting.classify.birds_fish_insects.why": {
+"context_id": "MW21.R4.sorting.classify.birds_fish_insects.why",
+"lesson": "MW21",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "birds_fish_insects",
+"task": "classify",
+"why": "1"
+},
+"map_settings": {
+"theme": "birds_fish_insects",
+"task": "classify",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW21.R4.numberLine.1": {
+"context_id": "MW21.R4.numberLine.1",
+"lesson": "MW21",
+"round": 4,
+"game": "numberLine",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"max": "14",
+"level": "1"
+},
+"assessed_skill": "M10",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW22.R1.shapes.compose": {
+"context_id": "MW22.R1.shapes.compose",
+"lesson": "MW22",
+"round": 1,
+"game": "shapes",
+"settings": {
+"view": "compose"
+},
+"map_settings": {
+"view": "compose"
+},
+"assessed_skill": "M9",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW22.R2.gridDictation.1": {
+"context_id": "MW22.R2.gridDictation.1",
+"lesson": "MW22",
+"round": 2,
+"game": "gridDictation",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"level": "1"
+},
+"assessed_skill": "M6",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW22.R3.gridDictation.2": {
+"context_id": "MW22.R3.gridDictation.2",
+"lesson": "MW22",
+"round": 3,
+"game": "gridDictation",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "M6",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW22.R4.sorting.explain.habitats": {
+"context_id": "MW22.R4.sorting.explain.habitats",
+"lesson": "MW22",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "habitats",
+"task": "explain",
+"why": "1"
+},
+"map_settings": {
+"theme": "habitats",
+"task": "explain",
+"why": "1"
+},
+"assessed_skill": "S5",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW22.R4.sorting.explain.habitats.why": {
+"context_id": "MW22.R4.sorting.explain.habitats.why",
+"lesson": "MW22",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "habitats",
+"task": "explain",
+"why": "1"
+},
+"map_settings": {
+"theme": "habitats",
+"task": "explain",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW22.R4.numberLine.2": {
+"context_id": "MW22.R4.numberLine.2",
+"lesson": "MW22",
+"round": 4,
+"game": "numberLine",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"max": "14",
+"level": "2"
+},
+"assessed_skill": "M10",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW23.R1.gridDictation.2": {
+"context_id": "MW23.R1.gridDictation.2",
+"lesson": "MW23",
+"round": 1,
+"game": "gridDictation",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"level": "2"
+},
+"assessed_skill": "M6",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW23.R2.sorting.is_needed.living_needs": {
+"context_id": "MW23.R2.sorting.is_needed.living_needs",
+"lesson": "MW23",
+"round": 2,
+"game": "sorting",
+"settings": {
+"theme": "living_needs",
+"task": "is_needed",
+"why": "1"
+},
+"map_settings": {
+"theme": "living_needs",
+"task": "is_needed",
+"why": "1"
+},
+"assessed_skill": "S5",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW23.R2.sorting.is_needed.living_needs.why": {
+"context_id": "MW23.R2.sorting.is_needed.living_needs.why",
+"lesson": "MW23",
+"round": 2,
+"game": "sorting",
+"settings": {
+"theme": "living_needs",
+"task": "is_needed",
+"why": "1"
+},
+"map_settings": {
+"theme": "living_needs",
+"task": "is_needed",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW23.R3.sorting.explain.living_needs_why": {
+"context_id": "MW23.R3.sorting.explain.living_needs_why",
+"lesson": "MW23",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "living_needs_why",
+"task": "explain",
+"why": "1"
+},
+"map_settings": {
+"theme": "living_needs_why",
+"task": "explain",
+"why": "1"
+},
+"assessed_skill": "S5",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW23.R3.sorting.explain.living_needs_why.why": {
+"context_id": "MW23.R3.sorting.explain.living_needs_why.why",
+"lesson": "MW23",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "living_needs_why",
+"task": "explain",
+"why": "1"
+},
+"map_settings": {
+"theme": "living_needs_why",
+"task": "explain",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW23.R4.numberComposition": {
+"context_id": "MW23.R4.numberComposition",
+"lesson": "MW23",
+"round": 4,
+"game": "numberComposition",
+"settings": {},
+"map_settings": {
+"numbers": "10",
+"complexity": "2"
+},
+"assessed_skill": "M3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW23.R4.order.16.1": {
+"context_id": "MW23.R4.order.16.1",
+"lesson": "MW23",
+"round": 4,
+"game": "order",
+"settings": {
+"range": "16",
+"level": "1"
+},
+"map_settings": {
+"range": "16",
+"row": "5",
+"level": "1"
+},
+"assessed_skill": "M10",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW24.R1.sorting.explain.living_needs_why": {
+"context_id": "MW24.R1.sorting.explain.living_needs_why",
+"lesson": "MW24",
+"round": 1,
+"game": "sorting",
+"settings": {
+"theme": "living_needs_why",
+"task": "explain",
+"why": "1"
+},
+"map_settings": {
+"theme": "living_needs_why",
+"task": "explain",
+"why": "1"
+},
+"assessed_skill": "S5",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW24.R1.sorting.explain.living_needs_why.why": {
+"context_id": "MW24.R1.sorting.explain.living_needs_why.why",
+"lesson": "MW24",
+"round": 1,
+"game": "sorting",
+"settings": {
+"theme": "living_needs_why",
+"task": "explain",
+"why": "1"
+},
+"map_settings": {
+"theme": "living_needs_why",
+"task": "explain",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW24.R2.shapes.real_shape": {
+"context_id": "MW24.R2.shapes.real_shape",
+"lesson": "MW24",
+"round": 2,
+"game": "shapes",
+"settings": {
+"view": "real_shape"
+},
+"map_settings": {
+"view": "real_shape"
+},
+"assessed_skill": "M9",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW24.R3.shapes.real_shape": {
+"context_id": "MW24.R3.shapes.real_shape",
+"lesson": "MW24",
+"round": 3,
+"game": "shapes",
+"settings": {
+"view": "real_shape"
+},
+"map_settings": {
+"view": "real_shape"
+},
+"assessed_skill": "M9",
+"secondary_skill": "M7",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW24.R4.sorting.action.nature_care": {
+"context_id": "MW24.R4.sorting.action.nature_care",
+"lesson": "MW24",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "nature_care",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "nature_care",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": "S6",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW24.R4.sorting.action.nature_care.why": {
+"context_id": "MW24.R4.sorting.action.nature_care.why",
+"lesson": "MW24",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "nature_care",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "nature_care",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 5,
+"role": "TRANSFER",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW24.R4.lines.measure_check": {
+"context_id": "MW24.R4.lines.measure_check",
+"lesson": "MW24",
+"round": 4,
+"game": "lines",
+"settings": {
+"view": "measure_check"
+},
+"map_settings": {
+"view": "measure_check"
+},
+"assessed_skill": "M7",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW25.R1.shapes.real_shape": {
+"context_id": "MW25.R1.shapes.real_shape",
+"lesson": "MW25",
+"round": 1,
+"game": "shapes",
+"settings": {
+"view": "real_shape"
+},
+"map_settings": {
+"view": "real_shape"
+},
+"assessed_skill": "M9",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW25.R2.sorting.classify.waste": {
+"context_id": "MW25.R2.sorting.classify.waste",
+"lesson": "MW25",
+"round": 2,
+"game": "sorting",
+"settings": {
+"theme": "waste",
+"task": "classify",
+"why": "1"
+},
+"map_settings": {
+"theme": "waste",
+"task": "classify",
+"why": "1"
+},
+"assessed_skill": "S6",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW25.R2.sorting.classify.waste.why": {
+"context_id": "MW25.R2.sorting.classify.waste.why",
+"lesson": "MW25",
+"round": 2,
+"game": "sorting",
+"settings": {
+"theme": "waste",
+"task": "classify",
+"why": "1"
+},
+"map_settings": {
+"theme": "waste",
+"task": "classify",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW25.R3.sorting.action.waste_actions": {
+"context_id": "MW25.R3.sorting.action.waste_actions",
+"lesson": "MW25",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "waste_actions",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "waste_actions",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": "S6",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW25.R3.sorting.action.waste_actions.why": {
+"context_id": "MW25.R3.sorting.action.waste_actions.why",
+"lesson": "MW25",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "waste_actions",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "waste_actions",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW25.R4.brainCrush.mix.10.2": {
+"context_id": "MW25.R4.brainCrush.mix.10.2",
+"lesson": "MW25",
+"round": 4,
+"game": "brainCrush",
+"settings": {
+"op": "mix",
+"range": "10",
+"level": "2"
+},
+"map_settings": {
+"op": "mix",
+"range": "10",
+"level": "2"
+},
+"assessed_skill": "M4",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW25.R4.brainCrush.mix.16.2": {
+"context_id": "MW25.R4.brainCrush.mix.16.2",
+"lesson": "MW25",
+"round": 4,
+"game": "brainCrush",
+"settings": {
+"op": "mix",
+"range": "16",
+"level": "2"
+},
+"map_settings": {
+"op": "mix",
+"range": "16",
+"level": "2"
+},
+"assessed_skill": "M4",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW26.R1.sorting.action.waste_actions": {
+"context_id": "MW26.R1.sorting.action.waste_actions",
+"lesson": "MW26",
+"round": 1,
+"game": "sorting",
+"settings": {
+"theme": "waste_actions",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "waste_actions",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": "S6",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW26.R1.sorting.action.waste_actions.why": {
+"context_id": "MW26.R1.sorting.action.waste_actions.why",
+"lesson": "MW26",
+"round": 1,
+"game": "sorting",
+"settings": {
+"theme": "waste_actions",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "waste_actions",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW26.R2.sorting.classify.healthy_habits": {
+"context_id": "MW26.R2.sorting.classify.healthy_habits",
+"lesson": "MW26",
+"round": 2,
+"game": "sorting",
+"settings": {
+"theme": "healthy_habits",
+"task": "classify",
+"why": "1"
+},
+"map_settings": {
+"theme": "healthy_habits",
+"task": "classify",
+"why": "1"
+},
+"assessed_skill": "S2",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW26.R2.sorting.classify.healthy_habits.why": {
+"context_id": "MW26.R2.sorting.classify.healthy_habits.why",
+"lesson": "MW26",
+"round": 2,
+"game": "sorting",
+"settings": {
+"theme": "healthy_habits",
+"task": "classify",
+"why": "1"
+},
+"map_settings": {
+"theme": "healthy_habits",
+"task": "classify",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW26.R3.sorting.action.healthy_choices": {
+"context_id": "MW26.R3.sorting.action.healthy_choices",
+"lesson": "MW26",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "healthy_choices",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "healthy_choices",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": "S2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW26.R3.sorting.action.healthy_choices.why": {
+"context_id": "MW26.R3.sorting.action.healthy_choices.why",
+"lesson": "MW26",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "healthy_choices",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "healthy_choices",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW26.R4.order.18.1": {
+"context_id": "MW26.R4.order.18.1",
+"lesson": "MW26",
+"round": 4,
+"game": "order",
+"settings": {
+"range": "18",
+"level": "1"
+},
+"map_settings": {
+"range": "18",
+"row": "5",
+"level": "1"
+},
+"assessed_skill": "M10",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW27.R1.sorting.action.healthy_choices": {
+"context_id": "MW27.R1.sorting.action.healthy_choices",
+"lesson": "MW27",
+"round": 1,
+"game": "sorting",
+"settings": {
+"theme": "healthy_choices",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "healthy_choices",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": "S2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW27.R1.sorting.action.healthy_choices.why": {
+"context_id": "MW27.R1.sorting.action.healthy_choices.why",
+"lesson": "MW27",
+"round": 1,
+"game": "sorting",
+"settings": {
+"theme": "healthy_choices",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "healthy_choices",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW27.R2.sorting.explain.people_cultures": {
+"context_id": "MW27.R2.sorting.explain.people_cultures",
+"lesson": "MW27",
+"round": 2,
+"game": "sorting",
+"settings": {
+"theme": "people_cultures",
+"task": "explain",
+"why": "1"
+},
+"map_settings": {
+"theme": "people_cultures",
+"task": "explain",
+"why": "1"
+},
+"assessed_skill": "S1",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW27.R2.sorting.explain.people_cultures.why": {
+"context_id": "MW27.R2.sorting.explain.people_cultures.why",
+"lesson": "MW27",
+"round": 2,
+"game": "sorting",
+"settings": {
+"theme": "people_cultures",
+"task": "explain",
+"why": "1"
+},
+"map_settings": {
+"theme": "people_cultures",
+"task": "explain",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW27.R3.sorting.identify_respect.bulgaria_symbols": {
+"context_id": "MW27.R3.sorting.identify_respect.bulgaria_symbols",
+"lesson": "MW27",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "bulgaria_symbols",
+"task": "identify_respect",
+"why": "1"
+},
+"map_settings": {
+"theme": "bulgaria_symbols",
+"task": "identify_respect",
+"why": "1"
+},
+"assessed_skill": "S1",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW27.R3.sorting.identify_respect.bulgaria_symbols.why": {
+"context_id": "MW27.R3.sorting.identify_respect.bulgaria_symbols.why",
+"lesson": "MW27",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "bulgaria_symbols",
+"task": "identify_respect",
+"why": "1"
+},
+"map_settings": {
+"theme": "bulgaria_symbols",
+"task": "identify_respect",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW27.R4.numberComposition": {
+"context_id": "MW27.R4.numberComposition",
+"lesson": "MW27",
+"round": 4,
+"game": "numberComposition",
+"settings": {},
+"map_settings": {
+"numbers": "10",
+"complexity": "2"
+},
+"assessed_skill": "M3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW27.R4.numberLine.1": {
+"context_id": "MW27.R4.numberLine.1",
+"lesson": "MW27",
+"round": 4,
+"game": "numberLine",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"max": "20",
+"level": "1"
+},
+"assessed_skill": "M10",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW28.R1.sorting.identify_respect.bulgaria_symbols": {
+"context_id": "MW28.R1.sorting.identify_respect.bulgaria_symbols",
+"lesson": "MW28",
+"round": 1,
+"game": "sorting",
+"settings": {
+"theme": "bulgaria_symbols",
+"task": "identify_respect",
+"why": "1"
+},
+"map_settings": {
+"theme": "bulgaria_symbols",
+"task": "identify_respect",
+"why": "1"
+},
+"assessed_skill": "S1",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW28.R1.sorting.identify_respect.bulgaria_symbols.why": {
+"context_id": "MW28.R1.sorting.identify_respect.bulgaria_symbols.why",
+"lesson": "MW28",
+"round": 1,
+"game": "sorting",
+"settings": {
+"theme": "bulgaria_symbols",
+"task": "identify_respect",
+"why": "1"
+},
+"map_settings": {
+"theme": "bulgaria_symbols",
+"task": "identify_respect",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW28.R2.sorting.classify.traditions": {
+"context_id": "MW28.R2.sorting.classify.traditions",
+"lesson": "MW28",
+"round": 2,
+"game": "sorting",
+"settings": {
+"theme": "traditions",
+"task": "classify",
+"why": "1"
+},
+"map_settings": {
+"theme": "traditions",
+"task": "classify",
+"why": "1"
+},
+"assessed_skill": "S1",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW28.R2.sorting.classify.traditions.why": {
+"context_id": "MW28.R2.sorting.classify.traditions.why",
+"lesson": "MW28",
+"round": 2,
+"game": "sorting",
+"settings": {
+"theme": "traditions",
+"task": "classify",
+"why": "1"
+},
+"map_settings": {
+"theme": "traditions",
+"task": "classify",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW28.R3.sorting.whose_holiday.holidays": {
+"context_id": "MW28.R3.sorting.whose_holiday.holidays",
+"lesson": "MW28",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "holidays",
+"task": "whose_holiday",
+"why": "1"
+},
+"map_settings": {
+"theme": "holidays",
+"task": "whose_holiday",
+"why": "1"
+},
+"assessed_skill": "S1",
+"secondary_skill": "S3",
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW28.R3.sorting.whose_holiday.holidays.why": {
+"context_id": "MW28.R3.sorting.whose_holiday.holidays.why",
+"lesson": "MW28",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "holidays",
+"task": "whose_holiday",
+"why": "1"
+},
+"map_settings": {
+"theme": "holidays",
+"task": "whose_holiday",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW28.R4.brainCrush.mix.10.2": {
+"context_id": "MW28.R4.brainCrush.mix.10.2",
+"lesson": "MW28",
+"round": 4,
+"game": "brainCrush",
+"settings": {
+"op": "mix",
+"range": "10",
+"level": "2"
+},
+"map_settings": {
+"op": "mix",
+"range": "10",
+"level": "2"
+},
+"assessed_skill": "M4",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW28.R4.brainCrush.mix.20.2": {
+"context_id": "MW28.R4.brainCrush.mix.20.2",
+"lesson": "MW28",
+"round": 4,
+"game": "brainCrush",
+"settings": {
+"op": "mix",
+"range": "20",
+"level": "2"
+},
+"map_settings": {
+"op": "mix",
+"range": "20",
+"level": "2"
+},
+"assessed_skill": "M4",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW29.R1.sorting.whose_holiday.holidays": {
+"context_id": "MW29.R1.sorting.whose_holiday.holidays",
+"lesson": "MW29",
+"round": 1,
+"game": "sorting",
+"settings": {
+"theme": "holidays",
+"task": "whose_holiday",
+"why": "1"
+},
+"map_settings": {
+"theme": "holidays",
+"task": "whose_holiday",
+"why": "1"
+},
+"assessed_skill": "S1",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW29.R1.sorting.whose_holiday.holidays.why": {
+"context_id": "MW29.R1.sorting.whose_holiday.holidays.why",
+"lesson": "MW29",
+"round": 1,
+"game": "sorting",
+"settings": {
+"theme": "holidays",
+"task": "whose_holiday",
+"why": "1"
+},
+"map_settings": {
+"theme": "holidays",
+"task": "whose_holiday",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW29.R2.sorting.name_emotion.emotions": {
+"context_id": "MW29.R2.sorting.name_emotion.emotions",
+"lesson": "MW29",
+"round": 2,
+"game": "sorting",
+"settings": {
+"theme": "emotions",
+"task": "name_emotion",
+"why": "1"
+},
+"map_settings": {
+"theme": "emotions",
+"task": "name_emotion",
+"why": "1"
+},
+"assessed_skill": "S1",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW29.R2.sorting.name_emotion.emotions.why": {
+"context_id": "MW29.R2.sorting.name_emotion.emotions.why",
+"lesson": "MW29",
+"round": 2,
+"game": "sorting",
+"settings": {
+"theme": "emotions",
+"task": "name_emotion",
+"why": "1"
+},
+"map_settings": {
+"theme": "emotions",
+"task": "name_emotion",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW29.R3.sorting.emotion_cause.emotion_causes": {
+"context_id": "MW29.R3.sorting.emotion_cause.emotion_causes",
+"lesson": "MW29",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "emotion_causes",
+"task": "emotion_cause",
+"why": "1"
+},
+"map_settings": {
+"theme": "emotion_causes",
+"task": "emotion_cause",
+"why": "1"
+},
+"assessed_skill": "S1",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW29.R3.sorting.emotion_cause.emotion_causes.why": {
+"context_id": "MW29.R3.sorting.emotion_cause.emotion_causes.why",
+"lesson": "MW29",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "emotion_causes",
+"task": "emotion_cause",
+"why": "1"
+},
+"map_settings": {
+"theme": "emotion_causes",
+"task": "emotion_cause",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW29.R4.brainstorm.10.1": {
+"context_id": "MW29.R4.brainstorm.10.1",
+"lesson": "MW29",
+"round": 4,
+"game": "brainstorm",
+"settings": {
+"range": "10",
+"level": "1"
+},
+"map_settings": {
+"range": "10",
+"level": "1"
+},
+"assessed_skill": "M8",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW30.R1.sorting.emotion_cause.emotion_causes": {
+"context_id": "MW30.R1.sorting.emotion_cause.emotion_causes",
+"lesson": "MW30",
+"round": 1,
+"game": "sorting",
+"settings": {
+"theme": "emotion_causes",
+"task": "emotion_cause",
+"why": "1"
+},
+"map_settings": {
+"theme": "emotion_causes",
+"task": "emotion_cause",
+"why": "1"
+},
+"assessed_skill": "S1",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW30.R1.sorting.emotion_cause.emotion_causes.why": {
+"context_id": "MW30.R1.sorting.emotion_cause.emotion_causes.why",
+"lesson": "MW30",
+"round": 1,
+"game": "sorting",
+"settings": {
+"theme": "emotion_causes",
+"task": "emotion_cause",
+"why": "1"
+},
+"map_settings": {
+"theme": "emotion_causes",
+"task": "emotion_cause",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "RETRIEVAL",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW30.R2.sorting.action.social_situations": {
+"context_id": "MW30.R2.sorting.action.social_situations",
+"lesson": "MW30",
+"round": 2,
+"game": "sorting",
+"settings": {
+"theme": "social_situations",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "social_situations",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": "S1",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW30.R2.sorting.action.social_situations.why": {
+"context_id": "MW30.R2.sorting.action.social_situations.why",
+"lesson": "MW30",
+"round": 2,
+"game": "sorting",
+"settings": {
+"theme": "social_situations",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "social_situations",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 6,
+"role": "PRACTICE",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW30.R3.sorting.action.conflict_choices": {
+"context_id": "MW30.R3.sorting.action.conflict_choices",
+"lesson": "MW30",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "conflict_choices",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "conflict_choices",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": "S1",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW30.R3.sorting.action.conflict_choices.why": {
+"context_id": "MW30.R3.sorting.action.conflict_choices.why",
+"lesson": "MW30",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "conflict_choices",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "conflict_choices",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 6,
+"role": "PRIMARY_MEASUREMENT",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW30.R4.brainCrush.mix.10.2": {
+"context_id": "MW30.R4.brainCrush.mix.10.2",
+"lesson": "MW30",
+"round": 4,
+"game": "brainCrush",
+"settings": {
+"op": "mix",
+"range": "10",
+"level": "2"
+},
+"map_settings": {
+"op": "mix",
+"range": "10",
+"level": "2"
+},
+"assessed_skill": "M4",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW30.R4.brainCrush.mix.20.2": {
+"context_id": "MW30.R4.brainCrush.mix.20.2",
+"lesson": "MW30",
+"round": 4,
+"game": "brainCrush",
+"settings": {
+"op": "mix",
+"range": "20",
+"level": "2"
+},
+"map_settings": {
+"op": "mix",
+"range": "20",
+"level": "2"
+},
+"assessed_skill": "M4",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 4,
+"role": "TRANSFER",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW31.R1.numberLine.2": {
+"context_id": "MW31.R1.numberLine.2",
+"lesson": "MW31",
+"round": 1,
+"game": "numberLine",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"max": "10",
+"level": "2"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 4,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW31.R2.piratesTreasures.10": {
+"context_id": "MW31.R2.piratesTreasures.10",
+"lesson": "MW31",
+"round": 2,
+"game": "piratesTreasures",
+"settings": {
+"range": "10"
+},
+"map_settings": {
+"range": "10"
+},
+"assessed_skill": "M4",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 4,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW31.R3.brainCrush.mix.10.2": {
+"context_id": "MW31.R3.brainCrush.mix.10.2",
+"lesson": "MW31",
+"round": 3,
+"game": "brainCrush",
+"settings": {
+"op": "mix",
+"range": "10",
+"level": "2"
+},
+"map_settings": {
+"op": "mix",
+"range": "10",
+"level": "2"
+},
+"assessed_skill": "M4",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 3,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW31.R3.intellectScales.10.2": {
+"context_id": "MW31.R3.intellectScales.10.2",
+"lesson": "MW31",
+"round": 3,
+"game": "intellectScales",
+"settings": {
+"range": "10",
+"level": "2"
+},
+"map_settings": {
+"range": "10",
+"level": "2"
+},
+"assessed_skill": "M5",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 2,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW31.R3.lines.measure": {
+"context_id": "MW31.R3.lines.measure",
+"lesson": "MW31",
+"round": 3,
+"game": "lines",
+"settings": {
+"view": "measure"
+},
+"map_settings": {
+"view": "measure"
+},
+"assessed_skill": "M7",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 2,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW31.R3.shapes.find_shape": {
+"context_id": "MW31.R3.shapes.find_shape",
+"lesson": "MW31",
+"round": 3,
+"game": "shapes",
+"settings": {
+"view": "find_shape"
+},
+"map_settings": {
+"view": "find_shape"
+},
+"assessed_skill": "M9",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 2,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW31.R4.soonToSchool": {
+"context_id": "MW31.R4.soonToSchool",
+"lesson": "MW31",
+"round": 4,
+"game": "soonToSchool",
+"settings": {},
+"map_settings": {},
+"assessed_skill": "S1",
+"secondary_skill": "M1",
+"measurement": false,
+"planned_items": 5,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW31.R4.sorting.action.school_situations": {
+"context_id": "MW31.R4.sorting.action.school_situations",
+"lesson": "MW31",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "school_situations",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "school_situations",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": "S1",
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 4,
+"role": "PRACTICE",
+"action": "main",
+"status": "provisional",
+"counts_for_level": false
+},
+"MW31.R4.sorting.action.school_situations.why": {
+"context_id": "MW31.R4.sorting.action.school_situations.why",
+"lesson": "MW31",
+"round": 4,
+"game": "sorting",
+"settings": {
+"theme": "school_situations",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "school_situations",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": false,
+"planned_items": 4,
+"role": "PRACTICE",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW32.R1.numberLine.2": {
+"context_id": "MW32.R1.numberLine.2",
+"lesson": "MW32",
+"round": 1,
+"game": "numberLine",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"max": "10",
+"level": "2"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 2,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW32.R1.cobweb.2": {
+"context_id": "MW32.R1.cobweb.2",
+"lesson": "MW32",
+"round": 1,
+"game": "cobweb",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"fields": "3",
+"max": "10",
+"level": "2"
+},
+"assessed_skill": "M2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 1,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW32.R1.intellectScales.10.2": {
+"context_id": "MW32.R1.intellectScales.10.2",
+"lesson": "MW32",
+"round": 1,
+"game": "intellectScales",
+"settings": {
+"range": "10",
+"level": "2"
+},
+"map_settings": {
+"range": "10",
+"level": "2"
+},
+"assessed_skill": "M5",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 1,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW32.R2.brainCrush.mix.10.2": {
+"context_id": "MW32.R2.brainCrush.mix.10.2",
+"lesson": "MW32",
+"round": 2,
+"game": "brainCrush",
+"settings": {
+"op": "mix",
+"range": "10",
+"level": "2"
+},
+"map_settings": {
+"op": "mix",
+"range": "10",
+"level": "2"
+},
+"assessed_skill": "M4",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 2,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW32.R2.numberComposition": {
+"context_id": "MW32.R2.numberComposition",
+"lesson": "MW32",
+"round": 2,
+"game": "numberComposition",
+"settings": {},
+"map_settings": {
+"numbers": "10",
+"complexity": "2"
+},
+"assessed_skill": "M3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 1,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW32.R2.pirateCipher.2": {
+"context_id": "MW32.R2.pirateCipher.2",
+"lesson": "MW32",
+"round": 2,
+"game": "pirateCipher",
+"settings": {
+"level": "2"
+},
+"map_settings": {
+"field": "4x4",
+"level": "2"
+},
+"assessed_skill": "M6",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 1,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW32.R3.lines.measure": {
+"context_id": "MW32.R3.lines.measure",
+"lesson": "MW32",
+"round": 3,
+"game": "lines",
+"settings": {
+"view": "measure"
+},
+"map_settings": {
+"view": "measure"
+},
+"assessed_skill": "M7",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 1,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW32.R3.shapes.find_shape": {
+"context_id": "MW32.R3.shapes.find_shape",
+"lesson": "MW32",
+"round": 3,
+"game": "shapes",
+"settings": {
+"view": "find_shape"
+},
+"map_settings": {
+"view": "find_shape"
+},
+"assessed_skill": "M9",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 1,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW32.R3.sorting.action.final_s1": {
+"context_id": "MW32.R3.sorting.action.final_s1",
+"lesson": "MW32",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "final_s1",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "final_s1",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": "S1",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 1,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW32.R3.sorting.action.final_s1.why": {
+"context_id": "MW32.R3.sorting.action.final_s1.why",
+"lesson": "MW32",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "final_s1",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "final_s1",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 1,
+"role": "PRIMARY_MEASUREMENT",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW32.R3.sorting.action.final_s2": {
+"context_id": "MW32.R3.sorting.action.final_s2",
+"lesson": "MW32",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "final_s2",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "final_s2",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": "S2",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 1,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW32.R3.sorting.action.final_s2.why": {
+"context_id": "MW32.R3.sorting.action.final_s2.why",
+"lesson": "MW32",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "final_s2",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "final_s2",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 1,
+"role": "PRIMARY_MEASUREMENT",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW32.R3.sorting.sequence.final_s3": {
+"context_id": "MW32.R3.sorting.sequence.final_s3",
+"lesson": "MW32",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "final_s3",
+"task": "sequence",
+"why": "1"
+},
+"map_settings": {
+"theme": "final_s3",
+"task": "sequence",
+"why": "1"
+},
+"assessed_skill": "S3",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 1,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW32.R3.sorting.sequence.final_s3.why": {
+"context_id": "MW32.R3.sorting.sequence.final_s3.why",
+"lesson": "MW32",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "final_s3",
+"task": "sequence",
+"why": "1"
+},
+"map_settings": {
+"theme": "final_s3",
+"task": "sequence",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 1,
+"role": "PRIMARY_MEASUREMENT",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW32.R3.sorting.action.final_s4": {
+"context_id": "MW32.R3.sorting.action.final_s4",
+"lesson": "MW32",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "final_s4",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "final_s4",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": "S4",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 1,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW32.R3.sorting.action.final_s4.why": {
+"context_id": "MW32.R3.sorting.action.final_s4.why",
+"lesson": "MW32",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "final_s4",
+"task": "action",
+"why": "1"
+},
+"map_settings": {
+"theme": "final_s4",
+"task": "action",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 1,
+"role": "PRIMARY_MEASUREMENT",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW32.R3.sorting.cause.final_s56": {
+"context_id": "MW32.R3.sorting.cause.final_s56",
+"lesson": "MW32",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "final_s56",
+"task": "cause",
+"why": "1"
+},
+"map_settings": {
+"theme": "final_s56",
+"task": "cause",
+"why": "1"
+},
+"assessed_skill": "S5",
+"secondary_skill": "S6",
+"measurement": true,
+"planned_items": 1,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW32.R3.sorting.cause.final_s56.why": {
+"context_id": "MW32.R3.sorting.cause.final_s56.why",
+"lesson": "MW32",
+"round": 3,
+"game": "sorting",
+"settings": {
+"theme": "final_s56",
+"task": "cause",
+"why": "1"
+},
+"map_settings": {
+"theme": "final_s56",
+"task": "cause",
+"why": "1"
+},
+"assessed_skill": null,
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 1,
+"role": "PRIMARY_MEASUREMENT",
+"action": "why",
+"status": "provisional",
+"counts_for_level": false,
+"note": "умението на обяснението – решение на методиста; дотогава не участва в нивото"
+},
+"MW32.R4.brainCrush.mix.20.2": {
+"context_id": "MW32.R4.brainCrush.mix.20.2",
+"lesson": "MW32",
+"round": 4,
+"game": "brainCrush",
+"settings": {
+"op": "mix",
+"range": "20",
+"level": "2"
+},
+"map_settings": {
+"op": "mix",
+"range": "20",
+"level": "2"
+},
+"assessed_skill": "M4",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 2,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+},
+"MW32.R4.numberLine.1": {
+"context_id": "MW32.R4.numberLine.1",
+"lesson": "MW32",
+"round": 4,
+"game": "numberLine",
+"settings": {
+"level": "1"
+},
+"map_settings": {
+"max": "20",
+"level": "1"
+},
+"assessed_skill": "M10",
+"secondary_skill": null,
+"measurement": true,
+"planned_items": 2,
+"role": "PRIMARY_MEASUREMENT",
+"action": "main",
+"status": "provisional",
+"counts_for_level": true
+}
+}
+}

@@ -1,0 +1,29 @@
+<!doctype html><html lang="bg"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Демо – Моят квартал</title><style>
+:root{--bg:#2B2550;--card:#FFF8EE;--ink:#2B2233;--accent:#E5167A;--muted:#6B6072}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.4 system-ui,-apple-system,sans-serif}
+main{max-width:900px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-left))}
+h1{color:#fff;margin:0 0 6px;font-size:28px} p.n{color:#D9D2E3;margin:0 0 18px;font-size:15px}
+.box{background:var(--card);border-radius:20px;padding:18px;margin-bottom:16px}
+.kids{display:flex;gap:10px;flex-wrap:wrap} .kids button{min-width:76px;min-height:76px;border-radius:16px;border:3px solid #ccc;background:#fff;font:800 22px system-ui;cursor:pointer}
+.kids button.on{border-color:var(--accent);background:#FFE3F0}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.st,.w{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:110px;border-radius:18px;background:#fff;border:3px solid var(--accent);color:var(--ink);text-decoration:none}
+.st b{font-size:24px} .st span{font-size:14px;color:var(--muted)} .w{background:var(--accent);color:#fff;font:800 24px system-ui;margin-top:12px}
+</style></head><body><main>
+<h1>Демо „Моят квартал“</h1><p class="n">За теста с деца (временна графика). Без база – данните остават на този таблет. Изберете номера на детето, после кръговете по ред; след кръг детето натиска „Виж квартала“.</p>
+<div class="box"><b>Дете</b><div class="kids" id="kids"></div></div>
+<div class="box"><b>Домашна BK01 (А, У, И)</b><div class="steps"><a class="st" data-url="index.html?pilot=CHILD#game/phonemicHearing?level=1&tasks=8&hw=DEMO-BK01&st=0&lesson=BK01&round=1&skill=E1&meas=1&mode=learn&adaptive=0&bank=banks-b1-5:BK01:Р1" href="#"><b>Кръг 1</b><span>Фонематичен слух</span></a><a class="st" data-url="index.html?pilot=CHILD#game/alphabet?letters=АУИ&level=1&lettersQty=12&hw=DEMO-BK01&st=1&lesson=BK01&round=2&skill=E1&meas=0&mode=learn&adaptive=1&bank=banks-b1-5:BK01:Р2" href="#"><b>Кръг 2</b><span>Азбука</span></a><a class="st" data-url="index.html?pilot=CHILD#game/soundLetterParsing?level=1&answersQty=10&lessonNumber=1&hw=DEMO-BK01&st=2&lesson=BK01&round=3&skill=E1&meas=1&mode=learn&adaptive=0&bank=banks-b1-5:BK01:Р3" href="#"><b>Кръг 3</b><span>Звуков анализ</span></a><a class="st" data-url="index.html?pilot=CHILD#game/phonemicHearing?level=2&tasks=6&hw=DEMO-BK01&st=3&lesson=BK01&round=4&skill=E1&meas=1&mode=learn&adaptive=0&bank=banks-b1-5:BK01:Р4" href="#"><b>Кръг 4</b><span>Фонематичен слух</span></a><a class="st" data-url="index.html?pilot=CHILD#game/letterOfElements?letters=АУИ&level=1&rounds=4&lessonNumber=1&hw=DEMO-BK01&st=4&lesson=BK01&round=4&skill=E1&skill2=E10&meas=1&mode=learn&adaptive=0&bank=banks-b1-5:BK01:Р4" href="#"><b>Кръг 4</b><span>Буква от елементи</span></a></div><a class="w" id="world" href="#">Моят квартал</a>
+<button type="button" id="skip" style="margin-top:12px;min-height:56px;border-radius:14px;border:2px dashed #999;background:#fff;font:600 16px system-ui;width:100%">За възрастния: кръгове 3 и 4 – минати (само в демото)</button>
+<p class="n" id="skipmsg" style="color:#6B6072;margin:6px 0 0"></p></div>
+</main><script>
+const K=document.getElementById("kids"); let cur=(()=>{try{return localStorage.getItem("demo.kid")||"1"}catch(e){return "1"}})();
+for(let i=1;i<=8;i++){const b=document.createElement("button");b.textContent="Д"+i;b.onclick=()=>{cur=String(i);try{localStorage.setItem("demo.kid",cur)}catch(e){}draw()};K.appendChild(b)}
+const code=()=>"DEMO_"+cur;
+function draw(){[...K.children].forEach((b,i)=>b.classList.toggle("on",String(i+1)===cur));
+  document.querySelectorAll(".st").forEach(a=>a.href=a.dataset.url.replace("pilot=CHILD","demo=1&pilot="+code()));
+  document.getElementById("world").href="index.html?demo=1&pilot="+code()+"#world";}
+draw();
+// само за демото: отбелязва кръгове 3 и 4 на BK01 като минати за избраното дете (за да се види как къщите светват без още 10 минути игра)
+document.getElementById("skip").onclick=()=>{try{const k="platforma.rounds.v1",all=JSON.parse(localStorage.getItem(k)||"{}"),c=all[code()]=all[code()]||{},l=c.BK01=c.BK01||[];[3,4].forEach(r=>{if(!l.includes(r))l.push(r)});localStorage.setItem(k,JSON.stringify(all));document.getElementById("skipmsg").textContent="Готово за "+code()+" – отворете „Моят квартал“.";}catch(e){}};
+</script></body></html>

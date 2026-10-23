@@ -1,0 +1,870 @@
+{
+ "version": "1.0.0",
+ "date": "2026-10-23",
+ "status": "чернова – за методически преглед",
+ "notes": [
+  "Без валута за 5–7.",
+  "Завършване = всички кръгове, без изискване за точност.",
+  "Буквените къщи са опора в урока; наградата е промяна + избор.",
+  "Звезда/постижение за умение се смята отделно: ≥10 валидни измервателни решения по умението (skill_status_history).",
+  "Изпълнява се на сървъра (002_world_v1.sql: evaluate_world); клиентът показва само предварителен изглед."
+ ],
+ "objects": [
+  {
+   "id": "letters.house.А.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на А светва",
+   "zones": [
+    "L01"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.У.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на У светва",
+   "zones": [
+    "L01"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.И.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на И светва",
+   "zones": [
+    "L01"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.decor.1",
+   "district": "letters",
+   "kind": "decor",
+   "title": "фенер",
+   "zones": [],
+   "variants": []
+  },
+  {
+   "id": "letters.decor.2",
+   "district": "letters",
+   "kind": "decor",
+   "title": "пейка",
+   "zones": [],
+   "variants": []
+  },
+  {
+   "id": "letters.decor.3",
+   "district": "letters",
+   "kind": "decor",
+   "title": "ограда с цветя",
+   "zones": [],
+   "variants": []
+  },
+  {
+   "id": "letters.house.О.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на О светва",
+   "zones": [
+    "L02"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.Е.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на Е светва",
+   "zones": [
+    "L02"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.Ъ.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на Ъ светва",
+   "zones": [
+    "L02"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.decor.4",
+   "district": "letters",
+   "kind": "decor",
+   "title": "балкон със саксии",
+   "zones": [],
+   "variants": []
+  },
+  {
+   "id": "letters.house.М.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на М светва",
+   "zones": [
+    "L03"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.Н.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на Н светва",
+   "zones": [
+    "L03"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.decor.5",
+   "district": "letters",
+   "kind": "decor",
+   "title": "табела с името",
+   "zones": [],
+   "variants": []
+  },
+  {
+   "id": "letters.house.Л.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на Л светва",
+   "zones": [
+    "L04"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.Р.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на Р светва",
+   "zones": [
+    "L04"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.decor.6",
+   "district": "letters",
+   "kind": "decor",
+   "title": "покрив в нов цвят",
+   "zones": [],
+   "variants": []
+  },
+  {
+   "id": "letters.house.Й.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на Й светва",
+   "zones": [
+    "L05"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.Ю.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на Ю светва",
+   "zones": [
+    "L05"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.Я.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на Я светва",
+   "zones": [
+    "L05"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.decor.7",
+   "district": "letters",
+   "kind": "decor",
+   "title": "пейка под дърво",
+   "zones": [],
+   "variants": []
+  },
+  {
+   "id": "letters.house.Д.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на Д светва",
+   "zones": [
+    "L06"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.Т.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на Т светва",
+   "zones": [
+    "L06"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.decor.8",
+   "district": "letters",
+   "kind": "decor",
+   "title": "кладенче",
+   "zones": [],
+   "variants": []
+  },
+  {
+   "id": "letters.house.Б.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на Б светва",
+   "zones": [
+    "L07"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.П.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на П светва",
+   "zones": [
+    "L07"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.decor.0",
+   "district": "letters",
+   "kind": "decor",
+   "title": "цветна леха",
+   "zones": [],
+   "variants": []
+  },
+  {
+   "id": "letters.house.Г.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на Г светва",
+   "zones": [
+    "L08"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.К.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на К светва",
+   "zones": [
+    "L08"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.З.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на З светва",
+   "zones": [
+    "L09"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.С.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на С светва",
+   "zones": [
+    "L09"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.В.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на В светва",
+   "zones": [
+    "L10"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.Ф.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на Ф светва",
+   "zones": [
+    "L10"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.Ж.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на Ж светва",
+   "zones": [
+    "L11"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.Ш.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на Ш светва",
+   "zones": [
+    "L11"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.Х.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на Х светва",
+   "zones": [
+    "L12"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.Ч.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на Ч светва",
+   "zones": [
+    "L12"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.Ц.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на Ц светва",
+   "zones": [
+    "L12"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.Щ.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на Щ светва",
+   "zones": [
+    "L13"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.house.ь.lit",
+   "district": "letters",
+   "kind": "core",
+   "title": "Къщата на Ь светва",
+   "zones": [
+    "L13"
+   ],
+   "variants": []
+  },
+  {
+   "id": "letters.festival",
+   "district": "letters",
+   "kind": "event",
+   "title": "Празник на буквите",
+   "zones": [
+    "square"
+   ],
+   "variants": []
+  }
+ ],
+ "rules": [
+  {
+   "rule_id": "bk01.complete",
+   "version": 1,
+   "lesson": "BK01",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "BK01",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "letters.house.А.lit",
+     "letters.house.У.lit",
+     "letters.house.И.lit"
+    ],
+    "choice": {
+     "offer": [
+      "letters.decor.1",
+      "letters.decor.2",
+      "letters.decor.3"
+     ],
+     "pick": 1
+    },
+    "star": false
+   },
+   "once": true,
+   "title": "А, У, И — чувам и свързвам"
+  },
+  {
+   "rule_id": "bk02.complete",
+   "version": 1,
+   "lesson": "BK02",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "BK02",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "letters.house.О.lit",
+     "letters.house.Е.lit",
+     "letters.house.Ъ.lit"
+    ],
+    "choice": {
+     "offer": [
+      "letters.decor.2",
+      "letters.decor.3",
+      "letters.decor.4"
+     ],
+     "pick": 1
+    },
+    "star": false
+   },
+   "once": true,
+   "title": "О, Е, Ъ — разширявам звуковата карта"
+  },
+  {
+   "rule_id": "bk03.complete",
+   "version": 1,
+   "lesson": "BK03",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "BK03",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "letters.house.М.lit",
+     "letters.house.Н.lit"
+    ],
+    "choice": {
+     "offer": [
+      "letters.decor.3",
+      "letters.decor.4",
+      "letters.decor.5"
+     ],
+     "pick": 1
+    },
+    "star": false
+   },
+   "once": true,
+   "title": "М, Н — започвам да сливам"
+  },
+  {
+   "rule_id": "bk04.complete",
+   "version": 1,
+   "lesson": "BK04",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "BK04",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "letters.house.Л.lit",
+     "letters.house.Р.lit"
+    ],
+    "choice": {
+     "offer": [
+      "letters.decor.4",
+      "letters.decor.5",
+      "letters.decor.6"
+     ],
+     "pick": 1
+    },
+    "star": false
+   },
+   "once": true,
+   "title": "Л, Р — чета повече"
+  },
+  {
+   "rule_id": "bk05.complete",
+   "version": 1,
+   "lesson": "BK05",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "BK05",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "letters.house.Й.lit",
+     "letters.house.Ю.lit",
+     "letters.house.Я.lit"
+    ],
+    "choice": {
+     "offer": [
+      "letters.decor.5",
+      "letters.decor.6",
+      "letters.decor.7"
+     ],
+     "pick": 1
+    },
+    "star": false
+   },
+   "once": true,
+   "title": "Й, Ю, Я — специални букви"
+  },
+  {
+   "rule_id": "bk06.complete",
+   "version": 1,
+   "lesson": "BK06",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "BK06",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "letters.house.Д.lit",
+     "letters.house.Т.lit"
+    ],
+    "choice": {
+     "offer": [
+      "letters.decor.6",
+      "letters.decor.7",
+      "letters.decor.8"
+     ],
+     "pick": 1
+    },
+    "star": false
+   },
+   "once": true,
+   "title": "Д, Т — чувам разликата"
+  },
+  {
+   "rule_id": "bk07.complete",
+   "version": 1,
+   "lesson": "BK07",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "BK07",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "letters.house.Б.lit",
+     "letters.house.П.lit"
+    ],
+    "choice": {
+     "offer": [
+      "letters.decor.7",
+      "letters.decor.8",
+      "letters.decor.0"
+     ],
+     "pick": 1
+    },
+    "star": false
+   },
+   "once": true,
+   "title": "Б, П — чета и проверявам"
+  },
+  {
+   "rule_id": "bk08.complete",
+   "version": 1,
+   "lesson": "BK08",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "BK08",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "letters.house.Г.lit",
+     "letters.house.К.lit"
+    ],
+    "choice": {
+     "offer": [
+      "letters.decor.8",
+      "letters.decor.0",
+      "letters.decor.1"
+     ],
+     "pick": 1
+    },
+    "star": false
+   },
+   "once": true,
+   "title": "Г, К — разширявам думите"
+  },
+  {
+   "rule_id": "bk09.complete",
+   "version": 1,
+   "lesson": "BK09",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "BK09",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "letters.house.З.lit",
+     "letters.house.С.lit"
+    ],
+    "choice": {
+     "offer": [
+      "letters.decor.0",
+      "letters.decor.1",
+      "letters.decor.2"
+     ],
+     "pick": 1
+    },
+    "star": false
+   },
+   "once": true,
+   "title": "З, С — слушам внимателно"
+  },
+  {
+   "rule_id": "bk10.complete",
+   "version": 1,
+   "lesson": "BK10",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "BK10",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "letters.house.В.lit",
+     "letters.house.Ф.lit"
+    ],
+    "choice": {
+     "offer": [
+      "letters.decor.1",
+      "letters.decor.2",
+      "letters.decor.3"
+     ],
+     "pick": 1
+    },
+    "star": false
+   },
+   "once": true,
+   "title": "В, Ф — чета по-плавно"
+  },
+  {
+   "rule_id": "bk11.complete",
+   "version": 1,
+   "lesson": "BK11",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "BK11",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "letters.house.Ж.lit",
+     "letters.house.Ш.lit"
+    ],
+    "choice": {
+     "offer": [
+      "letters.decor.2",
+      "letters.decor.3",
+      "letters.decor.4"
+     ],
+     "pick": 1
+    },
+    "star": false
+   },
+   "once": true,
+   "title": "Ж, Ш — четенето става по-богато"
+  },
+  {
+   "rule_id": "bk12.complete",
+   "version": 1,
+   "lesson": "BK12",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "BK12",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "letters.house.Х.lit",
+     "letters.house.Ч.lit",
+     "letters.house.Ц.lit"
+    ],
+    "choice": {
+     "offer": [
+      "letters.decor.3",
+      "letters.decor.4",
+      "letters.decor.5"
+     ],
+     "pick": 1
+    },
+    "star": false
+   },
+   "once": true,
+   "title": "Х, Ч, Ц — овладявам още графеми"
+  },
+  {
+   "rule_id": "bk13.complete",
+   "version": 1,
+   "lesson": "BK13",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "BK13",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "letters.house.Щ.lit",
+     "letters.house.ь.lit"
+    ],
+    "choice": {
+     "offer": [
+      "letters.decor.4",
+      "letters.decor.5",
+      "letters.decor.6"
+     ],
+     "pick": 1
+    },
+    "star": false
+   },
+   "once": true,
+   "title": "Щ, ь, ьо/йо — специални случаи"
+  },
+  {
+   "rule_id": "bk14.complete",
+   "version": 1,
+   "lesson": "BK14",
+   "lesson_kind": "integrated",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "BK14",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "letters.festival"
+    ],
+    "show": "district_complete",
+    "star": false
+   },
+   "once": true,
+   "title": "Показвам какво мога"
+  }
+ ]
+}

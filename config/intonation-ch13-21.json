@@ -455,16 +455,14 @@
     {
      "n": 0,
      "who": "Иво",
-     "text": "Мамо, ключът ми го няма!",
-     "feeling": "уплашено",
-     "task": true,
-     "feedback": "Иво е уплашен.",
-     "check": null
+     "text": "Мамо, не мога да намеря ключа.",
+     "feeling": null,
+     "task": false
     },
     {
      "n": 1,
      "who": "Мама",
-     "text": "Не се плаши. Погледни в джоба на якето.",
+     "text": "Погледни в джоба на якето.",
      "feeling": null,
      "task": false
     },
@@ -475,16 +473,35 @@
      "feeling": "радостно",
      "task": true,
      "feedback": "Иво е радостен.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 3,
+     "who": "Иво",
+     "text": "Ой! Мамо, какво изтропа зад вратата?",
+     "feeling": "уплашено",
+     "task": true,
+     "feedback": "Иво е уплашен.",
+     "check": null,
+     "ask_who": true
+    },
+    {
+     "n": 4,
+     "who": "Мама",
+     "text": "Не се плаши. Котето събори една кутия.",
+     "feeling": null,
+     "task": false
+    },
+    {
+     "n": 5,
      "who": "Мама",
      "text": "Ах, пак си оставил обувките насред пътя!",
      "feeling": "ядосано",
      "task": true,
      "feedback": "Мама е ядосана.",
-     "check": null
+     "check": null,
+     "ask_who": true
     }
    ]
   },
@@ -506,7 +523,8 @@
      "feeling": "ядосано",
      "task": true,
      "feedback": "Мая е ядосана.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 1,
@@ -515,7 +533,8 @@
      "feeling": "тъжно",
      "task": true,
      "feedback": "Иво е тъжен.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 2,
@@ -527,11 +546,12 @@
     {
      "n": 3,
      "who": "Иво",
-     "text": "Ура! Хайде!",
+     "text": "Ура, Мая! Хайде!",
      "feeling": "радостно",
      "task": true,
      "feedback": "Иво е радостен.",
-     "check": null
+     "check": null,
+     "ask_who": true
     }
    ]
   },
@@ -553,7 +573,8 @@
      "feeling": "тъжно",
      "task": true,
      "feedback": "Ани е тъжна.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 1,
@@ -569,16 +590,18 @@
      "feeling": "радостно",
      "task": true,
      "feedback": "Ани е радостна.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 3,
      "who": "Ани",
-     "text": "Ой! Какво гръмна така силно?",
+     "text": "Ой, татко! Какво гръмна така силно?",
      "feeling": "уплашено",
      "task": true,
      "feedback": "Ани е уплашена.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 4,
@@ -603,11 +626,12 @@
     {
      "n": 0,
      "who": "Мая",
-     "text": "Ей, ние бяхме първи!",
+     "text": "Ей, ние с Иво бяхме първи!",
      "feeling": "ядосано",
      "task": true,
      "feedback": "Мая е ядосана.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 1,
@@ -616,7 +640,8 @@
      "feeling": "уплашено",
      "task": true,
      "feedback": "Иво е уплашен.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 2,
@@ -628,11 +653,12 @@
     {
      "n": 3,
      "who": "Иво",
-     "text": "Беше супер! Пак!",
+     "text": "Мая, беше супер! Пак!",
      "feeling": "радостно",
      "task": true,
      "feedback": "Иво е радостен.",
-     "check": null
+     "check": null,
+     "ask_who": true
     }
    ]
   },
@@ -654,7 +680,8 @@
      "feeling": "уплашено",
      "task": true,
      "feedback": "Ани е уплашена.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 1,
@@ -666,11 +693,12 @@
     {
      "n": 2,
      "who": "Ани",
-     "text": "Ох, това фенерче пак не работи!",
+     "text": "Ох, мамо, това фенерче пак не работи!",
      "feeling": "ядосано",
      "task": true,
      "feedback": "Ани е ядосана.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 3,
@@ -686,7 +714,8 @@
      "feeling": "радостно",
      "task": true,
      "feedback": "Ани е радостна.",
-     "check": null
+     "check": null,
+     "ask_who": true
     }
    ]
   },
@@ -708,7 +737,8 @@
      "feeling": "радостно",
      "task": true,
      "feedback": "Иво е радостен.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 1,
@@ -717,16 +747,18 @@
      "feeling": "ядосано",
      "task": true,
      "feedback": "Мая е ядосана.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 2,
      "who": "Иво",
-     "text": "Не исках... Сега баба ще се натъжи.",
+     "text": "Ох, Мая... Баба толкова обичаше тази ваза.",
      "feeling": "тъжно",
      "task": true,
      "feedback": "Иво е тъжен.",
-     "check": "може да се чуе и като вина/притеснение; от четирите „тъжно“ е най-близо"
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 3,
@@ -755,7 +787,8 @@
      "feeling": "уплашено",
      "task": true,
      "feedback": "Ани е уплашена.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 1,
@@ -767,11 +800,12 @@
     {
      "n": 2,
      "who": "Ани",
-     "text": "Ох, изпуснах си сладоледа...",
+     "text": "Ох, дядо, изпуснах си сладоледа...",
      "feeling": "тъжно",
      "task": true,
      "feedback": "Ани е тъжна.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 3,
@@ -787,7 +821,8 @@
      "feeling": "радостно",
      "task": true,
      "feedback": "Ани е радостна.",
-     "check": null
+     "check": null,
+     "ask_who": true
     }
    ]
   },
@@ -809,7 +844,8 @@
      "feeling": "радостно",
      "task": true,
      "feedback": "Иво е радостен.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 1,
@@ -818,16 +854,18 @@
      "feeling": "ядосано",
      "task": true,
      "feedback": "Мая е ядосана.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 2,
      "who": "Иво",
-     "text": "Съжалявам, Мая. Много съжалявам.",
+     "text": "Ох... Сега ти остана без торта.",
      "feeling": "тъжно",
      "task": true,
      "feedback": "Иво е тъжен.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 3,
@@ -856,7 +894,8 @@
      "feeling": "радостно",
      "task": true,
      "feedback": "Иво е радостен.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 1,
@@ -865,7 +904,8 @@
      "feeling": "ядосано",
      "task": true,
      "feedback": "Иво е ядосан.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 2,
@@ -881,7 +921,8 @@
      "feeling": "тъжно",
      "task": true,
      "feedback": "Иво е тъжен.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 4,
@@ -910,7 +951,8 @@
      "feeling": "уплашено",
      "task": true,
      "feedback": "Мая е уплашена.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 1,
@@ -926,7 +968,8 @@
      "feeling": "ядосано",
      "task": true,
      "feedback": "Баба е ядосана.",
-     "check": null
+     "check": null,
+     "ask_who": true
     },
     {
      "n": 3,
@@ -935,7 +978,8 @@
      "feeling": "радостно",
      "task": true,
      "feedback": "Мая е радостна.",
-     "check": null
+     "check": null,
+     "ask_who": true
     }
    ]
   }

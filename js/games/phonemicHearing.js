@@ -30,7 +30,8 @@
       this.shell.setLabel(l.toUpperCase() + " " + l);
       this.box.innerHTML = `<div class="az-hint">Коя картинка започва с буквата „${l}“?</div><div class="ph-grid" id="grid">${opts.map(o => this.card(o)).join("")}</div>`;
       [...this.box.querySelectorAll(".ph-pic")].forEach((b, i) => b.addEventListener("pointerdown", e => { e.preventDefault(); this.tapL1(b, opts[i]); }));
-      this.say(`Коя картинка започва с ${l}?`);
+      // нов вид: задачата вече е казана в кратката инструкция и е написана – гласът казва само звука (методист/потребител 19.10)
+      this.say(document.documentElement.classList.contains("look2") ? l : `Коя картинка започва с ${l}?`);
     }
     tapL1(b, it) {
       if (this.finished || this.locked || b.classList.contains("bad")) return;
@@ -41,10 +42,16 @@
       const W = window.BUK_WORDS, byL = {}; W.forEach(x => (byL[x.w[0]] = byL[x.w[0]] || []).push(x));
       const letters = Object.keys(byL).filter(l => !this.used.has("L" + l)); const l = letters.length ? letters[rnd(letters.length)] : Object.keys(byL)[0]; this.used.add("L" + l);
       const pics = shuffle(byL[l].slice()).slice(0, 4); this.cur = l;
+      // 6 плочки вместо цялата азбука: вярната + близки по звук (звучна/беззвучна двойка, сходни звукове) + случайни
+      const NEAR = { б: "пв", п: "бф", в: "фб", ф: "вп", г: "кх", к: "гх", д: "тб", т: "дп", ж: "шз", ш: "жщ", з: "сж", с: "зц", ц: "сч", ч: "цщ", щ: "шч", х: "кф",
+                     м: "нб", н: "мл", л: "рн", р: "лд", й: "ия", а: "ъя", ъ: "аъ", е: "иъ", и: "ей", о: "уъ", у: "ою", ю: "уя", я: "аю" };
+      const near = [...(NEAR[l] || "")].filter(x => x !== l && ALPHA.includes(x));
+      const rest = shuffle(ALPHA.filter(x => x !== l && !near.includes(x)));
+      const keys = [l, ...near.slice(0, 2), ...rest].slice(0, 6).sort((a, b) => ALPHA.indexOf(a) - ALPHA.indexOf(b));
       this.shell.setLabel("С коя буква започват?");
-      this.box.innerHTML = `<div class="ph-grid small">${pics.map(o => this.card(o, "static")).join("")}</div><div class="ph-keys" id="keys">${ALPHA.map(k => `<button type="button" class="ph-key" data-l="${k}">${k}</button>`).join("")}</div>`;
+      this.box.innerHTML = `<div class="ph-grid small">${pics.map(o => this.card(o, "static")).join("")}</div><div class="ph-keys${keys.length < 10 ? " few" : ""}" id="keys">${keys.map(k => `<button type="button" class="ph-key" data-l="${k}">${k}</button>`).join("")}</div>`;
       this.box.querySelectorAll(".ph-key").forEach(b => b.addEventListener("pointerdown", e => { e.preventDefault(); this.tapL2(b); }));
-      this.say("С коя буква започват имената на картинките?");
+      if (!document.documentElement.classList.contains("look2")) this.say("С коя буква започват имената на картинките?");   // нов вид: задачата е в кратката инструкция и на екрана
     }
     tapL2(b) {
       if (this.finished || this.locked) return;

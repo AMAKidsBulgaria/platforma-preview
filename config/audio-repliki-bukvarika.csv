@@ -1,0 +1,30 @@
+audio_id,файл,текст,ударение,audio_role,вид,бележка,как да се прочете,приоритет,блок,speaker,voice_style,take_status
+bkr_koya_bukva_sht_e_napisana_pr,bkr_koya_bukva_sht_e_napisana_pr.wav,Коя буква щ е написана правилно?,Коя буква щ е написана правилно?,question,въпрос,"BK13 Р4 letterOfElements, BK14 Р1 letterOfElements","спокоен въпрос, бавно",1,1,диктор 1,"спокоен въпрос, бавно",not_recorded
+bkr_nameri_bukvata_b,bkr_nameri_bukvata_b.wav,Намери буквата Б,Намери буквата Б,instruction,указание,BK14 Р1 alphabet,"спокойно и ясно, към дете на 5–6 години",1,1,диктор 1,"спокойно и ясно, към дете на 5–6 години",not_recorded
+bkr_nameri_bukvata_g,bkr_nameri_bukvata_g.wav,Намери буквата Г,Намери буквата Г,instruction,указание,BK14 Р1 alphabet,"спокойно и ясно, към дете на 5–6 години",1,1,диктор 1,"спокойно и ясно, към дете на 5–6 години",not_recorded
+bkr_nameri_bukvata_d,bkr_nameri_bukvata_d.wav,Намери буквата Д,Намери буквата Д,instruction,указание,BK14 Р1 alphabet,"спокойно и ясно, към дете на 5–6 години",1,1,диктор 1,"спокойно и ясно, към дете на 5–6 години",not_recorded
+bkr_nameri_bukvata_zh,bkr_nameri_bukvata_zh.wav,Намери буквата Ж,Намери буквата Ж,instruction,указание,BK14 Р1 alphabet,"спокойно и ясно, към дете на 5–6 години",1,1,диктор 1,"спокойно и ясно, към дете на 5–6 години",not_recorded
+bkr_nameri_bukvata_ts,bkr_nameri_bukvata_ts.wav,Намери буквата Ц,Намери буквата Ц,instruction,указание,BK14 Р1 alphabet,"спокойно и ясно, към дете на 5–6 години",1,1,диктор 1,"спокойно и ясно, към дете на 5–6 години",not_recorded
+bkr_nameri_bukvata_ch,bkr_nameri_bukvata_ch.wav,Намери буквата Ч,Намери буквата Ч,instruction,указание,BK14 Р1 alphabet,"спокойно и ясно, към дете на 5–6 години",1,1,диктор 1,"спокойно и ясно, към дете на 5–6 години",not_recorded
+bkr_nameri_bukvata_sht,bkr_nameri_bukvata_sht.wav,Намери буквата Щ,Намери буквата Щ,instruction,указание,BK14 Р1 alphabet,"спокойно и ясно, към дете на 5–6 години",1,1,диктор 1,"спокойно и ясно, към дете на 5–6 години",not_recorded
+bkr_nameri_bukvata_y,bkr_nameri_bukvata_y.wav,Намери буквата Ь,Намери буквата Ь,instruction,указание,BK14 Р1 alphabet,"спокойно и ясно, към дете на 5–6 години",1,1,диктор 1,"спокойно и ясно, към дете на 5–6 години",not_recorded
+bkr_nameri_bukvata_a,bkr_nameri_bukvata_a.wav,Намери буквата ъ,Намери буквата ъ,instruction,указание,"BK02 Р2 alphabet, BK14 Р1 alphabet","спокойно и ясно, към дете на 5–6 години",1,1,диктор 1,"спокойно и ясно, към дете на 5–6 години",not_recorded
+bkr_procheti_koe_zvuchi_kato_nap,bkr_procheti_koe_zvuchi_kato_nap.wav,Прочети. Кое звучи като написаното? Чуй и избери.,Прочети. Кое звучи като написаното? Чуй и избери.,instruction,указание,"BK03 Р3 soundLetterParsing, BK03 Р4 constructor, BK04 Р1 constructor, BK04 Р4 constructor","спокойно и ясно, към дете на 5–6 години",1,1,диктор 1,"спокойно и ясно, към дете на 5–6 години",not_recorded
+bkr_koi_bukvi_sa_obarnati,bkr_koi_bukvi_sa_obarnati.wav,Кои букви са обърнати?,Кои букви са обърнати?,question,въпрос,код,"спокоен въпрос, бавно",2,1,диктор 1,"спокоен въпрос, бавно",not_recorded
+bkr_nameri_patekata_s_azbukata_i,bkr_nameri_patekata_s_azbukata_i.wav,Намери пътеката с азбуката и докосвай буквите по ред. Започни с а.,Намери пъте́ката с азбуката и докосвай буквите по ред. Започни с а.,instruction,указание,код,"спокойно и ясно, към дете на 5–6 години",2,1,диктор 1,"спокойно и ясно, към дете на 5–6 години",not_recorded
+bkr_s_koya_bukva_zapochvat_imena,bkr_s_koya_bukva_zapochvat_imena.wav,С коя буква започват имената на картинките?,С коя буква започват имената на картинките?,question,въпрос,код,"спокоен въпрос, бавно",2,1,диктор 1,"спокоен въпрос, бавно",not_recorded
+bkr_glina,bkr_glina.wav,глина,глина,word,дума,"BK08 Р3 trueWords, BK09 Р1 trueWords","една дума, ясно и спокойно",1,3,диктор 1,"една дума, ясно и спокойно",not_recorded
+bkr_greblo,bkr_greblo.wav,гребло,гребло,word,дума,"BK08 Р3 trueWords, BK09 Р1 trueWords","една дума, ясно и спокойно",1,3,диктор 1,"една дума, ясно и спокойно",not_recorded
+bkr_grim,bkr_grim.wav,грим,грим,word,дума,"BK08 Р3 trueWords, BK11 Р3 trueWords","една дума, ясно и спокойно",1,3,диктор 1,"една дума, ясно и спокойно",not_recorded
+bkr_dyulya,bkr_dyulya.wav,дюля,дюля,word,дума,BK07 Р1 trueWords,"една дума, ясно и спокойно",1,3,диктор 1,"една дума, ясно и спокойно",not_recorded
+bkr_dyuna,bkr_dyuna.wav,дюна,дюна,word,дума,BK07 Р1 trueWords,"една дума, ясно и спокойно",1,3,диктор 1,"една дума, ясно и спокойно",not_recorded
+bkr_klyuch,bkr_klyuch.wav,ключ,ключ,word,дума,BK08 Р3 trueWords,"една дума, ясно и спокойно",1,3,диктор 1,"една дума, ясно и спокойно",not_recorded
+bkr_kosh,bkr_kosh.wav,кош,кош,word,дума,BK13 Р3 trueWords,"една дума, ясно и спокойно",1,3,диктор 1,"една дума, ясно и спокойно",not_recorded
+bkr_lav,bkr_lav.wav,лъв,лъв,word,дума,"BK04 Р3 trueWords, BK05 Р1 trueWords, BK06 Р1 trueWords","една дума, ясно и спокойно",1,3,диктор 1,"една дума, ясно и спокойно",not_recorded
+bkr_maymuna,bkr_maymuna.wav,маймуна,маймуна,word,дума,"BK04 Р3 trueWords, BK05 Р1 trueWords, BK06 Р1 trueWords, BK06 Р3 trueWords","една дума, ясно и спокойно",1,3,диктор 1,"една дума, ясно и спокойно",not_recorded
+bkr_minyor,bkr_minyor.wav,миньор,миньор,word,дума,BK07 Р1 trueWords,"една дума, ясно и спокойно",1,3,диктор 1,"една дума, ясно и спокойно",not_recorded
+bkr_obuvka,bkr_obuvka.wav,обувка,обувка,word,дума,BK09 Р1 trueWords,"една дума, ясно и спокойно",1,3,диктор 1,"една дума, ясно и спокойно",not_recorded
+bkr_ramka,bkr_ramka.wav,рамка,рамка,word,дума,"BK05 Р1 trueWords, BK06 Р3 trueWords","една дума, ясно и спокойно",1,3,диктор 1,"една дума, ясно и спокойно",not_recorded
+bkr_remak,bkr_remak.wav,ремък,ремък,word,дума,"BK04 Р3 trueWords, BK06 Р1 trueWords","една дума, ясно и спокойно",1,3,диктор 1,"една дума, ясно и спокойно",not_recorded
+bkr_tigar,bkr_tigar.wav,тигър,тигър,word,дума,BK07 Р1 trueWords,"една дума, ясно и спокойно",1,3,диктор 1,"една дума, ясно и спокойно",not_recorded
+bkr_shtit,bkr_shtit.wav,щит,щит,word,дума,BK13 Р3 trueWords,"една дума, ясно и спокойно",1,3,диктор 1,"една дума, ясно и спокойно",not_recorded

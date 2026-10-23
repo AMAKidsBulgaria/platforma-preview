@@ -15,7 +15,7 @@
    треньорът (office=1) отбелязва зад бутон със задържане: различи гласовете / показа чувството с гласа / прочете плавно и разбираемо.
    Набори A → B → C за Ч21 Р3; упражнение Ч21 Р2 – 2 сценки, първо невидените; там при грешка има втори опит с подсказка. */
 (function () {
-  const URL = "config/intonation-ch13-21.json?v=6";
+  const URL = "config/intonation-ch13-21.json?v=7";
   let data = null; const load = () => data || (data = fetch(URL).then(r => r.json()));
   const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
   const EXP = "platforma.inton.exposure";
@@ -130,7 +130,8 @@
           this.finishMiss({ goal: l.feeling, triple: null }, f, extra, 3000);
         }));
       };
-      draw("who"); this.say("Прочети. Кой го казва?");
+      // ask_who: false – репликата не подсказва кой говори; името се показва и се пита само „Как го казва?“
+      if (l.ask_who === false) { whoOk = null; draw("how"); } else { draw("who"); this.prompt("Прочети. Кой го казва?"); }
     }
     // след последната задача от сценката: цялата сценка за четене на глас + отметки за възрастния
     readAloud(sc) {
@@ -155,7 +156,7 @@
       ["pointerup", "pointerleave", "pointercancel"].forEach(ev => gate.addEventListener(ev, stop));
       this.box.querySelectorAll(".sq-checks .tx-chip").forEach(b => b.onclick = () => { const i = Number(b.dataset.i); on.has(i) ? on.delete(i) : on.add(i); b.classList.toggle("on", on.has(i)); });
       q("#sc-next").onclick = () => save("unknown"); q("#sc-skip").onclick = () => save("not_told"); q("#sc-done").onclick = () => save("told");
-      this.say("Сега изиграй сценката! Избери кой герой си ти. Другия ще прочете възрастен.");
+      this.prompt("Сега изиграй сценката! Избери кой герой си ти. Другия ще прочете възрастен.");
     }
     startRound() {
       this.stepWrong = 0; const it = this.items[this.idx]; if (!it) return;
@@ -190,10 +191,11 @@
         hint.innerHTML = `${esc(it.feedback)} <span class="in-arrow">→</span> <b>${M[it.goal]}</b>`;
         this.finishMiss(it, g, extra, 2600);
       }));
-      this.say("Прочети. " + ASK);
+      this.prompt("Прочети. " + ASK);
     }
     finishMiss(it, g, extra, ms) {
-      this.locked = true; this.miss(it.goal, g); Object.assign(this.log[this.log.length - 1], extra);
+      // грешен краен отговор: записът е измерване (верен=не от първия опит), не „опит“ – иначе в измерването остават само верните
+      this.locked = true; this.miss(it.goal, g); Object.assign(this.log[this.log.length - 1], extra, { attempt: false, first_attempt_correct: false });
       this.roundOk.push(false); this.idx++; this.renderProgress();
       this.later(() => this.afterItem(it), ms);
     }

@@ -1,0 +1,32 @@
+/* Прототип „Квартал на буквите“ – временна графика (сменя се след D1) */
+.screen-world { background: #2B2550; position: fixed; inset: 0; overflow: hidden; }
+.world-map { position: absolute; top: 96px; bottom: 96px; left: 12px; right: 12px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.world-svg { display: block; width: 100%; height: 100%; max-width: 100%; max-height: 100%; }
+.world-msg { color: #fff; font: 700 24px/1.4 system-ui, sans-serif; text-align: center; max-width: 560px; padding: 24px; }
+.world-status { position: absolute; left: auto; right: max(16px, env(safe-area-inset-right, 0px)); top: 34px; bottom: auto; text-align: right; color: #fff; opacity: .75; font: 600 14px system-ui, sans-serif; }
+.wbase { fill: rgba(255, 255, 255, .28); }
+.wplot.st-locked .wbase { fill: rgba(30, 20, 50, .35); }
+.wplot.st-next .wbase { fill: rgba(255, 214, 102, .55); animation: wpulse 1.6s ease-in-out infinite; }
+@keyframes wpulse { 50% { fill: rgba(255, 214, 102, .2); } }
+.wh-body { fill: #C9C3D6; stroke: #4A3F66; stroke-width: 2; } .wh-roof { fill: #8D86A0; stroke: #4A3F66; stroke-width: 2; } .wh-win { fill: #4A3F66; }
+.wh-l { font: 800 11px system-ui, sans-serif; text-anchor: middle; fill: #4A3F66; }
+.wh.lit .wh-body { fill: #FFF1D6; } .wh.lit .wh-roof { fill: #E5167A; } .wh.lit .wh-win { fill: #FFD23F; filter: drop-shadow(0 0 4px #FFD23F); } .wh.lit .wh-l { fill: #2B2233; }
+.wfest-sq { fill: rgba(255, 255, 255, .25); stroke: #fff; stroke-width: 3; } .wfest.lit .wfest-sq { fill: rgba(255, 210, 63, .55); }
+.wfest-t, .wgift-t, .wdecor { font-size: 26px; text-anchor: middle; }
+.wgift { cursor: pointer; animation: wbob 1.2s ease-in-out infinite; } .wgift-c { fill: #fff; stroke: #E5167A; stroke-width: 4; }
+@keyframes wbob { 50% { transform: translateY(-6px); } }
+.wadult { stroke: #fff; stroke-width: 1.5; } .wadult.pend { fill: #9A93AE; } .wadult.rev { fill: #B4540A; }
+.world-choice { position: fixed; inset: 0; z-index: 9995; display: grid; place-items: center; background: rgba(20, 16, 40, .6); }
+.wc-box { background: #FFF8EE; border-radius: 24px; padding: 24px 28px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,.4); }
+.wc-box h2 { margin: 0 0 16px; font: 800 30px system-ui, sans-serif; color: #2B2233; }
+.wc-opts { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; }
+.wc-opt { min-width: 150px; min-height: 150px; border: 4px solid #E5167A; border-radius: 22px; background: #fff; display: grid; place-items: center; gap: 6px; padding: 14px; cursor: pointer; }
+.wc-ic { font-size: 64px; line-height: 1; } .wc-t { font: 700 18px system-ui, sans-serif; color: #2B2233; }
+.wh-found { fill: #8B6B4A; } .wh-scaf { stroke: #B08A5A; stroke-width: 2; fill: none; stroke-dasharray: 3 2; }
+.wplot.st-locked .wh, .wplot.st-next .wh { opacity: .95; }
+.wplot.grow .wh { animation: wgrow .9s cubic-bezier(.2, 1.4, .4, 1) both; transform-box: fill-box; transform-origin: 50% 100%; }
+@keyframes wgrow { from { opacity: 0; transform: scale(.2); } }
+.wfocus { fill: none; stroke: #FFD23F; stroke-width: 5; stroke-dasharray: 10 8; animation: wspin 6s linear infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes wspin { to { stroke-dashoffset: -180; } }
+.world-mascot { position: absolute; width: 120px; pointer-events: none; animation: wpop .5s cubic-bezier(.2, 1.4, .4, 1) both; }
+@keyframes wpop { from { opacity: 0; transform: translateY(20px) scale(.6); } }

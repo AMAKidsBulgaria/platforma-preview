@@ -46,9 +46,9 @@
   /* Обкръжалка: 4 картинки по тема, под тях името на търсения предмет; един клик на рунд. */
   const THEMES = { mushrooms: ["Гъби", "mushroom"], transport: ["Транспорт", "transport"] };
   class OutwardGame extends CardGame {
-    get gameId() { return "outwardThings"; } get skillName() { return "Разпознаване на предмети: " + THEMES[this.s.theme || "mushrooms"][0].toLowerCase(); }
+    get gameId() { return "outwardThings"; } get skillName() { return "Разпознаване на предмети: " + THEMES[this.s.theme === "mushrooms" ? "transport" : (this.s.theme || "transport")][0].toLowerCase(); }
     render() {
-      const theme = this.s.theme || "mushrooms"; const content = ((window.BUK.world || {}).outwardThings || {})[theme];
+      const theme = this.s.theme === "mushrooms" ? "transport" : (this.s.theme || "transport"); /* гъбите отпаднаха (19.10) */ const content = ((window.BUK.world || {}).outwardThings || {})[theme];
       this.names = content ? Object.values(content) : (theme === "mushrooms" ? ["Манатарка", "Лисичка", "Печурка", "Мухоморка"] : ["Автобус", "Влак", "Самолет", "Лодка"]);
       this.cat = THEMES[theme][1]; this.scene("wt-out"); this.used = new Set(); this.shell.setLabel(THEMES[theme][0]);
     }
@@ -68,12 +68,12 @@
   }
   window.GAMES.outwardThings = {
     id: "outwardThings", name: "Обкръжалка", module: "theWorld", skill: "Разпознаване на предмети", cls: OutwardGame,
-    task: s => `Определи какъв предмет е изобразен на екрана. Тема: ${THEMES[s.theme || "mushrooms"][0].toLowerCase()}.`,
+    task: s => `Определи какъв предмет е изобразен на екрана. Тема: ${THEMES[s.theme === "mushrooms" ? "transport" : (s.theme || "transport")][0].toLowerCase()}.`,
     tiers: s => { const q = Number(s.exampleQty) || 4; return [0, Math.ceil(q / 2), q]; },
     settings: [
       { key: "exampleQty", label: "Брой примери", type: "range", min: 4, max: 25, def: 4 },
-      { key: "theme", label: "Тема", type: "cycle", options: [["mushrooms", "Гъби"], ["transport", "Транспорт"]], def: "mushrooms", help: "Гъби: 13 вида. Транспорт: 16 превозни средства." }
+      { key: "theme", label: "Тема", type: "cycle", options: [["transport", "Транспорт"]], def: "transport", help: "Транспорт: 16 превозни средства." }
     ],
-    paramsLine: s => `${s.exampleQty} примера · ${THEMES[s.theme || "mushrooms"][0].toLowerCase()}`
+    paramsLine: s => `${s.exampleQty} примера · ${THEMES[s.theme === "mushrooms" ? "transport" : (s.theme || "transport")][0].toLowerCase()}`
   };
 })();

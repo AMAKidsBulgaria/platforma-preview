@@ -206,3 +206,13 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 4px s
   .hud-example { font-size: 26px; }
 }
 @media (prefers-reduced-motion: reduce) { .bubble.shake, .bubble.pop { animation: none; } }
+/* „Кой играе?“ – общ таблет в пилота (js/sync.js): картинки вместо имена */
+.who-plays { position: fixed; inset: 0; z-index: 9999; background: rgba(40, 30, 90, .72); display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.who-box { background: #FFF8EC; border-radius: 28px; border: 6px solid #fff; box-shadow: 0 12px 40px rgba(0,0,0,.35); padding: 18px 22px 24px; max-width: min(96vw, 1100px); max-height: 92vh; overflow: auto; text-align: center; }
+.who-box h2 { margin: 4px 0 2px; font-family: var(--display); font-size: clamp(28px, 4vw, 44px); color: #E0237A; }
+.who-box p { margin: 0 0 14px; font-family: var(--display); font-size: 20px; color: #4A3A28; }
+.who-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+.who-kid { width: clamp(96px, 13vw, 150px); height: clamp(96px, 13vw, 150px); border-radius: 22px; border: 4px solid #C4A580; background: #fff; padding: 6px; cursor: pointer; box-shadow: 0 5px 0 #B08A5E; }
+.who-kid img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.who-kid b { font-family: var(--display); font-size: 22px; color: #3B2A14; }
+.who-kid:active { transform: translateY(3px); box-shadow: 0 2px 0 #B08A5E; }

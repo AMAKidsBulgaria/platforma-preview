@@ -6,6 +6,9 @@
   class CompositionGame extends BaseGame {
     get gameId() { return "numberComposition"; }
     get skillName() { return `Състав на числата до ${this.s.numbers}`; }
+    // Домашна: задачите идват от банката на рунда (config/math-banks.json); задача = две от n/a/b, третото се търси:
+    // {n,a} → n е a и ?; {n,b} → n е ? и b; {a,b} → ? е a и b (цялото). Без банка – случайният генератор по-долу.
+    start() { MATH_BANK.attach(this).then(() => super.start()); }
     render() {
       this.numbers = Number(this.s.numbers || 3); this.complexity = Number(this.s.complexity || 1);
       this.keys = this.numbers <= 10 ? 10 : 20;
@@ -37,23 +40,42 @@
       this.prevPart = p;
       return { whole, a: p, b: whole - p };
     }
+    bankExample() {
+      const u = this.mb.units[this.idx % this.mb.units.length];
+      if (u.n == null) return { whole: u.a + u.b, a: u.a, b: u.b, miss: "whole" };
+      if (u.a == null) return { whole: u.n, a: u.n - u.b, b: u.b, miss: "a" };
+      return { whole: u.n, a: u.a, b: u.n - u.a, miss: "b" };
+    }
     startRound() {
-      this.ex = this.makeExample();
-      this.current = { text: `${this.ex.whole} = ${this.ex.a} + ?`, answer: this.ex.b };
-      this.whole.textContent = this.ex.whole; this.partA.querySelector("span").textContent = this.ex.a;
-      this.partB.className = "comp-part"; this.partB.querySelector("span").textContent = "";
+      this.ex = this.mb ? this.bankExample() : Object.assign(this.makeExample(), { miss: "b" });
+      const ex = this.ex, q = v => ex.miss === v ? "?" : ex[v];
+      ex.want = ex[ex.miss];
+      this.box = ex.miss === "whole" ? this.whole.parentNode : ex.miss === "a" ? this.partA : this.partB;
+      this.current = { text: `${q("whole")} = ${q("a")} + ${q("b")}`, answer: ex.want };
+      const wb = this.whole.parentNode; wb.style.background = wb.style.borderColor = ""; this.partA.className = "comp-part"; this.partB.className = "comp-part";
+      this.whole.textContent = ex.miss === "whole" ? "" : ex.whole;
+      this.partA.querySelector("span").textContent = ex.miss === "a" ? "" : ex.a;
+      this.partB.querySelector("span").textContent = ex.miss === "b" ? "" : ex.b;
       [...this.keypad.children].forEach(k => k.disabled = false);
-      this.shell.setLabel(`${this.ex.whole} = ${this.ex.a} + ?`); this.say(`${this.ex.whole} е ${this.ex.a} и колко?`);
+      this.shell.setLabel(this.current.text);
+      this.prompt(ex.miss === "whole" ? `Колко е ${ex.a} и ${ex.b}?` : ex.miss === "a" ? `${ex.whole} е колко и ${ex.b}?` : `${ex.whole} е ${ex.a} и колко?`);
+    }
+    // цялото (горе) няма класове right/wrong в CSS – оцветяваме го на място със същите цветове като частите
+    mark(c) {
+      if (this.box !== this.whole.parentNode) { this.box.classList.remove("right", "wrong"); if (c) this.box.classList.add(c); return; }
+      const bg = { right: "radial-gradient(circle at 40% 35%, #C9F7C6, #95FF93 75%, #5FD64A)", wrong: "radial-gradient(circle at 40% 35%, #FFD3D3, #FF9393 75%, #E86A6A)" };
+      this.box.style.background = c ? bg[c] : ""; this.box.style.borderColor = c ? `var(--${c === "right" ? "good" : "bad"})` : "";
     }
     pick(v, key) {
-      const ok = v === this.ex.b;
-      if (!this.answer(ok, { text: this.current.text, answer: this.ex.b, given: v })) return;
+      const ex = this.ex, ok = v === ex.want, span = this.box.querySelector("span");
+      if (!this.answer(ok, { text: this.current.text, answer: ex.want, given: v })) return;
       [...this.keypad.children].forEach(k => k.disabled = true);
-      this.partB.querySelector("span").textContent = v;
-      if (ok) { this.partB.classList.add("right"); this.shell.flash("Точно така!", "good"); this.say(`Точно така! ${this.ex.whole} е ${this.ex.a} и ${this.ex.b}`); this.advance(1400); }
+      span.textContent = v;
+      const full = `${ex.whole} е ${ex.a} и ${ex.b}`;
+      if (ok) { this.mark("right"); this.shell.flash("Точно така!", "good"); this.say("Точно така!"); this.advance(1400); }
       else {
-        this.partB.classList.add("wrong"); key.classList.add("wrong"); this.shell.flash(`${this.ex.whole} е ${this.ex.a} и ${this.ex.b}`, "bad"); this.say(`Не. ${this.ex.whole} е ${this.ex.a} и ${this.ex.b}`);
-        setTimeout(() => { this.partB.className = "comp-part right"; this.partB.querySelector("span").textContent = this.ex.b; key.classList.remove("wrong"); }, 1100);
+        this.mark("wrong"); key.classList.add("wrong"); this.shell.flash(full, "bad"); this.say(`Не. ${full}`);
+        setTimeout(() => { this.mark("right"); span.textContent = ex.want; key.classList.remove("wrong"); }, 1100);
         this.advance(2600);
       }
     }
@@ -65,9 +87,9 @@
     task: "Определи състава на числата: кое число липсва, за да се получи цялото.",
     settings: [
       { key: "numbers", label: "Числа", type: "range", min: 3, max: 20, def: 3, help: "Числото, което детето разлага на две части." },
-      { key: "complexity", label: "Сложност", type: "cycle", options: [["1", "1"], ["2", "2"]], def: "1", help: "1: винаги избраното число. 2: случайни числа от 3 до избраното." },
+      { key: "complexity", label: "Сложност", type: "cycle", options: [["1", "Едно число"], ["2", "Смесени числа"]], def: "1", help: "Едно число: всички примери са с избраното число. Смесени числа: всеки пример е със случайно число от 3 до избраното." },
       { key: "examples", label: "Брой примери", type: "range", min: 4, max: 10, def: 4 }
     ],
-    paramsLine: s => `${s.examples} примера · число ${s.numbers} · сложност ${s.complexity}`
+    paramsLine: s => `${s.examples} примера · число ${s.numbers} · ${String(s.complexity) === "2" ? "смесени числа" : "едно число"}`
   };
 })();

@@ -28,26 +28,38 @@
   window.GAMES = window.GAMES || {};
   window.GAMES.masksShow = { id: "masksShow", name: "Шоу с маски", module: "theWorld", skill: "Сетивни органи", cls: MasksGame, task: "Определи кои картини отговарят на съответния сетивен орган. Избери четирите картинки за показания орган.", tiers: s => { const q = Number(s.exampleQty) || 4; return [0, Math.ceil(q * 0.3), Math.ceil(q * 0.5)]; }, settings: [{ key: "exampleQty", label: "Брой примери", type: "range", min: 4, max: 25, def: 4 }], paramsLine: s => `${s.exampleQty} примера` };
 
-  /* Чиста каюта: 12 предмета (6 играчки + 6 дрехи) разхвърляни в каютата; влачи (или докосни предмет, после кутия) към вярната кутия. Ниво 2 е с време. Край при 12 верни или 3 грешки. */
+  /* Чиста каюта: 10 предмета (5 играчки + 5 дрехи) разхвърляни в каютата; влачи (или докосни предмет, после кутия) към вярната кутия. Ниво 2 е с време.
+     Домашна (MATH_BANK, tools/math_banks/cleanShipRoom.py): предметите и кутиите идват от слота на рунда.
+     Единица = един предмет: { n: "мече", g: "Играчки", boxes: ["Играчки", "Дрехи"] } – boxes е критерият за групиране (еднакъв в набора).
+     Всеки предмет е едно решение: първото пускане в кутия (first_attempt_correct); грешният опит е attempt-събитие. */
   class CleanRoomGame extends CardGame {
-    constructor(...a) { super(...a); this.level = Number(this.s.level) || 1; this.gameTime = Number(this.s.gameTime) || 30; this.total = 12; }
+    constructor(...a) { super(...a); this.level = Number(this.s.level) || 1; this.gameTime = Number(this.s.gameTime) || 30; this.total = 10; }
     get gameId() { return "cleanShipRoom"; } get skillName() { return "Групиране на предмети"; }
+    start() { MATH_BANK.attach(this).then(() => { if (this.mb && !this.mb.units.length) this.mb = null; if (this.mb) this.level = Number(this.mb.def.level) || 1; super.start(); }); }
     tick() { if (this.level !== 2) return super.tick(); const left = Math.max(0, this.gameTime - Math.floor((Date.now() - this.startedAt) / 1000)); this.shell.timer.textContent = `${Math.floor(left / 60)}:${String(left % 60).padStart(2, "0")}`; if (left <= 0 && !this.finished) { this.finished = true; this.shell.flash("Времето изтече", "bad"); setTimeout(() => this.finish(true), 1200); } }
     render() {
       this.scene("wt-cr", "scene-cabin"); this.shell.setLabel("Прибери вещите");
-      const R = window.ROOM_ITEMS; this.groups = ["Играчки", "Дрехи"]; this.items = shuffle(this.groups.flatMap(g => R[g].slice(0, 6).map(n => ({ n, g }))));
-      this.box.innerHTML = `<div class="cr-floor" id="floor">${this.items.map((it, i) => `<button type="button" class="pcard cr-item" data-i="${i}" draggable="true" style="left:${6 + (i % 6) * 15.5}%;top:${(i < 6 ? 4 : 40) + rnd(12)}%">${window.PIC(it.n, "item")}</button>`).join("")}</div><div class="cr-boxes">${this.groups.map(g => `<button type="button" class="cr-box" data-g="${g}"><span class="cr-lid"></span><b>${g}</b></button>`).join("")}</div><div class="az-hint">Докосни предмет и после кутията му, или го завлечи.</div>`;
+      if (this.mb) { this.groups = this.mb.units[0].boxes.slice(); this.items = this.mb.units.map(u => ({ n: u.n, g: u.g })); }
+      else { const R = window.ROOM_ITEMS; this.groups = ["Играчки", "Дрехи"]; this.items = shuffle(this.groups.flatMap(g => R[g].slice(0, 6).map(n => ({ n, g })))); }
+      this.total = this.items.length; this.missBy = {}; this.placed = 0;
+      const per = Math.min(6, Math.ceil(this.items.length / 2)), step = 88 / per;
+      this.box.innerHTML = `<div class="cr-floor" id="floor">${this.items.map((it, i) => `<button type="button" class="pcard cr-item" data-i="${i}" draggable="true" style="left:${6 + (i % per) * step}%;top:${(i < per ? 4 : 40) + rnd(12)}%">${window.PIC(it.n, "item")}</button>`).join("")}</div><div class="cr-boxes">${this.groups.map(g => `<button type="button" class="cr-box" data-g="${g}"><span class="cr-lid"></span><b>${g}</b></button>`).join("")}</div><div class="az-hint">Докосни предмет и после кутията му, или го завлечи.</div>`;
       this.sel = null;
       this.box.querySelectorAll(".cr-item").forEach(b => { b.addEventListener("pointerdown", e => { if (e.pointerType === "mouse" && e.button !== 0) return; this.pick(b); }); b.addEventListener("dragstart", e => { this.pick(b); e.dataTransfer.setData("text/plain", b.dataset.i); }); });
       this.box.querySelectorAll(".cr-box").forEach(x => { x.addEventListener("pointerdown", e => { e.preventDefault(); this.drop(x); }); x.addEventListener("dragover", e => e.preventDefault()); x.addEventListener("drop", e => { e.preventDefault(); this.drop(x); }); });
-      this.say("Прибери играчките и дрехите в кутиите им.");
+      const gs = this.groups.map(g => g.toLowerCase()); this.say(`Прибери ${gs.slice(0, -1).join(", ")} и ${gs[gs.length - 1]} в кутиите им.`);
     }
     startRound() { this.stepWrong = 0; this.roundStart = Date.now(); }
     pick(b) { if (this.finished || b.classList.contains("gone")) return; this.box.querySelectorAll(".cr-item").forEach(x => x.classList.remove("sel")); b.classList.add("sel"); this.sel = b; }
     drop(box) {
-      if (this.finished || !this.sel) return; const it = this.items[Number(this.sel.dataset.i)], b = this.sel; this.sel = null; b.classList.remove("sel");
-      if (it.g === box.dataset.g) { b.classList.add("pop"); this.later(() => b.classList.add("gone"), 400); box.classList.add("open"); this.later(() => box.classList.remove("open"), 600); this.correct++; this.renderScore(); this.log.push(this.event(true, { text: it.n, answer: it.g, given: box.dataset.g, ok: true, ms: Date.now() - this.roundStart, adapt: 0 , first_attempt_correct: this.stepWrong === 0, attempt_count: this.stepWrong + 1 })); this.roundOk.push(true); this.idx++; this.renderProgress(); this.say(it.n); if (this.idx >= 12) { this.shell.flash("Каютата е чиста!", "good"); this.later(() => this.finish(), 1200); } }
-      else { this.miss(it.g, box.dataset.g); this.shake(b); b.classList.add("bad"); this.later(() => b.classList.remove("bad"), 800); this.shell.flash(`„${it.n}“ е от „${it.g.toLowerCase()}“`, "bad"); this.say(`${it.n} е от ${it.g}`); this.later(() => this.shell.hideFlash(), 1300); }
+      if (this.finished || !this.sel) return; const i = Number(this.sel.dataset.i), it = this.items[i], b = this.sel; this.sel = null; b.classList.remove("sel");
+      if (it.g === box.dataset.g) {
+        const w = this.missBy[i] || 0; b.classList.add("pop"); this.later(() => b.classList.add("gone"), 400); box.classList.add("open"); this.later(() => box.classList.remove("open"), 600); this.correct++; this.renderScore();
+        this.log.push(this.event(true, { text: it.n, answer: it.g, given: box.dataset.g, ok: true, ms: Date.now() - this.roundStart, adapt: 0, first_attempt_correct: w === 0, attempt_count: w + 1 }));
+        this.roundOk.push(w === 0); this.idx++; this.placed++; this.roundStart = Date.now(); this.renderProgress(); this.say(it.n);
+        if (this.placed >= this.items.length) { this.shell.flash("Каютата е чиста!", "good"); this.later(() => this.finish(), 1200); }
+      }
+      else { this.missBy[i] = (this.missBy[i] || 0) + 1; this.miss(it.g, box.dataset.g); this.shake(b); b.classList.add("bad"); this.later(() => b.classList.remove("bad"), 800); this.shell.flash(`„${it.n}“ е от „${it.g.toLowerCase()}“`, "bad"); this.say(`${it.n} е от ${it.g}`); this.later(() => this.shell.hideFlash(), 1300); }
     }
   }
   window.GAMES.cleanShipRoom = { id: "cleanShipRoom", name: "Чиста каюта", module: "theWorld", skill: "Групиране", cls: CleanRoomGame, task: s => Number(s.level) === 2 ? "Прибери вещите в кутиите. Времето за игра е ограничено." : "Прибери вещите в кутиите. Времето за игра е неограничено.", tiers: () => [1, 3, 5], settings: [{ key: "level", label: "Ниво", type: "range", min: 1, max: 2, def: 1 }, { key: "gameTime", label: "Време за игра", type: "range", min: 30, max: 300, step: 30, def: 30, unit: "сек.", enabledIf: s => Number(s.level) === 2 }], paramsLine: s => `ниво ${s.level}` + (Number(s.level) === 2 ? ` · ${s.gameTime} сек.` : "") };
@@ -55,6 +67,8 @@
   /* Горско царство: тема Дървета — на кое дърво е листото; тема Животни — чие е малкото. 4 карти, един клик. */
   class ForestGame extends CardGame {
     get gameId() { return "forestKingdom"; } get skillName() { return this.s.theme === "animals" ? "Животни и техните малки" : "Дървета и листа"; }
+    // Домашна: задачите идват от банката на рунда (tools/math_banks/forestKingdom.py): {y: малкото, a: възрастното, opts: [4 възрастни]}.
+    start() { MATH_BANK.attach(this).then(() => { if (this.mb && !this.mb.units.length) this.mb = null; super.start(); }); }
     render() {
       const c = (window.BUK.world || {}).forestKingdom || {}; const animals = this.s.theme === "animals";
       this.pairs = animals ? Object.keys(c.animals ? c.animals.L : { 1: "Котка" }).map(k => [c.animals ? c.animals.L[k] : "Котка", c.animals ? c.animals.S[k] : "Котенце"]) : Object.values(c.trees || { 1: "Дъб", 2: "Бреза", 3: "Липа", 4: "Клен" }).map(t => [t, `Листо от ${t.toLowerCase()}`]);
@@ -62,7 +76,10 @@
     }
     startRound() {
       this.stepWrong = 0; let c = this.pairs.filter(p => !this.used.has(p[0])); if (c.length < 4) { this.used.clear(); c = this.pairs.slice(); }
-      const opts = shuffle(c.slice()).slice(0, 4); const right = opts[rnd(opts.length)]; this.used.add(right[0]); this.right = right; this.opts = opts;
+      let opts = shuffle(c.slice()).slice(0, 4), right = opts[rnd(opts.length)];
+      const mu = this.animals && this.mb && this.mb.units[this.idx % this.mb.units.length];
+      if (mu) { const young = Object.fromEntries(this.pairs.map(p => [p[0], p[1]])); opts = shuffle(mu.opts.map(a => [a, young[a] || a])); right = opts.find(p => p[0] === mu.a); right[1] = mu.y; }
+      this.used.add(right[0]); this.right = right; this.opts = opts;
       this.box.innerHTML = `<div class="hero">${window.PIC(right[1], this.animals ? "animal" : "tree")}<div><h3>${right[1]}</h3><p>${this.animals ? "Намери възрастното животно." : "Намери дървото."}</p></div></div><div class="pcards">${opts.map(p => this.card(window.PIC(p[0], this.animals ? "animal" : "tree"))).join("")}</div>`;
       [...this.box.querySelectorAll(".pcard")].forEach((b, i) => b.addEventListener("pointerdown", e => { e.preventDefault(); this.tap(b, opts[i]); }));
       this.say(this.animals ? `${right[1]}. Чие малко е това?` : `${right[1]}. От кое дърво е?`);
@@ -131,11 +148,14 @@
   class SchoolGame extends CardGame {
     constructor(...a) { super(...a); this.total = Number(this.s.exampleQty) || 5; this.n = Number(this.s.newItemQty) || 6; }
     get gameId() { return "soonToSchool"; } get skillName() { return "Ученически пособия"; }
+    // Домашна: задачите идват от банката на рунда (tools/math_banks/soonToSchool.py): {school: [...], other: [...]}.
+    start() { MATH_BANK.attach(this).then(() => { if (this.mb && !this.mb.units.length) this.mb = null; super.start(); }); }
     render() { this.scene("wt-sc"); this.shell.setLabel("Какво е за училище?"); }
     startRound() {
-      this.stepWrong = 0; const k = Math.floor(this.n / 2); const school = shuffle(window.SCHOOL_ITEMS.slice()).slice(0, k), other = shuffle(window.NON_SCHOOL_ITEMS.slice()).slice(0, this.n - k);
+      this.stepWrong = 0; const mu = this.mb && this.mb.units[this.idx % this.mb.units.length];
+      const k = mu ? mu.school.length : Math.floor(this.n / 2); const school = mu ? mu.school.slice() : shuffle(window.SCHOOL_ITEMS.slice()).slice(0, k), other = mu ? mu.other.slice() : shuffle(window.NON_SCHOOL_ITEMS.slice()).slice(0, this.n - k);
       this.items = shuffle(school.map(n => ({ n, ok: true })).concat(other.map(n => ({ n, ok: false })))); this.left = k; this.sel = null;
-      this.box.innerHTML = `<div class="sc-row"><div class="pcards" id="cards">${this.items.map((it, i) => `<button type="button" class="pcard sc-item" data-i="${i}" draggable="true">${window.PIC(it.n, it.ok ? "school" : "item")}</button>`).join("")}</div><button type="button" class="sc-bag" id="bag"><svg viewBox="0 0 100 100"><path d="M26 34 h48 a10 10 0 0 1 10 10 v40 a8 8 0 0 1 -8 8 H24 a8 8 0 0 1 -8 -8 V44 a10 10 0 0 1 10 -10z" fill="#4A6FE0"/><path d="M36 34 v-8 a14 14 0 0 1 28 0 v8" fill="none" stroke="#2F4DB0" stroke-width="6"/><rect x="34" y="56" width="32" height="24" rx="6" fill="#F5B70A"/></svg><b>Раница</b></button></div><div class="az-hint">Докосни ученическо пособие и после раницата, или го завлечи.</div>`;
+      this.box.innerHTML = `<div class="sc-row"><div class="pcards" id="cards">${this.items.map((it, i) => `<button type="button" class="pcard sc-item" data-i="${i}" draggable="true">${window.PIC(it.n, "item")}</button>`).join("")}</div><button type="button" class="sc-bag" id="bag"><svg viewBox="0 0 100 100"><path d="M26 34 h48 a10 10 0 0 1 10 10 v40 a8 8 0 0 1 -8 8 H24 a8 8 0 0 1 -8 -8 V44 a10 10 0 0 1 10 -10z" fill="#4A6FE0"/><path d="M36 34 v-8 a14 14 0 0 1 28 0 v8" fill="none" stroke="#2F4DB0" stroke-width="6"/><rect x="34" y="56" width="32" height="24" rx="6" fill="#F5B70A"/></svg><b>Раница</b></button></div><div class="az-hint">Докосни ученическо пособие и после раницата, или го завлечи.</div>`;
       this.box.querySelectorAll(".sc-item").forEach(b => { b.addEventListener("pointerdown", e => { if (e.pointerType === "mouse" && e.button !== 0) return; this.pick(b); }); b.addEventListener("dragstart", e => { this.pick(b); e.dataTransfer.setData("text/plain", b.dataset.i); }); });
       const bag = this.box.querySelector("#bag"); bag.addEventListener("pointerdown", e => { e.preventDefault(); this.drop(); }); bag.addEventListener("dragover", e => e.preventDefault()); bag.addEventListener("drop", e => { e.preventDefault(); this.drop(); });
       this.say("Сложи в раницата само ученическите пособия.");

@@ -7,7 +7,8 @@
   window.PIC = function (name, cat, key) {
     const [bg, sym] = CAT[cat] || CAT.item;
     const k = key || name;
-    const art = window.PICS_AVAILABLE.has(k) ? `<img src="assets/img/pics/${k}.png" alt="" draggable="false">` : `<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#${sym}"/></svg>`;
+    const f = (window.PICS_FILES || {})[k];   // реална картинка (tools/world_images/gen_pics.py → js/games/picsAvailable.js)
+    const art = f ? `<img src="assets/img/pics/${f}.jpg" alt="" draggable="false">` : `<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#${sym}"/></svg>`;
     return `<span class="pic" style="--pic-bg:${bg}">${art}<b>${name}</b></span>`;
   };
   // Професии и предмети към тях (собствени данни: 19 професии по 4 предмета)

@@ -1,7 +1,8 @@
 /* Карта на диаманти — предмети и техните сенки. По кода им (30.js): Ниво 1..2; ниво 2 е на време (30..180 с, стъпка 30).
    Поле 3x3 със сенки, 12 предмета в менюто отстрани (6 + 6): 9 верни и 3 излишни. Влачиш предмета върху сянката му. Норми 0 / 2 / 4. */
 (function () {
-  const OBJS = ["obj/apple", "obj/banana", "obj/carrot", "obj/cherries", "obj/cookie", "obj/cupcake", "obj/donut-sprinkles", "obj/ice-cream-cne", "obj/strawberry", "obj/watermelon", "obj/pear", "obj/pumpkin", "obj/lemon", "obj/orange", "obj/mushroom", "obj/pineapple", "obj/grapes", "obj/coconut", "obj/corn", "obj/tomato", "fish_orange", "fish_blue", "fish_red", "fish_green", "fish_pink", "fish_brown"];
+  // 19.10: рисуваните предмети от градината – всеки с различен силует (без рибки, които си приличат)
+  const OBJS = ["yabalka", "krusha", "yagoda", "chereshi", "morkov", "tikva", "gaba", "grozde", "lale", "roza", "iglika", "peperuda", "pchela", "patitsa", "zhaba", "zayche", "pan"].map(n => "garden_r/" + n);
   class ShadowMapGame extends BaseGame {
     get gameId() { return "shadowMap"; }
     get skillName() { return "Зрително внимание: предмет и сянка"; }
@@ -11,12 +12,12 @@
       this.shell.arena.innerHTML = `<svg class="sea" viewBox="0 0 1200 760" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><use href="#scene-hold"/></svg>
         <div class="sm"><div class="sm-menu" id="sm-l"></div><div class="sm-board" id="sm-board"></div><div class="sm-menu" id="sm-r"></div></div>`;
       const L = this.shell.arena.querySelector("#sm-l"), R = this.shell.arena.querySelector("#sm-r"), B = this.shell.arena.querySelector("#sm-board");
-      menu.forEach((f, i) => { const b = document.createElement("button"); b.type = "button"; b.className = "sm-item"; b.dataset.f = f; b.innerHTML = `<img src="assets/img/${f}.png" alt="" draggable="false">`; b.addEventListener("pointerdown", e => this.dragStart(e, b)); (i < 6 ? L : R).appendChild(b); });
-      board.forEach(f => { const c = document.createElement("div"); c.className = "sm-cell"; c.dataset.f = f; c.innerHTML = `<img class="shadow" src="assets/img/${f}.png" alt="" draggable="false">`; B.appendChild(c); });
+      menu.forEach((f, i) => { const b = document.createElement("button"); b.type = "button"; b.className = "sm-item"; b.dataset.f = f; b.innerHTML = `<img src="assets/img/${f}.png?v=2" alt="" draggable="false">`; b.addEventListener("pointerdown", e => this.dragStart(e, b)); (i < 6 ? L : R).appendChild(b); });
+      board.forEach(f => { const c = document.createElement("div"); c.className = "sm-cell"; c.dataset.f = f; c.innerHTML = `<img class="shadow" src="assets/img/${f}.png?v=2" alt="" draggable="false">`; B.appendChild(c); });
       this.renderProgress = () => { const p = this.shell.progress; p.innerHTML = ""; for (let i = 0; i < 9; i++) { const li = document.createElement("li"); li.className = i < this.placed ? "ok" : ""; p.appendChild(li); } };
       if (this.timeLeft != null) { this.tick = () => { this.timeLeft = Math.max(0, Number(this.s.time || 60) - Math.floor((Date.now() - this.startedAt) / 1000)); this.shell.timer.textContent = `${Math.floor(this.timeLeft / 60)}:${String(this.timeLeft % 60).padStart(2, "0")}`; if (this.timeLeft === 0 && !this.finished) { this.shell.flash("Времето изтече", "bad"); this.say("Времето изтече"); this.finishSoon(); } }; }
     }
-    startRound() { this.shell.setLabel("Предмет и сянка"); if (this.idx === 0) this.say("Завлечи всеки предмет върху неговата сянка"); }
+    startRound() { this.shell.setLabel("Предмет и сянка"); if (this.idx === 0) this.prompt("Завлечи всеки предмет върху неговата сянка"); }
     dragStart(e, btn) {
       if (this.finished || btn.disabled) return; e.preventDefault();
       const ghost = document.createElement("img"); ghost.src = btn.querySelector("img").src; ghost.className = "pc-ghost"; document.body.appendChild(ghost);
@@ -29,7 +30,7 @@
       const ok = btn.dataset.f === cell.dataset.f; this.locked = false;
       if (!this.answer(ok, { text: `сянка ${cell.dataset.f}`, answer: cell.dataset.f, given: btn.dataset.f })) return;
       this.locked = false;
-      if (ok) { cell.classList.add("filled"); cell.innerHTML = `<img src="assets/img/${btn.dataset.f}.png" alt="" draggable="false">`; btn.disabled = true; btn.classList.add("gone"); this.placed++; this.idx = this.placed; this.renderProgress(); this.say("Да!"); if (this.placed === 9) { this.shell.flash("Всички са на мястото си!", "good"); this.say("Браво! Всички са на мястото си."); setTimeout(() => this.finish(false), 1200); } }
+      if (ok) { cell.classList.add("filled"); cell.innerHTML = `<img src="assets/img/${btn.dataset.f}.png?v=2" alt="" draggable="false">`; btn.disabled = true; btn.classList.add("gone"); this.placed++; this.idx = this.placed; this.renderProgress(); this.say("Да!"); if (this.placed === 9) { this.shell.flash("Всички са на мястото си!", "good"); this.say("Браво! Всички са на мястото си."); setTimeout(() => this.finish(false), 1200); } }
       else { cell.classList.add("wrong"); setTimeout(() => cell.classList.remove("wrong"), 500); this.shell.flash("Това не е неговата сянка", "bad"); this.say("Не. Това не е неговата сянка"); setTimeout(() => this.shell.hideFlash(), 1200); }
     }
   }

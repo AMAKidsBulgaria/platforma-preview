@@ -14,5 +14,10 @@
     S("очила", "pic-ochila"), S("ухо", "pic-uho"), S("флаг", "pic-flag"), S("хвърчило", "pic-hvarchilo"), S("шапка", "pic-shapka"), S("щипка", "pic-shtipka"), S("юмрук", "pic-jumruk"),
     S("нос", "pic-nos"), S("ключ", "pic-kliuch"), S("самолет", "pic-samolet"), S("топка", "pic-topka"), S("врата", "pic-vrata"), S("зъб", "pic-zab"), S("око", "pic-oko"), S("усмивка", "pic-usmivka")
   ];
+  // Рисуваните картинки (assets/img/art/pics/pic_<латиница>.png – същият набор като в домашните) заместват плоските иконки
+  // и спрайтовете за всички думи от речника (tools/world_images/gen_artpics.py допълни липсващите).
+  const TR = Object.fromEntries([..."абвгдежзийклмнопрстуфхцчшщъьюя"].map((c, i) => [c, ["a", "b", "v", "g", "d", "e", "zh", "z", "i", "y", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f", "h", "ts", "ch", "sh", "sht", "a", "y", "yu", "ya"][i]]));
+  const ART = w => `art/pics/pic_${[...w.toLowerCase()].map(c => TR[c] ?? c).join("")}.png`;
+  window.BUK_WORDS.forEach(it => { if (it.w) it.img = ART(it.w); });
   window.BUK_PIC = item => item.img ? `<img src="assets/img/${item.img}" alt="" draggable="false">` : `<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#${item.sym}"/></svg>`;
 })();

@@ -11,13 +11,24 @@
   // Конструкторът (звук → запис) остава за упражнението. Засега със синтезиран глас; със записите на диктора става годно за измерване.
   // Име на изгледа за детето и за данните: едно име = една механика (заглавието на шаблона в домашната е само справка).
   // „Звуково-буквен анализ“ остава за класифициране на звука (гласна / съгласна / звучна / беззвучна) – тук не се ползва.
+  // изглед → [заглавие за детето, посока, mode_id от каноничната таксономия (методист 17.10.2026)].
+  // mode_id е учебната операция, посоката е отделно поле; различно действие = различно заглавие, дори при един и същ mode_id.
   const VIEW = {
-    whichLetter: ["Начален звук", "picture_to_letter"], readPick: ["Чета и чувам", "read_to_sound"], pickSyllable: ["Чувам и избирам сричка", "sound_to_written"],
-    letterChoice: ["Чувам звук, избирам буква", "sound_to_letter"], firstSound: ["Фонематичен слух", "sound_to_picture"], pair: ["Фонематичен слух", "pictures_to_letter"],
-    twoPics: ["Фонематичен слух", "sound_to_picture"], azbuka: ["Азбука", "sound_to_letter"], elements: ["Буква от елементи", "letter_form"],
-    construct: ["Конструктор", "sound_to_written"], wordOrder: ["Словоред", "order_syllables"], trueWords: ["Правилни думи", "read_to_picture"],
-    gapTask: ["Попълни буквата", "sound_to_letter"], minPair: ["Минимална двойка", "sound_to_picture"], fixLetter: ["Поправи буквата", "read_to_picture"],
-    sentence: ["Построй изречение", "order_words"], sentencePicture: ["Изречение и картина", "read_to_picture"] };
+    whichLetter: ["Първа буква", "picture_to_letter", "initial_sound"], readPick: ["Чета и чувам", "read_to_sound", "word_decoding"],
+    pickSyllable: ["Чувам и избирам сричка", "sound_to_written", "syllable_reading"], letterChoice: ["Чувам звук, избирам буква", "sound_to_letter", "choose_letter_from_sound"],
+    firstSound: ["Начален звук", "sound_to_picture", "initial_sound"], pair: ["Общ звук", "pictures_to_letter", "initial_sound"],
+    twoPics: ["Звук в думата", "sound_to_picture", "sound_in_word"], azbuka: ["Азбука", "sound_to_letter", "letter_recognition"],
+    elements: ["Буква от елементи", "letter_form", "letter_form"], construct: ["Конструктор", "sound_to_written", "build_word"],
+    wordOrder: ["Словоред", "order_syllables", "syllable_order"], trueWords: ["Правилни думи", "read_to_picture", "word_to_picture"],
+    gapTask: ["Попълни буквата", "sound_to_letter", "missing_letter"], minPair: ["Минимална двойка", "sound_to_picture", "minimal_pair"],
+    fixLetter: ["Поправи буквата", "read_to_picture", "fix_letter"], sentence: ["Построй изречение", "order_words", "sentence_building"],
+    sentencePicture: ["Изречение и картина", "read_to_picture", "sentence_picture"],
+    wordClass: ["Каква е думата?", "read_to_category", "semantic_word_class"] };
+  // mode_id, който зависи от задачата: сричка или дума, начален или последен звук
+  const MODE = {
+    readPick: (u, g) => syllables(u.write || "").length < 2 ? "syllable_reading" : "word_decoding",
+    construct: (u, g) => u.skill === "E2" ? "syllable_blending" : "build_word",
+    letterChoice: (u, g) => g.bank && g.bank.checkpoint ? "first_last_sound" : "choose_letter_from_sound" };
   const READPICK = { BK03: [3, 4], BK04: [1, 4], BK05: [4] };
   const NEAR = { м: "н", н: "м", л: "р", р: "л", б: "п", п: "б", д: "т", т: "д", г: "к", к: "г", в: "ф", ф: "в", з: "с", с: "з", ж: "ш", ш: "ж" };
   const VSWAP = { а: "о", о: "у", у: "а", е: "и", и: "е", ъ: "а", ю: "у", я: "а" };
@@ -36,7 +47,7 @@
   const PLAIN = ["котка", "топка", "слон", "риба", "куче", "нос", "кола", "пчела", "домат", "часовник", "жаба", "зебра", "балон", "ваза", "пиле", "торта", "банан", "лодка"];
   const KEY = "platforma.bankplan.v1";
   const DATA = {};
-  const load = n => { const f = n <= 5 ? "config/banks-b1-5.json" : n <= 13 ? "config/banks-b6-13.json?v=4" : "config/banks-b14.json?v=1"; return DATA[f] || (DATA[f] = fetch(f).then(r => r.json())); };
+  const load = n => { const f = n <= 5 ? "config/banks-b1-5.json?v=5" : n <= 13 ? "config/banks-b6-13.json?v=6" : "config/banks-b14.json?v=3"; return DATA[f] || (DATA[f] = fetch(f).then(r => r.json())); };
   const SND = c => SOUND[c] || c;
 
   // Деление на срички: една съгласна между гласни отива към следващата сричка, от две и повече първата остава;
@@ -63,7 +74,12 @@
         const plan = this.plan(bank);
         const ids = this.bankGame ? ((plan[c.round] || {})[this.bankGame.game] || []) : [];
         this.items = ids.map(id => U[id]).filter(Boolean);
+        this.availableItems = this.bankGame && Array.isArray(this.bankGame.eligible) ? this.bankGame.eligible.length : null;   // налични в банката за този рунд
         this.total = this.items.length;
+        // недостиг в банката: показва се наличното, без случайно допълване; измерването на рунда не се брои
+        this.gap = this.bankGame && (plan._shortfall || []).find(g => g.round === Number(c.round) && g.game === this.bankGame.game) || null;
+        if (this.gap) console.warn("Недостиг в банката:", this.gap.reason);
+        if (!this.items.length) { this.shell.arena.innerHTML = `<div class="az-hint">За този рунд още няма достатъчно задачи.</div>`; return; }
         const t = document.getElementById("game-title"); if (t && this.bankGame) t.textContent = this.bankGame.game.replace(/\s*\(.*\)|\s*\/.*$/, "");
         super.start();
       }).catch(e => { console.error(e); this.shell.arena.innerHTML = `<div class="az-hint">Задачите не се заредиха: ${e.message}</div>`; });
@@ -80,7 +96,7 @@
         }
       }
       const k = `${KEY}:${this.ctx.hw || "demo"}:${this.lesson}:${bank.version}${this.retake ? ":r" : ""}`;
-      try { const s = localStorage.getItem(k); if (s) return JSON.parse(s); } catch (e) {}
+      try { const s = localStorage.getItem(k), p = s && JSON.parse(s); if (p && BANK_PLAN.stillValid(bank, this.lesson, p)) return p; } catch (e) {}
       const p = BANK_PLAN.planLesson(bank, this.lesson, k);
       try { localStorage.setItem(k, JSON.stringify(p)); } catch (e) {}
       return p;
@@ -93,13 +109,8 @@
       this.box = this.shell.arena.querySelector("#bk");
     }
     // ---------- звук ----------
-    // Едно изречение или поредица думи; засега синтезиран глас.
-    speak(...parts) {
-      if (!("speechSynthesis" in window) || localStorage.getItem("platforma.sound") === "off") return;
-      speechSynthesis.cancel();
-      const v = speechSynthesis.getVoices().find(x => x.lang && x.lang.toLowerCase().startsWith("bg"));
-      parts.filter(Boolean).forEach(t => { const u = new SpeechSynthesisUtterance(t); u.lang = "bg-BG"; u.rate = 0.85; if (v) u.voice = v; speechSynthesis.speak(u); });
-    }
+    // Едно изречение или поредица думи: записът на диктора, ако е качен, иначе синтезиран глас (js/voice.js).
+    speak(...parts) { window.VOICE.speak(parts, { rate: 0.85, gap: 150 }); }
     // ---------- изграждане ----------
     pic(w, cls) { return `<button type="button" class="ph-pic bk-pic ${cls || ""}" data-v="${w}" aria-label="${w}"><img src="${PIC(w)}" alt="" draggable="false"><span class="bk-ear" data-say="${w}" aria-label="Чуй думата"></span></button>`; }
     keys(list, cls) { return `<div class="ph-keys bk-keys ${cls || ""}">${list.map(k => `<button type="button" class="ph-key bk-key" data-v="${k}">${k}</button>`).join("")}</div>`; }
@@ -113,17 +124,21 @@
 
     startRound() {
       this.view = null; const r = this._startRound();
-      const v = VIEW[this.view] || [this.bankGame.game, null], t = document.getElementById("game-title"); if (t && this.view) t.textContent = v[0];
+      const v = VIEW[this.view] || [this.bankGame.game, null], t = document.getElementById("game-title"); if (t && this.view && !document.documentElement.classList.contains("look2")) t.textContent = v[0];
       return r;
     }
     // данни: реалният тип на задачата, независимо от заглавието на шаблона
     event(ok, extra) {
       const v = VIEW[this.view] || [];
-      return super.event(ok, Object.assign({ game_type: this.view, view_name: v[0] || null, direction: v[1] || null, target_skill: this.u && this.u.skill || null, template_title: this.bankGame && this.bankGame.game }, extra || {}));
+      const bg = this.bankGame || {}, mode = MODE[this.view] && this.u ? MODE[this.view](this.u, this) : v[2] || null;
+      return super.event(ok, Object.assign({ measurement_valid: !this.gap, shortfall_reason: this.gap ? this.gap.reason : null, game_type: this.view, view_name: v[0] || null,
+        mode_id: mode, direction: v[1] || null, target_skill: this.u && this.u.skill || null, template_title: bg.game || null,
+        is_diagnostic: !!bg.diagnostic, platform_proxy: bg.platform_proxy || null }, extra || {}));
     }
     _startRound() {
       this.stepWrong = 0; const u = this.items[this.idx]; this.u = u; this.prompt = () => {};
       const g = this.bankGame.game;
+      if (u.wclass) return this.wordClass(u);
       if (u.type === "форма" && u.variant) return this.elements(u);
       if (u.type === "форма") return this.azbuka(u);
       if (u.fix) return this.fixLetter(u);
@@ -152,12 +167,12 @@
       const t = u.target.toLowerCase(), opts = shuffle([u.pic, ...u.distract]);
       this.shell.setLabel(`${u.target} ${t}`);
       this.answerKey = u.pic;
-      this.prompt = () => this.speak(`Коя картинка започва с ${SND(t)}?`);
+      this.prompt = () => this.speak(document.documentElement.classList.contains("look2") ? SND(t) : `Коя картинка започва с ${SND(t)}?`);   // нов вид: само звукът
       this.box.innerHTML = `<div class="az-hint">Коя картинка започва с /${SND(t)}/? ${this.replay()}</div><div class="ph-grid bk-grid">${opts.map(w => this.pic(w)).join("")}</div>`;
       this.wire(b => this.check(b, b.dataset.v === u.pic, u.pic, b.dataset.v, () => this.speak(b.dataset.v)));
       this.prompt();
     }
-    // Звуково-буквен анализ н.1: една картинка, с коя буква започва думата
+    // Първа буква (Б1–Б2 Р3): една картинка, с кой звук започва думата – отговорът е буква
     whichLetter(u) {
       this.view = "whichLetter";
       const keys = this.knownVowels();
@@ -211,12 +226,12 @@
       const opts = shuffle(["ok", "bad"]);
       this.shell.setLabel(u.target);
       this.answerKey = "ok";
-      this.prompt = () => this.speak(`Коя буква ${SND(u.target.toLowerCase())} е написана правилно?`);
+      this.prompt = () => this.speak(u.target.toLowerCase() === "ь" ? "Кой малък ер е написан правилно?" : `Коя буква ${SND(u.target.toLowerCase())} е написана правилно?`);   // ь няма звук – назовава се
       this.box.innerHTML = `<div class="az-hint">Коя е написана правилно? ${this.replay()}</div><div class="bk-forms">${opts.map(o => `<button type="button" class="bk-form" data-v="${o}">${window.LETTER_FORM(u.target, o === "ok" ? "" : u.variant)}</button>`).join("")}</div>`;
       this.wire(b => this.check(b, b.dataset.v === "ok", u.target, b.dataset.v === "ok" ? u.target : u.variant, () => {}));
       this.prompt();
     }
-    // Звуково-буквен анализ н.2: чуй сричката, избери я сред три изписани
+    // Чувам и избирам сричка: чуй сричката, избери я сред три изписани
     pickSyllable(u) {
       this.view = "pickSyllable";
       const s = u.write, rev = s.split("").reverse().join(""), vs = "аоуеи".replace(s.slice(-1), "").replace(s[0], "");
@@ -224,7 +239,7 @@
       const opts = shuffle([...new Set([s, rev, swap])]);
       this.shell.setLabel("");
       this.answerKey = s;
-      this.prompt = () => this.speak(s);
+      this.prompt = () => this.speak("Коя сричка чуваш?", s);   // указанието се казва преди сричката – децата още не четат
       this.box.innerHTML = `<div class="az-hint">Коя сричка чуваш? ${this.replay()}</div>${this.keys(opts, "big wide")}`;
       this.wire(b => this.check(b, b.dataset.v === s, s, b.dataset.v, () => this.speak(s)));
       this.prompt();
@@ -247,7 +262,7 @@
         ev.preventDefault(); if (this.locked || b.classList.contains("bad")) return;
         this.speak(b.dataset.v); sel = b; this.box.querySelectorAll(".rp-card").forEach(x => x.classList.toggle("on", x === b)); go.disabled = false;
       }));
-      go.addEventListener("click", () => { if (!sel || this.locked) return; const b = sel; sel = null; go.disabled = true; b.classList.remove("on"); this.check(b, b.dataset.v === w, w, b.dataset.v, () => {}); if (this.log.length) Object.assign(this.log[this.log.length - 1], { voice: "tts" }); });
+      go.addEventListener("click", () => { if (!sel || this.locked) return; const b = sel; sel = null; go.disabled = true; b.classList.remove("on"); this.check(b, b.dataset.v === w, w, b.dataset.v, () => {}); if (this.log.length) Object.assign(this.log[this.log.length - 1], { voice: opts.every(o => window.VOICE.source(o) === "file") ? "recorded" : "tts" }); });
       const r = this.box.querySelector(".bk-replay"); if (r) r.addEventListener("pointerdown", ev => { ev.preventDefault(); this.prompt(); });
       this.prompt();
     }
@@ -295,7 +310,17 @@
       this.wire(b => this.check(b, b.dataset.v === u.pic, u.pic, b.dataset.v, () => {}));
       this.prompt();
     }
-    // Фонетика / Звуково-буквен анализ (Б6–Б13): чуй думата и избери буквата от двойката (или от няколко)
+    // Каква е думата? (Б11 Р3): прочети думата и избери НЕЩО / ПРАВИ / КАКВО Е – без граматични термини; думата не се озвучава
+    wordClass(u) {
+      this.view = "wordClass";
+      this.shell.setLabel("");
+      this.answerKey = u.wclass;
+      this.prompt = () => this.speak("Прочети думата. Нещо ли е, какво прави или какво е?");
+      this.box.innerHTML = `<div class="az-hint">Каква е думата? ${this.replay()}</div><div class="bk-word">${u.write}</div>${this.keys(["нещо", "прави", "какво е"], "cls")}`;
+      this.wire(b => this.check(b, b.dataset.v === u.wclass, u.wclass, b.dataset.v, () => {}));
+      this.prompt();
+    }
+    // Фонетика / Чувам звук, избирам буква (Б6–Б14): чуй думата и избери буквата от двойката (или от няколко)
     letterChoice(u) {
       this.view = "letterChoice";
       const q = u.pos === "край" && u.keys.length > 2 ? "С кой звук завършва думата?" : u.pos === "начало" ? (u.keys.length > 2 && !this.bank.checkpoint ? "С коя буква започва думата?" : "С кой звук започва думата?") : `Кой звук чуваш в думата: ${u.keys.join(" или ")}?`;
@@ -323,7 +348,7 @@
       const opts = shuffle([u.pic, u.mp]);
       this.shell.setLabel("");
       this.answerKey = u.pic;
-      this.prompt = () => this.speak(u.pic);
+      this.prompt = () => this.speak("Коя е думата, която чуваш?", u.pic);   // указанието се казва преди думата
       this.box.innerHTML = `<div class="az-hint">Коя е думата, която чуваш? ${this.replay()}</div><div class="ph-grid bk-grid">${opts.map(w => this.pic(w, "noear")).join("")}</div>`;
       this.wire(b => this.check(b, b.dataset.v === u.pic, u.pic, b.dataset.v, () => this.speak(u.pic)));
       this.prompt();
@@ -356,7 +381,7 @@
       const html = u.gap.replace("_", `<span class="bk-gap">?</span>`);
       this.shell.setLabel("");
       this.answerKey = u.choices[0];
-      this.prompt = () => this.speak(u.write);
+      this.prompt = () => this.speak("Коя буква липсва?", u.write);   // указанието се казва преди думата
       this.box.innerHTML = `<div class="az-hint">Коя буква липсва? ${this.replay()}</div><div class="bk-word">${html}</div>${this.keys(shuffle(u.choices.slice()), "big")}`;
       this.wire(b => { const ok = b.dataset.v === u.choices[0]; if (ok) this.box.querySelector(".bk-gap").textContent = b.dataset.v.toLowerCase(); this.check(b, ok, u.write, b.dataset.v, () => this.speak(u.write)); });
       this.prompt();

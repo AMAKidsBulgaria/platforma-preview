@@ -17,16 +17,13 @@
    отваряне и затваряне без действие не „изгаря“ набора. Паметта е обща за всички режими.
    Гласът казва само указанията – изреченията детето ги чете само; „Чуй текста“ има чак на финалния екран. */
 (function () {
-  const URL = "config/sequence-ch17-20.json?v=10";
+  const URL = "config/sequence-ch17-20.json?v=12";
   let data = null; const load = () => data || (data = fetch(URL).then(r => r.json()));
   const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
   const SPK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 010 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
-  function speakSeq(lines, onLine) {
-    if (!("speechSynthesis" in window) || localStorage.getItem("platforma.sound") === "off") return () => {};
-    speechSynthesis.cancel(); let i = 0, stop = false; const v = speechSynthesis.getVoices().find(v => v.lang && v.lang.toLowerCase().startsWith("bg"));
-    const next = () => { if (stop) return; if (i >= lines.length) { onLine && onLine(-1); return; } onLine && onLine(i); const u = new SpeechSynthesisUtterance(lines[i]); u.lang = "bg-BG"; u.rate = 0.9; if (v) u.voice = v; u.onend = () => { i++; setTimeout(next, 250); }; speechSynthesis.speak(u); };
-    next(); return () => { stop = true; speechSynthesis.cancel(); };
-  }
+  // глас ред по ред (записите на диктора, иначе синтезиран) – js/voice.js
+  function speakSeq(lines, onLine) { return window.VOICE.speak(lines, { onLine, gap: 250 }); }
+
   const BACK = '<svg viewBox="0 0 24 24"><path d="M9 14L4 9l5-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 9h10.5a5.5 5.5 0 010 11H11" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>';
   const RETELL = [["in_order", "Разказа по ред", ""], ["each_picture", "Каза нещо за всяка картинка", ""], ["sequence_words", "Използва думи за последователност", "първо / после / след това / накрая"]];
   const EXP = "platforma.seq.exposure";
@@ -126,7 +123,7 @@
       const check = () => {
         tries++; const good = slots.map((v, i) => v === i), all = good.every(Boolean);
         if (tries === 1) { firstPos = good.filter(Boolean).length; this.review = { review_changed: changed, review_delta: atFull ? firstPos - atFull.filter((v, i) => v === i).length : 0 }; }
-        const extra = { ...this.review, ...this.meta, story_kind: st.kind, first_try_correct: tries === 1 && all, correct_positions_first_try: firstPos, attempts_to_complete: tries, hint_used: tries > 1, self_review_before_check: !!(this.review && this.review.review_changed), story_id: st.id, steps: n, positions_ok: firstPos, attempt_count: tries, hint_level: Math.min(tries - 1, 4), view: this.view, bank_item: st.id };
+        const extra = { ...this.review, ...this.meta, task_count: 1, scored_decision_count: n, correct_scored_decisions: firstPos, story_kind: st.kind, first_try_correct: tries === 1 && all, correct_positions_first_try: firstPos, attempts_to_complete: tries, hint_used: tries > 1, self_review_before_check: !!(this.review && this.review.review_changed), story_id: st.id, steps: n, positions_ok: firstPos, attempt_count: tries, hint_level: Math.min(tries - 1, 4), view: this.view, bank_item: st.id };
         if (all) return this.finishStory(st, tries === 1, extra);
         this.locked = true; this.shake(this.box.querySelector(".sq-slots"));
         warn = null;
@@ -144,7 +141,7 @@
         }
         this.say(hint); this.later(() => { this.locked = false; draw(); }, 500);
       };
-      draw(); this.say(ASK[this.view]);
+      draw(); this.prompt(ASK[this.view]);
     }
     // първо запълване: едно поставено изречение леко помръдва и иконката за връщане светва – „това може да се натиска“
     wiggle() { const b = this.box.querySelector(".sq-slot.full:not(.fixed)"); if (b) { b.classList.add("wiggle"); this.later(() => b.classList.remove("wiggle"), 1600); } }
@@ -176,7 +173,7 @@
           ["pointerup", "pointerleave", "pointercancel"].forEach(ev => gate.addEventListener(ev, stopHold));
           this.box.querySelectorAll(".sq-checks .tx-chip").forEach(b => b.onclick = () => { const i = Number(b.dataset.i); if (on.has(i)) on.delete(i); else on.add(i); b.classList.toggle("on", on.has(i)); });
           q("#sq-next").onclick = () => save("unknown"); q("#sq-skip").onclick = () => save("not_told"); q("#sq-done").onclick = () => save("told");
-          this.say(ask + " Кажи какво става на всяка картинка.");
+          this.prompt(ask + " Кажи какво става на всяка картинка.");
           return;
         } else {
           this.box.innerHTML = `<div class="sq sq-text"><h3>Прочети историята отначало.</h3><div class="sq-para"><h4>${esc(st.title)}</h4><p>${st.steps.map((x, i) => `<span class="sq-s" data-s="${i}">${esc(x)}</span>`).join(" ")}</p>
@@ -190,7 +187,8 @@
       };
       const rec = () => Object.assign(this.log[this.log.length - 1], extra);
       if (ok) { this.correct++; this.renderScore(); this.log.push(this.event(true, { text: st.id, answer: st.id, given: st.id, ms: Date.now() - this.roundStart, first_attempt_correct: true })); rec(); this.roundOk.push(true); this.idx++; this.renderProgress(); this.shell.flash("Точно така!", "good"); this.say("Точно така!"); this.later(() => { this.shell.hideFlash(); after(); }, 1100); return; }
-      this.miss(st.id, shown ? "shown" : "solved-later"); rec(); this.roundOk.push(false); this.idx++; this.renderProgress();
+      // грешен краен отговор: записът е измерване (не от първия опит), не „опит“ – иначе в измерването остават само верните
+      this.miss(st.id, shown ? "shown" : "solved-later"); rec(); Object.assign(this.log[this.log.length - 1], { attempt: false, first_attempt_correct: false }); this.roundOk.push(false); this.idx++; this.renderProgress();
       if (!shown) { this.shell.flash("Браво, вече е наред!", "good"); this.say("Браво, вече е наред!"); return this.later(() => { this.shell.hideFlash(); after(); }, 1100); }
       after();
     }

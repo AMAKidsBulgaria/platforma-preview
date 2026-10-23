@@ -10,10 +10,14 @@
   class ConstructorGame extends CardGame {
     constructor(...a) { super(...a); this.total = Number(this.s.answersQty) || 4; this.level = Number(this.s.level) || 1; this.speed = Number(this.s.speed) || 1; this.fly = this.level <= 2 ? (Number(this.s.flyElemsQty) || 6) : 6; }
     get gameId() { return "constructor"; } get skillName() { return this.level === 1 ? "Разпознаване на срички" : this.level === 2 ? "Сглобяване на дума от срички" : "Разпознаване на думи"; }
+    start() { READICA_BANK.attach(this).then(() => super.start()); }
     render() { this.scene("wt-cn", "scene-space-game"); this.box.innerHTML = `<div class="cn-target" id="target"></div><div class="cn-sky" id="sky"></div>`; this.sky = this.box.querySelector("#sky"); this.target = this.box.querySelector("#target"); this.pool = shuffle(words(this.s.dataComplexity, Number(this.s.maxLettersQty) || 4).slice()); this.k = 0; this.shell.setLabel(this.level === 2 ? "Сглоби думата" : this.level === 1 ? "Намери сричката" : "Намери думата"); }
     startRound() {
       this.stepWrong = 0; const S = sylls2();
-      if (this.level === 1) { const t = S[rnd(S.length)]; this.answers = [t]; this.items = [t]; while (this.items.length < this.fly) { const x = S[rnd(S.length)]; if (!this.items.includes(x)) this.items.push(x); } this.target.innerHTML = `<span class="cn-word">${t}</span>`; }
+      // банка на рунда: целите вървят поред, а облачетата-разсейващи идват от разсейващите на слота
+      const B = this.rb, D = B && B.def.distractors ? B.def.distractors.map(norm) : null;
+      if (B && this.level !== 2) { const t = norm(B.units[this.k++ % B.units.length]); this.answers = [t]; this.items = [t]; const pool = shuffle(D.filter(x => x !== t)); while (this.items.length < Math.min(this.level === 1 ? this.fly : 6, pool.length + 1)) this.items.push(pool[this.items.length - 1]); this.target.innerHTML = `<span class="cn-word">${t}</span>`; }
+      else if (this.level === 1) { const t = S[rnd(S.length)]; this.answers = [t]; this.items = [t]; while (this.items.length < this.fly) { const x = S[rnd(S.length)]; if (!this.items.includes(x)) this.items.push(x); } this.target.innerHTML = `<span class="cn-word">${t}</span>`; }
       else if (this.level === 2) { const raw = this.pool[this.k++ % this.pool.length]; const parts = raw.toLowerCase().split("/"); this.answers = parts; this.items = parts.slice(); while (this.items.length < Math.max(this.fly, parts.length + 2)) { const x = S[rnd(S.length)]; if (!this.items.includes(x)) this.items.push(x); } this.target.innerHTML = `<span class="cn-word">${norm(raw)}</span><span class="cn-built" id="built">${parts.map(() => "<i></i>").join("")}</span>`; }
       else { const raw = this.pool[this.k++ % this.pool.length]; const t = norm(raw); this.answers = [t]; this.items = [t]; while (this.items.length < 6) { const x = norm(this.pool[rnd(this.pool.length)]); if (!this.items.includes(x)) this.items.push(x); } this.target.innerHTML = `<span class="cn-word">${t}</span>`; }
       this.pos = 0; this.sky.innerHTML = "";
@@ -23,7 +27,7 @@
         b.style.top = (8 + (i % 4) * 22 + Math.random() * 6) + "%"; b.style.setProperty("--dur", (dur + Math.random() * 4).toFixed(1) + "s"); b.style.animationDelay = (-Math.random() * dur).toFixed(1) + "s";
         b.addEventListener("pointerdown", e => { e.preventDefault(); this.tap(b); }); this.sky.appendChild(b);
       });
-      this.say(this.level === 2 ? `Сглоби думата ${norm(this.pool[(this.k - 1) % this.pool.length])}` : `Намери ${this.answers[0]}`);
+      this.prompt(this.level === 2 ? `Сглоби думата ${norm(this.pool[(this.k - 1) % this.pool.length])}` : `Намери ${this.answers[0]}`);
     }
     tap(b) {
       if (this.finished || this.locked || b.classList.contains("gone")) return;
@@ -31,7 +35,7 @@
       if (t === this.answers[this.pos]) {
         b.classList.add("pop"); this.later(() => b.classList.add("gone"), 400); this.pos++;
         if (this.level === 2) { const cell = this.box.querySelectorAll("#built i")[this.pos - 1]; cell.textContent = t; cell.classList.add("on"); }
-        if (this.pos >= this.answers.length) { this.say(this.answers.join("")); this.done(this.answers.join(""), 900); }
+        if (this.pos >= this.answers.length) { this.prompt(this.answers.join("")); this.done(this.answers.join(""), 900); }
       } else { this.miss(this.answers[this.pos], t); this.shake(b); this.shell.flash(this.level === 2 ? `Следва „${this.answers[this.pos]}“` : `Търси „${this.answers[0]}“`, "bad"); this.later(() => this.shell.hideFlash(), 1200); }
     }
   }
@@ -57,6 +61,7 @@
   class OrderGame extends CardGame {
     constructor(...a) { super(...a); this.total = Number(this.s.answersQty) || 4; this.level = Number(this.s.level) || 1; }
     get gameId() { return "wordOrder"; } get skillName() { return this.level <= 2 ? "Подреждане на срички" : this.level === 3 ? "Подреждане на букви" : "Откриване на правописна грешка"; }
+    start() { READICA_BANK.attach(this).then(() => super.start()); }
     render() {
       const maxL = Number(this.s.maxLettersQty) || 4; const sv = (DICT().shortVocab || {})["1"] || [];
       const pics = Object.fromEntries(window.BUK_WORDS.map(w => [w.w, w]));
@@ -66,6 +71,8 @@
       else if (this.level === 4) this.pool = words(this.s.dataComplexity, maxL, 3).filter(w => [...norm(w)].some(l => PAIRS[l]));
       else { const all = DICT().sentences || {}; this.pool = (all[String(this.s.dataComplexity)] || all["1"] || ["мама чете книга"]).map(x => Array.isArray(x) ? x[0] : x).filter(s => [...s.toLowerCase()].filter(l => PAIRS[l]).length >= 2); }
       if (!this.pool.length) this.pool = ["ма/ма", "та/та", "ко/те"];
+      const SAFE = DICT().safe; if (!this.rb && SAFE && this.level >= 4) { const k = x => this.level === 4 ? norm(x) : x.toLowerCase().replace(/[.!?]$/, ""), f = this.pool.filter(x => (SAFE[k(x)] || []).length >= (this.level === 4 ? 1 : 2)); if (f.length >= 4) this.pool = f; }
+      if (this.rb) this.pool = this.rb.units.slice();   // банка на рунда; нива 4 и 5 – двойки [вярно, показано]
       this.pool = shuffle(this.pool.slice()); this.k = 0; this.scene("wt-or", "scene-space-game");
       this.shell.setLabel(({ 1: "Подреди сричките", 2: "Подреди сричките", 3: "Подреди буквите", 4: "Поправи грешката", 5: "Поправи грешките" })[this.level]);
     }
@@ -76,36 +83,44 @@
         const order = shuffle(this.parts.map((p, i) => ({ p, i })));
         this.box.innerHTML = `${pic ? `<div class="pcard big-pic small">${window.BUK_PIC(pic)}</div>` : ""}<div class="or-slots">${this.parts.map((p, i) => `<span class="or-slot ghost" ${this.level === 1 ? `style="--c:${COLORS[i % 8]}"` : ""}>${p}</span>`).join("")}</div><div class="or-tiles">${order.map(o => `<button type="button" class="wtile" data-i="${o.i}" ${this.level === 1 ? `style="--c:${COLORS[o.i % 8]}"` : ""}>${o.p}</button>`).join("")}</div>`;
         this.box.querySelectorAll(".or-tiles .wtile").forEach(b => b.addEventListener("pointerdown", e => { e.preventDefault(); this.tapPart(b); }));
-        this.say("Подреди сричките, за да се получи дума.");
+        this.prompt("Подреди сричките, за да се получи дума.");
       } else if (this.level === 3) {
         const w = norm(raw); this.word = w; this.pos = 1; const mid = [...w].slice(1, -1).map((l, i) => ({ l, i: i + 1 }));
         this.box.innerHTML = `<div class="or-slots">${[...w].map((l, i) => `<span class="or-slot${i === 0 || i === w.length - 1 ? " on fixed" : ""}">${i === 0 || i === w.length - 1 ? l : ""}</span>`).join("")}</div><div class="or-tiles">${shuffle(mid).map(o => `<button type="button" class="ac-l" data-i="${o.i}">${o.l}</button>`).join("")}</div>`;
         this.box.querySelectorAll(".or-tiles .ac-l").forEach(b => b.addEventListener("pointerdown", e => { e.preventDefault(); this.tapLetter(b); }));
-        this.say("Постави буквите на мястото им.");
+        this.prompt("Постави буквите на мястото им.");
       } else {
-        const text = this.level === 4 ? norm(raw) : raw.toLowerCase(); const idx = [...text].map((l, i) => PAIRS[l] ? i : -1).filter(i => i >= 0); const n = this.level === 4 ? 1 : 2;
-        this.errs = new Set(shuffle(idx).slice(0, n)); this.text = text; this.shown = [...text].map((l, i) => this.errs.has(i) ? PAIRS[l] : l); this.left = this.errs.size;
+        if (Array.isArray(raw)) {   // от банката: грешките са подбрани (видими, не в последната буква, сгрешената дума не е истинска)
+          const lc = this.level === 4 ? x => x.toLowerCase() : x => x; this.text = lc(raw[0]); this.shown = [...lc(raw[1])];
+          this.errs = new Set([...this.text].map((l, i) => l !== this.shown[i] ? i : -1).filter(i => i >= 0));
+        } else {
+          // свободна игра: изречението е с главна буква и точка; грешката не е в последната буква на дума (както в банките)
+          const text = this.level === 4 ? norm(raw) : raw[0].toUpperCase() + raw.slice(1).replace(/[.!?]?$/, "."); const safe = (DICT().safe || {})[this.level === 4 ? norm(raw) : raw.toLowerCase().replace(/[.!?]$/, "")];   // места, при които сгрешената дума не е истинска
+          const idx = safe || [...text].map((l, i) => PAIRS[l] && /[а-я]/.test(text[i + 1] || "") ? i : -1).filter(i => i >= 0); const n = this.level === 4 ? 1 : 2;
+          this.errs = new Set(shuffle(idx).slice(0, n)); this.text = text; this.shown = [...text].map((l, i) => { if (!this.errs.has(i)) return l; const x = PAIRS[l.toLowerCase()]; return l === l.toLowerCase() ? x : x.toUpperCase(); });
+        }
+        this.left = this.errs.size;
         this.box.innerHTML = `<div class="az-hint">${this.level === 4 ? "В думата има една сгрешена буква. Докосни я." : "В изречението има две сгрешени букви. Докосни ги."}</div><div class="or-text">${this.shown.map((l, i) => l === " " ? `<span class="or-sp"></span>` : `<button type="button" class="ac-l ac-s" data-i="${i}">${l}</button>`).join("")}</div>`;
         this.box.querySelectorAll(".ac-l").forEach(b => b.addEventListener("pointerdown", e => { e.preventDefault(); this.tapErr(b); }));
-        this.say(this.level === 4 ? "Поправи грешката в думата." : "Поправи грешките в изречението.");
+        this.prompt(this.level === 4 ? "Поправи грешката в думата." : "Поправи грешките в изречението.");
       }
     }
     tapPart(b) {
       if (this.finished || this.locked || b.classList.contains("used")) return;
       const i = Number(b.dataset.i);
-      if (i === this.pos) { b.classList.add("used"); const s = this.box.querySelectorAll(".or-slot")[this.pos]; s.textContent = this.parts[i]; s.classList.remove("ghost"); s.classList.add("on"); this.pos++; if (this.pos >= this.parts.length) { this.say(this.parts.join("")); this.done(this.parts.join(""), 900); } }
+      if (i === this.pos) { b.classList.add("used"); const s = this.box.querySelectorAll(".or-slot")[this.pos]; s.textContent = this.parts[i]; s.classList.remove("ghost"); s.classList.add("on"); this.pos++; if (this.pos >= this.parts.length) { this.prompt(this.parts.join("")); this.done(this.parts.join(""), 900); } }
       else { this.miss(this.parts.join(""), this.parts[i]); b.classList.add("bad"); this.shake(b); this.later(() => b.classList.remove("bad"), 800); this.shell.flash(this.pos === 0 ? "С коя сричка започва думата?" : `Коя сричка идва след „${this.parts[this.pos - 1]}“?`, "bad"); this.later(() => this.shell.hideFlash(), 1200); }
     }
     tapLetter(b) {
       if (this.finished || this.locked || b.disabled) return;
       const i = Number(b.dataset.i);
-      if (i === this.pos) { b.disabled = true; b.classList.add("used"); const s = this.box.querySelectorAll(".or-slot")[this.pos]; s.textContent = this.word[i]; s.classList.add("on"); this.pos++; if (this.pos >= this.word.length - 1) { this.say(this.word); this.done(this.word, 900); } }
+      if (i === this.pos) { b.disabled = true; b.classList.add("used"); const s = this.box.querySelectorAll(".or-slot")[this.pos]; s.textContent = this.word[i]; s.classList.add("on"); this.pos++; if (this.pos >= this.word.length - 1) { this.prompt(this.word); this.done(this.word, 900); } }
       else { this.miss(this.word, this.word[i]); b.classList.add("bad"); this.shake(b); this.later(() => b.classList.remove("bad"), 800); this.shell.flash(`Коя буква идва след „${this.word[this.pos - 1]}“?`, "bad"); this.later(() => this.shell.hideFlash(), 1200); }
     }
     tapErr(b) {
       if (this.finished || this.locked || b.classList.contains("good")) return;
       const i = Number(b.dataset.i);
-      if (this.errs.has(i)) { b.textContent = this.text[i]; b.classList.add("good"); this.left--; if (this.left <= 0) { this.say(this.text); this.done(this.text, 1000); } }
+      if (this.errs.has(i)) { b.textContent = this.text[i]; b.classList.add("good"); this.left--; if (this.left <= 0) { this.prompt(this.text); this.done(this.text, 1000); } }
       else { this.miss(this.text, this.shown[i]); b.classList.add("bad"); this.shake(b); this.later(() => b.classList.remove("bad"), 800); this.shell.flash("Тази буква е вярна. Търси сгрешената.", "bad"); this.later(() => this.shell.hideFlash(), 1200); if (this.stepWrong >= 2) this.box.querySelectorAll(".ac-l").forEach(x => { if (this.errs.has(Number(x.dataset.i)) && !x.classList.contains("good")) x.classList.add("hint"); }); }
     }
   }
@@ -127,7 +142,7 @@
      извън нея (свободна игра) — също от банката, по „Речник“ (ниво на изреченията); старият речник е само резерв. Вярно може да е всяко от двете изречения на двойката. Изречението не се чете на глас преди избора
      (детето чете само); гласът потвърждава след верен отговор. Картинка: assets/img/art/sent/<id>a.jpg (изречението) и <id>b.jpg (двойката);
      докато я няма, картата е временна, с текста. */
-  const CF_BANK_URL = "config/conformity-bank-draft.json?v=3";
+  const CF_BANK_URL = "config/conformity-bank-draft.json?v=4";
   let cfBank = null;
   const CF_SEEN = "platforma.cf.seen.v1";
   const cfSeen = () => { try { return new Set(JSON.parse(localStorage.getItem(CF_SEEN) || "[]")); } catch (e) { return new Set(); } };
@@ -190,8 +205,8 @@
       if (this.finished || this.locked) return;
       const cur = this.cur, ok = b.dataset.side === cur.t; this.locked = true;
       if (this.measured && cur.it.id) cfMarkSeen(cur.it.id);
-      if (ok) { b.classList.add("good"); this.say(cur.text); this.done(cur.text, 1400); }
-      else { const given = b.dataset.side === "a" ? cur.it.phrase : cur.it.pair; this.miss(cur.text, given); b.classList.add("bad"); this.shake(b); this.box.querySelectorAll("[data-side]").forEach(x => { if (x.dataset.side === cur.t) x.classList.add("hint"); }); this.shell.flash("Вярното е отбелязано", "bad"); this.roundOk.push(false); this.idx++; this.renderProgress(); this.log.push(this.event(false, { text: cur.text, answer: cur.text, given, ok: false, ms: 0, adapt: 0, attempt: true })); this.later(() => { this.shell.hideFlash(); this.nextRound(); }, 1500); }
+      if (ok) { b.classList.add("good"); this.prompt(cur.text); this.done(cur.text, 1400); }
+      else { const given = b.dataset.side === "a" ? cur.it.phrase : cur.it.pair; this.miss(cur.text, given); b.classList.add("bad"); this.shake(b); this.box.querySelectorAll("[data-side]").forEach(x => { if (x.dataset.side === cur.t) x.classList.add("hint"); }); this.shell.flash("Вярното е отбелязано", "bad"); this.roundOk.push(false); this.idx++; this.renderProgress(); this.log.push(this.event(false, { text: cur.text, answer: cur.text, given, ok: false, ms: Date.now() - this.roundStart, adapt: 0, first_attempt_correct: false })); /* краен запис на задачата, не „опит“ */ this.later(() => { this.shell.hideFlash(); this.nextRound(); }, 1500); }
     }
   }
   window.GAMES.conformity = {
@@ -213,8 +228,10 @@
     renderLives() { this.shell.lives.innerHTML = ""; }
     render() {
       const D = DICT(); let pool;
-      if (this.level === 1) pool = ((D.mixed || {})["1"] || ["МА", "НА"]).map(x => x.toLowerCase());
-      else if (this.level === 2) pool = words(this.s.dataComplexity, 15).map(norm);
+      // 19.10: ниво 1 – само срички (2–3 букви; 4-буквените като „балк“ четат като космически думи);
+      // ниво 2 – двата речника са еднакви, затова „Сложност“ е дължината: 1 – думи от 1–2 срички, 2 – от 3 и повече
+      if (this.level === 1) pool = ((D.mixed || {})["1"] || ["МА", "НА"]).filter(x => x.length <= 3).map(x => x.toLowerCase());
+      else if (this.level === 2) pool = words(1, 15).filter(w => Number(this.s.dataComplexity) === 2 ? w.split("/").length >= 3 : w.split("/").length <= 2).map(norm);
       else if (this.level === 3) pool = ((D.sentences || {})[String(this.s.dataComplexity)] || (D.sentences || {})["1"] || ["мама чете книга"]).map(x => (Array.isArray(x) ? x[0] : x));
       else pool = ((D.texts || {})["1"] || [["Заглавие", "Текст."]]).map(x => ({ title: x[0], text: x[1] }));
       this.items = shuffle(pool.slice()).slice(0, this.total); this.k = 0;
@@ -236,7 +253,7 @@
       { key: "answersQty", label: "Количество отговори", type: "range", min: 3, max: 100, def: 3, help: "Колко срички, думи, изречения или текста ще прочете детето." },
       { key: "autoSwitch", label: "Автоматично превключване", type: "cycle", options: [["off", "Изключено"], ["on", "Включено"]], def: "off" },
       { key: "speed", label: "Скорост", type: "range", min: 1, max: 7, def: 1, unit: "сек.", enabledIf: s => s.autoSwitch === "on" },
-      { key: "dataComplexity", label: "Сложност", type: "range", min: 1, max: 2, def: 1, enabledIf: s => [2, 3].includes(Number(s.level)) }
+      { key: "dataComplexity", label: "Сложност", type: "range", min: 1, max: 2, def: 1, enabledIf: s => [2, 3].includes(Number(s.level)), help: "Ниво 2 (думи): 1 – думи от 1–2 срички, 2 – от 3 и повече срички. Ниво 3 (изречения): 1 – кратки (около 3 думи), 2 – по-дълги (около 5 думи)." }
     ],
     paramsLine: s => `ниво ${s.level} · ${s.answersQty} единици` + (s.autoSwitch === "on" ? ` · авто ${s.speed} сек.` : "")
   };

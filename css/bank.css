@@ -13,6 +13,7 @@
 .bk-pic.noear .bk-ear { display: none; }
 .bk-keys.big .bk-key { width: 92px; height: 96px; font-size: 52px; border-radius: 16px; }
 .bk-keys.wide .bk-key { width: auto; min-width: 104px; padding: 0 18px; text-transform: none; }
+.bk-keys.cls .bk-key { width: auto; min-width: 170px; height: 88px; padding: 0 22px; font-size: 32px; text-transform: uppercase; border-radius: 16px; }
 .bk-key.used { opacity: .25; pointer-events: none; }
 .bk-word { position: relative; z-index: 1; font-family: var(--display); font-weight: 800; font-size: 76px; letter-spacing: .04em; color: #3B2A14; background: #fff; border-radius: 22px; padding: 6px 34px 10px; box-shadow: 0 6px 0 #C4A580, 0 10px 18px rgba(0,0,0,.15); }
 .bk-gap { display: inline-block; min-width: .7em; color: #6F5FD3; border-bottom: 6px solid #6F5FD3; text-align: center; }

@@ -1,0 +1,828 @@
+/* Визия „един свят“ (макет, html.look2 – ?look=2): същият рисуван свят и език на интерфейса като детската карта в офиса.
+   Фоновете са самите рисунки на картата (assets/img/art/districts), приглушени; табели и бутони – бели заоблени карти
+   с оранжев кант и оранжев основен бутон (като „Продължи“ на картата). */
+html.look2 { --l2-ink: #3B2A14; --l2-card: #FFFDF8; --l2-edge: #F2A33A; --l2-btn: #F5A93B; --l2-btn-deep: #C9781A; --l2-shadow: rgba(60, 40, 10, .22); }
+html.look2 .screen > svg.bg-fill { display: none; }
+html.look2 .screen { background: #9BC46A url("../assets/img/art/districts/world-1.png") center / cover no-repeat; }
+html.look2 .screen::before { content: ""; position: absolute; inset: 0; background: rgba(255, 252, 240, .38); backdrop-filter: blur(2px); pointer-events: none; }
+html.look2 .screen > * { position: relative; }
+html.look2 .screen-modules::before { background: rgba(255, 252, 240, .5); backdrop-filter: blur(6px); }
+/* табели → бели карти с оранжев кант */
+html.look2 .plank { background: var(--l2-card); color: var(--l2-ink); border: 3px solid var(--l2-edge); border-radius: 18px; box-shadow: 0 6px 0 var(--l2-shadow); padding: 6px 36px; }
+html.look2 .plank::before, html.look2 .plank::after { display: none; }
+html.look2 .title-outline { color: #fff; -webkit-text-stroke: 0; text-shadow: 0 3px 0 rgba(60, 40, 10, .45), 0 0 18px rgba(0, 0, 0, .25); }
+/* основен бутон → оранжев */
+html.look2 .gbtn-green { background: var(--l2-btn); --btn-deep: var(--l2-btn-deep); color: var(--l2-ink); }
+/* начален екран: долината с трите места */
+html.look2 .modules-l2 { position: relative; flex: 1; min-height: 0; }
+html.look2 .region { position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 4px; background: var(--l2-card); border: 3px solid var(--l2-edge);
+  border-radius: 20px; padding: 10px 22px 12px; box-shadow: 0 8px 0 var(--l2-shadow), 0 14px 30px rgba(0,0,0,.18); cursor: pointer; font-family: var(--display); color: var(--l2-ink); }
+html.look2 .region b { font-size: clamp(22px, 2.6vw, 34px); line-height: 1.05; }
+html.look2 .region span { font-size: clamp(14px, 1.4vw, 18px); color: #7A5A30; font-weight: 700; }
+html.look2 .region:hover { transform: translate(-50%, -54%); }
+/* станции на игрите (Букварика) */
+html.look2 .house-art { width: 230px; height: 230px; object-fit: contain; margin-bottom: -26px; }
+html.look2 .house-label { background: var(--l2-card); border: 3px solid var(--l2-edge); border-radius: 18px; color: var(--l2-ink); }
+html.look2 .house:not(:disabled) .house-label { box-shadow: 0 6px 0 var(--l2-shadow), 0 12px 20px rgba(40,20,0,.18); }
+/* екранът на играта: рамката е светла, фонът – рисуваният свят, приглушен */
+html.look2 .stage { border: 8px solid #fff; box-shadow: 0 0 0 3px var(--l2-edge), 0 16px 40px rgba(0,0,0,.22);
+  background: linear-gradient(rgba(255, 251, 238, .72), rgba(255, 251, 238, .72)), #DDE9C9 url("../assets/img/art/districts/world-1.png") 30% 60% / 160% auto no-repeat; }
+html.look2 .stage svg.sea { opacity: 0; }
+/* „Играй“ – оранжево, без празно място над името */
+html.look2 .house:not(:disabled)::after, html.look2 .island:not(:disabled)::after, html.look2 .planet:not(:disabled)::after, html.look2 .booth:not(:disabled)::after {
+  background: var(--l2-btn); color: var(--l2-ink); box-shadow: 0 4px 0 var(--l2-btn-deep); }
+html.look2 .house-label { padding: 22px 12px 14px; font-size: clamp(18px, 1.8vw, 24px); }
+/* долните бутони – в същия език */
+html.look2 .gbtn-purple, html.look2 .gbtn-grey { background: var(--l2-card); color: var(--l2-ink); --btn-deep: #D9C7A8; border: 3px solid var(--l2-edge); }
+/* хапчетата в играта (таймер, задача, звезди, звук) – бели с оранжев кант, мастило вместо лилаво/розово */
+html.look2 .hud-pill { background: var(--l2-card); border: 3px solid var(--l2-edge); box-shadow: 0 4px 0 var(--l2-shadow); color: #C2410C; }
+html.look2 .hud-pill svg { color: #C2410C; fill: currentColor; }
+html.look2 .hud-example { color: var(--l2-ink); -webkit-text-stroke: 0; }
+/* начален екран: три карти с рисуван пейзаж */
+html.look2 .modules { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; max-width: 1500px; align-content: center; flex: 1; }
+html.look2 .module-card { background: var(--l2-card); border: 4px solid #fff; border-radius: 26px; box-shadow: 0 0 0 3px var(--l2-edge), 0 10px 0 var(--l2-shadow), 0 22px 40px rgba(40, 30, 0, .25);
+  aspect-ratio: 4 / 3.4; display: flex; flex-direction: column; }
+html.look2 .module-card .module-art { width: 100%; flex: 1; min-height: 0; object-fit: cover; display: block; }
+html.look2 .module-card .module-name { position: static; padding: 12px 16px 16px; text-align: center; color: var(--l2-ink); -webkit-text-stroke: 0; text-shadow: none; font-size: clamp(20px, 2.2vw, 30px); line-height: 1.1; }
+html.look2 .module-card:hover { transform: translateY(-4px); }
+/* Букварика, вариант А: карти с рисунка на дейността */
+html.look2.hub-a .village { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; width: min(1100px, 100%); }
+html.look2.hub-a .house { background: none; border: 0; box-shadow: none; padding: 0 0 26px; }
+html.look2.hub-a .house:not(:disabled):hover .house-art { transform: translateY(-6px) scale(1.04); }
+html.look2.hub-a .house-art { width: 100%; height: clamp(150px, 26vh, 250px); margin: 0 0 6px; filter: drop-shadow(0 10px 8px rgba(40,30,0,.25)); }
+html.look2.hub-a .house-label { width: auto; max-width: 100%; border: 3px solid var(--l2-edge); border-radius: 999px; background: var(--l2-card); padding: 6px 22px 16px; box-shadow: 0 5px 0 var(--l2-shadow) !important; }
+html.look2.hub-a .screen-bmap { background-image: url("../assets/img/art/hub/card_buk.jpg"); }
+html.look2.hub-a .screen-bmap::before { background: rgba(255, 252, 240, .62); backdrop-filter: blur(8px); }
+/* Букварика, вариант Б: обекти на поляна с пътечки, име отдолу (като сгради) */
+html.look2.hub-b .screen-bmap { background-image: url("../assets/img/art/hub/hub_meadow.jpg"); }
+html.look2.hub-b .screen-bmap::before { background: none; backdrop-filter: none; }
+html.look2.hub-b .village { gap: 18px 40px; width: min(1150px, 100%); }
+html.look2.hub-b .house-art { width: clamp(170px, 24vh, 250px); height: clamp(170px, 24vh, 250px); margin-bottom: -8px; filter: drop-shadow(0 12px 8px rgba(40,30,0,.25)); }
+html.look2.hub-b .house-label { width: auto; padding: 6px 22px; border-radius: 999px; border: 3px solid var(--l2-edge); font-size: clamp(17px, 1.7vw, 22px); }
+html.look2.hub-b .house:not(:disabled)::after { display: none; }
+html.look2 .module-card { grid-column: auto !important; grid-row: auto !important; aspect-ratio: 4 / 3.3; }
+html.look2 .modules { max-width: min(1500px, calc((100vh - 300px) * 5)); }
+html.look2 .screen-modules .title-outline { color: var(--l2-ink); text-shadow: 0 2px 0 #fff, 0 0 24px rgba(255,255,255,.9); }
+@media (max-width: 1000px) { html.look2 .modules { grid-template-columns: 1fr 1fr; max-width: 760px; } }
+@media (max-width: 560px) { html.look2 .modules { grid-template-columns: 1fr; } }
+/* вариант А – бутонът „Играй“ стъпва на името; всичко се побира на таблет */
+html.look2.hub-a .house { padding: 0 0 16px; }
+html.look2.hub-a .house-label { padding: 6px 22px 14px; font-size: clamp(16px, 1.6vw, 22px); line-height: 1.15; }
+html.look2.hub-a .house:not(:disabled)::after { bottom: 0; }
+html.look2.hub-a .house-art { height: clamp(120px, 21vh, 230px); }
+html.look2.hub-a .village { gap: clamp(10px, 2.5vh, 28px) 34px; align-content: center; flex: 1; }
+/* Букварика, вариант В: поляна с 6 мини-зони, пътечка между тях, леко движение, отметки */
+html.look2.hub-c .screen-bmap { background-image: url("../assets/img/art/hub/hub_meadow.jpg"); }
+html.look2.hub-c .screen-bmap::before { background: none; backdrop-filter: none; }
+html.look2.hub-c .village.meadow { display: block; position: absolute; inset: 0; width: auto; margin: 0; padding: 0; }
+.meadow-path { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.meadow-path path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.meadow-path .p-edge { stroke: #A88452; stroke-width: 30px; opacity: .45; }
+.meadow-path .p-dirt { stroke: #D9B67A; stroke-width: 22px; opacity: .9; }
+.meadow-path .p-peb { stroke: #F3E2BF; stroke-width: 3px; stroke-dasharray: 1 13 2 21; opacity: .8; }
+html.look2 .meadow > .zone { position: absolute; transform: translate(-50%, -50%); width: calc(clamp(150px, 19vw, 250px) * var(--k, 1)); background: none; border: 0; padding: 0; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; animation: zoneIdle 4.5s ease-in-out infinite; animation-delay: var(--d, 0s); }
+.zone img { width: 100%; height: auto; display: block; filter: drop-shadow(0 10px 8px rgba(40, 30, 0, .25)); transition: transform .15s, filter .15s; }
+.zone:hover img, .zone:focus-visible img { transform: scale(1.05); filter: drop-shadow(0 10px 8px rgba(40, 30, 0, .25)) drop-shadow(0 0 14px rgba(255, 236, 160, .9)); }
+.zone:active img { transform: scale(.98); }
+.zone-label { margin-top: -10px; background: #FFFDF8; color: #3B2A14; border: 2px solid #F2A33A; border-radius: 999px; padding: 3px 14px; font-family: var(--display); font-weight: 800;
+  font-size: clamp(14px, 1.25vw, 18px); line-height: 1.15; text-align: center; box-shadow: 0 3px 0 rgba(60, 40, 10, .2); }
+.zone:hover .zone-label { background: #FFF3D6; }
+.zone-badge { position: absolute; top: 10%; right: 12%; min-width: 26px; height: 26px; padding: 0 5px; border-radius: 7px; display: grid; place-items: center; font-size: 15px; line-height: 1;
+  background: #FBF1DC; border: 2px solid #B98A55; box-shadow: 0 2px 0 rgba(90, 60, 20, .3); transform: rotate(-6deg); }
+.zone-badge.star { color: #C99A2E; } .zone-badge.new { color: #C9783A; } .zone-badge.fav { color: #B9566F; }
+@keyframes zoneIdle { 0%, 100% { transform: translate(-50%, -50%); } 50% { transform: translate(-50%, calc(-50% - 4px)); } }
+@media (prefers-reduced-motion: reduce) { .zone { animation: none; } }
+/* заглавие и „Изход“ – рисувана дървена табела */
+html.look2.hub-c .screen-bmap .plank { background: url("../assets/img/art/hub/sign_wood.png") center 42% / 100% auto no-repeat; border: 0; box-shadow: none; color: #4A2C10;
+  padding: 22px 62px 20px; min-width: 250px; font-size: clamp(20px, 2.4vw, 28px); text-shadow: 0 1px 0 rgba(255, 230, 180, .7); }
+html.look2.hub-c .screen-bmap .gbtn-purple { background: #C99A5C; color: #3B2410; border: 3px solid #8B5E2E; --btn-deep: #8B5E2E; }
+html.look2.hub-c .screen-bmap .plank-head, html.look2.hub-c .screen-bmap .foot-bar { z-index: 2; }
+html.look2.hub-c .screen-bmap > .village.meadow { position: absolute !important; top: 90px; left: 0; right: 0; bottom: 70px; height: auto; max-width: none; flex: none; }
+html.look2.hub-c .screen-bmap .plank-head { padding-top: calc(4px + env(safe-area-inset-top, 0px)); }
+/* лек живот около зоните */
+.zone-fx { position: absolute; inset: 0; pointer-events: none; }
+.zone-fx i { position: absolute; opacity: 0; }
+.fx-notes .zone-fx i { left: 62%; top: 12%; width: 14px; height: 18px; background: none; }
+.fx-notes .zone-fx i::before { content: "♪"; color: #8A5A1C; font-size: 18px; text-shadow: 0 1px 0 #fff; }
+.fx-notes .zone-fx i { animation: fxNote 3.6s ease-out infinite; } .fx-notes .zone-fx i:nth-child(2) { animation-delay: 1.2s; left: 70%; } .fx-notes .zone-fx i:nth-child(3) { animation-delay: 2.4s; left: 56%; }
+@keyframes fxNote { 0% { opacity: 0; transform: translate(0, 0) scale(.7); } 15% { opacity: .9; } 100% { opacity: 0; transform: translate(14px, -40px) scale(1.1); } }
+.fx-steam .zone-fx i { left: 17%; top: 40%; width: 14px; height: 14px; border-radius: 50%; background: rgba(255, 255, 255, .85); animation: fxSteam 3.2s ease-out infinite; }
+.fx-steam .zone-fx i:nth-child(2) { animation-delay: 1.05s; } .fx-steam .zone-fx i:nth-child(3) { animation-delay: 2.1s; }
+@keyframes fxSteam { 0% { opacity: 0; transform: translate(0, 0) scale(.5); } 20% { opacity: .9; } 100% { opacity: 0; transform: translate(-10px, -46px) scale(1.8); } }
+.fx-sparkle .zone-fx i { width: 10px; height: 10px; background: radial-gradient(circle, #FFF6C8 0 30%, rgba(255, 230, 140, 0) 70%); animation: fxSpark 3.8s ease-in-out infinite; }
+.fx-sparkle .zone-fx i:nth-child(1) { left: 44%; top: 28%; } .fx-sparkle .zone-fx i:nth-child(2) { left: 60%; top: 40%; animation-delay: 1.3s; } .fx-sparkle .zone-fx i:nth-child(3) { left: 36%; top: 46%; animation-delay: 2.5s; }
+@keyframes fxSpark { 0%, 100% { opacity: 0; transform: scale(.4); } 45% { opacity: 1; transform: scale(1.6); } }
+.fx-beat .zone-fx i { left: 22%; top: 50%; width: 3px; height: 12px; border-radius: 2px; background: #8A5A1C; animation: fxBeat 1.6s ease-out infinite; }
+.fx-beat .zone-fx i:nth-child(1) { transform: rotate(-35deg); } .fx-beat .zone-fx i:nth-child(2) { left: 26%; top: 47%; } .fx-beat .zone-fx i:nth-child(3) { left: 30%; top: 50%; transform: rotate(35deg); }
+@keyframes fxBeat { 0%, 60%, 100% { opacity: 0; } 10%, 30% { opacity: .75; } }
+@media (prefers-reduced-motion: reduce) { .zone-fx { display: none; } }
+html.look2.hub-c .screen-bmap .plank-head { padding-top: 0; margin-top: -8px; }
+html.look2 .meadow > .zone .zone-label { margin-top: -4px; }
+/* Математика – градина с 12 мини-зони */
+html.look2.hub-c .screen-map { background-image: url("../assets/img/art/hub/hub_garden.jpg"); }
+html.look2.hub-c .screen-map::before { background: none; backdrop-filter: none; }
+html.look2 .meadow.meadow-small > .zone { width: calc(clamp(118px, 14vw, 190px) * var(--k, 1)); }
+html.look2 .meadow-small .zone-label { font-size: clamp(13px, 1.1vw, 16px); padding: 2px 10px; }
+html.look2.hub-c .screen-map .plank { background: url("../assets/img/art/hub/sign_wood.png") center 42% / 100% auto no-repeat; border: 0; box-shadow: none; color: #4A2C10;
+  padding: 22px 62px 20px; min-width: 250px; font-size: clamp(20px, 2.4vw, 28px); text-shadow: 0 1px 0 rgba(255, 230, 180, .7); }
+html.look2.hub-c .screen-map .plank-head { padding-top: 0; margin-top: -8px; z-index: 2; }
+html.look2.hub-c .screen-map .gbtn-purple { background: #C99A5C; color: #3B2410; border: 3px solid #8B5E2E; --btn-deep: #8B5E2E; }
+html.look2.hub-c .screen-map .foot-bar { z-index: 2; }
+html.look2 .meadow > .zone { background: none !important; box-shadow: none !important; border: 0 !important; min-height: 0; aspect-ratio: auto; }
+html.look2 .meadow > .zone::before, html.look2 .meadow > .zone::after { display: none !important; }
+html.look2 .meadow.meadow-small > .zone { width: calc(clamp(104px, 12.2vw, 170px) * var(--k, 1)); }
+html.look2 .meadow-small .zone-label { font-size: clamp(12px, 1vw, 15px); padding: 2px 8px; }
+html.look2 .meadow-small .zone-badge { min-width: 22px; height: 22px; font-size: 13px; }
+/* лека пътечка (методист: поддържащ елемент) и заглавия на редовете */
+.meadow-path .p-edge { stroke-width: 18px; opacity: .25; }
+.meadow-path .p-dirt { stroke: #E6CC98; stroke-width: 13px; opacity: .7; }
+.meadow-path .p-peb { stroke-width: 2px; opacity: .55; }
+.row-title { position: absolute; transform: translateY(-50%); z-index: 1; background: rgba(255, 250, 238, .82); color: #6B4A20; border-radius: 999px; padding: 2px 12px;
+  font-family: var(--display); font-weight: 800; font-size: clamp(12px, 1vw, 15px); letter-spacing: .02em; white-space: nowrap; pointer-events: none; }
+html.look2 .meadow.meadow-small > .zone { width: calc(clamp(100px, 11.5vw, 165px) * var(--k, 1)); }
+/* по образеца (19.10): мек, леко размит фон; табели на редовете вляво; пътечката – широка светла лента зад реда */
+html.look2.hub-c .screen-map::before { background: rgba(255, 250, 235, .18); backdrop-filter: blur(5px) saturate(.9); -webkit-backdrop-filter: blur(5px) saturate(.9); }
+html.look2.hub-c .screen-map .meadow-path .p-edge { stroke: #EBD9B0; stroke-width: 120px; opacity: .55; filter: none; }
+html.look2.hub-c .screen-map .meadow-path .p-dirt { stroke: #F3E6C6; stroke-width: 70px; opacity: .55; filter: none; }
+html.look2.hub-c .screen-map .meadow-path .p-peb { display: none; }
+html.look2 .meadow-small > .row-title { transform: translate(-50%, -50%); width: clamp(96px, 9.5vw, 150px); padding: 10px 8px; border-radius: 12px; text-align: center; white-space: normal; line-height: 1.12;
+  background: linear-gradient(#E2B57A, #C98F4E); color: #3B2410; border: 3px solid #8B5E2E; box-shadow: 0 4px 0 rgba(90, 55, 20, .45), inset 0 2px 0 rgba(255, 235, 200, .6);
+  font-size: clamp(13px, 1.25vw, 19px); }
+html.look2 .meadow-small .zone-label { white-space: nowrap; font-size: clamp(11px, .95vw, 14px); }
+html.look2.hub-c .screen-map .meadow-path .p-edge { stroke-width: 64px; opacity: .45; }
+html.look2.hub-c .screen-map .meadow-path .p-dirt { stroke-width: 40px; opacity: .5; }
+html.look2 .meadow-small > .row-title { width: clamp(110px, 11vw, 168px); font-size: clamp(12px, 1.15vw, 18px); }
+/* дървени табели по образеца (19.10): висяща дъска с въжета и листа за заглавието; дъска с листа за редовете и „Изход“.
+   border-image: краищата (въжета, листа) не се разтягат, средата се удължава по текста */
+html.look2.hub-c .screen-map .plank, html.look2.hub-c .screen-bmap .plank, html.look2.hub-c .screen-wmap .plank, html.look2.hub-c .screen-rmap .plank {
+  background: none; border-style: solid; border-width: 34px 60px 22px; border-image: url("../assets/img/art/hub/sign_plank.png") 90 130 50 130 fill / 34px 60px 22px stretch;
+  padding: 0 10px; min-width: 0; color: #5A3412; font-size: clamp(26px, 3.2vw, 42px); line-height: 1.1; text-shadow: 0 1px 0 rgba(255, 228, 175, .8); box-shadow: none; }
+html.look2 .meadow-small > .row-title, html.look2.hub-c .screen-map .gbtn-purple, html.look2.hub-c .screen-bmap .gbtn-purple, html.look2.hub-c .screen-wmap .gbtn-purple, html.look2.hub-c .screen-rmap .gbtn-purple {
+  background: none; border-style: solid; border-width: 14px 30px; border-image: url("../assets/img/art/hub/plank_small.png") 40 110 40 110 fill / 14px 30px stretch;
+  box-shadow: none; color: #4A2A0E; text-shadow: 0 1px 0 rgba(255, 228, 175, .8); border-radius: 0; }
+html.look2 .meadow-small > .row-title { padding: 0 2px; width: clamp(120px, 11.5vw, 175px); font-size: clamp(13px, 1.25vw, 19px); filter: drop-shadow(0 4px 3px rgba(60, 35, 10, .3)); }
+html.look2.hub-c .screen-map .gbtn-purple, html.look2.hub-c .screen-bmap .gbtn-purple, html.look2.hub-c .screen-wmap .gbtn-purple, html.look2.hub-c .screen-rmap .gbtn-purple { padding: 2px 10px; filter: drop-shadow(0 4px 3px rgba(60, 35, 10, .3)); }
+html.look2.hub-c .screen-map .gbtn-purple::before, html.look2.hub-c .screen-bmap .gbtn-purple::before, html.look2.hub-c .screen-map .gbtn-purple::after, html.look2.hub-c .screen-bmap .gbtn-purple::after, html.look2.hub-c .screen-wmap .gbtn-purple::after, html.look2.hub-c .screen-rmap .gbtn-purple::after { display: none; }
+html.look2.hub-c .screen-map .plank-head, html.look2.hub-c .screen-bmap .plank-head, html.look2.hub-c .screen-wmap .plank-head, html.look2.hub-c .screen-rmap .plank-head { margin-top: -4px; z-index: 2; }
+html.look2 .meadow-small > .row-title { width: clamp(140px, 13vw, 205px); border-width: 16px 26px; padding: 2px 6px; font-size: clamp(12px, 1.1vw, 17px); left: 8% !important; }
+/* табелите на редовете и „Изход“ – обратно към предишния вид (по желание 19.10); рисуваната дъска остава само за заглавието */
+html.look2 .meadow-small > .row-title, html.look2.hub-c .screen-map .gbtn-purple, html.look2.hub-c .screen-bmap .gbtn-purple, html.look2.hub-c .screen-wmap .gbtn-purple, html.look2.hub-c .screen-rmap .gbtn-purple { border-image: none; filter: none; }
+html.look2 .meadow-small > .row-title { width: clamp(110px, 11vw, 168px); padding: 10px 8px; border: 3px solid #8B5E2E; border-radius: 12px; background: linear-gradient(#E2B57A, #C98F4E);
+  box-shadow: 0 4px 0 rgba(90, 55, 20, .45), inset 0 2px 0 rgba(255, 235, 200, .6); color: #3B2410; font-size: clamp(12px, 1.15vw, 18px); left: 7% !important; }
+html.look2.hub-c .screen-map .gbtn-purple, html.look2.hub-c .screen-bmap .gbtn-purple, html.look2.hub-c .screen-wmap .gbtn-purple, html.look2.hub-c .screen-rmap .gbtn-purple { background: #C99A5C; color: #3B2410; border: 3px solid #8B5E2E; --btn-deep: #8B5E2E; border-radius: 16px; padding: revert; }
+html.look2.hub-c .screen-map .gbtn-purple::before, html.look2.hub-c .screen-bmap .gbtn-purple::before, html.look2.hub-c .screen-map .gbtn-purple::after, html.look2.hub-c .screen-bmap .gbtn-purple::after, html.look2.hub-c .screen-wmap .gbtn-purple::after, html.look2.hub-c .screen-rmap .gbtn-purple::after { display: revert; }
+/* „Изход“ по образеца: дървена дъска с текстура, тъмен кант, стрелка вляво */
+html.look2.hub-c .screen-map .gbtn-purple, html.look2.hub-c .screen-bmap .gbtn-purple, html.look2.hub-c .screen-wmap .gbtn-purple, html.look2.hub-c .screen-rmap .gbtn-purple {
+  display: inline-flex; align-items: center; gap: 14px; padding: 10px 30px 10px 22px; border-radius: 18px; border: 3px solid #7A4E22;
+  background: repeating-linear-gradient(176deg, rgba(150, 95, 40, .10) 0 3px, rgba(255, 230, 190, .08) 3px 9px), linear-gradient(#EBC58C, #D29A57);
+  color: #4A2A0E; box-shadow: 0 5px 0 #8B5E2E, 0 8px 14px rgba(60, 35, 10, .25), inset 0 2px 0 rgba(255, 240, 210, .7); text-shadow: 0 1px 0 rgba(255, 230, 190, .7); }
+html.look2.hub-c .screen-map .gbtn-purple::before, html.look2.hub-c .screen-bmap .gbtn-purple::before, html.look2.hub-c .screen-wmap .gbtn-purple::before, html.look2.hub-c .screen-rmap .gbtn-purple::before { content: ""; display: block; position: static; width: 30px; height: 26px; opacity: 1; background: none;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 26'%3E%3Cpath d='M13 2 L2 13 L13 24 L13 17 L28 17 L28 9 L13 9 Z' stroke='black' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 26'%3E%3Cpath d='M13 2 L2 13 L13 24 L13 17 L28 17 L28 9 L13 9 Z' stroke='black' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  background-color: #8A5526; }
+html.look2.hub-c .screen-map .gbtn-purple::after, html.look2.hub-c .screen-bmap .gbtn-purple::after, html.look2.hub-c .screen-wmap .gbtn-purple::after, html.look2.hub-c .screen-rmap .gbtn-purple::after { display: none; }
+/* Околен свят – горска поляна */
+html.look2.hub-c .screen-wmap { background-image: url("../assets/img/art/hub/hub_forest.jpg"); }
+html.look2.hub-c .screen-wmap::before { background: rgba(255, 250, 235, .18); backdrop-filter: blur(5px) saturate(.9); -webkit-backdrop-filter: blur(5px) saturate(.9); }
+html.look2.hub-c .screen-wmap .meadow-path .p-edge { stroke: #EBD9B0; stroke-width: 64px; opacity: .45; filter: none; }
+html.look2.hub-c .screen-wmap .meadow-path .p-dirt { stroke: #F3E6C6; stroke-width: 40px; opacity: .5; filter: none; }
+html.look2.hub-c .screen-wmap .meadow-path .p-peb { display: none; }
+.zone-missing { display: block; width: 100%; aspect-ratio: 1.5; border-radius: 50%; background: radial-gradient(ellipse at 50% 40%, #A6CF6A, #7BAA45 70%, rgba(0,0,0,0) 72%); opacity: .7; }
+html.look2.hub-c .screen-wmap .foot-bar, html.look2.hub-c .screen-rmap .foot-bar { z-index: 2; }
+html.look2.hub-c .screen-wmap::before { content: "" !important; position: absolute !important; inset: 0 !important; z-index: 0 !important; pointer-events: none; background: rgba(255, 250, 235, .18) !important; backdrop-filter: blur(5px) saturate(.9) !important; -webkit-backdrop-filter: blur(5px) saturate(.9) !important; display: block !important; }
+/* мекият фон е предварително размит (backdrop-filter не работи надеждно на всички екрани) */
+html.look2.hub-c .screen-map { background-image: url("../assets/img/art/hub/hub_garden_soft.jpg?v=4"); }
+html.look2.hub-c .screen-wmap { background-image: url("../assets/img/art/hub/hub_forest_soft.jpg?v=4"); }
+html.look2.hub-c .screen-map::before, html.look2.hub-c .screen-wmap::before { background: none !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+html.look2.hub-c .screen-wmap .foot-bar, html.look2.hub-c .screen-rmap .foot-bar { margin-top: auto; position: absolute; left: 0; bottom: 0; }
+/* Читарика – пътят навън */
+html.look2.hub-c .screen-rmap { background-image: url("../assets/img/art/hub/hub_road_soft.jpg"); }
+html.look2.hub-c .screen-rmap::before { background: none !important; backdrop-filter: none !important; }
+html.look2.hub-c .screen-rmap .meadow-path .p-edge { stroke: #EBD9B0; stroke-width: 64px; opacity: .45; filter: none; }
+html.look2.hub-c .screen-rmap .meadow-path .p-dirt { stroke: #F3E6C6; stroke-width: 40px; opacity: .5; filter: none; }
+html.look2.hub-c .screen-rmap .meadow-path .p-peb { display: none; }
+html.look2 .meadow-small .zone-label { white-space: normal; max-width: 13vw; }
+html.look2.hub-c .screen-map .plank, html.look2.hub-c .screen-bmap .plank, html.look2.hub-c .screen-wmap .plank, html.look2.hub-c .screen-rmap .plank { padding: 4px 46px 0; font-size: clamp(24px, 2.8vw, 38px); }
+html.look2.hub-c .screen-map .plank, html.look2.hub-c .screen-bmap .plank, html.look2.hub-c .screen-wmap .plank, html.look2.hub-c .screen-rmap .plank { padding: 14px 46px 16px; line-height: 1; }
+/* бележки 19.10: по-тънки и прозрачни ленти; по-светли, по-тънки табели на групите (не приличат на бутони) */
+html.look2.hub-c .screen-map .meadow-path .p-edge, html.look2.hub-c .screen-rmap .meadow-path .p-edge, html.look2.hub-c .screen-wmap .meadow-path .p-edge { stroke-width: 40px; opacity: .3; }
+html.look2.hub-c .screen-map .meadow-path .p-dirt, html.look2.hub-c .screen-rmap .meadow-path .p-dirt, html.look2.hub-c .screen-wmap .meadow-path .p-dirt { stroke-width: 22px; opacity: .4; }
+html.look2 .meadow-small > .row-title { background: rgba(255, 248, 232, .88); border: 2px solid #C99A5C; box-shadow: 0 2px 0 rgba(90, 55, 20, .2); color: #5A3A16; padding: 6px 8px; font-weight: 800; }
+/* Околен свят: табелка до зоната, не колона вляво; извити пътечки */
+html.look2 .meadow-small > .row-title.row-title-near { left: var(--x) !important; width: auto; padding: 4px 14px; border-radius: 999px; white-space: nowrap; transform: translate(-30%, -50%); }
+html.look2.hub-c .screen-wmap .meadow-path .p-dirt { stroke: #E6D3A3; }
+/* Читарика – библиотека: градина за четене, симетрично */
+html.look2.hub-c .screen-rmap { background-image: url("../assets/img/art/hub/hub_library_soft.jpg?v=4"); }
+/* polish 19.10 – общи правила: етикети най-много 2 реда, еднаква ширина; дискретни състояния */
+html.look2 .meadow-small > .zone .zone-label { max-width: 13.5vw; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+html.look2 .meadow-small .zone-label { min-width: 8.5vw; }
+.zone-badge { min-width: 22px; height: 22px; font-size: 12px; opacity: .92; }
+.zone-badge.new { width: auto; padding: 0 6px; font-family: var(--display); font-weight: 800; font-size: 11px; color: #9A5B1E; background: #FFF6E2; }
+.zone-badge.lock { color: #7A6A55; }
+html.look2 .meadow > .zone:disabled { cursor: default; animation: none; }
+html.look2 .meadow > .zone:disabled img { filter: grayscale(.85) brightness(1.05) opacity(.6); }
+html.look2 .meadow > .zone:disabled .zone-label { opacity: .65; }
+html.look2 .meadow > .zone.sel img { transform: scale(1.06); filter: drop-shadow(0 10px 8px rgba(40,30,0,.25)) drop-shadow(0 0 18px rgba(255, 220, 120, 1)); }
+html.look2 .meadow > .zone.sel .zone-label { background: #FFE7B0; }
+/* ленти – еднакво тънки и в Математика, Читарика, Околен свят */
+html.look2.hub-c .screen-map .meadow-path .p-edge, html.look2.hub-c .screen-rmap .meadow-path .p-edge, html.look2.hub-c .screen-wmap .meadow-path .p-edge { stroke-width: 30px; opacity: .22; }
+html.look2.hub-c .screen-map .meadow-path .p-dirt, html.look2.hub-c .screen-rmap .meadow-path .p-dirt, html.look2.hub-c .screen-wmap .meadow-path .p-dirt { stroke-width: 16px; opacity: .32; }
+/* Математика – категориите по-малки, повече въздух */
+html.look2.hub-c .screen-map .meadow-small > .row-title { width: clamp(96px, 9.5vw, 150px); font-size: clamp(11px, 1vw, 15px); padding: 5px 6px; }
+/* изправен таблет / телефон: редовете стават мрежа по 3 със заглавие на групата отгоре (без ленти) */
+@media (orientation: portrait) {
+  html.look2 .meadow.meadow-small { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px 10px; align-content: start; overflow-y: auto; padding: 0 16px 90px !important; }
+  html.look2 .meadow.meadow-small > .zone { position: static; transform: none; width: auto; animation: none; justify-self: center; max-width: 200px; }
+  html.look2 .meadow.meadow-small > .row-title, html.look2 .meadow.meadow-small > .row-title.row-title-near { position: static; transform: none; grid-column: 1 / -1; justify-self: start; width: auto; margin-top: 10px; }
+  html.look2 .meadow.meadow-small > .meadow-path { display: none; }
+  html.look2 .meadow-small > .zone .zone-label { max-width: 28vw; min-width: 0; }
+}
+@media (orientation: portrait) {
+  html.look2 .meadow.meadow-small { grid-auto-rows: max-content; }
+  html.look2 .meadow.meadow-small > .zone { width: min(25vw, 190px) !important; height: auto; min-height: 0; }
+  html.look2 .meadow.meadow-small > .zone img { width: 100%; height: auto; }
+  html.look2 .meadow-small > .zone .zone-label { display: block; -webkit-line-clamp: unset; overflow: visible; max-width: 30vw; white-space: normal; }
+}
+@media (orientation: portrait) {
+  html.look2 .meadow.meadow-small > .zone { position: relative; width: min(22vw, 165px) !important; }
+}
+@media (orientation: portrait) {
+  html.look2 .meadow.meadow-small > .zone, html.look2 .meadow.meadow-small > .row-title { left: auto !important; top: auto !important; }
+}
+html.look2.hub-c .screen-wmap .meadow-path .p-edge { opacity: .16; }
+html.look2.hub-c .screen-wmap .meadow-path .p-dirt { opacity: .25; }
+html.look2 .meadow-small > .row-title.row-title-near { transform: translate(-50%, -50%); }
+/* ---------- екран „Настройки“ в стила на света ---------- */
+html.look2.hub-c .screen-settings .plank-sub { display: none; }
+html.look2.hub-c .screen-settings .plank { background: none; border-style: solid; border-width: 34px 60px 22px; border-image: url("../assets/img/art/hub/sign_plank.png") 90 130 50 130 fill / 34px 60px 22px stretch;
+  padding: 14px 46px 16px; min-width: 0; color: #5A3412; font-size: clamp(24px, 2.8vw, 38px); line-height: 1; text-shadow: 0 1px 0 rgba(255, 228, 175, .8); box-shadow: none; }
+html.look2.hub-c .screen-settings .scroll-wrap { width: min(940px, 100%); }
+html.look2.hub-c .screen-settings .foot-bar #btn-settings-start { display: none; }
+html.look2.hub-c .screen-settings .gbtn-purple { background: rgba(255, 248, 232, .9); color: #6B4A20; border: 2px solid #C99A5C; box-shadow: 0 3px 0 rgba(90, 55, 20, .25); }
+/* картинка отгоре, настройките с имена в средата, „Старт“ отдолу – всичко в свитъка */
+.kid-layer { display: none; }
+html.look2.hub-c .scroll-wrap.set-mode { justify-content: flex-start; }
+html.look2.hub-c .scroll-wrap.set-mode .kid-layer { display: flex; justify-content: center; position: relative; z-index: 2; margin-top: 7%; }
+.kid-art { width: min(20vh, 170px); height: auto; filter: drop-shadow(0 8px 6px rgba(40, 30, 0, .25)); }
+.kid-art.kid-art-card { width: min(28vh, 240px); border-radius: 16px; border: 3px solid #fff; box-shadow: 0 0 0 2px #C99A5C, 0 8px 16px rgba(60, 35, 10, .25); filter: none; }
+html.look2.hub-c .scroll-wrap.set-mode .cards { padding: 8px 12% 6px; gap: 12px 16px; position: relative; z-index: 2; }
+html.look2.hub-c .scroll-wrap.set-mode .info-dot { top: 7%; right: 13%; background: #FFF8E8; color: #8B5E2E; border-color: #C99A5C; }
+.kid-start { position: relative; z-index: 2; align-self: center; margin: 4px auto 6%; font-family: var(--display); font-weight: 800; font-size: clamp(22px, 2.4vw, 32px); color: #3B2410; padding: 10px 56px;
+  border-radius: 18px; border: 3px solid #B8741F; background: linear-gradient(#FFC75A, #F0A030); box-shadow: 0 6px 0 #B8741F, 0 10px 18px rgba(80, 45, 0, .25); cursor: pointer; }
+.kid-start:active { transform: translateY(3px); box-shadow: 0 3px 0 #B8741F; }
+html.look2.hub-c .screen-settings .card { padding: 10px 14px 12px; gap: 4px; }
+html.look2.hub-c .screen-settings .card-value { font-size: 34px; }
+html.look2.hub-c .screen-settings .card-title { font-size: 17px; }
+.set-ic { font-size: 15px; }
+html.look2.hub-c .screen-settings .card.card-chips input[type=range], html.look2.hub-c .screen-settings .card.card-chips .card-value-row, html.look2.hub-c .screen-settings .card.card-chips .range-ends { display: none; }
+.set-chips { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-top: 6px; }
+.set-chip { min-width: 40px; height: 40px; border-radius: 12px; border: 2px solid #D9B57A; background: #FFFDF6; font-family: var(--display); font-weight: 800; font-size: 19px; color: #6B4A20; cursor: pointer; }
+.set-chip.on { background: #6DBB45; border-color: #3F8A26; color: #fff; box-shadow: 0 3px 0 #3F8A26; }
+html.look2.hub-c .screen-settings .card { background: #FFF6E0; border: 2px solid #D9B57A; box-shadow: 0 3px 0 rgba(90, 55, 20, .2); color: #4A2A0E; }
+html.look2.hub-c .screen-settings .card-title { color: #6B4A20; text-shadow: none; }
+html.look2.hub-c .screen-settings .card-value { color: #C2410C; -webkit-text-stroke: 0; text-shadow: none; }
+html.look2.hub-c .screen-settings .card input[type=range]::-webkit-slider-runnable-track { background: linear-gradient(#C99A5C, #A8773C); box-shadow: inset 0 1px 0 rgba(255,255,255,.3); }
+html.look2.hub-c .screen-settings .card input[type=range]::-webkit-slider-thumb { background: radial-gradient(circle at 35% 35%, #9FDB6E, #4E9E2C); border: 3px solid #fff; }
+html.look2.hub-c .screen-settings .arrow { background: #E9A23B; box-shadow: 0 4px 0 #B8741F; }
+html.look2.hub-c .scroll-wrap.kid-mode.adult-open .kid-layer { z-index: 4; pointer-events: none; }
+html.look2.hub-c .scroll-wrap.kid-mode.adult-open .kid-layer > :not(.kid-gear) { visibility: hidden; }
+html.look2.hub-c .scroll-wrap.kid-mode.adult-open .kid-gear { pointer-events: auto; background: #F0A030; color: #fff; border-color: #B8741F; }
+html.look2.hub-c .scroll-wrap.kid-mode.adult-open .kid-gear::after { content: "✓"; }
+html.look2.hub-c .scroll-wrap.kid-mode.adult-open .kid-gear { font-size: 0; }
+html.look2.hub-c .scroll-wrap.kid-mode.adult-open .kid-gear::after { font-size: 22px; }
+html.look2.hub-c .scroll-wrap.kid-mode .kid-gear { top: -2%; right: -4%; }
+.kid-art.kid-art-card { width: min(46vh, 380px); border-radius: 22px; border: 4px solid #fff; box-shadow: 0 0 0 2px #C99A5C, 0 10px 20px rgba(60, 35, 10, .25); filter: none; }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode .card { min-height: 0; height: auto; align-self: start; justify-content: flex-start; }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode .cards { align-items: start; }
+html.look2.hub-c .screen-settings .info-dot { background: #FFF8E8 !important; color: #8B5E2E !important; border: 2px solid #C99A5C !important; box-shadow: 0 3px 0 rgba(90, 55, 20, .25) !important; }
+html.look2.hub-c .scroll-wrap.set-mode.set-many .kid-art { width: min(12vh, 100px); }
+html.look2.hub-c .scroll-wrap.set-mode.set-many .kid-layer { margin-top: 5%; }
+html.look2.hub-c .scroll-wrap.set-mode.set-many .cards { gap: 10px 14px; }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode .card { min-width: 0; overflow: hidden; }
+html.look2.hub-c .screen-settings .arrows { grid-template-columns: 38px minmax(0, 1fr) 38px; gap: 4px; }
+html.look2.hub-c .screen-settings .arrow { width: 38px; height: 38px; }
+html.look2.hub-c .screen-settings .arrow-value { font-size: 17px; color: #4A2A0E; background: #FFFDF6; border: 2px solid #E6CFA0; border-radius: 10px; padding: 6px 4px; text-shadow: none; -webkit-text-stroke: 0; min-width: 0; overflow-wrap: anywhere; line-height: 1.1; }
+html.look2.hub-c .screen-settings .select-wrap, html.look2.hub-c .screen-settings select { background: #FFFDF6 !important; color: #C2410C !important; border-color: #D9B57A !important; -webkit-text-stroke: 0 !important; text-shadow: none !important; }
+html.look2.hub-c .screen-settings .card-value-row .unit { color: #6B4A20; background: none; }
+html.look2.hub-c .screen-settings .arrow-value { overflow-wrap: normal; word-break: keep-all; font-size: clamp(13px, 1.2vw, 16px); }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode.set-many .kid-start { margin-bottom: 4%; }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode .cards { padding-bottom: 0; }
+/* старото подреждане измества 4-та и 5-та карта (за 5 карти) – при 6 се застъпват; тук – обикновена мрежа, последният ред центриран */
+html.look2.hub-c .screen-settings .cards > * { grid-column: auto !important; grid-row: auto !important; margin: 0 !important; width: auto !important; }
+html.look2.hub-c .screen-settings .cards { display: flex !important; flex-wrap: wrap; justify-content: center; }
+html.look2.hub-c .screen-settings .cards > .card { flex: 0 1 calc((100% - 32px) / 3); }
+html.look2.hub-c .screen-settings .cards > .card[hidden] { display: none; }
+/* рисуван свитък вместо старата пиратска рисунка */
+html.look2.hub-c .screen-settings .scroll-art { visibility: hidden; }
+html.look2.hub-c .screen-settings .scroll-wrap { background: url("../assets/img/art/hub/scroll_wide.png?v=1") center / 100% 100% no-repeat; filter: drop-shadow(0 14px 18px rgba(60, 35, 10, .28)); }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode .cards { padding: 6px 13% 4px; }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode .info-dot { top: 9%; right: 11.5%; }
+/* еднакви прозорци: еднаква височина в реда, заглавие горе, контролът долу */
+html.look2.hub-c .screen-settings .cards { align-items: stretch !important; }
+html.look2.hub-c .screen-settings .cards > .card { align-self: stretch !important; min-height: 140px; display: flex; flex-direction: column; justify-content: space-between; }
+html.look2.hub-c .screen-settings .card-title { min-height: 2.3em; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.15; }
+html.look2.hub-c .screen-settings .card .set-chips, html.look2.hub-c .screen-settings .card .arrows, html.look2.hub-c .screen-settings .card .select-wrap { margin-top: auto; margin-bottom: 6px; }
+/* падащо меню (диапазон) – със стрелка */
+html.look2.hub-c .screen-settings .select-wrap { position: relative; border: 0 !important; background: none !important; }
+html.look2.hub-c .screen-settings .select-wrap select { -webkit-appearance: none; appearance: none; height: 54px; font-size: 32px; text-align: center; text-align-last: center; padding: 0 44px 0 14px;
+  border: 2px solid #D9B57A !important; border-radius: 14px; background: #FFFDF6 !important; color: #C2410C !important; cursor: pointer; }
+html.look2.hub-c .screen-settings .select-wrap::after { content: ""; position: absolute; right: 12px; top: 50%; width: 28px; height: 28px; transform: translateY(-50%); border-radius: 50%; pointer-events: none;
+  background: #E9A23B url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 18px no-repeat;
+  box-shadow: 0 2px 0 #B8741F; }
+html.look2.hub-c .screen-settings .select-wrap select::-ms-expand { display: none; }
+html.look2.hub-c .screen-settings .card-title { display: block; min-height: 2.3em; padding-top: .1em; }
+html.look2.hub-c .screen-settings .card-title .set-ic { margin-right: 4px; }
+html.look2.hub-c .screen-settings .cards > .card { min-height: 118px; }
+html.look2.hub-c .screen-settings .scroll-wrap.set-many .cards > .card { min-height: 0; padding: 8px 12px 8px; }
+html.look2.hub-c .screen-settings .scroll-wrap.set-many .card-value { font-size: 28px; }
+html.look2.hub-c .screen-settings .scroll-wrap { flex: 0 1 auto; max-height: calc(100vh - 230px); }
+html.look2.hub-c .screen-settings .foot-bar { position: absolute; left: 0; bottom: 0; z-index: 3; }
+/* успокояване (19.10): оранжево −10–15% наситеност; зелено само за избраното; иконки монохромни; картинката по-малка и по-горе */
+html.look2.hub-c .screen-settings .arrow { background: #DFA35A; box-shadow: 0 3px 0 #A97A3E; }
+html.look2.hub-c .screen-settings .select-wrap::after { background-color: #DFA35A; box-shadow: 0 2px 0 #A97A3E; }
+html.look2.hub-c .screen-settings .card-value { color: #A9542A; }
+html.look2.hub-c .screen-settings .select-wrap select { color: #A9542A !important; }
+html.look2.hub-c .screen-settings .card input[type=range]::-webkit-slider-thumb { background: radial-gradient(circle at 35% 35%, #FFF8E8, #D9B57A); border: 3px solid #A97A3E; }
+.set-chip.on { background: #79B556; border-color: #4E8A33; box-shadow: 0 3px 0 #4E8A33; }
+.set-ic { filter: grayscale(1) sepia(.5) brightness(.75); opacity: .85; }
+.kid-start { background: linear-gradient(#F7C66E, #E5A04A); border-color: #A97A3E; box-shadow: 0 6px 0 #A97A3E, 0 10px 18px rgba(80, 45, 0, .2); }
+html.look2.hub-c .scroll-wrap.set-mode .kid-art { width: min(16vh, 136px); }
+html.look2.hub-c .scroll-wrap.set-mode.set-many .kid-art { width: min(10vh, 84px); }
+html.look2.hub-c .scroll-wrap.set-mode .kid-layer { margin-top: 5.5%; }
+html.look2.hub-c .scroll-wrap.set-mode.set-many .kid-layer { margin-top: 4.5%; }
+/* бележки 19.10: повече въздух между име и контрол; второстепенните настройки – по-слаби */
+html.look2.hub-c .screen-settings .card-title { margin-bottom: 8px; }
+html.look2.hub-c .screen-settings .card.card-minor { background: rgba(255, 249, 235, .72); border-color: #E6CFA0; box-shadow: none; }
+html.look2.hub-c .screen-settings .card.card-minor .card-title { color: #8A6A40; font-weight: 700; }
+html.look2.hub-c .screen-settings .card.card-minor .card-value { color: #8A6A40; }
+html.look2.hub-c .screen-settings .card.card-minor .arrow { background: #E6C595; box-shadow: 0 2px 0 #B99561; }
+html.look2.hub-c .screen-settings .card.card-minor .arrow-value { color: #6B5030; }
+/* настройки с плочки (текстове, режими) – цял ред, топли плочки */
+html.look2.hub-c .screen-settings .cards > .card.card-choice { flex-basis: 100%; min-height: 0; }
+html.look2.hub-c .screen-settings .cards-choice > .card:not(.card-choice) { flex-basis: calc((100% - 32px) / 3); }
+html.look2.hub-c .screen-settings .card-choice .card-title { min-height: 0; margin-bottom: 4px; }
+html.look2.hub-c .screen-settings .choice-grid { width: 100%; gap: 8px; }
+html.look2.hub-c .screen-settings .choice { min-height: 46px; padding: 6px 8px; background: #FFFDF6; color: #5A3A16; border: 2px solid #E6CFA0; border-radius: 12px; text-align: center; text-shadow: none; }
+html.look2.hub-c .screen-settings .choice b { font-size: clamp(13px, 1.1vw, 16px); }
+html.look2.hub-c .screen-settings .choice small { font-size: clamp(11px, .9vw, 13px); color: #8A6A40; }
+html.look2.hub-c .screen-settings .choice:not(:disabled):hover { background: #FFF3D6; transform: translateY(-1px); }
+html.look2.hub-c .screen-settings .choice.on { background: #79B556; color: #fff; border-color: #4E8A33; box-shadow: 0 3px 0 #4E8A33; }
+html.look2.hub-c .screen-settings .choice.on small { color: #EAF6DF; }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode .cards { overflow-y: auto; max-height: calc(100vh - 470px); }
+/* при плочки – картинката отпада, за да има място за всички възможности */
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode:has(.cards-choice) .kid-layer { display: none; }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode:has(.cards-choice) .cards { margin-top: 8%; max-height: calc(100vh - 400px); }
+html.look2.hub-c .screen-settings .choice { min-height: 40px; padding: 4px 6px; }
+html.look2.hub-c .screen-settings .card-choice { padding: 8px 12px 10px; }
+/* иконките – в цвят и малко по-едри, за да се четат (звездата при „Ниво“ – по-контрастна) */
+.set-ic { filter: none; opacity: 1; font-size: 17px; }
+/* картите не се режат: без ограничение на височината (освен при много плочки) */
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode .cards { max-height: none; overflow: visible; }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode:has(.cards-choice) .cards { max-height: calc(100vh - 360px); overflow-y: auto; }
+html.look2.hub-c .screen-settings .scroll-wrap { max-height: none; }
+/* ---------- екран „Инструкция“ в стила на света ---------- */
+html.look2.hub-c .screen-intro #intro-level { display: none; }
+html.look2.hub-c .screen-intro .plank { background: none; border-style: solid; border-width: 34px 60px 22px; border-image: url("../assets/img/art/hub/sign_plank.png") 90 130 50 130 fill / 34px 60px 22px stretch;
+  padding: 14px 46px 16px; min-width: 0; color: #5A3412; font-size: clamp(24px, 2.8vw, 38px); line-height: 1; text-shadow: 0 1px 0 rgba(255, 228, 175, .8); box-shadow: none; }
+html.look2.hub-c .screen-intro .intro-panel { width: min(980px, 94%); margin: 1vh auto 0; padding: 7% 11% 6%; grid-template-columns: 1.15fr 1fr; grid-template-rows: auto auto; gap: 14px 30px; flex: 0 1 auto;
+  background: url("../assets/img/art/hub/scroll_wide.png?v=1") center / 100% 100% no-repeat; filter: drop-shadow(0 14px 18px rgba(60, 35, 10, .28)); }
+html.look2.hub-c .screen-intro .intro-left { background: none; border: 0; box-shadow: none; padding: 0; gap: 10px; grid-row: 1 / span 2; }
+html.look2.hub-c .screen-intro .intro-art { display: none; }
+html.look2.hub-c .screen-intro .intro-zone { width: min(22vh, 190px); height: auto; filter: drop-shadow(0 8px 6px rgba(40, 30, 0, .25)); }
+html.look2.hub-c .screen-intro .intro-zone-card { width: min(28vh, 250px); border-radius: 14px; border: 3px solid #fff; box-shadow: 0 0 0 2px #C99A5C; filter: none; }
+html.look2.hub-c .screen-intro .task { color: #4A2A0E; font-size: clamp(19px, 2vw, 26px); max-width: 26ch; }
+html.look2.hub-c .screen-intro #btn-speak { background: #FFF8E8; color: #8B5E2E; border: 2px solid #C99A5C; box-shadow: 0 3px 0 rgba(90, 55, 20, .25); --btn-deep: transparent; }
+html.look2.hub-c .screen-intro .params-line { color: #8A6A40; }
+html.look2.hub-c .screen-intro .tiers { gap: 10px; align-self: end; }
+html.look2.hub-c .screen-intro .tier-card { background: #FFFDF6; border: 2px solid #E6CFA0; box-shadow: 0 3px 0 rgba(90, 55, 20, .2); padding: 10px 16px; transform: none !important; flex-direction: row; gap: 14px; }
+html.look2.hub-c .screen-intro .tier-card b { color: #5A3A16; font-size: clamp(16px, 1.6vw, 21px); text-shadow: none; }
+html.look2.hub-c .screen-intro .hearts { min-width: 104px; gap: 5px; }
+html.look2.hub-c .screen-intro .hearts i { width: 30px; height: 30px; background: #E2497A; }
+html.look2.hub-c .screen-intro .hearts.zero i { background: #E6D6BC; }
+html.look2.hub-c .screen-intro .tier input:checked + .tier-card { background: #79B556; border-color: #4E8A33; box-shadow: 0 3px 0 #4E8A33; }
+html.look2.hub-c .screen-intro .tier input:checked + .tier-card b { color: #fff; }
+html.look2.hub-c .screen-intro .tier input:checked + .tier-card .hearts i { background: #FFE3EC; }
+html.look2.hub-c .screen-intro .tier input:checked + .tier-card .hearts.zero i { background: rgba(255, 255, 255, .45); }
+html.look2.hub-c .screen-intro .intro-panel > #btn-start { grid-column: 2; justify-self: center; align-self: start; font-family: var(--display); font-weight: 800; font-size: clamp(22px, 2.4vw, 30px); color: #3B2410;
+  padding: 10px 52px; border-radius: 18px; border: 3px solid #A97A3E; background: linear-gradient(#F7C66E, #E5A04A); box-shadow: 0 6px 0 #A97A3E, 0 10px 18px rgba(80, 45, 0, .2); }
+html.look2.hub-c .screen-intro .foot-bar .gbtn-purple, html.look2.hub-c .screen-intro .foot-bar .gbtn-grey { background: rgba(255, 248, 232, .9); color: #6B4A20; border: 2px solid #C99A5C; box-shadow: 0 3px 0 rgba(90, 55, 20, .25); }
+html.look2.hub-c .screen-intro .foot-bar .gbtn-grey { font-size: 16px; padding: 8px 18px; }
+@media (max-width: 760px) { html.look2.hub-c .screen-intro .intro-panel { grid-template-columns: 1fr; } html.look2.hub-c .screen-intro .intro-left { grid-row: auto; } html.look2.hub-c .screen-intro .intro-panel > #btn-start { grid-column: 1; } }
+/* сърцата – главното: едри, над надписа; „Настройки“ – вляво до „Изход“ */
+html.look2.hub-c .screen-intro .tier-card { flex-direction: column; justify-content: center; gap: 2px; padding: 8px 12px; }
+html.look2.hub-c .screen-intro .hearts { min-width: 0; justify-content: center; }
+html.look2.hub-c .screen-intro .hearts i { width: 34px; height: 34px; }
+html.look2.hub-c .screen-intro .tier-card b { font-size: clamp(14px, 1.3vw, 17px); }
+html.look2.hub-c .screen-intro .tiers { flex-direction: row; gap: 10px; }
+html.look2.hub-c .screen-intro .tier { flex: 1; }
+html.look2.hub-c .screen-intro .tier-card { height: 100%; min-height: 96px; }
+html.look2.hub-c .screen-intro .intro-panel { grid-template-columns: 1fr 1.15fr; }
+html.look2.hub-c .screen-intro .intro-panel > #btn-start::before { display: none; }
+html.look2.hub-c .screen-intro .foot-bar { justify-content: flex-start; gap: 12px; }
+html.look2.hub-c .screen-intro .tier { flex: 1 1 0; min-width: 0; }
+html.look2.hub-c .screen-intro .tier-card { align-items: center; text-align: center; }
+html.look2.hub-c .screen-intro .tier-card b { display: block; width: 100%; text-align: center; white-space: nowrap; }
+html.look2.hub-c .screen-intro .hearts { min-height: 36px; align-items: center; }
+html.look2.hub-c .screen-intro .tiers { width: 100%; }
+html.look2.hub-c .screen-intro .tier-card b { white-space: normal; font-size: clamp(13px, 1.15vw, 16px); }
+html.look2.hub-c .screen-intro .tier-card { padding: 8px 6px; }
+/* бележки 19.10: 0 грешки – звезда; по-меко зелено; сърцата малко по-ниско; по-компактен „Чуй задачата“ */
+html.look2.hub-c .screen-intro .tier-star { font-size: 30px; line-height: 34px; color: #E0A92E; text-shadow: 0 1px 0 rgba(120, 80, 10, .25); }
+html.look2.hub-c .screen-intro .tier input:checked + .tier-card .tier-star { color: #FFF3C4; }
+html.look2.hub-c .screen-intro .tier input:checked + .tier-card { background: #86BC66; border-color: #5E9443; box-shadow: 0 3px 0 #5E9443; }
+html.look2.hub-c .screen-settings .set-chip.on, html.look2.hub-c .screen-settings .choice.on { background: #86BC66; border-color: #5E9443; box-shadow: 0 3px 0 #5E9443; }
+html.look2.hub-c .screen-intro .tiers { margin-top: 8px; }
+html.look2.hub-c .screen-intro #btn-speak { font-size: 15px; padding: 5px 14px; min-height: 0; gap: 6px; }
+html.look2.hub-c .screen-intro #btn-speak svg { width: 18px; height: 18px; }
+html.look2.hub-c .screen-intro .hearts i { width: 28px; height: 28px; }
+html.look2.hub-c .screen-intro .hearts { gap: 3px; }
+/* един екран преди играта: допустими грешки като настройка, „Още настройки“, бутон „?“ в играта */
+html.look2.hub-c .screen-settings .tier-chips .tier-chip { display: flex; flex-direction: column; align-items: center; gap: 0; min-width: 66px; height: auto; padding: 4px 6px; }
+.tier-chip .tc-ic { font-size: 17px; line-height: 20px; color: #D9466F; letter-spacing: -1px; }
+.tier-chip small { font-size: 11px; font-weight: 700; color: #6B4A20; white-space: nowrap; }
+.tier-chip.on .tc-ic, .tier-chip.on small { color: #fff; }
+.tier-chip:first-child .tc-ic { color: #5E9443; }
+.more-toggle { flex-basis: 100%; order: 98; align-self: center; margin: 2px auto 0; background: none; border: 0; color: #8B5E2E; font-family: var(--display); font-weight: 800; font-size: 15px; cursor: pointer; text-decoration: underline dotted; }
+html.look2.hub-c .screen-settings .cards > .card.card-minor { order: 99; }
+html.look2.hub-c .screen-settings .scroll-wrap:not(.more-open) .cards > .card.card-minor { display: none; }
+html.look2.hub-c .screen-settings .info-panel .info-full { font-size: 16px; }
+.hud-task { font-family: var(--display); font-weight: 900; font-size: 22px; display: none; }
+html.look2.hub-c .hud-task { display: inline-grid; place-items: center; margin-right: 8px; }
+html.look2.hub-c .screen-settings .tier-chips { flex-wrap: nowrap; gap: 5px; }
+html.look2.hub-c .screen-settings .tier-chips .tier-chip { min-width: 0; flex: 1 1 0; padding: 4px 3px; }
+.tier-chip small { font-size: 10.5px; }
+html.look2.hub-c .screen-settings .scroll-wrap.more-open .cards { max-height: calc(100vh - 430px); overflow-y: auto; }
+html.look2.hub-c .screen-settings .scroll-wrap.more-open .kid-layer { display: none; }
+html.look2.hub-c .screen-settings .scroll-wrap.more-open .cards { margin-top: 7%; }
+/* докато се изговаря кратката инструкция – лентата е с по-малък шрифт и се пренася */
+html.look2.task-intro .hud-example { font-size: clamp(18px, 2vw, 26px); white-space: normal; max-width: 62vw; line-height: 1.2; padding: 8px 22px; letter-spacing: 0; -webkit-text-stroke: 0; }
+html.look2.hub-c .screen-settings .cards > .card.card-choice + .card.card-choice { margin-top: 10px !important; }
+html.look2.hub-c .screen-settings .cards { row-gap: 14px; }
+/* „Допустими грешки“ – компактна лента най-горе: име вляво, избор вдясно, на един ред */
+html.look2.hub-c .screen-settings .cards > .card.card-tiers { flex-basis: 100%; min-height: 0 !important; flex-direction: row; align-items: center; justify-content: center; gap: 16px; padding: 6px 14px; background: transparent; border: 0; box-shadow: none; order: -1; }
+html.look2.hub-c .screen-settings .card.card-tiers .card-title { min-height: 0; margin: 0; }
+html.look2.hub-c .screen-settings .card.card-tiers .tier-chips { margin: 0; flex: 0 0 auto; }
+html.look2.hub-c .screen-settings .card.card-tiers .tier-chip { flex: 0 0 auto; min-width: 84px; flex-direction: row; gap: 6px; height: 38px; padding: 4px 10px; }
+html.look2.hub-c .screen-settings .card.card-tiers .tier-chip small { font-size: 13px; }
+/* разгънати настройки – по-плътни карти, за да остане всичко над „Старт“ без превъртане */
+html.look2.hub-c .screen-settings .scroll-wrap.more-open .cards > .card:not(.card-tiers):not(.card-choice) { min-height: 0 !important; padding: 6px 10px 6px; }
+html.look2.hub-c .screen-settings .scroll-wrap.more-open .card-title { min-height: 0; margin-bottom: 2px; font-size: 15px; }
+html.look2.hub-c .screen-settings .scroll-wrap.more-open .card-value { font-size: 24px; }
+html.look2.hub-c .screen-settings .scroll-wrap.more-open .set-chip { height: 32px; min-width: 32px; font-size: 16px; }
+html.look2.hub-c .screen-settings .scroll-wrap.more-open .arrow { width: 32px; height: 32px; }
+html.look2.hub-c .screen-settings .scroll-wrap.more-open .select-wrap select { height: 40px; font-size: 24px; }
+html.look2.hub-c .screen-settings .scroll-wrap.more-open .cards { row-gap: 8px; max-height: calc(100vh - 380px); }
+html.look2.hub-c .screen-settings .scroll-wrap.more-open .more-toggle { order: -1; flex-basis: 100%; }
+/* избраната плочка е зелена веднага – и под курсора (hover не я избелва) */
+html.look2.hub-c .screen-settings .choice.on, html.look2.hub-c .screen-settings .choice.on:not(:disabled):hover,
+html.look2.hub-c .screen-settings .set-chip.on, html.look2.hub-c .screen-settings .set-chip.on:hover { background: #86BC66; color: #fff; border-color: #5E9443; box-shadow: 0 3px 0 #5E9443; transform: none; }
+html.look2.hub-c .screen-settings .choice.on b, html.look2.hub-c .screen-settings .choice.on small, html.look2.hub-c .screen-settings .set-chip.on small, html.look2.hub-c .screen-settings .set-chip.on .tc-ic { color: #fff; }
+/* „Старт“ – като печат: стъпва на долния ръб на свитъка и излиза навън */
+html.look2.hub-c .screen-settings .scroll-wrap .kid-start { margin-top: 10px; margin-bottom: -46px; position: relative; z-index: 3; }
+html.look2.hub-c .screen-settings .scroll-wrap { margin-bottom: 46px; }
+html.look2.hub-c .screen-intro .intro-panel > #btn-start { margin-bottom: -46px; }
+html.look2.hub-c .screen-settings .scroll-wrap .kid-start { margin-bottom: -78px; }
+html.look2.hub-c .screen-settings .scroll-wrap { margin-bottom: 78px; }
+html.look2.hub-c .screen-intro .intro-panel > #btn-start { margin-bottom: -78px; }
+/* свитъкът никога не е по-нисък от съдържанието; „Старт“ винаги в долния ръб (като печат) */
+html.look2.hub-c .screen-settings .scroll-wrap { min-height: min(540px, 60vh); padding-bottom: 0; }
+html.look2.hub-c .screen-settings .scroll-wrap .kid-start { margin-top: auto; }
+html.look2.hub-c .screen-settings .scroll-wrap .more-toggle { margin-bottom: 14px; }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode:has(.cards-choice) .cards { max-height: none; overflow: visible; margin-top: 6%; }
+/* „Старт“ като печат: закрепен към долния ръб на свитъка, наполовина навън */
+html.look2.hub-c .screen-settings .scroll-wrap { position: relative; min-height: min(400px, 46vh); padding-bottom: 64px; margin-bottom: 70px; justify-content: center; }
+html.look2.hub-c .screen-settings .scroll-wrap .kid-start { position: absolute; left: 50%; bottom: 0; transform: translate(-50%, 55%); margin: 0; }
+html.look2.hub-c .screen-settings .scroll-wrap .kid-start:active { transform: translate(-50%, calc(55% + 3px)); }
+/* „Старт“ – изцяло под свитъка, както в образеца (19.10) */
+html.look2.hub-c .screen-settings .scroll-wrap { margin-bottom: 110px; padding-bottom: 28px; }
+html.look2.hub-c .screen-settings .scroll-wrap .kid-start { transform: translate(-50%, 125%); }
+html.look2.hub-c .screen-settings .scroll-wrap .kid-start:active { transform: translate(-50%, calc(125% + 3px)); }
+/* ---------- екран „Резултат“ в стила на света: за детето; прогресът – при родителя ---------- */
+html.look2.hub-c .screen-result .plank { background: none; border-style: solid; border-width: 34px 60px 22px; border-image: url("../assets/img/art/hub/sign_plank.png") 90 130 50 130 fill / 34px 60px 22px stretch;
+  padding: 14px 46px 16px; min-width: 0; color: #5A3412; font-size: clamp(22px, 2.6vw, 34px); line-height: 1.05; text-shadow: 0 1px 0 rgba(255, 228, 175, .8); box-shadow: none; }
+html.look2.hub-c .screen-result .scroll-art { visibility: hidden; }
+html.look2.hub-c .screen-result .result-scroll { position: relative; flex: 0 1 auto; width: min(820px, 92%); margin: 1vh auto 110px; background: url("../assets/img/art/hub/scroll_wide.png?v=1") center / 100% 100% no-repeat;
+  filter: drop-shadow(0 14px 18px rgba(60, 35, 10, .28)); min-height: min(420px, 50vh); justify-content: center; }
+html.look2.hub-c .screen-result .result-inner { padding: 7% 15% 9%; gap: 10px; }
+html.look2.hub-c .screen-result .result-zone { width: min(17vh, 150px); height: auto; filter: drop-shadow(0 8px 6px rgba(40, 30, 0, .25)); }
+html.look2.hub-c .screen-result .result-stars svg { width: 76px; height: 76px; color: #E8D9BC; }
+html.look2.hub-c .screen-result .result-stars svg.on { color: #F2B632; }
+html.look2.hub-c .screen-result .result-sub { color: #4A2A0E; font-size: clamp(17px, 1.8vw, 22px); font-weight: 700; }
+html.look2.hub-c .screen-result .result-stats { display: flex; justify-content: center; gap: 10px; margin: 2px 0 0; }
+html.look2.hub-c .screen-result .result-stats div { background: rgba(255, 252, 242, .75); border: 1.5px solid #E6CFA0; border-radius: 12px; padding: 4px 14px; min-width: 76px; box-shadow: none; }
+html.look2.hub-c .screen-result .result-stats dt { font-size: 11px; color: #8A6A40; }
+html.look2.hub-c .screen-result .result-stats dd { font-size: 20px; color: #6B4A20; -webkit-text-stroke: 0; text-shadow: none; }
+html.look2.hub-c .screen-result .parent-box, html.look2.hub-c .screen-result [data-go=parent] { display: none; }
+html.look2.hub-c .screen-result .rest-note { color: #6B4A20; background: rgba(255, 248, 232, .85); border-radius: 10px; padding: 4px 12px; }
+html.look2.hub-c .screen-result .result-scroll > #btn-again { position: absolute; left: 50%; bottom: 0; transform: translate(-50%, 125%); margin: 0; font-family: var(--display); font-weight: 800;
+  font-size: clamp(22px, 2.4vw, 32px); color: #3B2410; padding: 10px 56px; border-radius: 18px; border: 3px solid #A97A3E; background: linear-gradient(#F7C66E, #E5A04A); box-shadow: 0 6px 0 #A97A3E, 0 10px 18px rgba(80, 45, 0, .2); }
+html.look2.hub-c .screen-result .result-scroll > #btn-again::before, html.look2.hub-c .screen-result .result-scroll > #btn-again::after { display: none; }
+html.look2.hub-c .screen-result .foot-bar .gbtn-purple { background: rgba(255, 248, 232, .9); color: #6B4A20; border: 2px solid #C99A5C; box-shadow: 0 3px 0 rgba(90, 55, 20, .25); }
+/* „За родители“ – дискретно на началния екран */
+.parent-link { display: none; }
+html.look2 .parent-link { display: block; position: absolute; top: calc(14px + env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); z-index: 3; background: rgba(255, 248, 232, .9);
+  color: #6B4A20; border: 2px solid #C99A5C; border-radius: 999px; padding: 6px 16px; font-family: var(--display); font-weight: 800; font-size: 15px; cursor: pointer; box-shadow: 0 3px 0 rgba(90, 55, 20, .25); }
+html.look2 .parent-link { position: static; align-self: center; margin-left: auto; margin-right: 12px; }
+/* ===================== игрите в стила на света (hub-c) ===================== */
+/* фон по модул: поляната (Букварика), градината (Математика), гората (Околен свят), градината за четене (Читарика) – светъл слой за четимост */
+html.look2.hub-c .screen-game { background-image: url("../assets/img/art/hub/hub_garden_soft.jpg?v=4"); }
+html.look2.hub-c[data-mod="buk"] .screen-game { background-image: url("../assets/img/art/hub/hub_meadow.jpg"); }
+html.look2.hub-c[data-mod="world"] .screen-game { background-image: url("../assets/img/art/hub/hub_forest_soft.jpg?v=4"); }
+html.look2.hub-c[data-mod="read"] .screen-game { background-image: url("../assets/img/art/hub/hub_library_soft.jpg?v=4"); }
+html.look2.hub-c .stage { background: linear-gradient(rgba(255, 251, 238, .66), rgba(255, 251, 238, .66)), #DDE9C9 url("../assets/img/art/hub/hub_garden_soft.jpg?v=4") center / cover no-repeat; border-color: #FFF8EA; box-shadow: 0 0 0 3px #D9A55A, 0 16px 40px rgba(60, 35, 10, .22); }
+html.look2.hub-c[data-mod="buk"] .stage { background-image: linear-gradient(rgba(255, 251, 238, .66), rgba(255, 251, 238, .66)), url("../assets/img/art/hub/hub_meadow.jpg"); }
+html.look2.hub-c[data-mod="world"] .stage { background-image: linear-gradient(rgba(255, 251, 238, .66), rgba(255, 251, 238, .66)), url("../assets/img/art/hub/hub_forest_soft.jpg?v=4"); }
+html.look2.hub-c[data-mod="read"] .stage { background-image: linear-gradient(rgba(255, 251, 238, .66), rgba(255, 251, 238, .66)), url("../assets/img/art/hub/hub_library_soft.jpg?v=4"); }
+html.look2.hub-c .stage svg.sea, html.look2.hub-c .arena > svg.sea { display: none; }
+/* заглавието на играта – висящата дървена табела */
+html.look2.hub-c .screen-game .plank { background: none; border-style: solid; border-width: 30px 56px 20px; border-image: url("../assets/img/art/hub/sign_plank.png") 90 130 50 130 fill / 30px 56px 20px stretch;
+  padding: 8px 40px 10px; min-width: 0; color: #5A3412; font-size: clamp(20px, 2.4vw, 32px); line-height: 1; text-shadow: 0 1px 0 rgba(255, 228, 175, .8); box-shadow: none; }
+html.look2.hub-c .screen-game .plank-head { padding-top: 0; margin-top: -6px; }
+/* кръглите бутони (?, 🔊) – топло дърво/крем */
+html.look2.hub-c .hud-sound { border: 3px solid #C99A5C; background: linear-gradient(#FFFDF6, #F6E7CC); color: #8B5E2E; box-shadow: 0 3px 0 #A97A3E; }
+html.look2.hub-c .hud-sound svg { color: #8B5E2E; }
+html.look2.hub-c .hud-score svg path { fill: #E0A92E; }
+html.look2.hub-c .hud-clock svg circle { stroke: #A9542A; } html.look2.hub-c .hud-clock svg path { stroke: #A9542A; }
+/* вътрешните бутони в игрите: синьото → топло (крем + оранжево), основното действие – оранжево */
+html.look2.hub-c .stage .gbtn-sky, html.look2.hub-c .stage .gbtn-blue, html.look2.hub-c .stage .gbtn-purple { background: linear-gradient(#FFFDF6, #F3E2C2); color: #6B4A20; --btn-deep: #C99A5C; border: 2px solid #D9B57A; }
+html.look2.hub-c .stage .gbtn-green, html.look2.hub-c .stage .gbtn-orange { background: linear-gradient(#F7C66E, #E5A04A); color: #3B2410; --btn-deep: #A97A3E; }
+/* долната лента в играта – като в менютата */
+html.look2.hub-c .screen-game .foot-bar .gbtn { background: rgba(255, 248, 232, .92); color: #6B4A20; border: 2px solid #C99A5C; box-shadow: 0 3px 0 rgba(90, 55, 20, .25); }
+/* „Пиратско съкровище“ – рисуван сандък и горска катеричка (без пирати) */
+html.look2.hub-c .tr-chest { background: url("../assets/img/art/hub/tr_chest.png") center bottom / contain no-repeat; border: 0; box-shadow: none; aspect-ratio: 1.15; filter: drop-shadow(0 10px 8px rgba(60, 35, 10, .3)); }
+html.look2.hub-c .tr-chest.full { background-image: url("../assets/img/art/hub/tr_chest_full.png"); }
+html.look2.hub-c .tr-chest::after { display: none; }
+html.look2.hub-c .tr-left { background: url("../assets/img/art/hub/tr_squirrel.png") center bottom / contain no-repeat; aspect-ratio: .8; filter: drop-shadow(0 8px 6px rgba(60, 35, 10, .25)); }
+html.look2.hub-c .tr-left.happy { background-image: url("../assets/img/art/hub/tr_squirrel_happy.png"); }
+html.look2.hub-c .tr-left > svg { display: none; }
+/* „Тайни карти“ – пластовете се виждат като купчина: по-голямо отместване, дебелина и сянка; покритите са бледи, не сиви */
+html.look2.hub-c .sc-card { left: calc(var(--x) * var(--w) - var(--l) * 10px); top: calc(var(--y) * var(--h) - var(--l) * 12px); border-color: #C99A5C;
+  background: linear-gradient(#FFFDF6, #F6E7CC); box-shadow: calc(var(--l) * 2px + 3px) calc(var(--l) * 2px + 4px) 0 #B98A55, 0 calc(var(--l) * 4px + 6px) calc(var(--l) * 6px + 8px) rgba(60, 35, 10, calc(.18 + var(--l) * .08)); }
+html.look2.hub-c .sc-card.blocked { filter: saturate(.35) brightness(.9); opacity: 1; }
+html.look2.hub-c .sc-card.sel { border-color: #E5A04A; }
+/* гърбовете на картите (Сафари, Запоминалка) – дърво вместо лилаво */
+html.look2.hub-c .ms-back { background: repeating-linear-gradient(45deg, #D9B57A 0 10px, #C99A5C 10px 20px); border-color: #A97A3E; }
+html.look2.hub-c .ms-face, html.look2.hub-c .ms-back { border-color: #C99A5C; }
+/* „Криеница“ – храстите по-меки и по-малко еднакви */
+html.look2.hub-c .hs-bush { background: radial-gradient(circle at 40% 35%, #A8D27A, #6FA548 70%); box-shadow: inset 0 -8px 0 rgba(40, 80, 20, .18), 0 4px 0 rgba(60, 90, 30, .25); }
+/* „Главоблъсканица“ – по-едри предмети */
+html.look2.hub-c .bc-pics img { width: clamp(38px, 4.6vw, 64px); }
+/* бутоните ±1 час в „Страж на времето“ */
+html.look2.hub-c .tg-btns .gbtn { background: linear-gradient(#FFFDF6, #F3E2C2); color: #6B4A20; border: 2px solid #D9B57A; --btn-deep: #C99A5C; }
+html.look2.hub-c .tg-digital { background: #3B2A1A; border-color: #6B4A20; }
+/* картинките в картите – по-едри, без бяла кутия; кремав фон като на картинките */
+html.look2.hub-c .pic { background: #FFF6E0; padding: 6px; gap: 4px; }
+html.look2.hub-c .pic img { width: 76%; height: 70%; border-radius: 10px; mix-blend-mode: multiply; }
+html.look2.hub-c .pic b { font-size: 15px; }
+/* „Криеница“ – полето се побира по височина */
+html.look2.hub-c .hs-spot { width: min(118px, calc((100vh - 340px) / 4.3)); height: min(118px, calc((100vh - 340px) / 4.3)); }
+html.look2.hub-c .hs-board { gap: 10px; }
+html.look2.hub-c .hs-board { grid-template-columns: repeat(5, min(118px, calc((100vh - 340px) / 4.3))); }
+/* лилавите бутони в игрите (st-btn и др.) – топли */
+html.look2.hub-c .st-btn { background: linear-gradient(#F7C66E, #E5A04A); color: #3B2410; box-shadow: 0 4px 0 #A97A3E; }
+html.look2.hub-c .st-btn.ghost { background: #FFFDF6; color: #6B4A20; box-shadow: 0 3px 0 #D9B57A; border: 2px solid #E6CFA0; }
+html.look2.hub-c .st-btn.ghost svg { color: #8B5E2E; }
+/* „Сафари“ – полето се побира по височина */
+html.look2.hub-c .sf-board { grid-template-columns: repeat(5, min(118px, calc((100vh - 330px) / 4.4))); gap: 8px; }
+html.look2.hub-c .sf-card { width: min(118px, calc((100vh - 330px) / 4.4)); height: min(118px, calc((100vh - 330px) / 4.4)); }
+/* лентата със задачата – дълъг текст се смалява и пренася, не се реже */
+html.look2.hub-c .hud-example { max-width: min(62vw, 760px); white-space: normal; text-wrap: balance; line-height: 1.1; font-size: clamp(18px, 2.4vw, 34px); }
+html.look2.hub-c .cn-word { background: #FFFDF6; color: #5A3412; border-color: #E5A04A; box-shadow: 0 5px 0 #C99A5C; }
+html.look2.hub-c .cn-cloud { color: #5A3412; }
+/* Азбука: буквените духчета – по-малки (около 15%), над плочката, не конкурират буквата */
+html.look2 .az-mo img.mo-spr { position: absolute; left: 50%; top: -40px; width: 50px; height: 50px; right: auto; object-fit: contain; transform: translateX(-50%); pointer-events: none;
+  filter: drop-shadow(0 3px 2px rgba(60, 40, 10, .2)); }
+html.look2 .az-mo::before { display: none; }
+html.look2 .az-mo.pop img.mo-spr { opacity: 0; transition: opacity .2s; }
+/* лентата със задачата: текстът центриран, лентата по ширината на текста; при пренасяне не застъпва точките за напредъка */
+html.look2.hub-c .hud-example { text-align: center; justify-self: center; width: fit-content; max-width: min(60vw, 720px); padding: 6px 26px; font-size: clamp(17px, 2vw, 28px); }
+html.look2.hub-c .stage:has(.hud-example) .progress { top: calc(78px + var(--hud-extra, 0px)); }
+html.look2.hub-c .hud { align-items: start; }
+/* духчетата (бележки 19.10): ~8% по-малки, еднаква височина, приглушени, надничат зад плочката; реагират на отговора */
+html.look2 .az-mo img.mo-spr { width: 46px; height: 40px; object-fit: contain; object-position: center bottom; top: -30px; z-index: 0; filter: saturate(.82) brightness(1.02) drop-shadow(0 2px 2px rgba(60, 40, 10, .18)); }
+html.look2 .az-mo > span { position: relative; z-index: 1; }
+html.look2 .az-mo { isolation: isolate; }
+html.look2 .az-mo::after { z-index: 1; }
+/* грешка: духчето се сепва (накланя се и подскача); успех: радостно подскача преди да изчезне */
+html.look2 .az-mo.shake img.mo-spr { animation: sprOops .55s ease-out; }
+html.look2 .az-mo.pop img.mo-spr { animation: sprYay .35s ease-out; opacity: 1; }
+html.look2 .az-mo.hint img.mo-spr { animation: sprPeek 1s ease-in-out infinite; }
+@keyframes sprOops { 0% { transform: translateX(-50%) rotate(0); } 25% { transform: translateX(-50%) translateY(-6px) rotate(-12deg); } 60% { transform: translateX(-50%) rotate(8deg); } 100% { transform: translateX(-50%) rotate(0); } }
+@keyframes sprYay { 0% { transform: translateX(-50%) translateY(0) scale(1); } 50% { transform: translateX(-50%) translateY(-14px) scale(1.12); } 100% { transform: translateX(-50%) translateY(-4px) scale(1); } }
+@keyframes sprPeek { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-6px); } }
+@media (prefers-reduced-motion: reduce) { html.look2 .az-mo img.mo-spr { animation: none !important; } }
+/* наднича зад плочката: духчето е под фона на плочката (долната му част се скрива) */
+html.look2 .az-mo { isolation: auto; z-index: auto; }
+html.look2 .az-mo img.mo-spr { z-index: -1; top: -27px; }
+html.look2 .az-grid { position: relative; z-index: 0; isolation: isolate; }
+html.look2 .az-mo img.mo-spr { top: -36px; }
+/* Азбука, ниво 4 – лабиринт в стила на света: всички разклонения еднакво изглеждащи пътечки (не подсказват верния път),
+   буквите – на кръгли камъчета (по-едри, четими), поляна около пътечките, свършените камъчета – зелени следи */
+html.look2.hub-c .az-lab { width: min(1160px, 100%); filter: drop-shadow(0 8px 10px rgba(60, 40, 10, .18)); }
+html.look2.hub-c .az-lab .road-blob { stroke: #CFE2A6; stroke-width: 96; opacity: .75; }
+html.look2.hub-c .az-lab .road { stroke: #9C6B33; stroke-width: 46; }
+html.look2.hub-c .az-lab .road-in { stroke: #E2BC80; stroke-width: 38; }
+html.look2.hub-c .az-lab .lt circle { r: 20px; fill: #FFF8E8; fill-opacity: 1; stroke: #B98A55; stroke-width: 2.5; filter: drop-shadow(0 2px 0 rgba(90, 55, 20, .35)); }
+html.look2.hub-c .az-lab .lt text { font-size: 22px; fill: #4A2A0E; }
+html.look2.hub-c .az-lab .lt:hover circle { fill: #FFEFC7; }
+html.look2.hub-c .az-lab .lt.shake circle { fill: #F5C4B8; stroke: #C0533B; }
+html.look2.hub-c .az-lab .lt.gone circle { r: 13px; fill: #86BC66; fill-opacity: 1; stroke: #5E9443; }
+html.look2.hub-c .az-lab .lt.hint circle { fill: #FFE38A; stroke: #E0A92E; }
+html.look2 .az-hint.le-target b { font-size: 1.6em; margin-left: 6px; vertical-align: -3px; }
+/* всичко се побира – второстепенните са видими без превключвател */
+html.look2.hub-c .screen-settings .scroll-wrap.fits-all .cards > .card.card-minor { display: flex !important; }
+/* 2 реда карти: по-плътни карти и без картинката на играта, за да остане всичко в свитъка */
+html.look2.hub-c .screen-settings .scroll-wrap.two-rows .kid-layer { display: none; }
+html.look2.hub-c .screen-settings .scroll-wrap.two-rows .cards { margin-top: 6%; row-gap: 8px; }
+html.look2.hub-c .screen-settings .scroll-wrap.two-rows .cards > .card:not(.card-tiers):not(.card-choice) { min-height: 0 !important; padding: 6px 10px; }
+html.look2.hub-c .screen-settings .scroll-wrap.two-rows .card-title { min-height: 0; margin-bottom: 2px; font-size: 15px; }
+html.look2.hub-c .screen-settings .scroll-wrap.two-rows .card-value { font-size: 24px; }
+html.look2.hub-c .screen-settings .scroll-wrap.two-rows .set-chip { height: 32px; min-width: 32px; font-size: 16px; }
+html.look2.hub-c .screen-settings .scroll-wrap.two-rows .arrow { width: 32px; height: 32px; }
+html.look2.hub-c .screen-settings .scroll-wrap.two-rows .select-wrap select { height: 40px; font-size: 24px; }
+html.look2.hub-c .screen-settings .scroll-wrap { flex-shrink: 0; }
+html.look2.hub-c .screen-settings .scroll-wrap.two-rows .cards { margin-top: 3%; }
+html.look2.hub-c .screen-settings .scroll-wrap.two-rows { padding-top: 46px; padding-bottom: 46px; }
+html.look2.hub-c .screen-settings .scroll-wrap.two-rows .cards > .card:not(.card-tiers):not(.card-choice) { justify-content: flex-start; gap: 6px; }
+html.look2.hub-c .screen-settings .scroll-wrap.two-rows .card .set-chips, html.look2.hub-c .screen-settings .scroll-wrap.two-rows .card .arrows, html.look2.hub-c .screen-settings .scroll-wrap.two-rows .card .select-wrap { margin-top: 4px; margin-bottom: 2px; }
+html.look2.hub-c .screen-settings .scroll-wrap.two-rows .card-title { min-height: 0 !important; display: block; }
+/* един ред карти + картинка: свитъкът расте, за да не излизат картите извън него; контролите – под заглавието, без празнина */
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode:not(.two-rows) .cards > .card:not(.card-tiers):not(.card-choice) { min-height: 0 !important; justify-content: flex-start; gap: 8px; }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode:not(.two-rows) .card .set-chips, html.look2.hub-c .screen-settings .scroll-wrap.set-mode:not(.two-rows) .card .arrows,
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode:not(.two-rows) .card .select-wrap { margin-top: 4px; }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode:not(.two-rows) .card-title { min-height: 0 !important; display: block; }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode { padding-top: 40px; padding-bottom: 50px; }
+/* заглавието на началния екран – лека дъга */
+html.look2 .screen-modules .title-outline { width: min(980px, 92vw); margin: 0 auto; line-height: 0; }
+html.look2 .title-arc { width: 100%; height: auto; overflow: visible; display: block; }
+html.look2 .title-arc text { font-family: var(--display); font-weight: 900; font-size: 92px; fill: #3B2A14; paint-order: stroke; stroke: rgba(255, 252, 240, .85); stroke-width: 10px; stroke-linejoin: round; letter-spacing: 1px; }
+html.look2 .screen-modules .title-outline { width: min(1100px, 94vw); }
+html.look2 .title-arc text { font-size: 86px; }
+/* настройките не опират в долния ръб на свитъка: картите – по съдържанието си, повече въздух отдолу, картинката по-малка */
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode .cards { flex: 0 0 auto; align-items: flex-start !important; }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode .cards > .card { align-self: flex-start !important; height: auto !important; }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode { padding-bottom: 72px; padding-top: 36px; justify-content: center; }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode .kid-art { width: min(13vh, 118px); }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode .kid-layer { margin-top: 0; }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode .cards { margin-top: 4px; }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode { padding-top: 54px; }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode .kid-art { width: min(16vh, 140px); }
+html.look2.hub-c .screen-settings .scroll-wrap.set-mode .kid-layer { margin-bottom: 6px; }
+/* рисуваните картинки на предмети (бял фон) – сливат се с кремавите плочки и в двата вида */
+img[src*="art/pics/pic_"] { mix-blend-mode: multiply; }
+html.look2.hub-c .hud-task svg { width: 30px; height: 30px; }
+/* 19.10: скритите настройки (hiddenIf) никога не се показват – и когато „Още настройки“ е отворено */
+html.look2.hub-c .screen-settings .cards > .card[hidden]:not(#_) { display: none !important; }
+/* подравняване: картите в един ред са еднакво високи; заглавията – на една линия, контролите – центрирани в останалото място */
+html.look2.hub-c .screen-settings .cards > .card:not(.card-choice):not(.card-tiers) { align-self: stretch !important; }
+html.look2.hub-c .screen-settings .cards > .card:not(.card-choice):not(.card-tiers) > .set-chips,
+html.look2.hub-c .screen-settings .cards > .card:not(.card-choice):not(.card-tiers) > .arrows,
+html.look2.hub-c .screen-settings .cards > .card:not(.card-choice):not(.card-tiers) > .select-wrap { margin-top: auto !important; margin-bottom: auto !important; }
+/* „Изключено“/„Включено“ не излиза от полето */
+html.look2.hub-c .screen-settings .arrows { grid-template-columns: auto minmax(0, 1fr) auto; gap: 6px; }
+html.look2.hub-c .screen-settings .arrow-value { min-width: 0; padding: 6px 2px; white-space: nowrap; font-size: clamp(12px, 1.05vw, 15px) !important; }
+/* заключени стойности (няма материал с изучените букви) */
+html.look2 .screen-settings .set-chip.off, .set-chip.off { opacity: .4; cursor: not-allowed; filter: grayscale(.6); }
+.set-off-hint { font-size: 13px; color: #8A6A40; text-align: center; margin-top: 4px; }
+/* „i“ – прозорчето е до бутона, с малка стрелка към него */
+html.look2 .info-panel.near-i { width: min(520px, 70vw); max-height: 60vh; overflow: auto; z-index: 30; }
+html.look2 .info-panel.near-i::before { content: ""; position: absolute; top: -8px; right: 18px; width: 16px; height: 16px; background: #fff; transform: rotate(45deg); }
+/* „един свят“: фонът в игрите е светъл – белите надписи от стария (тъмен) вид стават тъмнокафяви върху лека кремава лента */
+html.look2 .in-sit, html.look2 .in-note, html.look2 .sq-note, html.look2 .wq-say, html.look2 .sq-review p {
+  color: #3B2A14 !important; text-shadow: none !important; background: rgba(255, 249, 235, .88); border-radius: 14px; padding: 6px 14px; align-self: flex-start; }
+html.look2 .sc-ask h3, html.look2 .st-q h3, html.look2 .st-order h3, html.look2 .st-adult h3, html.look2 .st-create h3, html.look2 .st-book h3,
+html.look2 .tx-task h3, html.look2 .sq h3, html.look2 .in-trip h3 {
+  color: #3B2A14 !important; text-shadow: 0 1px 0 rgba(255, 255, 255, .7) !important; }
+html.look2 .sc-ask h3:not(:empty) { background: rgba(255, 249, 235, .88); border-radius: 14px; padding: 4px 16px; }
+html.look2 .in-hint, html.look2 .in-hint b { color: #3B2A14 !important; }
+html.look2 .cn-built i { color: #3B2A14; border-bottom-color: #8A6A40; }
+/* „един свят“ (19.10, пълен преглед на Читарика): всички светли надписи от стария тъмен вид → тъмни; жълтите акценти → тъмен кехлибар */
+html.look2 .es-note, html.look2 .tx-step, html.look2 .sq-hint, html.look2 .in-hint, html.look2 .sq-review .sq-sub {
+  color: #3B2A14 !important; text-shadow: none !important; background: rgba(255, 249, 235, .88); border-radius: 12px; padding: 4px 12px; }
+html.look2 .es-note:empty, html.look2 .tx-step:empty, html.look2 .sq-hint:empty, html.look2 .in-hint:empty { background: none; padding: 0; }
+html.look2 .st-line, html.look2 .st-q q, html.look2 .in-trip-row figcaption, html.look2 .in-goal-tag { color: #9A4A06 !important; text-shadow: none !important; }
+html.look2 .st-lbl, html.look2 .st-book p, html.look2 .sc-role, html.look2 .sc-read h3, html.look2 .sq-reset { color: #3B2A14 !important; text-shadow: none !important; }
+html.look2 .sq-reset:active { background: rgba(90, 55, 20, .1); }
+/* „За родителя – задръж“: видим, но дискретен бутон в тона на кита; бележката под картинките – в средата */
+html.look2 .sq-gate { border-color: #C4A580 !important; background: rgba(255, 249, 235, .9) !important; color: #6B4A20 !important; }
+html.look2 .sq-gate i { background: rgba(196, 165, 128, .45) !important; }
+html.look2 .sq-note { align-self: center; text-align: center; }
+/* стрелките на настройка с превключване („Събиране / Изваждане“) – центрирани */
+html.look2.hub-c .screen-settings .card .arrows { width: auto; max-width: 100%; justify-content: center; margin-left: auto; margin-right: auto; }
+/* Подводно царство (19.10, методист): подводен фон в игровата зона; истински мехури; числото на жетон под рибката */
+html.look2 .arena.uw-arena { background: url(../assets/img/art/hub/sea_play.jpg) center bottom / cover no-repeat; border-radius: 22px; overflow: hidden; }
+html.look2 .uw-arena .bubble { background: radial-gradient(circle at 34% 28%, rgba(255,255,255,.55), rgba(255,255,255,.08) 38%, rgba(160,220,240,.10) 62%, rgba(255,255,255,.28) 100%) !important;
+  border: 2px solid rgba(255,255,255,.55) !important; box-shadow: inset 0 -8px 18px rgba(120,200,230,.25), inset 0 6px 12px rgba(255,255,255,.25), 0 6px 14px rgba(20,70,100,.12) !important; backdrop-filter: none;
+  animation: rise var(--dur, 10s) linear forwards, uwsway var(--sw, 3s) ease-in-out infinite !important; }
+html.look2 .uw-arena .bubble.loop { animation: rise var(--dur, 10s) linear infinite, uwsway var(--sw, 3s) ease-in-out infinite !important; }
+html.look2 .uw-arena .bubble.paused { animation-play-state: paused, paused !important; }
+html.look2 .uw-arena .bubble::before { background: radial-gradient(ellipse, rgba(255,255,255,.9), rgba(255,255,255,0) 70%) !important; }
+html.look2 .uw-arena .bubble img.creature { top: 12%; width: 62%; height: 62%; }
+html.look2 .uw-arena .bubble b { bottom: 6%; min-width: 1.6em; padding: 0 .3em; background: #FFF8E6 !important; color: #6B3A0E !important; border: 2px solid #D9B57A !important; box-shadow: 0 3px 0 #B08A5E !important; border-radius: 999px; }
+html.look2 .uw-arena .bubble:active { transform: scale(.94); }
+html.look2 .uw-arena .bubble.shake { animation: uwwobble .5s ease !important; filter: saturate(.6) brightness(.92); box-shadow: inset 0 0 0 3px rgba(255,255,255,.4) !important; }
+html.look2 .uw-arena .bubble.pop { animation: uwpop .35s ease-out forwards !important; }
+@keyframes uwsway { 0%, 100% { margin-left: 0 } 50% { margin-left: var(--amp, 16px) } }
+@keyframes uwwobble { 0%, 100% { margin-left: 0 } 25% { margin-left: -8px } 75% { margin-left: 8px } }
+@keyframes uwpop { to { transform: scale(1.25); opacity: 0; } }
+.uw-fizz { position: absolute; z-index: 5; width: var(--s, 10px); height: var(--s, 10px); border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.9), rgba(255,255,255,.15) 60%); border: 1px solid rgba(255,255,255,.7); animation: uwfizz 1.1s ease-out forwards; }
+@keyframes uwfizz { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-120px); opacity: 0; } }
+/* жив подводен фон – само декор, бавно и спокойно */
+html.look2 .uw-arena .uw-life { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+html.look2 .uw-arena .bubbles { z-index: 1; }
+.uw-rays { position: absolute; left: 20%; right: 20%; top: -10%; height: 70%; background: repeating-linear-gradient(100deg, rgba(255,255,240,0) 0 40px, rgba(255,255,240,.16) 60px, rgba(255,255,240,0) 90px);
+  -webkit-mask-image: linear-gradient(to bottom, #000, transparent); mask-image: linear-gradient(to bottom, #000, transparent); animation: uwrays 9s ease-in-out infinite alternate; }
+@keyframes uwrays { from { transform: translateX(-30px) skewX(-4deg); opacity: .6; } to { transform: translateX(30px) skewX(4deg); opacity: 1; } }
+.uw-amb { position: absolute; bottom: -20px; width: var(--s); height: var(--s); border-radius: 50%; border: 1px solid rgba(255,255,255,.7); background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.8), rgba(255,255,255,.08) 60%);
+  animation: uwamb var(--d, 8s) linear infinite; }
+@keyframes uwamb { 0% { transform: translate(0, 0); opacity: 0; } 10% { opacity: .9; } 50% { transform: translate(8px, -50vh); } 100% { transform: translate(-4px, -100vh); opacity: 0; } }
+.uw-far { position: absolute; width: 70px; opacity: .35; filter: blur(1px) saturate(.6); }
+.uw-far.a { top: 58%; animation: uwfarL 38s linear infinite; }
+.uw-far.b { top: 30%; width: 54px; animation: uwfarR 46s linear infinite; animation-delay: -20s; }
+@keyframes uwfarL { from { left: 105%; } to { left: -10%; } }
+@keyframes uwfarR { from { left: -10%; transform: scaleX(-1); } to { left: 105%; transform: scaleX(-1); } }
+@media (prefers-reduced-motion: reduce) { .uw-rays, .uw-amb, .uw-far { animation: none; } .uw-amb, .uw-far { display: none; } }
+/* издължените рибки – малко по-широки, за да са със сходен визуален размер */
+html.look2 .uw-arena .bubble img.creature[src*="fish_f"], html.look2 .uw-arena .bubble img.creature[src*="fish_g"] { width: 76%; height: 76%; top: 4%; }
+.uw-rays { background: repeating-linear-gradient(100deg, rgba(255,255,235,0) 0 40px, rgba(255,255,235,.26) 60px, rgba(255,255,235,0) 90px); }
+/* Умни везни (19.10): плавен наклон; блюдата се докосват; числата на ниво 2 – в тона на кита */
+html.look2 .balance-wrap.b2 #beam { transform-box: view-box; transform-origin: 400px 160px; transition: transform .9s cubic-bezier(.3,.7,.3,1); }
+html.look2 .balance-wrap.b2 #panL, html.look2 .balance-wrap.b2 #panR { transition: transform .9s cubic-bezier(.3,.7,.3,1); }
+html.look2 .balance-wrap.b2 .pickable { cursor: pointer; }
+html.look2 .balance-wrap.b2 .pickable:hover ellipse:first-of-type { filter: brightness(1.08); }
+html.look2 .balance-wrap.b2 .pickable:active { opacity: .9; }
+html.look2 .balance-wrap.b2 svg.balance { pointer-events: auto; }
+html.look2 .balance-wrap.b2 .pan-hit { pointer-events: all; }
+
+html.look2 .pan-num-svg { fill: #FFF8E6; stroke: #6B3A0E; stroke-width: 5px; }
+html.look2 .ring-sign { border-color: #E2B95A; background: #FFF8E6; color: #6B3A0E; }
+html.look2 .abox.sign { color: #6B3A0E; }
+html.look2 .balance-wrap.b2 { aspect-ratio: 960 / 540; width: min(90%, 960px); }
+html.look2 .balance-wrap.b2 svg.balance { overflow: visible; }
+html.look2 .balance-wrap.b2.lv2 { width: min(70%, 760px, calc((100vh - 360px) * 1.78)); top: 10%; }
+html.look2 .balance-wrap.b2 ~ .crate-ui { bottom: 1.5%; }
+/* Тайни карти (19.10): размер според височината – долната карта не стига до ръба; ясни свободни/покрити; избрана се повдига; освободена светва */
+html.look2 .sc-board { --w: min(clamp(56px, 7vw, 92px), calc((100vh - 360px) / (var(--rows, 3) * 1.4 + .4))); margin-bottom: 4vh; }
+html.look2.hub-c .sc-card { box-shadow: 0 5px 0 #A97A3E, 0 8px 14px rgba(60,35,10,.22); transition: transform .18s, filter .2s, box-shadow .2s; }
+html.look2.hub-c .sc-card.blocked { filter: saturate(.3) brightness(.86) !important; box-shadow: 0 2px 0 #A97A3E !important; }
+html.look2.hub-c .sc-card.sel { transform: translateY(-10px) scale(1.04); box-shadow: 0 0 0 4px rgba(245,183,10,.7), 0 14px 18px rgba(60,35,10,.3) !important; }
+html.look2.hub-c .sc-card.freed { animation: scfreed 1s ease; }
+@keyframes scfreed { 0%, 100% { box-shadow: 0 5px 0 #A97A3E; } 40% { box-shadow: 0 0 0 6px rgba(255,214,90,.85), 0 5px 0 #A97A3E; } }
+.choice svg { display: block; margin: 0 auto 2px; }
+html.look2.hub-c .sc-card.gone { opacity: 0 !important; visibility: hidden; transition: opacity .35s, transform .35s, visibility 0s .35s; }
+
+/* ===== 23.10.2026 – промени по проучването (независими от бранда) =====
+   Всички цветове – в токени, за да се сменят с новия бранд на едно място. */
+html.look2 {
+  --brand-accent: #E5167A;        /* акцент за „докосни“ (циклама – като сайта); сменя се с бранда */
+  --brand-accent-dark: #A80E58;
+  --brand-accent-2: #0EA5E9;      /* втори акцент */
+  --ok: #2E9D5B; --ok-dark: #1F6E40;
+  --no: #D9534F;
+  --ink-strong: #2B1D10;
+}
+/* 1. Без избелващ воал над игрите: фонът – спокоен, леко затъмнен по краищата, без бяла „мъгла“ */
+html.look2.hub-c .stage, html.look2.hub-c[data-mod] .stage {
+  background-image: linear-gradient(rgba(255,250,238,.22), rgba(255,250,238,.22)), radial-gradient(ellipse at center, rgba(255,255,255,0) 50%, rgba(40,25,10,.22) 100%), var(--stage-art, url("../assets/img/art/hub/hub_garden_soft.jpg?v=4")) !important;
+  background-size: cover !important; background-position: center !important; }
+html.look2.hub-c[data-mod="buk"] .stage { --stage-art: url("../assets/img/art/hub/hub_meadow_soft.jpg"); }
+html.look2.hub-c[data-mod="world"] .stage { --stage-art: url("../assets/img/art/hub/hub_forest_soft.jpg?v=4"); }
+html.look2.hub-c[data-mod="read"] .stage { --stage-art: url("../assets/img/art/hub/hub_library_soft.jpg?v=4"); }
+/* 2. Отговорите (всичко, което детето докосва за отговор) – акцентна рамка и „натискаема“ сянка; навигацията – по-малка и тиха */
+html.look2 :is(.sp-chip, .wtile, .key, .abox, .numtile, .bc-btn, .ocell.tap, .opt, .sh-opt, .bst-opt, .ac-l, .sc-who, .in-goal, .sc-how, .tile-ans):not(.good):not(.bad):not(.right):not(.wrong):not(.used):not(:disabled) {
+  border-color: var(--brand-accent) !important; box-shadow: 0 5px 0 var(--brand-accent-dark), 0 8px 14px rgba(60,20,40,.18) !important; }
+html.look2 :is(.sp-chip, .wtile, .key, .abox, .numtile, .bc-btn, .opt, .sh-opt, .bst-opt, .ac-l):not(:disabled):active { transform: translateY(4px); box-shadow: 0 1px 0 var(--brand-accent-dark) !important; }
+html.look2.hub-c .screen-game .gbtn-grey, html.look2.hub-c #btn-game-settings { min-width: 0 !important; min-height: 44px !important; padding: 0 18px !important; font-size: 16px !important; opacity: .85; }
+/* 3. Настройки – за възрастния: детето вижда картинката на играта и „Старт“; настройките се отключват със задържане */
+html.look2.hub-c .screen-settings .adult-locked .cards, html.look2.hub-c .screen-settings .adult-locked .more-toggle { display: none !important; }
+html.look2.hub-c .screen-settings .adult-locked .kid-art { max-height: 46vh !important; width: auto; }
+.adult-gate { position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 8px; margin: 10px auto 0; padding: 8px 16px; border-radius: 999px;
+  border: 2px solid #C4A580; background: rgba(255,249,235,.92); color: #6B4A20; font: 600 15px var(--display); cursor: pointer; }
+.adult-gate small { font-size: 12px; opacity: .7; } .adult-gate span, .adult-gate small { position: relative; }
+.adult-gate i { position: absolute; inset: 0; width: 0; background: rgba(196,165,128,.4); }
+.adult-gate.holding i { width: 100%; transition: width 1.5s linear; }
+#btn-game-settings { position: relative; overflow: hidden; }
+#btn-game-settings.holding { background: linear-gradient(90deg, rgba(196,165,128,.45) 50%, transparent 50%) 100% 0 / 200% 100% no-repeat, #FFF8EA !important; animation: holdfill 1.5s linear forwards; }
+@keyframes holdfill { to { background-position: 0 0, 0 0; } }
+/* 4. Вярно/грешно – и с форма, не само с цвят (✓ / ✗) */
+html.look2 .feedback.good::before { content: "✓ "; font-weight: 900; }
+html.look2 .feedback.bad::before { content: "✗ "; font-weight: 900; }
+html.look2 :is(.wtile.good, .bc-btn.right, .numtile.right, .abox.right, .key.right, .opt.good, .sh-opt.good, .sp-chip.right, .ac-l.good)::after,
+html.look2 :is(.wtile.bad, .bc-btn.wrong, .numtile.wrong, .abox.wrong, .key.wrong, .opt.bad, .sh-opt.bad, .ac-l.bad)::after {
+  position: absolute; top: -10px; right: -10px; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font: 900 18px/1 var(--display); color: #fff; border: 3px solid #fff; box-shadow: 0 2px 4px rgba(0,0,0,.25); z-index: 2; }
+html.look2 :is(.wtile.good, .bc-btn.right, .numtile.right, .abox.right, .key.right, .opt.good, .sh-opt.good, .sp-chip.right, .ac-l.good)::after { content: "✓"; background: var(--ok); }
+html.look2 :is(.wtile.bad, .bc-btn.wrong, .numtile.wrong, .abox.wrong, .key.wrong, .opt.bad, .sh-opt.bad, .ac-l.bad)::after { content: "✗"; background: var(--no); }
+html.look2 :is(.wtile, .bc-btn, .numtile, .abox, .key, .opt, .sh-opt, .sp-chip, .ac-l) { position: relative; }
+/* 5. Таймерът – скрит за 5–7 (времето се записва тихо за отчетите) */
+html.look2 .hud-clock { visibility: hidden; }
+html.look2.hub-c .scroll-wrap.set-mode.adult-locked .kid-layer { display: flex !important; margin-top: 4% !important; }
+html.look2.hub-c .scroll-wrap.set-mode.adult-locked .kid-art { width: min(30vh, 260px) !important; }
+html.look2.hub-c .scroll-wrap.set-mode.adult-locked .kid-art.kid-art-card { width: min(40vh, 340px) !important; }
+/* Пазител-персонаж (пробно): малък, в долния ляв ъгъл на игралното поле; плавно влиза и излиза; не пречи на докосванията */
+#mascot { position: absolute; left: 1.5%; bottom: 2%; width: clamp(96px, 13vh, 150px); z-index: 6; pointer-events: none; opacity: 0; transform: translateY(24px) scale(.9); transition: opacity .25s, transform .3s cubic-bezier(.3,1.4,.5,1); filter: drop-shadow(0 6px 8px rgba(30,40,40,.25)); }
+#mascot.on { opacity: 1; transform: none; }
+#mascot.on.joy, #mascot.on.celebrate { animation: mhop .5s ease; }
+@keyframes mhop { 40% { transform: translateY(-12px); } }
+@media (prefers-reduced-motion: reduce) { #mascot { transition: opacity .2s; transform: none; } #mascot.on { animation: none; } }

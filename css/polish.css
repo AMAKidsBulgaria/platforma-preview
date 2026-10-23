@@ -618,8 +618,8 @@
 .match { position: relative; z-index: 1; display: flex; gap: 60px; }
 .match .col { display: flex; flex-direction: column; gap: 14px; }
 .match .wtile { min-width: 220px; font-size: 28px; padding: 10px 22px; }
-.match .wtile.grp { background: #E8E3FA; border-color: #8E7FD8; }
-.wtile.sel { border-color: var(--purple); box-shadow: 0 6px 0 #B08A5E, 0 0 0 4px rgba(123,92,224,.45); }
+.match .wtile.grp { background: #FBE3B8; border-color: #D29A4A; }   /* въпросите – меден тон от кита (вместо лилаво; зеленото е за „вярно“) */
+.wtile.sel { border-color: #E09A1A; box-shadow: 0 6px 0 #B08A5E, 0 0 0 5px rgba(245,183,10,.55); }   /* избрано – златно, като подсказките */
 .hs-board { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(5, 118px); gap: 12px; }
 .hs-spot { width: 118px; height: 118px; padding: 0; background: none; border: 0; cursor: default; position: relative; }
 .hs-bush { display: block; width: 100%; height: 100%; border-radius: 50% 50% 45% 45%; background: radial-gradient(circle at 40% 35%, #7FD061, #3E9A3A 70%); box-shadow: inset 0 -8px 0 rgba(0,0,0,.12); }
@@ -721,7 +721,7 @@ html.in-office .office-back { top: 10px; bottom: auto; left: 10px; }
 html.mode-learn #timer, html.mode-learn #score, html.mode-learn #lives, html.mode-learn #result-stars, html.mode-learn #r-streak { display: none !important; }
 
 /* Числова права */
-.nl-wrap { display:flex; flex-direction:column; align-items:center; gap:10px; width:100%; max-width:1000px; margin:0 auto; }
+.nl-wrap { display:flex; flex-direction:column; align-items:center; gap:10px; width:100%; max-width:1000px; margin:0 auto; padding-top:104px; } /* картата с числото – под заглавната табела */
 .nl-card { display:flex; align-items:center; gap:14px; background:#fff; border:3px solid #F9A620; border-radius:18px; padding:10px 22px; font-family:Manrope,sans-serif; }
 .nl-q { font-size:22px; font-weight:700; color:#1D2B32; }
 .nl-big { font-size:48px; font-weight:800; color:#E9A23B; line-height:1; }
@@ -750,3 +750,175 @@ html.in-office .office-back::before { content: ""; }
 /* Читалка след урока: без часовник и без точки */
 body.rd-practice .hud-score, body.rd-practice .hud-clock { visibility: hidden; }
 body.rd-practice .rd-word { gap: 0; font-size: 110px; }
+/* Мозъчна атака – картинен модел „с колко повече/по-малко“ (Ч17 Р3) */
+.bst-model { display: none; flex-direction: column; align-items: center; gap: 14px; }
+.bst.bst-diffmode .bst-model { display: flex; }
+.bst.bst-diffmode .bst-row, .bst.bst-diffmode .bst-ans, .bst.bst-diffmode .ord-controls { display: none; }
+.bst.bst-diffmode { justify-content: center; }
+.bst-rows svg { display: block; height: auto; }
+.bst-opts .wtile.bst-opt { min-width: 90px; font-size: 40px; }
+.bst-q .geo-say { width: 40px; height: 40px; font-size: 20px; vertical-align: middle; border-radius: 50%; border: 3px solid #C4A580; background: #fff; cursor: pointer; }
+/* Фонематичен слух, ниво 2 – 6 плочки: по-едри */
+.ph-keys.few { gap: 14px; }
+.ph-keys.few .ph-key { width: 86px; height: 86px; font-size: 44px; }
+
+/* Фонетика: думата се показва след отговора на мястото на „Чуй думата“ (височината на картата не се мени) */
+.fo { padding-top: 96px; gap: 22px; }
+.fo-word { display: none; min-height: 48px; line-height: 48px; }
+.fo-word.shown { display: block; }
+.fo-word.shown + .fo-hear { display: none; }
+.fo-hear { height: 48px; font: 600 18px var(--display, inherit); color: #4A2A10; background: #FFE9B0; border: 3px solid #C4A580; border-radius: 999px; padding: 0 16px; cursor: pointer; }
+.fo-hear:active { transform: scale(.96); }
+.fo { padding-top: 104px; gap: 18px; }
+.fo-pic { width: 190px; height: 190px; }
+.fo-pic img, .fo-pic svg { width: 170px; height: 170px; }
+/* Фонетика: чиповете – плочки в стила на картата (икона + надпис в една плочка) */
+.fo .sp-chips { gap: 28px; }
+.fo .sp-chip { width: 168px; padding: 14px 10px 12px; gap: 8px; background: #FFF4D1; border: 4px solid #C4A580; border-radius: 24px;
+  box-shadow: 0 6px 0 #B08A5E, 0 10px 18px rgba(0,0,0,.16); transition: transform .12s, box-shadow .12s, background .12s; }
+.fo .sp-chip svg { width: 92px; height: 92px; filter: drop-shadow(0 3px 2px rgba(0,0,0,.18)); }
+.fo .sp-chip span { background: none; padding: 0; font-size: 22px; font-weight: 700; color: #4A2A10; }
+.fo .sp-chip:hover { transform: translateY(-3px); background: #FFF8E2; }
+.fo .sp-chip:active { transform: translateY(4px); box-shadow: 0 2px 0 #B08A5E, 0 4px 8px rgba(0,0,0,.14); }
+.fo .sp-chip.shake { border-color: #E0453A; }
+.fo .sp-chip.shake svg { filter: none; }
+.fo .sp-chip.hint { border-color: #F5B70A; box-shadow: 0 6px 0 #C98A0A, 0 0 0 6px rgba(255,211,77,.55); }
+.fo .sp-chip.hint svg { filter: none; }
+.fo .sp-chip.right { background: #E3F4D8; border-color: #4CB84A; box-shadow: 0 6px 0 #2E8A2C, 0 10px 18px rgba(0,0,0,.16); }
+.fo { padding-top: 96px; gap: 14px; }
+.fo .fo-card { padding-bottom: 10px; }
+.fo .sp-chip { width: 160px; padding: 10px 10px 8px; gap: 4px; }
+.fo .sp-chip svg { width: 78px; height: 78px; }
+
+/* Звуково-буквен анализ: същите плочки за чиповете; звукът в квадратни скоби [а] – както се означава звук */
+.sp .sp-chips { gap: 28px; }
+.sp .sp-chip { width: 168px; padding: 14px 10px 12px; gap: 8px; background: #FFF4D1; border: 4px solid #C4A580; border-radius: 24px; box-shadow: 0 6px 0 #B08A5E, 0 10px 18px rgba(0,0,0,.16); transition: transform .12s, box-shadow .12s, background .12s; }
+.sp .sp-chip svg { width: 92px; height: 92px; filter: drop-shadow(0 3px 2px rgba(0,0,0,.18)); }
+.sp .sp-chip span { background: none; padding: 0; font-size: 22px; font-weight: 700; color: #4A2A10; }
+.sp .sp-chip:hover { transform: translateY(-3px); background: #FFF8E2; }
+.sp .sp-chip:active { transform: translateY(4px); box-shadow: 0 2px 0 #B08A5E, 0 4px 8px rgba(0,0,0,.14); }
+.sp .sp-chip.shake { border-color: #E0453A; }
+.sp .sp-chip.shake svg { filter: none; }
+.sp .sp-chip.hint { border-color: #F5B70A; box-shadow: 0 6px 0 #C98A0A, 0 0 0 6px rgba(255,211,77,.55); }
+.sp .sp-chip.hint svg { filter: none; }
+.sp .sp-chip.right { background: #E3F4D8; border-color: #4CB84A; box-shadow: 0 6px 0 #2E8A2C, 0 10px 18px rgba(0,0,0,.16); }
+.sp .sp-chip { width: 160px; padding: 10px 10px 8px; gap: 4px; }
+.sp .sp-chip svg { width: 78px; height: 78px; }
+.sp .sp-chip svg { width: 84px; height: 84px; }
+.sp .sp-chips { gap: 24px; }
+.sp { padding-top: 104px; gap: 20px; }
+.sp-br { color: #4A2A10; font-weight: 400; }
+.sp .fo-hear { margin-top: 2px; }
+
+/* компактно, за да се събират и клетките (ниво 2–4); на ниво 1 звукът е само в скоби, без жълто поле */
+.sp-word { font-size: 88px; }
+.sp-cell { width: 54px; height: 54px; }
+.sp-cell svg { width: 44px; height: 44px; }
+.sp .sp-card { gap: 10px; padding-top: 14px; padding-bottom: 12px; }
+.sp .sp-chip { width: 150px; padding: 8px 8px 6px; }
+.sp .sp-chip svg { width: 76px; height: 76px; }
+.sp { padding-top: 96px; gap: 16px; }
+.sp-word.single .sp-l.on { background: none; box-shadow: none; }
+.sp-word.single .sp-br { font-family: "Helvetica Neue", Arial, sans-serif; font-weight: 300; }
+/* Читалка: думата винаги в средата на картата (контейнерът може да е по-широк от буквите); ударението – по-далеч от горния ръб */
+.rd-word { justify-content: center; text-align: center; }
+.rd-word:not(.text) { white-space: nowrap; }   /* само сричка/дума на един ред; изреченията и текстът се пренасят */
+.rd-card.wide { width: min(1000px, 92%); box-sizing: border-box; }
+.rd-word.text { white-space: normal; max-width: 100%; overflow-wrap: break-word; }
+.rd-card { padding-top: 44px; padding-bottom: 28px; min-height: 220px; }
+.rd-l.acc::after { top: -26px; }
+/* Читалка (Читарика): дългият текст – картата расте до наличното място, после се превърта вътре; по-дребен шрифт */
+.rd-card.wide { height: auto !important; min-height: 0; max-height: calc(100vh - 340px); overflow-y: auto; align-items: flex-start; padding: 22px 34px; }
+.rd-word.text { max-height: none; overflow: visible; font-size: 24px; line-height: 1.45; }
+.rd-word.text h3 { font-size: 28px; }
+.rd-card.wide .rd-word.text:not(:has(h3)) { text-align: center; font-size: 30px; }   /* изречение – в средата */
+.rd .rd-card, .rd .rd-next, .rd .rd-count, .rd .rd-auto { flex-shrink: 0; }   /* колоната не смачква картата с текста */
+.rd-card.wide .rd-word.text { flex: 1 1 auto; }
+/* Ярки числа (19.10): голяма картинка вляво, флумастери с числата вдясно */
+.bn2 { grid-template-columns: minmax(0, 1fr) auto; padding: 96px 2.5% 18px; gap: 20px; }
+.bn-frame { position: relative; justify-self: center; width: 100%; max-width: calc((100vh - 170px) * 1.5); aspect-ratio: 3 / 2; background: #fff; border-radius: 18px; border: 6px solid #fff; box-shadow: 0 8px 0 #C4A580, 0 16px 28px rgba(0,0,0,.2); overflow: hidden; }
+.bn-frame canvas { display: block; width: 100%; height: 100%; cursor: pointer; touch-action: none; }
+.bn-nums { position: absolute; inset: 0; pointer-events: none; }
+.bn-nums span { position: absolute; transform: translate(-50%, -50%); font: 700 calc(var(--fs, 1) * clamp(13px, 1.5vw, 20px)) var(--display); color: #5A5A5A; white-space: nowrap; transition: opacity .3s; }
+.bn-nums span.done { opacity: 0; }
+.bn-nums span.wrong { animation: shake .45s ease; color: #D33; }
+.bn2 .bn-pal { grid-template-columns: 1fr; gap: 7px; align-content: center; max-height: 100%; overflow-y: auto; padding: 4px 6px; }
+.bn-marker { position: relative; display: flex; align-items: center; gap: 0; padding: 0; border: 0; background: none; box-shadow: none; border-radius: 0; cursor: pointer; transition: transform .15s; }
+.bn-marker i { width: 34px; height: 30px; border-radius: 0; background: #2B2B2B; clip-path: polygon(0 50%, 60% 8%, 100% 8%, 100% 92%, 60% 92%); box-shadow: none; position: relative; }
+.bn-marker i::before { content: ""; position: absolute; left: 0; top: 40%; width: 6px; height: 20%; background: var(--c); }
+.bn-marker b { min-width: 92px; height: 44px; display: grid; place-items: center; background: var(--c); border-radius: 6px 10px 10px 6px; color: #fff; font: 800 26px var(--display); text-shadow: 0 1px 2px rgba(0,0,0,.45); box-shadow: inset 0 -4px 0 rgba(0,0,0,.15), 0 3px 0 rgba(0,0,0,.12); padding: 0 10px; }
+.bn-marker.sel { transform: translateX(-14px) scale(1.06); }
+.bn-marker.sel b { outline: 4px solid #FFC93C; outline-offset: 1px; }
+@media (max-width: 700px) { .bn2 { grid-template-columns: 1fr; } .bn2 .bn-pal { grid-template-columns: repeat(5, auto); } }
+.bn2 { padding: 128px 3% 22px; grid-template-rows: minmax(0, 1fr); align-items: center; }
+.bn-frame { width: auto; height: auto; max-width: 100%; max-height: 100%; aspect-ratio: 3 / 2; }
+.bn2 .bn-frame { height: 100%; }
+/* числата в Ярки числа – като в образеца: тънки, с бял ореол, четат се и върху линии */
+.bn-nums span { color: #4A4A4A; text-shadow: 0 0 3px #fff, 0 0 3px #fff, 0 0 2px #fff; }
+/* Пиратски шифър (19.10): градинска леха – еднакви квадратни клетки, тревисто поле в дървена рамка; предметите – в кремави жетони */
+.pc-grid { grid-template-rows: repeat(var(--n, 3), minmax(0, 1fr)); gap: 6px; padding: 12px; width: min(52vh, 92%); border-radius: 18px;
+  background: linear-gradient(180deg, #A9773F, #8A5C2C) !important; box-shadow: inset 0 0 0 3px rgba(255,255,255,.18), 0 8px 0 #6B4520, 0 16px 26px rgba(0,0,0,.22); }
+.pc-cell { aspect-ratio: 1; min-width: 0; min-height: 0; border-radius: 10px; border: 0; background: radial-gradient(circle at 50% 40%, #B5D98A, #8DBF5E); box-shadow: inset 0 -4px 0 rgba(60,100,30,.25), inset 0 2px 0 rgba(255,255,255,.35); }
+.pc-cell img { width: 80%; max-height: 80%; object-fit: contain; filter: drop-shadow(0 4px 3px rgba(0,0,0,.25)); }
+.pc-cell.right { background: radial-gradient(circle at 50% 40%, #CFEFA8, #9BD06A); box-shadow: inset 0 0 0 4px var(--good); }
+.pc-cell.wrong { background: radial-gradient(circle at 50% 40%, #F6C7B8, #E59A86); }
+.pc-cell.hint { box-shadow: inset 0 0 0 4px #FFC93C, 0 0 0 3px rgba(255,201,60,.5); }
+.pc-bubble { background: radial-gradient(circle at 35% 30%, #FFFDF6, #F3E3C3) !important; border: 3px solid #D9B57A !important; box-shadow: 0 4px 0 #B08A5E, 0 8px 14px rgba(0,0,0,.15) !important; }
+.pc-bubble img { width: 76%; filter: drop-shadow(0 2px 2px rgba(0,0,0,.2)); }
+.pc-task { background: #FFF8E6 !important; border: 3px solid #D9B57A !important; box-shadow: 0 5px 0 #B08A5E !important; padding: 6px 26px !important; }
+.pc-task img { width: clamp(46px, 5vw, 70px) !important; }
+.pc-task b { color: #9A4A06 !important; }
+#example:empty { display: none; }
+.pc-mid { min-height: 0; }
+.pc-grid { width: auto !important; height: 100%; max-height: 100%; max-width: min(100%, 60vh); aspect-ratio: 1; align-self: center; }
+#example:empty { display: inline-block; visibility: hidden; }
+.pc-task img, .pc-bubble img, .pc-cell img { aspect-ratio: 1; object-fit: contain; height: auto; }
+.pc-task img { width: clamp(44px, 4.6vw, 64px) !important; }
+.pc-bubble { width: clamp(46px, 5vw, 70px) !important; height: auto; aspect-ratio: 1; overflow: hidden; }
+.pc-bubble img { width: 74% !important; max-height: 74%; }
+.pc-grid { height: auto !important; width: min(54vh, 100%) !important; max-height: none; }
+.pc-grid { width: min(calc(100vh - 400px), 100%) !important; min-width: 220px; }
+.pc { padding-top: 112px !important; gap: 10px; }
+.pc-grid { width: min(calc(100vh - 470px), 100%) !important; }
+/* Главоблъсканица (19.10): ниво 1 – плодове в плетени табли; ниво 2 – училищна дъска с тебешир; отговорите – дървени жетони */
+.bc { justify-content: center; gap: 26px; }
+.bc-task { gap: 18px; }
+.bc-cloud.bc-tray { position: relative; width: clamp(240px, 30vw, 380px); aspect-ratio: 700 / 364; min-height: 0; padding: 0; border: 0; border-radius: 0; box-shadow: none;
+  background: url(../assets/img/math/tray.png) center / contain no-repeat; display: grid; place-items: center; filter: drop-shadow(0 8px 8px rgba(80,50,20,.25)); }
+.bc-tray .bc-pics { position: absolute; left: 14%; right: 14%; top: 10%; bottom: 22%; display: grid; grid-template-columns: repeat(var(--k, 3), 1fr); align-content: center; justify-items: center; gap: 0 2px; }
+.bc-tray .bc-pics img, html.look2.hub-c .bc-tray .bc-pics img { width: clamp(30px, 3.6vw, 50px); height: auto; filter: drop-shadow(0 3px 2px rgba(0,0,0,.25)); }
+.bc-tray .bc-zero { font-size: clamp(18px, 2vw, 24px); color: #8A5A20; font-weight: 700; }
+.bc-op { color: #FFF8E6; -webkit-text-stroke: 4px #9A4A06; }
+.bc-board { padding: 22px 54px 30px; min-width: min(560px, 80vw); border-radius: 14px; text-align: center; border: 14px solid #A8743E;
+  background: radial-gradient(ellipse at 40% 30%, #3E6B4E, #2B4F38 70%, #223F2D); box-shadow: inset 0 0 0 3px rgba(0,0,0,.18), inset 0 0 40px rgba(0,0,0,.35), 0 8px 0 #7A5028, 0 16px 26px rgba(0,0,0,.25); position: relative; }
+.bc-board::after { content: ""; position: absolute; left: 18%; bottom: -12px; width: 46px; height: 8px; border-radius: 4px; background: #F4F1E8; box-shadow: 0 1px 2px rgba(0,0,0,.3); }
+.bc-chalk { font: 700 clamp(56px, 8vw, 104px)/1.1 "Comic Sans MS", "Chalkboard SE", var(--display); color: #F6F3EA; letter-spacing: .04em; text-shadow: 0 0 2px rgba(255,255,255,.6), 1px 1px 0 rgba(255,255,255,.15); }
+.bc-desk { background: linear-gradient(180deg, #B98552, #9C6A3A) !important; border-color: #7E5228 !important; }
+.bc-btn { background: radial-gradient(circle at 35% 30%, #FFFDF6, #F3E3C3 70%, #E2C690) !important; border-color: #FFF8E6 !important; color: #6B3A0E !important; box-shadow: 0 6px 0 #8E6438, 0 10px 16px rgba(0,0,0,.2) !important; }
+.bc-btn.right { background: radial-gradient(circle at 35% 30%, #D8F5C4, #8CD46A 70%, #5FA941) !important; color: #fff !important; }
+.bc-btn.wrong { background: radial-gradient(circle at 35% 30%, #FFD9D3, #F09A8C 70%, #D9604E) !important; color: #fff !important; }
+.bc-tray .bc-pics img, html.look2.hub-c .bc-tray .bc-pics img { width: clamp(34px, 4.2vw, 58px); }
+/* предметите лежат в таблата: по-големи, леко застъпени, със сянка; предният ръб на таблата е върху тях */
+.bc-cloud.bc-tray { width: clamp(280px, 34vw, 440px); }
+.bc-tray .bc-pics { left: 13%; right: 13%; top: 8%; bottom: 24%; gap: 0; }
+.bc-tray .bc-pics img, html.look2.hub-c .bc-tray .bc-pics img { width: clamp(46px, 5.6vw, 74px); margin: -6px -4px; filter: drop-shadow(0 6px 4px rgba(70,40,10,.35)); }
+.bc-tray .bc-pics img:nth-child(2n) { transform: rotate(8deg); } .bc-tray .bc-pics img:nth-child(3n) { transform: rotate(-10deg); }
+.bc-rim { position: absolute; inset: 0; pointer-events: none; background: url(../assets/img/math/tray.png) center / contain no-repeat;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 58%, #000 66%); mask-image: linear-gradient(to bottom, transparent 58%, #000 66%); }
+/* отговорите – на дървена дъска от летви с гвоздейчета */
+.bc-desk { position: relative; border: 0 !important; border-radius: 10px !important; padding: 22px 28px !important;
+  background:
+    radial-gradient(circle at 18px 50%, #5A3A1A 3px, transparent 4px) 0 0 / 100% 33.4% repeat-y,
+    radial-gradient(circle at calc(100% - 18px) 50%, #5A3A1A 3px, transparent 4px) 0 0 / 100% 33.4% repeat-y,
+    linear-gradient(180deg, transparent 0 31.5%, #6E4520 31.5% 33.4%, transparent 33.4% 64.8%, #6E4520 64.8% 66.7%, transparent 66.7%),
+    repeating-linear-gradient(90deg, rgba(110,60,20,.08) 0 3px, transparent 3px 22px),
+    linear-gradient(180deg, #C8925A, #B07A44 33%, #C08A52 34%, #A9733E 66%, #BC8650 67%, #A06A36) !important;
+  box-shadow: 0 6px 0 #6B4520, 0 12px 20px rgba(0,0,0,.25) !important; }
+.bc-tray .bc-pics { top: 6%; bottom: 33%; }
+.bc-rim { -webkit-mask-image: linear-gradient(to bottom, transparent 70%, #000 76%); mask-image: linear-gradient(to bottom, transparent 70%, #000 76%); }
+/* пълна памет – знак за възрастен и изчакване преди следваща игра (23.10) */
+.unsaved-warn { position: fixed; top: calc(10px + env(safe-area-inset-top, 0px)); right: calc(10px + env(safe-area-inset-right, 0px)); z-index: 9998; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #B4540A; color: #fff; font: 800 24px/44px system-ui, sans-serif; box-shadow: 0 2px 8px rgba(0,0,0,.3); }
+.unsaved-panel { position: fixed; top: 64px; right: 12px; z-index: 9999; max-width: 380px; background: #fff; color: #2B2233; border-radius: 14px; padding: 16px 18px; box-shadow: 0 8px 30px rgba(0,0,0,.35); font: 16px/1.45 system-ui, sans-serif; }
+.unsaved-panel h3 { margin: 0 0 6px; font-size: 18px; } .unsaved-panel p { margin: 0 0 8px; }
+.unsaved-close { min-height: 44px; padding: 8px 16px; border: 0; border-radius: 10px; background: #E5167A; color: #fff; font-weight: 700; }
+.wait-sync { position: fixed; inset: 0; z-index: 9990; display: grid; place-items: center; background: rgba(20,16,40,.55); color: #fff; font: 700 30px system-ui, sans-serif; }

@@ -10,7 +10,7 @@
     "Иво изкопа дупка в саксията.",
     "Сложи едно семе в дупката.",
     "Поля семето с вода.",
-    "След седмица поникна цвете."
+    "След няколко седмици цъфна цвете."
    ],
    "hint_first": "Какво трябва да има в саксията, преди да сложиш семето?",
    "kind": "процедура",
@@ -21,14 +21,16 @@
     "assets/img/art/seq/q01_3.jpg?v=1",
     "assets/img/art/seq/q01_4.jpg?v=1"
    ],
-   "time_words": [
-    "След седмица"
-   ],
+   "time_words": [],
    "pool": "practice",
+   "reading_difficulty": "средна",
+   "sequence_difficulty": "лесна",
    "profile": {
+    "reading_difficulty": "средна",
+    "sequence_difficulty": "лесна",
     "steps": 4,
-    "avg_words": 4.5,
-    "time_words": true,
+    "avg_words": 4.8,
+    "time_words": false,
     "causal": null,
     "order_obvious": null,
     "kind": "процедура"
@@ -51,7 +53,11 @@
     "После"
    ],
    "pool": "practice",
+   "reading_difficulty": "средна",
+   "sequence_difficulty": "лесна",
    "profile": {
+    "reading_difficulty": "средна",
+    "sequence_difficulty": "лесна",
     "steps": 4,
     "avg_words": 4.0,
     "time_words": true,
@@ -82,7 +88,11 @@
     "Накрая"
    ],
    "pool": "practice",
+   "reading_difficulty": "лесна",
+   "sequence_difficulty": "средна",
    "profile": {
+    "reading_difficulty": "лесна",
+    "sequence_difficulty": "средна",
     "steps": 4,
     "avg_words": 4.2,
     "time_words": true,
@@ -106,7 +116,11 @@
    "pictures": null,
    "time_words": [],
    "pool": "assessment",
+   "reading_difficulty": "средна",
+   "sequence_difficulty": "средна",
    "profile": {
+    "reading_difficulty": "средна",
+    "sequence_difficulty": "средна",
     "steps": 4,
     "avg_words": 4.2,
     "time_words": false,
@@ -130,7 +144,11 @@
    "pictures": null,
    "time_words": [],
    "pool": "assessment",
+   "reading_difficulty": "средна",
+   "sequence_difficulty": "лесна",
    "profile": {
+    "reading_difficulty": "средна",
+    "sequence_difficulty": "лесна",
     "steps": 4,
     "avg_words": 5.0,
     "time_words": false,
@@ -156,7 +174,11 @@
     "Накрая"
    ],
    "pool": "assessment",
+   "reading_difficulty": "средна",
+   "sequence_difficulty": "лесна",
    "profile": {
+    "reading_difficulty": "средна",
+    "sequence_difficulty": "лесна",
     "steps": 4,
     "avg_words": 5.0,
     "time_words": true,
@@ -171,7 +193,7 @@
    "steps": [
     "Небето стана сиво.",
     "Заваля силен дъжд.",
-    "Иво отвори чадъра си.",
+    "Когато заваля, Иво отвори чадъра си.",
     "После излезе слънце и дъга."
    ],
    "hint_first": "Защо Иво отвори чадъра – какво стана преди това?",
@@ -187,9 +209,13 @@
     "После"
    ],
    "pool": "practice",
+   "reading_difficulty": "лесна",
+   "sequence_difficulty": "лесна",
    "profile": {
+    "reading_difficulty": "лесна",
+    "sequence_difficulty": "лесна",
     "steps": 4,
-    "avg_words": 3.8,
+    "avg_words": 4.2,
     "time_words": true,
     "causal": null,
     "order_obvious": null,
@@ -213,7 +239,11 @@
     "Накрая"
    ],
    "pool": "assessment",
+   "reading_difficulty": "средна",
+   "sequence_difficulty": "лесна",
    "profile": {
+    "reading_difficulty": "средна",
+    "sequence_difficulty": "лесна",
     "steps": 4,
     "avg_words": 4.8,
     "time_words": true,
@@ -242,7 +272,11 @@
    ],
    "time_words": [],
    "pool": "practice",
+   "reading_difficulty": "средна",
+   "sequence_difficulty": "лесна",
    "profile": {
+    "reading_difficulty": "средна",
+    "sequence_difficulty": "лесна",
     "steps": 4,
     "avg_words": 3.8,
     "time_words": false,
@@ -266,7 +300,11 @@
    "pictures": null,
    "time_words": [],
    "pool": "assessment",
+   "reading_difficulty": "висока",
+   "sequence_difficulty": "средна",
    "profile": {
+    "reading_difficulty": "висока",
+    "sequence_difficulty": "средна",
     "steps": 4,
     "avg_words": 4.0,
     "time_words": false,
@@ -293,7 +331,11 @@
     "Вечерта"
    ],
    "pool": "assessment",
+   "reading_difficulty": "висока",
+   "sequence_difficulty": "средна",
    "profile": {
+    "reading_difficulty": "висока",
+    "sequence_difficulty": "средна",
     "steps": 5,
     "avg_words": 4.2,
     "time_words": true,
@@ -318,7 +360,11 @@
    "pictures": null,
    "time_words": [],
    "pool": "assessment",
+   "reading_difficulty": "средна",
+   "sequence_difficulty": "средна",
    "profile": {
+    "reading_difficulty": "средна",
+    "sequence_difficulty": "средна",
     "steps": 5,
     "avg_words": 4.6,
     "time_words": false,
@@ -342,8 +388,12 @@
    "level": null,
    "pictures": null,
    "time_words": [],
-   "pool": "assessment",
+   "pool": "practice",
+   "reading_difficulty": "висока",
+   "sequence_difficulty": "лесна",
    "profile": {
+    "reading_difficulty": "висока",
+    "sequence_difficulty": "лесна",
     "steps": 5,
     "avg_words": 5.0,
     "time_words": false,
@@ -370,7 +420,11 @@
     "Вечерта"
    ],
    "pool": "assessment",
+   "reading_difficulty": "висока",
+   "sequence_difficulty": "лесна",
    "profile": {
+    "reading_difficulty": "висока",
+    "sequence_difficulty": "лесна",
     "steps": 5,
     "avg_words": 4.4,
     "time_words": true,
@@ -401,7 +455,11 @@
     "Накрая"
    ],
    "pool": "practice",
+   "reading_difficulty": "средна",
+   "sequence_difficulty": "лесна",
    "profile": {
+    "reading_difficulty": "средна",
+    "sequence_difficulty": "лесна",
     "steps": 4,
     "avg_words": 4.8,
     "time_words": true,
@@ -430,7 +488,11 @@
    ],
    "time_words": [],
    "pool": "practice",
+   "reading_difficulty": "лесна",
+   "sequence_difficulty": "средна",
    "profile": {
+    "reading_difficulty": "лесна",
+    "sequence_difficulty": "средна",
     "steps": 4,
     "avg_words": 4.0,
     "time_words": false,
@@ -459,7 +521,11 @@
    ],
    "time_words": [],
    "pool": "practice",
+   "reading_difficulty": "висока",
+   "sequence_difficulty": "средна",
    "profile": {
+    "reading_difficulty": "висока",
+    "sequence_difficulty": "средна",
     "steps": 4,
     "avg_words": 4.8,
     "time_words": false,
@@ -488,7 +554,11 @@
    ],
    "time_words": [],
    "pool": "practice",
+   "reading_difficulty": "средна",
+   "sequence_difficulty": "средна",
    "profile": {
+    "reading_difficulty": "средна",
+    "sequence_difficulty": "средна",
     "steps": 4,
     "avg_words": 4.0,
     "time_words": false,
@@ -508,7 +578,7 @@
    ],
    "hint_first": "От какво се появява малката ябълка?",
    "kind": "природен процес",
-   "level": "трудна",
+   "level": "лесна",
    "pictures": [
     "assets/img/art/seq/q19_1.jpg?v=1",
     "assets/img/art/seq/q19_2.jpg?v=1",
@@ -517,7 +587,11 @@
    ],
    "time_words": [],
    "pool": "practice",
+   "reading_difficulty": "висока",
+   "sequence_difficulty": "лесна",
    "profile": {
+    "reading_difficulty": "висока",
+    "sequence_difficulty": "лесна",
     "steps": 4,
     "avg_words": 7.0,
     "time_words": false,
@@ -546,7 +620,11 @@
    ],
    "time_words": [],
    "pool": "practice",
+   "reading_difficulty": "средна",
+   "sequence_difficulty": "трудна",
    "profile": {
+    "reading_difficulty": "средна",
+    "sequence_difficulty": "трудна",
     "steps": 4,
     "avg_words": 4.8,
     "time_words": false,
@@ -575,7 +653,11 @@
    ],
    "time_words": [],
    "pool": "practice",
+   "reading_difficulty": "висока",
+   "sequence_difficulty": "трудна",
    "profile": {
+    "reading_difficulty": "висока",
+    "sequence_difficulty": "трудна",
     "steps": 4,
     "avg_words": 5.0,
     "time_words": false,
@@ -604,7 +686,11 @@
    ],
    "time_words": [],
    "pool": "practice",
+   "reading_difficulty": "висока",
+   "sequence_difficulty": "трудна",
    "profile": {
+    "reading_difficulty": "висока",
+    "sequence_difficulty": "трудна",
     "steps": 4,
     "avg_words": 4.8,
     "time_words": false,
@@ -619,7 +705,7 @@
    "steps": [
     "Мая взе лист и моливи.",
     "Нарисува къща и дърво.",
-    "Оцвети слънцето в жълто.",
+    "Добави жълто слънце и довърши рисунката.",
     "Сложи рисунката в рамка.",
     "Подари рисунката на баба."
    ],
@@ -629,9 +715,13 @@
    "pictures": null,
    "time_words": [],
    "pool": "assessment",
+   "reading_difficulty": "висока",
+   "sequence_difficulty": "лесна",
    "profile": {
+    "reading_difficulty": "висока",
+    "sequence_difficulty": "лесна",
     "steps": 5,
-    "avg_words": 4.2,
+    "avg_words": 4.6,
     "time_words": false,
     "causal": 0,
     "order_obvious": "висока",
@@ -645,8 +735,8 @@
     "Иво и татко купиха рибка от магазина.",
     "Вкъщи татко напълни аквариума с вода.",
     "Иво пусна рибката във водата.",
-    "Даде ѝ малко храна.",
-    "Рибката заплува весело."
+    "Иво даде на рибката малко храна.",
+    "Рибката изяде храната и заплува весело."
    ],
    "hint_first": "Какво трябва да има в аквариума, преди да пуснеш рибката?",
    "kind": "процедура",
@@ -654,9 +744,13 @@
    "pictures": null,
    "time_words": [],
    "pool": "assessment",
+   "reading_difficulty": "висока",
+   "sequence_difficulty": "средна",
    "profile": {
+    "reading_difficulty": "висока",
+    "sequence_difficulty": "средна",
     "steps": 5,
-    "avg_words": 5.0,
+    "avg_words": 6.0,
     "time_words": false,
     "causal": 1,
     "order_obvious": "средна",
@@ -679,7 +773,11 @@
    "pictures": null,
    "time_words": [],
    "pool": "assessment",
+   "reading_difficulty": "средна",
+   "sequence_difficulty": "средна",
    "profile": {
+    "reading_difficulty": "средна",
+    "sequence_difficulty": "средна",
     "steps": 5,
     "avg_words": 4.6,
     "time_words": false,
@@ -706,7 +804,11 @@
     "Накрая"
    ],
    "pool": "assessment",
+   "reading_difficulty": "средна",
+   "sequence_difficulty": "средна",
    "profile": {
+    "reading_difficulty": "средна",
+    "sequence_difficulty": "средна",
     "steps": 5,
     "avg_words": 5.2,
     "time_words": true,
@@ -720,7 +822,7 @@
    "title": "Хранилката",
    "steps": [
     "Навън валеше сняг и беше студено.",
-    "Птичките не можеха да намерят храна.",
+    "Заради снега птичките трудно намираха храна.",
     "Мая сложи семена в хранилката.",
     "Накрая птичките долетяха и ядоха."
    ],
@@ -732,7 +834,11 @@
     "Накрая"
    ],
    "pool": "assessment",
+   "reading_difficulty": "висока",
+   "sequence_difficulty": "средна",
    "profile": {
+    "reading_difficulty": "висока",
+    "sequence_difficulty": "средна",
     "steps": 4,
     "avg_words": 5.5,
     "time_words": true,
@@ -742,13 +848,42 @@
    }
   },
   {
+   "id": "q29",
+   "title": "Балонът за рождения ден",
+   "steps": [
+    "Иво взе един червен балон.",
+    "Той го наду силно.",
+    "Татко завърза балона с конец.",
+    "Иво закачи балона на вратата.",
+    "Гостите дойдоха и видяха балона."
+   ],
+   "hint_first": "Какво трябва да стане с балона, преди татко да го завърже?",
+   "kind": "процедура",
+   "level": null,
+   "pictures": null,
+   "time_words": [],
+   "pool": "assessment",
+   "reading_difficulty": "средна",
+   "sequence_difficulty": "лесна",
+   "profile": {
+    "reading_difficulty": "средна",
+    "sequence_difficulty": "лесна",
+    "steps": 5,
+    "avg_words": 4.8,
+    "time_words": false,
+    "causal": 0,
+    "order_obvious": "висока",
+    "kind": "процедура"
+   }
+  },
+  {
    "id": "q27",
    "title": "Счупената количка",
    "steps": [
-    "Количката на Иво се счупи.",
-    "Едно колело падна на пода.",
+    "Иво играеше с количката.",
+    "Едното ѝ колело се счупи и падна на пода.",
     "Иво занесе количката на дядо.",
-    "Дядо залепи колелото.",
+    "Дядо поправи колелото.",
     "Иво пак игра с количката."
    ],
    "hint_first": "Защо Иво занесе количката на дядо – какво стана преди това?",
@@ -757,9 +892,13 @@
    "pictures": null,
    "time_words": [],
    "pool": "assessment",
+   "reading_difficulty": "висока",
+   "sequence_difficulty": "средна",
    "profile": {
+    "reading_difficulty": "висока",
+    "sequence_difficulty": "средна",
     "steps": 5,
-    "avg_words": 4.6,
+    "avg_words": 5.2,
     "time_words": false,
     "causal": 2,
     "order_obvious": "средна",
@@ -807,14 +946,14 @@
      "q09",
      "q15",
      "q01",
-     "q07"
+     "q07",
+     "q19"
     ],
     [
      "q03",
      "q16",
      "q17",
      "q18",
-     "q19",
      "q20",
      "q21",
      "q22"
@@ -829,7 +968,7 @@
     "A": [
      "q11",
      "q12",
-     "q13"
+     "q29"
     ],
     "B": [
      "q14",
@@ -846,7 +985,7 @@
   "CH20.Р1": {
    "view": "sentences",
    "pool": "practice",
-   "n": 2,
+   "n": 1,
    "steps": 4
   }
  },
@@ -857,6 +996,7 @@
    "q03",
    "q07",
    "q09",
+   "q13",
    "q15",
    "q16",
    "q17",
@@ -874,14 +1014,14 @@
    "q10",
    "q11",
    "q12",
-   "q13",
    "q14",
    "q23",
    "q24",
    "q25",
    "q26",
    "q27",
-   "q28"
+   "q28",
+   "q29"
   ]
  },
  "pictures_missing": [],

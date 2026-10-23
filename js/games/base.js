@@ -18,6 +18,7 @@
       this.total = Number(settings.examples || 4);
       this.idx = 0; this.correct = 0; this.wrong = 0; this.streak = 0; this.bestStreak = 0; this.wrongStreak = 0;
       this.livesLeft = this.tier; this.log = []; this.startedAt = Date.now();
+      if (/[?&]qa=1\b/.test(location.hash)) window.__qa = this; // само за проверката на потока (tools/qa_bukvarika)
       this.timerId = null; this.roundStart = 0; this.locked = false; this.finished = false;
       // Адаптивност: -1 по-лесно, 0 както е зададено, +1 по-трудно. Движи се само в рамката на учителя.
       this.adapt = 0; this.adaptLog = [];
@@ -27,6 +28,13 @@
     startRound() {}
     get gameId() { return "base"; }
     get skillName() { return ""; }
+    // Режимът на задачата от js/games/modes.js: [заглавие, mode_id, посока]. Банковите изгледи на Букварика имат своите (bankGame.js).
+    modeInfo() {
+      const M = (window.GAME_MODES || {})[this.gameId];
+      if (!M || (window.BANK_GAME && this instanceof window.BANK_GAME)) return null;
+      const v = this.view != null && M.by === "view" ? this.view : M.by === "level" ? (this.level != null ? this.level : this.s.level) : M.by ? this.s[M.by] : "";
+      return M.modes[String(v == null || v === "" ? M.def : v)] || M.modes[M.def] || null;
+    }
 
     start() {
       this.render();
@@ -46,9 +54,11 @@
     }
     nextRound() {
       if (this.finished) return;
-      if (this.idx >= this.total) return this.finish();
+      if (this.idx >= this.total) { this.renderProgress(); return this.finish(); }   // последната точка също се оцветява
       this.locked = false; this.renderProgress();
       this.roundStart = Date.now();
+      const mi = this.modeInfo(), t = document.getElementById("game-title"); if (mi && t && !document.documentElement.classList.contains("look2")) t.textContent = mi[0];   // „един свят“: на дъската остава името на играта
+      this.screenNo = (this.screenNo || 0) + 1;
       this.startRound();
     }
     // Събитие за една задача по схемата на измерването.
@@ -61,7 +71,25 @@
         primary_skill_code: c.skill || null, secondary_skill_code: c.skill2 || null, content_bank_id: c.bank || null,
         is_measurement_item: c.meas === "1", is_free_play: !this.learn, mode: this.mode, module_mode: c.mm || "trainer",
         timestamp: new Date().toISOString()
-      }, extra || {});
+      }, this.rb ? { bank_slot: this.rb.slot, item_set: this.rb.set } : this.mb ? { bank_slot: this.mb.slot, item_set: this.mb.set } : {}, this.modeFields(), this.decisionFields(ok), extra || {}, this.uidFields(extra));
+    }
+    // постоянен идентификатор на задачата (itemUid.js); null – свободна игра или задача без банка
+    uidFields(extra) {
+      const U = window.ITEM_UID; if (!U) return {};
+      const uid = U.of(this, extra); if (!uid) return { item_uid: null };
+      const inf = U.info(uid) || {};
+      return { item_uid: uid, item_version: inf.item_version || 1, bank_version: U.version(), item_skill: inf.skill || null };
+    }
+    modeFields() {
+      const mi = this.modeInfo(); if (!mi) return {};
+      const src = mi[3] || (this.s && String(this.s.retell) === "1" ? "combined" : this.ctx.skill === "E5" ? "combined" : "machine"); // E5 (плавност): платформата мери предпоставка, статусът е от наблюдението
+      return { view_name: mi[0], mode_id: mi[1], direction: mi[2], status_source: src, obs_required: src === "combined" };
+    }
+    // Сложни задачи (история, подреждане): една задача носи няколко оценени решения. Играта слага this.decisions преди отговора;
+    // иначе една задача = едно решение. Правилото за минимума в измерването брои решенията (scored_decision_count).
+    decisionFields(ok) {
+      const d = this.decisions; this.decisions = null;
+      return Object.assign({ task_count: 1, scored_decision_count: 1, correct_scored_decisions: ok ? 1 : 0 }, d || {});
     }
     // Записва отговор и движи адаптивността: 3 верни подред → по-трудно, 2 грешни подред → по-лесно (само ако е позволена).
     answer(ok, { text, answer, given }) {
@@ -87,6 +115,9 @@
     finishSoon() { this.finished = true; setTimeout(() => this.finish(true), 1300); }
     advance(delay) { setTimeout(() => { if (this.finished) return; this.idx++; this.shell.hideFlash(); this.nextRound(); }, delay); }
     say(text) { this.shell.say(text); }
+    // методист 19.10 (Читарика): кратката инструкция се казва веднъж преди играта; в самата игра задачата и думите
+    // не се четат – детето чете само. Похвалата и бутоните „Чуй“ (this.say) остават.
+    prompt(text) { this.promptsSkipped = (this.promptsSkipped || 0) + 1; }
     finish(early) {
       if (this.finished && this.timerId === null) return;
       this.finished = true; clearInterval(this.timerId); this.timerId = null;
@@ -107,7 +138,12 @@
         lesson_id: c.lesson || null, round_id: c.round != null ? Number(c.round) : null, game_template_id: c.tpl || this.gameId,
         primary_skill_code: c.skill || null, secondary_skill_code: c.skill2 || null, content_bank_id: c.bank || null,
         is_measurement_item: c.meas === "1", module_mode: c.mm || "trainer",
-        skill: this.skillName, at: new Date().toISOString(), log: this.log, events: items
+        skill: this.skillName, at: new Date().toISOString(), log: this.log, events: items,
+        // три броя (23.10): планираните са по картата (сървърът), показаните – total, наличните в банката – доколкото играта ги знае
+        presented_items: this.total, available_items: this.availableItems != null ? this.availableItems : this.rb ? this.rb.units.length : this.mb ? (this.mb.units || []).length : null,
+        // повторения на инструкцията (👂) – сигнал за ясна/неясна инструкция, не за грешка
+        instruction_text: this.instructionText || null, instruction_replay_count: (this.instrReplays || []).length, instruction_replayed: !!(this.instrReplays || []).length,
+        time_to_first_instruction_replay: (this.instrReplays || [])[0] ? this.instrReplays[0].ms : null, instruction_replay_items: (this.instrReplays || []).map(r => r.item)
       });
     }
     destroy() { clearInterval(this.timerId); this.timerId = null; this.finished = true; this.shell.arena.innerHTML = ""; document.documentElement.classList.remove("mode-learn"); }

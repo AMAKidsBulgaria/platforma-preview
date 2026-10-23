@@ -241,3 +241,37 @@
 .sc-read { gap: 8px; } .sc-read h3 { font-size: 24px; }
 .sc-read .sc-line p { font-size: 18px; padding: 4px 12px; } .sc-read .sc-ava { width: 34px; height: 34px; }
 .sc-read .sc-dlg { gap: 4px; } .sc-role { gap: 8px; font-size: 18px; } .sc-role small { font-size: 14px; }
+
+/* Редактирай изречението / Думата в контекст / Задай въпрос (Читарика 15, 11, 20) */
+.es { display: flex; flex-direction: column; align-items: center; gap: 18px; max-width: 900px; margin: 0 auto; }
+.es-sent { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 2px; background: #fff; border-radius: 18px; padding: 18px 22px; box-shadow: 0 4px 0 rgba(0,0,0,.08); font-family: var(--display); font-size: 34px; font-weight: 700; color: #3A2410; }
+.es-w { font: inherit; color: inherit; background: none; border: 0; border-radius: 10px; padding: 2px 6px; cursor: pointer; }
+.es-w:hover, .es-w.on { background: #FFF1C9; }
+.es-w.good { background: #D6F3E3; } .es-w.bad { background: #F8D7D3; } .es-w.hint { box-shadow: 0 0 0 3px #FFD34D; }
+.es-gap { width: 18px; height: 38px; border: 0; background: none; cursor: pointer; position: relative; padding: 0; }
+.es-gap::after { content: ""; position: absolute; left: 50%; top: 50%; width: 6px; height: 6px; margin: -3px; border-radius: 50%; background: #C9B79B; }
+.es-gap:hover::after { width: 10px; height: 10px; margin: -5px; background: #9B7B4E; }
+.es-gap.good::after { background: var(--good); width: 12px; height: 12px; margin: -6px; } .es-gap.bad::after { background: var(--bad); } .es-gap.hint::after { background: #FFC21A; width: 12px; height: 12px; margin: -6px; }
+.es-sent.done .es-gap { display: none; }
+.es-end { margin-left: 2px; } .es-fixed { padding: 2px 6px; }
+.es-note { font-size: 17px; color: #EDE7FF; margin: 0; text-align: center; }
+.wc-blank { display: inline-block; min-width: 110px; text-align: center; border-bottom: 3px dashed #C9B79B; margin: 0 8px; color: #9B7B4E; }
+.wc-blank.on { border-bottom-color: var(--good); color: #2E7D4F; }
+.aq-built { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; min-height: 52px; padding: 8px 12px; border-radius: 14px; background: #FFF7E3; border: 2px dashed #E3C98F; }
+.aq-q { font-family: var(--display); font-weight: 700; font-size: 24px; color: #3A2410; }
+.aq-empty { color: #B39A73; font-size: 20px; }
+.aq-final { font-family: var(--display); font-weight: 700; font-size: 22px; padding: 4px 10px; border-radius: 10px; }
+.aq-final.good { background: #D6F3E3; } .aq-final.hint { background: #FFF1C9; }
+
+/* Направи изречението ясно (Ч14): изглежда като обикновен текст; местата между буквите се докосват, но не се виждат */
+.cv-row { display: inline-flex; flex-wrap: wrap; align-items: center; }
+.cv-l { font: inherit; color: inherit; background: none; border: 0; border-radius: 6px; padding: 0; margin: 0; cursor: pointer; letter-spacing: 0; }
+.cv-l:hover { background: #FFF1C9; } .cv-l.good { background: #D6F3E3; } .cv-l.bad { background: #F8D7D3; } .cv-l.hint { box-shadow: 0 0 0 3px #FFD34D; }
+.cv-gap { width: 7px; height: 44px; margin: 0 -1px; border: 0; background: none; cursor: pointer; position: relative; padding: 0; border-radius: 4px; }
+.cv-gap:hover { background: rgba(155,123,78,.18); }
+.cv-gap.on { width: 22px; }
+.cv-gap.good { background: rgba(46,125,79,.18); } .cv-gap.bad { background: rgba(176,58,46,.22); }
+.cv-end { min-width: 16px; } .cv-end.good { color: #2E7D4F; } .cv-end.bad { color: var(--bad); }
+.cv-marks { flex-direction: row !important; justify-content: center; gap: 14px; }
+.cv-marks .st-opt { width: 84px !important; min-width: 0 !important; flex: 0 0 auto; font-size: 34px; }
+.cv-marks .st-opt.on { background: #D6F3E3; border-color: var(--good); }

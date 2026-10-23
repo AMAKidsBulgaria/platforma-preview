@@ -59,10 +59,11 @@
       const bad = shuffle([...ALPHA].filter(l => !noRot.includes(l))).slice(0, n);
       const good = shuffle([...ALPHA].filter(l => !bad.includes(l))).slice(0, 6 - n);
       this.items = shuffle(bad.map(l => ({ l, bad: true })).concat(good.map(l => ({ l, bad: false })))); this.left = n;
+      const L2 = document.documentElement.classList.contains("look2");   // нов вид: редът остава, но въпросът не се изговаря втори път в първия рунд (кратката инструкция току-що е казана)
       this.box.innerHTML = `<div class="az-hint">Някои букви са обърнати наопаки. Докосни ги, за да ги изправиш.</div><div class="le-row" id="row"></div>`;
       const row = this.box.querySelector("#row");
       this.items.forEach(it => { const b = document.createElement("button"); b.type = "button"; b.className = "az-tile le-tile"; b.innerHTML = `<span class="${it.bad ? "flip" : ""}">${it.l}</span>`; b.setAttribute("aria-label", `Буква ${it.l}`); b.addEventListener("pointerdown", e => { e.preventDefault(); this.tapL1(b, it); }); row.appendChild(b); });
-      this.say("Кои букви са обърнати?");
+      if (!(L2 && this.idx === 0)) this.say("Кои букви са обърнати?");
     }
     tapL1(b, it) {
       if (this.finished || this.locked) return;
@@ -74,12 +75,21 @@
     startL2() {
       const letter = this.letters[this.idx % this.letters.length], strokes = L[letter]; this.cur = letter; this.need = strokes.length; this.got = 0;
       const others = Object.keys(L).filter(k => k !== letter), decoys = [];
-      let guard = 0; while (decoys.length < 3 && guard++ < 60) { const k = others[rnd(others.length)], d = L[k][rnd(L[k].length)]; if (!strokes.includes(d) && !decoys.includes(d)) decoys.push(d); }
+      // чуждите елементи не бива да изглеждат като елемент на буквата (напр. още една вертикална черта при „Н“):
+      // сравнява се формата – видът на щриха и размерът му, без мястото в полето
+      const look = d => { const t = d.match(/[a-zA-Z]|-?[\d.]+/g); let x = 0, y = 0, x0 = 0, y0 = 0, mnx = 1e9, mny = 1e9, mxx = -1e9, mxy = -1e9, cmds = "", i = 0;
+        const add = () => { mnx = Math.min(mnx, x); mny = Math.min(mny, y); mxx = Math.max(mxx, x); mxy = Math.max(mxy, y); };
+        while (i < t.length) { const c = t[i++]; cmds += c.toUpperCase();
+          if (c === "M" || c === "L") { x = +t[i++]; y = +t[i++]; } else if (c === "H") x = +t[i++]; else if (c === "V") y = +t[i++];
+          else if (c === "a") { i += 5; x += +t[i++]; y += +t[i++]; } else if (c === "q") { i += 2; x += +t[i++]; y += +t[i++]; } add(); }
+        return cmds.replace(/M/g, "") + ":" + Math.round((mxx - mnx) / 15) + "x" + Math.round((mxy - mny) / 15); };
+      const own = new Set(strokes.map(look));
+      let guard = 0; while (decoys.length < 3 && guard++ < 200) { const k = others[rnd(others.length)], d = L[k][rnd(L[k].length)]; if (!own.has(look(d)) && !decoys.some(x => look(x) === look(d))) decoys.push(d); }
       const elems = shuffle(strokes.map((d, i) => ({ d, i })).concat(decoys.map(d => ({ d, i: -1 }))));
       this.box.innerHTML = `<div class="az-hint">Намери всички елементи на буквата „${letter}“.</div><div class="le-big">${svg(strokes, "st hid")}</div><div class="le-elems" id="elems"></div>`;
       this.big = this.box.querySelector(".le-big svg"); const el = this.box.querySelector("#elems"); if (elems.length > 5) el.classList.add("many");
       elems.forEach(e => { const b = document.createElement("button"); b.type = "button"; b.className = "az-tile le-elem"; b.innerHTML = svg([e.d], "st"); b.setAttribute("aria-label", e.i >= 0 ? "Елемент от буквата" : "Чужд елемент"); b.addEventListener("pointerdown", ev => { ev.preventDefault(); this.tapL2(b, e); }); el.appendChild(b); });
-      this.say(`Събери буквата ${letter}`);
+      this.say(`Събери буквата ${letter}`);   // казва коя е буквата – нова информация всеки рунд
     }
     tapL2(b, e) {
       if (this.finished || this.locked || b.classList.contains("gone")) return;

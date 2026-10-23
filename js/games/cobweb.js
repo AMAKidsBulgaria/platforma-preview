@@ -7,7 +7,7 @@
   const OBJS = ["obj/apple", "obj/banana", "obj/carrot", "obj/cherries", "obj/cookie", "obj/cupcake", "obj/donut-sprinkles", "obj/ice-cream-cne", "obj/strawberry", "obj/watermelon", "obj/pear", "obj/pumpkin", "obj/lemon", "obj/orange", "obj/mushroom", "obj/pineapple", "obj/grapes", "obj/coconut", "obj/corn", "obj/tomato", "fish_orange", "fish_blue", "fish_red", "fish_green", "fish_pink", "fish_brown"];
   const MAX = 10; // числата в играта са до 10 (както при тях)
   // адаптивност: -1 → числа до 6, 0 → до 10, +1 → до 10, но по-близки количества (по-трудно различаване)
-  const pics = (name, count) => { const cols = count <= 4 ? 2 : count <= 6 ? 3 : 4; return `<span class="pics" style="--cols:${cols}">${Array.from({ length: count }, () => `<img src="assets/img/${name}.png" alt="" draggable="false">`).join("")}</span>`; };
+  const pics = (name, count) => { const cols = count <= 4 ? 2 : count <= 6 ? 3 : 4; return `<span class="pics" style="--cols:${cols}">${Array.from({ length: count }, () => `<img src="assets/img/${name}.png?v=p2" alt="" draggable="false">`).join("")}</span>`; };
   // различни количества за всички групи в реда
   function distinctCounts(n, adapt) {
     const max = adapt < 0 ? 6 : MAX; const set = new Set();
@@ -19,16 +19,22 @@
   class CobwebGame extends BaseGame {
     get gameId() { return "cobweb"; }
     get skillName() { return ({ 1: "Число и количество до 10", 2: "Свързване на число с количество", 3: "Подреждане по брой" })[Number(this.s.level)] || "Число и количество"; }
+    // В домашната задачите идват от банката на рунда (config/math-banks.json, tools/math_banks/cobweb.py):
+    //   ниво 1: {"f": [[брой, показано число], ...]} – точно едно поле има брой = числото; ниво 2–3: {"c": [броеве]}.
+    start() { (window.MATH_BANK ? MATH_BANK.attach(this) : Promise.resolve()).then(() => super.start()); }
+    bankUnit() { const u = this.mb && this.mb.units.length ? this.mb.units[this.idx % this.mb.units.length] : null; return u && (this.level === 1 ? u.f : u.c) ? u : null; }
     render() {
       this.level = Number(this.s.level || 1); this.n = Number(this.s.fields || 3); this.asc = (this.s.dir || "fwd") === "fwd";
+      const u0 = this.bankUnit(); if (u0) this.n = (u0.f || u0.c).length;
       this.shell.arena.innerHTML = `<svg class="sea" viewBox="0 0 1200 760" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><use href="#scene-underwater"/></svg><div class="fields" id="fields"></div><div class="numrow" id="numrow"></div>`;
       this.box = this.shell.arena.querySelector("#fields"); this.numrow = this.shell.arena.querySelector("#numrow");
       this.box.style.setProperty("--n", this.n); this.numrow.style.setProperty("--n", this.n);
     }
     startRound() {
       this.numrow.innerHTML = ""; this.numrow.className = "numrow"; this.box.innerHTML = "";
-      const names = shuffle(OBJS.slice()).slice(0, this.n), counts = distinctCounts(this.n, this.adapt);
-      if (this.level === 1) this.roundMatch(names, counts);
+      const u = this.bankUnit(), names = shuffle(OBJS.slice()).slice(0, this.n);
+      const counts = u ? (u.f ? u.f.map(x => x[0]) : u.c.slice()) : distinctCounts(this.n, this.adapt);
+      if (this.level === 1) this.roundMatch(names, counts, u ? u.f.map(x => x[1]) : null);
       else if (this.level === 2) this.roundConnect(names, counts);
       else this.roundOrder(names, counts);
     }
@@ -45,10 +51,10 @@
       return b;
     }
     // ---- ниво 1 ----
-    roundMatch(names, counts) {
-      this.shell.setLabel("Къде числото е вярно?"); this.say("Къде числото е вярно?");
-      const okIdx = rnd(this.n);
-      const nums = counts.map((c, i) => { if (i === okIdx) return c; let v; do { v = 1 + rnd(MAX); } while (v === c); return v; });
+    roundMatch(names, counts, bankNums) {
+      this.shell.setLabel("Къде числото е вярно?"); this.prompt("Къде числото е вярно?");
+      const okIdx = bankNums ? bankNums.findIndex((v, i) => v === counts[i]) : rnd(this.n);
+      const nums = bankNums || counts.map((c, i) => { if (i === okIdx) return c; let v; do { v = 1 + rnd(MAX); } while (v === c); return v; });
       this.current = { text: `${counts[okIdx]} = ${counts[okIdx]} картинки`, answer: counts[okIdx] };
       counts.forEach((c, i) => {
         const b = this.field(names[i], c, `<b class="num">${nums[i]}</b>`);
@@ -65,7 +71,7 @@
     }
     // ---- ниво 2 ----
     roundConnect(names, counts) {
-      this.shell.setLabel("Свържи картинките с числото"); this.say("Свържи картинките с числото");
+      this.shell.setLabel("Свържи картинките с числото"); this.prompt("Свържи картинките с числото");
       this.current = { text: counts.join(" · "), answer: counts.join(",") };
       let picked = null, done = 0, wrongInRound = 0;
       counts.forEach((c, i) => {
@@ -99,7 +105,7 @@
     }
     // ---- ниво 3 ----
     roundOrder(names, counts) {
-      this.shell.setLabel(this.asc ? "От най-малко към най-много" : "От най-много към най-малко"); this.say(this.asc ? "Подреди от най-малко към най-много" : "Подреди от най-много към най-малко");
+      this.shell.setLabel(this.asc ? "От най-малко към най-много" : "От най-много към най-малко"); this.prompt(this.asc ? "Подреди от най-малко към най-много" : "Подреди от най-много към най-малко");
       const sorted = counts.slice().sort((a, b) => this.asc ? a - b : b - a);
       this.current = { text: sorted.join(this.asc ? " < " : " > "), answer: sorted.join(",") };
       let step = 0, wrongInRound = 0;
@@ -138,7 +144,7 @@
     settings: [
       { key: "level", label: "Ниво", type: "range", min: 1, max: 3, def: 1, help: "Ниво 1: намери вярното число. Ниво 2: свържи картинки с числа. Ниво 3: подреди по брой." },
       { key: "fields", label: "Полета в реда", type: "range", min: 2, max: 4, def: 3, help: "Колко групи вижда детето наведнъж." },
-      { key: "dir", label: "Посока", type: "cycle", options: [["fwd", "Напред"], ["back", "Назад"]], def: "fwd", help: "Само за ниво 3: Напред е от най-малко към най-много, Назад е обратното." },
+      { key: "dir", label: "Посока", type: "cycle", options: [["fwd", "Напред"], ["back", "Назад"]], def: "fwd", hiddenIf: s => Number(s.level) !== 3, help: "Само за ниво 3: Напред е от най-малко към най-много, Назад е обратното." },
       { key: "examples", label: "Брой примери", type: "range", min: 4, max: 10, def: 4 }
     ],
     paramsLine: s => `${s.examples} примера · ${s.fields} полета` + (Number(s.level) === 3 ? ` · ${s.dir === "back" ? "назад" : "напред"}` : "")

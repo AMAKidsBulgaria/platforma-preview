@@ -7,11 +7,19 @@
   class NumberLineGame extends BaseGame {
     get gameId() { return "numberLine"; }
     get skillName() { return Number(this.s.level) === 2 ? `Съседи на числата до ${this.s.max}` : `Числова права до ${this.s.max}`; }
+    // В домашната задачите идват от банката на рунда (config/math-banks.json, tools/math_banks/numberLine.py):
+    //   ниво 1: {"n": 7} – постави числото; ниво 2: {"n": 6, "ask": "after"|"before"} – съседът след/преди n.
+    // При измерване (набори A/B) отговорените числа не остават надписани – всяка задача е отделна.
+    start() { (window.MATH_BANK ? MATH_BANK.attach(this) : Promise.resolve()).then(() => super.start()); }
     render() {
       this.level = Number(this.s.level || 1); this.max = Math.max(3, Math.min(20, Number(this.s.max || 10)));
       this.learnedLabels = new Set();
+      this.units = this.mb && this.mb.units.length ? this.mb.units.filter(u => u && u.n >= 0 && u.n <= this.max) : null;
+      if (this.units && !this.units.length) this.units = null;
+      this.keepLabels = !(this.units && this.mb.def.sets);
       const pool = []; for (let n = 1; n < this.max; n++) pool.push(n);
       this.items = []; while (this.items.length < this.total) { shuffle(pool); this.items.push(...pool); } this.items = this.items.slice(0, this.total);
+      if (this.units) this.items = Array.from({ length: this.total }, (_, i) => this.units[i % this.units.length].n);
       this.shell.arena.innerHTML = `<div class="nl-wrap"><div class="nl-card" id="nl-card"></div><svg class="nl" viewBox="0 0 ${W} ${H}" id="nl-svg" aria-label="Числова права"></svg></div>`;
       this.svg = this.shell.arena.querySelector("#nl-svg"); this.card = this.shell.arena.querySelector("#nl-card");
     }
@@ -27,17 +35,17 @@
       this.svg.querySelectorAll(".nl-tick").forEach(g => g.addEventListener("pointerdown", () => this.tap(Number(g.dataset.n))));
     }
     startRound() {
-      const n = this.items[this.idx];
-      if (this.level === 2) { this.dir = rnd(2) ? 1 : -1; if (n + this.dir < 0 || n + this.dir > this.max) this.dir = -this.dir; this.target = n + this.dir; this.shown = n; this.card.innerHTML = `<span class="nl-q">Кое число е точно <b>${this.dir > 0 ? "след" : "преди"}</b></span><span class="nl-big">${n}</span><span class="nl-q">?</span>`; this.shell.setLabel(`Докосни делението на числото ${this.dir > 0 ? "след" : "преди"} ${n}.`); const labels = new Set(this.learnedLabels); labels.add(n); this.draw(labels, {}); }
-      else { this.target = n; this.shown = null; this.card.innerHTML = `<span class="nl-q">Къде е мястото на</span><span class="nl-big">${n}</span><span class="nl-q">?</span>`; this.shell.setLabel(`Докосни делението, където е числото ${n}.`); this.draw(new Set(this.learnedLabels), {}); }
-      this.say(this.level === 2 ? `Кое число е точно ${this.dir > 0 ? "след" : "преди"} ${n}?` : `Къде е мястото на ${n}?`);
+      const n = this.items[this.idx], u = this.units ? this.units[this.idx % this.units.length] : null;
+      if (this.level === 2) { this.dir = u && u.ask ? (u.ask === "before" ? -1 : 1) : rnd(2) ? 1 : -1; if (n + this.dir < 0 || n + this.dir > this.max) this.dir = -this.dir; this.target = n + this.dir; this.shown = n; this.card.innerHTML = `<span class="nl-q">Кое число е точно <b>${this.dir > 0 ? "след" : "преди"}</b></span><span class="nl-big">${n}</span><span class="nl-q">?</span>`; this.shell.setLabel(`Кое число е ${this.dir > 0 ? "след" : "преди"} ${n}?`); const labels = new Set(this.learnedLabels); labels.add(n); this.draw(labels, {}); }
+      else { this.target = n; this.shown = null; this.card.innerHTML = `<span class="nl-q">Къде е мястото на</span><span class="nl-big">${n}</span><span class="nl-q">?</span>`; this.shell.setLabel(`Къде е ${n}?`); this.draw(new Set(this.learnedLabels), {}); }
+      this.prompt(this.level === 2 ? `Кое число е точно ${this.dir > 0 ? "след" : "преди"} ${n}?` : `Къде е мястото на ${n}?`);
     }
     tap(n) {
       if (this.locked || this.finished) return;
       const ok = n === this.target;
       if (!this.answer(ok, { text: this.level === 2 ? `${this.dir > 0 ? "след" : "преди"} ${this.shown}` : String(this.target), answer: String(this.target), given: String(n) })) return;
       const marks = {}; marks[this.target] = "good"; if (!ok) marks[n] = "bad";
-      const labels = new Set(this.learnedLabels); if (this.shown != null) labels.add(this.shown); labels.add(this.target); this.learnedLabels.add(this.target); this.draw(labels, marks);
+      const labels = new Set(this.learnedLabels); if (this.shown != null) labels.add(this.shown); labels.add(this.target); if (this.keepLabels) this.learnedLabels.add(this.target); this.draw(labels, marks);
       this.shell.flash(ok ? "Точно така!" : `Мястото на ${this.target} е тук.`, ok ? "good" : "bad"); this.say(ok ? "Точно така!" : `${this.target} е тук.`);
       this.advance(ok ? 1100 : 1700);
     }

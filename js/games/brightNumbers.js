@@ -27,10 +27,58 @@
     if (kind === "add") { const a = rnd(answer + 1); return `${a} + ${answer - a}`; }
     const a = answer + rnd(Math.max(1, range - answer + 1)); return `${a} − ${a - answer}`;
   }
+  // 19.10: истински картинки за оцветяване (config/bright-pics.json + assets/img/bright: линии и карта на частите; tools/bright_pics).
+  // Старите SVG картинки (PICS) остават резерва, ако банката не се зареди.
+  let BANK = null; const bankP = fetch("config/bright-pics.json?v=3").then(r => r.json()).then(j => { BANK = j.pics; }).catch(() => {});
+  const img = src => new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = no; i.src = src; });
+  const hex = h => [1, 3, 5].map(k => parseInt(h.slice(k, k + 2), 16));
   class BrightNumbersGame extends BaseGame {
     get gameId() { return "brightNumbers"; }
     get skillName() { return Number(this.s.level) === 3 ? `Смятане до ${this.s.range} чрез оцветяване` : `Разпознаване на числа ${Number(this.s.level) === 2 ? "до 20" : "до 10"}`; }
-    render() {
+    start() { bankP.then(() => { if (!BANK || !BANK.length) return super.start(); const P = BANK[(Number(this.s.picture || 1) - 1) % BANK.length];
+      Promise.all([img(`assets/img/bright/${P.id}_lines.png`), img(`assets/img/bright/${P.id}_map.png`)]).then(([L, M]) => { this.P = P; this.L = L; this.M = M; super.start(); }).catch(() => super.start()); }); }
+    numbers(n) {   // n различни числа за цветовете
+      this.level = Number(this.s.level || 1); this.range = Number(this.s.range || 10);
+      const [lo, hi] = RANGES[this.level] || [1, this.range]; const nums = new Set(); while (nums.size < Math.min(n, hi - lo + 1)) nums.add(lo + rnd(hi - lo + 1)); return [...nums];
+    }
+    render() { if (this.P) return this.renderPic(); return this.renderSvg(); }
+    renderPic() {
+      const P = this.P, nc = P.colors.length, nums = this.numbers(nc);
+      this.numOf = {}; this.labelOf = {}; P.colors.forEach((_, c) => { this.numOf[c] = nums[c % nums.length]; this.labelOf[c] = this.level === 3 ? exprFor(this.numOf[c], this.range, this.s.op) : String(this.numOf[c]); });
+      // твърде малките части (човка, листенце) идват готово оцветени – числото трябва да се събира; на ниво 3 (задачи) прагът е по-висок
+      const minR = this.level === 3 ? 0.032 : 0.024; P.parts.forEach(q => { q.on = q.c >= 0 && q.r >= minR; });
+      this.parts = P.parts.map((q, i) => ({ ...q, i })).filter(q => q.on); this.total = this.parts.length; this.done = 0; this.sel = null;
+      this.shell.arena.innerHTML = `<svg class="sea" viewBox="0 0 1200 760" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><use href="#scene-beach"/></svg>
+        <div class="bn bn2"><div class="bn-frame"><canvas id="bn-cv" width="${P.w}" height="${P.h}"></canvas><div class="bn-nums" id="bn-nums"></div></div><div class="bn-pal" id="bn-pal"></div></div>`;
+      const cv = this.shell.arena.querySelector("#bn-cv"), ctx = cv.getContext("2d");
+      // карта на частите
+      const mc = document.createElement("canvas"); mc.width = P.w; mc.height = P.h; const mx = mc.getContext("2d"); mx.drawImage(this.M, 0, 0);
+      const md = mx.getImageData(0, 0, P.w, P.h).data; this.lab = new Uint16Array(P.w * P.h); for (let k = 0; k < this.lab.length; k++) this.lab[k] = md[4 * k] + 256 * md[4 * k + 1];
+      // запълване: частите за оцветяване – бели, готовите – с цвета си
+      this.fill = ctx.createImageData(P.w, P.h); this.col = P.parts.map(q => q.on ? [255, 255, 255] : hex(q.c >= 0 ? P.colors[q.c] : q.fill));
+      const f = this.fill.data; for (let k = 0; k < this.lab.length; k++) { const c = this.col[this.lab[k]]; f[4 * k] = c[0]; f[4 * k + 1] = c[1]; f[4 * k + 2] = c[2]; f[4 * k + 3] = 255; }
+      this.ctx = ctx; this.draw();
+      const nb = this.shell.arena.querySelector("#bn-nums");
+      nb.innerHTML = this.parts.map(q => `<span data-i="${q.i}" style="left:${q.x * 100}%;top:${q.y * 100}%;--fs:${Math.max(.85, Math.min(1.5, q.r * 28)) * (this.level === 3 ? .8 : 1)}">${this.labelOf[q.c]}</span>`).join("");
+      cv.addEventListener("pointerdown", e => { e.preventDefault(); const r = cv.getBoundingClientRect(); const x = Math.floor((e.clientX - r.left) / r.width * P.w), y = Math.floor((e.clientY - r.top) / r.height * P.h); const i = this.lab[y * P.w + x]; const q = P.parts[i]; if (q && q.on) this.paintPart(i); });
+      const pal = this.shell.arena.querySelector("#bn-pal");
+      shuffle(P.colors.map((_, c) => c).filter(c => this.parts.some(q => q.c === c))).forEach(c => { const b = document.createElement("button"); b.type = "button"; b.className = "bn-sw bn-marker"; b.style.setProperty("--c", P.colors[c]); b.dataset.c = c; b.innerHTML = `<i></i><b>${this.labelOf[c]}</b>`; b.addEventListener("pointerdown", e => { e.preventDefault(); this.select(b); }); pal.appendChild(b); });
+      this.select(pal.firstChild);
+      this.renderProgress = () => { const p = this.shell.progress; p.innerHTML = ""; for (let i = 0; i < this.total; i++) { const li = document.createElement("li"); li.className = i < this.done ? "ok" : ""; p.appendChild(li); } };
+    }
+    draw() { this.ctx.putImageData(this.fill, 0, 0); this.ctx.drawImage(this.L, 0, 0); }
+    paintPart(i) {
+      if (this.finished) return; const q = this.P.parts[i]; if (q.doneP) return;
+      const ok = String(q.c) === this.sel.dataset.c; this.locked = false;
+      if (!this.answer(ok, { text: `част ${this.labelOf[q.c]}`, answer: this.labelOf[q.c], given: this.labelOf[this.sel.dataset.c] })) return;
+      this.locked = false; const span = this.shell.arena.querySelector(`#bn-nums span[data-i="${i}"]`);
+      if (ok) {
+        q.doneP = true; const c = hex(this.P.colors[q.c]), f = this.fill.data; for (let k = 0; k < this.lab.length; k++) if (this.lab[k] === i) { f[4 * k] = c[0]; f[4 * k + 1] = c[1]; f[4 * k + 2] = c[2]; }
+        this.draw(); if (span) span.classList.add("done"); this.done++; this.idx = this.done; this.renderProgress();
+        if (this.done === this.total) { this.shell.flash("Картината е готова!", "good"); this.say("Браво! Картината е готова."); setTimeout(() => this.finish(false), 1400); }
+      } else { if (span) { span.classList.remove("wrong"); void span.offsetWidth; span.classList.add("wrong"); } this.shell.flash(`Тук е ${this.labelOf[q.c]}`, "bad"); setTimeout(() => this.shell.hideFlash(), 1200); }
+    }
+    renderSvg() {
       this.level = Number(this.s.level || 1); this.pic = PICS[(Number(this.s.picture || 1) - 1) % PICS.length]; this.range = Number(this.s.range || 10);
       const colorsUsed = [...new Set(this.pic.parts.map(p => p[1]))];
       const [lo, hi] = RANGES[this.level] || [1, this.range]; const nums = new Set(); while (nums.size < colorsUsed.length) nums.add(lo + rnd(hi - lo + 1));
@@ -54,8 +102,8 @@
       this.select(pal.firstChild);
       this.renderProgress = () => { const p = this.shell.progress; p.innerHTML = ""; for (let i = 0; i < this.total; i++) { const li = document.createElement("li"); li.className = i < this.done ? "ok" : ""; p.appendChild(li); } };
     }
-    startRound() { this.shell.setLabel(`Оцвети ${this.labelOf[this.sel.dataset.c]}`); if (this.idx === 0) this.say("Избери цвят и оцвети частите с това число"); }
-    select(b) { [...b.parentElement.children].forEach(x => x.classList.remove("sel")); b.classList.add("sel"); this.sel = b; this.shell.setLabel(`Оцвети ${this.labelOf[b.dataset.c]}`); this.say(this.labelOf[b.dataset.c].replace("+", "плюс").replace("−", "минус")); }
+    startRound() { this.shell.setLabel(`Оцвети ${this.labelOf[this.sel.dataset.c]}`); if (this.idx === 0) this.prompt("Избери цвят и оцвети частите с това число"); }
+    select(b) { [...b.parentElement.children].forEach(x => x.classList.remove("sel")); b.classList.add("sel"); this.sel = b; this.shell.setLabel(`Оцвети ${this.labelOf[b.dataset.c]}`); this.prompt(this.labelOf[b.dataset.c].replace("+", "плюс").replace("−", "минус")); }
     paint(g) {
       if (this.finished || g.classList.contains("done")) return;
       const ok = g.dataset.c === this.sel.dataset.c;
@@ -72,9 +120,9 @@
     task: "Оцвети всяка част от картината с подходящия цвят.",
     settings: [
       { key: "level", label: "Ниво", type: "range", min: 1, max: 3, def: 1, help: "Ниво 1: числа до 10. Ниво 2: числа до 20. Ниво 3: примери, чийто отговор е числото на цвета." },
-      { key: "picture", label: "Картинка", type: "range", min: 1, max: 4, def: 1 },
-      { key: "range", label: "Диапазон на смятане", type: "range", min: 9, max: 20, def: 10, help: "Само за ниво 3." },
-      { key: "op", label: "Избор на действие", type: "cycle", options: [["add", "Събиране"], ["sub", "Изваждане"], ["mix", "Смесено"]], def: "add", help: "Само за ниво 3." }
+      { key: "picture", label: "Картинка", type: "range", min: 1, max: 8, def: 1, help: "1 Бухалче, 2 Корабче, 3 Рибка, 4 Охлюв, 5 Ракета, 6 Таралеж, 7 Котенце, 8 Мече." },
+      { key: "range", label: "Диапазон на смятане", type: "range", min: 9, max: 20, def: 10, hiddenIf: s => Number(s.level) !== 3, help: "Само за ниво 3." },
+      { key: "op", label: "Избор на действие", type: "cycle", options: [["add", "Събиране"], ["sub", "Изваждане"], ["mix", "Смесено"]], def: "add", hiddenIf: s => Number(s.level) !== 3, help: "Само за ниво 3." }
     ],
     paramsLine: s => `картинка ${s.picture}` + (Number(s.level) === 3 ? ` · до ${s.range} · ${({ add: "събиране", sub: "изваждане", mix: "смесено" })[s.op]}` : "")
   };
