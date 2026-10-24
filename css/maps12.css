@@ -1,0 +1,30 @@
+/* Учебни карти V1.2 (стил B+) – тестов режим ?maps=v12 (js/maps12.js) */
+.screen.screen-m12 { position: fixed; inset: 0; display: block; min-height: 0; background: #F3E7CF; color: #3B3226; overflow: hidden; font-family: "Nunito", system-ui, sans-serif; }
+.m12-top { position: absolute; left: 0; right: 0; top: 10px; display: flex; justify-content: center; align-items: center; gap: 10px; z-index: 3; pointer-events: none; }
+.m12-top > * { pointer-events: auto; }
+.m12-tl { position: absolute; left: 16px; top: 12px; z-index: 4; } .m12-tr { position: absolute; right: 16px; top: 12px; z-index: 4; }
+.m12-bl { position: absolute; left: 16px; bottom: 16px; z-index: 4; } .m12-br { position: absolute; right: 16px; bottom: 16px; z-index: 4; }
+.m12-bc { position: absolute; left: 0; right: 0; bottom: 14px; display: flex; justify-content: center; align-items: flex-end; gap: 8px; z-index: 4; pointer-events: none; } .m12-bc > * { pointer-events: auto; }
+.m12-title { font-weight: 900; font-size: 32px; line-height: 1; background: #FFF8EC; border: 3px solid #D9C6A3; border-radius: 20px; padding: 12px 28px; box-shadow: 0 5px 0 #D9C6A3; }
+.m12-eluva { height: 70px; margin-top: -6px; } .m12-eluva.big { height: 96px; margin: 0; }
+.m12-nav { font-family: inherit; font-weight: 900; font-size: 24px; color: #1F6F66; background: #FFF8EC; border: 3px solid #2A9D8F; border-radius: 20px; height: 64px; padding: 0 20px 0 12px; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 5px 0 #1F6F66; cursor: pointer; }
+.m12-nav .m12-ic { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: #E3F3F0; overflow: hidden; } .m12-nav .m12-ic img { width: 42px; height: 42px; object-fit: cover; }
+.m12-nav.primary { background: #2A9D8F; color: #fff; border-color: #1F6F66; height: 76px; font-size: 28px; padding: 0 30px 0 16px; } .m12-nav.primary .m12-ic { background: rgba(255,255,255,.2); }
+.m12-nav.adult { font-size: 19px; height: 54px; color: #6E6458; border-color: #D9C6A3; box-shadow: 0 4px 0 #D9C6A3; padding: 0 18px; }
+.m12-nav:active { transform: translateY(3px); box-shadow: 0 2px 0 #1F6F66; }
+.m12-seg { display: flex; background: #FFF8EC; border: 3px solid #D9C6A3; border-radius: 22px; padding: 5px; box-shadow: 0 5px 0 #D9C6A3; }
+.m12-seg button { font-family: inherit; font-weight: 900; font-size: 26px; line-height: 1; padding: 13px 24px; border-radius: 16px; color: #6E6458; background: none; border: 0; cursor: pointer; } .m12-seg button.on { background: #2A9D8F; color: #fff; }
+.m12-map { position: absolute; left: 0; right: 0; top: 86px; bottom: 0; } .m12-map.m12-home { top: 84px; bottom: 100px; }
+.m12-svg { width: 100%; height: 100%; display: block; } .m12-svg text { font-family: "Nunito", system-ui, sans-serif; }
+.m12-wait { text-align: center; margin-top: 30vh; font-size: 22px; }
+.m12-isl { cursor: pointer; } .m12-isl.soon .m12-isl-art { filter: grayscale(.85) brightness(1.06); opacity: .62; } .m12-isl:not(.soon):active .m12-isl-art { transform: translateY(-6px); }
+/* станции: играна (✓), препоръчана (златиста рамка), недостъпна (по-ниска наситеност, без прозрачност, катинар) */
+.m12-st { cursor: pointer; } .m12-st .m12-lift { transition: transform .18s cubic-bezier(.2,1.4,.4,1); transform-box: fill-box; transform-origin: 50% 100%; }
+.m12-st:active .m12-lift, .m12-st.tap .m12-lift { transform: translateY(-10px) scale(1.04); }
+.m12-st.pick .m12-lift { filter: drop-shadow(0 0 14px rgba(255,214,90,.95)); }
+.m12-lock .m12-art { filter: saturate(.45) contrast(.85) brightness(1.04); }
+.m12-glow { fill: rgba(255,236,170,.45); stroke: #F2B705; filter: drop-shadow(0 0 8px rgba(255,200,60,.9)); animation: m12glow 2.4s ease-in-out infinite; } @keyframes m12glow { 50% { stroke-opacity: .5; } }
+.m12-toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; background: #FFF8EC; border: 3px solid #D9C6A3; border-radius: 22px; padding: 8px 22px 8px 10px; box-shadow: 0 6px 0 #D9C6A3; font: 900 24px "Nunito", system-ui, sans-serif; color: #3B3226; z-index: 9999; }
+.m12-toast img { height: 64px; }
+/* общите правила за .screen (app.css, look2.css) правят децата relative – тук всичко е позиционирано абсолютно */
+html .screen.screen-m12 > .m12-top, html .screen.screen-m12 > .m12-tl, html .screen.screen-m12 > .m12-tr, html .screen.screen-m12 > .m12-bl, html .screen.screen-m12 > .m12-br, html .screen.screen-m12 > .m12-bc, html .screen.screen-m12 > .m12-map { position: absolute; }

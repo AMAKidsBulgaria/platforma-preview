@@ -14,7 +14,7 @@
   const DECOR_ICON = { "фенер": "🏮", "пейка": "🪑", "ограда с цветя": "🌷", "балкон със саксии": "🪴", "табела с името": "🪧", "покрив в нов цвят": "🏠", "пейка под дърво": "🌳", "кладенче": "⛲", "цветна леха": "🌼" };
   let W = null, L = null, BPL = null;   // правилата (world-rules.json), разположението (world-layout.json) и вида B+ (world-bplus.json)
   const ready = Promise.all([fetch("config/world-rules.json?v=2").then(r => r.json()), fetch("config/world-layout.json?v=2").then(r => r.json()),
-    fetch("config/world-bplus.json?v=7").then(r => r.json()).catch(() => null)])
+    fetch("config/world-bplus.json?v=9").then(r => r.json()).catch(() => null)])
     .then(([d, l, b]) => { W = d; L = l; BPL = b; }).catch(() => {});
   // вид B+: world=bplus включва, world=v1 връща временната графика; помни се на устройството
   const BPQ = (location.search + location.hash).match(/[?&#~]world[=_](bplus|v1)/);
@@ -25,7 +25,66 @@
   const decorN = id => +((id || "").match(/\.(\d+)$/) || [0, 0])[1] % 3;
   const decorSprite = (did, id) => `${SPR}${BPL.districts[did].decor}_decor_${decorN(id) + 1}.webp`;
   const decorTitle = (did, id) => ((BPL.decor_titles || {})[BPL.districts[did].decor] || [])[decorN(id)] || obj(id).title;
-  const streetOf = {};   // коя улица гледа детето във всеки квартал (за тази сесия)
+  const streetOf = {};
+  // аватар на детето (проба, D-аватар 24.10.2026): жител на квартала – стои до текущия строеж, радва се при нов етап, участва в избора на украса.
+  // Изборът се пази по дете на таблета (platforma.world.avatar.v1); avatar=a1..a6|n1..n4 в адреса го задава (демо). Без движение, валута и магазин.
+  const AVK = "platforma.world.avatar.v1", AVQ = (location.search + location.hash).match(/[?&#~]avatar[=_]([an][0-9])/);
+  const avatarOf = child => { if (window.PILOT_SYNC && window.PILOT_SYNC.avatarOf && !AVQ) return window.PILOT_SYNC.avatarOf(child); let m = {}; try { m = JSON.parse(localStorage.getItem(AVK) || "{}"); } catch (e) {}
+    if (AVQ && child && m[child] !== AVQ[1]) { m[child] = AVQ[1]; try { localStorage.setItem(AVK, JSON.stringify(m)); } catch (e) {} } return (child && m[child]) || null; };
+  // „Избери своя герой“: 10 големи фигурки, без текст; при първо отваряне на квартала и от бутона с лицето на героя
+  const AVATARS = ["a1", "a2", "a3", "a4", "a5", "a6", "n1", "n2", "n3", "n4"];
+  // героят с шапка: фигурката + шапката, поставена по главата ѝ (config/world-bplus.json: avatar_heads, accessories)
+  const accOf = child => (window.PILOT_SYNC && window.PILOT_SYNC.accessoryOf ? window.PILOT_SYNC.accessoryOf(child) : null);
+  function hatBox(av, acc) {   // шапката в дялове от фигурката: [left, top, width] (top може да е отрицателен – над темето)
+    const Hd = BPL && BPL.avatar_heads && BPL.avatar_heads[av], A = BPL && BPL.accessories; if (!Hd || !A || !acc || !A.fit[acc]) return null;
+    const [fw, off] = A.fit[acc], w = Hd.w * fw, h = w * Hd.aspect / A.aspect[acc];
+    return [Hd.cx - w / 2, Hd.top - h * (1 - off), w, h];
+  }
+  // начален каталог V1: аксесоарът е ГОТОВА комбинация (част от 3D фигурката) – acc/<герой>_<аксесоар>.webp, поставена с обувките върху обувките на основата
+  // (така №4 сменя каскета си с шапката, а героите с очила сменят очилата си – без втори чифт); [left, top, width, height] в дялове от основата
+  const comboOf = (av, acc) => (acc && BPL && BPL.accessories && BPL.accessories.combo && BPL.accessories.combo[av] && BPL.accessories.combo[av][acc]) || null;
+  const comboSrc = (av, acc) => `assets/img/world/avatars/acc/${av}_${acc}.webp?v=2`;
+  function figHTML(av, acc, cls) {
+    const cb = comboOf(av, acc), hb = cb ? null : hatBox(av, acc);
+    if (cb) return `<span class="avfig ${cls || ""}"><img class="avghost" alt="" src="assets/img/world/avatars/${av}.webp?v=3"><img class="avcombo" alt="" src="${comboSrc(av, acc)}" style="left:${cb[0] * 100}%;top:${cb[1] * 100}%;width:${cb[2] * 100}%;height:${cb[3] * 100}%"></span>`;
+    return `<span class="avfig ${cls || ""}"><img alt="" src="assets/img/world/avatars/${av}.webp?v=3">${hb ? `<img class="avhat" alt="" src="assets/img/world/avatars/${acc}.webp?v=1" style="left:${hb[0] * 100}%;top:${hb[1] * 100}%;width:${hb[2] * 100}%">` : ""}</span>`;
+  }
+  function figSVG(av, acc, x, y, bw, bh) {   // фигурката в кутия bw×bh, стъпила на долния ѝ край, по средата
+    // еднакъв ръст за всички 10 героя: височината е винаги bh (от темето до обувките), ширината следва пропорцията на фигурката
+    const Hd = BPL && BPL.avatar_heads && BPL.avatar_heads[av], asp = Hd ? Hd.aspect : 0.5, h = bh, w = h * asp, x0 = x + (bw - w) / 2, y0 = y + bh - h, cb = comboOf(av, acc), hb = cb ? null : hatBox(av, acc);
+    if (cb) return `<image class="avcombo" data-acc="${acc}" href="${comboSrc(av, acc)}" x="${x0 + cb[0] * w}" y="${y0 + cb[1] * h}" width="${cb[2] * w}" height="${cb[3] * h}"/>`;
+    return `<image href="assets/img/world/avatars/${av}.webp?v=3" x="${x0}" y="${y0}" width="${w}" height="${h}"/>` + (hb ? `<image class="avhat" href="assets/img/world/avatars/${acc}.webp?v=1" x="${x0 + hb[0] * w}" y="${y0 + hb[1] * h}" width="${hb[2] * w}" height="${hb[3] * h}"/>` : "");
+  }
+  // „Избери своя герой“: стъпка 1 – 10 фигурки; стъпка 2 – шапка (4 начални или без), преглед върху избраната фигурка, „Готово“
+  function openAvatarPick(box, did, first) {
+    if (document.getElementById("avatar-pick")) return;
+    const ws = window.PILOT_SYNC && window.PILOT_SYNC.worldState(); if (!ws) return;
+    const o = document.createElement("div"); o.id = "avatar-pick"; o.className = "world-choice avatar-pick"; o.setAttribute("role", "dialog"); o.setAttribute("aria-label", "Избери своя герой");
+    document.body.appendChild(o);
+    const say = t => { try { if (window.VOICE && window.VOICE.speak) window.VOICE.speak([t]); } catch (e) {} };
+    const close = first ? "" : '<button type="button" class="ap-close" aria-label="Затвори">✕</button>';
+    function step1() {
+      const cur = avatarOf(ws.child);
+      o.innerHTML = `<div class="ap-box"><h2>Избери своя герой</h2><div class="ap-grid">${AVATARS.map((a, i) => `<button type="button" class="ap-opt${a === cur ? " on" : ""}" data-a="${a}" aria-label="Герой ${i + 1}">${figHTML(a, null)}</button>`).join("")}</div>${close}</div>`;
+      o.querySelectorAll(".ap-opt").forEach(b => b.addEventListener("click", () => step2(b.dataset.a)));
+      bindClose(); say("Избери своя герой. Той ще живее в твоя квартал.");
+    }
+    function step2(av) {
+      const A = (BPL && BPL.accessories) || { start: [] }; let acc = accOf(ws.child);
+      const draw = () => {
+        o.innerHTML = `<div class="ap-box ap2"><h2>Избери шапка или очила</h2><div class="ap-hero">${figHTML(av, acc, "big")}</div>
+          <div class="ap-hats"><button type="button" class="ap-hat${!acc ? " on" : ""}" data-h="" aria-label="Без аксесоар">${figHTML(av, null, "face")}<span class="ap-none">✕</span></button>${A.start.map(h => `<button type="button" class="ap-hat${h === acc ? " on" : ""}" data-h="${h}" aria-label="${esc(A.names[h] || h)}">${comboOf(av, h) ? figHTML(av, h, "face") : `<img alt="" src="assets/img/world/avatars/${h}.webp?v=1">`}</button>`).join("")}</div>
+          <div class="ap-actions"><button type="button" class="ap-back" aria-label="Друг герой">◀</button><button type="button" class="ap-done" aria-label="Готово">✓ Готово</button></div>${close}</div>`;
+        o.querySelectorAll(".ap-hat").forEach(b => b.addEventListener("click", () => { acc = b.dataset.h || null; draw(); }));
+        o.querySelector(".ap-back").addEventListener("click", step1);
+        o.querySelector(".ap-done").addEventListener("click", () => { window.PILOT_SYNC.chooseAvatar(av, ws.child, acc); o.remove(); render(box, did); });
+        bindClose();
+      };
+      draw(); say("Избери шапка или очила за своя герой. После натисни Готово.");
+    }
+    function bindClose() { const x = o.querySelector(".ap-close"); if (x) x.addEventListener("click", () => o.remove()); }
+    step1();
+  }   // коя улица гледа детето във всеки квартал (за тази сесия)
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
   const obj = id => (W.objects || []).find(o => o.id === id) || { id, title: id };
   const letterOf = id => (id.match(/house\.(.+)\.lit$/) || [])[1] || "";
@@ -50,7 +109,8 @@
       let st = confirmed ? "confirmed" : done && review ? "review" : done && (invalid.length || ws.blocked || settled) ? "reconcile" : done ? "pending" : "locked";
       if (st === "locked" && !nextGiven) { st = "next"; nextGiven = true; }
       const server = ws.choices[r.rule_id] || {}, mine = ws.myChoices[r.rule_id];
-      const chosen = server.chosen || mine || null, offer = (r.effect.choice && r.effect.choice.offer) || [];
+      const chosen = mine || server.chosen || null,   // моят (последен) избор; изборите от друг таблет идват в „моите“ от sync.js
+      offer = (r.effect.choice && r.effect.choice.offer) || [];
       return { rule: r, objs, rounds, need, st, reason, chosen, choiceConfirmed: !!server.chosen, offer, canChoose: (st === "confirmed" || st === "pending" || st === "review" || st === "reconcile") && offer.length && !chosen };
     });
   }
@@ -68,6 +128,7 @@
   }
   // кой етап детето вече е видяло – новият се анимира само първия път
   const SEEN = "platforma.world.seen.v1";
+  const RECENT = {};   // нов етап, видян преди малко: при повторно рисуване (отговор от сървъра) анимацията и радостта не се губят
   const seenGet = () => { try { return JSON.parse(localStorage.getItem(SEEN) || "{}"); } catch (e) { return {}; } };
   const seenSet = v => { try { localStorage.setItem(SEEN, JSON.stringify(v)); } catch (e) {} };
 
@@ -80,7 +141,7 @@
       did = current; window.WORLD_DISTRICT = null; tabs(ws0, acc, box);
       if (acc[current] === "locked") {   // заключен квартал: картата е притъмнена; за възрастния – кога се отваря
         const D = bpOn() ? BPL.districts[current] : district(current); look();
-        box.innerHTML = `<div class="wlocked" data-district="${current}" data-state="locked"><svg class="world-svg" viewBox="0 0 ${D.w} ${D.h}"><image href="${D.bg}" width="${D.w}" height="${D.h}" class="wlocked-img"/></svg><div class="wlock">🔒</div>${bpOn() ? '<img class="wlock-guide" alt="" src="assets/img/mascot/hello.png">' : ""}</div>`;
+        box.innerHTML = `<div class="wlocked" data-district="${current}" data-state="locked"><svg class="world-svg" viewBox="0 0 ${D.w} ${D.h}"><image href="${D.bg}" width="${D.w}" height="${D.h}" class="wlocked-img"/></svg><div class="wlock">🔒</div>${bpOn() ? '<button type="button" class="weluva" aria-label="Елува – защо е заключено"><img alt="" src="assets/img/mascot/hello.png"><span class="weluva-say">Тази част ще се отвори, когато стигнеш до нея в занятията.</span></button>' : ""}</div>`;
         const w = document.getElementById("world-status"); if (w) w.textContent = "Отключва се след завършване на BK14";
         return;
       }
@@ -96,7 +157,8 @@
       const [px, py, pr] = final ? D.final.at : D.plots[x.rule.lesson];
       const lit = x.st === "confirmed" || x.st === "pending" || x.st === "review" || x.st === "reconcile";
       const stage = lit ? 4 : Math.min(3, new Set(x.rounds.filter(r => x.need.includes(r))).size);
-      const isNew = stage > (seen[x.rule.lesson] || 0); if (isNew) { seen[x.rule.lesson] = stage; seenNew[x.rule.lesson] = stage; }
+      const rk = ws.child + "|" + x.rule.lesson, isNew = stage > (seen[x.rule.lesson] || 0) || (RECENT[rk] && RECENT[rk].stage === stage && Date.now() - RECENT[rk].at < 6000);
+      if (isNew) { if (stage > (seen[x.rule.lesson] || 0)) RECENT[rk] = { stage, at: Date.now() }; seen[x.rule.lesson] = stage; seenNew[x.rule.lesson] = stage; }
       const k = final ? 1.6 : Math.max(0.9, pr / 40);
       const houses = final ? `<g class="wfest ${lit ? "lit" : "dark"}"><circle r="${pr * 0.42}" class="wfest-sq"/><text y="8" class="wfest-t">${lit ? "🎉" : stage ? "🚧" : "★"}</text></g>`
         : x.objs.map((o, j) => houseSvg(letterOf(o), stage, (j - (x.objs.length - 1) / 2) * 34 * k, 0, k)).join("");
@@ -149,7 +211,8 @@
       const final = x.rule.lesson === finalL, i = regular.indexOf(x), sp0 = final ? null : pos[i], slot = final ? B.final : slotOf(sp0[0], sp0[1]);
       const [px, py] = slot;
       const stage = lit(x) ? 4 : Math.min(3, new Set(x.rounds.filter(r => x.need.includes(r))).size);
-      const isNew = stage > (seen[x.rule.lesson] || 0); if (isNew) { seen[x.rule.lesson] = stage; seenNew[x.rule.lesson] = stage; }
+      const rk = ws.child + "|" + x.rule.lesson, isNew = stage > (seen[x.rule.lesson] || 0) || (RECENT[rk] && RECENT[rk].stage === stage && Date.now() - RECENT[rk].at < 6000);
+      if (isNew) { if (stage > (seen[x.rule.lesson] || 0)) RECENT[rk] = { stage, at: Date.now() }; seen[x.rule.lesson] = stage; seenNew[x.rule.lesson] = stage; }
       // разнообразие: видовете сгради се редуват, а при второто срещане на същия вид на улицата – огледално
       const nT = B.types.length, type = final ? B.final_type : B.types[sp0[1] % nT], flip = !final && Math.floor(sp0[1] / nT) % 2 === 1;
       const sz = final ? B.final_size : Math.round(B.size * (slot[2] || 1));
@@ -177,39 +240,66 @@
     // следващата улица се отваря, когато първото ѝ занятие е достъпно (по реда на правилата), а не след брой занятия
     const opened = j => j <= cur || regular.some((x, n) => pos[n][0] === j && x.st !== "locked");
     const nav = nStreets > 1 ? `<button type="button" class="wstreet prev" aria-label="Предишна улица" ${cur === 0 ? "disabled" : ""}>◀</button><button type="button" class="wstreet next${cur < nStreets - 1 && !opened(cur + 1) ? " locked" : ""}" aria-label="Следваща улица" ${cur === nStreets - 1 || !opened(cur + 1) ? "disabled" : ""}>${cur < nStreets - 1 && !opened(cur + 1) ? "🔒" : "▶"}</button><div class="wstreet-dots">${Array.from({ length: nStreets }, (_, j) => `<i class="${j === cur ? "on" : opened(j) ? "" : "off"}"></i>`).join("")}</div>` : "";
-    // Елува стои на дъската (място без парцели до площада): поздравява; при нов етап – радва се
+    // Елува в „Моят квартал“ е помощник ИЗВЪН картата (долу вдясно); главният герой тук е аватарът.
+    // Излиза на картата само за кратко при събитие: ново занятие/нова улица – до новата сграда; цял квартал – празнува с аватара.
     const fresh = items.map(o => o.x).find(x => seenNew[x.rule.lesson]);
-    const G = B.guide, eluva = G ? `<g class="wguide${fresh ? " cheer" : ""}" transform="translate(${G[0]} ${G[1]})"><ellipse class="wguide-sh" rx="46" ry="14"/><image href="assets/img/mascot/${fresh ? (seenNew[fresh.rule.lesson] >= 4 ? "celebrate" : "joy") : "hello"}.png" x="-65" y="-128" width="130" height="130"/></g>` : "";
+    // аватарът: до текущия строеж, стъпил на терена вдясно от парцела (не върху контура); ръст = AVS от досегашния (тест 65/70/75 %, по подразбиране 70 %)
+    const av = avatarOf(ws.child), avBtn = `<button type="button" class="wavatar-btn" aria-label="Моят герой">${av ? figHTML(av, accOf(ws.child), "face") : "🙂"}</button>`, curX = items.map(o => o.x).find(x => x.st === "next"), ci = curX ? regular.indexOf(curX) : -1;
+    const cs = curX ? (curX.rule.lesson === finalL ? B.final : slotOf(pos[ci][0], pos[ci][1])) : null, csz = cs ? (curX.rule.lesson === finalL ? B.final_size : B.size * (cs[2] || 1)) : 0;
+    // повторно изиграно, вече готово занятие (акцент от „Виж квартала“): без нов обект – само кратка радост на героя до готовата сграда
+    const again = !fresh && focusLesson && items.map(o => o.x).find(x => x.rule.lesson === focusLesson && lit(x));
+    const AVS = (+(new URLSearchParams(location.search).get("avsize")) || 70) / 100, fh = csz * 0.88 * AVS, fw = fh * 0.6;
+    const avatar = av && cs ? `<g class="wavatar${fresh || again ? " cheer" : ""}" data-avatar="${av}" transform="translate(${cs[0] + csz * 0.56 + fw * 0.35} ${cs[1] + csz * 0.3})"><ellipse class="wguide-sh" rx="${fh * 0.22}" ry="${fh * 0.065}"/>${figSVG(av, accOf(ws.child), -fw / 2, -fh, fw, fh)}</g>` : "";
+    const fi = fresh ? regular.indexOf(fresh) : -1, fs = fresh ? (fresh.rule.lesson === finalL ? B.final : fi >= 0 ? slotOf(pos[fi][0], pos[fi][1]) : null) : null;
+    const fsz = fs ? (fresh.rule.lesson === finalL ? B.final_size : B.size * (fs[2] || 1)) : 0, gs = fsz * 0.5;
+    // правило 1: до съответната сграда, без да я закрива – страната (ляво/дясно), която е по-далеч от другите парцели и от аватара
+    const others = items.map(o => o.x).filter(x => x !== fresh).map(x => { const n = regular.indexOf(x); return x.rule.lesson === finalL ? B.final : n >= 0 ? slotOf(pos[n][0], pos[n][1]) : null; }).filter(Boolean).concat(cs ? [[cs[0] + csz * 0.56, cs[1]]] : []);
+    const gx = fs ? [-1, 1].map(d => fs[0] + d * (fsz * 0.56 + gs * 0.3)).map(x => [x, Math.min(...others.map(o => Math.hypot(o[0] - x, o[1] - fs[1])), 1e9)]).sort((a, b) => b[1] - a[1])[0][0] : 0;
+    const eluva = fs ? `<g class="wguide visit" transform="translate(${gx} ${fs[1] + fsz * 0.3})"><ellipse class="wguide-sh" rx="${gs * 0.33}" ry="${gs * 0.1}"/><image href="assets/img/mascot/${fresh.rule.lesson === finalL || seenNew[fresh.rule.lesson] >= 4 ? "celebrate" : "joy"}.png" x="${-gs / 2}" y="${-gs}" width="${gs}" height="${gs}"/></g>` : "";
+    const helper = `<button type="button" class="weluva${fs ? " away" : ""}" aria-label="Елува – подсказка"><img alt="" src="assets/img/mascot/hello.png"><span class="weluva-say" hidden></span></button>`;
     box.innerHTML = `<svg class="world-svg" data-district="${did}" data-look="bplus" data-street="${cur}" viewBox="0 0 ${B.w} ${B.h}" preserveAspectRatio="xMidYMid meet" aria-label="${esc(D.title)}">
-      <image href="${B.bg}" width="${B.w}" height="${B.h}"/>${items.map(o => o.html).join("")}${eluva}</svg>${nav}`;
+      <image href="${B.bg}" width="${B.w}" height="${B.h}"/>${items.map(o => o.html).join("")}${avatar}${eluva}</svg>${nav}${avBtn}${helper}`;
+    // Елува се връща в ъгъла след краткото посещение на картата
+    // правило 2–3: нищо не чака натискане; при преминаване към друг екран/улица посещението просто изчезва с картата (таймерът се спира)
+    clearTimeout(box._ev); if (fs) box._ev = setTimeout(() => { const v = box.querySelector(".wguide.visit"), h = box.querySelector(".weluva"); if (v) v.classList.add("gone"); if (h) h.classList.remove("away"); }, 3800);
+    const hint = t => { const h = box.querySelector(".weluva"); if (!h) return; const b = h.querySelector(".weluva-say"); b.textContent = t; b.hidden = false; h.classList.remove("hop"); void h.offsetWidth; h.classList.add("hop");
+      clearTimeout(h._t); h._t = setTimeout(() => { b.hidden = true; }, 3500); try { if (window.VOICE && window.VOICE.speak) window.VOICE.speak([t]); } catch (err) {} };
+    box.querySelector(".weluva").addEventListener("click", () => hint(curX ? "Изиграй следващия кръг от домашната и сградата ще порасне." : "Докосни сграда, за да я разгледаш."));
+    box.querySelector(".wavatar-btn").addEventListener("click", () => openAvatarPick(box, did, false));
+    // първо отваряне без избран герой: питаме едва когато сървърът е отговорил за детето (нов таблет – героят може вече да е избран другаде)
+    if (!av && !ws.demoNoPick) { const known = !window.PILOT_SYNC.stateKnown || window.PILOT_SYNC.stateKnown(ws.child);
+      if (known) setTimeout(() => openAvatarPick(box, did, true), 400); else setTimeout(() => { const s2 = document.getElementById("screen-world"); if (s2 && !s2.hidden) render(box, did); }, 1500); }
     box.querySelectorAll(".wstreet").forEach(b => b.addEventListener("click", () => {
       if (b.disabled) return;
       streetOf[did] = { key, street: Math.max(0, Math.min(nStreets - 1, cur + (b.classList.contains("next") ? 1 : -1))) }; window.WORLD_FOCUS = null; render(box, did); }));
     box.querySelectorAll(".wplot").forEach(g => g.addEventListener("click", () => {
       const x = S.find(y => y.rule.lesson === g.dataset.lesson); if (!x) return;
-      if (x.canChoose) openChoice(x, box, did); else if (lit(x)) openView(x, g);   // готов обект: разглеждане
+      if (x.canChoose) openChoice(x, box, did); else if (lit(x)) openView(x, g, box, did);   // готов обект: разглеждане
       else if (x.st === "next") {   // текущ строеж: Елува подсказва какво следва (връзка към следващия кръг – D3)
-        const e = box.querySelector(".wguide"); if (e) { e.classList.remove("cheer"); void e.getBBox(); e.classList.add("cheer"); }
-        g.classList.add("hinted");
-        try { if (window.VOICE && window.VOICE.speak) window.VOICE.speak(["Тук строим. Изиграй следващия кръг от домашната и сградата ще порасне."]); } catch (err) {}
+        g.classList.add("hinted"); hint("Тук строим. Изиграй следващия кръг от домашната и сградата ще порасне.");
       }
     }));
     const w = document.getElementById("world-status");
     if (w) w.textContent = ws.demo ? "Демо – данните са само на този таблет" : ws.queued ? "Изпраща се…" : S.some(x => x.st === "reconcile") ? "Нужна е проверка от учителя" : S.some(x => x.st === "review") ? "Има награда за преглед" : S.some(x => x.st === "pending") ? "Чака потвърждение" : "";
   }
   // готов обект: детето го разглежда отблизо (сградата и украсата); затваря се с докосване
-  function openView(x, g) {
+  // готов обект: разглеждане отблизо – сградата „оживява“ (светват прозорците, дим от комина), героят идва и се радва; украсата може да се смени
+  function openView(x, g, box, did) {
     if (document.getElementById("world-view")) return;
     const sp = g.querySelector(".wsprite"), dc = g.querySelector(".wdecor-img"); if (!sp) return;
+    const ws = window.PILOT_SYNC && window.PILOT_SYNC.worldState(), av = ws && avatarOf(ws.child);
     const o = document.createElement("div"); o.id = "world-view"; o.className = "world-choice world-view"; o.setAttribute("role", "dialog");
-    o.innerHTML = `<div class="wv-box"><img class="wv-b" alt="" src="${sp.getAttribute("href")}">${dc ? `<img class="wv-d" alt="" src="${dc.getAttribute("href")}">` : ""}</div>`;
-    o.addEventListener("click", () => o.remove()); document.body.appendChild(o);
+    o.innerHTML = `<div class="wv-box"><div class="wv-scene"><img class="wv-b" alt="" src="${sp.getAttribute("href")}">${dc ? `<img class="wv-d" alt="" src="${dc.getAttribute("href")}">` : ""}${av ? figHTML(av, accOf(ws.child), "wv-av") : ""}</div>
+      ${x.offer && x.offer.length && x.chosen ? '<button type="button" class="wv-change">Смени украсата</button>' : ""}</div>`;
+    o.addEventListener("click", e => { if (e.target.closest(".wv-change")) { o.remove(); openChoice(x, box, did); return; } o.remove(); });
+    document.body.appendChild(o);
   }
 
   function openChoice(x, box, did) {
     if (document.getElementById("world-choice")) return;
     const o = document.createElement("div"); o.id = "world-choice"; o.className = "world-choice"; o.setAttribute("role", "dialog");
-    o.innerHTML = `<div class="wc-box"><h2>Избери украса</h2><div class="wc-opts">${x.offer.map(id => {
+    const av = window.PILOT_SYNC && avatarOf((window.PILOT_SYNC.worldState() || {}).child);
+    o.innerHTML = `<div class="wc-box">${av ? figHTML(av, accOf((window.PILOT_SYNC.worldState() || {}).child), "wc-avatar") : ""}<h2>Избери украса</h2><div class="wc-opts">${x.offer.map(id => {
       const t = did && bpOn() ? decorTitle(did, id) : obj(id).title, ic = did && bpOn() ? `<img class="wc-img" alt="" src="${decorSprite(did, id)}">` : `<span class="wc-ic">${DECOR_ICON[t] || "✨"}</span>`;
       return `<button type="button" class="wc-opt" data-id="${esc(id)}">${ic}<span class="wc-t">${esc(t)}</span></button>`; }).join("")}</div></div>`;
     document.body.appendChild(o);

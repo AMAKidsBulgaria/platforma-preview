@@ -59,6 +59,8 @@
 
   // ---------- навигация ----------
   function show(id) {
+    // учебни карти V1.2 (тестов режим ?maps=v12): началото и четирите карти идват от js/maps12.js; игрите и останалите екрани – както досега
+    if (window.M12 && window.M12.on() && window.M12.views.includes(id)) { if (game) { game.destroy(); game = null; } window.M12.show(id); return; }
     $$(".screen").forEach(s => s.hidden = s.id !== `screen-${id}`);
     window.scrollTo(0, 0);
     if (id === "map") renderMap();
@@ -78,7 +80,8 @@
     if (id === "parent") renderParent();
     if (id !== "game" && game) { game.destroy(); game = null; }
   }
-  document.addEventListener("click", e => { const b = e.target.closest("[data-go]"); if (!b) return; let go = b.dataset.go; if (go === "map" && current && current.module) go = ({ bukvarica: "bmap", readica: "rmap", theWorld: "wmap" })[current.module] || "map"; show(go); });
+  window.APP = { show, selectGame: id => selectGame(id) };
+  document.addEventListener("click", e => { const b = e.target.closest("[data-go]"); if (!b || !b.dataset.go) return; let go = b.dataset.go; if (go === "map" && current && current.module && !b.closest("#screen-m12")) go = ({ bukvarica: "bmap", readica: "rmap", theWorld: "wmap" })[current.module] || "map"; show(go); });
 
   // ---------- данни ----------
   const sessions = () => { try { return JSON.parse(localStorage.getItem(STORE_KEY) || "[]"); } catch { return []; } };

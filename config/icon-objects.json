@@ -1,0 +1,396 @@
+{
+ "version": "1.0-за-одобрение",
+ "date": "2026-10-24",
+ "note": "Описания на обектите за иконите по стандарт B+ V1.1-б (подложка 76 %, обект 80 %). Описанието следва СЕГАШНАТА икона; стандартизира се само представянето. „must“ = детайли, които носят учебния смисъл и не бива да се променят (брой, посока, ред). Генерира се САМО след одобрение от методиста (status: approved). control = контролна серия.",
+ "objects": {
+  "zone_elements": {
+   "module": "Букварика",
+   "game": "Елементи на букви",
+   "bg": "Дървена масичка с табла с цветни пръчици и дъги (елементи на букви), до нея столче и кошничка с извити пръчици.",
+   "must": "Пръчици и дъги – части на букви, без готови букви.",
+   "en": "a small wooden table with a tray of coloured sticks and arcs (letter parts), a round stool beside it and a basket of curved sticks; no complete letters",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "zone_hearing": {
+   "module": "Букварика",
+   "game": "Фонематичен слух",
+   "bg": "Грамофон с голяма фуния и стълб с две камбанки.",
+   "must": "Слушане на звук. Да остане, ако децата го разпознават като „слушане“ при теста; иначе се търси по-ясен символ (напр. ухо и камбанки).",
+   "en": "an old gramophone with a big golden horn on a round wooden base, and a small post with two bells",
+   "control": true,
+   "review": "решава се след теста с деца",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 (задължителни елементи) OK · проверка 2 (135 px) OK · чака таблет"
+  },
+  "zone_phonetics": {
+   "module": "Букварика",
+   "game": "Фонетика",
+   "bg": "Голяма черна дъска с нарисувана уста (основен акцент) отпред; встрани по-малки камбанка и слушалки – символите на играта за звучна и беззвучна съгласна.",
+   "must": "Устата е основният и най-голям елемент. Камбанка (звучна) и слушалки (беззвучна) – второстепенни. Без рупор и барабан. Потвърдено в кода на играта: камбанка = звучна, слушалки = беззвучна.",
+   "en": "a big blackboard on a stand with a large simple drawn open mouth as the main element in front, and beside it smaller: a little bell and a small pair of headphones",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "zone_parsing": {
+   "module": "Букварика",
+   "game": "Звуково-буквен анализ",
+   "bg": "Влакче с локомотив и вагончета с цветни кубчета по релса, отзад малка гаричка.",
+   "must": "Вагончетата една след друга – звуковете в ред; без букви по кубчетата.",
+   "en": "a toy train with a locomotive and three little wagons carrying coloured blocks on a short curved track, a tiny station roof behind; no letters on the blocks",
+   "control": true,
+   "status": "approved",
+   "status_icon": "generated · проверка 1 (задължителни елементи) OK · проверка 2 (135 px) OK · чака таблет"
+  },
+  "zone_reading": {
+   "module": "Букварика",
+   "game": "Читалка",
+   "bg": "Отворена книга върху лилава възглавница на пън, фенер и купчинка книги.",
+   "must": "Отворената книга.",
+   "en": "an open book lying on a purple cushion on a tree stump, a small lantern on a post and a stack of books beside it",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "rz_order": {
+   "module": "Читарика",
+   "game": "Словоред",
+   "bg": "Въже между два кола с щипки и закачени листчета, отдолу кошничка с листчета.",
+   "must": "Листчетата в ред на въжето – думите в изречение.",
+   "en": "a rope between two wooden posts with several paper cards pinned in a row with clothes pegs, and a small basket of cards below",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "rz_build": {
+   "module": "Читарика",
+   "game": "Построй изречение",
+   "bg": "Дървена пейка с пет блокчета в ред, последното – кръгло (точка).",
+   "must": "Условна илюстрация: блокчета в ред и кръгла точка накрая. Броят на блокчетата НЕ е модел за брой думи в изречение.",
+   "en": "a wooden bench with five blocks in a row: four rectangular blocks and the last one round (like a full stop)",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "rz_conformity": {
+   "module": "Читарика",
+   "game": "Съответствие",
+   "bg": "Карта с котенце и лист с редове, вързани заедно с червена панделка.",
+   "must": "Картина + текст, свързани – съответствие. V1.2: опростено – две големи части (картина и текст), свързани с панделка.",
+   "en": "ONE large picture card showing a kitten and ONE large paper sheet with three thick grey lines, standing side by side and joined by a simple thick red ribbon; nothing else, big simple shapes",
+   "control": true,
+   "status": "approved",
+   "status_icon": "V1.2: опростена за четимост при 135 px · чака таблет"
+  },
+  "rz_intonation": {
+   "module": "Читарика",
+   "game": "Интонация и знак",
+   "bg": "Голяма дървена въпросителна, удивителна и кръгла точка.",
+   "must": "Трите знака: ? ! и точка.",
+   "en": "three chunky wooden punctuation marks standing side by side: a question mark, an exclamation mark and a round full stop",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "rz_conventions": {
+   "module": "Читарика",
+   "game": "Направи изречението ясно",
+   "bg": "Ред от плочки: първата е по-висока (главна буква), видим празен интервал между две групи плочки и плочка със знак накрая.",
+   "must": "Трите акцента на играта: главна в началото, интервал между думите, знак в края. Без истински букви.",
+   "en": "a row of chunky blank letter tiles on a wooden base: the FIRST tile clearly TALLER than the others (capital letter), a clearly visible empty gap splitting the tiles into two groups (space between words), and the LAST tile showing a big question mark",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "rz_edit": {
+   "module": "Читарика",
+   "game": "Редактирай изречението",
+   "bg": "Чин с лист, молив и гума.",
+   "must": "Молив и гума – поправяне.",
+   "en": "a small wooden school desk with a sheet of paper, a big yellow pencil and a pink-blue eraser on it",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "rz_context": {
+   "module": "Читарика",
+   "game": "Думата в контекст",
+   "bg": "Поставка с три полета (средното празно) и три карти отпред, средната свети.",
+   "must": "Празното място в средата и светещата карта – думата, която пасва.",
+   "en": "a wooden holder with three slots, the middle slot empty and darker, and three blank cards in front of it, the middle card glowing softly",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "rz_readcar": {
+   "module": "Читарика",
+   "game": "Читалка",
+   "bg": "Отворена книга на поставка-пюпитър с лампичка отгоре.",
+   "must": "Отворената книга на пюпитъра.",
+   "en": "an open book on a wooden reading lectern with a small brass lamp above it",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "rz_sequence": {
+   "module": "Читарика",
+   "game": "Подреди по ред",
+   "bg": "Три карти на поставка: семе, кълн, цвете.",
+   "must": "Редът семе → кълн → цвете отляво надясно.",
+   "en": "three picture cards on a wooden stand in this order from left to right: a seed in soil, a small sprout, a flower",
+   "control": true,
+   "status": "approved",
+   "status_icon": "generated · проверка 1 (задължителни елементи) OK · проверка 2 (135 px) OK · чака таблет"
+  },
+  "rz_text": {
+   "module": "Читарика",
+   "game": "Текст",
+   "bg": "Изправен лист с картинка на пейзаж и редове текст, с червена отметка-лента.",
+   "must": "Картинка + редове – текст.",
+   "en": "an upright page on a wooden stand with a small landscape picture at the top and grey text lines below, and a red ribbon bookmark",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "mz_subitize": {
+   "module": "Математика",
+   "game": "Колко са?",
+   "bg": "Два зара на пън, калинка и детелинки.",
+   "must": "КРИТИЧНО: заровете показват 3 и 5 точки.",
+   "en": "two big wooden dice on a tree stump, one showing three dots and one showing five dots, a ladybird and clover leaves beside them",
+   "control": true,
+   "accept": "неприета при грешен брой, ред или отношение – проверка на 1024 px и при 135 px в картата",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 (задължителни елементи) OK · проверка 2 (135 px) OK · чака таблет · заровете: 3 и 5 точки ✓"
+  },
+  "mz_order": {
+   "module": "Математика",
+   "game": "Последователност",
+   "bg": "Стълбички от кубчета: 1, 2, 3, 4, 5 – растящи отляво надясно, в различни цветове.",
+   "must": "КРИТИЧНО: 5 стълбчета с височина 1–5 кубчета, растящи отляво надясно.",
+   "en": "five columns of toy cubes growing from left to right with exactly 1, 2, 3, 4 and 5 cubes, each column a different colour (red, orange, yellow, green, blue)",
+   "accept": "неприета при грешен брой, ред или отношение – проверка на 1024 px и при 135 px в картата",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет · стълбчета 1–5 ✓"
+  },
+  "mz_numberline": {
+   "module": "Математика",
+   "game": "Числова права",
+   "bg": "Дървена линийка с чертички и жабче, което скача по нея.",
+   "must": "Деленията са равномерни и ясно видими; жабчето е НАД линийката и не ги закрива.",
+   "en": "a long wooden ruler with evenly spaced clearly visible notches, and a small frog jumping ABOVE it (not covering any notch), dotted arcs showing equal jumps",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "mz_compose": {
+   "module": "Математика",
+   "game": "Състав на числата",
+   "bg": "Кошница ябълки, две по-малки кошнички и щайга.",
+   "must": "Ябълките, разделени в кошници – състав.",
+   "en": "a big basket of red apples, two smaller baskets with apples and a small wooden crate beside them",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "mz_cobweb": {
+   "module": "Математика",
+   "game": "Улов",
+   "bg": "Езерце с риби, мостче и мрежа за риба.",
+   "must": "Рибите и мрежата.",
+   "en": "a small round pond with two orange and blue fish, a little wooden jetty and a fishing net leaning on the edge",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "mz_crush": {
+   "module": "Математика",
+   "game": "Главоблъсканица",
+   "bg": "Пейка с две чинии ябълки и знак плюс между тях.",
+   "must": "КРИТИЧНО: 3 ябълки + 2 ябълки и знак „+“ между чиниите.",
+   "en": "a wooden bench with two plates: three red apples on the left plate, two red apples on the right plate, and a chunky wooden plus sign between them",
+   "accept": "неприета при грешен брой, ред или отношение – проверка на 1024 px и при 135 px в картата",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет · 3 + 2 ябълки и „+“ ✓"
+  },
+  "mz_storm": {
+   "module": "Математика",
+   "game": "Мозъчна атака",
+   "bg": "Карирано одеяло с два реда ябълки (червени и зелени) и кошничка.",
+   "must": "КРИТИЧНО: 2 реда по 10 ябълки (червени отгоре, зелени отдолу). Приема се само ако при 135 px двата реда се различават; по-едри ябълки, без кошничка, броят остава 10 + 10.",
+   "en": "a checked picnic blanket seen from above at an angle with exactly two straight rows of apples: the back row has exactly ten red apples, the front row has exactly ten green apples, apples evenly spaced, nothing else",
+   "accept": "неприета при грешен брой, ред или отношение – проверка на 1024 px и при 135 px в картата",
+   "status": "approved",
+   "status_icon": "сглобена от код (одеяло + 20 отделни ябълки): точно 10 червени + 10 зелени · първите 2 опита неприети (11 + 11, 8 + 9) · при 135 px редовете се различават по цвят, отделните ябълки – трудно · чака таблет"
+  },
+  "mz_underwater": {
+   "module": "Математика",
+   "game": "Подводно царство",
+   "bg": "Езерце с рибка, водни лилии и балони, вързани за тръстика.",
+   "must": "Рибката и балоните.",
+   "en": "a small round pond with an orange fish and water lilies, and three balloons tied to a reed",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "mz_scales": {
+   "module": "Математика",
+   "game": "Умни везни",
+   "bg": "Везна с тиква в едното блюдо и ябълки в другото, щайга с ябълки.",
+   "must": "КРИТИЧНО: тиквата натежава (блюдото ѝ е по-ниско).",
+   "en": "a brass balance scale with a pumpkin in the left pan and a few apples in the right pan, the pumpkin pan clearly LOWER, and a small crate of apples beside it",
+   "control": true,
+   "accept": "неприета при грешен брой, ред или отношение – проверка на 1024 px и при 135 px в картата",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 (задължителни елементи) OK · проверка 2 (135 px) OK · чака таблет · блюдото с тиквата е по-ниско ✓"
+  },
+  "mz_treasure": {
+   "module": "Математика",
+   "game": "Пиратско съкровище",
+   "bg": "Отворен сандък с монети, лопатка и свитък-карта.",
+   "must": "Сандъкът и картата.",
+   "en": "an open treasure chest full of gold coins, a small shovel and a rolled map, a few coins on the ground",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "mz_cards": {
+   "module": "Математика",
+   "game": "Тайни карти",
+   "bg": "Кръгла маса с карти с гърба нагоре, две обърнати (звезда, листо), столче.",
+   "must": "Обърнати и скрити карти – памет.",
+   "en": "a round wooden table with cards lying face down in a grid, two cards turned face up showing a star and a leaf, a small stool beside it",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "mz_patterns": {
+   "module": "Математика",
+   "game": "Какво следва?",
+   "bg": "Гирлянд от цветни флагчета и сметало-низ с мъниста между два кола.",
+   "must": "КРИТИЧНО: повтарящ се ред на цветовете (флагчета и мъниста).",
+   "en": "two wooden posts with a rope between them: on the rope hang exactly six triangle flags in this exact order from left to right: red, blue, yellow, red, blue, yellow. Below, on a second string, exactly six round beads in the same order: red, blue, yellow, red, blue, yellow",
+   "accept": "неприета при грешен брой, ред или отношение – проверка на 1024 px и при 135 px в картата",
+   "status": "approved",
+   "status_icon": "втори опит: червено-синьо-жълто ×2 и при флагчетата, и при мънистата · първият неприет (мънистата 5, редът нарушен) · чака таблет"
+  },
+  "mz_cipher": {
+   "module": "Математика",
+   "game": "Пиратски шифър",
+   "bg": "Квадратна дъска 3×3 с ясни клетки; цветни точки по ръба отбелязват редовете и колоните; в една клетка има знак (звездичка).",
+   "must": "КРИТИЧНО: точно 3×3 клетки и позиция в мрежа (ред + колона). Да не изглежда като градинарска игра.",
+   "en": "a square wooden board game: a flat board divided into exactly 3 by 3 equal square cells with raised wooden borders, three small coloured dots (red, yellow, blue) along the left edge marking the three rows and three along the top edge marking the three columns, and one small gold star in one cell; no plants, no soil, no garden",
+   "accept": "неприета при грешен брой, ред или отношение – проверка на 1024 px и при 135 px в картата",
+   "status": "approved",
+   "status_icon": "втори опит: дъска 3×3 с точки за редове и колони и звезда · първият неприет (приличаше на леха) · чака таблет"
+  },
+  "mz_shadow": {
+   "module": "Математика",
+   "game": "Карта на диаманти",
+   "bg": "Един ясно разпознаваем предмет (ябълка) и неговата тъмна сянка до него.",
+   "must": "Предмет и неговата сянка (играта: силуети на предмети от градината, въпреки името „Карта на диаманти“). Един предмет, една сянка – четимост при 135 px.",
+   "en": "one large red apple standing next to its own large dark flat shadow silhouette lying on the ground beside it",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "mz_lines": {
+   "module": "Математика",
+   "game": "Линии и измерване",
+   "bg": "Линийка от цветни кубчета, кутийка с кубчета и извито въже.",
+   "must": "Права (кубчета) и крива (въже) линия.",
+   "en": "a straight row of coloured cubes in a long wooden holder, a small box of cubes, and a long curved rope lying beside it",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "mz_grid": {
+   "module": "Математика",
+   "game": "Графична диктовка",
+   "bg": "Дъска с пирончета и опъната червена форма на къщичка, кутийка с тебешири, табелка-стрелка.",
+   "must": "Дъската с точки и линията по нея.",
+   "en": "a wooden pegboard with a red rubber band stretched into a simple house shape, a small box of chalks, and a little arrow sign without letters",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "wz_professions": {
+   "module": "Околен свят",
+   "game": "Професии",
+   "bg": "Три големи предмета на професии: готварска шапка, лекарска слушалка, строителна каска.",
+   "must": "Разпознаваеми професии при 135 px: 3 големи предмета, без маса и дребни детайли (V1.2).",
+   "en": "three large professional objects only, side by side and big: a white chef's hat, a doctor's stethoscope and a yellow builder's helmet; no table, nothing else",
+   "control": true,
+   "status": "approved",
+   "status_icon": "V1.2: опростена за четимост при 135 px · чака таблет"
+  },
+  "wz_school": {
+   "module": "Околен свят",
+   "game": "На училище",
+   "bg": "Отворена ученическа раница с тетрадки и моливи.",
+   "must": "Раницата с пособията.",
+   "en": "an open school backpack in blue and orange with notebooks and coloured pencils sticking out",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "wz_room": {
+   "module": "Околен свят",
+   "game": "Чиста каюта",
+   "bg": "Две кашонки: в едната играчки (мече, топка), в другата сгънати дрехи; чорап на земята.",
+   "must": "Подреждане по вид: играчки / дрехи.",
+   "en": "two open cardboard boxes, one with toys (a teddy bear and a ball), the other with folded clothes, and one sock lying on the ground",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "wz_senses": {
+   "module": "Околен свят",
+   "game": "Шоу с маски",
+   "bg": "Поставка с пет кръгли плочки: око, ухо, нос, уста, ръка – сетивните органи от играта.",
+   "must": "Играта е за сетивните органи: око, ухо, нос, уста, ръка. Без театрална маска.",
+   "en": "a wooden stand holding five round toy discs in a row, each showing one simple sense organ: an eye, an ear, a nose, a mouth and a hand",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "wz_clock": {
+   "module": "Околен свят",
+   "game": "Страж на времето",
+   "bg": "Голям часовник на стойка и малък будилник на столче.",
+   "must": "Часовниците.",
+   "en": "a big round wooden clock on a post and a small alarm clock on a little stool beside it",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "wz_outward": {
+   "module": "Околен свят",
+   "game": "Обкръжалка",
+   "bg": "Лупа на стойка, през която се виждат автобус и самолет.",
+   "must": "Играта е за транспорт (гъбите отпаднаха на 19.10). 1–2 превозни средства в лупата.",
+   "en": "a large magnifying glass on a brass stand, and through the lens you clearly see a small toy bus and a small toy aeroplane",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "wz_safari": {
+   "module": "Околен свят",
+   "game": "Сафари",
+   "bg": "Маса с 4 големи карти (две еднакви с жираф, две обърнати) и голям бинокъл.",
+   "must": "Двойката жирафи – намиране на двойки; 4 големи карти вместо 6 дребни (V1.2).",
+   "en": "a small round wooden table with only FOUR large cards in a 2 by 2 grid: two face-up cards both showing the same giraffe, two face-down blue cards, and a big pair of binoculars in front",
+   "status": "approved",
+   "status_icon": "V1.2: опростена за четимост при 135 px · чака таблет"
+  },
+  "wz_hide": {
+   "module": "Околен свят",
+   "game": "Криеница",
+   "bg": "Одеяло за пикник с играчки: колиичка, топка, кукла, хвърчило, чашка.",
+   "must": "Много предмети – търсене.",
+   "en": "a checked picnic blanket with scattered toys: a small blue car, a beach ball, a rag doll, a kite and a little cup",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет"
+  },
+  "wz_memory": {
+   "module": "Околен свят",
+   "game": "Запоминалка",
+   "bg": "Поле 3×3 от карти: три карти с лицето нагоре показват числата 1, 2 и 3, останалите шест са с гърба нагоре.",
+   "must": "Числа върху карти в поле 3×3: точно три с ЛИЦЕТО нагоре (1, 2, 3), шест с ГЪРБА нагоре. Цифрите са допустими – съществена част от играта.",
+   "en": "a wooden tray with a 3 by 3 grid of cards: three cards face UP showing the digits 1, 2 and 3 in large clear print, the other six cards face DOWN with a plain blue back",
+   "accept": "неприета, ако цифрите 1, 2, 3 не се четат при 135 px в картата",
+   "status": "approved",
+   "status_icon": "generated · проверка 1 OK · проверка 2 OK · чака таблет · 3 карти с 1, 2, 3 и 6 обърнати ✓; цифрите се четат при 135 px"
+  }
+ },
+ "standard": {
+  "pad": "една обща кремава основа с тревна повърхност (pad.png) – добавя се ПРОГРАМНО от скрипта, никога не се генерира в картинката; фиксиран размер 76 % и позиция",
+  "camera": "един и същ изометричен ъгъл – по общата подложка",
+  "composition": "основният обект – центриран по визуалната си тежест",
+  "scale": "обект 80 % от ширината (най-много 76 % от височината) – вариант Б, потвърден на таблет",
+  "text": "без надписи; изключение само когато е част от играта и е изрично в описанието (Запоминалка: 1, 2, 3)",
+  "background": "прозрачен (без бял ореол)",
+  "details": "без дребни декоративни предмети",
+  "content": "задължителните елементи – точно изпълнени (поле must; при „КРИТИЧНО“ – критерий за приемане)",
+  "check": "в реалната карта на таблет, не само в увеличен преглед"
+ },
+ "acceptance": "Всяка икона минава три проверки преди да влезе в картите: (1) задължителните елементи – на 1024 px; (2) четимост в картата при 135 px; (3) таблет. Статус в полето status_icon: generated → accepted / rejected.",
+ "approved": "2026-10-24 – одобрено генерирането (първо контролната серия)"
+}

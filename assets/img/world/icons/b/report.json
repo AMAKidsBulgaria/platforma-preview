@@ -1,0 +1,512 @@
+{
+ "zone_alphabet": {
+  "object_width_pct": 62,
+  "object_height_pct": 64,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "rz_constructor": {
+  "object_width_pct": 86,
+  "object_height_pct": 57,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "rz_story": {
+  "object_width_pct": 68,
+  "object_height_pct": 65,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "mz_bright": {
+  "object_width_pct": 58,
+  "object_height_pct": 71,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "mz_shapes": {
+  "object_width_pct": 73,
+  "object_height_pct": 60,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "rz_accents": {
+  "object_width_pct": 86,
+  "object_height_pct": 49,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "rz_guess": {
+  "object_width_pct": 52,
+  "object_height_pct": 66,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "rz_true": {
+  "object_width_pct": 74,
+  "object_height_pct": 56,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "rz_words": {
+  "object_width_pct": 57,
+  "object_height_pct": 68,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "rz_say": {
+  "object_width_pct": 74,
+  "object_height_pct": 49,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "wz_forest": {
+  "object_width_pct": 67,
+  "object_height_pct": 65,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "zone_elements": {
+  "object_width_pct": 71,
+  "object_height_pct": 65,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "zone_hearing": {
+  "object_width_pct": 71,
+  "object_height_pct": 75,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "zone_phonetics": {
+  "object_width_pct": 66,
+  "object_height_pct": 70,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "zone_parsing": {
+  "object_width_pct": 80,
+  "object_height_pct": 64,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "zone_reading": {
+  "object_width_pct": 68,
+  "object_height_pct": 65,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "rz_order": {
+  "object_width_pct": 86,
+  "object_height_pct": 67,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "rz_build": {
+  "object_width_pct": 86,
+  "object_height_pct": 45,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "rz_conformity": {
+  "object_width_pct": 76,
+  "object_height_pct": 45,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "rz_intonation": {
+  "object_width_pct": 81,
+  "object_height_pct": 67,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "rz_conventions": {
+  "object_width_pct": 86,
+  "object_height_pct": 43,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "rz_edit": {
+  "object_width_pct": 67,
+  "object_height_pct": 58,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "rz_context": {
+  "object_width_pct": 73,
+  "object_height_pct": 55,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "rz_readcar": {
+  "object_width_pct": 56,
+  "object_height_pct": 76,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "rz_sequence": {
+  "object_width_pct": 68,
+  "object_height_pct": 53,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "rz_text": {
+  "object_width_pct": 57,
+  "object_height_pct": 66,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "mz_subitize": {
+  "object_width_pct": 71,
+  "object_height_pct": 55,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "mz_order": {
+  "object_width_pct": 78,
+  "object_height_pct": 67,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "mz_numberline": {
+  "object_width_pct": 86,
+  "object_height_pct": 52,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "mz_compose": {
+  "object_width_pct": 72,
+  "object_height_pct": 65,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "mz_cobweb": {
+  "object_width_pct": 73,
+  "object_height_pct": 66,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "mz_crush": {
+  "object_width_pct": 86,
+  "object_height_pct": 47,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "mz_storm": {
+  "object_width_pct": 86,
+  "object_height_pct": 37,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "mz_underwater": {
+  "object_width_pct": 55,
+  "object_height_pct": 76,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "mz_scales": {
+  "object_width_pct": 69,
+  "object_height_pct": 76,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "mz_treasure": {
+  "object_width_pct": 85,
+  "object_height_pct": 71,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "mz_cards": {
+  "object_width_pct": 63,
+  "object_height_pct": 67,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "mz_patterns": {
+  "object_width_pct": 86,
+  "object_height_pct": 50,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "mz_cipher": {
+  "object_width_pct": 62,
+  "object_height_pct": 50,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "mz_shadow": {
+  "object_width_pct": 80,
+  "object_height_pct": 57,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "mz_lines": {
+  "object_width_pct": 79,
+  "object_height_pct": 76,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "mz_grid": {
+  "object_width_pct": 86,
+  "object_height_pct": 51,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "wz_professions": {
+  "object_width_pct": 86,
+  "object_height_pct": 30,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "wz_school": {
+  "object_width_pct": 54,
+  "object_height_pct": 69,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "wz_room": {
+  "object_width_pct": 79,
+  "object_height_pct": 58,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "wz_senses": {
+  "object_width_pct": 86,
+  "object_height_pct": 49,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "wz_clock": {
+  "object_width_pct": 63,
+  "object_height_pct": 74,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "wz_outward": {
+  "object_width_pct": 56,
+  "object_height_pct": 70,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "wz_safari": {
+  "object_width_pct": 66,
+  "object_height_pct": 53,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "wz_hide": {
+  "object_width_pct": 81,
+  "object_height_pct": 61,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ },
+ "wz_memory": {
+  "object_width_pct": 68,
+  "object_height_pct": 60,
+  "pad": [
+   123,
+   437,
+   778,
+   536
+  ]
+ }
+}

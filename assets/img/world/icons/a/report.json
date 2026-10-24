@@ -1,0 +1,62 @@
+{
+ "zone_alphabet": {
+  "object_width_pct": 64,
+  "object_height_pct": 66,
+  "pad": [
+   72,
+   366,
+   881,
+   607
+  ]
+ },
+ "rz_constructor": {
+  "object_width_pct": 70,
+  "object_height_pct": 47,
+  "pad": [
+   72,
+   366,
+   881,
+   607
+  ]
+ },
+ "rz_story": {
+  "object_width_pct": 69,
+  "object_height_pct": 66,
+  "pad": [
+   72,
+   366,
+   881,
+   607
+  ]
+ },
+ "mz_bright": {
+  "object_width_pct": 54,
+  "object_height_pct": 66,
+  "pad": [
+   72,
+   366,
+   881,
+   607
+  ]
+ },
+ "mz_shapes": {
+  "object_width_pct": 70,
+  "object_height_pct": 57,
+  "pad": [
+   72,
+   366,
+   881,
+   607
+  ]
+ },
+ "wz_forest": {
+  "object_width_pct": 68,
+  "object_height_pct": 66,
+  "pad": [
+   72,
+   366,
+   881,
+   607
+  ]
+ }
+}

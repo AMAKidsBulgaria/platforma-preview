@@ -124,21 +124,46 @@
   function choose(ruleId, chosen) {
     const i = ident(); if (!i.child) return false;
     const mine = read(MYCH) || {}; (mine[i.child] = mine[i.child] || {})[ruleId] = chosen; write(MYCH, mine);
-    const ev = { event_key: `${i.device}:choice:${i.child}:${ruleId}`, child_code: i.child, type: "world_choice", client_ts: new Date().toISOString(), policy_version: 1,
+    const ts = new Date().toISOString();   // смяна на украсата е позволена: всеки избор – ново събитие; по-новият печели и на сървъра
+    const ev = { event_key: `${i.device}:choice:${i.child}:${ruleId}:${ts}`, child_code: i.child, type: "world_choice", client_ts: ts, policy_version: 1,
                  payload: { rule_id: ruleId, chosen } };
-    if (!read(QP + ev.event_key) && !memQ[ev.event_key]) saveItem({ ev, tries: 0, state: "queued", added: new Date().toISOString() });
+    saveItem({ ev, tries: 0, state: "queued", added: ts });
     flushLocked({ force: true }); return true;
   }
+  // избор на герой (аватар): показва се веднага; изпраща се като avatar_choice (смяна е позволена – всеки избор е ново събитие); сървърът пази профила
+  const AVK = "platforma.world.avatar.v1";
+  const ACCK = "platforma.world.accessory.v1";
+  function chooseAvatar(avatar, child, accessory) {
+    const c = child || ident().child; if (!c || !/^[an][0-9]$/.test(avatar)) return false;
+    const m = read(AVK) || {}; m[c] = avatar; write(AVK, m);
+    const ak = read(ACCK) || {}; if (accessory) ak[c] = accessory; else delete ak[c]; write(ACCK, ak);
+    const ts = new Date().toISOString(), ev = { event_key: `${ident().device || "dev"}:avatar:${c}:${ts}`, child_code: c, type: "avatar_choice", client_ts: ts, policy_version: 1, payload: accessory ? { avatar, accessory } : { avatar } };
+    saveItem({ ev, tries: 0, state: "queued", added: ts });
+    flushLocked({ force: true }); return true;
+  }
+  const avatarOf = child => ((read(AVK) || {})[child || ident().child]) || null;
+  const accessoryOf = child => ((read(ACCK) || {})[child || ident().child]) || null;
   // децата, играли на този таблет (за страницата на учителя)
   function childrenOnDevice() { const all = read(RKEY) || roundsMem; return Object.keys(all); }
+  // нов таблет / повторно влизане: веднъж на зареждане за всяко дете – заявка за състоянието му (кръгове, украси, герой)
+  const synced = new Set(), stateDone = new Set(), stateAsked = {};
+  // известно ли е състоянието на детето от сървъра (за да не питаме за герой, който вече е избран на друг таблет)
+  function stateKnown(c) { return DEMO || !CFG || !navigator.onLine || stateDone.has(c) || (stateAsked[c] && Date.now() - stateAsked[c] > 6000); }
+  function requestState(c) {
+    if (!c || synced.has(c) || DEMO) return; synced.add(c); stateAsked[c] = Date.now();
+    ready.then(() => { if (!CFG) return; const ts = new Date().toISOString();
+      saveItem({ ev: { event_key: `${ident().device || "dev"}:state:${c}:${ts}`, child_code: c, type: "state_sync", client_ts: ts, policy_version: 1, payload: {} }, tries: 0, state: "queued", added: ts });
+      flushLocked({ force: true }); });
+  }
   function worldState(child) {
-    const c = child || ident().child; if (!c) return null;
+    const c = child || ident().child; if (!c) return null; requestState(c);
     const conf = (read(WKEY) || {})[c] || {}, ch = (read(CHKEY) || {})[c] || {}, mine = (read(MYCH) || {})[c] || {}, rounds = ((read(RKEY) || roundsMem)[c]) || {};
-    const pendingKeys = new Set(getQ().filter(x => x.ev.child_code === c && x.state === "queued").map(x => x.ev.type));
+    const Q0 = getQ().filter(x => x.ev.type !== "state_sync");   // заявката за състоянието не е резултат на детето: не се брои като „изпраща се“ / блокирано
+    const pendingKeys = new Set(Q0.filter(x => x.ev.child_code === c && x.state === "queued").map(x => x.ev.type));
     const pm = (read(PRGKEY) || {})[c] || { program: "full", reading_entry: "standard", source: "default" };
     return { child: c, program: pm.program, readingEntry: pm.reading_entry, programSource: pm.source, confirmed: conf, choices: ch, myChoices: mine, rounds, progress: (read(PGKEY) || {})[c] || {}, reviews: (state().reviews || []).filter(r => r.child_code === c),
-             queued: getQ().filter(x => x.ev.child_code === c && x.state === "queued").length, blocked: getQ().filter(x => x.ev.child_code === c && x.state === "blocked").length,
-             blockedReasons: getQ().filter(x => x.ev.child_code === c && x.state === "blocked").map(x => x.reason),
+             queued: Q0.filter(x => x.ev.child_code === c && x.state === "queued").length, blocked: Q0.filter(x => x.ev.child_code === c && x.state === "blocked").length,
+             blockedReasons: Q0.filter(x => x.ev.child_code === c && x.state === "blocked").map(x => x.reason),
              lastOk: DEMO ? null : state().last_ok || null, sending: pendingKeys.size > 0, demo: DEMO };   // демо: няма сървър – няма „за изравняване“
   }
 
@@ -230,6 +255,7 @@
             if (!keys.has(x.ev.event_key)) return;                                // чуждо за тази заявка – не се пипа
             const res = byKey[x.ev.event_key];
             if (!res) return;                                                     // без отговор за него – остава, както е
+            if (x.ev.type === "state_sync" && (res.status === "processed" || res.status === "duplicate")) stateDone.add(x.ev.child_code);
             if (res.status === "processed" || res.status === "duplicate") { rejectedItems += res.items_rejected || 0; if (res.round_valid === false) invalidRounds++; return dropItem(x.ev.event_key); }   // потвърдено → излиза
             if (res.status === "failed") { x.tries = (x.tries || 0) + 1; if (x.tries >= MAX_TRIES) { x.state = "blocked"; x.reason = "failed"; } return saveItem(x); }
             x.state = "blocked"; x.reason = res.status; x.blocked_at = new Date().toISOString(); saveItem(x);   // conflict / forbidden / invalid_schema – за преглед
@@ -240,6 +266,15 @@
             const p2 = read(PGKEY) || {};
             r.data.progress.forEach(x => { (p2[x.child_code] = p2[x.child_code] || {})[x.lesson] = { received: x.received || [], valid: x.valid || [] }; });
             write(PGKEY, p2);
+            const led = read(RKEY) || roundsMem; let ch = false;
+            r.data.progress.forEach(x => { const c = led[x.child_code] = led[x.child_code] || {}, l = c[x.lesson] = c[x.lesson] || [];
+              (x.received || []).forEach(n => { if (!l.map(Number).includes(Number(n))) { l.push(Number(n)); ch = true; } }); });
+            if (ch && !write(RKEY, led)) Object.assign(roundsMem, led);
+          }
+          if (Array.isArray(r.data.avatars)) {   // героят от профила на детето (друг таблет, повторно влизане); по-нов локален избор, който още чака, не се презаписва
+            const m = read(AVK) || {}, waiting = new Set(getQ().filter(x => x.ev.type === "avatar_choice" && x.state !== "done").map(x => x.ev.child_code));
+            const ak = read(ACCK) || {};
+            r.data.avatars.forEach(x => { if (!waiting.has(x.child_code)) { m[x.child_code] = x.avatar; if (x.accessory) ak[x.child_code] = x.accessory; else delete ak[x.child_code]; } }); write(AVK, m); write(ACCK, ak);
           }
           if (Array.isArray(r.data.programs)) {   // учебната програма на децата (отключване на кварталите)
             const pm = read(PRGKEY) || {};
@@ -250,6 +285,9 @@
             const w2 = read(CHKEY) || {};
             r.data.choices.forEach(c2 => { (w2[c2.child_code] = w2[c2.child_code] || {})[c2.rule_id] = { offered: c2.offered, chosen: c2.chosen }; });
             write(CHKEY, w2);
+            const mine = read(MYCH) || {}, pend = new Set(getQ().filter(x => x.ev.type === "world_choice").map(x => x.ev.child_code + "|" + x.ev.payload.rule_id));
+            r.data.choices.forEach(c2 => { if (c2.chosen && !pend.has(c2.child_code + "|" + c2.rule_id)) (mine[c2.child_code] = mine[c2.child_code] || {})[c2.rule_id] = c2.chosen; });
+            write(MYCH, mine);
           }
           try { window.dispatchEvent(new CustomEvent("pilot-world")); } catch (e) {}
           if (Array.isArray(r.data.unlocks)) {
@@ -286,5 +324,5 @@
              rounds_invalid: s.rounds_invalid || 0, reviews: s.reviews || [],
              last_ok: s.last_ok || null, next_at: s.next_at || 0, items_rejected: s.items_rejected || 0, confirmed_unlocks: read(WKEY) || {} };
   }
-  window.PILOT_SYNC = { enqueue, flush: () => flushLocked({ force: true }), needsPick, pick, status, registerDevice, retryBlocked, ready, choose, worldState, childrenOnDevice };
+  window.PILOT_SYNC = { enqueue, flush: () => flushLocked({ force: true }), needsPick, pick, status, registerDevice, retryBlocked, ready, choose, chooseAvatar, avatarOf, accessoryOf, stateKnown, worldState, childrenOnDevice };
 })();
