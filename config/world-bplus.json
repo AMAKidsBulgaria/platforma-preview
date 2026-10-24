@@ -225,6 +225,10 @@
    272,
    403
   ],
+  "plot_ring": [
+   232,
+   164
+  ],
   "reading_decor_1": [
    360,
    414
@@ -408,6 +412,29 @@
     985,
     610
    ],
+   "streets": [
+    7,
+    6
+   ],
+   "street_slots": {
+    "7": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "6": [
+     0,
+     1,
+     2,
+     3,
+     5,
+     6
+    ]
+   },
    "types": [
     "letters_house",
     "letters_round",
@@ -416,13 +443,14 @@
    ],
    "final_type": "letters_final",
    "decor": "letters",
-   "bg": "assets/img/world/bplus/bg_letters.webp",
+   "bg": "assets/img/world/bplus/bg_letters.webp?v=4",
    "w": 1536,
    "h": 1024,
    "size": 200,
    "street": 8,
    "anchor": 0.36,
-   "empty_plot": "board"
+   "empty_plot": "sprite",
+   "plot_sprite": "plot_ring"
   },
   "reading": {
    "slots": [
@@ -476,6 +504,22 @@
     1020,
     440
    ],
+   "streets": [
+    8,
+    8,
+    7
+   ],
+   "street_slots": {
+    "7": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
    "types": [
     "reading_tower",
     "reading_dome",
@@ -484,13 +528,14 @@
    ],
    "final_type": "reading_final",
    "decor": "reading",
-   "bg": "assets/img/world/bplus/bg_reading.webp",
+   "bg": "assets/img/world/bplus/bg_reading.webp?v=4",
    "w": 1536,
    "h": 1024,
    "size": 200,
    "street": 8,
    "anchor": 0.36,
-   "empty_plot": "board"
+   "empty_plot": "sprite",
+   "plot_sprite": "plot_ring"
   },
   "mathworld": {
    "slots": [
@@ -544,6 +589,23 @@
     1050,
     735
    ],
+   "streets": [
+    8,
+    8,
+    8,
+    7
+   ],
+   "street_slots": {
+    "7": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
    "types": [
     "mathworld_cube",
     "mathworld_green",
@@ -552,13 +614,14 @@
    ],
    "final_type": "mathworld_final",
    "decor": "mathworld",
-   "bg": "assets/img/world/bplus/bg_mathworld.webp",
+   "bg": "assets/img/world/bplus/bg_mathworld.webp?v=4",
    "w": 1536,
    "h": 1024,
    "size": 200,
    "street": 8,
    "anchor": 0.36,
-   "empty_plot": "board"
+   "empty_plot": "sprite",
+   "plot_sprite": "plot_ring"
   }
  }
 }

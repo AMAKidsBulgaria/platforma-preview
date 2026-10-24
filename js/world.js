@@ -14,7 +14,7 @@
   const DECOR_ICON = { "фенер": "🏮", "пейка": "🪑", "ограда с цветя": "🌷", "балкон със саксии": "🪴", "табела с името": "🪧", "покрив в нов цвят": "🏠", "пейка под дърво": "🌳", "кладенче": "⛲", "цветна леха": "🌼" };
   let W = null, L = null, BPL = null;   // правилата (world-rules.json), разположението (world-layout.json) и вида B+ (world-bplus.json)
   const ready = Promise.all([fetch("config/world-rules.json?v=2").then(r => r.json()), fetch("config/world-layout.json?v=2").then(r => r.json()),
-    fetch("config/world-bplus.json?v=5").then(r => r.json()).catch(() => null)])
+    fetch("config/world-bplus.json?v=7").then(r => r.json()).catch(() => null)])
     .then(([d, l, b]) => { W = d; L = l; BPL = b; }).catch(() => {});
   // вид B+: world=bplus включва, world=v1 връща временната графика; помни се на устройството
   const BPQ = (location.search + location.hash).match(/[?&#~]world[=_](bplus|v1)/);
@@ -130,8 +130,14 @@
   function renderBplus(box, did, ws, S, focusLesson) {
     const B = BPL.districts[did], D = district(did), finalL = D.final && D.final.lesson;
     const seenAll = seenGet(), seen = seenAll[ws.child] = seenAll[ws.child] || {}, seenNew = {};
-    const regular = S.filter(x => x.rule.lesson !== finalL), nStreets = Math.max(1, Math.ceil(regular.length / B.street));
-    const street = x => x.rule.lesson === finalL ? nStreets - 1 : Math.floor(regular.indexOf(x) / B.street);
+    const regular = S.filter(x => x.rule.lesson !== finalL);
+    // улици: разделянето е от конфигурацията (напр. Букварика 7 + 6), за да няма празни парцели без занятие; иначе – по B.street
+    const split = Array.isArray(B.streets) && B.streets.reduce((a, b) => a + b, 0) === regular.length ? B.streets
+      : Array.from({ length: Math.max(1, Math.ceil(regular.length / B.street)) }, (_, j) => Math.min(B.street, regular.length - j * B.street));
+    const nStreets = split.length, pos = [];   // pos[i] = [улица, място в улицата] за i-тото обикновено занятие
+    split.forEach((n, j) => { for (let p = 0; p < n; p++) pos.push([j, p]); });
+    const slotOf = (j, p) => { const m = (B.street_slots || {})[split[j]]; return B.slots[m ? m[p] : p]; };
+    const street = x => x.rule.lesson === finalL ? nStreets - 1 : pos[regular.indexOf(x)][0];
     // улицата следва текущото занятие (или акцента); ръчно избраната улица важи, докато текущото занятие не се смени
     const want = S.find(x => focusLesson && x.rule.lesson === focusLesson) || S.find(x => x.st === "next");
     const key = (want ? want.rule.lesson : "") + "|" + ws.child, so = streetOf[did];
@@ -140,19 +146,22 @@
     const lit = x => x.st === "confirmed" || x.st === "pending" || x.st === "review" || x.st === "reconcile";
     // финалната сграда (BK14 / CH24 / MW32) е на площада и се вижда от всяка улица като голямата цел; методическите правила не се променят
     const items = S.filter(x => x.rule.lesson === finalL || street(x) === cur).map(x => {
-      const final = x.rule.lesson === finalL, i = regular.indexOf(x), slot = final ? B.final : B.slots[i % B.street];
+      const final = x.rule.lesson === finalL, i = regular.indexOf(x), sp0 = final ? null : pos[i], slot = final ? B.final : slotOf(sp0[0], sp0[1]);
       const [px, py] = slot;
       const stage = lit(x) ? 4 : Math.min(3, new Set(x.rounds.filter(r => x.need.includes(r))).size);
       const isNew = stage > (seen[x.rule.lesson] || 0); if (isNew) { seen[x.rule.lesson] = stage; seenNew[x.rule.lesson] = stage; }
       // разнообразие: видовете сгради се редуват, а при второто срещане на същия вид на улицата – огледално
-      const nT = B.types.length, type = final ? B.final_type : B.types[i % nT], flip = !final && Math.floor((i % B.street) / nT) % 2 === 1;
+      const nT = B.types.length, type = final ? B.final_type : B.types[sp0[1] % nT], flip = !final && Math.floor(sp0[1] / nT) % 2 === 1;
       const sz = final ? B.final_size : Math.round(B.size * (slot[2] || 1));
       // един мащаб за всички етапи на обекта (от готовата сграда) и една долна точка – обектът не „скача“ между етапите
       // финалната сграда преди началото си: бледа силуетна „голяма цел“ на площада (готовият вид, без цвят)
       const goal = final && stage === 0, shown = goal ? 4 : stage;
       const sp = BPL.sprites[`${type}_${shown}`] || [1, 1], ref = BPL.sprites[`${type}_4`] || sp, k = sz / ref[0];
       const wpx = Math.round(sp[0] * k), h = Math.round(sp[1] * k), top = -h + sz * (B.anchor || 0.32);
-      const board = B.empty_plot === "board" && stage === 0 && !final;   // празният парцел е кръгът на дъската – без спрайт
+      // празен парцел: кръгът се рисува от кода (дъските нямат нарисувани парцели) – така всяка улица показва точно толкова парцела, колкото занятия има
+      const board = (B.empty_plot === "board" || B.empty_plot === "sprite") && stage === 0 && !final;
+      const ps = B.empty_plot === "sprite" && BPL.sprites[B.plot_sprite], pw = sz * 1.0, phh = ps ? pw * ps[1] / ps[0] : 0;
+      const emptyPlot = ps ? `<image class="wslot" href="${SPR}${B.plot_sprite}.webp" x="${-pw / 2}" y="${-phh / 2}" width="${pw}" height="${phh}"/>` : `<ellipse class="wslot" rx="${sz * 0.5}" ry="${sz * 0.36}"/>`;
       const decor = x.chosen ? `<image class="wdecor-img" href="${decorSprite(did, x.chosen)}" x="${sz * 0.3}" y="${sz * 0.3 - sz * 0.45}" width="${sz * 0.3}" height="${sz * 0.45}" preserveAspectRatio="xMidYMax meet"/>` : "";
       const gift = x.canChoose ? `<g class="wgift" transform="translate(0 ${top - 10})"><circle r="30" class="wgift-c"/><text y="11" class="wgift-t">🎁</text></g>` : "";
       const adult = ws.demo ? "" : x.st === "pending" ? `<circle class="wadult pend" cx="${sz * 0.42}" cy="${sz * 0.2}" r="9"/>` : (x.st === "review" || x.st === "reconcile") ? `<circle class="wadult rev" cx="${sz * 0.42}" cy="${sz * 0.2}" r="9"/>` : "";
@@ -162,11 +171,11 @@
       const ring = `<ellipse class="wring" rx="${sz * 0.52}" ry="${sz * 0.37}" cy="${board ? 0 : sz * 0.04}"/>`;
       return { y: py, x, html: `<g class="wplot bp st-${x.st} r-${role}${final ? " final" : ""}${isNew ? " grow" : ""}${focus ? " focus" : ""}" data-lesson="${x.rule.lesson}" data-state="${x.st}" data-stage="${stage}" data-new="${isNew ? 1 : 0}" data-chosen="${x.chosen || ""}" transform="translate(${px} ${py})" ${role === "future" ? 'aria-disabled="true"' : 'role="button" tabindex="0"'} aria-label="${esc(x.rule.title || x.rule.lesson)}">
         ${focus ? `<ellipse class="wfocus" rx="${sz * 0.62}" ry="${sz * 0.42}" cy="${board ? 0 : sz * 0.04}"/>` : ""}${role === "current" ? ring : ""}
-        ${board ? `<ellipse class="wslot" rx="${sz * 0.5}" ry="${sz * 0.36}"/>` : `<image class="wsprite${goal ? " wgoal" : ""}" href="${SPR}${type}_${shown}.webp" x="${-wpx / 2}" y="${top}" width="${wpx}" height="${h}"${flip ? ' transform="scale(-1 1)"' : ""}/>`}${decor}${gift}${adult}</g>` };
+        ${board ? emptyPlot : `<image class="wsprite${goal ? " wgoal" : ""}" href="${SPR}${type}_${shown}.webp" x="${-wpx / 2}" y="${top}" width="${wpx}" height="${h}"${flip ? ' transform="scale(-1 1)"' : ""}/>`}${decor}${gift}${adult}</g>` };
     }).sort((a, b) => a.y - b.y);   // по-долните пред по-горните
     seenSet(seenAll);
     // следващата улица се отваря, когато първото ѝ занятие е достъпно (по реда на правилата), а не след брой занятия
-    const opened = j => j <= cur || regular.some((x, n) => Math.floor(n / B.street) === j && x.st !== "locked");
+    const opened = j => j <= cur || regular.some((x, n) => pos[n][0] === j && x.st !== "locked");
     const nav = nStreets > 1 ? `<button type="button" class="wstreet prev" aria-label="Предишна улица" ${cur === 0 ? "disabled" : ""}>◀</button><button type="button" class="wstreet next${cur < nStreets - 1 && !opened(cur + 1) ? " locked" : ""}" aria-label="Следваща улица" ${cur === nStreets - 1 || !opened(cur + 1) ? "disabled" : ""}>${cur < nStreets - 1 && !opened(cur + 1) ? "🔒" : "▶"}</button><div class="wstreet-dots">${Array.from({ length: nStreets }, (_, j) => `<i class="${j === cur ? "on" : opened(j) ? "" : "off"}"></i>`).join("")}</div>` : "";
     // Елува стои на дъската (място без парцели до площада): поздравява; при нов етап – радва се
     const fresh = items.map(o => o.x).find(x => seenNew[x.rule.lesson]);
