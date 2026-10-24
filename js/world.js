@@ -19,7 +19,8 @@
   // вид B+: world=bplus включва, world=v1 връща временната графика; помни се на устройството
   const BPQ = (location.search + location.hash).match(/[?&#~]world[=_](bplus|v1)/);
   try { if (BPQ) localStorage.setItem("platforma.world.look", BPQ[1]); } catch (e) {}
-  const bpOn = () => { let v = BPQ ? BPQ[1] : null; try { v = v || localStorage.getItem("platforma.world.look"); } catch (e) {} return v === "bplus" && !!BPL; };
+  const H2 = (/[?&#~]home[=_]v2/.test(location.search + location.hash) || (function () { try { return localStorage.getItem("platforma.home") === "v2" && !/[?&#~]home[=_]v1/.test(location.search + location.hash); } catch (e) { return false; } })());   // „Моят свят“ (home=v2) върви с квартала B+
+  const bpOn = () => { let v = BPQ ? BPQ[1] : (H2 ? "bplus" : null); try { v = v || localStorage.getItem("platforma.world.look"); } catch (e) {} return v === "bplus" && !!BPL; };
   const SPR = "assets/img/world/bplus/";
   // украсата в B+: 3 картинки на квартал; изборът (id от правилата) се показва с картинката n % 3 и нейното име (списъкът украси за B+ – за съгласуване)
   const decorN = id => +((id || "").match(/\.(\d+)$/) || [0, 0])[1] % 3;
@@ -77,7 +78,7 @@
           <div class="ap-actions"><button type="button" class="ap-back" aria-label="Друг герой">◀</button><button type="button" class="ap-done" aria-label="Готово">✓ Готово</button></div>${close}</div>`;
         o.querySelectorAll(".ap-hat").forEach(b => b.addEventListener("click", () => { acc = b.dataset.h || null; draw(); }));
         o.querySelector(".ap-back").addEventListener("click", step1);
-        o.querySelector(".ap-done").addEventListener("click", () => { window.PILOT_SYNC.chooseAvatar(av, ws.child, acc); o.remove(); render(box, did); });
+        o.querySelector(".ap-done").addEventListener("click", () => { window.PILOT_SYNC.chooseAvatar(av, ws.child, acc); o.remove(); if (typeof box === "function") box(); else render(box, did); });
         bindClose();
       };
       draw(); say("Избери шапка или очила за своя герой. После натисни Готово.");
@@ -340,5 +341,42 @@
     return [].concat(...ds.map(d => states(ws, d))).filter(x => x.st === "reconcile" || x.st === "review" || x.st === "pending").map(x => ({ lesson: x.rule.lesson, title: x.rule.title, state: x.st, reason: x.reason }));
   }
   window.addEventListener("pilot-world", () => { const s = document.getElementById("screen-world"); if (s && !s.hidden) render(); });
-  window.WORLD = { render, ready, attention, bplus: () => bpOn() ? BPL : null, access: ws => access(ws), states: (ws, did) => states(ws, did), districtOf: l => Object.keys((L && L.districts) || {}).find(d => { const D = L.districts[d]; return D.plots[l] || (D.final && D.final.lesson === l); }) || null };
+  // сградата на занятието (за началния екран „Моят свят“ и екрана след кръга): същият вид и етап като в квартала B+
+  function plotOf(ws, lesson) {
+    if (!bpOn() || !BPL || !L) return null;
+    const did = Object.keys(L.districts || {}).find(d => { const D = L.districts[d]; return D.plots[lesson] || (D.final && D.final.lesson === lesson); }); if (!did || !BPL.districts[did]) return null;
+    const B = BPL.districts[did], D = district(did), finalL = D.final && D.final.lesson, S = states(ws, did), x = S.find(y => y.rule.lesson === lesson); if (!x) return null;
+    const regular = S.filter(y => y.rule.lesson !== finalL), final = lesson === finalL;
+    const split = Array.isArray(B.streets) && B.streets.reduce((a, b) => a + b, 0) === regular.length ? B.streets : Array.from({ length: Math.max(1, Math.ceil(regular.length / B.street)) }, (_, j) => Math.min(B.street, regular.length - j * B.street));
+    const pos = []; split.forEach((n, j) => { for (let q = 0; q < n; q++) pos.push([j, q]); });
+    const lit = x.st === "confirmed" || x.st === "pending" || x.st === "review" || x.st === "reconcile", stage = lit ? 4 : Math.min(3, new Set(x.rounds.filter(r => x.need.includes(r))).size);
+    const type = final ? B.final_type : B.types[pos[regular.indexOf(x)][1] % B.types.length];
+    return { did, stage, src: (n => `${SPR}${type}_${n}.webp`), title: D.title };
+  }
+  // умален изглед „Какво построих“ (плочката в „Моят свят“): улицата на текущия строеж – готовите сгради, строежът и героят; без анимации и без отбелязване „видяно“
+  function preview(ws, did) {
+    if (!bpOn() || !BPL || !BPL.districts[did]) return "";
+    const B = BPL.districts[did], D = district(did), finalL = D.final && D.final.lesson, S = states(ws, did), regular = S.filter(x => x.rule.lesson !== finalL);
+    const split = Array.isArray(B.streets) && B.streets.reduce((a, b) => a + b, 0) === regular.length ? B.streets : Array.from({ length: Math.max(1, Math.ceil(regular.length / B.street)) }, (_, j) => Math.min(B.street, regular.length - j * B.street));
+    const pos = []; split.forEach((n, j) => { for (let q = 0; q < n; q++) pos.push([j, q]); });
+    const slotOf = (j, q) => { const mm = (B.street_slots || {})[split[j]]; return B.slots[mm ? mm[q] : q]; };
+    const nx = S.find(x => x.st === "next"), cur = nx && nx.rule.lesson !== finalL ? pos[regular.indexOf(nx)][0] : split.length - 1;
+    const lit = x => x.st === "confirmed" || x.st === "pending" || x.st === "review" || x.st === "reconcile";
+    let out = "", hero = "";
+    S.filter(x => x.rule.lesson === finalL || pos[regular.indexOf(x)][0] === cur).map(x => {
+      const final = x.rule.lesson === finalL, sp0 = final ? null : pos[regular.indexOf(x)], slot = final ? B.final : slotOf(sp0[0], sp0[1]);
+      const stage = lit(x) ? 4 : Math.min(3, new Set(x.rounds.filter(r => x.need.includes(r))).size), type = final ? B.final_type : B.types[sp0[1] % B.types.length];
+      const flip = !final && Math.floor(sp0[1] / B.types.length) % 2 === 1, sz = final ? B.final_size : Math.round(B.size * (slot[2] || 1));
+      return { x, slot, stage, type, flip, sz, final };
+    }).sort((a, b) => a.slot[1] - b.slot[1]).forEach(o => {
+      const [px, py] = o.slot, goal = o.final && o.stage === 0, shown = goal ? 4 : o.stage;
+      if (o.x.st === "next") { out += `<ellipse cx="${px}" cy="${py}" rx="${o.sz * 0.52}" ry="${o.sz * 0.37}" fill="none" stroke="#F2B705" stroke-width="10"/>`;
+        const av = avatarOf(ws.child), fh = o.sz * 0.88 * 0.7; if (av) hero = `<g transform="translate(${px + o.sz * 0.56 + fh * 0.21} ${py + o.sz * 0.3})">${figSVG(av, accOf(ws.child), -fh * 0.3, -fh, fh * 0.6, fh)}</g>`; }
+      if (o.stage === 0 && !o.final) { out += `<ellipse cx="${px}" cy="${py}" rx="${o.sz * 0.5}" ry="${o.sz * 0.36}" fill="rgba(90,70,30,.12)"/>`; return; }
+      const sp = BPL.sprites[`${o.type}_${shown}`] || [1, 1], ref = BPL.sprites[`${o.type}_4`] || sp, k = o.sz / ref[0], w = sp[0] * k, h = sp[1] * k, top = -h + o.sz * (B.anchor || 0.32);
+      out += `<g transform="translate(${px} ${py})"${goal ? ' opacity=".35"' : ""}><image href="${SPR}${o.type}_${shown}.webp" x="${-w / 2}" y="${top}" width="${w}" height="${h}"${o.flip ? ' transform="scale(-1 1)"' : ""}/></g>`;
+    });
+    return `<svg viewBox="0 0 ${B.w} ${B.h}" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><image href="${B.bg}" width="${B.w}" height="${B.h}"/>${out}${hero}</svg>`;
+  }
+  window.WORLD = { render, ready, attention, plotOf, preview, fig: figHTML, hero: child => ({ av: avatarOf(child), acc: accOf(child) }), pickHero: (cb, first) => openAvatarPick(cb, null, !!first), bplus: () => bpOn() ? BPL : null, access: ws => access(ws), states: (ws, did) => states(ws, did), districtOf: l => Object.keys((L && L.districts) || {}).find(d => { const D = L.districts[d]; return D.plots[l] || (D.final && D.final.lesson === l); }) || null };
 })();

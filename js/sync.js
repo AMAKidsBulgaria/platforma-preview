@@ -112,6 +112,7 @@
   }
   // ---- светът на детето (прототип „Квартал на буквите“) ----
   // дневник на завършените кръгове на това устройство: от него се показва „завършено, чака потвърждение“ още преди отговора на сървъра
+  const HWSK = "platforma.hw.server.v1";   // възложените домашни от сървъра (по дете)
   const RKEY = "platforma.rounds.v1", CHKEY = "platforma.world.choices.v1", MYCH = "platforma.world.mychoices.v1", PGKEY = "platforma.world.progress.v1";
   const roundsMem = {};
   function noteRound(child, lesson, round, early) {
@@ -275,6 +276,11 @@
             const m = read(AVK) || {}, waiting = new Set(getQ().filter(x => x.ev.type === "avatar_choice" && x.state !== "done").map(x => x.ev.child_code));
             const ak = read(ACCK) || {};
             r.data.avatars.forEach(x => { if (!waiting.has(x.child_code)) { m[x.child_code] = x.avatar; if (x.accessory) ak[x.child_code] = x.accessory; else delete ak[x.child_code]; } }); write(AVK, m); write(ACCK, ak);
+          }
+          if (Array.isArray(r.data.homeworks) && Array.isArray(r.data.programs)) {   // възложените от учителя домашни („Моят свят“); за всяко дете от пакета – списъкът от сървъра (оттеглените отпадат)
+            const hm = read(HWSK) || {};
+            r.data.programs.forEach(x => { hm[x.child_code] = r.data.homeworks.filter(h => h.child_code === x.child_code).map(h => ({ hw: h.hw_id, lesson: h.lesson, at: h.assigned_at })); });
+            write(HWSK, hm);
           }
           if (Array.isArray(r.data.programs)) {   // учебната програма на децата (отключване на кварталите)
             const pm = read(PRGKEY) || {};

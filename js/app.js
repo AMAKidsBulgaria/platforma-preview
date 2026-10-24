@@ -59,6 +59,12 @@
 
   // ---------- навигация ----------
   function show(id) {
+    // „Моят свят“ (тестов режим ?home=v2, js/home2.js): началото е Моят свят; „learn“ = Учебната карта (островите на картите V1.2)
+    // „Моят свят“: плъзгачите (ниво, скорост, брой) са за възрастния – детето отива направо на въвеждането; възрастният ги отваря със задържане (HOME2.adultSettings)
+    if (window.HOME2 && window.HOME2.on() && id === "settings" && !window.H2_ADULT_SETTINGS) id = "intro";
+    window.H2_ADULT_SETTINGS = false;
+    if (window.HOME2 && window.HOME2.on()) { if (id === "modules") { if (game) { game.destroy(); game = null; } window.HOME2.show(); return; } if (id === "learn") id = "m12home"; }
+    if (id === "m12home") { if (game) { game.destroy(); game = null; } window.M12.show("modules"); return; }
     // учебни карти V1.2 (тестов режим ?maps=v12): началото и четирите карти идват от js/maps12.js; игрите и останалите екрани – както досега
     if (window.M12 && window.M12.on() && window.M12.views.includes(id)) { if (game) { game.destroy(); game = null; } window.M12.show(id); return; }
     $$(".screen").forEach(s => s.hidden = s.id !== `screen-${id}`);
@@ -75,7 +81,7 @@
       else { const bx = $("#planets"); bx.classList.remove("meadow"); bx.style.cssText = ""; renderNodes("#planets", READ_ORDER, "planet", "planet-art", "--p1", "--p2"); } }
     if (id === "wmap") { if (LOOK2() && document.documentElement.classList.contains("hub-c")) renderMeadow("#booths", WORLD_ORDER2.map(i => WORLD_ORDER.find(o => o[0] === i)).filter(Boolean), WORLD_ZONES, [2, 22], true, WORLD_GROUPS, true);
       else { const bx = $("#booths"); bx.classList.remove("meadow"); bx.style.cssText = ""; renderNodes("#booths", WORLD_ORDER, "booth", "booth-art", "--b1", "--b2"); } }
-    if (id === "intro") renderIntro();
+    if (id === "intro") { renderIntro(); if (window.HOME2 && window.HOME2.on()) window.HOME2.decorIntro(); }
     if (id === "settings") renderSettings();
     if (id === "parent") renderParent();
     if (id !== "game" && game) { game.destroy(); game = null; }
@@ -482,7 +488,9 @@
       window.addEventListener("pilot-sync", tryAgain); return;
     }
     // общ таблет в пилота: преди домашна – „Кой играе?“ (js/sync.js), за да отиде резултатът при правилното дете
-    if (window.HW_CTX && window.PILOT_SYNC && window.PILOT_SYNC.needsPick() && !startGame.picked) { return window.PILOT_SYNC.pick(() => { startGame.picked = true; startGame(tier); startGame.picked = false; }); }
+    // „Моят свят“ (home=v2): детето вече е избрано на началния екран и е натиснало „Продължи“/„Следващ кръг“ – не се пита втори път (същият раздел, до 2 минути, същото дете)
+    const pickOk = (() => { try { const x = JSON.parse(sessionStorage.getItem("platforma.pickok") || "null"); sessionStorage.removeItem("platforma.pickok"); return !!(x && Date.now() - x.at < 120000 && window.PILOT_SYNC && x.c === window.PILOT_SYNC.status().child); } catch (e) { return false; } })();
+    if (window.HW_CTX && window.PILOT_SYNC && window.PILOT_SYNC.needsPick() && !startGame.picked && !pickOk) { return window.PILOT_SYNC.pick(() => { startGame.picked = true; startGame(tier); startGame.picked = false; }); }
     $("#game-title").textContent = current.name;
     if (game) { try { game.destroy(); } catch (e) {} game = null; }
     shell.arena.innerHTML = "";   // без остатък от предишната игра, докато се чува кратката инструкция
@@ -541,6 +549,7 @@
     const today = Number(localStorage.getItem(DAY_KEY()) || 0) + r.seconds; lsSet(DAY_KEY(), today);
     r.todaySeconds = today;
     renderResult(r); show("result");
+    if (window.HOME2 && window.HOME2.on()) window.HOME2.result(r);
     // прототип „Моят квартал“: след кръг от домашна по Букварика – „Виж квартала“ (къщата е пораснала)
     const les = String(r.lesson_id || r.lesson || ""), sw = $("#btn-see-world");
     if (sw) sw.hidden = !(window.HW_CTX && /^(BK|CH|MW)\d/.test(les) && !r.early && window.PILOT_SYNC && window.PILOT_SYNC.status().child && window.WORLD);

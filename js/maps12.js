@@ -8,7 +8,8 @@
   const Q = location.search + location.hash, m = Q.match(/[?&#~]maps[=_](v12|v1)/);
   try { if (m) localStorage.setItem("platforma.maps", m[1]); } catch (e) {}
   let mode = m ? m[1] : null; try { mode = mode || localStorage.getItem("platforma.maps"); } catch (e) {}
-  const ON = mode === "v12", SHORTN = /[?&#~]names[=_]short/.test(Q);
+  const H2 = (/[?&#~]home[=_]v2/.test(location.search + location.hash) || (function () { try { return localStorage.getItem("platforma.home") === "v2" && !/[?&#~]home[=_]v1/.test(location.search + location.hash); } catch (e) { return false; } })());
+  const ON = mode === "v12" || H2, SHORTN = /[?&#~]names[=_]short/.test(Q);
   const D3 = "assets/img/world/d3/", IC = "assets/img/world/icons/app/", BP = "assets/img/world/bplus/";
   const BUK = [["alphabet", "Азбука", "zone_alphabet"], ["letterOfElements", "Елементи на букви", "zone_elements"], ["phonemicHearing", "Фонематичен слух", "zone_hearing"], ["phonetics", "Фонетика", "zone_phonetics"], ["soundLetterParsing", "Звуково-буквен анализ", "zone_parsing"], ["readca", "Читалка", "zone_reading"]];
   const READ = [["Думи", [["constructor", "Конструктор", "rz_constructor"], ["accents", "Ударения", "rz_accents"], ["guessWord", "Познай думата", "rz_guess"], ["trueWords", "Правилни думи", "rz_true"], ["words", "Думи", "rz_words"], ["sayDifferently", "Кажи друго", "rz_say"]]],
@@ -100,6 +101,10 @@
         ${soon ? `<g transform="translate(${cx} ${y + h * 0.32})"><rect x="-150" y="-52" width="300" height="104" rx="22" fill="#FFF8EC" stroke="#D9C6A3" stroke-width="5"/><circle cx="-108" cy="0" r="30" fill="#EFE3CC"/><text x="-108" y="11" text-anchor="middle" font-size="30">🔒</text><text x="22" y="-8" text-anchor="middle" font-size="23" font-weight="900" fill="#6E6458">Ще се отключи</text><text x="22" y="22" text-anchor="middle" font-size="23" font-weight="900" fill="#6E6458">след Букварика</text></g>` : ""}</g>`;
     });
     const first = ["letters", "reading", "mathworld"].find(k => P[k]) || "letters";
+    if (H2) {   // „Моят свят“: тук е само Учебната карта – начало горе вляво, без втори бутон за домашна
+      screen().innerHTML = `<div class="m12-tl">${navBtn("", "modules", HOME_IC, "Начало")}</div><div class="m12-top">${guide}<div class="m12-title">Учебна карта</div></div><div class="m12-map m12-home">${svg("0 0 1280 616", inner)}</div>`;
+      box.querySelectorAll(".m12-isl.soon").forEach(g => g.addEventListener("click", () => toast("Ще се отключи след Букварика!"))); return;
+    }
     screen().innerHTML = `<div class="m12-top"><div class="m12-title">Подготовка за училище</div></div><div class="m12-tr">${navBtn("adult", "parent", "", "За родители")}</div>
       <div class="m12-map m12-home">${svg("0 0 1280 616", inner)}</div>
       <div class="m12-bl">${navBtn("adult", "", "", "Изход", 'id="m12-exit"')}</div><div class="m12-bc">${guide.replace("m12-eluva", "m12-eluva big")}${navBtn("primary", "", '<svg width="28" height="28" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#fff"/></svg>', "Домашна работа", 'id="m12-hw"')}</div><div class="m12-br">${quarter(first)}</div>`;

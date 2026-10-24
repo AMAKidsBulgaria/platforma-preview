@@ -18,7 +18,8 @@ h1{color:#fff;margin:0 0 6px;font-size:28px} p.n{color:#D9D2E3;margin:0 0 18px;f
 <b style="display:block;margin-top:12px">Програма</b><div class="row" id="prog"></div>
 <b style="display:block;margin-top:12px">Читарика</b><div class="row" id="entry"></div>
 <b style="display:block;margin-top:12px">Вид на света</b><div class="row" id="look"></div><p class="msg">Програмата се запомня за детето при отваряне на линк. Смяна на програмата не изтрива напредъка.</p></div>
-<div class="box"><a class="w" id="world" href="#">Моят свят</a>
+<div class="box"><b>Нов начален екран „Моят свят“ (прототип)</b><p class="msg">Героят, едно основно действие („Продължи“ към следващия кръг от домашното) и плочките „Учебна карта“ и „Моят квартал“. В пилота домашното се възлага от учителя в офиса; тук е симулирано: възложено е BK01.</p><div class="row"><a class="w" id="home2" href="#" style="flex:1">Моят свят – нов начален екран</a></div></div>
+<div class="box"><a class="w" id="world" href="#">Моят квартал (досегашният вход)</a>
 <button type="button" class="adult" id="skip">За възрастния (симулирано): BK01 – кръгове 3 и 4 минати</button>
 <button type="button" class="adult" id="mid">За възрастния (симулирано): среден напредък – във всеки квартал 6 завършени занятия с украса, седмото – 2 кръга</button>
 <button type="button" class="adult" id="all">За възрастния (симулирано): всичко завършено (BK01–BK14, CH01–CH24, MW01–MW32)</button>
@@ -35,8 +36,9 @@ btns("kids",[1,2,3,4,5,6,7,8].map(i=>[String(i),"Д"+i]),()=>kid,v=>{kid=v;P("de
 btns("prog",PROG,()=>prog,v=>{prog=v;P("demo.prog",v)}); btns("entry",ENT,()=>entry,v=>{entry=v;P("demo.entry",v)}); btns("look",[["bplus","B+ (нова посока)"],["v1","Временна графика"]],()=>look,v=>{look=v;P("demo.look",v)});
 const code=()=>"DEMO_"+kid, q=()=>"demo=1&program="+prog+"&entry="+entry+"&pilot="+code()+"&world="+look;
 function draw(){[["kids",kid],["prog",prog],["entry",entry],["look",look]].forEach(([id,v])=>[...document.getElementById(id).children].forEach(b=>b.classList.toggle("on",b.dataset.v===v)));
-  document.querySelectorAll(".st").forEach(a=>a.href=a.dataset.url.replace("pilot=CHILD",q()));
-  document.getElementById("world").href="index.html?"+q()+"#world";
+  document.querySelectorAll(".st").forEach(a=>a.href=a.dataset.url.replace("pilot=CHILD",q()+"&home=v1"));
+  document.getElementById("world").href="index.html?"+q()+"&home=v1#world";
+  document.getElementById("home2").href="index.html?"+q()+"&home=v2&hwdemo=BK01";
   document.querySelectorAll(".box[data-mod]").forEach(b=>b.classList.toggle("off",!VIS[prog].includes(b.dataset.mod)));}
 draw();
 const mark=(les,rs)=>{try{const k="platforma.rounds.v1",all=JSON.parse(localStorage.getItem(k)||"{}"),c=all[code()]=all[code()]||{},l=c[les]=c[les]||[];rs.forEach(r=>{if(!l.includes(r))l.push(r)});localStorage.setItem(k,JSON.stringify(all));
