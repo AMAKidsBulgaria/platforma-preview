@@ -1,0 +1,564 @@
+{
+ "note": "Вид B+ (D1.1, прототип, v3 24.10.2026): своя игрова дъска за всеки квартал + спрайтове по етапи 0–4; кварталът се показва на „улици“ по 8 занятия; финалната сграда е на площада и се вижда от всяка улица. Пуска се с world=bplus.",
+ "sprites": {
+  "letters_decor_1": [
+   278,
+   576
+  ],
+  "letters_decor_2": [
+   360,
+   369
+  ],
+  "letters_decor_3": [
+   360,
+   333
+  ],
+  "letters_final_0": [
+   277,
+   203
+  ],
+  "letters_final_1": [
+   273,
+   202
+  ],
+  "letters_final_2": [
+   277,
+   317
+  ],
+  "letters_final_3": [
+   275,
+   329
+  ],
+  "letters_final_4": [
+   279,
+   329
+  ],
+  "letters_house2_0": [
+   282,
+   249
+  ],
+  "letters_house2_1": [
+   287,
+   252
+  ],
+  "letters_house2_2": [
+   291,
+   337
+  ],
+  "letters_house2_3": [
+   293,
+   360
+  ],
+  "letters_house2_4": [
+   298,
+   365
+  ],
+  "letters_house_0": [
+   291,
+   220
+  ],
+  "letters_house_1": [
+   275,
+   224
+  ],
+  "letters_house_2": [
+   293,
+   304
+  ],
+  "letters_house_3": [
+   289,
+   341
+  ],
+  "letters_house_4": [
+   296,
+   353
+  ],
+  "letters_round_0": [
+   284,
+   216
+  ],
+  "letters_round_1": [
+   288,
+   212
+  ],
+  "letters_round_2": [
+   290,
+   300
+  ],
+  "letters_round_3": [
+   289,
+   350
+  ],
+  "letters_round_4": [
+   295,
+   343
+  ],
+  "letters_tower_0": [
+   289,
+   232
+  ],
+  "letters_tower_1": [
+   287,
+   235
+  ],
+  "letters_tower_2": [
+   289,
+   346
+  ],
+  "letters_tower_3": [
+   289,
+   421
+  ],
+  "letters_tower_4": [
+   287,
+   423
+  ],
+  "mathworld_cube_0": [
+   285,
+   201
+  ],
+  "mathworld_cube_1": [
+   278,
+   200
+  ],
+  "mathworld_cube_2": [
+   288,
+   290
+  ],
+  "mathworld_cube_3": [
+   285,
+   330
+  ],
+  "mathworld_cube_4": [
+   285,
+   322
+  ],
+  "mathworld_decor_1": [
+   360,
+   525
+  ],
+  "mathworld_decor_2": [
+   360,
+   493
+  ],
+  "mathworld_decor_3": [
+   360,
+   394
+  ],
+  "mathworld_final_0": [
+   284,
+   244
+  ],
+  "mathworld_final_1": [
+   281,
+   246
+  ],
+  "mathworld_final_2": [
+   290,
+   372
+  ],
+  "mathworld_final_3": [
+   286,
+   401
+  ],
+  "mathworld_final_4": [
+   298,
+   383
+  ],
+  "mathworld_green_0": [
+   280,
+   230
+  ],
+  "mathworld_green_1": [
+   282,
+   236
+  ],
+  "mathworld_green_2": [
+   283,
+   336
+  ],
+  "mathworld_green_3": [
+   286,
+   359
+  ],
+  "mathworld_green_4": [
+   299,
+   360
+  ],
+  "mathworld_lab_0": [
+   282,
+   209
+  ],
+  "mathworld_lab_1": [
+   281,
+   213
+  ],
+  "mathworld_lab_2": [
+   284,
+   371
+  ],
+  "mathworld_lab_3": [
+   288,
+   376
+  ],
+  "mathworld_lab_4": [
+   287,
+   380
+  ],
+  "mathworld_mill_0": [
+   264,
+   224
+  ],
+  "mathworld_mill_1": [
+   264,
+   227
+  ],
+  "mathworld_mill_2": [
+   268,
+   359
+  ],
+  "mathworld_mill_3": [
+   269,
+   399
+  ],
+  "mathworld_mill_4": [
+   272,
+   403
+  ],
+  "reading_decor_1": [
+   360,
+   414
+  ],
+  "reading_decor_2": [
+   311,
+   657
+  ],
+  "reading_decor_3": [
+   261,
+   684
+  ],
+  "reading_dome_0": [
+   274,
+   223
+  ],
+  "reading_dome_1": [
+   284,
+   224
+  ],
+  "reading_dome_2": [
+   294,
+   309
+  ],
+  "reading_dome_3": [
+   295,
+   338
+  ],
+  "reading_dome_4": [
+   291,
+   334
+  ],
+  "reading_final_0": [
+   277,
+   209
+  ],
+  "reading_final_1": [
+   278,
+   213
+  ],
+  "reading_final_2": [
+   284,
+   295
+  ],
+  "reading_final_3": [
+   285,
+   324
+  ],
+  "reading_final_4": [
+   281,
+   316
+  ],
+  "reading_house_0": [
+   291,
+   222
+  ],
+  "reading_house_1": [
+   275,
+   222
+  ],
+  "reading_house_2": [
+   282,
+   296
+  ],
+  "reading_house_3": [
+   277,
+   316
+  ],
+  "reading_house_4": [
+   275,
+   302
+  ],
+  "reading_steps_0": [
+   271,
+   246
+  ],
+  "reading_steps_1": [
+   273,
+   247
+  ],
+  "reading_steps_2": [
+   285,
+   420
+  ],
+  "reading_steps_3": [
+   294,
+   509
+  ],
+  "reading_steps_4": [
+   296,
+   511
+  ],
+  "reading_tower_0": [
+   279,
+   227
+  ],
+  "reading_tower_1": [
+   286,
+   236
+  ],
+  "reading_tower_2": [
+   293,
+   385
+  ],
+  "reading_tower_3": [
+   286,
+   452
+  ],
+  "reading_tower_4": [
+   286,
+   445
+  ]
+ },
+ "decor_titles": {
+  "letters": [
+   "фенер",
+   "пейка",
+   "ограда с цветя"
+  ],
+  "reading": [
+   "кресло за четене",
+   "фенер-книга",
+   "къщичка за птици"
+  ],
+  "mathworld": [
+   "ветропоказател",
+   "хотел за насекоми",
+   "слънчев часовник"
+  ]
+ },
+ "districts": {
+  "letters": {
+   "slots": [
+    [
+     425,
+     245,
+     0.95
+    ],
+    [
+     800,
+     250,
+     0.96
+    ],
+    [
+     1090,
+     320,
+     1.0
+    ],
+    [
+     1228,
+     515,
+     1.0
+    ],
+    [
+     1135,
+     700,
+     0.95
+    ],
+    [
+     830,
+     722,
+     1.08
+    ],
+    [
+     440,
+     672,
+     1.05
+    ],
+    [
+     300,
+     450,
+     0.95
+    ]
+   ],
+   "final": [
+    740,
+    485
+   ],
+   "final_size": 250,
+   "guide": [
+    985,
+    610
+   ],
+   "types": [
+    "letters_house",
+    "letters_round",
+    "letters_house2",
+    "letters_tower"
+   ],
+   "final_type": "letters_final",
+   "decor": "letters",
+   "bg": "assets/img/world/bplus/bg_letters.webp",
+   "w": 1536,
+   "h": 1024,
+   "size": 200,
+   "street": 8,
+   "anchor": 0.36,
+   "empty_plot": "board"
+  },
+  "reading": {
+   "slots": [
+    [
+     210,
+     665,
+     0.88
+    ],
+    [
+     300,
+     415,
+     0.85
+    ],
+    [
+     550,
+     335,
+     0.81
+    ],
+    [
+     480,
+     555,
+     0.84
+    ],
+    [
+     610,
+     700,
+     0.82
+    ],
+    [
+     1210,
+     575,
+     0.99
+    ],
+    [
+     1250,
+     375,
+     0.85
+    ],
+    [
+     1110,
+     240,
+     0.85
+    ]
+   ],
+   "final": [
+    790,
+    520
+   ],
+   "final_size": 240,
+   "guide": [
+    1020,
+    440
+   ],
+   "types": [
+    "reading_tower",
+    "reading_dome",
+    "reading_house",
+    "reading_steps"
+   ],
+   "final_type": "reading_final",
+   "decor": "reading",
+   "bg": "assets/img/world/bplus/bg_reading.webp",
+   "w": 1536,
+   "h": 1024,
+   "size": 200,
+   "street": 8,
+   "anchor": 0.36,
+   "empty_plot": "board"
+  },
+  "mathworld": {
+   "slots": [
+    [
+     335,
+     410,
+     1.08
+    ],
+    [
+     590,
+     190,
+     1.02
+    ],
+    [
+     855,
+     185,
+     0.9
+    ],
+    [
+     1072,
+     365,
+     0.95
+    ],
+    [
+     1213,
+     580,
+     1.0
+    ],
+    [
+     875,
+     720,
+     1.0
+    ],
+    [
+     525,
+     630,
+     1.03
+    ],
+    [
+     715,
+     330,
+     0.93
+    ]
+   ],
+   "final": [
+    765,
+    480
+   ],
+   "final_size": 165,
+   "guide": [
+    1050,
+    735
+   ],
+   "types": [
+    "mathworld_cube",
+    "mathworld_green",
+    "mathworld_lab",
+    "mathworld_mill"
+   ],
+   "final_type": "mathworld_final",
+   "decor": "mathworld",
+   "bg": "assets/img/world/bplus/bg_mathworld.webp",
+   "w": 1536,
+   "h": 1024,
+   "size": 200,
+   "street": 8,
+   "anchor": 0.36,
+   "empty_plot": "board"
+  }
+ }
+}

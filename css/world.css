@@ -1,6 +1,6 @@
 /* Прототип „Квартал на буквите“ – временна графика (сменя се след D1) */
 .screen-world { background: #2B2550; position: fixed; inset: 0; overflow: hidden; }
-.world-map { position: absolute; top: 96px; bottom: 96px; left: 12px; right: 12px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.world-map { position: absolute; top: 150px; bottom: 96px; left: 12px; right: 12px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .world-svg { display: block; width: 100%; height: 100%; max-width: 100%; max-height: 100%; }
 .world-msg { color: #fff; font: 700 24px/1.4 system-ui, sans-serif; text-align: center; max-width: 560px; padding: 24px; }
 .world-status { position: absolute; left: auto; right: max(16px, env(safe-area-inset-right, 0px)); top: 34px; bottom: auto; text-align: right; color: #fff; opacity: .75; font: 600 14px system-ui, sans-serif; }
@@ -30,3 +30,64 @@
 @keyframes wspin { to { stroke-dashoffset: -180; } }
 .world-mascot { position: absolute; width: 120px; pointer-events: none; animation: wpop .5s cubic-bezier(.2, 1.4, .4, 1) both; }
 @keyframes wpop { from { opacity: 0; transform: translateY(20px) scale(.6); } }
+.world-tabs { position: absolute; top: 92px; left: 12px; right: 12px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.wtab { min-height: 52px; padding: 8px 18px; border-radius: 16px; border: 3px solid rgba(255,255,255,.5); background: rgba(255,255,255,.15); color: #fff; font: 700 18px system-ui, sans-serif; cursor: pointer; }
+.wtab.on { background: #FFF8EE; color: #2B2233; border-color: #E5167A; } .wtab.locked { opacity: .8; }
+.wlocked { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+.wlocked-img { filter: grayscale(.85) brightness(.6); } .wlock { position: absolute; font-size: 96px; filter: drop-shadow(0 4px 10px rgba(0,0,0,.5)); }
+/* Вид B+ (D1.1, прототип – world=bplus): топъл кремав фон, спрайтове по етапи, улици по 8 занятия */
+.screen-world.bplus { background: #F3E7CF; }
+.screen-world.bplus .world-status { color: #5A4A3A; }
+.screen-world.bplus .wtab { color: #3B3226; border-color: #D9C6A3; background: #FFF8EC; }
+.screen-world.bplus .wtab.on { background: #2A9D8F; color: #fff; border-color: #2A9D8F; }
+.wplot.bp .wbase { fill: transparent; }
+.wplot.bp.st-next .wbase { fill: rgba(255, 210, 90, .7); filter: blur(6px); animation: wpulse-bp 1.6s ease-in-out infinite; }
+@keyframes wpulse-bp { 50% { fill: rgba(255, 210, 90, .25); } }
+.wplot.bp.st-locked .wsprite { opacity: .5; filter: saturate(.35) brightness(1.08); }
+.wplot.bp.grow .wsprite { animation: wgrow .9s cubic-bezier(.2, 1.4, .4, 1) both; transform-box: fill-box; transform-origin: 50% 100%; }
+.wplot.bp .wsprite, .wplot.bp .wdecor-img { filter: drop-shadow(0 6px 6px rgba(70, 50, 20, .25)); }
+.wplot.bp.st-locked .wsprite { filter: saturate(.35) brightness(1.08); }
+.wplot.bp { cursor: pointer; }
+.wstreet { position: absolute; top: 50%; width: 64px; height: 64px; margin-top: -32px; border-radius: 50%; border: 3px solid #D9C6A3; background: #FFF8EC; color: #2A9D8F; font-size: 28px; cursor: pointer; box-shadow: 0 4px 12px rgba(70, 50, 20, .2); }
+.wstreet.prev { left: 6px; } .wstreet.next { right: 6px; } .wstreet:disabled { opacity: .3; cursor: default; }
+.wstreet-dots { position: absolute; bottom: 6px; left: 0; right: 0; display: flex; gap: 8px; justify-content: center; }
+.wstreet-dots i { width: 12px; height: 12px; border-radius: 50%; background: #D9C6A3; } .wstreet-dots i.on { background: #2A9D8F; }
+.wlock-guide { position: absolute; width: 150px; right: 12%; bottom: 8%; animation: wpop .5s cubic-bezier(.2, 1.4, .4, 1) both; }
+.screen-world.bplus .wlocked-img { filter: saturate(.25) brightness(.95); }
+.screen-world.bplus .wlock { filter: drop-shadow(0 4px 10px rgba(70, 50, 20, .35)); }
+.wc-img { width: 110px; height: 110px; object-fit: contain; }
+.screen-world.bplus ~ .world-choice .wc-box, .world-choice .wc-box:has(.wc-img) { background: #FFF8EC; }
+.world-choice:has(.wc-img) .wc-opt { border-color: #2A9D8F; }
+/* B+: без дървената табела – разделите на кварталите са най-горе, картата е под тях на цялата височина; стрелките за улиците – в полетата отстрани */
+.screen-world.bplus .plank-head { display: none; }
+.screen-world.bplus .world-tabs { position: absolute; top: calc(10px + env(safe-area-inset-top, 0px)); z-index: 2; }
+.screen-world.bplus .world-map { top: calc(78px + env(safe-area-inset-top, 0px)); bottom: 0; left: 0; right: 0; }
+.screen-world.bplus .world-tabs:empty + .world-map { top: calc(10px + env(safe-area-inset-top, 0px)); }
+.screen-world.bplus .foot-bar { z-index: 2; }
+.screen-world.bplus .world-status { position: absolute; z-index: 2; background: rgba(255, 248, 236, .9); padding: 4px 10px; border-radius: 10px; top: auto; bottom: 18px; }
+.screen-world.bplus .wstreet { z-index: 2; }
+.screen-world.bplus .wstreet-dots { bottom: 4px; z-index: 2; }
+/* B+ v2: празният парцел е кръгът на дъската; следващият свети, бъдещите – само кръгът */
+.wplot.bp .wslot { fill: transparent; }
+.wplot.bp.st-next .wslot { fill: rgba(255, 214, 90, .35); stroke: #FFC93C; stroke-width: 6; animation: wpulse-slot 1.6s ease-in-out infinite; }
+@keyframes wpulse-slot { 50% { fill: rgba(255, 214, 90, .08); stroke-opacity: .45; } }
+.world-mascot.bp-guide { left: auto; top: auto; right: 84px; bottom: 40px; width: 130px; }
+/* B+ v3: ясни състояния за детето */
+.wplot.bp .wring { fill: rgba(255, 214, 90, .18); stroke: #FFC93C; stroke-width: 7; animation: wpulse-ring 1.4s ease-in-out infinite; }   /* текущ строеж */
+@keyframes wpulse-ring { 50% { stroke-opacity: .35; fill: rgba(255, 214, 90, .04); } }
+.wplot.bp.r-current .wslot { fill: rgba(255, 214, 90, .3); }
+.wplot.bp.r-done { cursor: pointer; } .wplot.bp.r-done:active .wsprite { transform: translateY(-6px); }   /* готов: докосва се за разглеждане */
+.wplot.bp.r-future { cursor: default; pointer-events: none; }   /* бъдещ: видим, неактивен, без ефект */
+.wguide-sh { fill: rgba(60, 50, 20, .18); }
+.wplot.bp .wsprite.wgoal { opacity: .38; filter: grayscale(.9) brightness(1.15); }   /* финалът – „голямата цел“, още не започнат */
+.wplot.bp.final.r-future { pointer-events: none; }
+.wguide.cheer image { animation: wcheer .7s ease-in-out 3; transform-box: fill-box; transform-origin: 50% 100%; }
+@keyframes wcheer { 50% { transform: translateY(-14px); } }
+.wstreet.locked { font-size: 24px; opacity: .55; }
+.wstreet-dots i.off { background: transparent; border: 2px solid #D9C6A3; width: 8px; height: 8px; }
+.world-view .wv-box { position: relative; background: #FFF8EC; border-radius: 28px; padding: 28px 40px; box-shadow: 0 10px 40px rgba(0,0,0,.3); }
+.world-view .wv-b { display: block; height: min(52vh, 380px); width: auto; }
+.world-view .wv-d { position: absolute; right: 18px; bottom: 22px; height: min(18vh, 130px); width: auto; }
+/* B+: бутонът „Назад“ в палитрата на света (кремав с тюркоазен ръб – като разделите), вместо лилавото на игрите */
+.screen-world.bplus .foot-bar .gbtn.gbtn-purple { background: #FFF8EC; color: #1F6F66; border: 3px solid #2A9D8F; --btn-deep: #1F6F66; filter: none; }
+.screen-world.bplus .foot-bar .gbtn.gbtn-purple::before, .screen-world.bplus .foot-bar .gbtn.gbtn-purple::after { display: none; }

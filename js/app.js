@@ -539,8 +539,10 @@
     r.todaySeconds = today;
     renderResult(r); show("result");
     // прототип „Моят квартал“: след кръг от домашна по Букварика – „Виж квартала“ (къщата е пораснала)
-    const sw = $("#btn-see-world"); if (sw) sw.hidden = !(window.HW_CTX && /^BK/.test(String(r.lesson_id || r.lesson || "")) && !r.early && window.PILOT_SYNC && window.PILOT_SYNC.status().child && window.WORLD);
-    window.WORLD_FOCUS = sw && !sw.hidden ? String(r.lesson_id || r.lesson) : null;   // кварталът се отваря с акцент върху това занятие
+    const les = String(r.lesson_id || r.lesson || ""), sw = $("#btn-see-world");
+    if (sw) sw.hidden = !(window.HW_CTX && /^(BK|CH|MW)\d/.test(les) && !r.early && window.PILOT_SYNC && window.PILOT_SYNC.status().child && window.WORLD);
+    window.WORLD_FOCUS = sw && !sw.hidden ? les : null;   // кварталът се отваря с акцент върху това занятие
+    window.WORLD_DISTRICT = sw && !sw.hidden && window.WORLD.districtOf ? window.WORLD.districtOf(les) : null;
   }
 
   // ---------- резултат ----------

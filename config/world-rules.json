@@ -7,7 +7,8 @@
   "Завършване = всички кръгове, без изискване за точност.",
   "Буквените къщи са опора в урока; наградата е промяна + избор.",
   "Звезда/постижение за умение се смята отделно: ≥10 валидни измервателни решения по умението (skill_status_history).",
-  "Изпълнява се на сървъра (002_world_v1.sql: evaluate_world); клиентът показва само предварителен изглед."
+  "Изпълнява се на сървъра (002_world_v1.sql: evaluate_world); клиентът показва само предварителен изглед.",
+  "ВРЕМЕННО (24.10.2026): правилата за кварталите на Читарика (CH01–CH24) и Математика и околен свят (MW01–MW32) са техническа основа – завършено занятие → обект; финал → празник. Чакат утвърждаване от методиста (карта „занятие → обект“)."
  ],
  "objects": [
   {
@@ -391,6 +392,622 @@
     "square"
    ],
    "variants": []
+  },
+  {
+   "id": "reading.building.CH01",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH01)",
+   "zones": [
+    "CH01"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH02",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH02)",
+   "zones": [
+    "CH02"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH03",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH03)",
+   "zones": [
+    "CH03"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH04",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH04)",
+   "zones": [
+    "CH04"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH05",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH05)",
+   "zones": [
+    "CH05"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH06",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH06)",
+   "zones": [
+    "CH06"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH07",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH07)",
+   "zones": [
+    "CH07"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH08",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH08)",
+   "zones": [
+    "CH08"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH09",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH09)",
+   "zones": [
+    "CH09"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH10",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH10)",
+   "zones": [
+    "CH10"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH11",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH11)",
+   "zones": [
+    "CH11"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH12",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH12)",
+   "zones": [
+    "CH12"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH13",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH13)",
+   "zones": [
+    "CH13"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH14",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH14)",
+   "zones": [
+    "CH14"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH15",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH15)",
+   "zones": [
+    "CH15"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH16",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH16)",
+   "zones": [
+    "CH16"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH17",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH17)",
+   "zones": [
+    "CH17"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH18",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH18)",
+   "zones": [
+    "CH18"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH19",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH19)",
+   "zones": [
+    "CH19"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH20",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH20)",
+   "zones": [
+    "CH20"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH21",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH21)",
+   "zones": [
+    "CH21"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH22",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH22)",
+   "zones": [
+    "CH22"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.building.CH23",
+   "district": "reading",
+   "kind": "core",
+   "title": "Сграда по пътя (CH23)",
+   "zones": [
+    "CH23"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "reading.festival",
+   "district": "reading",
+   "kind": "event",
+   "title": "Празник на четенето",
+   "zones": [
+    "CH24"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW01",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW01)",
+   "zones": [
+    "MW01"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW02",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW02)",
+   "zones": [
+    "MW02"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW03",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW03)",
+   "zones": [
+    "MW03"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW04",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW04)",
+   "zones": [
+    "MW04"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW05",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW05)",
+   "zones": [
+    "MW05"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW06",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW06)",
+   "zones": [
+    "MW06"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW07",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW07)",
+   "zones": [
+    "MW07"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW08",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW08)",
+   "zones": [
+    "MW08"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW09",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW09)",
+   "zones": [
+    "MW09"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW10",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW10)",
+   "zones": [
+    "MW10"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW11",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW11)",
+   "zones": [
+    "MW11"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW12",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW12)",
+   "zones": [
+    "MW12"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW13",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW13)",
+   "zones": [
+    "MW13"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW14",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW14)",
+   "zones": [
+    "MW14"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW15",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW15)",
+   "zones": [
+    "MW15"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW16",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW16)",
+   "zones": [
+    "MW16"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW17",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW17)",
+   "zones": [
+    "MW17"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW18",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW18)",
+   "zones": [
+    "MW18"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW19",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW19)",
+   "zones": [
+    "MW19"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW20",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW20)",
+   "zones": [
+    "MW20"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW21",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW21)",
+   "zones": [
+    "MW21"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW22",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW22)",
+   "zones": [
+    "MW22"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW23",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW23)",
+   "zones": [
+    "MW23"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW24",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW24)",
+   "zones": [
+    "MW24"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW25",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW25)",
+   "zones": [
+    "MW25"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW26",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW26)",
+   "zones": [
+    "MW26"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW27",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW27)",
+   "zones": [
+    "MW27"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW28",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW28)",
+   "zones": [
+    "MW28"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW29",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW29)",
+   "zones": [
+    "MW29"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW30",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW30)",
+   "zones": [
+    "MW30"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.place.MW31",
+   "district": "mathworld",
+   "kind": "core",
+   "title": "Място в околността (MW31)",
+   "zones": [
+    "MW31"
+   ],
+   "variants": [],
+   "temporary": true
+  },
+  {
+   "id": "mathworld.festival",
+   "district": "mathworld",
+   "kind": "event",
+   "title": "Празник на околността",
+   "zones": [
+    "MW32"
+   ],
+   "variants": [],
+   "temporary": true
   }
  ],
  "rules": [
@@ -865,6 +1482,1462 @@
    },
    "once": true,
    "title": "Показвам какво мога"
+  },
+  {
+   "rule_id": "ch01.complete",
+   "version": 1,
+   "lesson": "CH01",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH01",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH01"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "От сричка към дума",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch02.complete",
+   "version": 1,
+   "lesson": "CH02",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH02",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH02"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Чета точно",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch03.complete",
+   "version": 1,
+   "lesson": "CH03",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH03",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH03"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Чета правилно",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch04.complete",
+   "version": 1,
+   "lesson": "CH04",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH04",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH04"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Думите и значението им",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch05.complete",
+   "version": 1,
+   "lesson": "CH05",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH05",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH05"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Кой? Какво?",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch06.complete",
+   "version": 1,
+   "lesson": "CH06",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH06",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH06"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Какво прави?",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch07.complete",
+   "version": 1,
+   "lesson": "CH07",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH07",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH07"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Какъв е?",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch08.complete",
+   "version": 1,
+   "lesson": "CH08",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH08",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH08"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Къде? Накъде?",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch09.complete",
+   "version": 1,
+   "lesson": "CH09",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH09",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH09"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Свързвам думите",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch10.complete",
+   "version": 1,
+   "lesson": "CH10",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH10",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH10"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Чета и разбирам",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch11.complete",
+   "version": 1,
+   "lesson": "CH11",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH11",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH11"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Избирам точната дума",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch12.complete",
+   "version": 1,
+   "lesson": "CH12",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH12",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH12"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Строя изречение",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch13.complete",
+   "version": 1,
+   "lesson": "CH13",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH13",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH13"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Казвам, питам, възкликвам",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch14.complete",
+   "version": 1,
+   "lesson": "CH14",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH14",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH14"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Пиша по-ясно",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch15.complete",
+   "version": 1,
+   "lesson": "CH15",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH15",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH15"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Откривам и поправям",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch16.complete",
+   "version": 1,
+   "lesson": "CH16",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH16",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH16"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Разбирам изречението",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch17.complete",
+   "version": 1,
+   "lesson": "CH17",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH17",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH17"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Разбирам текста",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch18.complete",
+   "version": 1,
+   "lesson": "CH18",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH18",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH18"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Откривам най-важното",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch19.complete",
+   "version": 1,
+   "lesson": "CH19",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH19",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH19"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Разказвам със свои думи",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch20.complete",
+   "version": 1,
+   "lesson": "CH20",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH20",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH20"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Питам и намирам отговора",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch21.complete",
+   "version": 1,
+   "lesson": "CH21",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH21",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH21"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Чета като герой",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch22.complete",
+   "version": 1,
+   "lesson": "CH22",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH22",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH22"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Чета и разбирам художествена история",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch23.complete",
+   "version": 1,
+   "lesson": "CH23",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH23",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.building.CH23"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Разказвам и играя история",
+   "temporary": true
+  },
+  {
+   "rule_id": "ch24.complete",
+   "version": 1,
+   "lesson": "CH24",
+   "lesson_kind": "integrated",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "CH24",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "reading.festival"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Създавам своя история",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw01.complete",
+   "version": 1,
+   "lesson": "MW01",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW01",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW01"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Класифицирам и откривам закономерности / Правила и учтивост",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw02.complete",
+   "version": 1,
+   "lesson": "MW02",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW02",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW02"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Числа 1–3 / Моето семейство",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw03.complete",
+   "version": 1,
+   "lesson": "MW03",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW03",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW03"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Част и цяло. Започвам да събирам / Как хората си помагат",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw04.complete",
+   "version": 1,
+   "lesson": "MW04",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW04",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW04"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "На, над, под / Моето тяло",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw05.complete",
+   "version": 1,
+   "lesson": "MW05",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW05",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW05"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Числа 4–5 / Пазя себе си",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw06.complete",
+   "version": 1,
+   "lesson": "MW06",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW06",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW06"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Ляво и дясно / Моите сетива",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw07.complete",
+   "version": 1,
+   "lesson": "MW07",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW07",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW07"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Разбирам изваждането / Грижа се за себе си",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw08.complete",
+   "version": 1,
+   "lesson": "MW08",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW08",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW08"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Числа 6–7 / Моят ден",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw09.complete",
+   "version": 1,
+   "lesson": "MW09",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW09",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW09"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Числа 8–9 / Моята седмица",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw10.complete",
+   "version": 1,
+   "lesson": "MW10",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW10",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW10"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "10 и 0 + числова редица / Моята година: месеци и сезони",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw11.complete",
+   "version": 1,
+   "lesson": "MW11",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW11",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW11"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Сравнявам количества / Живо и неживо",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw12.complete",
+   "version": 1,
+   "lesson": "MW12",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW12",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW12"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Математическа мисия до 10 / Природата се променя",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw13.complete",
+   "version": 1,
+   "lesson": "MW13",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW13",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW13"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Права, крива, отсечка / Как се придвижваме",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw14.complete",
+   "version": 1,
+   "lesson": "MW14",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW14",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW14"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Измервам дължина, височина и ширина / Движа се безопасно",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw15.complete",
+   "version": 1,
+   "lesson": "MW15",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW15",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW15"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Смятам до 10 / Растенията около нас",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw16.complete",
+   "version": 1,
+   "lesson": "MW16",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW16",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW16"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Разбирам текстовата задача / Как растат растенията",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw17.complete",
+   "version": 1,
+   "lesson": "MW17",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW17",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW17"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Повече с / по-малко с / Храна от растенията",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw18.complete",
+   "version": 1,
+   "lesson": "MW18",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW18",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW18"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Числа 11–12 / Животните около нас",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw19.complete",
+   "version": 1,
+   "lesson": "MW19",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW19",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW19"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Геометрични фигури / Домашни и диви животни",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw20.complete",
+   "version": 1,
+   "lesson": "MW20",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW20",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW20"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Числа 13–14 / Родители и малки",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw21.complete",
+   "version": 1,
+   "lesson": "MW21",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW21",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW21"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Форми и композиции / Птици, риби, насекоми",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw22.complete",
+   "version": 1,
+   "lesson": "MW22",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW22",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW22"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Вътре/вън + графична диктовка / Къде живеят животните",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw23.complete",
+   "version": 1,
+   "lesson": "MW23",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW23",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW23"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Числа 15–16 / Какво е нужно на живите същества",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw24.complete",
+   "version": 1,
+   "lesson": "MW24",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW24",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW24"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Геометрия в реалния свят / Грижа се за природата",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw25.complete",
+   "version": 1,
+   "lesson": "MW25",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW25",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW25"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Решавам примери и задачи до 16 / Екология и отпадъци",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw26.complete",
+   "version": 1,
+   "lesson": "MW26",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW26",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW26"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Числа 17–18 / Здраве, движение и активност",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw27.complete",
+   "version": 1,
+   "lesson": "MW27",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW27",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW27"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Числа 19–20 / България и хората по света",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw28.complete",
+   "version": 1,
+   "lesson": "MW28",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW28",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW28"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Увеличавам и намалявам / Традиции и празници",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw29.complete",
+   "version": 1,
+   "lesson": "MW29",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW29",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW29"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Решавам текстови задачи / Разпознавам емоциите",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw30.complete",
+   "version": 1,
+   "lesson": "MW30",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW30",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW30"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Смятам уверено до 20 / Разбирам себе си и другите",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw31.complete",
+   "version": 1,
+   "lesson": "MW31",
+   "lesson_kind": "regular",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW31",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.place.MW31"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Интегрирана математическа мисия / Готов съм за училище",
+   "temporary": true
+  },
+  {
+   "rule_id": "mw32.complete",
+   "version": 1,
+   "lesson": "MW32",
+   "lesson_kind": "integrated",
+   "condition": {
+    "type": "lesson_complete",
+    "lesson": "MW32",
+    "rounds": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "accuracy_required": false
+   },
+   "effect": {
+    "unlock": [
+     "mathworld.festival"
+    ],
+    "star": false
+   },
+   "once": true,
+   "title": "Финална мисия и диагностика / Рефлексия",
+   "temporary": true
   }
  ]
 }

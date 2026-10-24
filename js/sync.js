@@ -9,6 +9,7 @@
    • Повторното изпращане е безопасно: ключът на събитието е постоянен и сървърът го приема веднъж.
    • Потвърдените отключвания от сървъра се пазят отделно (за изравняване на света на детето). */
 (function () {
+  const PRGKEY = "platforma.world.program.v1";
   const QKEY = "platforma.outbox.v2", OLDQ = "platforma.outbox.v1", IKEY = "platforma.pilot.v1", WKEY = "platforma.world.confirmed.v1", SKEY = "platforma.sync.state.v1";
   const BATCH = 50, MAX_TRIES = 10, TIMEOUT = 20000;
   let CFG = null, busy = false, batch = BATCH;
@@ -57,6 +58,8 @@
     if (g) { i.roster = g[1].split(",").map(x => x.split(".")).filter(x => x[0]).map(([c, p]) => ({ code: c.toUpperCase(), pic: (p || "").replace(/[^a-z_]/g, "") })); delete i.child; }
     if (t && i.child) { i.hwt = Object.assign(i.hwt || {}, { [i.child]: t[1] }); }
     writeIdent(i);
+    const pg = all.match(/[?&#~]program[=_](full|language|reading_only)/), en = all.match(/[?&#~]entry[=_](standard|direct)/);
+    if (pg && i.child && /[?&#~]demo[=_]1/.test(all)) { const pm = read(PRGKEY) || {}; pm[i.child] = { program: pg[1], reading_entry: en ? en[1] : "standard", source: "demo" }; write(PRGKEY, pm); }
   })();
   // „Кой играе?“ – картинки вместо имена (децата не четат); избраното дете важи за тази домашна
   function needsPick() { const i = ident(); return !!(i.roster && i.roster.length > 1); }
@@ -132,10 +135,11 @@
     const c = child || ident().child; if (!c) return null;
     const conf = (read(WKEY) || {})[c] || {}, ch = (read(CHKEY) || {})[c] || {}, mine = (read(MYCH) || {})[c] || {}, rounds = ((read(RKEY) || roundsMem)[c]) || {};
     const pendingKeys = new Set(getQ().filter(x => x.ev.child_code === c && x.state === "queued").map(x => x.ev.type));
-    return { child: c, confirmed: conf, choices: ch, myChoices: mine, rounds, progress: (read(PGKEY) || {})[c] || {}, reviews: (state().reviews || []).filter(r => r.child_code === c),
+    const pm = (read(PRGKEY) || {})[c] || { program: "full", reading_entry: "standard", source: "default" };
+    return { child: c, program: pm.program, readingEntry: pm.reading_entry, programSource: pm.source, confirmed: conf, choices: ch, myChoices: mine, rounds, progress: (read(PGKEY) || {})[c] || {}, reviews: (state().reviews || []).filter(r => r.child_code === c),
              queued: getQ().filter(x => x.ev.child_code === c && x.state === "queued").length, blocked: getQ().filter(x => x.ev.child_code === c && x.state === "blocked").length,
              blockedReasons: getQ().filter(x => x.ev.child_code === c && x.state === "blocked").map(x => x.reason),
-             lastOk: state().last_ok || null, sending: pendingKeys.size > 0 };
+             lastOk: DEMO ? null : state().last_ok || null, sending: pendingKeys.size > 0, demo: DEMO };   // демо: няма сървър – няма „за изравняване“
   }
 
   function enqueue(r) {
@@ -236,6 +240,11 @@
             const p2 = read(PGKEY) || {};
             r.data.progress.forEach(x => { (p2[x.child_code] = p2[x.child_code] || {})[x.lesson] = { received: x.received || [], valid: x.valid || [] }; });
             write(PGKEY, p2);
+          }
+          if (Array.isArray(r.data.programs)) {   // учебната програма на децата (отключване на кварталите)
+            const pm = read(PRGKEY) || {};
+            r.data.programs.forEach(x => { pm[x.child_code] = { program: x.program, reading_entry: x.reading_entry, source: "server" }; });
+            write(PRGKEY, pm);
           }
           if (Array.isArray(r.data.choices)) {
             const w2 = read(CHKEY) || {};

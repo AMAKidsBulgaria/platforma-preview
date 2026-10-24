@@ -1,29 +1,52 @@
 <!doctype html><html lang="bg"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
-<title>Демо – Моят квартал</title><style>
+<title>Демо – Моят свят</title><style>
 :root{--bg:#2B2550;--card:#FFF8EE;--ink:#2B2233;--accent:#E5167A;--muted:#6B6072}
 body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.4 system-ui,-apple-system,sans-serif}
-main{max-width:900px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-left))}
+main{max-width:940px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-left))}
 h1{color:#fff;margin:0 0 6px;font-size:28px} p.n{color:#D9D2E3;margin:0 0 18px;font-size:15px}
-.box{background:var(--card);border-radius:20px;padding:18px;margin-bottom:16px}
-.kids{display:flex;gap:10px;flex-wrap:wrap} .kids button{min-width:76px;min-height:76px;border-radius:16px;border:3px solid #ccc;background:#fff;font:800 22px system-ui;cursor:pointer}
-.kids button.on{border-color:var(--accent);background:#FFE3F0}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
-.st,.w{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:110px;border-radius:18px;background:#fff;border:3px solid var(--accent);color:var(--ink);text-decoration:none}
-.st b{font-size:24px} .st span{font-size:14px;color:var(--muted)} .w{background:var(--accent);color:#fff;font:800 24px system-ui;margin-top:12px}
+.box{background:var(--card);border-radius:20px;padding:18px;margin-bottom:16px} .box.off{opacity:.45}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px} .row button{min-height:64px;min-width:76px;padding:8px 14px;border-radius:16px;border:3px solid #ccc;background:#fff;font:800 18px system-ui;cursor:pointer}
+.row button.on{border-color:var(--accent);background:#FFE3F0}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:8px}
+.st,.w{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:100px;border-radius:18px;background:#fff;border:3px solid var(--accent);color:var(--ink);text-decoration:none}
+.st b{font-size:22px} .st span{font-size:14px;color:var(--muted);text-align:center} .w{background:var(--accent);color:#fff;font:800 24px system-ui;min-height:90px}
+.adult{margin-top:10px;min-height:52px;border-radius:14px;border:2px dashed #999;background:#fff;font:600 15px system-ui;width:100%;cursor:pointer} .msg{color:var(--muted);font-size:14px;margin:6px 0 0}
 </style></head><body><main>
-<h1>Демо „Моят квартал“</h1><p class="n">За теста с деца (временна графика). Без база – данните остават на този таблет. Изберете номера на детето, после кръговете по ред; след кръг детето натиска „Виж квартала“.</p>
-<div class="box"><b>Дете</b><div class="kids" id="kids"></div></div>
-<div class="box"><b>Домашна BK01 (А, У, И)</b><div class="steps"><a class="st" data-url="index.html?pilot=CHILD#game/phonemicHearing?level=1&tasks=8&hw=DEMO-BK01&st=0&lesson=BK01&round=1&skill=E1&meas=1&mode=learn&adaptive=0&bank=banks-b1-5:BK01:Р1" href="#"><b>Кръг 1</b><span>Фонематичен слух</span></a><a class="st" data-url="index.html?pilot=CHILD#game/alphabet?letters=АУИ&level=1&lettersQty=12&hw=DEMO-BK01&st=1&lesson=BK01&round=2&skill=E1&meas=0&mode=learn&adaptive=1&bank=banks-b1-5:BK01:Р2" href="#"><b>Кръг 2</b><span>Азбука</span></a><a class="st" data-url="index.html?pilot=CHILD#game/soundLetterParsing?level=1&answersQty=10&lessonNumber=1&hw=DEMO-BK01&st=2&lesson=BK01&round=3&skill=E1&meas=1&mode=learn&adaptive=0&bank=banks-b1-5:BK01:Р3" href="#"><b>Кръг 3</b><span>Звуков анализ</span></a><a class="st" data-url="index.html?pilot=CHILD#game/phonemicHearing?level=2&tasks=6&hw=DEMO-BK01&st=3&lesson=BK01&round=4&skill=E1&meas=1&mode=learn&adaptive=0&bank=banks-b1-5:BK01:Р4" href="#"><b>Кръг 4</b><span>Фонематичен слух</span></a><a class="st" data-url="index.html?pilot=CHILD#game/letterOfElements?letters=АУИ&level=1&rounds=4&lessonNumber=1&hw=DEMO-BK01&st=4&lesson=BK01&round=4&skill=E1&skill2=E10&meas=1&mode=learn&adaptive=0&bank=banks-b1-5:BK01:Р4" href="#"><b>Кръг 4</b><span>Буква от елементи</span></a></div><a class="w" id="world" href="#">Моят квартал</a>
-<button type="button" id="skip" style="margin-top:12px;min-height:56px;border-radius:14px;border:2px dashed #999;background:#fff;font:600 16px system-ui;width:100%">За възрастния: кръгове 3 и 4 – минати (само в демото)</button>
-<p class="n" id="skipmsg" style="color:#6B6072;margin:6px 0 0"></p></div>
+<h1>Демо „Моят свят“ · D2</h1><p class="n">Интерактивен прототип за таблет 1280×800, вид B+ v3. Без база и без детски данни: децата Д1–Д8 са фиктивни, а всичко остава само на този таблет. Изберете дете и програма, после изиграйте кръговете. След кръг натиснете „Виж квартала“.</p>
+<div class="box legend"><b>Реално и симулирано</b><p class="msg"><b>Реално:</b> игрите и кръговете, записът на напредъка на таблета, строежът след всеки кръг, наградата и изборът на украса, разглеждането, улиците, трите пътеки, заключените и скритите квартали, повторното отваряне.<br><b>Симулирано:</b> бутоните „За възрастния“ записват напредък директно, без игра, за да се стигне бързо до дадено състояние. Демото не изпраща нищо към сървър. Връзката „текущ строеж → следващ кръг от домашната“ още липсва (D3).</p></div>
+<div class="box"><b>Дете</b><div class="row" id="kids"></div>
+<b style="display:block;margin-top:12px">Програма</b><div class="row" id="prog"></div>
+<b style="display:block;margin-top:12px">Читарика</b><div class="row" id="entry"></div>
+<b style="display:block;margin-top:12px">Вид на света</b><div class="row" id="look"></div><p class="msg">Програмата се запомня за детето при отваряне на линк. Смяна на програмата не изтрива напредъка.</p></div>
+<div class="box"><a class="w" id="world" href="#">Моят свят</a>
+<button type="button" class="adult" id="skip">За възрастния (симулирано): BK01 – кръгове 3 и 4 минати</button>
+<button type="button" class="adult" id="mid">За възрастния (симулирано): среден напредък – във всеки квартал 6 завършени занятия с украса, седмото – 2 кръга</button>
+<button type="button" class="adult" id="all">За възрастния (симулирано): всичко завършено (BK01–BK14, CH01–CH24, MW01–MW32)</button>
+<button type="button" class="adult" id="bk14">За възрастния (симулирано): BK14 завършено (отключва Читарика при стандартно начало)</button>
+<button type="button" class="adult" id="reset">Ново начало за това дете (изтрива само неговите демо данни на този таблет)</button><p class="msg" id="msg"></p></div>
+<div class="box letters" data-mod="letters"><b>Букварика · BK01 (А, У, И)</b><div class="steps"><a class="st" data-url="index.html?pilot=CHILD#game/phonemicHearing?level=1&tasks=8&hw=DEMO-BK01&st=0&lesson=BK01&round=1&skill=E1&meas=1&mode=learn&adaptive=0&bank=banks-b1-5:BK01:Р1" href="#"><b>Кръг 1</b><span>Фонематичен слух</span></a><a class="st" data-url="index.html?pilot=CHILD#game/alphabet?letters=АУИ&level=1&lettersQty=12&hw=DEMO-BK01&st=1&lesson=BK01&round=2&skill=E1&meas=0&mode=learn&adaptive=1&bank=banks-b1-5:BK01:Р2" href="#"><b>Кръг 2</b><span>Азбука</span></a><a class="st" data-url="index.html?pilot=CHILD#game/soundLetterParsing?level=1&answersQty=10&lessonNumber=1&hw=DEMO-BK01&st=2&lesson=BK01&round=3&skill=E1&meas=1&mode=learn&adaptive=0&bank=banks-b1-5:BK01:Р3" href="#"><b>Кръг 3</b><span>Звуково-буквен анализ</span></a><a class="st" data-url="index.html?pilot=CHILD#game/phonemicHearing?level=2&tasks=6&hw=DEMO-BK01&st=3&lesson=BK01&round=4&skill=E1&meas=1&mode=learn&adaptive=0&bank=banks-b1-5:BK01:Р4" href="#"><b>Кръг 4</b><span>Фонематичен слух</span></a><a class="st" data-url="index.html?pilot=CHILD#game/letterOfElements?letters=АУИ&level=1&rounds=4&lessonNumber=1&hw=DEMO-BK01&st=4&lesson=BK01&round=4&skill=E1&skill2=E10&meas=1&mode=learn&adaptive=0&bank=banks-b1-5:BK01:Р4" href="#"><b>Кръг 4</b><span>Елементи на букви</span></a></div></div><div class="box reading" data-mod="reading"><b>Читарика · CH01</b><div class="steps"><a class="st" data-url="index.html?pilot=CHILD#game/constructor?speed=1&level=1&answersQty=4&hw=DEMO-CH01&st=0&lesson=CH01&round=1&skill=E2&meas=1&mode=learn&adaptive=0&bank=CH_01_syll_D2" href="#"><b>Кръг 1</b><span>Конструктор</span></a><a class="st" data-url="index.html?pilot=CHILD#game/wordOrder?level=2&answersQty=6&hw=DEMO-CH01&st=1&lesson=CH01&round=2&skill=E2&meas=0&mode=learn&adaptive=1&bank=CH_01_words" href="#"><b>Кръг 2</b><span>Словоред</span></a><a class="st" data-url="index.html?pilot=CHILD#game/trueWords?level=1&answersQty=6&hw=DEMO-CH01&st=2&lesson=CH01&round=3&skill=E3&meas=1&mode=learn&adaptive=0&bank=CH_01_words" href="#"><b>Кръг 3</b><span>Правилни думи</span></a><a class="st" data-url="index.html?pilot=CHILD#game/constructor?speed=1&level=3&answersQty=5&hw=DEMO-CH01&st=3&lesson=CH01&round=4&skill=E3&meas=1&mode=learn&adaptive=0&bank=CH_01_words" href="#"><b>Кръг 4</b><span>Конструктор</span></a></div></div><div class="box mathworld" data-mod="mathworld"><b>Математика и околен свят · MW01</b><div class="steps"><a class="st" data-url="index.html?pilot=CHILD#game/cleanShipRoom?level=1&hw=DEMO-MW01&st=0&lesson=MW01&round=1&skill=M1&meas=1&mode=learn&adaptive=0&bank=MW_01_room" href="#"><b>Кръг 1</b><span>Чиста каюта (стаята)</span></a><a class="st" data-url="index.html?pilot=CHILD#game/patterns?examples=6&hw=DEMO-MW01&st=1&lesson=MW01&round=2&skill=M1&meas=0&mode=learn&adaptive=1&bank=MW_01_patterns" href="#"><b>Кръг 2</b><span>Закономерности</span></a><a class="st" data-url="index.html?pilot=CHILD#game/sorting?theme=features&task=classify&why=1&examples=6&hw=DEMO-MW01&st=2&lesson=MW01&round=3&skill=M1&meas=1&mode=learn&adaptive=0&bank=MW_01_features_v1" href="#"><b>Кръг 3</b><span>Сортиране по тема</span></a><a class="st" data-url="index.html?pilot=CHILD#game/sorting?theme=rules_politeness&task=judge_polite&why=1&examples=5&hw=DEMO-MW01&st=3&lesson=MW01&round=4&skill=S1&meas=1&mode=learn&adaptive=0&bank=MW_01_rules_politeness_v1" href="#"><b>Кръг 4</b><span>Сортиране по тема</span></a></div></div>
 </main><script>
-const K=document.getElementById("kids"); let cur=(()=>{try{return localStorage.getItem("demo.kid")||"1"}catch(e){return "1"}})();
-for(let i=1;i<=8;i++){const b=document.createElement("button");b.textContent="Д"+i;b.onclick=()=>{cur=String(i);try{localStorage.setItem("demo.kid",cur)}catch(e){}draw()};K.appendChild(b)}
-const code=()=>"DEMO_"+cur;
-function draw(){[...K.children].forEach((b,i)=>b.classList.toggle("on",String(i+1)===cur));
-  document.querySelectorAll(".st").forEach(a=>a.href=a.dataset.url.replace("pilot=CHILD","demo=1&pilot="+code()));
-  document.getElementById("world").href="index.html?demo=1&pilot="+code()+"#world";}
+const S=(k,d)=>{try{return localStorage.getItem(k)||d}catch(e){return d}}, P=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+let kid=S("demo.kid","1"), prog=S("demo.prog","full"), entry=S("demo.entry","standard"), look=S("demo.look","bplus");
+const PROG=[["full","А · Пълна"],["language","Б · Езикова"],["reading_only","В · Само Читарика"]], ENT=[["standard","Стандартно (след BK14)"],["direct","Директен прием"]];
+const VIS={full:["letters","reading","mathworld"],language:["letters","reading"],reading_only:["reading"]};
+const btns=(id,arr,get,set)=>{const b=document.getElementById(id);b.innerHTML="";arr.forEach(([v,t])=>{const x=document.createElement("button");x.textContent=t;x.onclick=()=>{set(v);draw()};x.dataset.v=v;b.appendChild(x)})};
+btns("kids",[1,2,3,4,5,6,7,8].map(i=>[String(i),"Д"+i]),()=>kid,v=>{kid=v;P("demo.kid",v)});
+btns("prog",PROG,()=>prog,v=>{prog=v;P("demo.prog",v)}); btns("entry",ENT,()=>entry,v=>{entry=v;P("demo.entry",v)}); btns("look",[["bplus","B+ (нова посока)"],["v1","Временна графика"]],()=>look,v=>{look=v;P("demo.look",v)});
+const code=()=>"DEMO_"+kid, q=()=>"demo=1&program="+prog+"&entry="+entry+"&pilot="+code()+"&world="+look;
+function draw(){[["kids",kid],["prog",prog],["entry",entry],["look",look]].forEach(([id,v])=>[...document.getElementById(id).children].forEach(b=>b.classList.toggle("on",b.dataset.v===v)));
+  document.querySelectorAll(".st").forEach(a=>a.href=a.dataset.url.replace("pilot=CHILD",q()));
+  document.getElementById("world").href="index.html?"+q()+"#world";
+  document.querySelectorAll(".box[data-mod]").forEach(b=>b.classList.toggle("off",!VIS[prog].includes(b.dataset.mod)));}
 draw();
-// само за демото: отбелязва кръгове 3 и 4 на BK01 като минати за избраното дете (за да се види как къщите светват без още 10 минути игра)
-document.getElementById("skip").onclick=()=>{try{const k="platforma.rounds.v1",all=JSON.parse(localStorage.getItem(k)||"{}"),c=all[code()]=all[code()]||{},l=c.BK01=c.BK01||[];[3,4].forEach(r=>{if(!l.includes(r))l.push(r)});localStorage.setItem(k,JSON.stringify(all));document.getElementById("skipmsg").textContent="Готово за "+code()+" – отворете „Моят квартал“.";}catch(e){}};
+const mark=(les,rs)=>{try{const k="platforma.rounds.v1",all=JSON.parse(localStorage.getItem(k)||"{}"),c=all[code()]=all[code()]||{},l=c[les]=c[les]||[];rs.forEach(r=>{if(!l.includes(r))l.push(r)});localStorage.setItem(k,JSON.stringify(all));
+  document.getElementById("msg").textContent="Готово за "+code()+" – отворете „Моят свят“."}catch(e){}};
+const L=(p,a,b)=>Array.from({length:b-a+1},(_,i)=>p+String(a+i).padStart(2,"0"));
+document.getElementById("skip").onclick=()=>mark("BK01",[3,4]);
+const pick=les=>fetch("config/world-rules.json?v=2").then(r=>r.json()).then(W=>{try{const k="platforma.world.mychoices.v1",all=JSON.parse(localStorage.getItem(k)||"{}"),c=all[code()]=all[code()]||{};
+  W.rules.filter(r=>les.includes(r.lesson)&&r.effect&&r.effect.choice).forEach(r=>{c[r.rule_id]=c[r.rule_id]||r.effect.choice.offer[0]});localStorage.setItem(k,JSON.stringify(all));}catch(e){}}).catch(()=>{});
+document.getElementById("mid").onclick=()=>{const d=L("BK",1,6).concat(L("CH",1,6),L("MW",1,6)); d.forEach(l=>mark(l,[1,2,3,4])); mark("BK07",[1,2]); mark("CH07",[1,2]); mark("MW07",[1,2]); pick(d);};
+document.getElementById("reset").onclick=()=>{try{["platforma.rounds.v1","platforma.world.mychoices.v1","platforma.world.seen.v1","platforma.world.program.v1"].forEach(k=>{const a=JSON.parse(localStorage.getItem(k)||"{}");delete a[code()];localStorage.setItem(k,JSON.stringify(a));});
+  document.getElementById("msg").textContent="Демо данните на "+code()+" са изтрити.";}catch(e){}};
+document.getElementById("all").onclick=()=>L("BK",1,14).concat(L("CH",1,24),L("MW",1,32)).forEach(l=>mark(l,[1,2,3,4])); document.getElementById("bk14").onclick=()=>mark("BK14",[1,2,3,4]);
 </script></body></html>
