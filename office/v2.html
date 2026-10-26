@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Офис — нов профил на детето</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="office.css?v=158">
+<style>
+/* office/v2.html: ролята „Дете“ – новият профил „Моят свят“ в рамка, с лента за тестване (дете, сценарий, линк) */
+body.kid-full .main { background: #F3E7CF; }
+.v2-kid { height: 100vh; height: 100dvh; display: flex; flex-direction: column; }
+.v2-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding: 8px max(12px, env(safe-area-inset-left, 0px)); background: #2E2A24; color: #F6F1E6; font: 600 14px/1.2 "Source Sans 3", system-ui, sans-serif; }
+.v2-bar b { font-family: Manrope, system-ui, sans-serif; }
+.v2-bar label { display: inline-flex; align-items: center; gap: 6px; }
+.v2-bar select { font: inherit; max-width: 240px; padding: 4px 6px; border-radius: 8px; }
+.v2-bar .btn { white-space: nowrap; padding: 6px 12px; }
+.v2-bar .btn.ghost { color: #F6F1E6; border-color: rgba(246, 241, 230, .55); background: transparent; }
+.v2-bar .btn.ghost:hover { background: rgba(246, 241, 230, .12); }
+.v2-hint { font-size: 13px; opacity: .85; overflow-wrap: anywhere; }
+.v2-frame { flex: 1; width: 100%; border: 0; display: block; background: #F3E7CF; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo">A</span><span>Офис</span></div>
+  <nav class="roles" id="roles" aria-label="Роля"></nav>
+  <div class="who" id="who"></div>
+</header>
+<div class="shell">
+  <aside class="side"><nav id="nav" aria-label="Раздели"></nav><button class="btn ghost small" id="reset">Нулирай демо данните</button></aside>
+  <main class="main" id="main"></main>
+</div>
+<div class="modal" id="modal" hidden><div class="modal-box" id="modal-box"></div></div>
+<script src="../js/games/base.js"></script>
+<script src="../js/games/words.js"></script>
+<script src="../js/games/pics.js"></script>
+<script src="../js/games/underwater.js"></script><script src="../js/games/cobweb.js"></script><script src="../js/games/scales.js"></script><script src="../js/games/composition.js"></script><script src="../js/games/order.js"></script><script src="../js/games/brainCrush.js"></script><script src="../js/games/brainstorm.js"></script><script src="../js/games/pirateCipher.js"></script><script src="../js/games/brightNumbers.js"></script><script src="../js/games/shadowMap.js"></script><script src="../js/games/secretCards.js"></script><script src="../js/games/piratesTreasures.js"></script>
+<script src="../js/games/alphabet.js"></script><script src="../js/games/readca.js"></script><script src="../js/games/soundLetterParsing.js"></script><script src="../js/games/letterOfElements.js"></script><script src="../js/games/phonemicHearing.js"></script><script src="../js/games/phonetics.js"></script>
+<script src="../js/games/numberLine.js"></script><script src="../js/games/worldChoice.js"></script><script src="../js/games/readWords.js"></script><script src="../js/games/readMore.js"></script><script src="../js/games/worldMemory.js"></script><script src="../js/games/conformityPlan.js?v=1"></script><script src="../js/games/readMore2.js?v=8"></script><script src="../js/games/story.js?v=4"></script><script src="../js/games/textRead.js?v=8"></script><script src="../js/games/worldMore.js"></script>
+<script src="seed.js?v=152"></script>
+<script src="pilot.js?v=4"></script>
+<script>window.OFFICE_CHILD_V2 = true;</script>
+<script src="office.js?v=168"></script>
+</body>
+</html>

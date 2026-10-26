@@ -9,7 +9,7 @@
     }
     get gameId() { return "hideAndSeek"; } get skillName() { return "Внимание: нови предмети"; }
     tick() {
-      if (!this.timed) return super.tick();
+      if (!this.timed || this.learn) return super.tick();   // домашно: без таймер – кръгът се довършва
       const left = Math.max(0, this.gameTime - Math.floor((Date.now() - this.startedAt) / 1000));
       this.shell.timer.textContent = `${Math.floor(left / 60)}:${String(left % 60).padStart(2, "0")}`;
       if (left <= 0 && !this.finished) { this.finished = true; this.shell.flash("Времето изтече", "bad"); setTimeout(() => this.finish(true), 1200); }

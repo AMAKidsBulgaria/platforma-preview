@@ -50,6 +50,8 @@
     }
     renderLives() {
       const l = this.shell.lives; l.innerHTML = ""; if (this.learn) return;
+      // до 3 – по сърце за всяка грешка; повече – едно сърце и „× оставащи“ (иначе 9 или 15 сърца не се събират горе)
+      if (this.tier > 3) { const h = document.createElement("i"); if (this.livesLeft <= 0) h.className = "off"; l.appendChild(h); const x = document.createElement("span"); x.className = "lives-x"; x.textContent = "× " + Math.max(0, this.livesLeft); l.appendChild(x); return; }
       for (let i = 0; i < this.tier; i++) { const h = document.createElement("i"); if (i >= this.livesLeft) h.className = "off"; l.appendChild(h); }
     }
     nextRound() {

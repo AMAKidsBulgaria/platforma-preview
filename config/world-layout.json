@@ -28,7 +28,7 @@
       "final": { "lesson": "CH24", "at": [1360, 840, 90] }
     },
     "mathworld": {
-      "title": "Околността",
+      "title": "Квартал на числата",
       "module": "mathworld",
       "temporary": true,
       "bg": "assets/img/art/districts/map-overview.png", "w": 1536, "h": 1024,

@@ -36,7 +36,7 @@
     constructor(...a) { super(...a); this.level = Number(this.s.level) || 1; this.gameTime = Number(this.s.gameTime) || 30; this.total = 10; }
     get gameId() { return "cleanShipRoom"; } get skillName() { return "Групиране на предмети"; }
     start() { MATH_BANK.attach(this).then(() => { if (this.mb && !this.mb.units.length) this.mb = null; if (this.mb) this.level = Number(this.mb.def.level) || 1; super.start(); }); }
-    tick() { if (this.level !== 2) return super.tick(); const left = Math.max(0, this.gameTime - Math.floor((Date.now() - this.startedAt) / 1000)); this.shell.timer.textContent = `${Math.floor(left / 60)}:${String(left % 60).padStart(2, "0")}`; if (left <= 0 && !this.finished) { this.finished = true; this.shell.flash("Времето изтече", "bad"); setTimeout(() => this.finish(true), 1200); } }
+    tick() { if (this.level !== 2 || this.learn) return super.tick(); const left = Math.max(0, this.gameTime - Math.floor((Date.now() - this.startedAt) / 1000)); this.shell.timer.textContent = `${Math.floor(left / 60)}:${String(left % 60).padStart(2, "0")}`; if (left <= 0 && !this.finished) { this.finished = true; this.shell.flash("Времето изтече", "bad"); setTimeout(() => this.finish(true), 1200); } }
     render() {
       this.scene("wt-cr", "scene-cabin"); this.shell.setLabel("Прибери вещите");
       if (this.mb) { this.groups = this.mb.units[0].boxes.slice(); this.items = this.mb.units.map(u => ({ n: u.n, g: u.g })); }

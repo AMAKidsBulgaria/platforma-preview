@@ -28,3 +28,39 @@
 .m12-toast img { height: 64px; }
 /* общите правила за .screen (app.css, look2.css) правят децата relative – тук всичко е позиционирано абсолютно */
 html .screen.screen-m12 > .m12-top, html .screen.screen-m12 > .m12-tl, html .screen.screen-m12 > .m12-tr, html .screen.screen-m12 > .m12-bl, html .screen.screen-m12 > .m12-br, html .screen.screen-m12 > .m12-bc, html .screen.screen-m12 > .m12-map { position: absolute; }
+
+/* „Играй и откривай“ (?home=v2): четири карти 2×2 във вида B+ – всяка със свой цвят, островът с две игри, името и кръгъл бутон ▶ */
+html .screen.screen-m12 > .m12-cards { position: absolute; left: 0; right: 0; top: 108px; bottom: 22px; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 20px; padding: 0 max(28px, env(safe-area-inset-right, 0px)) 0 max(28px, env(safe-area-inset-left, 0px)); }
+.m12-card { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; min-height: 0; border-radius: 30px; border: 4px solid #fff; padding: 10px 14px 14px; cursor: pointer; box-shadow: 0 7px 0 rgba(90, 70, 30, .18); font-family: inherit; color: #3B3226; overflow: hidden; }
+.m12-card.c-buk { background: #CDEBDD; } .m12-card.c-read { background: #E3D9F5; } .m12-card.c-math { background: #FBE7B5; } .m12-card.c-world { background: #CFEBD8; }
+.m12-card-art { position: absolute; inset: 6px 10% 54px; display: grid; place-items: center; } .m12-card-art svg { width: 100%; height: 100%; }
+.m12-card-name { position: relative; background: #FFF8EC; border: 3px solid #E4D6BD; border-radius: 18px; padding: 8px 34px; font-size: 28px; font-weight: 900; box-shadow: 0 4px 0 #E4D6BD; }
+.m12-card-play { position: absolute; right: 18px; bottom: 16px; width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-size: 24px; border: 4px solid #fff; }
+.c-buk .m12-card-play { background: #2A9D8F; } .c-read .m12-card-play { background: #8E5BD0; } .c-math .m12-card-play { background: #F2A541; } .c-world .m12-card-play { background: #3BAA5C; }
+.m12-card:active { transform: translateY(4px); box-shadow: 0 3px 0 rgba(90, 70, 30, .18); }
+.m12-card.soon .m12-card-art { filter: grayscale(.8) brightness(1.05); opacity: .6; } .m12-card.soon .m12-card-play { background: #B9AE9C; }
+.m12-title2 { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 28px; } .m12-title2 b { font-size: 30px; } .m12-title2 small { font-size: 18px; color: #6E6458; font-weight: 800; }
+/* „Играй и откривай“ по примерния екран (25.10): пейзаж отзад, по-тесни карти в бяла рамка, заключената – лилав катинар и обяснение */
+html.home2 .screen.screen-m12 > .m12-bg { position: absolute; inset: 0; background: url("../assets/img/world/home2/bg_hub.webp?v=1") center / cover no-repeat; z-index: 0; }
+html .screen.screen-m12 > .m12-cards { left: 50%; right: auto; width: min(1180px, 74vw); transform: translateX(-50%); top: 118px; bottom: 34px; gap: 22px 26px; padding: 0; z-index: 1; }
+.m12-card { border: 8px solid rgba(255, 255, 255, .85); box-shadow: 0 8px 18px rgba(60, 80, 40, .22); }
+.m12-card-name { font-size: 30px; padding: 8px 60px; border-radius: 26px; }
+.m12-card-why { position: relative; margin-top: -4px; margin-bottom: -6px; background: rgba(255, 248, 236, .95); border: 2px solid #E4D6BD; border-top: 0; border-radius: 0 0 16px 16px; padding: 4px 16px 6px; font-size: 15px; font-weight: 700; color: #6E6458; }
+.m12-card.soon { background: #E6DBF7; } .m12-card.soon .m12-card-art { filter: saturate(.55) brightness(1.06); opacity: .75; } .m12-card.soon .m12-card-play { background: #A58BD6; }
+html.home2 .screen.screen-m12 > .m12-top .m12-title2 { box-shadow: 0 6px 14px rgba(60, 80, 40, .2); }
+.m12-card-why { max-width: 78%; text-align: center; line-height: 1.3; }
+/* препоръчаната игра: мек златист ореол около кръглата основа (следва платформата) и еднократно леко поклащане */
+.m12-halo { fill: rgba(255, 214, 110, .38); stroke: #F2C14E; stroke-width: 6; filter: drop-shadow(0 0 10px rgba(255, 200, 70, .85)); }
+.m12-rec .m12-lift { animation: m12wob 1.1s ease-in-out .6s 1; transform-box: fill-box; transform-origin: 50% 90%; }
+@keyframes m12wob { 25% { transform: rotate(-3deg); } 50% { transform: rotate(2.5deg); } 75% { transform: rotate(-1.5deg); } }
+/* Букварика: рамка на картата с мек кремав топъл градиент */
+html .screen.screen-m12 > .m12-map.m12-frame { left: 16px; right: 16px; bottom: 16px; border-radius: 30px; background: radial-gradient(ellipse at 50% 42%, #FBF3E2 0%, #F4E7CC 62%, #EEDDBC 100%); box-shadow: inset 0 0 0 3px #E6D6B8; }
+/* „Играй и откривай“: пейзажът с ~20 % по-малък контраст и наситеност; ▶ и катинарът – обратно; обяснението не се застъпва с катинара */
+html.home2 .screen.screen-m12 > .m12-bg { filter: saturate(.78) contrast(.8) brightness(1.06); }
+.m12-card.soon .m12-card-play { background: #A58BD6; font-size: 22px; }
+.m12-card-why { max-width: 62%; }
+.m12-card-why { max-width: 68%; font-size: 14px; }
+/* иконите на игрите леко „дишат“ (както досегашните карти: 4 px нагоре, 4,5 с, всяка с различно начало); заключените – неподвижни */
+.m12-st:not(.m12-lock) .m12-art { animation: m12idle 4.5s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 100%; }
+@keyframes m12idle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@media (prefers-reduced-motion: reduce) { .m12-st .m12-art, .m12-rec .m12-lift { animation: none !important; } }

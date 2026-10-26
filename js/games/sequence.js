@@ -189,7 +189,7 @@
       if (ok) { this.correct++; this.renderScore(); this.log.push(this.event(true, { text: st.id, answer: st.id, given: st.id, ms: Date.now() - this.roundStart, first_attempt_correct: true })); rec(); this.roundOk.push(true); this.idx++; this.renderProgress(); this.shell.flash("Точно така!", "good"); this.say("Точно така!"); this.later(() => { this.shell.hideFlash(); after(); }, 1100); return; }
       // грешен краен отговор: записът е измерване (не от първия опит), не „опит“ – иначе в измерването остават само верните
       this.miss(st.id, shown ? "shown" : "solved-later"); rec(); Object.assign(this.log[this.log.length - 1], { attempt: false, first_attempt_correct: false }); this.roundOk.push(false); this.idx++; this.renderProgress();
-      if (!shown) { this.shell.flash("Браво, вече е наред!", "good"); this.say("Браво, вече е наред!"); return this.later(() => { this.shell.hideFlash(); after(); }, 1100); }
+      if (!shown) { this.shell.flash("Вече е наред!", "good"); this.say("Вече е наред!"); return this.later(() => { this.shell.hideFlash(); after(); }, 1100); }
       after();
     }
     destroy() { this.stopVoice(); super.destroy(); }

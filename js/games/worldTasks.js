@@ -95,7 +95,7 @@
       this.log.push(this.event(both, { unit_id: it.id, text: it.label, answer: String(it.primary_answer), given: this.res.given, ms: Date.now() - this.roundStart, first_attempt_correct: both,
         task_mode: this.s.task, render_task: this.th.task, step2_type: it.step2_type || this.th.step2_type, image_dependency: it.image_dependency || this.th.image_dependency, theme: it.theme, primary_correct: p, accepted_alt: !!this.res.acceptedAlt, reason_correct: r, reason_distractor_type: this.res.reasonType, reason_given: this.res.reasonGiven || null, bank_item: it.id, item_set: this.set, scope: it.scope }));
       if (both) this.correct++; this.roundOk.push(both); this.idx++; this.renderProgress(); this.renderScore();
-      this.say(both ? "Браво!" : "Добре. Продължаваме."); this.later(() => this.nextRound(), 700);
+      this.say(both ? "Точно така!" : "Добре. Продължаваме."); this.later(() => this.nextRound(), 700);
     }
   }
   window.GAMES = window.GAMES || {};

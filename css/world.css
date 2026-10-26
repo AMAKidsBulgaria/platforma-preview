@@ -156,3 +156,50 @@
 .ap-hat .avfig.face { height: 160px; margin-top: 30px; flex: none; }
 .ap-hat .avfig.face > img:first-child { height: 100%; width: auto; max-width: none; max-height: none; }
 .ap-hat .ap-none { position: absolute; right: 4px; top: 2px; font-size: 22px; color: #8A7A64; line-height: 1; }
+
+/* близък/далечен план (камерата на досегашната карта): бутонът горе вдясно, встрани от героя (горе вляво) и от Елува (долу вдясно) */
+.wcam { position: absolute; right: 14px; top: 14px; z-index: 3; font: 800 19px/1 "Nunito", system-ui, sans-serif; color: #1F6F66; background: #FFF8EC; border: 3px solid #2A9D8F; border-radius: 18px; padding: 12px 16px; box-shadow: 0 4px 0 #1F6F66; cursor: pointer; }
+.wcam:active { transform: translateY(3px); box-shadow: 0 1px 0 #1F6F66; }
+/* прототип „долина“: площадките в терена – утъпкана пръст с тревист ръб; бъдеща – спокойна, тънък пунктир; текуща – светъл златист контур и табелка със силуета на сградата */
+.vpad { fill: rgba(196, 160, 98, .55); stroke: rgba(120, 95, 50, .35); stroke-width: 3; }
+.vpad-fut { fill: rgba(196, 160, 98, .32); stroke: rgba(255, 250, 230, .8); stroke-width: 3; stroke-dasharray: 10 9; }
+.vpad-cur { fill: none; stroke: #FFD96B; stroke-width: 7; filter: drop-shadow(0 0 8px rgba(255, 210, 80, .9)); }
+.vsign rect:first-child { fill: #8A5A2B; } .vsign-b { fill: #E7C48A; stroke: #8A5A2B; stroke-width: 3; }
+.vsign-sil { filter: brightness(0) opacity(.45); }
+/* героят в квартала: цялото лице и прическата в кръга; кръгът – изцяло на екрана */
+.wavatar-btn { left: max(16px, env(safe-area-inset-left, 0px)) !important; top: 16px !important; align-items: flex-start !important; }
+.wavatar-btn .avfig.face { height: 200% !important; margin-top: 4px !important; }
+/* „Виж целия свят“ (долината): бутонът под „Виж всичко“; общият изглед върху квартала */
+.wcam.wworld { top: 14px; }
+.wworld-ov { position: absolute; inset: 0; z-index: 6; background: #F3E7CF; animation: wpop .35s ease-out both; }
+.wworld-ov svg { width: 100%; height: 100%; display: block; }
+.wwd rect { fill: #FFF8EC; stroke: #D9C6A3; stroke-width: 4; } .wwd text { font: 900 30px "Nunito", system-ui, sans-serif; fill: #3B3226; } .wwd { cursor: pointer; }
+.wwd.on rect { stroke: #F2B705; stroke-width: 7; } .wwd.soon { opacity: .75; cursor: default; }
+.wworld-back { position: absolute; left: 16px; top: 16px; font: 800 20px/1 "Nunito", system-ui, sans-serif; color: #1F6F66; background: #FFF8EC; border: 3px solid #2A9D8F; border-radius: 18px; padding: 12px 18px; box-shadow: 0 4px 0 #1F6F66; cursor: pointer; }
+.wworld-ov { position: fixed !important; inset: 0 !important; z-index: 50 !important; } .wwd text { font-size: 26px; }
+/* долината (преглед 25.10): ясно е само следващото място; останалите – дискретни основи; финалът – основа и табелка */
+.vpad-fut { fill: rgba(255, 248, 225, .16) !important; stroke: rgba(255, 250, 235, .35) !important; stroke-width: 2 !important; stroke-dasharray: none !important; }
+.vpad-goal { fill: rgba(196, 160, 98, .45); stroke: rgba(255, 245, 220, .8); stroke-width: 3; }
+.vsign.big .vsign-b { stroke-width: 4; }
+/* бутоните на камерата: една и съща форма, различни икони; „Целият свят“ – под първия */
+.wcam { display: inline-flex; align-items: center; gap: 8px; min-width: 210px; justify-content: flex-start; }
+.wcam .wci { font-size: 22px; line-height: 1; }
+.wcam.wworld { top: 74px !important; }
+.vpad-cur.pulse { animation: vpulse 1s ease-in-out 3; } @keyframes vpulse { 50% { stroke-width: 12; stroke: #FFE89A; } }
+/* режим „преглед“: ясен знак, че всичко е отключено само за разглеждане */
+html.review-mode::after { content: "Преглед – всичко е отключено"; position: fixed; left: 50%; bottom: 6px; transform: translateX(-50%); z-index: 100000; background: #7A4FB5; color: #fff; font: 700 13px/1 Nunito, system-ui, sans-serif; padding: 6px 12px; border-radius: 999px; pointer-events: none; opacity: .9; }
+/* „Продължи строежа“: малко контекстно хапче до строежа и панел при докосване на сградата (само при незавършено домашно) */
+.wcont { position: absolute; z-index: 30; display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px 7px 7px; border-radius: 999px; border: 3px solid #F2B705; background: #FFF8EC; color: #3A2F25; font: 800 17px/1 Nunito, system-ui, sans-serif; box-shadow: 0 3px 0 #D9A400, 0 6px 14px rgba(60, 40, 10, .18); cursor: pointer; white-space: nowrap; }
+.wcont-pl { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #F0A43A; }
+.wcont:active { transform: translateY(2px); box-shadow: 0 1px 0 #D9A400; }
+.wcont-panel { position: absolute; z-index: 31; width: 300px; display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; border-radius: 18px; background: #FFFAF1; border: 2px solid #E4D6BD; box-shadow: 0 10px 28px rgba(60, 40, 10, .22); font-family: Nunito, system-ui, sans-serif; color: #3A2F25; }
+.wcont-panel b { font-size: 18px; } .wcont-panel .wcp-sub { font-size: 14px; color: #6E6458; }
+.wcont-panel .wcp-bar { display: flex; gap: 5px; margin: 4px 0 6px; } .wcont-panel .wcp-bar i { flex: 1; height: 8px; border-radius: 4px; background: #E6DFD2; } .wcont-panel .wcp-bar i.on { background: #2A9D8F; }
+.wcont-panel .wcp-go { border: 0; border-radius: 999px; padding: 11px 14px; background: #F0A43A; color: #fff; font: 800 17px/1 Nunito, system-ui, sans-serif; box-shadow: 0 3px 0 #C97F1E; cursor: pointer; }
+/* общият свят – мозайка от зоните: докосната клетка отваря тази зона; заключен квартал – по-блед, без сгради */
+.wworld-ov .wmz:not(.off) { cursor: pointer; } .wworld-ov .wmz.off { filter: saturate(.55) brightness(.97); }
+/* „Моят свят“ включва и новия вид на игрите (look2); общите му правила за екраните (фон, замъгляване, position: relative) не важат за квартала –
+   иначе картата не стига до долу при изправен таблет и отдолу прозира старата картина */
+html.look2 .screen-world.bplus { background: #F3E7CF; }
+html.look2 .screen-world.bplus::before { display: none; }
+html.look2 .screen-world.bplus > .world-map { position: absolute; }

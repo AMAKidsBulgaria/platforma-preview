@@ -6,7 +6,10 @@
   const STORE_KEY = "platforma.sessions.v1";
   // визия „един свят“ (макет): ?look=2 включва, ?look=1 връща сегашната; помни се на устройството
   (function () { const m = (location.search + location.hash).match(/look=(\d)/); try { if (m) localStorage.setItem("platforma.look", m[1]); } catch (e) {}
-    let v = m ? m[1] : null; try { v = v || localStorage.getItem("platforma.look"); } catch (e) {} if (v === "2") document.documentElement.classList.add("look2"); })();
+    let v = m ? m[1] : null; try { v = v || localStorage.getItem("platforma.look"); } catch (e) {}
+    // „Моят свят“ (home=v2) винаги е с новата визия на игрите (B+) – и на устройство, където ?look=2 не е бил отварян
+    let h2 = /[?&#~]home[=_]v2/.test(location.search + location.hash); try { h2 = h2 || (localStorage.getItem("platforma.home") === "v2" && !/[?&#~]home[=_]v1/.test(location.search + location.hash)); } catch (e) {}
+    if (v === "2" || (h2 && !m)) document.documentElement.classList.add("look2"); })();
   const LOOK2 = () => document.documentElement.classList.contains("look2");
   // лабиринтът (Азбука, ниво 4): рисувани храстчета вместо плоските кръгчета
   window.LOOK2_LAB = svg => { if (!LOOK2()) return; svg.querySelectorAll("g.flag[transform]").forEach(g => { const t = g.getAttribute("transform"); g.innerHTML = `<image href="assets/img/art/hub/bush.png" x="-28" y="-36" width="56" height="55"/>`; g.setAttribute("transform", t); }); };
@@ -22,7 +25,7 @@
   const MATH_ORDER = [
     ["brightNumbers", "Ярки числа", "crystal"], ["subitize", "Колко са?", "trees"], ["order", "Последователност", "volcano"], ["numberLine", "Числова права", "trees"], ["numberComposition", "Състав на числата", "palm"], ["cobweb", "Улов", "jungle"],
     ["brainCrush", "Главоблъсканица", "waterfall"], ["brainstorm", "Мозъчна атака", "slime"], ["underwaterKingdom", "Подводно царство", "gold"], ["intellectScales", "Умни везни", "pink"], ["piratesTreasures", "Пиратско съкровище", "chest"], ["secretCards", "Тайни карти", "trees"],
-    ["patterns", "Какво следва?", "trees"], ["pirateCipher", "Пиратски шифър", "deadtree"], ["shadowMap", "Карта на диаманти", "bluecrystal"], ["lines", "Линии и измерване", "trees"], ["shapes", "Фигури", "trees"], ["gridDictation", "Графична диктовка", "trees"]
+    ["patterns", "Закономерност", "trees"], ["pirateCipher", "Пиратски шифър", "deadtree"], ["shadowMap", "Карта на диаманти", "bluecrystal"], ["lines", "Линии и измерване", "trees"], ["shapes", "Фигури", "trees"], ["gridDictation", "Графична диктовка", "trees"]
   ];
   // три реда по смисъл (методист): всеки със собствена лека пътечка и малко заглавие вляво
   const MATH_GROUPS = [["Числа и брой", 0], ["Смятам и сравнявам", 6], ["Логика и пространство", 12]];
@@ -86,7 +89,7 @@
     if (id === "parent") renderParent();
     if (id !== "game" && game) { game.destroy(); game = null; }
   }
-  window.APP = { show, selectGame: id => selectGame(id) };
+  window.APP = { show, selectGame: id => selectGame(id), gameName: () => current && current.name, gameMap: () => ({ bukvarica: "bmap", readica: "rmap", theWorld: "wmap" })[current && current.module] || "map" };
   document.addEventListener("click", e => { const b = e.target.closest("[data-go]"); if (!b || !b.dataset.go) return; let go = b.dataset.go; if (go === "map" && current && current.module && !b.closest("#screen-m12")) go = ({ bukvarica: "bmap", readica: "rmap", theWorld: "wmap" })[current.module] || "map"; show(go); });
 
   // ---------- данни ----------
@@ -124,7 +127,7 @@
     const art = { bukvarica: ["Букварика", "card_buk"], readica: ["Читарика", "card_read2"], mathematics: ["Математика", "card_math2"], theWorld: ["Околен свят", "card_world2"] };   // ред: Букварика, Читарика, Математика, Околен свят
     { const h = $(".screen-modules .title-outline"); if (h && !h.querySelector("svg")) { const t = h.textContent;   // заглавието – лека дъга
       h.innerHTML = `<svg class="title-arc" viewBox="0 0 1400 200" role="img" aria-label="${t}"><defs><path id="arcP" d="M40 175 Q700 95 1360 175"/></defs><text><textPath href="#arcP" startOffset="50%" text-anchor="middle">${t}</textPath></text></svg>`; } }
-    Object.entries(art).forEach(([m, [n, img]]) => { const c = card(m); c.innerHTML = `<img class="module-art" src="assets/img/art/hub/${img}.jpg" alt="" draggable="false"><span class="module-name">${n}</span>`; box.appendChild(c); });
+    Object.entries(art).forEach(([m, [n, img]]) => { const c = card(m); c.innerHTML = `<img class="module-art" loading="lazy" src="assets/img/art/hub/${img}.jpg" alt="" draggable="false"><span class="module-name">${n}</span>`; box.appendChild(c); });
     // макет за станциите на Букварика: ?hub=c (по подразбиране) – поляна с 6 мини-зони и пътечка; ?hub=a – картинки в мрежа; ?hub=b – предмети на поляна
     const hm = (location.search + location.hash).match(/hub=([abc])/); try { if (hm) localStorage.setItem("platforma.hub", hm[1]); } catch (e) {}
     let hv = hm ? hm[1] : null; try { hv = hv || localStorage.getItem("platforma.hub"); } catch (e) {} document.documentElement.classList.add(hv === "b" ? "hub-b" : hv === "a" ? "hub-a" : "hub-c");
@@ -281,6 +284,12 @@
   // иконки само където помагат (методист 19.10): ниво и скорост; останалите – само името
   const SET_ICON = k => /^level$|tier|difficulty/i.test(k) ? "⭐" : /speed|tempo|time|sec/i.test(k) ? "🐢" : "";   // само ниво и скорост
   const TIERS = () => ((typeof current.tiers === "function" ? current.tiers(settings) : current.tiers) || [0, 1, 2]).slice(0, 3).map(Number);
+  // допустими грешки – ЕДНА скала за всички игри (методист 19.10): без грешки · 1 · 3; настройките и екранът преди старта четат оттук.
+  // Скрито там, където грешката не струва „живот“ (проверено в кода на игрите, 19.10): четенето (Читалка ×2), Сафари (търсене на двойки),
+  // Светът около мен (две стъпки, без живот), трите игри с изречения
+  const NO_LIVES = ["readca", "readcaR", "safari", "sorting", "conventions", "editSentence", "wordContext"], UNI_TIERS = [0, 1, 3];
+  const tierOptions = () => NO_LIVES.includes(current.id) ? null : UNI_TIERS;
+  const tierNow = () => { const t = tierOptions(); if (!t) return TIERS()[1]; const v = Number(settings.__tier); return t.includes(v) ? v : 1; };
   const SET_MAIN = k => /^(level|examples|exampleQty|range|op|count|qty|series|seri|items|n)$/i.test(k);   // основни настройки – по-силен контраст
   // 23.10 (проучване): настройките са за възрастния – отключват се със задържане 1,5 сек.; след това остават отключени до края на сесията
   const ADULT_KEY = "platforma.adult";
@@ -298,13 +307,13 @@
     const img = hubImg(current.id);
     const card = current.id === "sorting" ? "card_world2" : ({ bukvarica: "card_buk", readica: "card_read2", theWorld: "card_world2", mathematics: "card_math2" })[current.module] || "card_math2";
     kid = document.createElement("div"); kid.id = "kid-layer"; kid.className = "kid-layer";
-    kid.innerHTML = img ? `<img class="kid-art" src="assets/img/art/hub/${img}.png" alt="" draggable="false">` : `<img class="kid-art kid-art-card" src="assets/img/art/hub/${card}.jpg" alt="" draggable="false">`;
+    kid.innerHTML = img ? `<img class="kid-art" src="assets/img/art/hub/${img}.webp" alt="" draggable="false">` : `<img class="kid-art kid-art-card" src="assets/img/art/hub/${card}.jpg" alt="" draggable="false">`;
     form.insertBefore(kid, form.firstChild.nextSibling);
     const shown = current.settings.filter(c => !(c.hiddenIf && c.hiddenIf(settings))).length;
     form.classList.toggle("set-many", shown > 3);   // повече от 3 настройки – картинката става малка, за да се събере всичко
     form.classList.add("set-mode");
     const st = document.createElement("button"); st.type = "button"; st.className = "kid-start"; st.id = "kid-start"; st.textContent = "Старт";
-    st.addEventListener("click", () => { lsSet(setKey(current.id), JSON.stringify(settings)); infoPanel.hidden = true; startGame(Number(settings.__tier != null ? settings.__tier : TIERS()[1])); });
+    st.addEventListener("click", () => { lsSet(setKey(current.id), JSON.stringify(settings)); infoPanel.hidden = true; startGame(tierNow()); });
     form.appendChild(st);
     form.querySelectorAll(".adult-gate").forEach(b => b.remove());
     form.classList.toggle("adult-locked", !adultOn());
@@ -334,8 +343,7 @@
     // допустими грешки – като настройка (✓ без грешки · ♥ 1 · ♥♥♥ 3)
     // еднакво: без грешки · 1 · 3. Скрито там, където грешката не струва „живот“ (проверено в кода на игрите, 19.10):
     // четенето (Читалка ×2), Сафари (търсене на двойки), Светът около мен (две стъпки, без живот), трите игри с изречения
-    const NO_LIVES = ["readca", "readcaR", "safari", "sorting", "conventions", "editSentence", "wordContext"];
-    const tiers = [0, 1, 3], noLives = NO_LIVES.includes(current.id);
+    const tiers = UNI_TIERS, noLives = !tierOptions();
     if (settings.__tier == null || !tiers.includes(Number(settings.__tier))) settings.__tier = 1;
     if (noLives) settings.__tier = TIERS()[1];
     if (!noLives) {
@@ -406,12 +414,16 @@
     $("#intro-level").textContent = `Ниво ${settings.level || 1}`;
     $("#intro-task").textContent = typeof current.task === "function" ? current.task(settings) : current.task;
     $("#intro-params").textContent = current.paramsLine ? current.paramsLine(settings) : "";
-    const tiers = (typeof current.tiers === "function" ? current.tiers(settings) : current.tiers) || [0, 1, 2];
+    // същата скала като в настройките и избраното там (досега тук бяха старите стойности на всяка игра, напр. 1/4/6, и винаги средната)
+    const opts = tierOptions(), now = tierNow(), tiers = opts || [now, now, now];
+    $(".tiers").style.display = opts ? "" : "none";   // игра без „животи“ – без избор на грешки
     $$(".tier").forEach((lab, i) => {
-      const n = tiers[i]; const inp = lab.querySelector("input"); inp.value = n; inp.checked = i === 1;
+      const n = tiers[i]; const inp = lab.querySelector("input"); inp.value = n; inp.checked = opts ? n === now : i === 0;
       lab.querySelector("b").textContent = n === 0 ? "Не допускай грешки" : n === 1 ? "Имаш право на 1 грешка" : `Имаш право на ${n} грешки`;
       const h = lab.querySelector(".hearts"); h.innerHTML = ""; h.classList.toggle("zero", n === 0);
-      for (let k = 0; k < Math.max(Math.min(n, 6), 1); k++) h.appendChild(document.createElement("i"));
+      // до 3 грешки – толкова сърца; повече – едно сърце и „× N“ (иначе 9 или 15 сърца излизат извън картата)
+      for (let k = 0; k < (n > 3 ? 1 : Math.max(n, 1)); k++) h.appendChild(document.createElement("i"));
+      if (n > 3) { const x = document.createElement("span"); x.className = "hearts-x"; x.textContent = "× " + n; h.appendChild(x); }
     });
     if (LOOK2() && document.documentElement.classList.contains("hub-c")) introLook2();
   }
@@ -425,7 +437,7 @@
     const task = shortTask($("#intro-task").textContent); $("#intro-task").textContent = task;
     let art = left.querySelector(".intro-zone"); if (art) art.remove();
     const img = hubImg(current.id), card = current.id === "sorting" ? "card_math" : ({ bukvarica: "card_buk", readica: "card_read", theWorld: "card_math", mathematics: "card_math2" })[current.module] || "card_math2";
-    left.insertAdjacentHTML("afterbegin", img ? `<img class="intro-zone" src="assets/img/art/hub/${img}.png" alt="" draggable="false">` : `<img class="intro-zone intro-zone-card" src="assets/img/art/hub/${card}.jpg" alt="" draggable="false">`);
+    left.insertAdjacentHTML("afterbegin", img ? `<img class="intro-zone" src="assets/img/art/hub/${img}.webp" alt="" draggable="false">` : `<img class="intro-zone intro-zone-card" src="assets/img/art/hub/${card}.jpg" alt="" draggable="false">`);
     $$(".tier").forEach(lab => { const n = Number(lab.querySelector("input").value); lab.querySelector("b").textContent = n === 0 ? "0 грешки" : n === 1 ? "1 грешка" : `${n} грешки`;
       if (n === 0) { const h = lab.querySelector(".hearts"); h.innerHTML = '<span class="tier-star" aria-hidden="true">★</span>'; } });
     const st = $("#btn-start"); if (st.parentElement !== panel) panel.appendChild(st);
@@ -435,7 +447,7 @@
   $("#btn-speak").addEventListener("click", () => {
     window.VOICE.speak($("#intro-task").textContent, { rate: 0.9 });
   });
-  $("#btn-start").addEventListener("click", () => { window.VOICE.cancel(); startGame(Number($("input[name=tier]:checked").value)); });
+  $("#btn-start").addEventListener("click", () => { window.VOICE.cancel(); const ch = $("input[name=tier]:checked"); settings.__tier = ch && tierOptions() ? Number(ch.value) : settings.__tier; lsSet(setKey(current.id), JSON.stringify(settings)); startGame(ch ? Number(ch.value) : tierNow()); });
 
   // ---------- игра ----------
   // Глас: инструкции, числа и обратна връзка се четат на български. Може да се изключи от бутона в играта.
@@ -539,7 +551,7 @@
     return { arm: t => { ref = t; until = Date.now() + 2500; } };
   })();
   $("#btn-exit-game").addEventListener("click", () => { if (game) game.finish(true); });
-  { const gs = $("#btn-game-settings"), go = () => { if (game) { game.destroy(); game = null; } show("settings"); };
+  { const gs = $("#btn-game-settings"), go = () => { if (game) { game.destroy(); game = null; } window.H2_ADULT_SETTINGS = true; show("settings"); };
     // в игра: за възрастния – със задържане (детето не излиза случайно); отключено ли е – с едно натискане
     gs.addEventListener("click", () => { if (!LOOK2() || adultOn()) go(); });
     holdButton(gs, 1500, () => { if (LOOK2() && !adultOn()) go(); }); }
@@ -589,7 +601,7 @@
       if (!practice && r.early) $("#result-sub").textContent = r.answered ? "Следващия път ще стигнеш по-далеч!" : "Опитай пак – ще се получи!";
       if (!practice && r.early && !r.answered) $("#result-title").textContent = `Опитай пак, ${r.child}!`;
       const inner = $(".result-inner"); let art = inner.querySelector(".result-zone"); if (art) art.remove();
-      const img = hubImg(current.id); if (img) inner.insertAdjacentHTML("afterbegin", `<img class="result-zone" src="assets/img/art/hub/${img}.png" alt="" draggable="false">`);
+      const img = hubImg(current.id); if (img) inner.insertAdjacentHTML("afterbegin", `<img class="result-zone" src="assets/img/art/hub/${img}.webp" alt="" draggable="false">`);
       $("#btn-again").textContent = "Играй пак";
       const ag = $("#btn-again"); if (ag.parentElement !== $(".result-scroll")) $(".result-scroll").appendChild(ag);
     }

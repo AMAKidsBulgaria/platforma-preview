@@ -251,7 +251,7 @@
   },
   "mz_patterns": {
    "module": "Математика",
-   "game": "Какво следва?",
+   "game": "Закономерност",
    "bg": "Гирлянд от цветни флагчета и сметало-низ с мъниста между два кола.",
    "must": "КРИТИЧНО: повтарящ се ред на цветовете (флагчета и мъниста).",
    "en": "two wooden posts with a rope between them: on the rope hang exactly six triangle flags in this exact order from left to right: red, blue, yellow, red, blue, yellow. Below, on a second string, exactly six round beads in the same order: red, blue, yellow, red, blue, yellow",

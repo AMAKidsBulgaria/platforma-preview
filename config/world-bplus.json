@@ -340,6 +340,966 @@
   "reading_tower_4": [
    286,
    445
+  ],
+  "letters_house_v1_0": [
+   291,
+   220
+  ],
+  "letters_house_v1_1": [
+   275,
+   224
+  ],
+  "letters_house_v1_2": [
+   293,
+   304
+  ],
+  "letters_house_v1_3": [
+   289,
+   341
+  ],
+  "letters_house_v1_4": [
+   296,
+   353
+  ],
+  "letters_house_v2_0": [
+   291,
+   220
+  ],
+  "letters_house_v2_1": [
+   275,
+   224
+  ],
+  "letters_house_v2_2": [
+   293,
+   304
+  ],
+  "letters_house_v2_3": [
+   289,
+   341
+  ],
+  "letters_house_v2_4": [
+   296,
+   353
+  ],
+  "letters_house_v3_0": [
+   291,
+   220
+  ],
+  "letters_house_v3_1": [
+   275,
+   224
+  ],
+  "letters_house_v3_2": [
+   293,
+   304
+  ],
+  "letters_house_v3_3": [
+   289,
+   341
+  ],
+  "letters_house_v3_4": [
+   296,
+   353
+  ],
+  "letters_house_v4_0": [
+   291,
+   220
+  ],
+  "letters_house_v4_1": [
+   275,
+   224
+  ],
+  "letters_house_v4_2": [
+   293,
+   304
+  ],
+  "letters_house_v4_3": [
+   289,
+   341
+  ],
+  "letters_house_v4_4": [
+   296,
+   353
+  ],
+  "letters_round_v1_0": [
+   284,
+   216
+  ],
+  "letters_round_v1_1": [
+   288,
+   212
+  ],
+  "letters_round_v1_2": [
+   290,
+   300
+  ],
+  "letters_round_v1_3": [
+   289,
+   350
+  ],
+  "letters_round_v1_4": [
+   295,
+   343
+  ],
+  "letters_round_v2_0": [
+   284,
+   216
+  ],
+  "letters_round_v2_1": [
+   288,
+   212
+  ],
+  "letters_round_v2_2": [
+   290,
+   300
+  ],
+  "letters_round_v2_3": [
+   289,
+   350
+  ],
+  "letters_round_v2_4": [
+   295,
+   343
+  ],
+  "letters_round_v3_0": [
+   284,
+   216
+  ],
+  "letters_round_v3_1": [
+   288,
+   212
+  ],
+  "letters_round_v3_2": [
+   290,
+   300
+  ],
+  "letters_round_v3_3": [
+   289,
+   350
+  ],
+  "letters_round_v3_4": [
+   295,
+   343
+  ],
+  "letters_round_v4_0": [
+   284,
+   216
+  ],
+  "letters_round_v4_1": [
+   288,
+   212
+  ],
+  "letters_round_v4_2": [
+   290,
+   300
+  ],
+  "letters_round_v4_3": [
+   289,
+   350
+  ],
+  "letters_round_v4_4": [
+   295,
+   343
+  ],
+  "letters_house2_v1_0": [
+   282,
+   249
+  ],
+  "letters_house2_v1_1": [
+   287,
+   252
+  ],
+  "letters_house2_v1_2": [
+   291,
+   337
+  ],
+  "letters_house2_v1_3": [
+   293,
+   360
+  ],
+  "letters_house2_v1_4": [
+   298,
+   365
+  ],
+  "letters_house2_v2_0": [
+   282,
+   249
+  ],
+  "letters_house2_v2_1": [
+   287,
+   252
+  ],
+  "letters_house2_v2_2": [
+   291,
+   337
+  ],
+  "letters_house2_v2_3": [
+   293,
+   360
+  ],
+  "letters_house2_v2_4": [
+   298,
+   365
+  ],
+  "letters_house2_v3_0": [
+   282,
+   249
+  ],
+  "letters_house2_v3_1": [
+   287,
+   252
+  ],
+  "letters_house2_v3_2": [
+   291,
+   337
+  ],
+  "letters_house2_v3_3": [
+   293,
+   360
+  ],
+  "letters_house2_v3_4": [
+   298,
+   365
+  ],
+  "letters_house2_v4_0": [
+   282,
+   249
+  ],
+  "letters_house2_v4_1": [
+   287,
+   252
+  ],
+  "letters_house2_v4_2": [
+   291,
+   337
+  ],
+  "letters_house2_v4_3": [
+   293,
+   360
+  ],
+  "letters_house2_v4_4": [
+   298,
+   365
+  ],
+  "letters_tower_v1_0": [
+   289,
+   232
+  ],
+  "letters_tower_v1_1": [
+   287,
+   235
+  ],
+  "letters_tower_v1_2": [
+   289,
+   346
+  ],
+  "letters_tower_v1_3": [
+   289,
+   421
+  ],
+  "letters_tower_v1_4": [
+   287,
+   423
+  ],
+  "letters_tower_v2_0": [
+   289,
+   232
+  ],
+  "letters_tower_v2_1": [
+   287,
+   235
+  ],
+  "letters_tower_v2_2": [
+   289,
+   346
+  ],
+  "letters_tower_v2_3": [
+   289,
+   421
+  ],
+  "letters_tower_v2_4": [
+   287,
+   423
+  ],
+  "letters_tower_v3_0": [
+   289,
+   232
+  ],
+  "letters_tower_v3_1": [
+   287,
+   235
+  ],
+  "letters_tower_v3_2": [
+   289,
+   346
+  ],
+  "letters_tower_v3_3": [
+   289,
+   421
+  ],
+  "letters_tower_v3_4": [
+   287,
+   423
+  ],
+  "letters_tower_v4_0": [
+   289,
+   232
+  ],
+  "letters_tower_v4_1": [
+   287,
+   235
+  ],
+  "letters_tower_v4_2": [
+   289,
+   346
+  ],
+  "letters_tower_v4_3": [
+   289,
+   421
+  ],
+  "letters_tower_v4_4": [
+   287,
+   423
+  ],
+  "reading_tower_v1_0": [
+   279,
+   227
+  ],
+  "reading_tower_v1_1": [
+   286,
+   236
+  ],
+  "reading_tower_v1_2": [
+   293,
+   385
+  ],
+  "reading_tower_v1_3": [
+   286,
+   452
+  ],
+  "reading_tower_v1_4": [
+   286,
+   445
+  ],
+  "reading_tower_v2_0": [
+   279,
+   227
+  ],
+  "reading_tower_v2_1": [
+   286,
+   236
+  ],
+  "reading_tower_v2_2": [
+   293,
+   385
+  ],
+  "reading_tower_v2_3": [
+   286,
+   452
+  ],
+  "reading_tower_v2_4": [
+   286,
+   445
+  ],
+  "reading_tower_v3_0": [
+   279,
+   227
+  ],
+  "reading_tower_v3_1": [
+   286,
+   236
+  ],
+  "reading_tower_v3_2": [
+   293,
+   385
+  ],
+  "reading_tower_v3_3": [
+   286,
+   452
+  ],
+  "reading_tower_v3_4": [
+   286,
+   445
+  ],
+  "reading_tower_v4_0": [
+   279,
+   227
+  ],
+  "reading_tower_v4_1": [
+   286,
+   236
+  ],
+  "reading_tower_v4_2": [
+   293,
+   385
+  ],
+  "reading_tower_v4_3": [
+   286,
+   452
+  ],
+  "reading_tower_v4_4": [
+   286,
+   445
+  ],
+  "reading_dome_v1_0": [
+   274,
+   223
+  ],
+  "reading_dome_v1_1": [
+   284,
+   224
+  ],
+  "reading_dome_v1_2": [
+   294,
+   309
+  ],
+  "reading_dome_v1_3": [
+   295,
+   338
+  ],
+  "reading_dome_v1_4": [
+   291,
+   334
+  ],
+  "reading_dome_v2_0": [
+   274,
+   223
+  ],
+  "reading_dome_v2_1": [
+   284,
+   224
+  ],
+  "reading_dome_v2_2": [
+   294,
+   309
+  ],
+  "reading_dome_v2_3": [
+   295,
+   338
+  ],
+  "reading_dome_v2_4": [
+   291,
+   334
+  ],
+  "reading_dome_v3_0": [
+   274,
+   223
+  ],
+  "reading_dome_v3_1": [
+   284,
+   224
+  ],
+  "reading_dome_v3_2": [
+   294,
+   309
+  ],
+  "reading_dome_v3_3": [
+   295,
+   338
+  ],
+  "reading_dome_v3_4": [
+   291,
+   334
+  ],
+  "reading_dome_v4_0": [
+   274,
+   223
+  ],
+  "reading_dome_v4_1": [
+   284,
+   224
+  ],
+  "reading_dome_v4_2": [
+   294,
+   309
+  ],
+  "reading_dome_v4_3": [
+   295,
+   338
+  ],
+  "reading_dome_v4_4": [
+   291,
+   334
+  ],
+  "reading_house_v1_0": [
+   291,
+   222
+  ],
+  "reading_house_v1_1": [
+   275,
+   222
+  ],
+  "reading_house_v1_2": [
+   282,
+   296
+  ],
+  "reading_house_v1_3": [
+   277,
+   316
+  ],
+  "reading_house_v1_4": [
+   275,
+   302
+  ],
+  "reading_house_v2_0": [
+   291,
+   222
+  ],
+  "reading_house_v2_1": [
+   275,
+   222
+  ],
+  "reading_house_v2_2": [
+   282,
+   296
+  ],
+  "reading_house_v2_3": [
+   277,
+   316
+  ],
+  "reading_house_v2_4": [
+   275,
+   302
+  ],
+  "reading_house_v3_0": [
+   291,
+   222
+  ],
+  "reading_house_v3_1": [
+   275,
+   222
+  ],
+  "reading_house_v3_2": [
+   282,
+   296
+  ],
+  "reading_house_v3_3": [
+   277,
+   316
+  ],
+  "reading_house_v3_4": [
+   275,
+   302
+  ],
+  "reading_house_v4_0": [
+   291,
+   222
+  ],
+  "reading_house_v4_1": [
+   275,
+   222
+  ],
+  "reading_house_v4_2": [
+   282,
+   296
+  ],
+  "reading_house_v4_3": [
+   277,
+   316
+  ],
+  "reading_house_v4_4": [
+   275,
+   302
+  ],
+  "reading_steps_v1_0": [
+   271,
+   246
+  ],
+  "reading_steps_v1_1": [
+   273,
+   247
+  ],
+  "reading_steps_v1_2": [
+   285,
+   420
+  ],
+  "reading_steps_v1_3": [
+   294,
+   509
+  ],
+  "reading_steps_v1_4": [
+   296,
+   511
+  ],
+  "reading_steps_v2_0": [
+   271,
+   246
+  ],
+  "reading_steps_v2_1": [
+   273,
+   247
+  ],
+  "reading_steps_v2_2": [
+   285,
+   420
+  ],
+  "reading_steps_v2_3": [
+   294,
+   509
+  ],
+  "reading_steps_v2_4": [
+   296,
+   511
+  ],
+  "reading_steps_v3_0": [
+   271,
+   246
+  ],
+  "reading_steps_v3_1": [
+   273,
+   247
+  ],
+  "reading_steps_v3_2": [
+   285,
+   420
+  ],
+  "reading_steps_v3_3": [
+   294,
+   509
+  ],
+  "reading_steps_v3_4": [
+   296,
+   511
+  ],
+  "reading_steps_v4_0": [
+   271,
+   246
+  ],
+  "reading_steps_v4_1": [
+   273,
+   247
+  ],
+  "reading_steps_v4_2": [
+   285,
+   420
+  ],
+  "reading_steps_v4_3": [
+   294,
+   509
+  ],
+  "reading_steps_v4_4": [
+   296,
+   511
+  ],
+  "mathworld_cube_v1_0": [
+   285,
+   201
+  ],
+  "mathworld_cube_v1_1": [
+   278,
+   200
+  ],
+  "mathworld_cube_v1_2": [
+   288,
+   290
+  ],
+  "mathworld_cube_v1_3": [
+   285,
+   330
+  ],
+  "mathworld_cube_v1_4": [
+   285,
+   322
+  ],
+  "mathworld_cube_v2_0": [
+   285,
+   201
+  ],
+  "mathworld_cube_v2_1": [
+   278,
+   200
+  ],
+  "mathworld_cube_v2_2": [
+   288,
+   290
+  ],
+  "mathworld_cube_v2_3": [
+   285,
+   330
+  ],
+  "mathworld_cube_v2_4": [
+   285,
+   322
+  ],
+  "mathworld_cube_v3_0": [
+   285,
+   201
+  ],
+  "mathworld_cube_v3_1": [
+   278,
+   200
+  ],
+  "mathworld_cube_v3_2": [
+   288,
+   290
+  ],
+  "mathworld_cube_v3_3": [
+   285,
+   330
+  ],
+  "mathworld_cube_v3_4": [
+   285,
+   322
+  ],
+  "mathworld_cube_v4_0": [
+   285,
+   201
+  ],
+  "mathworld_cube_v4_1": [
+   278,
+   200
+  ],
+  "mathworld_cube_v4_2": [
+   288,
+   290
+  ],
+  "mathworld_cube_v4_3": [
+   285,
+   330
+  ],
+  "mathworld_cube_v4_4": [
+   285,
+   322
+  ],
+  "mathworld_green_v1_0": [
+   280,
+   230
+  ],
+  "mathworld_green_v1_1": [
+   282,
+   236
+  ],
+  "mathworld_green_v1_2": [
+   283,
+   336
+  ],
+  "mathworld_green_v1_3": [
+   286,
+   359
+  ],
+  "mathworld_green_v1_4": [
+   299,
+   360
+  ],
+  "mathworld_green_v2_0": [
+   280,
+   230
+  ],
+  "mathworld_green_v2_1": [
+   282,
+   236
+  ],
+  "mathworld_green_v2_2": [
+   283,
+   336
+  ],
+  "mathworld_green_v2_3": [
+   286,
+   359
+  ],
+  "mathworld_green_v2_4": [
+   299,
+   360
+  ],
+  "mathworld_green_v3_0": [
+   280,
+   230
+  ],
+  "mathworld_green_v3_1": [
+   282,
+   236
+  ],
+  "mathworld_green_v3_2": [
+   283,
+   336
+  ],
+  "mathworld_green_v3_3": [
+   286,
+   359
+  ],
+  "mathworld_green_v3_4": [
+   299,
+   360
+  ],
+  "mathworld_green_v4_0": [
+   280,
+   230
+  ],
+  "mathworld_green_v4_1": [
+   282,
+   236
+  ],
+  "mathworld_green_v4_2": [
+   283,
+   336
+  ],
+  "mathworld_green_v4_3": [
+   286,
+   359
+  ],
+  "mathworld_green_v4_4": [
+   299,
+   360
+  ],
+  "mathworld_lab_v1_0": [
+   282,
+   209
+  ],
+  "mathworld_lab_v1_1": [
+   281,
+   213
+  ],
+  "mathworld_lab_v1_2": [
+   284,
+   371
+  ],
+  "mathworld_lab_v1_3": [
+   288,
+   376
+  ],
+  "mathworld_lab_v1_4": [
+   287,
+   380
+  ],
+  "mathworld_lab_v2_0": [
+   282,
+   209
+  ],
+  "mathworld_lab_v2_1": [
+   281,
+   213
+  ],
+  "mathworld_lab_v2_2": [
+   284,
+   371
+  ],
+  "mathworld_lab_v2_3": [
+   288,
+   376
+  ],
+  "mathworld_lab_v2_4": [
+   287,
+   380
+  ],
+  "mathworld_lab_v3_0": [
+   282,
+   209
+  ],
+  "mathworld_lab_v3_1": [
+   281,
+   213
+  ],
+  "mathworld_lab_v3_2": [
+   284,
+   371
+  ],
+  "mathworld_lab_v3_3": [
+   288,
+   376
+  ],
+  "mathworld_lab_v3_4": [
+   287,
+   380
+  ],
+  "mathworld_lab_v4_0": [
+   282,
+   209
+  ],
+  "mathworld_lab_v4_1": [
+   281,
+   213
+  ],
+  "mathworld_lab_v4_2": [
+   284,
+   371
+  ],
+  "mathworld_lab_v4_3": [
+   288,
+   376
+  ],
+  "mathworld_lab_v4_4": [
+   287,
+   380
+  ],
+  "mathworld_mill_v1_0": [
+   264,
+   224
+  ],
+  "mathworld_mill_v1_1": [
+   264,
+   227
+  ],
+  "mathworld_mill_v1_2": [
+   268,
+   359
+  ],
+  "mathworld_mill_v1_3": [
+   269,
+   399
+  ],
+  "mathworld_mill_v1_4": [
+   272,
+   403
+  ],
+  "mathworld_mill_v2_0": [
+   264,
+   224
+  ],
+  "mathworld_mill_v2_1": [
+   264,
+   227
+  ],
+  "mathworld_mill_v2_2": [
+   268,
+   359
+  ],
+  "mathworld_mill_v2_3": [
+   269,
+   399
+  ],
+  "mathworld_mill_v2_4": [
+   272,
+   403
+  ],
+  "mathworld_mill_v3_0": [
+   264,
+   224
+  ],
+  "mathworld_mill_v3_1": [
+   264,
+   227
+  ],
+  "mathworld_mill_v3_2": [
+   268,
+   359
+  ],
+  "mathworld_mill_v3_3": [
+   269,
+   399
+  ],
+  "mathworld_mill_v3_4": [
+   272,
+   403
+  ],
+  "mathworld_mill_v4_0": [
+   264,
+   224
+  ],
+  "mathworld_mill_v4_1": [
+   264,
+   227
+  ],
+  "mathworld_mill_v4_2": [
+   268,
+   359
+  ],
+  "mathworld_mill_v4_3": [
+   269,
+   399
+  ],
+  "mathworld_mill_v4_4": [
+   272,
+   403
   ]
  },
  "decor_titles": {
@@ -1116,6 +2076,729 @@
    "hat_pirate": "hat",
    "hat_summer": "hat",
    "sunglasses": "glasses"
+  }
+ },
+ "valley": {
+  "letters": {
+   "bg": "assets/img/world/bplus/clay_letters.webp?v=3",
+   "w": 1536,
+   "h": 1024,
+   "size": 175,
+   "streets": [
+    13
+   ],
+   "street_slots": {},
+   "slots": [
+    [
+     200,
+     780,
+     0.92
+    ],
+    [
+     520,
+     870,
+     0.92
+    ],
+    [
+     810,
+     810,
+     0.92
+    ],
+    [
+     1150,
+     840,
+     0.92
+    ],
+    [
+     1320,
+     660,
+     0.9,
+     -1
+    ],
+    [
+     1030,
+     570,
+     0.9
+    ],
+    [
+     450,
+     580,
+     0.9
+    ],
+    [
+     140,
+     570,
+     0.9
+    ],
+    [
+     170,
+     350,
+     0.86
+    ],
+    [
+     430,
+     260,
+     0.86
+    ],
+    [
+     670,
+     380,
+     0.86
+    ],
+    [
+     1060,
+     260,
+     0.86
+    ],
+    [
+     1335,
+     390,
+     0.86,
+     -1
+    ]
+   ],
+   "final": [
+    752,
+    568
+   ],
+   "final_size": 230,
+   "empty_plot": "valley",
+   "zones": [
+    {
+     "name": "Градина",
+     "from": 0,
+     "to": 6,
+     "icon": [
+      300,
+      600
+     ]
+    },
+    {
+     "name": "Ливада с мелница",
+     "from": 7,
+     "to": 12,
+     "icon": [
+      1310,
+      150
+     ]
+    }
+   ],
+   "plot_types": [
+    "letters_house",
+    "letters_round",
+    "letters_house2_v1",
+    "letters_tower_v3",
+    "letters_house_v2",
+    "letters_round_v3",
+    "letters_tower",
+    "letters_house2_v3",
+    "letters_round_v2",
+    "letters_house_v4",
+    "letters_tower_v1",
+    "letters_house2",
+    "letters_round_v4"
+   ]
+  },
+  "reading": {
+   "bg": "assets/img/world/bplus/clay_reading1.webp?v=2",
+   "w": 1536,
+   "h": 1024,
+   "size": 175,
+   "streets": [
+    8,
+    8,
+    7
+   ],
+   "street_slots": {},
+   "slots": [
+    [
+     240,
+     790,
+     0.92
+    ],
+    [
+     380,
+     510,
+     0.9
+    ],
+    [
+     540,
+     260,
+     0.86
+    ],
+    [
+     660,
+     810,
+     0.92
+    ],
+    [
+     980,
+     670,
+     0.9
+    ],
+    [
+     830,
+     420,
+     0.86
+    ],
+    [
+     1320,
+     480,
+     0.9,
+     -1
+    ],
+    [
+     1280,
+     820,
+     0.92
+    ]
+   ],
+   "final": [
+    768,
+    510
+   ],
+   "final_size": 230,
+   "empty_plot": "valley",
+   "plot_types": [
+    "reading_tower",
+    "reading_dome",
+    "reading_house",
+    "reading_steps",
+    "reading_tower_v1",
+    "reading_dome_v1",
+    "reading_house_v1",
+    "reading_steps_v1",
+    "reading_tower_v2",
+    "reading_dome_v2",
+    "reading_house_v2",
+    "reading_steps_v2",
+    "reading_tower_v3",
+    "reading_dome_v3",
+    "reading_house_v3",
+    "reading_steps_v3",
+    "reading_tower_v4",
+    "reading_dome_v4",
+    "reading_house_v4",
+    "reading_steps_v4",
+    "reading_tower",
+    "reading_dome",
+    "reading_house"
+   ],
+   "areas": [
+    {
+     "name": "Книжната градина",
+     "bg": "assets/img/world/bplus/clay_reading1.webp?v=2",
+     "slots": [
+      [
+       240,
+       790,
+       0.92
+      ],
+      [
+       380,
+       510,
+       0.9
+      ],
+      [
+       540,
+       260,
+       0.86
+      ],
+      [
+       660,
+       810,
+       0.92
+      ],
+      [
+       980,
+       670,
+       0.9
+      ],
+      [
+       830,
+       420,
+       0.86
+      ],
+      [
+       1320,
+       480,
+       0.9,
+       -1
+      ],
+      [
+       1280,
+       820,
+       0.92
+      ]
+     ]
+    },
+    {
+     "name": "Езерото на приказките",
+     "bg": "assets/img/world/bplus/clay_reading2.webp?v=2",
+     "slots": [
+      [
+       170,
+       600,
+       0.9
+      ],
+      [
+       280,
+       260,
+       0.86
+      ],
+      [
+       600,
+       480,
+       0.9
+      ],
+      [
+       440,
+       860,
+       0.92
+      ],
+      [
+       860,
+       770,
+       0.92
+      ],
+      [
+       950,
+       280,
+       0.86
+      ],
+      [
+       1340,
+       440,
+       0.86,
+       -1
+      ],
+      [
+       1300,
+       770,
+       0.92
+      ]
+     ]
+    },
+    {
+     "name": "Хълмът с хвърчилото",
+     "bg": "assets/img/world/bplus/clay_reading3.webp?v=2",
+     "slots": [
+      [
+       270,
+       650,
+       0.9
+      ],
+      [
+       160,
+       340,
+       0.86
+      ],
+      [
+       600,
+       300,
+       0.86
+      ],
+      [
+       1070,
+       290,
+       0.86
+      ],
+      [
+       680,
+       750,
+       0.92
+      ],
+      [
+       1090,
+       860,
+       0.92
+      ],
+      [
+       1340,
+       590,
+       0.9,
+       -1
+      ]
+     ]
+    }
+   ]
+  },
+  "mathworld": {
+   "bg": "assets/img/world/bplus/clay_math1.webp?v=2",
+   "w": 1536,
+   "h": 1024,
+   "size": 175,
+   "streets": [
+    8,
+    8,
+    8,
+    7
+   ],
+   "street_slots": {},
+   "slots": [
+    [
+     260,
+     760,
+     0.92
+    ],
+    [
+     160,
+     340,
+     0.86
+    ],
+    [
+     520,
+     500,
+     0.9
+    ],
+    [
+     650,
+     870,
+     0.92
+    ],
+    [
+     910,
+     620,
+     0.9
+    ],
+    [
+     780,
+     260,
+     0.86
+    ],
+    [
+     1180,
+     340,
+     0.86
+    ],
+    [
+     1350,
+     620,
+     0.9,
+     -1
+    ]
+   ],
+   "final": [
+    768,
+    522
+   ],
+   "final_size": 230,
+   "empty_plot": "valley",
+   "plot_types": [
+    "mathworld_cube",
+    "mathworld_green",
+    "mathworld_lab",
+    "mathworld_mill",
+    "mathworld_cube_v1",
+    "mathworld_green",
+    "mathworld_lab_v1",
+    "mathworld_mill_v1",
+    "mathworld_cube_v2",
+    "mathworld_green",
+    "mathworld_lab_v2",
+    "mathworld_mill_v2",
+    "mathworld_cube_v3",
+    "mathworld_green",
+    "mathworld_lab_v3",
+    "mathworld_mill_v3",
+    "mathworld_cube_v4",
+    "mathworld_green",
+    "mathworld_lab_v4",
+    "mathworld_mill_v4",
+    "mathworld_cube",
+    "mathworld_green",
+    "mathworld_lab",
+    "mathworld_mill",
+    "mathworld_cube_v1",
+    "mathworld_green",
+    "mathworld_lab_v1",
+    "mathworld_mill_v1",
+    "mathworld_cube_v2",
+    "mathworld_green",
+    "mathworld_lab_v2"
+   ],
+   "areas": [
+    {
+     "name": "Градината на формите",
+     "bg": "assets/img/world/bplus/clay_math1.webp?v=2",
+     "slots": [
+      [
+       260,
+       760,
+       0.92
+      ],
+      [
+       160,
+       340,
+       0.86
+      ],
+      [
+       520,
+       500,
+       0.9
+      ],
+      [
+       650,
+       870,
+       0.92
+      ],
+      [
+       910,
+       620,
+       0.9
+      ],
+      [
+       780,
+       260,
+       0.86
+      ],
+      [
+       1180,
+       340,
+       0.86
+      ],
+      [
+       1350,
+       620,
+       0.9,
+       -1
+      ]
+     ]
+    },
+    {
+     "name": "Везните",
+     "bg": "assets/img/world/bplus/clay_math2.webp?v=2",
+     "slots": [
+      [
+       500,
+       850,
+       0.92
+      ],
+      [
+       280,
+       310,
+       0.86
+      ],
+      [
+       670,
+       260,
+       0.86
+      ],
+      [
+       610,
+       550,
+       0.9
+      ],
+      [
+       910,
+       870,
+       0.92
+      ],
+      [
+       970,
+       440,
+       0.86
+      ],
+      [
+       1360,
+       440,
+       0.86,
+       -1
+      ],
+      [
+       1270,
+       730,
+       0.92
+      ]
+     ]
+    },
+    {
+     "name": "Овощната градина",
+     "bg": "assets/img/world/bplus/clay_math3.webp?v=2",
+     "slots": [
+      [
+       250,
+       750,
+       0.92
+      ],
+      [
+       160,
+       360,
+       0.86
+      ],
+      [
+       540,
+       520,
+       0.9
+      ],
+      [
+       660,
+       870,
+       0.92
+      ],
+      [
+       960,
+       640,
+       0.9
+      ],
+      [
+       780,
+       260,
+       0.86
+      ],
+      [
+       1180,
+       370,
+       0.86
+      ],
+      [
+       1380,
+       700,
+       0.9,
+       -1
+      ]
+     ]
+    },
+    {
+     "name": "Площадът със сметалото",
+     "bg": "assets/img/world/bplus/clay_math4.webp?v=2",
+     "slots": [
+      [
+       320,
+       690,
+       0.9
+      ],
+      [
+       230,
+       380,
+       0.86
+      ],
+      [
+       610,
+       260,
+       0.86
+      ],
+      [
+       1010,
+       330,
+       0.86
+      ],
+      [
+       1030,
+       690,
+       0.9
+      ],
+      [
+       690,
+       870,
+       0.92
+      ],
+      [
+       1380,
+       470,
+       0.9,
+       -1
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "world_overview": {
+  "bg": "assets/img/world/bplus/clay_world.webp?v=4",
+  "w": 1536,
+  "h": 1024,
+  "districts": {
+   "letters": {
+    "at": [
+     256,
+     372
+    ],
+    "label": "Квартал на буквите",
+    "map": [
+     70,
+     560,
+     0.42
+    ]
+   },
+   "reading": {
+    "at": [
+     768,
+     330
+    ],
+    "label": "Пътят на четенето",
+    "map": [
+     90,
+     70,
+     0.36
+    ],
+    "patch": true
+   },
+   "mathworld": {
+    "at": [
+     1280,
+     372
+    ],
+    "label": "Квартал на числата",
+    "map": [
+     960,
+     40,
+     0.37
+    ],
+    "patch": true
+   }
+  },
+  "mosaic": {
+   "ground": "#ABA725",
+   "center": {
+    "bg": "assets/img/world/bplus/clay_world.webp?v=4",
+    "crop": [
+     384,
+     237,
+     768,
+     512
+    ]
+   },
+   "cells": {
+    "reading": [
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      2,
+      0
+     ]
+    ],
+    "letters": [
+     [
+      0,
+      1
+     ]
+    ],
+    "mathworld": [
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      0,
+      2
+     ]
+    ]
+   }
   }
  }
 }

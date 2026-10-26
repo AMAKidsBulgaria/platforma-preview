@@ -1,10 +1,10 @@
 /* „Моят свят“ – начален екран на детето (прототип, тестов режим зад ?home=v2; home=v1 връща досегашното начало; помни се на устройството).
-   Отговаря на три въпроса: кой съм аз (героят), какво мога да направя сега (едно основно действие), какво построих (Моят квартал).
-   Навигация: Моят свят → Учебна карта (картите V1.2) | Моят квартал (B+); игра → след кръга: сградата пораства → „Следващ кръг“.
+   Отговаря на три въпроса: кой съм аз (героят), какво мога да направя сега (едно основно действие), какво построих (Моят свят – кварталът).
+   Начален екран → плочки „Моят свят“ (кварталът B+, близък/далечен план) | „Играй и откривай“ (свободните игри, картите V1.2); игра → след кръга: сградата пораства → „Следващ кръг“.
    Състояния на основното действие (решение 24.10.2026):
      • има незавършено домашно → „Продължи“ отваря следващия незавършен етап; точките = кръговете на ТОВА домашно (не общият напредък);
-     • домашното е завършено → кратко поздравление; основно действие „Учебна карта“;
-     • няма възложено домашно → основно действие „Учебна карта“, без празни индикатори.
+     • домашното е завършено → кратко поздравление; основно действие „Играй и откривай“;
+     • няма възложено домашно → основно действие „Играй и откривай“, без празни индикатори.
    Правило при повече от едно незавършено домашно: първо НАЙ-СТАРОТО възложено (по реда на възлагане; при еднакво време – по реда на програмата).
    Домашните се възлагат от учителя (офис → „Пилот“ → „Домашни“, таблица homework_assignments); таблетът ги получава с отговора на сървъра.
    Отворен линк на домашна също се помни на устройството (преди първата връзка). За тест без сървър – ?hwdemo=BK06,BK07. Монети, звезди и серии няма – наградата е строежът в квартала. */
@@ -21,7 +21,7 @@
   const HWK = "platforma.hw.v1", STK = "platforma.hw.stages.v1";
   const MOD = { BK: "Букварика", CH: "Читарика", MW: "Математика и околен свят" };
   const child = () => (window.PILOT_SYNC && window.PILOT_SYNC.status().child) || null;
-  const ws = () => (window.PILOT_SYNC && window.PILOT_SYNC.worldState()) || { rounds: {} };
+  const ws = () => (window.PILOT_SYNC && window.PILOT_SYNC.worldState()) || { rounds: {} };   // без дете: празен напредък (умаленият квартал – статична картинка)
 
   // ---- етапите на домашната: същата логика като office/office.js (hwFromCfg + ctxOf + gameLink) и tools/e2e_homework.py ----
   const COUNT_KEY = { phonemicHearing: "tasks", phonetics: "answersQty", soundLetterParsing: "answersQty", letterOfElements: "rounds", alphabet: "lettersQty", readcaR: "answersQty", constructor: "answersQty", wordOrder: "answersQty", trueWords: "answersQty", buildSentence: "answersQty", conformity: "answersQty", accents: "answersQty", words: "answersQty", sayDifferently: "answersQty", guessWord: "answersQty", professions: "exampleQty", outwardThings: "exampleQty", masksShow: "exampleQty", forestKingdom: "exampleQty", timeGuardian: "exampleQty", soonToSchool: "exampleQty", hideAndSeek: "exampleQty", memoryStick: "exampleQty", readca: null, cleanShipRoom: null, safari: null, secretCards: null, shadowMap: null };
@@ -97,7 +97,8 @@
     const P = cur.h && window.WORLD && window.WORLD.plotOf ? window.WORLD.plotOf(W, cur.h.lesson) : null;
     const did = (P && P.did) || "letters";
     const what = cur.h ? `${MOD[cur.h.lesson.slice(0, 2)]} · занятие ${+cur.h.lesson.slice(2)}` : "";
-    const bld = P ? `<div class="h2-bld${P.stage === 0 ? " goal" : ""}"><img alt="" src="${P.src(P.stage === 0 ? 4 : P.stage)}"></div>` : "";
+    // етапът на строежа, до който е стигнало детето (незапочнат строеж – основата, етап 1)
+    const bld = P ? `<div class="h2-bld"><img alt="" src="${P.src(Math.max(1, P.stage))}"></div>` : "";
     let main = "", lead = "learn";
     if (cur.kind === "open") {
       lead = "go";
@@ -106,18 +107,21 @@
     } else if (cur.kind === "done") {
       main = `<div class="h2-card done" data-state="done">${bld}<div class="h2-what"><span class="h2-k">Браво!</span><b>Домашното е готово.</b>${dots(cur.st)}</div></div>`;
     }
-    const tile = (id, art, t, sub, cls) => `<button type="button" class="h2-tile ${cls || ""}" id="${id}"><span class="h2-tile-art">${art}</span><span class="h2-tile-t">${t}</span><span class="h2-tile-s">${sub}</span></button>`;
+    const tile = (id, art, t, sub, cls) => `<button type="button" class="h2-tile ${cls || ""}" id="${id}"><span class="h2-tile-art">${art}</span><span class="h2-pill"><span class="h2-tile-t">${t}</span><span class="h2-tile-s">${sub}</span></span></button>`;
     // учебната карта: островът на модула с две от игрите му (като на самата карта); кварталът: умален изглед на построеното – улицата на текущия строеж
     const mod = cur.h ? { BK: "letters", CH: "reading", MW: "mathworld" }[cur.h.lesson.slice(0, 2)] : "letters", IC = "assets/img/world/icons/app/";
     const ICS = { letters: ["zone_alphabet", "zone_reading"], reading: ["rz_constructor", "rz_story"], mathworld: ["mz_shapes", "wz_forest"] }[mod];
-    const learnArt = `<svg viewBox="0 0 483 421" aria-hidden="true"><image href="${D3}isl_${mod}.webp" width="483" height="421"/><image href="${IC}${ICS[0]}.webp" x="92" y="70" width="150" height="150"/><image href="${IC}${ICS[1]}.webp" x="242" y="70" width="150" height="150"/></svg>`;
-    const worldArt = (window.WORLD && window.WORLD.preview && window.WORLD.preview(W, did)) || `<img alt="" src="${BP}bg_${did}.webp?v=4">`;
+    // илюстрациите на плочките (по примерния екран 25.10): собствени картинки, не изрезки от картите
+    const H2I = "assets/img/world/home2/", learnArt = `<img alt="" src="${H2I}card_buk.webp?v=1">`;
+    // „Моят свят“ – живата картина на квартала на детето (неговите сгради и героят); докато няма нито една сграда – илюстрацията
+    const built = c && Object.values(W.rounds || {}).some(r => r && r.length), live = built && window.WORLD && window.WORLD.preview ? window.WORLD.preview(W, did) : "";
+    const worldArt = live ? live.replace('preserveAspectRatio="xMidYMid meet"', 'preserveAspectRatio="xMidYMid slice"') : `<img alt="" src="${H2I}tile_world.webp?v=1">`;
     screen().innerHTML = `<div class="h2-wrap" data-lead="${lead}" data-state="${cur.kind}">
       <header class="h2-head"><button type="button" class="h2-hero" id="h2-hero" aria-label="Моят герой">${face}</button>
         <div class="h2-hello"><h1>Здравей!</h1><p>${cur.kind === "open" ? "Да продължим ли?" : cur.kind === "done" ? "Домашното ти е готово." : "Какво ще играем днес?"}</p></div>
         <div class="h2-tr">${window.PILOT_SYNC && window.PILOT_SYNC.needsPick() ? '<button type="button" class="h2-adult" id="h2-who" aria-label="Смени дете">Смени дете</button>' : ""}<button type="button" class="h2-adult" id="h2-adult" aria-label="За възрастния">За възрастния</button></div></header>
       ${main}
-      <div class="h2-tiles">${tile("h2-learn", learnArt, "Учебна карта", "Занятия и игри", lead === "learn" ? "lead" : "")}${tile("h2-world", worldArt, "Моят квартал", "Какво построих", "")}</div></div>`;
+      <div class="h2-tiles">${tile("h2-world", worldArt, "Моят свят", "Какво построих", "world" + (live ? " live" : ""))}${tile("h2-learn", learnArt, "Играй и откривай", "Избери игра", "learn" + (lead === "learn" ? " lead" : ""))}</div></div>`;
     const go = document.getElementById("h2-go"); if (go) go.addEventListener("click", () => launch(cur.h, cur.st.next));
     document.getElementById("h2-learn").addEventListener("click", () => window.APP.show("learn"));
     document.getElementById("h2-world").addEventListener("click", () => { window.WORLD_DISTRICT = did; window.APP.show("world"); });
@@ -128,7 +132,7 @@
       ["pointerup", "pointerleave", "pointercancel"].forEach(e => a.addEventListener(e, stop));
       a.addEventListener("click", () => { if (!a.dataset.tip) { a.dataset.tip = a.textContent; a.textContent = "Задръж"; setTimeout(() => { a.textContent = a.dataset.tip; delete a.dataset.tip; }, 1500); } }); }
     const who = document.getElementById("h2-who"); if (who) who.addEventListener("click", () => { box.innerHTML = ""; window.PILOT_SYNC.pick(() => render(true)); });
-    if (speak) say(cur.kind === "open" ? "Здравей! Натисни Продължи и сградата ти ще порасне." : cur.kind === "done" ? "Браво! Домашното е готово. Избери игра от учебната карта." : "Здравей! Избери игра от учебната карта.");
+    if (speak) say(cur.kind === "open" ? "Здравей! Натисни Продължи и сградата ти ще порасне." : cur.kind === "done" ? "Браво! Домашното е готово. Избери игра." : "Здравей! Избери игра.");
     // нов герой: първо „Избери своя герой“
     if (c && !hero.av && window.WORLD && window.WORLD.pickHero) setTimeout(() => window.WORLD.pickHero(render, true), 500);
   }
@@ -159,21 +163,32 @@
       const prev = Math.max(0, P.stage - 1);
       // сградата и точките – в свитъка (там, където бяха звездите и числата); бутоните – долу
       const art = document.createElement("div"); art.id = "h2-res-art"; art.className = "h2-res-art";
-      art.innerHTML = `<div class="h2-grow"><img class="a" alt="" src="${P.src(prev)}"><img class="b" alt="" src="${P.src(P.stage)}"></div>${dots(x.st)}`;
+      // моментът на строежа (25.10): камерата е върху строежа в самия квартал – героят до него, новият етап се появява (~2,5 с; докосване – пропуска)
+      const fv = window.WORLD && window.WORLD.focusView ? window.WORLD.focusView(ws(), x.h.lesson, prev) : "";
+      art.innerHTML = (fv ? `<div class="h2-build" title="">${fv}</div>` : `<div class="h2-grow"><img class="a" alt="" src="${P.src(prev)}"><img class="b" alt="" src="${P.src(P.stage)}"></div>`) + dots(x.st);
+      const bd = art.querySelector(".h2-build"); if (bd) bd.addEventListener("click", () => bd.classList.add("skip"));
       const inner = document.querySelector("#screen-result .result-inner"); if (inner) inner.insertBefore(art, inner.firstChild);
-      res.innerHTML = `<div class="h2-res-btns">${x.st.complete ? `<button type="button" class="h2-go" id="h2-r-world">Виж квартала</button>` : `<button type="button" class="h2-go" id="h2-r-next"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" fill="#fff"/></svg>${x.st.nextRound === Number(r.round) ? "Продължи" : "Следващ кръг"}</button><button type="button" class="h2-sec" id="h2-r-world">Моят квартал</button>`}<button type="button" class="h2-sec" id="h2-r-home">Начало</button></div>`;
-      if (title) title.textContent = x.st.complete ? "Браво! Сградата е готова!" : "Браво! Сградата расте!";
-      say(x.st.complete ? "Браво! Сградата е готова!" : "Браво! Сградата расте!");
+      res.innerHTML = `<div class="h2-res-btns">${x.st.complete ? `<button type="button" class="h2-go" id="h2-r-world">${P.choose ? "🎁 Избери украса" : "Виж моя свят"}</button>` : `<button type="button" class="h2-go" id="h2-r-next"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" fill="#fff"/></svg>${x.st.nextRound === Number(r.round) ? "Продължи" : "Следващ кръг"}</button><button type="button" class="h2-sec" id="h2-r-world">Моят свят</button>`}<button type="button" class="h2-sec" id="h2-r-home">Начало</button></div>`;
+      if (title) title.textContent = x.st.complete ? "Сградата е готова!" : "Браво! Сградата расте!";   // завършената – по-специално: без същия рефрен
+      say(x.st.complete ? "Твоята сграда е готова! Избери украса." : "Браво! Сградата расте!");
     } else {
-      if (title) title.textContent = "Браво!";
-      res.innerHTML = `<div class="h2-res-btns"><button type="button" class="h2-go" id="h2-r-again">Играй пак</button><button type="button" class="h2-sec" id="h2-r-learn">Учебна карта</button><button type="button" class="h2-sec" id="h2-r-home">Начало</button></div>`;
+      // свободна игра (решение 25.10): картата на играта, името и „N от N примера“ с отметки – без звезди, проценти и „Отлично“; Елува за кратко поздравява
+      const done = r.early ? (r.answered || 0) : (r.total || r.answered || 0), all = r.total || done, early = !!r.early;
+      if (title) title.textContent = early ? "Добър опит!" : "Браво!";
+      const zone = document.querySelector("#screen-result .result-zone"), src = zone ? zone.getAttribute("src") : "";
+      const art = document.createElement("div"); art.id = "h2-res-art"; art.className = "h2-res-art h2-free";
+      art.innerHTML = `<p class="h2-free-sub">${early ? "Следващия път ще стигнеш по-далеч!" : "Завърши играта!"}</p>${src ? `<div class="h2-free-pic"><img alt="" src="${src}"></div>` : ""}<b class="h2-free-name">${(window.APP && window.APP.gameName && window.APP.gameName()) || r.gameName || ""}</b>
+        <div class="h2-dots">${Array.from({ length: Math.min(all, 12) }, (_, i) => `<i class="${i < done ? "on" : ""}"></i>`).join("")}</div><span class="h2-free-n">${done} от ${all} примера</span><img class="h2-free-eluva" alt="" src="assets/img/mascot/${early ? "hello" : "joy"}.png">`;
+      const inner = document.querySelector("#screen-result .result-inner"); if (inner) inner.insertBefore(art, inner.firstChild);
+      say(early ? "Добър опит! Следващия път ще стигнеш по-далеч." : "Браво! Завърши играта!");
+      res.innerHTML = `<div class="h2-res-col"><button type="button" class="h2-go h2-wide" id="h2-r-again">Играй пак</button><div class="h2-res-btns"><button type="button" class="h2-sec" id="h2-r-learn">Други игри</button><button type="button" class="h2-sec" id="h2-r-home">Начало</button></div></div>`;
     }
     foot.parentNode.insertBefore(res, foot);
     const on = (id, f) => { const b = document.getElementById(id); if (b) b.addEventListener("click", f); };
     on("h2-r-next", () => launch(x.h, x.st.next));
     on("h2-r-world", () => { window.WORLD_FOCUS = x.h.lesson; window.WORLD_DISTRICT = P.did; window.APP.show("world"); });
     on("h2-r-home", () => window.APP.show("modules"));
-    on("h2-r-learn", () => window.APP.show("learn"));
+    on("h2-r-learn", () => window.APP.show(window.APP.gameMap ? window.APP.gameMap() : "learn"));   // „Други игри“ – картата на модула на играта
     on("h2-r-again", () => { const b = document.getElementById("btn-again"); if (b) b.click(); });
   }
   // отговор от сървъра (възложени домашни, напредък, герой) – „Моят свят“ се пречертава, ако е отворен
@@ -184,8 +199,10 @@
     ["pointerup", "pointerleave", "pointercancel"].forEach(e => btn.addEventListener(e, stop)); }
   function decorIntro() {
     const foot = document.getElementById("screen-intro"); if (!foot || document.getElementById("h2-gear")) return;
-    const b = document.createElement("button"); b.type = "button"; b.id = "h2-gear"; b.className = "h2-adult h2-gear"; b.setAttribute("aria-label", "Настройки за възрастния (задръж)"); b.textContent = "⚙";
+    const b = document.createElement("button"); b.type = "button"; b.id = "h2-gear"; b.className = "h2-adult h2-gear"; b.setAttribute("aria-label", "Настройки за възрастния (задръж)"); b.textContent = "⚙ Настройки";
+    b.addEventListener("click", () => { if (!b.dataset.tip) { b.dataset.tip = 1; b.textContent = "Задръж"; setTimeout(() => { b.textContent = "⚙ Настройки"; delete b.dataset.tip; }, 1500); } });
     foot.appendChild(b); holdOpen(b, () => { window.H2_ADULT_SETTINGS = true; window.APP.show("settings"); });
   }
-  window.HOME2 = { on: () => ON, decorIntro, show, result, current: () => current(child()), stages, status: h => status(child(), h), hashFor };
+  window.HOME2 = { on: () => ON, decorIntro, show, result, current: () => current(child()), stages, status: h => status(child(), h), hashFor,
+    go: () => { const c = current(child()); if (c.kind === "open" && c.st.next >= 0) launch(c.h, c.st.next); } };   // „Продължи строежа“ от квартала
 })();

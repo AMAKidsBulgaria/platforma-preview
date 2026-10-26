@@ -17,7 +17,7 @@
     ["Текстове", [["wordContext", "Думата в контекст", "rz_context"], ["readcaR", "Читалка", "rz_readcar"], ["sequence", "Подреди по ред", "rz_sequence"], ["text", "Текст", "rz_text"], ["story", "История", "rz_story"]]]];
   const MATH = [["Числа и брой", [["brightNumbers", "Ярки числа", "mz_bright"], ["subitize", "Колко са?", "mz_subitize"], ["order", "Последователност", "mz_order"], ["numberLine", "Числова права", "mz_numberline"], ["numberComposition", "Състав на числата", "mz_compose"], ["cobweb", "Улов", "mz_cobweb"]]],
     ["Смятам и сравнявам", [["brainCrush", "Главоблъсканица", "mz_crush"], ["brainstorm", "Мозъчна атака", "mz_storm"], ["underwaterKingdom", "Подводно царство", "mz_underwater"], ["intellectScales", "Умни везни", "mz_scales"], ["piratesTreasures", "Пиратско съкровище", "mz_treasure"], ["secretCards", "Тайни карти", "mz_cards"]]],
-    ["Логика и пространство", [["patterns", "Какво следва?", "mz_patterns"], ["pirateCipher", "Пиратски шифър", "mz_cipher"], ["shadowMap", "Карта на диаманти", "mz_shadow"], ["lines", "Линии и измерване", "mz_lines"], ["shapes", "Фигури", "mz_shapes"], ["gridDictation", "Графична диктовка", "mz_grid"]]]];
+    ["Логика и пространство", [["patterns", "Закономерност", "mz_patterns"], ["pirateCipher", "Пиратски шифър", "mz_cipher"], ["shadowMap", "Карта на диаманти", "mz_shadow"], ["lines", "Линии и измерване", "mz_lines"], ["shapes", "Фигури", "mz_shapes"], ["gridDictation", "Графична диктовка", "mz_grid"]]]];
   const WORLD = [["Аз и светът около мен", [["professions", "Професии", "wz_professions"], ["soonToSchool", "На училище", "wz_school"], ["cleanShipRoom", "Чиста каюта", "wz_room"], ["masksShow", "Шоу с маски", "wz_senses"]]],
     ["Природа и време", [["forestKingdom", "Горско царство", "wz_forest"], ["timeGuardian", "Страж на времето", "wz_clock"]]],
     ["Наблюдавам и запомням", [["outwardThings", "Обкръжалка", "wz_outward"], ["safari", "Сафари", "wz_safari"], ["hideAndSeek", "Криеница", "wz_hide"], ["memoryStick", "Запоминалка", "wz_memory"]]]];
@@ -25,7 +25,7 @@
   const HWGAME = { reading: { order: "wordOrder" } };   // игра на картата → игра в домашните (където се различават)
   const PRE = { letters: "BK", reading: "CH", math: "MW", world: "MW" };
   let ACC = { games: {} }, HM = null;
-  const ready = Promise.all([fetch("config/free-play-access.json?v=1").then(r => r.json()).then(d => { ACC = d; }).catch(() => {}),
+  const ready = Promise.all([fetch("config/free-play-access.json?v=2").then(r => r.json()).then(d => { ACC = d; }).catch(() => {}),
     fetch("config/homework-map.json").then(r => r.json()).then(d => { HM = d; }).catch(() => {}),
     window.WORLD && window.WORLD.ready ? window.WORLD.ready : Promise.resolve()]);
   let READY = false; ready.then(() => { READY = true; });
@@ -45,7 +45,7 @@
     return null;
   }
   function stateOf(mod, id, played, rec) {
-    const a = ACC.games[mod + ":" + id];
+    const a = window.PLATFORMA_REVIEW ? null : ACC.games[mod + ":" + id];   // преглед: всички игри отключени
     if (a) { if (a.category !== "A") return "lock"; const mm = (a.introduced_in || "").match(/^([A-Z]+)(\d+)/); if (mm && +mm[2] > reached(mm[1])) return "lock"; }
     const hw = (HWGAME[mod] || {})[id] || id;
     if (rec && rec === hw) return "rec";
@@ -58,15 +58,15 @@
   function wordsWrap(t, ch) { const w = t.split(" "); let a = "", out = []; w.forEach(x => { if (a && (a + " " + x).length > ch) { out.push(a); a = x; } else a = a ? a + " " + x : x; }); out.push(a); return out; }
   function lines(t) { for (const px of [20, 18]) { const ch = Math.floor((MAPW - 18) / (px * CW)), L = wordsWrap(t, ch); if (L.length <= 2 && L.every(l => l.length <= ch)) return [L, px]; }
     const w = t.split(" "), lg = Math.max(...w.map(x => x.length)); let L = wordsWrap(t, Math.max(lg, Math.ceil(t.length / 2))); if (L.length > 2) L = [L.slice(0, -1).join(" "), L[L.length - 1]];
-    return [L, Math.max(14, Math.min(18, (MAPW - 16) / (Math.max(...L.map(l => l.length)) * CW)))]; }
+    return [L, Math.max(16, Math.min(18, (MAPW - 16) / (Math.max(...L.map(l => l.length)) * CW)))]; }
   function station(g, x, y, size, st) {
     const name = SHORTN ? (SHORT[g[1]] || g[1]) : g[1], [L, px] = lines(name), fs = px / K, w = MAPW / K, h = (2 * 20 * 1.15 + 20 * 0.5) / K, off = (2 - L.length) * px * 1.15 / 2 / K, py = size * 0.3;
-    const rec = st === "rec" ? `<rect class="m12-glow" x="${-Math.max(size * 1.02, w + 14 / K) / 2}" y="${-size * 0.74}" width="${Math.max(size * 1.02, w + 14 / K)}" height="${py + h - (-size * 0.74) + 10 / K}" rx="${22 / K}" stroke-width="${5 / K}"/>` : "";
+    const rec = st === "rec" ? `<ellipse class="m12-halo" cx="0" cy="${size * 0.1}" rx="${size * 0.5}" ry="${size * 0.2}"/>` : "";
     const mark = st === "played" ? `<g transform="translate(${size * 0.4} ${size * 0.15})"><circle r="${12 / K}" fill="#2E9E5B" stroke="#fff" stroke-width="${2.5 / K}"/><path d="M${-5 / K} 0 l${3.5 / K} ${3.5 / K} l${6.5 / K} ${-7 / K}" fill="none" stroke="#fff" stroke-width="${2.6 / K}" stroke-linecap="round" stroke-linejoin="round"/></g>`
       : st === "lock" ? `<g transform="translate(${size * 0.4} ${size * 0.15})"><circle r="${17 / K}" fill="#FFF8EC" stroke="#8E8576" stroke-width="${2.5 / K}"/><text text-anchor="middle" y="${6 / K}" font-size="${17 / K}">🔒</text></g>` : "";
     return `<g class="m12-st m12-${st}" data-game="${g[0]}" data-state="${st}" transform="translate(${x} ${y})" ${st === "lock" ? 'aria-disabled="true"' : 'role="button" tabindex="0"'} aria-label="${esc(name)}">${rec}
-      <g class="m12-lift"><image class="m12-art" href="${IC}${g[2]}.webp" x="${-size / 2}" y="${-size * 0.72}" width="${size}" height="${size}"/>${mark}</g>
-      <g transform="translate(0 ${py})"><rect x="${-w / 2}" y="0" width="${w}" height="${h}" rx="${10 / K}" fill="#FFF8EC" stroke="${st === "lock" ? "#C9BEAC" : "#2A9D8F"}" stroke-width="${2.5 / K}"/>${L.map((l, i) => `<text text-anchor="middle" y="${off + (px * 0.98 + i * px * 1.15 + 3) / K}" font-size="${fs}" font-weight="800" fill="${st === "lock" ? "#9A8F80" : "#2F2A24"}">${esc(l)}</text>`).join("")}</g></g>`;
+      <g class="m12-lift"><image class="m12-art" style="animation-delay:${-([...g[0]].reduce((a, c) => a + c.charCodeAt(0), 0) % 45) / 10}s" href="${IC}${g[2]}.webp" x="${-size / 2}" y="${-size * 0.72}" width="${size}" height="${size}"/>${mark}</g>
+      <g transform="translate(0 ${py})"><rect x="${-w / 2}" y="0" width="${w}" height="${h}" rx="${10 / K}" fill="#FFF8EC" stroke="${st === "lock" ? "#C9BEAC" : st === "rec" ? "#E0A82E" : "#2A9D8F"}" stroke-width="${(st === "rec" ? 4 : 2.5) / K}"/>${L.map((l, i) => `<text text-anchor="middle" y="${off + (px * 0.98 + i * px * 1.15 + 3) / K}" font-size="${fs}" font-weight="800" fill="${st === "lock" ? "#9A8F80" : "#2F2A24"}">${esc(l)}</text>`).join("")}</g></g>`;
   }
   const svg = (vb, inner) => { const v = vb.split(" ").map(Number); K = Math.min(innerWidth / v[2], (innerHeight - 90) / v[3]); return `<svg class="m12-svg" viewBox="${vb}" preserveAspectRatio="xMidYMid meet">${inner}</svg>`; };
 
@@ -79,9 +79,11 @@
   }
   const navBtn = (cls, go, ic, t, extra = "") => `<button type="button" class="m12-nav ${cls}" ${go ? `data-go="${go}"` : ""} ${extra}>${ic ? `<span class="m12-ic">${ic}</span>` : ""}${t}</button>`;
   const HOME_IC = '<svg width="26" height="26" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="currentColor"/></svg>';
-  const quarter = did => navBtn("", "world", `<img alt="" src="${BP}bg_${did}.webp?v=4">`, "Моят квартал", `data-district="${did}"`);
+  const quarter = did => navBtn("", "world", `<img alt="" src="${BP}bg_${did}.webp?v=4">`, H2 ? "Моят свят" : "Моят квартал", `data-district="${did}"`);
   const guide = '<img class="m12-eluva" alt="" src="assets/img/mascot/hello.png">';
-  function top(center, did) { return `<div class="m12-tl">${navBtn("", "modules", HOME_IC, "Начало")}</div><div class="m12-top">${guide}${center}</div><div class="m12-tr">${quarter(did)}</div>`; }
+  const BACK_IC = '<svg width="26" height="26" viewBox="0 0 24 24"><path d="M15 4L7 12l8 8" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  // „Моят свят“ (home=v2): от картата на модула – назад към „Играй и откривай“ (четирите карти), не към началото
+  function top(center, did) { return `<div class="m12-tl">${H2 ? navBtn("", "learn", BACK_IC, "Игри") : navBtn("", "modules", HOME_IC, "Начало")}</div><div class="m12-top">${guide}${center}</div><div class="m12-tr">${quarter(did)}</div>`; }
   function played() { const s = new Set(); try { (JSON.parse(localStorage.getItem("platforma.sessions.v1") || "[]")).forEach(x => { if (!x.early) s.add(x.gameId); }); } catch (e) {} return s; }
 
   function home() {
@@ -101,9 +103,13 @@
         ${soon ? `<g transform="translate(${cx} ${y + h * 0.32})"><rect x="-150" y="-52" width="300" height="104" rx="22" fill="#FFF8EC" stroke="#D9C6A3" stroke-width="5"/><circle cx="-108" cy="0" r="30" fill="#EFE3CC"/><text x="-108" y="11" text-anchor="middle" font-size="30">🔒</text><text x="22" y="-8" text-anchor="middle" font-size="23" font-weight="900" fill="#6E6458">Ще се отключи</text><text x="22" y="22" text-anchor="middle" font-size="23" font-weight="900" fill="#6E6458">след Букварика</text></g>` : ""}</g>`;
     });
     const first = ["letters", "reading", "mathworld"].find(k => P[k]) || "letters";
-    if (H2) {   // „Моят свят“: тук е само Учебната карта – начало горе вляво, без втори бутон за домашна
-      screen().innerHTML = `<div class="m12-tl">${navBtn("", "modules", HOME_IC, "Начало")}</div><div class="m12-top">${guide}<div class="m12-title">Учебна карта</div></div><div class="m12-map m12-home">${svg("0 0 1280 616", inner)}</div>`;
-      box.querySelectorAll(".m12-isl.soon").forEach(g => g.addEventListener("click", () => toast("Ще се отключи след Букварика!"))); return;
+    if (H2) {   // „Играй и откривай“ (свободните игри): четири карти 2×2 – Букварика, Читарика, Математика, Околен свят; начало горе вляво
+      const CARDS = [["letters", "Букварика", "bmap", "isl_letters", ["zone_alphabet", "zone_reading"], "c-buk"], ["reading", "Читарика", "rmap", "isl_reading", ["rz_constructor", "rz_story"], "c-read"],
+        ["mathworld", "Математика", "map", "isl_mathworld", ["mz_shapes", "mz_bright"], "c-math"], ["mathworld", "Околен свят", "wmap", "isl_mathworld", ["wz_forest", "wz_safari"], "c-world"]].filter(c => P[c[0]]);
+      const IMG = { "c-buk": "card_buk", "c-read": "card_read", "c-math": "card_math", "c-world": "card_world" }, art = c => `<img alt="" src="assets/img/world/home2/${IMG[c[5]]}.webp?v=1">`;
+      screen().innerHTML = `<div class="m12-tl">${navBtn("", "modules", HOME_IC, "Начало")}</div><div class="m12-top">${guide}<div class="m12-title m12-title2"><b>Играй и откривай</b><small>Избери модул</small></div></div><div class="m12-tr">${quarter("letters")}</div>
+        <div class="m12-bg"></div><div class="m12-cards">${CARDS.map(c => `<button type="button" class="m12-card ${c[5]}${P[c[0]] === "soon" ? " soon" : ""}" data-go="${P[c[0]] === "soon" ? "" : c[2]}" data-module="${c[0]}" aria-label="${c[1]}"><span class="m12-card-art">${art(c)}</span><span class="m12-card-name">${c[1]}</span><span class="m12-card-play">${P[c[0]] === "soon" ? "🔒" : "▶"}</span>${P[c[0]] === "soon" ? `<span class="m12-card-why">🔒 ${c[0] === "reading" ? "Първо завърши Букварика, за да откриеш Читарика!" : "Ще се отвори скоро!"}</span>` : ""}</button>`).join("")}</div>`;
+      box.querySelectorAll(".m12-card.soon").forEach(g => g.addEventListener("click", () => toast("Ще се отключи след Букварика!"))); return;
     }
     screen().innerHTML = `<div class="m12-top"><div class="m12-title">Подготовка за училище</div></div><div class="m12-tr">${navBtn("adult", "parent", "", "За родители")}</div>
       <div class="m12-map m12-home">${svg("0 0 1280 616", inner)}</div>
@@ -117,29 +123,27 @@
   }
   function letters() {
     const S = stations("letters"), pos = [[340, 500], [600, 300], [960, 300], [1170, 450], [960, 690], [560, 700]];
-    let inner = `<image href="${D3}map_letters.webp?v=2" width="1536" height="1024"/>`;
+    let inner = `<defs><radialGradient id="m12sh"><stop offset="0" stop-color="#6B5228" stop-opacity=".28"/><stop offset="1" stop-color="#6B5228" stop-opacity="0"/></radialGradient></defs><ellipse cx="768" cy="905" rx="640" ry="95" fill="url(#m12sh)"/><image href="${D3}map_letters3.webp?v=1" width="1536" height="1024"/>`;
     const v = svg("90 40 1360 920", ""); MAPW = 190;
     BUK.forEach((g, i) => inner += station(g, pos[i][0], pos[i][1] + 20, 190, S.st(g)));
-    screen().innerHTML = top(`<div class="m12-title">Букварika</div>`.replace("Букварika", "Букварика"), "letters") + `<div class="m12-map">${v.replace("</svg>", inner + "</svg>")}</div>`;
+    screen().innerHTML = top(`<div class="m12-title">Букварika</div>`.replace("Букварika", "Букварика"), "letters") + `<div class="m12-map m12-frame">${v.replace("</svg>", inner + "</svg>")}</div>`;
   }
   function rows(mod, groups, bands, img, vb, center, did, sz) {
-    const S = stations(mod); let inner = `<image href="${D3}${img}" width="1536" height="1024" style="filter:saturate(.72) brightness(1.07)"/>`;
-    const v = svg(vb, ""); MAPW = Math.min(...bands.map(([y, a, b]) => (b - a - 180 - sz * 0.62) / 5)) * K - 12;
+    const S = stations(mod); let inner = `<image href="${D3}${img}" width="1536" height="1024" style="filter:saturate(.6) brightness(1.09)"/>`;
+    const v = svg(vb, ""); MAPW = Math.min(...bands.map(([y, a, b]) => (b - a - 40 - sz) / 5)) * K - 14;
     groups.forEach(([t, gs], r) => {
-      const [y, a, b] = bands[r], x0 = a + 180, step = (b - a - 180 - sz * 0.62) / 5, th = (r === 0 ? bands[1][0] - bands[0][0] : bands[r][0] - bands[r - 1][0]) - 46;
-      const one = Math.min(26, (th - 34) / (t.length * 0.62)); let TL = [[t], one];
-      if (one * K < 17) { const i = t.indexOf(" ", Math.floor(t.length / 2) - 3), L = [t.slice(0, i), t.slice(i + 1)]; TL = [L, Math.min(26, (th - 34) / (Math.max(...L.map(l => l.length)) * 0.62))]; }
-      const col = mod === "reading" ? ["#C99A12", "#1F6F66", "#A3487A"][r] : ["#C99A12", "#1F6F66", "#A3487A"][r];
-      inner += `<g transform="translate(${a + 34} ${y})"><rect x="${TL[0].length > 1 ? -44 : -30}" y="${-th / 2}" width="${TL[0].length > 1 ? 88 : 60}" height="${th}" rx="22" fill="${col}"/>${TL[0].map((l, j) => `<text text-anchor="middle" transform="rotate(-90) translate(0 ${TL[1] * 0.36 + (j - (TL[0].length - 1) / 2) * TL[1] * 1.1})" font-size="${TL[1]}" font-weight="900" fill="#fff">${esc(l)}</text>`).join("")}</g>`;
-      gs.forEach((g, i) => inner += station(g, x0 + i * step, y - 14, sz, S.st(g)));
+      const [y, a, b] = bands[r], step = (b - a - 40 - sz) / 5, x0 = a + 20 + sz / 2, th = (r === 0 ? bands[1][0] - bands[0][0] : bands[r][0] - bands[r - 1][0]) - 46;
+      const col = ["#B98A1A", "#1F6F66", "#9A4A74"][r], fz = 22 / K, tw = t.length * fz * 0.6 + 2.2 * fz, hh = 1.7 * fz;
+      inner += `<g transform="translate(${a + 18} ${y - th / 2 + 4})"><rect x="0" y="0" width="${tw}" height="${hh}" rx="${hh / 2}" fill="${col}"/><text x="${1.1 * fz}" y="${hh * 0.7}" font-size="${fz}" font-weight="900" fill="#fff">${esc(t)}</text></g>`;
+      gs.forEach((g, i) => inner += station(g, x0 + i * step, y + sz * 0.17, sz, S.st(g)));   // по-ниско – място за заглавието горе вляво
     });
     screen().innerHTML = top(center, did) + `<div class="m12-map">${v.replace("</svg>", inner + "</svg>")}</div>`;
   }
   const SEG = on => `<div class="m12-seg"><button type="button" data-go="map" class="${on === "math" ? "on" : ""}">Математика</button><button type="button" data-go="wmap" class="${on === "world" ? "on" : ""}">Околен свят</button></div>`;
-  function reading() { rows("reading", READ, [[223, 116, 1420], [470, 100, 1436], [741, 80, 1456]], "map_reading2.webp", "40 60 1456 840", `<div class="m12-title">Читарика</div>`, "reading", 160); }
-  function math() { rows("math", MATH, [[214, 94, 1430], [498, 94, 1430], [796, 94, 1430]], "map_math2.webp", "40 20 1456 960", SEG("math"), "mathworld", 180); }
+  function reading() { rows("reading", READ, [[223, 116, 1420], [470, 100, 1436], [741, 80, 1456]], "map_reading2.webp", "40 60 1456 840", `<div class="m12-title">Читарика</div>`, "reading", 140); }
+  function math() { rows("math", MATH, [[214, 94, 1430], [498, 94, 1430], [796, 94, 1430]], "map_math2.webp", "40 20 1456 960", SEG("math"), "mathworld", 152); }
   function world() {
-    const S = stations("world"), A = [[[300, 482, 664, 846], 300], [[1080, 1225], 385], [[445, 625, 805, 985], 700]], TP = [[580, 150], [1170, 275], [740, 545]];
+    const S = stations("world"), A = [[[300, 482, 664, 846], 300], [[1050, 1255], 385], [[445, 625, 805, 985], 700]], TP = [[580, 150], [1170, 275], [740, 545]];
     let inner = `<image href="${D3}map_world.webp" width="1536" height="1024"/>`;
     const v = svg("170 60 1300 860", ""); MAPW = 130;
     WORLD.forEach(([t, gs], r) => { const w = t.length * 16 + 48; inner += `<g transform="translate(${TP[r][0]} ${TP[r][1]})"><rect x="${-w / 2}" y="-25" width="${w}" height="50" rx="25" fill="#1F6F66"/><text text-anchor="middle" y="10" font-size="28" font-weight="900" fill="#fff">${esc(t)}</text></g>`;

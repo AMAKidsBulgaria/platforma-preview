@@ -216,3 +216,5 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 4px s
 .who-kid img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .who-kid b { font-family: var(--display); font-size: 22px; color: #3B2A14; }
 .who-kid:active { transform: translateY(3px); box-shadow: 0 2px 0 #B08A5E; }
+.hearts .hearts-x { font-weight: 900; font-size: 24px; color: #C2416B; margin-left: 6px; align-self: center; }
+.lives .lives-x { font-weight: 900; font-size: 22px; color: #C2416B; margin-left: 4px; align-self: center; line-height: 1; }

@@ -406,7 +406,7 @@
   "math:patterns": {
    "module": "math",
    "game": "patterns",
-   "title": "Какво следва?",
+   "title": "Закономерност",
    "homework_game": "patterns",
    "introduced_in": "MW01",
    "category": "A",

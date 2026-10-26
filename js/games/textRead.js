@@ -152,7 +152,7 @@
         if (!ok && tries < 2) { step.textContent = "Почти! Започни с думата, която пита. Махни картата, която не ти трябва."; this.say(step.textContent); this.shake(this.box.querySelector("#aq-built")); return; }
         okBtn.hidden = true; this.box.querySelector("#aq-cards").innerHTML = "";
         this.box.querySelector("#aq-built").innerHTML = `<span class="aq-final ${ok ? "good" : "hint"}">${esc(a.q)}</span>`;
-        step.textContent = (ok ? "Браво! " : "Ето въпроса. ") + "Сега докосни изречението, в което е отговорът."; this.prompt(a.q + " " + "Докосни изречението, в което е отговорът.");
+        step.textContent = (ok ? "Точно така! " : "Ето въпроса. ") + "Сега докосни изречението, в което е отговорът."; this.prompt(a.q + " " + "Докосни изречението, в което е отговорът.");
         this.evidence(ss, { q: a.q, evidence: a.evidence }, (evOk, evGiven) => {
           this.decisions = { task_count: 1, scored_decision_count: 2, correct_scored_decisions: (buildOk ? 1 : 0) + (evOk ? 1 : 0) };
           this.record(!!buildOk && !!evOk, a.q, said, { question_build_correct: !!buildOk, evidence_correct: !!evOk, evidence_given: evGiven, bank_item: a.id });
