@@ -28,8 +28,9 @@ html .screen.screen-home2 > .h2-wrap { position: absolute; inset: 0; }
 .h2-tile-t { font-size: 30px; font-weight: 900; margin-top: 8px; } .h2-tile-s { font-size: 19px; font-weight: 700; color: #6E6458; }
 .h2-tile:active { transform: translateY(4px); box-shadow: 0 2px 0 #D9C6A3; }
 /* без незавършено домашно: водеща е Учебната карта */
-.h2-tile.lead { border-color: #2A9D8F; box-shadow: 0 7px 0 #1F6F66; } .h2-tile.lead .h2-tile-t { color: #1F6F66; }
-.h2-wrap[data-lead="learn"] .h2-tiles { grid-template-columns: 1.35fr 1fr; }
+/* водещата карта не се отличава визуално (26.10.2026): еднакви размер, рамка и цвят във всички сценарии */
+/* двете карти са винаги еднакво големи (26.10.2026) */
+.h2-tiles { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 .h2-wrap[data-lead="learn"] .h2-tile.lead::after { content: "▶"; position: absolute; right: 18px; bottom: 16px; width: 56px; height: 56px; border-radius: 50%; background: #2A9D8F; color: #fff; display: grid; place-items: center; font-size: 26px; }
 
 /* след кръга: сградата пораства без натискане; после „Следващ кръг“ (звездите, сериите и бутоните на стария екран не се показват на детето) */

@@ -5,7 +5,8 @@
      • има незавършено домашно → „Продължи“ отваря следващия незавършен етап; точките = кръговете на ТОВА домашно (не общият напредък);
      • домашното е завършено → кратко поздравление; основно действие „Играй и откривай“;
      • няма възложено домашно → основно действие „Играй и откривай“, без празни индикатори.
-   Правило при повече от едно незавършено домашно: първо НАЙ-СТАРОТО възложено (по реда на възлагане; при еднакво време – по реда на програмата).
+   Правило при повече от едно незавършено домашно (решение 26.10.2026): водещо е детето да остане с групата – „Продължи“ води към НАЙ-НОВОТО
+   възложено незавършено домашно (последното проведено занятие); по-старите незавършени остават отворени по желание („Доиграй“ на сградата им).
    Домашните се възлагат от учителя (офис → „Пилот“ → „Домашни“, таблица homework_assignments); таблетът ги получава с отговора на сървъра.
    Отворен линк на домашна също се помни на устройството (преди първата връзка). За тест без сървър – ?hwdemo=BK06,BK07. Монети, звезди и серии няма – наградата е строежът в квартала. */
 (function () {
@@ -66,15 +67,21 @@
     const next = complete ? -1 : S.findIndex((s, i) => !stDone(i) && !s.pending);
     return { rounds: all.map(r => ({ r, done: rDone(r) })), next, nextRound: next >= 0 ? S[next].round : null, complete };
   }
-  // единно правило: следващото домашно = най-старото възложено незавършено; при еднакво време – по реда на програмата (BK < CH < MW, по номер)
-  function current(c) {
-    // възложените от учителя (от сървъра) + отворените с линк на това устройство (напр. преди първата връзка); едно домашно – веднъж
+  // единно правило (26.10.2026): детето остава с групата – следващото домашно = НАЙ-НОВОТО възложено незавършено;
+  // при еднакво време – по реда на програмата (BK < CH < MW, по номер). По-старите незавършени – „Доиграй“, по желание.
+  function hwList(c) {   // възложените от учителя (от сървъра) + отворените с линк на това устройство; едно домашно – веднъж; най-новото първо
     const srv = (rd("platforma.hw.server.v1", {})[c] || []), loc = (rd(HWK, {})[c] || []).filter(h => !srv.some(x => x.hw === h.hw));
-    const list = srv.concat(loc).sort((a, b) => a.at < b.at ? -1 : a.at > b.at ? 1 : a.lesson < b.lesson ? -1 : 1);
-    const open = list.find(h => !status(c, h).complete);
+    return srv.concat(loc).sort((a, b) => a.at > b.at ? -1 : a.at < b.at ? 1 : a.lesson < b.lesson ? -1 : 1);
+  }
+  function current(c) {
+    const list = hwList(c), open = list.find(h => !status(c, h).complete);
     if (open) return { kind: "open", h: open, st: status(c, open) };
-    const last = list[list.length - 1];
+    const last = list[0];
     return last ? { kind: "done", h: last, st: status(c, last) } : { kind: "none" };
+  }
+  function older(c, lesson) {   // незавършено по-старо домашно за това занятие (не текущото) – за „Доиграй“
+    const cur = current(c), h = hwList(c).find(x => x.lesson === lesson && !status(c, x).complete && !(cur.h && cur.h.hw === x.hw));
+    if (!h) return null; const st = status(c, h); return st.next >= 0 ? { kind: "open", h, st, older: true } : null;
   }
   // тест: ?hwdemo=BK06,BK07 – възлага на текущото дете тези домашни (по реда в списъка)
   const DEMOHW = ((Q.match(/[?&#~]hwdemo[=_]([A-Z0-9,]+)/) || [])[1] || "").split(",").filter(Boolean);
@@ -204,5 +211,7 @@
     foot.appendChild(b); holdOpen(b, () => { window.H2_ADULT_SETTINGS = true; window.APP.show("settings"); });
   }
   window.HOME2 = { on: () => ON, decorIntro, show, result, current: () => current(child()), stages, status: h => status(child(), h), hashFor,
-    go: () => { const c = current(child()); if (c.kind === "open" && c.st.next >= 0) launch(c.h, c.st.next); } };   // „Продължи строежа“ от квартала
+    go: () => { const c = current(child()); if (c.kind === "open" && c.st.next >= 0) launch(c.h, c.st.next); },
+    older: lesson => older(child(), lesson),
+    goOlder: lesson => { const o = older(child(), lesson); if (o) launch(o.h, o.st.next); } };   // „Продължи строежа“ от квартала
 })();

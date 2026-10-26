@@ -240,7 +240,7 @@
   }
 
   // f) домашни: учителят възлага занятие на децата от групата; таблетът го получава от сървъра („Моят свят“ → „Продължи“)
-  //    правило на таблета: първо най-старото възложено незавършено; оттеглено домашно изчезва от таблета при следващата връзка
+  //    правило на таблета (26.10.2026): първо най-новото възложено незавършено – детето остава с групата; по-старите – „Доиграй“, по желание; оттеглено домашно изчезва от таблета при следващата връзка
   const MODN = { BK: "Букварика", CH: "Читарика", MW: "Математика и околен свят" };
   function vHomework() {
     const kids = childrenF(), groups = [...new Set(kids.map(c => c.group_code))].sort(), g = S.hwGroup && groups.includes(S.hwGroup) ? S.hwGroup : groups[0];
@@ -249,7 +249,7 @@
     const doneR = (c, l) => new Set(ss.filter(x => x.child_code === c && x.lesson_id === l).map(x => x.round_id)).size;
     const opts = Object.entries(MODN).map(([k, v]) => `<optgroup label="${v}">${S.hw.lessons.filter(l => l.id.startsWith(k)).map(l => `<option value="${l.id}" ${S.hwLesson === l.id ? "selected" : ""}>${l.id} · ${esc(l.title)}</option>`).join("")}</optgroup>`).join("");
     const open = hws.filter(h => !h.revoked_at);
-    const form = `<div class="panel"><h2>Възложи домашно</h2><p class="muted pilot-note">Домашното е едно занятие (всичките му кръгове). Таблетът на детето показва „Продължи“ към следващия незавършен кръг; при няколко незавършени – първо най-старото. ${S.mode === "db" ? "" : '<span class="pill w">демо – записва се само в този браузър</span>'}</p>
+    const form = `<div class="panel"><h2>Възложи домашно</h2><p class="muted pilot-note">Домашното е едно занятие (всичките му кръгове). Таблетът на детето показва „Продължи“ към следващия незавършен кръг; при няколко незавършени – първо най-новото (детето остава с групата); по-старите остават отворени по желание. ${S.mode === "db" ? "" : '<span class="pill w">демо – записва се само в този браузър</span>'}</p>
       <div class="form" style="display:flex;gap:12px;flex-wrap:wrap;align-items:end"><label>Група <select id="hw-g">${groups.map(x => `<option ${x === g ? "selected" : ""}>${esc(x)}</option>`).join("")}</select></label>
       <label>Занятие <select id="hw-l">${opts}</select></label><button class="btn" id="hw-assign">Възложи</button></div>
       <div class="pilot-kids" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">${inG.map(c => `<label class="pill" style="cursor:pointer"><input type="checkbox" data-hwkid="${esc(c.code)}" checked> ${nm(c.code)}</label>`).join("")}</div><p class="muted" id="hw-msg"></p></div>`;

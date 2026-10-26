@@ -357,6 +357,7 @@
       const x = S.find(y => y.rule.lesson === g.dataset.lesson); if (!x) return;
       if (x.canChoose) openChoice(x, box, did); else if (lit(x)) openView(x, g, box, did);   // готов обект: разглеждане
       else if (x.st === "next" && contHW(x.rule.lesson)) contPanel(box, g, contHW(x.rule.lesson));   // домашно: малък панел „Продължи строежа“
+      else if (window.HOME2 && window.HOME2.older && window.HOME2.older(x.rule.lesson)) contPanel(box, g, window.HOME2.older(x.rule.lesson));   // по-старо незавършено домашно: „Доиграй“ (по желание)
       else if (x.st === "next") {   // текущ строеж: Елува подсказва какво следва (връзка към следващия кръг – D3)
         g.classList.add("hinted"); hint("Тук строим. Изиграй следващия кръг от домашната и сградата ще порасне.");
       }
@@ -404,8 +405,8 @@
     const n = parseInt(H.h.lesson.slice(2), 10), all = H.st.rounds.length, done = H.st.rounds.filter(r => r.done).length;
     const p = document.createElement("div"); p.className = "wcont-panel"; p.setAttribute("role", "dialog");
     p.innerHTML = `<b>${MODN[H.h.lesson.slice(0, 2)] || ""} · Занятие ${n}</b><span class="wcp-sub">Завършени ${done} от ${all} кръга</span>
-      <div class="wcp-bar">${H.st.rounds.map(r => `<i class="${r.done ? "on" : ""}"></i>`).join("")}</div><button type="button" class="wcp-go">Продължи строежа →</button>`;
-    p.querySelector(".wcp-go").addEventListener("click", e => { e.stopPropagation(); window.HOME2.go(); });
+      <div class="wcp-bar">${H.st.rounds.map(r => `<i class="${r.done ? "on" : ""}"></i>`).join("")}</div><button type="button" class="wcp-go">${H.older ? "Доиграй →" : "Продължи строежа →"}</button>`;
+    p.querySelector(".wcp-go").addEventListener("click", e => { e.stopPropagation(); if (H.older) window.HOME2.goOlder(H.h.lesson); else window.HOME2.go(); });
     box.appendChild(p);
     const r = g.getBoundingClientRect(), bb = box.getBoundingClientRect(), w = p.offsetWidth, h = p.offsetHeight;
     let left = r.right - bb.left + 12; if (left + w > bb.width - 8) left = r.left - bb.left - w - 12;
