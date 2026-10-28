@@ -1,0 +1,9508 @@
+{
+ "note": "Живият пристан: основа + слоеве, дорисувани в същата сцена (маска). Слой k = кръг (k%5) на занятие floor(k/5)+1; 5-ият кръг на занятието = голямото събитие. x,y,w,h – мястото на слоя в % от сцената (попълва се от генератора). gen – подсказката към генератора; say – какво казва героят при появата и при докосване.",
+ "zones": {
+  "1": {
+   "base": "p1_base",
+   "oto": {
+    "x": 16,
+    "y": 23,
+    "h": 55
+   },
+   "layers": [
+    {
+     "id": "p1_01",
+     "rect": [
+      5,
+      28,
+      9,
+      21
+     ],
+     "gen": "a round welcome wreath of autumn leaves and small red flowers hanging on the wooden front door",
+     "say": [
+      "oto",
+      "Hello, flowers!"
+     ],
+     "anim": "sway",
+     "bg": "венец с цветя",
+     "pos": [
+      3.125,
+      26.172,
+      12.695,
+      24.707
+     ],
+     "star": [
+      82.1,
+      11.1
+     ],
+     "pad": 2
+    },
+    {
+     "id": "p1_02",
+     "rect": [
+      12,
+      40,
+      7,
+      11
+     ],
+     "gen": "a small yellow butterfly resting on the green plant next to the door step",
+     "say": [
+      "oto",
+      "Hello, butterfly!"
+     ],
+     "anim": "flutter",
+     "bg": "пеперуда",
+     "where": "Where's the butterfly?",
+     "pos": [
+      10.026,
+      38.086,
+      9.961,
+      13.965
+     ],
+     "star": [
+      84.3,
+      12.6
+     ],
+     "pad": 2
+    },
+    {
+     "id": "p1_03",
+     "rect": [
+      16,
+      15,
+      8,
+      10
+     ],
+     "gen": "a small blue songbird sitting on the lower edge of the red tiled roof",
+     "say": [
+      "oto",
+      "Hello, bird!"
+     ],
+     "anim": "hop",
+     "bg": "птиче",
+     "where": "Where's the bird?",
+     "pos": [
+      14.518,
+      13.77,
+      9.961,
+      12.695
+     ],
+     "star": [
+      90.8,
+      16.9
+     ],
+     "pad": 2
+    },
+    {
+     "id": "p1_04",
+     "rect": [
+      3,
+      72,
+      11,
+      12
+     ],
+     "gen": "a small wooden sign with the word HELLO painted in big friendly letters, nailed to the front wooden post of the pier",
+     "say": [
+      "oto",
+      "Hello!"
+     ],
+     "anim": "",
+     "bg": "табелка HELLO",
+     "pos": [
+      2.279,
+      70.117,
+      13.542,
+      15.039
+     ],
+     "star": [
+      83.2,
+      15.6
+     ],
+     "pad": 2
+    },
+    {
+     "id": "p1_05",
+     "say": [
+      "polly",
+      "Hello, Oto!"
+     ],
+     "reply": [
+      "oto",
+      "Hello, Polly!"
+     ],
+     "anim": "bob",
+     "big": 1,
+     "bg": "Поли пристига",
+     "star": [
+      80,
+      10
+     ],
+     "pos": [
+      36.5,
+      52.8,
+      7.2,
+      18.2
+     ],
+     "sprite": "polly"
+    },
+    {
+     "id": "p1_06",
+     "rect": [
+      25,
+      8,
+      12,
+      17
+     ],
+     "gen": "a bright warm golden sun with soft glowing rays in the blue sky, no face",
+     "say": [
+      "oto",
+      "The sun!"
+     ],
+     "anim": "glow",
+     "bg": "слънце",
+     "where": "Where's the sun?",
+     "pos": [
+      23.112,
+      6.055,
+      15.82,
+      20.41
+     ],
+     "soft": "radial",
+     "star": [
+      78.2,
+      22.0
+     ],
+     "pad": 2
+    },
+    {
+     "id": "p1_07",
+     "rect": [
+      55,
+      57,
+      26,
+      22
+     ],
+     "gen": "a small turquoise wooden rowboat floating on the river, tied with a rope toward the pier, soft reflection in the water",
+     "say": [
+      "oto",
+      "A boat!"
+     ],
+     "anim": "float",
+     "bg": "лодка",
+     "where": "Where's the boat?",
+     "pos": [
+      53.06,
+      56.25,
+      29.818,
+      24.609
+     ],
+     "star": [
+      91.0,
+      17.5
+     ],
+     "pad": 2
+    },
+    {
+     "id": "p1_08",
+     "rect": [
+      57,
+      49,
+      22,
+      28
+     ],
+     "gen": "two wooden oars resting inside the turquoise rowboat and a small turquoise flag with a leaf emblem on a short pole at the back of the boat",
+     "say": [
+      "oto",
+      "My boat!"
+     ],
+     "anim": "float",
+     "bg": "гребла и флагче",
+     "pos": [
+      54.622,
+      48.242,
+      29.883,
+      34.57
+     ],
+     "star": [
+      83.0,
+      15.3
+     ],
+     "pad": 6
+    },
+    {
+     "id": "p1_09",
+     "rect": [
+      74,
+      78,
+      19,
+      10
+     ],
+     "gen": "a few round green water lily pads with pink water lily flowers floating on the river",
+     "say": [
+      "oto",
+      "The river!"
+     ],
+     "anim": "float",
+     "bg": "водни лилии",
+     "pos": [
+      72.005,
+      76.074,
+      22.786,
+      13.77
+     ],
+     "star": [
+      80.9,
+      12.1
+     ],
+     "pad": 2
+    },
+    {
+     "id": "p1_10",
+     "rect": [
+      41,
+      32,
+      21,
+      11
+     ],
+     "gen": "a small old stone arch footbridge crossing the river far in the distance, with its reflection in the water",
+     "say": [
+      "oto",
+      "Look! A bridge!"
+     ],
+     "anim": "",
+     "big": 1,
+     "bg": "мост",
+     "where": "Where's the bridge?",
+     "pos": [
+      39.062,
+      31.738,
+      24.87,
+      13.086
+     ],
+     "star": [
+      89.3,
+      19.4
+     ],
+     "pad": 2
+    },
+    {
+     "id": "p1_11",
+     "rect": [
+      88,
+      61,
+      9,
+      12
+     ],
+     "gen": "one cute small red cartoon fish jumping out of the river water in front of the reeds, with a little splash",
+     "say": [
+      "oto",
+      "One fish!"
+     ],
+     "anim": "jump",
+     "bg": "една рибка",
+     "where": "Where's the fish?",
+     "pos": [
+      87.37,
+      57.129,
+      12.5,
+      19.727
+     ],
+     "star": [
+      56.2,
+      27.2
+     ],
+     "pad": 4,
+     "erase": [
+      [
+       78,
+       52,
+       9.6,
+       24
+      ]
+     ]
+    },
+    {
+     "id": "p1_12",
+     "rect": [
+      80,
+      60,
+      9,
+      12
+     ],
+     "gen": "one cute yellow cartoon fish jumping out of the water with a little splash",
+     "say": [
+      "oto",
+      "Two fish!"
+     ],
+     "anim": "jump",
+     "bg": "две рибки",
+     "pos": [
+      76.042,
+      56.055,
+      16.732,
+      19.824
+     ],
+     "star": [
+      71.6,
+      23.6
+     ],
+     "pad": 4
+    },
+    {
+     "id": "p1_13",
+     "rect": [
+      69,
+      73,
+      9,
+      10
+     ],
+     "gen": "one cute purple cartoon fish peeking out of the water with a little splash",
+     "say": [
+      "oto",
+      "Three fish!"
+     ],
+     "anim": "jump",
+     "bg": "три рибки",
+     "pos": [
+      65.039,
+      69.043,
+      16.862,
+      17.773
+     ],
+     "star": [
+      88.4,
+      12.1
+     ],
+     "pad": 4,
+     "erase": [
+      [
+       63,
+       58,
+       12,
+       13
+      ]
+     ]
+    },
+    {
+     "id": "p1_14",
+     "rect": [
+      86,
+      81,
+      10,
+      9
+     ],
+     "gen": "a small cute green frog sitting on a round lily pad on the water",
+     "say": [
+      "oto",
+      "Hello, frog!"
+     ],
+     "anim": "hop",
+     "bg": "жабка",
+     "where": "Where's the frog?",
+     "pos": [
+      81.055,
+      76.172,
+      18.75,
+      18.652
+     ],
+     "star": [
+      74.7,
+      20.9
+     ],
+     "pad": 5
+    },
+    {
+     "id": "p1_15",
+     "rect": [
+      42,
+      67,
+      13,
+      15
+     ],
+     "gen": "Bubbles, the fish from the second reference picture (same look: bright orange round fish with big friendly eyes, lighter fins), peeking out of the river water and waving a fin, with a few bubbles around",
+     "say": [
+      "bubbles",
+      "Hello! I'm Bubbles!"
+     ],
+     "reply": [
+      "oto",
+      "Hello, Bubbles!"
+     ],
+     "anim": "bob",
+     "big": 1,
+     "bg": "Бъбълс изскача",
+     "pos": [
+      39.258,
+      64.062,
+      18.62,
+      20.41
+     ],
+     "pad": 3,
+     "star": [
+      93.4,
+      12.4
+     ],
+     "erase": [
+      [
+       37.5,
+       59,
+       6,
+       10
+      ],
+      [
+       52.8,
+       64,
+       3,
+       5
+      ]
+     ]
+    },
+    {
+     "id": "p1_16",
+     "rect": [
+      8,
+      47,
+      12,
+      14
+     ],
+     "gen": "a round birthday cake with white cream and red berries, without candles, standing on top of the wooden barrel",
+     "say": [
+      "oto",
+      "A cake!"
+     ],
+     "anim": "",
+     "bg": "торта",
+     "where": "Where's the cake?",
+     "pos": [
+      6.055,
+      45.02,
+      15.43,
+      17.871
+     ],
+     "star": [
+      87.3,
+      10.9
+     ],
+     "pad": 2
+    },
+    {
+     "id": "p1_17",
+     "rect": [
+      9,
+      42,
+      10,
+      11
+     ],
+     "gen": "exactly four thin lit birthday candles with small flames standing in the cake on the barrel",
+     "say": [
+      "oto",
+      "One, two, three, four!"
+     ],
+     "anim": "flame",
+     "bg": "четири свещички",
+     "pos": [
+      7.031,
+      40.039,
+      13.411,
+      14.844
+     ],
+     "star": [
+      85.0,
+      12.5
+     ],
+     "pad": 2
+    },
+    {
+     "id": "p1_18",
+     "rect": [
+      9,
+      42,
+      10,
+      11
+     ],
+     "gen": "one more lit birthday candle in the cake, so there are exactly five lit candles in total",
+     "say": [
+      "oto",
+      "Five!"
+     ],
+     "anim": "flame",
+     "bg": "пета свещичка",
+     "pos": [
+      7.031,
+      40.039,
+      13.216,
+      14.844
+     ],
+     "star": [
+      84.2,
+      12.5
+     ],
+     "pad": 2
+    },
+    {
+     "id": "p1_19",
+     "rect": [
+      67,
+      30,
+      14,
+      25
+     ],
+     "gen": "exactly five colourful balloons (red, yellow, blue, green, orange) on long strings tied to the turquoise rowboat, floating above it; keep the trees and the far river bank behind them unchanged",
+     "say": [
+      "oto",
+      "One, two, three, four, five!"
+     ],
+     "anim": "sway",
+     "bg": "пет балона",
+     "pos": [
+      65.039,
+      28.027,
+      17.383,
+      28.809
+     ],
+     "star": [
+      87.6,
+      6.4
+     ],
+     "pad": 2,
+     "erase": [
+      [
+       63.5,
+       24,
+       3,
+       11
+      ]
+     ]
+    },
+    {
+     "id": "p1_20",
+     "rect": [
+      20,
+      22,
+      24,
+      20
+     ],
+     "gen": "a colourful triangle bunting garland strung from the corner of the house roof down to the top of the pier post",
+     "say": [
+      "polly",
+      "I'm five!"
+     ],
+     "reply": [
+      "oto",
+      "Happy birthday, Polly!"
+     ],
+     "anim": "sway",
+     "big": 1,
+     "bg": "рожденият ден на Поли",
+     "pos": [
+      18.034,
+      20.02,
+      27.865,
+      23.828
+     ],
+     "star": [
+      93.7,
+      9.4
+     ],
+     "pad": 2
+    },
+    {
+     "id": "p1_21",
+     "rect": [
+      44,
+      64,
+      9,
+      10
+     ],
+     "gen": "a small straw sun hat with a turquoise ribbon sitting playfully on the head of the orange fish in the water",
+     "say": [
+      "oto",
+      "A hat!"
+     ],
+     "anim": "",
+     "bg": "шапка",
+     "where": "Where's the hat?",
+     "pos": [
+      42.057,
+      62.012,
+      12.826,
+      13.867
+     ],
+     "pad": 2,
+     "star": [
+      88.8,
+      10.6
+     ],
+     "erase": [
+      [
+       37.5,
+       59,
+       6,
+       10
+      ],
+      [
+       52.8,
+       64,
+       3,
+       5
+      ]
+     ]
+    },
+    {
+     "id": "p1_22",
+     "rect": [
+      89,
+      44,
+      8,
+      8
+     ],
+     "gen": "a small cute hedgehog on the grassy river bank",
+     "say": [
+      "oto",
+      "A hedgehog!"
+     ],
+     "anim": "hop",
+     "bg": "таралежче",
+     "pos": [
+      87.044,
+      42.383,
+      11.784,
+      11.426
+     ],
+     "star": [
+      76.8,
+      16.2
+     ],
+     "pad": 2
+    },
+    {
+     "id": "p1_23",
+     "rect": [
+      46,
+      58,
+      9,
+      8
+     ],
+     "gen": "two cute fluffy yellow ducklings swimming one after the other on the blue river water, with small ripples",
+     "say": [
+      "oto",
+      "Ducks!"
+     ],
+     "anim": "float",
+     "bg": "патенца",
+     "where": "Where are the ducks?",
+     "pos": [
+      41.081,
+      53.027,
+      18.815,
+      17.871
+     ],
+     "star": [
+      92.7,
+      19.7
+     ],
+     "pad": 5,
+     "erase": [
+      [
+       51,
+       64.3,
+       5,
+       5
+      ],
+      [
+       40,
+       50,
+       5.5,
+       18
+      ]
+     ]
+    },
+    {
+     "id": "p1_24",
+     "rect": [
+      61,
+      35,
+      7,
+      7
+     ],
+     "gen": "a small brown pony with a light mane grazing on the far green meadow, clearly a pony",
+     "say": [
+      "oto",
+      "A horse!"
+     ],
+     "anim": "",
+     "bg": "конче",
+     "pos": [
+      59.049,
+      33.008,
+      10.872,
+      10.84
+     ],
+     "star": [
+      90.4,
+      23.4
+     ],
+     "pad": 2
+    },
+    {
+     "id": "p1_25",
+     "rect": [
+      39,
+      6,
+      12,
+      22
+     ],
+     "gen": "a colourful striped hot air balloon with a small basket floating in the sky",
+     "say": [
+      "oto",
+      "Look! A hot air balloon!"
+     ],
+     "anim": "drift",
+     "big": 1,
+     "bg": "балон с горещ въздух",
+     "pos": [
+      38.737,
+      4.199,
+      13.281,
+      25.684
+     ],
+     "thr": 34,
+     "grow": 3,
+     "star": [
+      86.8,
+      9.1
+     ],
+     "pad": 2
+    },
+    {
+     "id": "p1_26",
+     "rect": [
+      45,
+      49,
+      13,
+      8
+     ],
+     "gen": "two small white paper boats floating on the river",
+     "say": [
+      "oto",
+      "Two boats!"
+     ],
+     "anim": "float",
+     "bg": "хартиени лодки",
+     "pos": [
+      43.099,
+      47.07,
+      16.797,
+      11.816
+     ],
+     "star": [
+      93.0,
+      27.3
+     ],
+     "pad": 2
+    },
+    {
+     "id": "p1_27",
+     "rect": [
+      0,
+      12,
+      25,
+      15
+     ],
+     "gen": "a string of small warm glowing fairy light bulbs along the lower edge of the house roof",
+     "say": [
+      "oto",
+      "Lights!"
+     ],
+     "anim": "glow",
+     "bg": "лампички",
+     "pos": [
+      0.0,
+      10.059,
+      26.367,
+      18.75
+     ],
+     "star": [
+      87.9,
+      15.6
+     ],
+     "pad": 2,
+     "erase": [
+      [
+       17.5,
+       12.5,
+       7,
+       9
+      ]
+     ]
+    },
+    {
+     "id": "p1_28",
+     "rect": [
+      58,
+      44,
+      9,
+      9
+     ],
+     "gen": "three small bright orange butterflies fluttering low over the river water",
+     "say": [
+      "oto",
+      "Butterflies!"
+     ],
+     "anim": "flutter",
+     "bg": "пеперуди",
+     "pos": [
+      56.055,
+      42.09,
+      12.826,
+      12.793
+     ],
+     "star": [
+      76.1,
+      22.9
+     ],
+     "pad": 2
+    },
+    {
+     "id": "p1_29",
+     "rect": [
+      12,
+      84,
+      15,
+      13
+     ],
+     "gen": "a small old brown travel suitcase with a rolled paper map on top, standing on the wooden pier planks",
+     "say": [
+      "oto",
+      "Let's go!"
+     ],
+     "anim": "",
+     "bg": "куфарче и карта",
+     "pos": [
+      10.026,
+      82.031,
+      18.034,
+      15.723
+     ],
+     "star": [
+      91.0,
+      11.8
+     ],
+     "pad": 2
+    },
+    {
+     "id": "p1_30",
+     "rect": [
+      53,
+      5,
+      44,
+      26
+     ],
+     "gen": "a big soft rainbow arching across the sky above the trees on the right; keep the clouds",
+     "say": [
+      "oto",
+      "A rainbow! Goodbye, dock!"
+     ],
+     "anim": "glow",
+     "big": 1,
+     "bg": "дъга",
+     "where": "Where's the rainbow?",
+     "feather": 60,
+     "pos": [
+      51.497,
+      3.125,
+      47.331,
+      29.59
+     ],
+     "star": [
+      89.7,
+      16.5
+     ],
+     "pad": 2
+    }
+   ],
+   "secrets": [
+    {
+     "id": "p1_s1",
+     "rect": [
+      15.5,
+      29.5,
+      5.5,
+      8
+     ],
+     "tap": [
+      15.5,
+      29,
+      6,
+      9
+     ],
+     "gen": "inside the round porthole window: a cute little brown owl face peeking out through the glass; keep the round wooden window frame exactly the same shape",
+     "say": [
+      "oto",
+      "An owl! Hello, owl!"
+     ],
+     "bg": "тайна: бухалче в прозорчето",
+     "pos": [
+      15.56,
+      29.59,
+      5.339,
+      7.812
+     ],
+     "thr": 30
+    },
+    {
+     "id": "p1_s2",
+     "rect": [
+      81,
+      17,
+      11,
+      13
+     ],
+     "tap": [
+      76,
+      12,
+      18,
+      30
+     ],
+     "gen": "a cute red squirrel with a fluffy tail sitting on a branch of the big yellow tree, clearly visible",
+     "say": [
+      "oto",
+      "A squirrel!"
+     ],
+     "bg": "тайна: катеричка зад дървото",
+     "pos": [
+      81.055,
+      17.09,
+      10.872,
+      12.793
+     ]
+    }
+   ]
+  },
+  "2": {
+   "base": "p2_base",
+   "oto": {
+    "x": 17,
+    "y": 28,
+    "h": 52
+   },
+   "layers": [
+    {
+     "id": "p2_01",
+     "rect": [
+      62,
+      49,
+      12,
+      13
+     ],
+     "gen": "the grey closed flower buds in this area open into bright red flowers",
+     "say": [
+      "oto",
+      "Red flowers!"
+     ],
+     "bg": "червени цветя",
+     "pad": 2,
+     "where": "Where are the red flowers?",
+     "pos": [
+      60.026,
+      47.266,
+      15.885,
+      16.602
+     ],
+     "star": [
+      91.0,
+      20.0
+     ]
+    },
+    {
+     "id": "p2_02",
+     "rect": [
+      77,
+      50,
+      15,
+      15
+     ],
+     "gen": "the grey closed flower buds in this area open into bright yellow flowers",
+     "say": [
+      "oto",
+      "Yellow flowers!"
+     ],
+     "bg": "жълти цветя",
+     "pad": 2,
+     "where": "Where are the yellow flowers?",
+     "pos": [
+      75.391,
+      48.047,
+      18.49,
+      18.848
+     ],
+     "star": [
+      87.7,
+      10.4
+     ]
+    },
+    {
+     "id": "p2_03",
+     "rect": [
+      48,
+      38,
+      11,
+      11
+     ],
+     "gen": "the grey closed flower buds in this area open into bright blue flowers",
+     "say": [
+      "oto",
+      "Blue flowers!"
+     ],
+     "bg": "сини цветя",
+     "pad": 2,
+     "where": "Where are the blue flowers?",
+     "pos": [
+      47.331,
+      37.207,
+      13.151,
+      13.672
+     ],
+     "star": [
+      83.7,
+      26.4
+     ]
+    },
+    {
+     "id": "p2_04",
+     "rect": [
+      37,
+      46,
+      9,
+      9
+     ],
+     "gen": "three small paint buckets standing on the grass, one with red paint, one with yellow paint and one with blue paint, with a paint brush",
+     "say": [
+      "oto",
+      "Red, yellow, blue!"
+     ],
+     "bg": "кофички с бои",
+     "pad": 2,
+     "pos": [
+      35.026,
+      45.41,
+      12.174,
+      11.426
+     ],
+     "star": [
+      81.8,
+      28.2
+     ]
+    },
+    {
+     "id": "p2_05",
+     "sprite": "c_bella",
+     "pos": [
+      49.5,
+      25,
+      8.5,
+      13.5
+     ],
+     "star": [
+      80,
+      10
+     ],
+     "anim": "bob",
+     "big": 1,
+     "say": [
+      "bella",
+      "Hello! I'm Bella."
+     ],
+     "reply": [
+      "oto",
+      "Hello, Bella!"
+     ],
+     "bg": "Bella пристига"
+    },
+    {
+     "id": "p2_06",
+     "rect": [
+      60,
+      35,
+      11,
+      10
+     ],
+     "gen": "a round lush bright green bush",
+     "say": [
+      "oto",
+      "Green!"
+     ],
+     "bg": "зелен храст",
+     "pad": 2,
+     "pos": [
+      58.008,
+      33.008,
+      14.648,
+      13.867
+     ],
+     "star": [
+      85.3,
+      11.3
+     ],
+     "erase": [
+      [
+       71,
+       32.5,
+       3.5,
+       5.5
+      ],
+      [
+       68.8,
+       44.5,
+       4,
+       4
+      ]
+     ]
+    },
+    {
+     "id": "p2_07",
+     "rect": [
+      10,
+      80,
+      11,
+      11
+     ],
+     "gen": "a small wicker basket with exactly six green apples, standing on the wooden dock",
+     "say": [
+      "oto",
+      "One, two, three, four, five, six!"
+     ],
+     "bg": "кошничка с шест ябълки",
+     "pad": 2,
+     "pos": [
+      8.008,
+      78.027,
+      14.909,
+      14.453
+     ],
+     "star": [
+      90.0,
+      10.8
+     ]
+    },
+    {
+     "id": "p2_08",
+     "rect": [
+      50,
+      50,
+      7,
+      8
+     ],
+     "gen": "a small green watering can standing in the grass",
+     "say": [
+      "oto",
+      "Green!"
+     ],
+     "bg": "зелена лейка",
+     "pad": 2,
+     "pos": [
+      48.242,
+      48.047,
+      10.352,
+      11.719
+     ],
+     "star": [
+      76.1,
+      20.0
+     ]
+    },
+    {
+     "id": "p2_09",
+     "rect": [
+      82,
+      61,
+      7,
+      7
+     ],
+     "gen": "a cute little green caterpillar sitting on a grey stone",
+     "say": [
+      "oto",
+      "Hello, caterpillar!"
+     ],
+     "bg": "гъсеничка",
+     "pad": 2,
+     "pos": [
+      80.013,
+      59.766,
+      10.807,
+      10.059
+     ],
+     "star": [
+      75.3,
+      25.2
+     ]
+    },
+    {
+     "id": "p2_10",
+     "rect": [
+      63,
+      0,
+      30,
+      30
+     ],
+     "gen": "the bare white crown of the big tree becomes full of lush bright green leaves, keeping the same tree shape",
+     "say": [
+      "oto",
+      "A green tree!"
+     ],
+     "bg": "дървото позеленява",
+     "pad": 2,
+     "big": 1,
+     "where": "Where's the tree?",
+     "pos": [
+      61.654,
+      0.098,
+      32.161,
+      31.738
+     ],
+     "star": [
+      89.7,
+      7.7
+     ]
+    },
+    {
+     "id": "p2_11",
+     "rect": [
+      71,
+      40,
+      11,
+      9
+     ],
+     "gen": "the grey closed flower buds in this area open into bright orange flowers",
+     "say": [
+      "oto",
+      "Orange flowers!"
+     ],
+     "bg": "оранжеви цветя",
+     "pad": 2,
+     "pos": [
+      69.076,
+      38.184,
+      13.932,
+      12.598
+     ],
+     "star": [
+      83.6,
+      27.1
+     ]
+    },
+    {
+     "id": "p2_12",
+     "rect": [
+      84,
+      38,
+      12,
+      11
+     ],
+     "gen": "the grey closed flower buds in this area open into bright pink flowers",
+     "say": [
+      "oto",
+      "Pink flowers! I like pink!"
+     ],
+     "bg": "розови цветя",
+     "pad": 2,
+     "where": "Where are the pink flowers?",
+     "pos": [
+      83.398,
+      37.305,
+      14.518,
+      13.574
+     ],
+     "star": [
+      82.1,
+      18.7
+     ]
+    },
+    {
+     "id": "p2_13",
+     "rect": [
+      88,
+      52,
+      10,
+      12
+     ],
+     "gen": "the grey closed flower buds in this area open into purple lavender-like flowers",
+     "say": [
+      "oto",
+      "Purple flowers!"
+     ],
+     "bg": "лилави цветя",
+     "pad": 2,
+     "pos": [
+      86.328,
+      50.098,
+      13.607,
+      15.723
+     ],
+     "star": [
+      90.0,
+      9.9
+     ]
+    },
+    {
+     "id": "p2_14",
+     "rect": [
+      42,
+      56,
+      15,
+      7
+     ],
+     "gen": "a row of exactly seven small colourful pinwheels (red, orange, yellow, green, blue, pink, purple) stuck in the grass along the river bank",
+     "say": [
+      "oto",
+      "One, two, three, four, five, six, seven!"
+     ],
+     "bg": "седем въртележки",
+     "pad": 2,
+     "pos": [
+      40.234,
+      54.785,
+      18.685,
+      10.059
+     ],
+     "star": [
+      92.0,
+      27.2
+     ]
+    },
+    {
+     "id": "p2_15",
+     "rect": [
+      24,
+      26,
+      14,
+      18
+     ],
+     "gen": "a small arch made of pink, orange and purple flowers over the beginning of the path",
+     "say": [
+      "bella",
+      "I like pink!"
+     ],
+     "bg": "арка от цветя",
+     "pad": 2,
+     "big": 1,
+     "reply": [
+      "oto",
+      "I like blue!"
+     ],
+     "pos": [
+      22.005,
+      24.023,
+      17.448,
+      21.875
+     ],
+     "star": [
+      88.1,
+      10.7
+     ]
+    },
+    {
+     "id": "p2_16",
+     "rect": [
+      13,
+      27,
+      7,
+      12
+     ],
+     "gen": "a little wooden painting easel with a colourful picture of flowers on it, standing in the grass next to the house",
+     "say": [
+      "oto",
+      "Look! A picture!"
+     ],
+     "bg": "статив с картина",
+     "pad": 2,
+     "pos": [
+      11.133,
+      25.195,
+      10.677,
+      15.625
+     ],
+     "star": [
+      88.4,
+      29.4
+     ]
+    },
+    {
+     "id": "p2_17",
+     "rect": [
+      60,
+      57,
+      18,
+      7
+     ],
+     "gen": "seven round stones along the river bank painted in rainbow colours: red, orange, yellow, green, blue, pink, purple",
+     "say": [
+      "oto",
+      "Seven colours!"
+     ],
+     "bg": "седем шарени камъчета",
+     "pad": 2,
+     "pos": [
+      58.008,
+      55.176,
+      21.68,
+      10.645
+     ],
+     "star": [
+      78.7,
+      28.4
+     ]
+    },
+    {
+     "id": "p2_18",
+     "rect": [
+      32,
+      9,
+      9,
+      14
+     ],
+     "gen": "a colourful diamond-shaped kite with a long tail flying in the sky",
+     "say": [
+      "oto",
+      "Look! A kite!"
+     ],
+     "bg": "хвърчило",
+     "pad": 2,
+     "pos": [
+      31.641,
+      8.398,
+      11.198,
+      15.332
+     ],
+     "star": [
+      91.3,
+      10.8
+     ],
+     "z": 3
+    },
+    {
+     "id": "p2_19",
+     "rect": [
+      44,
+      20,
+      12,
+      10
+     ],
+     "gen": "three small butterflies flying in the sky: one red, one blue and one yellow",
+     "say": [
+      "oto",
+      "Red, blue, yellow!"
+     ],
+     "bg": "три пеперуди",
+     "pad": 2,
+     "pos": [
+      45.768,
+      19.824,
+      11.849,
+      10.449
+     ],
+     "star": [
+      53.8,
+      14.0
+     ]
+    },
+    {
+     "id": "p2_20",
+     "rect": [
+      20,
+      3,
+      42,
+      26
+     ],
+     "gen": "a big soft rainbow arching across the sky on the left, with all seven colours",
+     "say": [
+      "oto",
+      "A rainbow! Seven colours!"
+     ],
+     "bg": "дъга",
+     "pad": 2,
+     "big": 1,
+     "where": "Where's the rainbow?",
+     "pos": [
+      18.034,
+      1.758,
+      45.833,
+      29.102
+     ],
+     "star": [
+      88.1,
+      9.4
+     ]
+    },
+    {
+     "id": "p2_21",
+     "rect": [
+      17,
+      14,
+      6,
+      12
+     ],
+     "gen": "small wind chimes made of little bells hanging from the edge of the house roof",
+     "say": [
+      "oto",
+      "Listen!"
+     ],
+     "bg": "звънчета",
+     "pad": 2,
+     "pos": [
+      15.104,
+      13.477,
+      8.268,
+      14.355
+     ],
+     "star": [
+      85.0,
+      15.6
+     ]
+    },
+    {
+     "id": "p2_22",
+     "rect": [
+      9,
+      38,
+      8,
+      9
+     ],
+     "gen": "a small cluster of blue bluebell flowers next to the house step",
+     "say": [
+      "oto",
+      "Blue flowers!"
+     ],
+     "bg": "синчец",
+     "pad": 2,
+     "pos": [
+      7.161,
+      36.133,
+      11.719,
+      12.695
+     ],
+     "star": [
+      91.1,
+      29.2
+     ]
+    },
+    {
+     "id": "p2_23",
+     "rect": [
+      32,
+      63,
+      6,
+      6
+     ],
+     "gen": "a cute small snail on top of the wooden dock post",
+     "say": [
+      "oto",
+      "A snail!"
+     ],
+     "bg": "охлювче",
+     "pad": 2,
+     "pos": [
+      30.078,
+      61.035,
+      9.635,
+      9.766
+     ],
+     "star": [
+      68.9,
+      11.0
+     ]
+    },
+    {
+     "id": "p2_24",
+     "rect": [
+      56,
+      46,
+      5,
+      5
+     ],
+     "gen": "a small red ladybird on a green leaf",
+     "say": [
+      "oto",
+      "Red! A ladybird!"
+     ],
+     "bg": "калинка",
+     "pad": 2,
+     "pos": [
+      54.036,
+      44.141,
+      8.529,
+      8.301
+     ],
+     "star": [
+      73.2,
+      24.7
+     ]
+    },
+    {
+     "id": "p2_25",
+     "rect": [
+      80,
+      20,
+      10,
+      12
+     ],
+     "gen": "far away at the edge of the forest a small mother otter is waving",
+     "say": [
+      "mum",
+      "Oto! Oto!"
+     ],
+     "bg": "мама на Ото",
+     "pad": 2,
+     "big": 1,
+     "reply": [
+      "oto",
+      "It's my mum!"
+     ],
+     "pos": [
+      78.385,
+      18.164,
+      13.151,
+      15.723
+     ],
+     "star": [
+      82.2,
+      17.4
+     ],
+     "z": 3
+    },
+    {
+     "id": "p2_26",
+     "rect": [
+      4,
+      68,
+      9,
+      8
+     ],
+     "gen": "a small bunch of yellow flowers lying on the wooden dock",
+     "say": [
+      "oto",
+      "A yellow flower! I like yellow!"
+     ],
+     "bg": "жълти цветя за Ото",
+     "pad": 2,
+     "pos": [
+      2.539,
+      66.016,
+      12.37,
+      11.816
+     ],
+     "star": [
+      94.2,
+      47.1
+     ]
+    },
+    {
+     "id": "p2_27",
+     "rect": [
+      62,
+      71,
+      14,
+      10
+     ],
+     "gen": "two white swans swimming gracefully on the river",
+     "say": [
+      "oto",
+      "Two swans!"
+     ],
+     "bg": "два лебеда",
+     "pad": 2,
+     "pos": [
+      59.766,
+      70.727,
+      18.424,
+      12.476
+     ],
+     "star": [
+      90.6,
+      16.3
+     ],
+     "thr": 55,
+     "grow": 3,
+     "feather": 6
+    },
+    {
+     "id": "p2_28",
+     "rect": [
+      70,
+      9,
+      8,
+      8
+     ],
+     "gen": "two little colourful birds sitting on a branch of the big tree",
+     "say": [
+      "oto",
+      "Hello, birds!"
+     ],
+     "bg": "птички",
+     "pad": 2,
+     "pos": [
+      68.164,
+      7.031,
+      11.719,
+      11.621
+     ],
+     "star": [
+      88.3,
+      28.6
+     ]
+    },
+    {
+     "id": "p2_29",
+     "rect": [
+      43,
+      68,
+      6,
+      12
+     ],
+     "gen": "a small turquoise flag with a leaf emblem on a short pole at the back of the rowing boat",
+     "say": [
+      "oto",
+      "Let's go!"
+     ],
+     "bg": "флагче на лодката",
+     "pad": 2,
+     "pos": [
+      41.471,
+      66.504,
+      8.919,
+      15.332
+     ],
+     "star": [
+      82.5,
+      18.5
+     ]
+    },
+    {
+     "id": "p2_30",
+     "rect": [
+      48,
+      12,
+      44,
+      32
+     ],
+     "gen": "a cloud of many colourful butterflies (red, orange, yellow, green, blue, pink, purple) flying up from the meadow into the sky",
+     "say": [
+      "oto",
+      "Goodbye, Bella!"
+     ],
+     "bg": "пеперудите се сбогуват",
+     "pad": 2,
+     "big": 1,
+     "reply": [
+      "bella",
+      "Goodbye, Oto!"
+     ],
+     "pos": [
+      46.029,
+      10.156,
+      47.201,
+      35.742
+     ],
+     "star": [
+      92.3,
+      11.5
+     ]
+    }
+   ],
+   "secrets": [
+    {
+     "id": "p2_s1",
+     "rect": [
+      40,
+      33,
+      6,
+      10
+     ],
+     "tap": [
+      39.5,
+      30,
+      6.434,
+      16
+     ],
+     "gen": "a cute small white rabbit with long ears sitting in the grass, facing the viewer, fully visible including both ears, clearly standing out",
+     "say": [
+      "oto",
+      "A rabbit!"
+     ],
+     "bg": "тайна: зайче зад храста",
+     "pos": [
+      40.5,
+      31,
+      4.434,
+      14
+     ]
+    },
+    {
+     "id": "p2_s2",
+     "rect": [
+      11.5,
+      30,
+      5,
+      8
+     ],
+     "tap": [
+      11,
+      29,
+      6,
+      10
+     ],
+     "gen": "inside the round porthole window: a cute little mouse face peeking out through the glass; keep the round window frame exactly the same",
+     "say": [
+      "oto",
+      "A mouse! Hello, mouse!"
+     ],
+     "bg": "тайна: мишле в прозорчето",
+     "pos": [
+      11.523,
+      30.078,
+      4.818,
+      7.812
+     ]
+    }
+   ]
+  },
+  "3": {
+   "base": "p3_base",
+   "oto": {
+    "x": 12,
+    "y": 30,
+    "h": 52
+   },
+   "layers": [
+    {
+     "id": "p3_01",
+     "rect": [
+      64.5,
+      36.5,
+      4,
+      7.5
+     ],
+     "gen": "the small lantern next to the door now glows with warm golden light",
+     "say": [
+      "oto",
+      "Look! A light!"
+     ],
+     "bg": "фенерът свети",
+     "pad": 2,
+     "pos": [
+      62.565,
+      34.961,
+      7.812,
+      10.938
+     ],
+     "star": [
+      85.0,
+      29.5
+     ]
+    },
+    {
+     "id": "p3_02",
+     "rect": [
+      50,
+      42.5,
+      6.5,
+      9
+     ],
+     "gen": "warm yellow light glows inside this round window, the window looks cosy and lived in",
+     "say": [
+      "oto",
+      "A window! Hello?"
+     ],
+     "bg": "светлина в прозореца",
+     "pad": 2,
+     "pos": [
+      48.047,
+      40.82,
+      10.026,
+      12.5
+     ],
+     "star": [
+      66.9,
+      28.1
+     ]
+    },
+    {
+     "id": "p3_03",
+     "rect": [
+      68.5,
+      42.5,
+      6.5,
+      9
+     ],
+     "gen": "warm yellow light glows inside this round window, the window looks cosy and lived in",
+     "say": [
+      "oto",
+      "Mum? Dad?"
+     ],
+     "bg": "още светлина",
+     "pad": 2,
+     "pos": [
+      66.536,
+      41.504,
+      10.352,
+      11.816
+     ],
+     "star": [
+      59.7,
+      19.8
+     ]
+    },
+    {
+     "id": "p3_04",
+     "rect": [
+      69,
+      8,
+      10,
+      16
+     ],
+     "gen": "a soft curl of white smoke rising up from the chimney below into the sky",
+     "say": [
+      "oto",
+      "Look! Smoke!"
+     ],
+     "bg": "дим от комина",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      68.424,
+      6.934,
+      10.938,
+      17.578
+     ],
+     "star": [
+      80.4,
+      17.2
+     ]
+    },
+    {
+     "id": "p3_05",
+     "sprite": "w_mum",
+     "pos": [
+      42.5,
+      38,
+      7.5,
+      24
+     ],
+     "star": [
+      70,
+      8
+     ],
+     "anim": "bob",
+     "big": 1,
+     "say": [
+      "mum",
+      "Hello, Oto!"
+     ],
+     "reply": [
+      "oto",
+      "This is my mum."
+     ],
+     "bg": "мама излиза",
+     "with": [
+      {
+       "sprite": "w_dad",
+       "pos": [
+        74,
+        38,
+        9.9,
+        25
+       ],
+       "star": [
+        70,
+        8
+       ],
+       "anim": "bob",
+       "say": [
+        "dad",
+        "Hello, Oto!"
+       ],
+       "reply": [
+        "oto",
+        "This is my dad."
+       ],
+       "bg": "татко"
+      }
+     ],
+     "where": "Where's Mum?"
+    },
+    {
+     "id": "p3_06",
+     "rect": [
+      35,
+      14,
+      9,
+      14
+     ],
+     "gen": "a small cute wooden birdhouse with a red roof hanging from the tree branch on a short rope, fully visible inside this area",
+     "say": [
+      "oto",
+      "A little house for birds!"
+     ],
+     "bg": "къщичка за птици",
+     "pad": 2,
+     "pos": [
+      33.789,
+      12.012,
+      12.109,
+      16.602
+     ],
+     "star": [
+      76.9,
+      17.6
+     ]
+    },
+    {
+     "id": "p3_07",
+     "rect": [
+      34,
+      40,
+      10,
+      9
+     ],
+     "gen": "a little washing line between two thin sticks with tiny colourful otter clothes hanging on it",
+     "say": [
+      "oto",
+      "Look! Little clothes!"
+     ],
+     "bg": "простор с дрешки",
+     "pad": 2,
+     "pos": [
+      32.682,
+      39.551,
+      13.151,
+      11.328
+     ],
+     "star": [
+      82.7,
+      41.4
+     ]
+    },
+    {
+     "id": "p3_08",
+     "rect": [
+      86,
+      22,
+      8,
+      24
+     ],
+     "gen": "a small wooden ladder leaning against the big oak trunk",
+     "say": [
+      "oto",
+      "A ladder! Up, up!"
+     ],
+     "bg": "стълба на дъба",
+     "pad": 2,
+     "pos": [
+      84.049,
+      23.047,
+      9.896,
+      24.805
+     ],
+     "star": [
+      67.1,
+      26.4
+     ]
+    },
+    {
+     "id": "p3_09",
+     "rect": [
+      2,
+      56,
+      8,
+      6
+     ],
+     "gen": "a small toy sailboat with a red sail floating on the water",
+     "say": [
+      "oto",
+      "A little boat!"
+     ],
+     "bg": "лодка-играчка",
+     "pad": 2,
+     "pos": [
+      1.497,
+      54.004,
+      8.789,
+      9.863
+     ],
+     "star": [
+      88.9,
+      14.9
+     ]
+    },
+    {
+     "id": "p3_10",
+     "sprite": "w_sister",
+     "pos": [
+      34.5,
+      51,
+      7.4,
+      19
+     ],
+     "star": [
+      70,
+      8
+     ],
+     "anim": "bob",
+     "big": 1,
+     "say": [
+      "sister",
+      "Hello, Oto!"
+     ],
+     "reply": [
+      "oto",
+      "It's my sister!"
+     ],
+     "bg": "сестрата, братът и бебето",
+     "with": [
+      {
+       "sprite": "w_brother",
+       "pos": [
+        85,
+        48,
+        8.4,
+        20
+       ],
+       "star": [
+        70,
+        8
+       ],
+       "anim": "bob",
+       "say": [
+        "brother",
+        "Hello, Oto!"
+       ],
+       "reply": [
+        "oto",
+        "It's my brother!"
+       ],
+       "bg": "брат"
+      },
+      {
+       "sprite": "w_baby",
+       "pos": [
+        45.5,
+        55,
+        3.8,
+        9
+       ],
+       "star": [
+        70,
+        8
+       ],
+       "anim": "bob",
+       "say": [
+        "baby",
+        "Oto! Oto!"
+       ],
+       "reply": [
+        "oto",
+        "It's the baby!"
+       ],
+       "bg": "бебето"
+      }
+     ],
+     "where": "Where's Oto's sister?"
+    },
+    {
+     "id": "p3_11",
+     "rect": [
+      0,
+      62,
+      12,
+      9
+     ],
+     "gen": "a small old brown wooden rowing boat with a little lantern on its bow, floating on the water, clearly visible",
+     "say": [
+      "oto",
+      "A boat! Who's this?"
+     ],
+     "bg": "лодката на баба и дядо",
+     "pad": 2,
+     "pos": [
+      0.0,
+      60.059,
+      13.932,
+      12.305
+     ],
+     "star": [
+      84.1,
+      11.1
+     ]
+    },
+    {
+     "id": "p3_12",
+     "rect": [
+      42,
+      66,
+      8,
+      9
+     ],
+     "gen": "a small tree stump with a basket of colourful balls of wool and knitting needles on it",
+     "say": [
+      "oto",
+      "Grandma's basket!"
+     ],
+     "bg": "кошничката на баба",
+     "pad": 2,
+     "pos": [
+      40.43,
+      64.062,
+      11.458,
+      11.914
+     ],
+     "star": [
+      86.9,
+      9.8
+     ]
+    },
+    {
+     "id": "p3_13",
+     "rect": [
+      42,
+      3,
+      25,
+      10
+     ],
+     "gen": "a string of exactly eight small round glowing paper lanterns hanging along the tree branch, evenly spaced, all eight fully inside this area",
+     "say": [
+      "oto",
+      "Seven lanterns!"
+     ],
+     "bg": "седем фенерчета",
+     "pad": 2,
+     "pos": [
+      40.104,
+      1.074,
+      28.581,
+      13.77
+     ],
+     "star": [
+      87.2,
+      19.9
+     ],
+     "reply": [
+      "oto",
+      "One, two, three, four, five, six, seven!"
+     ]
+    },
+    {
+     "id": "p3_14",
+     "rect": [
+      9,
+      84,
+      10,
+      12
+     ],
+     "gen": "a solid wooden rocking chair with a red cushion standing on the wooden dock, clearly visible, fully opaque",
+     "say": [
+      "oto",
+      "Grandpa's chair!"
+     ],
+     "bg": "столът на дядо",
+     "pad": 2,
+     "pos": [
+      7.096,
+      82.031,
+      13.802,
+      14.453
+     ],
+     "star": [
+      91.5,
+      14.9
+     ]
+    },
+    {
+     "id": "p3_15",
+     "sprite": "w_grandma",
+     "pos": [
+      52,
+      51,
+      9.1,
+      25
+     ],
+     "star": [
+      70,
+      8
+     ],
+     "anim": "bob",
+     "big": 1,
+     "say": [
+      "grandma",
+      "Hello, Oto!"
+     ],
+     "reply": [
+      "oto",
+      "It's my grandma!"
+     ],
+     "bg": "баба и дядо",
+     "with": [
+      {
+       "sprite": "w_grandpa",
+       "pos": [
+        62,
+        52,
+        10.2,
+        26
+       ],
+       "star": [
+        70,
+        8
+       ],
+       "anim": "bob",
+       "say": [
+        "grandpa",
+        "Hello, Oto!"
+       ],
+       "reply": [
+        "oto",
+        "Grandpa! Eight! My family!"
+       ],
+       "bg": "дядо"
+      }
+     ],
+     "where": "Where's Grandma?"
+    },
+    {
+     "id": "p3_16",
+     "rect": [
+      56.5,
+      38,
+      8,
+      18
+     ],
+     "gen": "the same round door, now freshly painted bright red; keep its exact shape, frame and handle",
+     "say": [
+      "oto",
+      "A red door!"
+     ],
+     "bg": "червена врата",
+     "pad": 2,
+     "pos": [
+      54.688,
+      36.133,
+      11.719,
+      21.484
+     ],
+     "star": [
+      82.2,
+      19.5
+     ]
+    },
+    {
+     "id": "p3_17",
+     "rect": [
+      52,
+      84,
+      10,
+      12
+     ],
+     "gen": "a small wooden easel with a bright colourful childlike painting of an otter family",
+     "say": [
+      "oto",
+      "My family picture!"
+     ],
+     "bg": "рисунката на семейството",
+     "pad": 2,
+     "pos": [
+      50.13,
+      82.031,
+      13.672,
+      15.82
+     ],
+     "star": [
+      86.7,
+      10.5
+     ]
+    },
+    {
+     "id": "p3_18",
+     "rect": [
+      62,
+      87,
+      9,
+      10
+     ],
+     "gen": "four small paint buckets standing on the grass: red, yellow, blue and green paint",
+     "say": [
+      "oto",
+      "Red, yellow, blue, green!"
+     ],
+     "bg": "бои",
+     "pad": 2,
+     "pos": [
+      60.026,
+      85.059,
+      12.826,
+      13.77
+     ],
+     "star": [
+      78.2,
+      13.5
+     ]
+    },
+    {
+     "id": "p3_19",
+     "rect": [
+      20,
+      4,
+      9,
+      14
+     ],
+     "gen": "a small colourful hot air balloon floating far away in the sky",
+     "say": [
+      "oto",
+      "Look! A balloon!"
+     ],
+     "bg": "балон в небето",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      20.768,
+      3.32,
+      8.529,
+      16.406
+     ],
+     "star": [
+      55.0,
+      45.8
+     ]
+    },
+    {
+     "id": "p3_20",
+     "rect": [
+      48,
+      25,
+      20,
+      7
+     ],
+     "gen": "a garland of small colourful triangle bunting flags in red, yellow, blue and green strung from the tree branch down to the house roof",
+     "say": [
+      "oto",
+      "Flags! Red, yellow, blue!"
+     ],
+     "bg": "знаменца",
+     "pad": 2,
+     "big": 1,
+     "pos": [
+      47.526,
+      23.047,
+      22.396,
+      10.742
+     ],
+     "star": [
+      77.3,
+      17.3
+     ]
+    },
+    {
+     "id": "p3_21",
+     "rect": [
+      74,
+      86,
+      22,
+      12
+     ],
+     "gen": "a big red and white checked picnic blanket spread flat on the grass",
+     "say": [
+      "oto",
+      "A picnic!"
+     ],
+     "bg": "пикник",
+     "pad": 2,
+     "pos": [
+      72.331,
+      84.18,
+      23.958,
+      14.16
+     ],
+     "star": [
+      69.0,
+      20.0
+     ]
+    },
+    {
+     "id": "p3_22",
+     "rect": [
+      79,
+      87,
+      8,
+      8
+     ],
+     "gen": "a wicker picnic basket with bread and apples, standing on the picnic blanket",
+     "say": [
+      "oto",
+      "A basket! Yummy!"
+     ],
+     "bg": "кошница с храна",
+     "pad": 2,
+     "pos": [
+      77.018,
+      85.059,
+      11.914,
+      11.719
+     ],
+     "star": [
+      88.0,
+      9.2
+     ]
+    },
+    {
+     "id": "p3_23",
+     "rect": [
+      89,
+      88,
+      7,
+      8
+     ],
+     "gen": "a small teapot and two cups standing on the picnic blanket",
+     "say": [
+      "oto",
+      "Tea for Grandma!"
+     ],
+     "bg": "чайник и чаши",
+     "pad": 2,
+     "pos": [
+      87.044,
+      87.207,
+      10.026,
+      10.449
+     ],
+     "star": [
+      65.6,
+      27.1
+     ]
+    },
+    {
+     "id": "p3_24",
+     "rect": [
+      84,
+      91,
+      6,
+      6
+     ],
+     "gen": "a plate with eight little cupcakes on the picnic blanket",
+     "say": [
+      "oto",
+      "Eight cakes!"
+     ],
+     "bg": "осем кексчета",
+     "pad": 2,
+     "pos": [
+      82.031,
+      89.062,
+      9.31,
+      9.766
+     ],
+     "star": [
+      77.6,
+      10.0
+     ]
+    },
+    {
+     "id": "p3_25",
+     "rect": [
+      64,
+      78,
+      8,
+      7
+     ],
+     "gen": "an old wooden box with its lid open, inside it an old drawing of a dark cave with toys",
+     "say": [
+      "grandpa",
+      "Look, Oto!"
+     ],
+     "bg": "кутията на дядо",
+     "pad": 2,
+     "big": 1,
+     "reply": [
+      "oto",
+      "A ball! A car! A teddy!"
+     ],
+     "pos": [
+      62.37,
+      76.074,
+      11.523,
+      10.645
+     ],
+     "star": [
+      90.4,
+      10.1
+     ]
+    },
+    {
+     "id": "p3_26",
+     "rect": [
+      8,
+      4,
+      10,
+      7
+     ],
+     "gen": "three small birds flying in the sky",
+     "say": [
+      "oto",
+      "Birds! Hello, birds!"
+     ],
+     "bg": "птици",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      8.789,
+      4.883,
+      8.724,
+      5.957
+     ],
+     "star": [
+      91.0,
+      18.0
+     ]
+    },
+    {
+     "id": "p3_27",
+     "rect": [
+      84,
+      6,
+      10,
+      10
+     ],
+     "gen": "a small bird nest with three little baby birds sitting on the branch",
+     "say": [
+      "oto",
+      "A nest! A bird family!"
+     ],
+     "bg": "гнездо",
+     "pad": 2,
+     "pos": [
+      82.682,
+      4.688,
+      12.76,
+      12.988
+     ],
+     "star": [
+      86.2,
+      27.8
+     ]
+    },
+    {
+     "id": "p3_28",
+     "rect": [
+      22,
+      88,
+      9,
+      10
+     ],
+     "gen": "a small green backpack and a basket of red apples standing on the wooden dock, ready for a trip",
+     "say": [
+      "oto",
+      "My bag! Let's go!"
+     ],
+     "bg": "раницата на Ото",
+     "pad": 2,
+     "pos": [
+      20.052,
+      86.035,
+      12.76,
+      12.793
+     ],
+     "star": [
+      77.6,
+      9.9
+     ]
+    },
+    {
+     "id": "p3_29",
+     "rect": [
+      72,
+      64,
+      4,
+      10
+     ],
+     "gen": "a small colourful paper pinwheel on a stick stuck in the grass",
+     "say": [
+      "oto",
+      "Look! It turns around!"
+     ],
+     "bg": "въртележка",
+     "pad": 2,
+     "pos": [
+      70.117,
+      62.207,
+      7.617,
+      13.672
+     ],
+     "star": [
+      69.2,
+      13.6
+     ]
+    },
+    {
+     "id": "p3_30",
+     "rect": [
+      0,
+      5,
+      16,
+      47
+     ],
+     "gen": "a big bunch of colourful balloons floating in the sky, their long strings hang straight down to the bottom edge of this area (they are tied to the lantern post just below); do not draw any lantern or post",
+     "say": [
+      "oto",
+      "Goodbye, family!"
+     ],
+     "bg": "балони за сбогуване",
+     "pad": 2,
+     "big": 1,
+     "reply": [
+      "polly",
+      "Goodbye! Goodbye!"
+     ],
+     "pos": [
+      0.0,
+      3.027,
+      17.904,
+      50.781
+     ],
+     "star": [
+      87.6,
+      6.0
+     ]
+    }
+   ],
+   "secrets": [
+    {
+     "id": "p3_s1",
+     "rect": [
+      76,
+      71,
+      9,
+      10
+     ],
+     "tap": [
+      75,
+      69,
+      11,
+      13
+     ],
+     "gen": "a cute round brown hedgehog sitting in the open short grass, facing the viewer with a happy face, clearly visible, not hidden by grass",
+     "say": [
+      "oto",
+      "A hedgehog! Hello!"
+     ],
+     "bg": "тайна: таралежче в тревата",
+     "pos": [
+      76.042,
+      71.094,
+      8.854,
+      9.766
+     ]
+    },
+    {
+     "id": "p3_s2",
+     "rect": [
+      8,
+      63,
+      6,
+      7
+     ],
+     "tap": [
+      7,
+      61,
+      8,
+      10
+     ],
+     "gen": "a cute little bright green frog sitting on top of the wooden barrel, clearly visible; keep the barrel and the lantern post exactly the same",
+     "say": [
+      "oto",
+      "A frog on the barrel!"
+     ],
+     "bg": "тайна: жабка на бъчвата",
+     "pos": [
+      8.073,
+      63.086,
+      5.859,
+      6.738
+     ]
+    }
+   ]
+  },
+  "4": {
+   "base": "p4_base",
+   "oto": {
+    "x": 9,
+    "y": 31,
+    "h": 50
+   },
+   "layers": [
+    {
+     "id": "p4_01",
+     "rect": [
+      14,
+      13,
+      7,
+      23
+     ],
+     "gen": "the iron wall lantern is now lit and glows with warm golden light, lighting the rocks around it",
+     "say": [
+      "oto",
+      "Look! A light!"
+     ],
+     "bg": "фенерът светва",
+     "pad": 3,
+     "pos": [
+      11.133,
+      10.254,
+      12.5,
+      28.418
+     ],
+     "star": [
+      79.7,
+      21.0
+     ],
+     "soft": "radial"
+    },
+    {
+     "id": "p4_02",
+     "rect": [
+      42,
+      28,
+      5,
+      11
+     ],
+     "gen": "the small wall lantern is now lit and glows warm gold",
+     "say": [
+      "oto",
+      "Another light!"
+     ],
+     "bg": "още светлина",
+     "pad": 3,
+     "pos": [
+      39.714,
+      25.879,
+      7.552,
+      15.137
+     ],
+     "star": [
+      83.6,
+      21.3
+     ],
+     "soft": "radial"
+    },
+    {
+     "id": "p4_03",
+     "rect": [
+      41,
+      40,
+      13,
+      15
+     ],
+     "gen": "the same treasure chest, now with its lid open and a brown teddy bear toy peeking out of it",
+     "say": [
+      "oto",
+      "A teddy! I've got a teddy!"
+     ],
+     "bg": "сандъкът се отваря",
+     "pad": 2,
+     "pos": [
+      40.365,
+      38.77,
+      14.128,
+      18.066
+     ],
+     "star": [
+      87.6,
+      13.5
+     ]
+    },
+    {
+     "id": "p4_04",
+     "rect": [
+      32,
+      55,
+      7,
+      8
+     ],
+     "gen": "a colourful toy beach ball lying on the sandy floor",
+     "say": [
+      "oto",
+      "A ball!"
+     ],
+     "bg": "топка",
+     "pad": 2,
+     "where": "Where's the ball?",
+     "pos": [
+      30.208,
+      53.809,
+      8.659,
+      10.742
+     ],
+     "star": [
+      81.2,
+      13.6
+     ]
+    },
+    {
+     "id": "p4_05",
+     "sprite": "c_bobby",
+     "pos": [
+      56,
+      39,
+      8.38,
+      17
+     ],
+     "star": [
+      70,
+      8
+     ],
+     "anim": "bob",
+     "big": 1,
+     "say": [
+      "bobby",
+      "Hello! I'm Bobby."
+     ],
+     "reply": [
+      "oto",
+      "Hello, Bobby!"
+     ],
+     "bg": "прилепчето Bobby",
+     "where": "Where's Bobby?"
+    },
+    {
+     "id": "p4_06",
+     "rect": [
+      22,
+      8,
+      9,
+      14
+     ],
+     "gen": "a colourful diamond-shaped kite hanging on the rock wall",
+     "say": [
+      "oto",
+      "A kite!"
+     ],
+     "bg": "хвърчило",
+     "pad": 2,
+     "where": "Where's the kite?",
+     "pos": [
+      21.159,
+      7.52,
+      11.328,
+      16.309
+     ],
+     "star": [
+      85.6,
+      19.2
+     ]
+    },
+    {
+     "id": "p4_07",
+     "rect": [
+      56,
+      60,
+      16,
+      7
+     ],
+     "gen": "a small colourful wooden toy train with three wagons standing on the sandy floor",
+     "say": [
+      "oto",
+      "A train! Choo choo!"
+     ],
+     "bg": "влакче",
+     "pad": 2,
+     "where": "Where's the train?",
+     "pos": [
+      54.036,
+      58.008,
+      19.727,
+      10.547
+     ],
+     "star": [
+      91.1,
+      18.5
+     ]
+    },
+    {
+     "id": "p4_08",
+     "rect": [
+      52,
+      25,
+      7,
+      10
+     ],
+     "gen": "a small silver toy robot standing on the rock shelf",
+     "say": [
+      "oto",
+      "A robot!"
+     ],
+     "bg": "робот",
+     "pad": 2,
+     "where": "Where's the robot?",
+     "pos": [
+      51.823,
+      25.098,
+      7.552,
+      10.449
+     ],
+     "star": [
+      81.9,
+      20.6
+     ]
+    },
+    {
+     "id": "p4_09",
+     "rect": [
+      80,
+      52,
+      10,
+      11
+     ],
+     "gen": "a small blue children's bike leaning against the rocks",
+     "say": [
+      "oto",
+      "A bike!"
+     ],
+     "bg": "колело",
+     "pad": 2,
+     "where": "Where's the bike?",
+     "pos": [
+      78.19,
+      51.27,
+      13.411,
+      13.574
+     ],
+     "star": [
+      76.7,
+      17.3
+     ]
+    },
+    {
+     "id": "p4_10",
+     "rect": [
+      32,
+      2,
+      42,
+      10
+     ],
+     "gen": "a long string of small warm glowing fairy lights hanging across the cave ceiling",
+     "say": [
+      "oto",
+      "Lights! Lots of lights!"
+     ],
+     "bg": "светлинки по тавана",
+     "pad": 2,
+     "big": 1,
+     "pos": [
+      30.013,
+      1.562,
+      45.898,
+      12.305
+     ],
+     "star": [
+      95.2,
+      40.5
+     ]
+    },
+    {
+     "id": "p4_11",
+     "rect": [
+      64,
+      47,
+      13,
+      11
+     ],
+     "gen": "a tiny cosy wooden bed with a blue blanket and a pillow standing on the sandy floor",
+     "say": [
+      "oto",
+      "A little bed!"
+     ],
+     "bg": "креватче",
+     "pad": 2,
+     "pos": [
+      62.044,
+      46.777,
+      14.974,
+      13.086
+     ],
+     "star": [
+      79.1,
+      20.1
+     ]
+    },
+    {
+     "id": "p4_12",
+     "rect": [
+      60,
+      18,
+      6,
+      9
+     ],
+     "gen": "a small glowing moon-shaped night light hanging from the rock",
+     "say": [
+      "oto",
+      "A night light!"
+     ],
+     "bg": "нощна лампичка",
+     "pad": 2,
+     "pos": [
+      59.961,
+      16.016,
+      7.031,
+      10.938
+     ],
+     "star": [
+      82.4,
+      20.5
+     ]
+    },
+    {
+     "id": "p4_13",
+     "rect": [
+      39,
+      62,
+      12,
+      7
+     ],
+     "gen": "a round soft colourful rug lying on the sandy floor",
+     "say": [
+      "oto",
+      "A rug! Sit down!"
+     ],
+     "bg": "килимче",
+     "pad": 2,
+     "pos": [
+      37.305,
+      60.059,
+      15.625,
+      9.668
+     ],
+     "star": [
+      90.6,
+      12.1
+     ]
+    },
+    {
+     "id": "p4_14",
+     "rect": [
+      49,
+      55,
+      7,
+      6
+     ],
+     "gen": "a small red toy car on the sandy floor",
+     "say": [
+      "oto",
+      "A car!"
+     ],
+     "bg": "количка",
+     "pad": 2,
+     "where": "Where's the car?",
+     "pos": [
+      47.201,
+      53.906,
+      10.156,
+      8.594
+     ],
+     "star": [
+      76.9,
+      17.0
+     ]
+    },
+    {
+     "id": "p4_15",
+     "rect": [
+      64,
+      36,
+      13,
+      13
+     ],
+     "gen": "many small brown plush teddy bear toys sitting together on the little bed under the blanket",
+     "say": [
+      "oto",
+      "Teddies! Lots of teddies!"
+     ],
+     "bg": "мечета в креватчето",
+     "pad": 2,
+     "big": 1,
+     "reply": [
+      "polly",
+      "Ten! Ten!"
+     ],
+     "pos": [
+      62.37,
+      35.547,
+      15.69,
+      15.332
+     ],
+     "star": [
+      72.2,
+      70.1
+     ]
+    },
+    {
+     "id": "p4_16",
+     "rect": [
+      73,
+      24,
+      10,
+      13
+     ],
+     "gen": "shiny red Christmas baubles hanging on the upper branches of the small fir tree",
+     "say": [
+      "oto",
+      "Red!"
+     ],
+     "bg": "червени топки по елхата",
+     "pad": 2,
+     "pos": [
+      72.591,
+      22.754,
+      12.24,
+      16.113
+     ],
+     "star": [
+      63.8,
+      35.2
+     ]
+    },
+    {
+     "id": "p4_17",
+     "rect": [
+      72,
+      36,
+      11,
+      11
+     ],
+     "gen": "shiny green and yellow Christmas baubles hanging on the lower branches of the small fir tree",
+     "say": [
+      "oto",
+      "Green and yellow!"
+     ],
+     "bg": "зелени и жълти топки",
+     "pad": 2,
+     "pos": [
+      70.117,
+      34.18,
+      14.648,
+      14.551
+     ],
+     "star": [
+      78.2,
+      14.1
+     ]
+    },
+    {
+     "id": "p4_18",
+     "rect": [
+      75,
+      17,
+      6,
+      7
+     ],
+     "gen": "a golden star on the top of the fir tree",
+     "say": [
+      "oto",
+      "A star!"
+     ],
+     "bg": "звезда на върха",
+     "pad": 2,
+     "pos": [
+      73.112,
+      15.137,
+      7.747,
+      10.742
+     ],
+     "star": [
+      79.8,
+      27.3
+     ]
+    },
+    {
+     "id": "p4_19",
+     "rect": [
+      80,
+      44,
+      9,
+      8
+     ],
+     "gen": "three wrapped Christmas presents with ribbons standing on the floor",
+     "say": [
+      "oto",
+      "Presents!"
+     ],
+     "bg": "подаръци",
+     "pad": 2,
+     "pos": [
+      78.711,
+      42.871,
+      10.742,
+      10.938
+     ],
+     "star": [
+      86.7,
+      18.8
+     ]
+    },
+    {
+     "id": "p4_20",
+     "rect": [
+      70,
+      15,
+      15,
+      37
+     ],
+     "gen": "the decorated Christmas fir tree now glows with many tiny warm golden fairy lights; keep all its baubles and the star",
+     "say": [
+      "bobby",
+      "Merry Christmas!"
+     ],
+     "bg": "елхата светва",
+     "pad": 2,
+     "big": 1,
+     "reply": [
+      "polly",
+      "Merry Christmas! Merry Christmas!"
+     ],
+     "pos": [
+      68.034,
+      13.086,
+      18.62,
+      40.137
+     ],
+     "star": [
+      80.1,
+      12.7
+     ]
+    },
+    {
+     "id": "p4_21",
+     "rect": [
+      2,
+      2,
+      18,
+      8
+     ],
+     "gen": "a garland of small colourful triangle party flags hanging along the rock",
+     "say": [
+      "oto",
+      "Flags! A party!"
+     ],
+     "bg": "знаменца за купона",
+     "pad": 2,
+     "pos": [
+      1.628,
+      1.758,
+      20.247,
+      9.473
+     ],
+     "star": [
+      89.7,
+      26.8
+     ]
+    },
+    {
+     "id": "p4_22",
+     "rect": [
+      35,
+      45,
+      6,
+      8
+     ],
+     "gen": "a small birthday cake with lit candles standing on a flat rock",
+     "say": [
+      "oto",
+      "A cake! Yummy!"
+     ],
+     "bg": "торта",
+     "pad": 2,
+     "pos": [
+      33.073,
+      43.555,
+      8.724,
+      11.328
+     ],
+     "star": [
+      71.6,
+      27.5
+     ]
+    },
+    {
+     "id": "p4_23",
+     "rect": [
+      27,
+      21,
+      6,
+      10
+     ],
+     "gen": "a small rag doll with a pink dress sitting on the rock shelf",
+     "say": [
+      "oto",
+      "A doll!"
+     ],
+     "bg": "кукла",
+     "pad": 2,
+     "where": "Where's the doll?",
+     "pos": [
+      27.344,
+      21.387,
+      5.469,
+      11.328
+     ],
+     "star": [
+      79.8,
+      23.3
+     ]
+    },
+    {
+     "id": "p4_24",
+     "rect": [
+      84,
+      64,
+      8,
+      8
+     ],
+     "gen": "a small tower of colourful wooden toy blocks on the rocks",
+     "say": [
+      "oto",
+      "Red, yellow, blue!"
+     ],
+     "bg": "кубчета",
+     "pad": 2,
+     "pos": [
+      82.031,
+      62.012,
+      9.831,
+      11.23
+     ],
+     "star": [
+      56.3,
+      14.8
+     ]
+    },
+    {
+     "id": "p4_25",
+     "rect": [
+      65,
+      22,
+      9,
+      14
+     ],
+     "gen": "bright daylight shining in from the back passage of the cave, with a glimpse of a white waterfall far away",
+     "say": [
+      "bobby",
+      "Listen!"
+     ],
+     "bg": "светлина от водопада",
+     "pad": 3,
+     "big": 1,
+     "reply": [
+      "oto",
+      "Look! Big... big!"
+     ],
+     "pos": [
+      62.109,
+      19.043,
+      14.779,
+      19.922
+     ],
+     "star": [
+      79.3,
+      20.1
+     ],
+     "soft": "radial"
+    },
+    {
+     "id": "p4_26",
+     "rect": [
+      28,
+      38,
+      8,
+      8
+     ],
+     "gen": "the small crystals on the shelf now glow soft purple",
+     "say": [
+      "oto",
+      "Purple!"
+     ],
+     "bg": "лилави кристали",
+     "pad": 3,
+     "pos": [
+      27.669,
+      37.012,
+      9.961,
+      10.352
+     ],
+     "star": [
+      68.0,
+      17.0
+     ],
+     "soft": "radial"
+    },
+    {
+     "id": "p4_27",
+     "rect": [
+      84,
+      29,
+      8,
+      15
+     ],
+     "gen": "the crystals now glow bright blue and pink",
+     "say": [
+      "oto",
+      "Blue and pink!"
+     ],
+     "bg": "сини и розови кристали",
+     "pad": 3,
+     "pos": [
+      81.12,
+      28.125,
+      13.086,
+      18.848
+     ],
+     "star": [
+      75.1,
+      17.3
+     ],
+     "soft": "radial"
+    },
+    {
+     "id": "p4_28",
+     "rect": [
+      90,
+      20,
+      6,
+      17
+     ],
+     "gen": "the iron wall lantern is now lit and glows with warm golden light",
+     "say": [
+      "oto",
+      "Light!"
+     ],
+     "bg": "още един фенер",
+     "pad": 3,
+     "pos": [
+      87.174,
+      18.164,
+      10.417,
+      20.898
+     ],
+     "star": [
+      78.1,
+      20.6
+     ],
+     "soft": "radial"
+    },
+    {
+     "id": "p4_29",
+     "rect": [
+      91,
+      54,
+      8,
+      16
+     ],
+     "gen": "the crystals now glow in many bright colours",
+     "say": [
+      "oto",
+      "Look! Colours!"
+     ],
+     "bg": "цветни кристали",
+     "pad": 2,
+     "pos": [
+      89.062,
+      52.051,
+      10.872,
+      19.824
+     ],
+     "star": [
+      88.0,
+      13.8
+     ]
+    },
+    {
+     "id": "p4_30",
+     "rect": [
+      62,
+      74,
+      36,
+      24
+     ],
+     "gen": "colourful glowing reflections of lights dancing on the dark water",
+     "say": [
+      "oto",
+      "Goodbye, cave!"
+     ],
+     "bg": "светлини по водата",
+     "pad": 2,
+     "big": 1,
+     "soft": "radial",
+     "reply": [
+      "bobby",
+      "Goodbye, Oto!"
+     ],
+     "pos": [
+      61.589,
+      73.145,
+      37.109,
+      26.465
+     ],
+     "star": [
+      82.8,
+      18.1
+     ]
+    }
+   ],
+   "secrets": [
+    {
+     "id": "p4_s1",
+     "sprite_gen": "a cute little green sea turtle sitting, facing the viewer, friendly",
+     "pos_bottom": [
+      86,
+      72,
+      9
+     ],
+     "say": [
+      "oto",
+      "A turtle! Hello, turtle!"
+     ],
+     "bg": "тайна: костенурка",
+     "pos": [
+      86.0,
+      64.0,
+      6.143,
+      9.0
+     ],
+     "tap": [
+      85.0,
+      63.0,
+      8.143,
+      11.0
+     ]
+    },
+    {
+     "id": "p4_s2",
+     "sprite_gen": "a cute little red crab with raised claws, smiling",
+     "pos_bottom": [
+      2.5,
+      62,
+      7
+     ],
+     "say": [
+      "oto",
+      "A crab! Hello, crab!"
+     ],
+     "bg": "тайна: раче",
+     "pos": [
+      2.0,
+      55.5,
+      5.351,
+      7.0
+     ],
+     "tap": [
+      1.0,
+      54.5,
+      7.351,
+      9.0
+     ]
+    }
+   ]
+  },
+  "5": {
+   "base": "p5_base",
+   "oto": {
+    "x": 13,
+    "y": 33,
+    "h": 50
+   },
+   "layers": [
+    {
+     "id": "p5_01",
+     "rect": [
+      62,
+      63,
+      11,
+      6
+     ],
+     "gen": "pink water lilies with round green leaves floating on the water",
+     "say": [
+      "oto",
+      "Pink flowers!"
+     ],
+     "bg": "водни лилии",
+     "pad": 2,
+     "pos": [
+      60.026,
+      61.035,
+      14.909,
+      9.863
+     ],
+     "star": [
+      85.2,
+      24.8
+     ]
+    },
+    {
+     "id": "p5_02",
+     "rect": [
+      38,
+      48,
+      12,
+      8
+     ],
+     "gen": "colourful wild flowers growing on the far river bank",
+     "say": [
+      "oto",
+      "Flowers!"
+     ],
+     "bg": "цветя на брега",
+     "pad": 2,
+     "pos": [
+      36.003,
+      46.777,
+      15.885,
+      11.035
+     ],
+     "star": [
+      88.9,
+      20.4
+     ]
+    },
+    {
+     "id": "p5_03",
+     "rect": [
+      64,
+      42,
+      6,
+      6
+     ],
+     "gen": "two small blue dragonflies flying above the water",
+     "say": [
+      "oto",
+      "Look! Dragonflies!"
+     ],
+     "bg": "водни кончета",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      64.518,
+      41.992,
+      5.339,
+      7.812
+     ],
+     "star": [
+      69.5,
+      41.2
+     ]
+    },
+    {
+     "id": "p5_04",
+     "rect": [
+      86,
+      47,
+      10,
+      10
+     ],
+     "gen": "a small wooden signpost on the rocks with a painted yellow duck on it, no letters",
+     "say": [
+      "oto",
+      "A duck! Quack!"
+     ],
+     "bg": "табелка с патица",
+     "pad": 2,
+     "pos": [
+      85.612,
+      45.801,
+      10.938,
+      13.086
+     ],
+     "star": [
+      88.7,
+      17.2
+     ]
+    },
+    {
+     "id": "p5_05",
+     "sprite": "c_dina",
+     "pos": [
+      38.5,
+      51,
+      7.41,
+      16
+     ],
+     "star": [
+      70,
+      8
+     ],
+     "anim": "bob",
+     "big": 1,
+     "say": [
+      "dina",
+      "Quack! Hello! I'm Dina."
+     ],
+     "reply": [
+      "oto",
+      "Hello, Dina!"
+     ],
+     "bg": "патицата Dina",
+     "where": "Where's Dina?"
+    },
+    {
+     "id": "p5_06",
+     "rect": [
+      74,
+      60,
+      6,
+      12
+     ],
+     "gen": "a tall white heron standing in the shallow water",
+     "say": [
+      "oto",
+      "Look! Long legs!"
+     ],
+     "bg": "чапла с дълги крака",
+     "pad": 2,
+     "pos": [
+      72.07,
+      58.008,
+      9.115,
+      15.82
+     ],
+     "star": [
+      86.4,
+      17.9
+     ]
+    },
+    {
+     "id": "p5_07",
+     "rect": [
+      87,
+      62,
+      10,
+      9
+     ],
+     "gen": "a small wooden bench with a striped towel on it, standing on the flat rocks",
+     "say": [
+      "oto",
+      "A towel!"
+     ],
+     "bg": "пейка с кърпа",
+     "pad": 2,
+     "pos": [
+      85.026,
+      60.059,
+      13.802,
+      12.793
+     ],
+     "star": [
+      81.6,
+      11.5
+     ]
+    },
+    {
+     "id": "p5_08",
+     "rect": [
+      70,
+      82,
+      6,
+      6
+     ],
+     "gen": "a yellow rubber duck toy floating on the water",
+     "say": [
+      "oto",
+      "A small duck!"
+     ],
+     "bg": "гумено пате",
+     "pad": 2,
+     "pos": [
+      69.206,
+      80.273,
+      7.292,
+      9.57
+     ],
+     "star": [
+      77.7,
+      16.3
+     ]
+    },
+    {
+     "id": "p5_09",
+     "rect": [
+      50,
+      34,
+      8,
+      10
+     ],
+     "gen": "a little wooden footbridge far away over the stream between the trees",
+     "say": [
+      "oto",
+      "A bridge!"
+     ],
+     "bg": "мостче",
+     "pad": 2,
+     "pos": [
+      48.047,
+      33.594,
+      10.221,
+      12.305
+     ],
+     "star": [
+      80.8,
+      19.8
+     ]
+    },
+    {
+     "id": "p5_10",
+     "rect": [
+      70,
+      4,
+      22,
+      20
+     ],
+     "gen": "a soft rainbow shining in the mist of the waterfall",
+     "say": [
+      "oto",
+      "A rainbow! Look!"
+     ],
+     "bg": "дъга във водопада",
+     "pad": 2,
+     "big": 1,
+     "soft": "radial",
+     "reply": [
+      "polly",
+      "Rainbow! Rainbow!"
+     ],
+     "pos": [
+      69.531,
+      3.32,
+      22.461,
+      22.266
+     ],
+     "star": [
+      73.0,
+      17.1
+     ]
+    },
+    {
+     "id": "p5_11",
+     "rect": [
+      40,
+      58,
+      9,
+      6
+     ],
+     "gen": "a big round green lily pad next to a small round lily pad floating on the water",
+     "say": [
+      "oto",
+      "Big and small!"
+     ],
+     "bg": "голямо и малко листо",
+     "pad": 2,
+     "pos": [
+      38.021,
+      57.031,
+      12.5,
+      8.594
+     ],
+     "star": [
+      84.4,
+      19.3
+     ]
+    },
+    {
+     "id": "p5_12",
+     "rect": [
+      58,
+      40,
+      6,
+      8
+     ],
+     "gen": "a big round grey stone with a small round stone on top of it on the river bank",
+     "say": [
+      "oto",
+      "A big stone! A small stone!"
+     ],
+     "bg": "голям и малък камък",
+     "pad": 2,
+     "pos": [
+      56.055,
+      39.355,
+      9.701,
+      10.547
+     ],
+     "star": [
+      85.9,
+      15.7
+     ]
+    },
+    {
+     "id": "p5_13",
+     "rect": [
+      44,
+      20,
+      10,
+      8
+     ],
+     "gen": "a big orange butterfly and a small blue butterfly flying",
+     "say": [
+      "oto",
+      "Big and small butterflies!"
+     ],
+     "bg": "пеперуди",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      43.75,
+      19.922,
+      10.872,
+      10.059
+     ],
+     "star": [
+      76.0,
+      28.2
+     ]
+    },
+    {
+     "id": "p5_14",
+     "rect": [
+      88,
+      82,
+      9,
+      8
+     ],
+     "gen": "a cosy duck nest with three white eggs between the rocks",
+     "say": [
+      "oto",
+      "Eggs! One, two, three!"
+     ],
+     "bg": "гнездо с яйца",
+     "pad": 2,
+     "pos": [
+      86.263,
+      80.469,
+      10.677,
+      11.426
+     ],
+     "star": [
+      82.9,
+      14.5
+     ]
+    },
+    {
+     "id": "p5_15",
+     "sprite": "w_duckling",
+     "pos": [
+      59,
+      62.5,
+      2.38,
+      6
+     ],
+     "star": [
+      60,
+      10
+     ],
+     "anim": "bob",
+     "big": 1,
+     "say": [
+      "dina",
+      "One, two, three, four, five! My babies!"
+     ],
+     "reply": [
+      "oto",
+      "Five babies!"
+     ],
+     "bg": "патенцата",
+     "with": [
+      {
+       "sprite": "w_duckling",
+       "pos": [
+        45,
+        62,
+        2.38,
+        6
+       ],
+       "star": [
+        60,
+        10
+       ],
+       "anim": "bob",
+       "say": [
+        "duckling",
+        "Quack!"
+       ],
+       "reply": [
+        "oto",
+        "A small baby!"
+       ],
+       "bg": "патенце"
+      },
+      {
+       "sprite": "w_duckling",
+       "pos": [
+        48.5,
+        63.5,
+        2.38,
+        6
+       ],
+       "star": [
+        60,
+        10
+       ],
+       "anim": "bob",
+       "say": [
+        "duckling",
+        "Quack!"
+       ],
+       "reply": [
+        "oto",
+        "Small!"
+       ],
+       "bg": "патенце"
+      },
+      {
+       "sprite": "w_duckling",
+       "pos": [
+        52,
+        64,
+        2.38,
+        6
+       ],
+       "star": [
+        60,
+        10
+       ],
+       "anim": "bob",
+       "say": [
+        "duckling",
+        "Quack!"
+       ],
+       "reply": [
+        "oto",
+        "A small baby!"
+       ],
+       "bg": "патенце"
+      },
+      {
+       "sprite": "w_duckling",
+       "pos": [
+        63,
+        63.5,
+        2.38,
+        6
+       ],
+       "star": [
+        60,
+        10
+       ],
+       "anim": "bob",
+       "say": [
+        "duckling",
+        "Quack!"
+       ],
+       "reply": [
+        "oto",
+        "Small!"
+       ],
+       "bg": "патенце"
+      }
+     ],
+     "where": "Where are the babies?"
+    },
+    {
+     "id": "p5_16",
+     "rect": [
+      80,
+      53,
+      8,
+      8
+     ],
+     "gen": "a bar of soap and white soap bubbles on a flat rock",
+     "say": [
+      "oto",
+      "Soap! Wash your hands!"
+     ],
+     "bg": "сапун",
+     "pad": 2,
+     "pos": [
+      80.078,
+      52.734,
+      8.464,
+      10.156
+     ],
+     "star": [
+      73.1,
+      24.0
+     ]
+    },
+    {
+     "id": "p5_17",
+     "rect": [
+      60,
+      20,
+      8,
+      10
+     ],
+     "gen": "a few big shiny soap bubbles floating in the air",
+     "say": [
+      "oto",
+      "Bubbles!"
+     ],
+     "bg": "сапунени балончета",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      58.008,
+      19.336,
+      11.849,
+      11.621
+     ],
+     "star": [
+      72.0,
+      13.4
+     ]
+    },
+    {
+     "id": "p5_18",
+     "rect": [
+      24,
+      85,
+      8,
+      10
+     ],
+     "gen": "a small wooden bucket of clean water standing on the dock",
+     "say": [
+      "oto",
+      "Water! Wash your hands!"
+     ],
+     "bg": "кофа с вода",
+     "pad": 2,
+     "pos": [
+      22.005,
+      83.008,
+      10.807,
+      13.867
+     ],
+     "star": [
+      82.5,
+      11.3
+     ]
+    },
+    {
+     "id": "p5_19",
+     "rect": [
+      0,
+      58,
+      7,
+      9
+     ],
+     "gen": "a striped towel hanging on the wooden post",
+     "say": [
+      "oto",
+      "A towel! My hands!"
+     ],
+     "bg": "кърпа на кола",
+     "pad": 2,
+     "pos": [
+      0.0,
+      56.055,
+      8.854,
+      12.793
+     ],
+     "star": [
+      64.7,
+      10.7
+     ]
+    },
+    {
+     "id": "p5_20",
+     "rect": [
+      28,
+      4,
+      30,
+      25
+     ],
+     "gen": "lots of big shiny rainbow-coloured soap bubbles floating in the air",
+     "say": [
+      "oto",
+      "Bubbles! Lots of bubbles!"
+     ],
+     "bg": "облак балончета",
+     "pad": 2,
+     "big": 1,
+     "soft": "radial",
+     "reply": [
+      "polly",
+      "Wash your hands! Wash your hands!"
+     ],
+     "pos": [
+      27.669,
+      2.539,
+      30.599,
+      27.539
+     ],
+     "star": [
+      83.0,
+      21.6
+     ]
+    },
+    {
+     "id": "p5_21",
+     "rect": [
+      52,
+      46,
+      6,
+      6
+     ],
+     "gen": "a small grey elephant far away drinking water at the river bend",
+     "say": [
+      "oto",
+      "Look! Big ears!"
+     ],
+     "bg": "слонче в далечината",
+     "pad": 2,
+     "pos": [
+      50.065,
+      44.043,
+      9.831,
+      9.766
+     ],
+     "star": [
+      88.7,
+      27.0
+     ]
+    },
+    {
+     "id": "p5_22",
+     "rect": [
+      26,
+      18,
+      7,
+      9
+     ],
+     "gen": "a big colourful toucan bird sitting on a branch",
+     "say": [
+      "oto",
+      "A big beak!"
+     ],
+     "bg": "тукан",
+     "pad": 2,
+     "pos": [
+      24.154,
+      16.016,
+      10.742,
+      12.793
+     ],
+     "star": [
+      88.5,
+      15.3
+     ]
+    },
+    {
+     "id": "p5_23",
+     "rect": [
+      93,
+      30,
+      7,
+      12
+     ],
+     "gen": "green jungle vines with red flowers hanging down the cliff",
+     "say": [
+      "oto",
+      "Red flowers!"
+     ],
+     "bg": "лиани",
+     "pad": 2,
+     "pos": [
+      91.016,
+      28.027,
+      8.919,
+      15.82
+     ],
+     "star": [
+      82.5,
+      11.1
+     ]
+    },
+    {
+     "id": "p5_24",
+     "rect": [
+      56,
+      6,
+      9,
+      10
+     ],
+     "gen": "a flock of small birds flying in the sky",
+     "say": [
+      "oto",
+      "Birds! Listen!"
+     ],
+     "bg": "птици",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      54.232,
+      4.102,
+      11.719,
+      13.867
+     ],
+     "star": [
+      80.6,
+      19.7
+     ]
+    },
+    {
+     "id": "p5_25",
+     "sprite": "w_monkey",
+     "pos": [
+      41,
+      43,
+      4.7,
+      9
+     ],
+     "star": [
+      70,
+      8
+     ],
+     "anim": "bob",
+     "big": 1,
+     "say": [
+      "oto",
+      "Oo-oo-aa-aa!"
+     ],
+     "reply": [
+      "oto",
+      "Small hands! Hello!"
+     ],
+     "bg": "маймунката от гората",
+     "where": "Where's the monkey?"
+    },
+    {
+     "id": "p5_26",
+     "rect": [
+      4,
+      8,
+      14,
+      8
+     ],
+     "gen": "a garland of colourful flowers along the edge of the roof",
+     "say": [
+      "oto",
+      "Flowers! Goodbye!"
+     ],
+     "bg": "венец от цветя",
+     "pad": 2,
+     "pos": [
+      3.841,
+      7.031,
+      16.016,
+      10.84
+     ],
+     "star": [
+      84.1,
+      21.6
+     ]
+    },
+    {
+     "id": "p5_27",
+     "rect": [
+      62,
+      82,
+      7,
+      7
+     ],
+     "gen": "a small orange fish jumping out of the water with a splash",
+     "say": [
+      "oto",
+      "A fish!"
+     ],
+     "bg": "рибка",
+     "pad": 2,
+     "pos": [
+      60.026,
+      80.078,
+      10.872,
+      10.742
+     ],
+     "star": [
+      92.6,
+      11.8
+     ]
+    },
+    {
+     "id": "p5_28",
+     "rect": [
+      86,
+      72,
+      8,
+      8
+     ],
+     "gen": "a small bird nest with two baby birds in the bushes between the rocks",
+     "say": [
+      "oto",
+      "Baby birds!"
+     ],
+     "bg": "птичи гнезда",
+     "pad": 2,
+     "pos": [
+      84.049,
+      70.02,
+      11.849,
+      11.816
+     ],
+     "star": [
+      83.0,
+      18.2
+     ]
+    },
+    {
+     "id": "p5_29",
+     "rect": [
+      74,
+      72,
+      8,
+      7
+     ],
+     "gen": "sparkling sunlight glittering on the water",
+     "say": [
+      "oto",
+      "Look! Shiny water!"
+     ],
+     "bg": "блясък по водата",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      72.005,
+      70.41,
+      11.328,
+      10.547
+     ],
+     "star": [
+      69.5,
+      21.3
+     ]
+    },
+    {
+     "id": "p5_30",
+     "rect": [
+      64,
+      64,
+      24,
+      14
+     ],
+     "gen": "many small colourful paper boats floating on the water",
+     "say": [
+      "oto",
+      "Goodbye, Dina!"
+     ],
+     "bg": "книжни лодчици",
+     "pad": 2,
+     "big": 1,
+     "reply": [
+      "dina",
+      "Goodbye, Oto! Wash your hands!"
+     ],
+     "pos": [
+      62.044,
+      62.207,
+      27.279,
+      17.676
+     ],
+     "star": [
+      85.6,
+      16.6
+     ]
+    }
+   ],
+   "secrets": [
+    {
+     "id": "p5_s1",
+     "sprite_gen": "a cute little green frog with big eyes sitting, facing the viewer, friendly smile",
+     "say": [
+      "oto",
+      "A frog! Jump!"
+     ],
+     "bg": "тайна: жабка",
+     "pos": [
+      90.0,
+      85.0,
+      4.294,
+      7.0
+     ],
+     "tap": [
+      89.0,
+      84.0,
+      6.294,
+      9.0
+     ]
+    },
+    {
+     "id": "p5_s2",
+     "sprite_gen": "a cute little brown otter-like beaver with a flat tail, sitting, friendly",
+     "say": [
+      "oto",
+      "A beaver! Hello!"
+     ],
+     "bg": "тайна: бобърче",
+     "pos": [
+      67.0,
+      48.0,
+      4.394,
+      7.0
+     ],
+     "tap": [
+      66.0,
+      47.0,
+      6.394,
+      9.0
+     ]
+    }
+   ]
+  },
+  "6": {
+   "base": "p6_base",
+   "oto": {
+    "x": 5,
+    "y": 32,
+    "h": 50
+   },
+   "layers": [
+    {
+     "id": "p6_01",
+     "rect": [
+      28,
+      36,
+      6,
+      10
+     ],
+     "gen": "bright red and orange jungle flowers growing on the hanging vine",
+     "say": [
+      "oto",
+      "Flowers!"
+     ],
+     "bg": "цветя по лианата",
+     "pad": 2,
+     "pos": [
+      26.237,
+      34.082,
+      8.464,
+      13.77
+     ],
+     "star": [
+      79.2,
+      11.3
+     ]
+    },
+    {
+     "id": "p6_02",
+     "rect": [
+      44,
+      61,
+      9,
+      4
+     ],
+     "gen": "water lilies with pink flowers floating on the river",
+     "say": [
+      "oto",
+      "Pink flowers!"
+     ],
+     "bg": "водни лилии",
+     "pad": 2,
+     "pos": [
+      42.057,
+      59.375,
+      12.826,
+      7.52
+     ],
+     "star": [
+      90.4,
+      29.9
+     ]
+    },
+    {
+     "id": "p6_03",
+     "rect": [
+      52,
+      26,
+      6,
+      7
+     ],
+     "gen": "a big bright blue butterfly flying",
+     "say": [
+      "oto",
+      "A butterfly!"
+     ],
+     "bg": "синя пеперуда",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      51.758,
+      24.121,
+      8.073,
+      9.863
+     ],
+     "star": [
+      68.5,
+      26.7
+     ]
+    },
+    {
+     "id": "p6_04",
+     "rect": [
+      30,
+      50,
+      4,
+      9
+     ],
+     "gen": "a small wooden post on the river bank with a round red sign on top and a round green sign below it, no letters",
+     "say": [
+      "oto",
+      "Red – stop! Green – go!"
+     ],
+     "bg": "знак стоп и тръгвай",
+     "pad": 2,
+     "pos": [
+      29.883,
+      48.047,
+      5.664,
+      12.793
+     ],
+     "star": [
+      66.7,
+      9.9
+     ]
+    },
+    {
+     "sprite": "w_monkey",
+     "pos": [
+      58,
+      56,
+      6.28,
+      12
+     ],
+     "star": [
+      60,
+      8
+     ],
+     "anim": "bob",
+     "say": [
+      "momo",
+      "Hello! I'm Momo."
+     ],
+     "reply": [
+      "oto",
+      "Hello, Momo!"
+     ],
+     "bg": "маймунката Momo",
+     "big": 1,
+     "where": "Where's Momo?",
+     "id": "p6_05",
+     "with": [
+      {
+       "sprite": "w_elephant",
+       "pos": [
+        38,
+        44,
+        9.57,
+        14
+       ],
+       "star": [
+        60,
+        8
+       ],
+       "anim": "bob",
+       "say": [
+        "oto",
+        "An elephant!"
+       ],
+       "reply": [
+        "momo",
+        "A big elephant!"
+       ],
+       "bg": "слон"
+      },
+      {
+       "sprite": "w_lion",
+       "pos": [
+        50,
+        47,
+        5.34,
+        11
+       ],
+       "star": [
+        60,
+        8
+       ],
+       "anim": "bob",
+       "say": [
+        "oto",
+        "A lion!"
+       ],
+       "reply": [
+        "polly",
+        "A lion! Roar!"
+       ],
+       "bg": "лъв"
+      },
+      {
+       "sprite": "w_snake",
+       "pos": [
+        72,
+        64,
+        4.24,
+        8
+       ],
+       "star": [
+        60,
+        8
+       ],
+       "anim": "bob",
+       "say": [
+        "oto",
+        "A snake!"
+       ],
+       "reply": [
+        "polly",
+        "A snake! Sss!"
+       ],
+       "bg": "змия"
+      }
+     ]
+    },
+    {
+     "id": "p6_06",
+     "rect": [
+      62,
+      38,
+      8,
+      7
+     ],
+     "gen": "a wooden arch over the gate of the little zoo, decorated with leaves, no letters",
+     "say": [
+      "oto",
+      "The zoo!"
+     ],
+     "bg": "входът на зоопарка",
+     "pad": 2,
+     "pos": [
+      60.026,
+      36.035,
+      11.849,
+      10.84
+     ],
+     "star": [
+      91.8,
+      17.1
+     ]
+    },
+    {
+     "id": "p6_07",
+     "rect": [
+      76,
+      52,
+      8,
+      4
+     ],
+     "gen": "a small round pond with lily pads inside the zoo fence",
+     "say": [
+      "oto",
+      "A little pond!"
+     ],
+     "bg": "езерце",
+     "pad": 2,
+     "pos": [
+      74.023,
+      50.098,
+      11.849,
+      7.715
+     ],
+     "star": [
+      90.1,
+      13.9
+     ]
+    },
+    {
+     "id": "p6_08",
+     "rect": [
+      84,
+      46,
+      7,
+      5
+     ],
+     "gen": "a small wooden feeding trough full of hay inside the zoo fence",
+     "say": [
+      "oto",
+      "Hay! Yummy!"
+     ],
+     "bg": "ясла със сено",
+     "pad": 2,
+     "pos": [
+      82.031,
+      44.043,
+      10.872,
+      8.789
+     ],
+     "star": [
+      77.2,
+      24.4
+     ]
+    },
+    {
+     "id": "p6_09",
+     "rect": [
+      66,
+      52,
+      8,
+      6
+     ],
+     "gen": "a small wooden bed on the beach with tiny toy monkeys jumping on it",
+     "say": [
+      "oto",
+      "Monkeys jumping on the bed!"
+     ],
+     "bg": "креватче с маймунки",
+     "pad": 2,
+     "pos": [
+      64.062,
+      50.098,
+      11.849,
+      9.668
+     ],
+     "star": [
+      90.1,
+      13.1
+     ]
+    },
+    {
+     "sprite": "w_giraffe",
+     "pos": [
+      80,
+      26,
+      7.78,
+      24
+     ],
+     "star": [
+      60,
+      8
+     ],
+     "anim": "bob",
+     "say": [
+      "momo",
+      "Look! A giraffe!"
+     ],
+     "reply": [
+      "oto",
+      "A big giraffe!"
+     ],
+     "bg": "жираф",
+     "big": 1,
+     "where": "Where's the giraffe?",
+     "id": "p6_10",
+     "with": [
+      {
+       "sprite": "w_frog",
+       "pos": [
+        86,
+        66,
+        3.17,
+        5
+       ],
+       "star": [
+        60,
+        8
+       ],
+       "anim": "bob",
+       "say": [
+        "oto",
+        "A frog!"
+       ],
+       "reply": [
+        "polly",
+        "Frog! Frog!"
+       ],
+       "bg": "жаба"
+      },
+      {
+       "sprite": "w_bird",
+       "pos": [
+        70,
+        40,
+        3.64,
+        6
+       ],
+       "star": [
+        60,
+        8
+       ],
+       "anim": "bob",
+       "say": [
+        "bird",
+        "I can fly!"
+       ],
+       "reply": [
+        "oto",
+        "A bird!"
+       ],
+       "bg": "птица"
+      },
+      {
+       "sprite": "w_crocodile",
+       "pos": [
+        72,
+        76,
+        5.9,
+        10
+       ],
+       "star": [
+        60,
+        8
+       ],
+       "anim": "bob",
+       "say": [
+        "oto",
+        "A crocodile! Stop, boat!"
+       ],
+       "reply": [
+        "polly",
+        "Crocodile! Crocodile!"
+       ],
+       "bg": "крокодил"
+      }
+     ]
+    },
+    {
+     "id": "p6_11",
+     "rect": [
+      52,
+      76,
+      5,
+      5
+     ],
+     "gen": "a small red ball floating on the water",
+     "say": [
+      "oto",
+      "Polly's ball!"
+     ],
+     "bg": "топката на Polly",
+     "pad": 2,
+     "pos": [
+      51.888,
+      75.195,
+      6.51,
+      7.617
+     ],
+     "star": [
+      58.0,
+      15.4
+     ]
+    },
+    {
+     "id": "p6_12",
+     "rect": [
+      92,
+      64,
+      8,
+      7
+     ],
+     "gen": "a small wooden diving board on the rocks over the water",
+     "say": [
+      "oto",
+      "Jump! Swim!"
+     ],
+     "bg": "трамплин",
+     "pad": 2,
+     "pos": [
+      90.039,
+      62.207,
+      9.766,
+      9.082
+     ],
+     "star": [
+      34.7,
+      22.6
+     ]
+    },
+    {
+     "id": "p6_13",
+     "rect": [
+      38,
+      14,
+      12,
+      8
+     ],
+     "gen": "a few colourful birds flying in the sky",
+     "say": [
+      "oto",
+      "Birds! I can fly!"
+     ],
+     "bg": "птици в небето",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      36.458,
+      12.109,
+      13.737,
+      11.816
+     ],
+     "star": [
+      72.0,
+      19.8
+     ]
+    },
+    {
+     "id": "p6_14",
+     "rect": [
+      42,
+      57,
+      12,
+      4
+     ],
+     "gen": "a little finish line on the sandy beach made of small colourful flags on two sticks",
+     "say": [
+      "oto",
+      "Run! Run!"
+     ],
+     "bg": "финал за тичане",
+     "pad": 2,
+     "pos": [
+      40.625,
+      55.078,
+      15.234,
+      7.812
+     ],
+     "star": [
+      80.8,
+      65.0
+     ]
+    },
+    {
+     "id": "p6_15",
+     "rect": [
+      55,
+      28,
+      30,
+      14
+     ],
+     "gen": "lots of small colourful butterflies flying over the jungle clearing",
+     "say": [
+      "oto",
+      "Fly! Fly! Fly!"
+     ],
+     "bg": "облак пеперуди",
+     "pad": 2,
+     "big": 1,
+     "soft": "radial",
+     "reply": [
+      "polly",
+      "I can fly! I can fly!"
+     ],
+     "pos": [
+      54.102,
+      26.172,
+      32.487,
+      17.773
+     ],
+     "star": [
+      79.4,
+      23.1
+     ]
+    },
+    {
+     "id": "p6_16",
+     "rect": [
+      12,
+      16,
+      7,
+      11
+     ],
+     "gen": "three round paper lanterns, red, yellow and green, hanging from the tree branch",
+     "say": [
+      "oto",
+      "Red, yellow, green!"
+     ],
+     "bg": "фенерчета",
+     "pad": 2,
+     "pos": [
+      10.742,
+      14.258,
+      10.156,
+      14.551
+     ],
+     "star": [
+      89.7,
+      20.8
+     ]
+    },
+    {
+     "id": "p6_17",
+     "rect": [
+      44,
+      66,
+      12,
+      5
+     ],
+     "gen": "a row of flat round stepping stones across the river",
+     "say": [
+      "oto",
+      "Walk... stop... go!"
+     ],
+     "bg": "камъчета за преминаване",
+     "pad": 2,
+     "pos": [
+      42.057,
+      64.062,
+      15.82,
+      8.008
+     ],
+     "star": [
+      90.5,
+      13.4
+     ]
+    },
+    {
+     "id": "p6_18",
+     "rect": [
+      60,
+      82,
+      6,
+      5
+     ],
+     "gen": "a small green turtle swimming in the water",
+     "say": [
+      "oto",
+      "A turtle! Swim!"
+     ],
+     "bg": "костенурка",
+     "pad": 2,
+     "pos": [
+      58.073,
+      81.348,
+      9.049,
+      7.52
+     ],
+     "star": [
+      84.2,
+      39.0
+     ]
+    },
+    {
+     "id": "p6_19",
+     "rect": [
+      86,
+      82,
+      9,
+      6
+     ],
+     "gen": "a small wooden raft with a little flag floating near the rocks",
+     "say": [
+      "oto",
+      "A raft!"
+     ],
+     "bg": "сал",
+     "pad": 2,
+     "pos": [
+      84.049,
+      80.078,
+      12.76,
+      9.766
+     ],
+     "star": [
+      58.7,
+      12.0
+     ]
+    },
+    {
+     "id": "p6_20",
+     "rect": [
+      5,
+      2,
+      50,
+      8
+     ],
+     "gen": "a long chain of colourful paper lanterns hanging along the big tree branch",
+     "say": [
+      "oto",
+      "Lights! Lots of lights!"
+     ],
+     "bg": "гирлянд от фенерчета",
+     "pad": 2,
+     "big": 1,
+     "pos": [
+      3.06,
+      0.098,
+      53.841,
+      11.719
+     ],
+     "star": [
+      93.2,
+      22.5
+     ]
+    },
+    {
+     "id": "p6_21",
+     "rect": [
+      88,
+      12,
+      7,
+      9
+     ],
+     "gen": "a round beehive hanging from the tree branch",
+     "say": [
+      "oto",
+      "A beehive! Bzzz!"
+     ],
+     "bg": "кошер",
+     "pad": 2,
+     "pos": [
+      86.003,
+      10.352,
+      10.612,
+      12.5
+     ],
+     "star": [
+      77.9,
+      32.8
+     ]
+    },
+    {
+     "id": "p6_22",
+     "rect": [
+      40,
+      24,
+      6,
+      8
+     ],
+     "gen": "a bunch of yellow bananas hanging from the vine",
+     "say": [
+      "oto",
+      "Bananas! Yellow!"
+     ],
+     "bg": "банани",
+     "pad": 2,
+     "pos": [
+      39.258,
+      22.07,
+      8.464,
+      11.719
+     ],
+     "star": [
+      71.5,
+      10.8
+     ]
+    },
+    {
+     "id": "p6_23",
+     "say": [
+      "oto",
+      "Mmm! Bananas!"
+     ],
+     "bg": "кошница с плодове",
+     "pos": [
+      12.0,
+      88.0,
+      6.678,
+      9.0
+     ],
+     "star": [
+      70,
+      10
+     ],
+     "sprite": "p6_23",
+     "anim": "none"
+    },
+    {
+     "id": "p6_24",
+     "rect": [
+      5,
+      58,
+      6,
+      6
+     ],
+     "gen": "a small jar of golden honey standing on top of the barrel",
+     "say": [
+      "oto",
+      "Honey! Yummy!"
+     ],
+     "bg": "мед",
+     "pad": 2,
+     "pos": [
+      3.19,
+      56.152,
+      9.57,
+      9.57
+     ],
+     "star": [
+      76.2,
+      21.4
+     ]
+    },
+    {
+     "sprite": "c_bizzy",
+     "pos": [
+      76,
+      13,
+      4.56,
+      8
+     ],
+     "star": [
+      60,
+      8
+     ],
+     "anim": "bob",
+     "say": [
+      "bee",
+      "Bzzz! Hello!"
+     ],
+     "reply": [
+      "oto",
+      "Listen! Bzzz!"
+     ],
+     "bg": "пчеличката",
+     "big": 1,
+     "where": "Where's the bee?",
+     "id": "p6_25"
+    },
+    {
+     "id": "p6_26",
+     "rect": [
+      60,
+      45,
+      30,
+      5
+     ],
+     "gen": "a garland of colourful jungle flowers along the zoo fence",
+     "say": [
+      "oto",
+      "Flowers! Goodbye!"
+     ],
+     "bg": "венец на оградата",
+     "pad": 2,
+     "pos": [
+      58.008,
+      43.164,
+      33.919,
+      8.691
+     ],
+     "star": [
+      92.5,
+      23.6
+     ]
+    },
+    {
+     "id": "p6_27",
+     "say": [
+      "oto",
+      "A sloth! Sleepy!"
+     ],
+     "bg": "ленивец",
+     "pos": [
+      21.0,
+      14.0,
+      8.47,
+      10.0
+     ],
+     "star": [
+      70,
+      10
+     ],
+     "sprite": "p6_27",
+     "anim": "none"
+    },
+    {
+     "id": "p6_28",
+     "rect": [
+      36,
+      55,
+      6,
+      4
+     ],
+     "gen": "a small sandcastle on the sandy beach",
+     "say": [
+      "oto",
+      "A sandcastle!"
+     ],
+     "bg": "пясъчен замък",
+     "pad": 2,
+     "pos": [
+      34.635,
+      53.027,
+      9.245,
+      7.715
+     ],
+     "star": [
+      61.3,
+      29.1
+     ]
+    },
+    {
+     "id": "p6_29",
+     "rect": [
+      70,
+      88,
+      6,
+      6
+     ],
+     "gen": "a small orange fish jumping out of the water with a splash",
+     "say": [
+      "oto",
+      "A fish! Jump!"
+     ],
+     "bg": "рибка",
+     "pad": 2,
+     "pos": [
+      68.099,
+      86.035,
+      9.701,
+      9.863
+     ],
+     "star": [
+      73.2,
+      10.9
+     ]
+    },
+    {
+     "id": "p6_30",
+     "rect": [
+      30,
+      3,
+      45,
+      20
+     ],
+     "gen": "a big flock of colourful tropical birds flying away over the river",
+     "say": [
+      "oto",
+      "Goodbye, Momo!"
+     ],
+     "bg": "ято птици",
+     "pad": 2,
+     "big": 1,
+     "soft": "radial",
+     "reply": [
+      "momo",
+      "Goodbye! I can jump!"
+     ],
+     "pos": [
+      28.646,
+      1.172,
+      48.112,
+      23.73
+     ],
+     "star": [
+      80.5,
+      21.0
+     ]
+    }
+   ],
+   "secrets": [
+    {
+     "id": "p6_s1",
+     "sprite_gen": "a cute little red panda sitting, facing the viewer, friendly",
+     "say": [
+      "oto",
+      "A red panda! Hello!"
+     ],
+     "bg": "тайна: червена панда",
+     "pos": [
+      1.0,
+      43.0,
+      3.787,
+      7.0
+     ],
+     "tap": [
+      0.0,
+      42.0,
+      5.787,
+      9.0
+     ]
+    },
+    {
+     "id": "p6_s2",
+     "sprite_gen": "a cute little chameleon with a curly tail, smiling",
+     "say": [
+      "oto",
+      "A chameleon! Green!"
+     ],
+     "bg": "тайна: хамелеон",
+     "pos": [
+      92.0,
+      37.0,
+      4.391,
+      6.0
+     ],
+     "tap": [
+      91.0,
+      36.0,
+      6.391,
+      8.0
+     ]
+    }
+   ]
+  },
+  "7": {
+   "base": "p7_base",
+   "oto": {
+    "x": 6,
+    "y": 28,
+    "h": 52
+   },
+   "layers": [
+    {
+     "id": "p7_01",
+     "rect": [
+      33,
+      18,
+      13,
+      20
+     ],
+     "gen": "the same tree, now full of shiny red apples among its leaves",
+     "say": [
+      "oto",
+      "Apples! Red apples!"
+     ],
+     "bg": "ябълки по дървото",
+     "pad": 2,
+     "where": "Where are the apples?",
+     "pos": [
+      31.055,
+      16.016,
+      16.602,
+      23.73
+     ],
+     "star": [
+      85.1,
+      10.3
+     ]
+    },
+    {
+     "id": "p7_02",
+     "rect": [
+      48,
+      22,
+      12,
+      16
+     ],
+     "gen": "the same tree, now full of yellow bunches of bananas hanging among big leaves",
+     "say": [
+      "oto",
+      "Bananas!"
+     ],
+     "bg": "банани",
+     "pad": 2,
+     "where": "Where are the bananas?",
+     "pos": [
+      46.484,
+      20.02,
+      15.43,
+      19.824
+     ],
+     "star": [
+      91.6,
+      7.9
+     ]
+    },
+    {
+     "id": "p7_03",
+     "rect": [
+      64,
+      14,
+      17,
+      22
+     ],
+     "gen": "the same tree, now full of round bright orange oranges",
+     "say": [
+      "oto",
+      "An orange orange!"
+     ],
+     "bg": "портокали",
+     "pad": 2,
+     "where": "Where are the oranges?",
+     "pos": [
+      62.044,
+      12.109,
+      20.768,
+      25.781
+     ],
+     "star": [
+      86.8,
+      13.6
+     ]
+    },
+    {
+     "id": "p7_04",
+     "rect": [
+      30,
+      53,
+      9,
+      8
+     ],
+     "gen": "a wicker basket full of red apples standing on the grass by the path",
+     "say": [
+      "oto",
+      "A basket of apples!"
+     ],
+     "bg": "кошница с ябълки",
+     "pad": 2,
+     "pos": [
+      28.06,
+      51.074,
+      12.435,
+      11.719
+     ],
+     "star": [
+      82.7,
+      16.7
+     ]
+    },
+    {
+     "id": "p7_05",
+     "sprite": "c_bizzy",
+     "pos": [
+      60.5,
+      31,
+      7.41,
+      13
+     ],
+     "star": [
+      60,
+      8
+     ],
+     "anim": "bob",
+     "say": [
+      "bee",
+      "Bzzz! Hello! I'm Bizzy."
+     ],
+     "reply": [
+      "oto",
+      "Hello, Bizzy!"
+     ],
+     "bg": "пчеличката Bizzy",
+     "big": 1,
+     "where": "Where's Bizzy?"
+    },
+    {
+     "id": "p7_06",
+     "rect": [
+      48,
+      42,
+      14,
+      6
+     ],
+     "gen": "a red and white checked tablecloth spread on the wooden picnic table",
+     "say": [
+      "oto",
+      "A picnic!"
+     ],
+     "bg": "покривка",
+     "pad": 2,
+     "pos": [
+      46.81,
+      41.211,
+      16.927,
+      8.691
+     ],
+     "star": [
+      87.7,
+      22.5
+     ]
+    },
+    {
+     "id": "p7_07",
+     "rect": [
+      50,
+      39,
+      5,
+      5
+     ],
+     "gen": "a big round birthday cake with cream standing on the picnic table",
+     "say": [
+      "oto",
+      "Cake! I like cake!"
+     ],
+     "bg": "торта",
+     "pad": 2,
+     "where": "Where's the cake?",
+     "pos": [
+      48.568,
+      37.402,
+      8.333,
+      8.398
+     ],
+     "star": [
+      89.1,
+      24.4
+     ]
+    },
+    {
+     "id": "p7_08",
+     "rect": [
+      56,
+      40,
+      5,
+      4
+     ],
+     "gen": "a loaf of bread on a wooden board on the picnic table",
+     "say": [
+      "oto",
+      "Bread!"
+     ],
+     "bg": "хляб",
+     "pad": 2,
+     "where": "Where's the bread?",
+     "pos": [
+      54.036,
+      38.574,
+      8.464,
+      7.324
+     ],
+     "star": [
+      57.7,
+      18.7
+     ]
+    },
+    {
+     "id": "p7_09",
+     "rect": [
+      36,
+      40,
+      7,
+      13
+     ],
+     "gen": "a small cart selling ice cream with a striped umbrella, three ice cream cones on top",
+     "say": [
+      "oto",
+      "Ice cream!"
+     ],
+     "bg": "количка за сладолед",
+     "pad": 2,
+     "where": "Where's the ice cream?",
+     "pos": [
+      34.049,
+      38.086,
+      10.807,
+      16.797
+     ],
+     "star": [
+      75.9,
+      22.1
+     ]
+    },
+    {
+     "id": "p7_10",
+     "rect": [
+      16,
+      62,
+      7,
+      12
+     ],
+     "gen": "a tall wooden ladder leaning against the barrel with a full basket of fruit on top",
+     "say": [
+      "oto",
+      "Apples, bananas, oranges!"
+     ],
+     "bg": "кошница с плодове",
+     "pad": 2,
+     "big": 1,
+     "pos": [
+      14.128,
+      60.059,
+      10.807,
+      15.82
+     ],
+     "star": [
+      88.6,
+      11.1
+     ]
+    },
+    {
+     "id": "p7_11",
+     "rect": [
+      82,
+      37,
+      13,
+      10
+     ],
+     "gen": "the market stall counter now filled with bottles of milk and jugs of water and glasses",
+     "say": [
+      "oto",
+      "Milk and water!"
+     ],
+     "bg": "мляко и вода в павилиона",
+     "pad": 2,
+     "where": "Where's the milk?",
+     "pos": [
+      80.208,
+      35.254,
+      16.536,
+      12.988
+     ],
+     "star": [
+      89.0,
+      18.0
+     ]
+    },
+    {
+     "id": "p7_12",
+     "rect": [
+      85,
+      30,
+      10,
+      6
+     ],
+     "gen": "a colourful striped awning flag garland along the roof of the market stall",
+     "say": [
+      "oto",
+      "Look! Flags!"
+     ],
+     "bg": "знаменца на павилиона",
+     "pad": 2,
+     "pos": [
+      83.008,
+      28.516,
+      13.672,
+      9.375
+     ],
+     "star": [
+      83.3,
+      20.8
+     ]
+    },
+    {
+     "id": "p7_13",
+     "rect": [
+      72,
+      48,
+      8,
+      7
+     ],
+     "gen": "a small brown cow standing behind the fence",
+     "say": [
+      "oto",
+      "A cow! Moo! Milk!"
+     ],
+     "bg": "кравичка",
+     "pad": 2,
+     "pos": [
+      70.182,
+      46.094,
+      11.589,
+      10.645
+     ],
+     "star": [
+      77.5,
+      9.2
+     ]
+    },
+    {
+     "id": "p7_14",
+     "rect": [
+      63,
+      51,
+      7,
+      6
+     ],
+     "gen": "a wooden well with a bucket of water",
+     "say": [
+      "oto",
+      "Water!"
+     ],
+     "bg": "кладенец",
+     "pad": 2,
+     "pos": [
+      61.003,
+      49.023,
+      10.872,
+      9.863
+     ],
+     "star": [
+      91.0,
+      12.9
+     ]
+    },
+    {
+     "id": "p7_15",
+     "rect": [
+      44,
+      57,
+      14,
+      6
+     ],
+     "gen": "a long wooden table with ten glasses of water and milk in a row",
+     "say": [
+      "oto",
+      "Drink!"
+     ],
+     "bg": "чаши за всички",
+     "pad": 2,
+     "big": 1,
+     "reply": [
+      "polly",
+      "Drink! Drink!"
+     ],
+     "pos": [
+      42.057,
+      55.078,
+      17.839,
+      9.766
+     ],
+     "star": [
+      90.1,
+      11.0
+     ]
+    },
+    {
+     "id": "p7_16",
+     "rect": [
+      24,
+      35,
+      8,
+      12
+     ],
+     "gen": "a small apple tree full of green and red apples",
+     "say": [
+      "oto",
+      "More apples!"
+     ],
+     "bg": "още ябълки",
+     "pad": 2,
+     "pos": [
+      22.005,
+      33.008,
+      11.914,
+      15.82
+     ],
+     "star": [
+      88.0,
+      8.6
+     ]
+    },
+    {
+     "id": "p7_17",
+     "rect": [
+      56,
+      30,
+      6,
+      9
+     ],
+     "gen": "a beehive hanging from the branch",
+     "say": [
+      "oto",
+      "Bizzy's house! Bzzz!"
+     ],
+     "bg": "кошерът на Bizzy",
+     "pad": 2,
+     "pos": [
+      54.036,
+      28.027,
+      9.896,
+      12.793
+     ],
+     "star": [
+      63.2,
+      19.8
+     ]
+    },
+    {
+     "id": "p7_18",
+     "rect": [
+      88,
+      52,
+      9,
+      8
+     ],
+     "gen": "a crate full of red apples next to the market stall",
+     "say": [
+      "oto",
+      "Ten apples!"
+     ],
+     "bg": "касетка ябълки",
+     "pad": 2,
+     "pos": [
+      86.003,
+      50.098,
+      12.826,
+      11.719
+     ],
+     "star": [
+      76.1,
+      10.8
+     ]
+    },
+    {
+     "id": "p7_19",
+     "rect": [
+      22,
+      4,
+      14,
+      8
+     ],
+     "gen": "three small birds flying in the sky",
+     "say": [
+      "oto",
+      "Birds!"
+     ],
+     "bg": "птици",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      21.875,
+      3.516,
+      13.737,
+      9.277
+     ],
+     "star": [
+      75.0,
+      25.3
+     ]
+    },
+    {
+     "id": "p7_20",
+     "rect": [
+      22,
+      40,
+      10,
+      11
+     ],
+     "gen": "a big beautiful layered cake with cream, decorated with exactly ten red apples on top, standing on a small wooden table on the grass",
+     "say": [
+      "oto",
+      "Ten apples! Clap your hands!"
+     ],
+     "bg": "тортата с десет ябълки",
+     "pad": 2,
+     "big": 1,
+     "pos": [
+      20.378,
+      38.086,
+      13.542,
+      14.746
+     ],
+     "star": [
+      84.1,
+      11.9
+     ]
+    },
+    {
+     "id": "p7_21",
+     "rect": [
+      66,
+      57,
+      8,
+      6
+     ],
+     "gen": "a small table with a teapot and cups",
+     "say": [
+      "oto",
+      "Tea!"
+     ],
+     "bg": "чай",
+     "pad": 2,
+     "pos": [
+      64.062,
+      55.078,
+      11.849,
+      9.766
+     ],
+     "star": [
+      90.7,
+      11.0
+     ]
+    },
+    {
+     "id": "p7_22",
+     "rect": [
+      82,
+      62,
+      10,
+      8
+     ],
+     "gen": "a basket of pears and grapes on the river bank",
+     "say": [
+      "oto",
+      "Mmm! Fruit!"
+     ],
+     "bg": "плодове на брега",
+     "pad": 2,
+     "pos": [
+      80.078,
+      60.059,
+      13.737,
+      11.816
+     ],
+     "star": [
+      78.7,
+      18.2
+     ]
+    },
+    {
+     "id": "p7_23",
+     "rect": [
+      38,
+      58,
+      6,
+      4
+     ],
+     "gen": "a picnic blanket with a plate of sandwiches",
+     "say": [
+      "oto",
+      "Bread! Yummy!"
+     ],
+     "bg": "сандвичи",
+     "pad": 2,
+     "pos": [
+      36.003,
+      56.055,
+      9.896,
+      7.715
+     ],
+     "star": [
+      88.8,
+      12.7
+     ]
+    },
+    {
+     "id": "p7_24",
+     "rect": [
+      0,
+      62,
+      6,
+      7
+     ],
+     "gen": "a jar of honey on top of the barrel",
+     "say": [
+      "oto",
+      "Honey!"
+     ],
+     "bg": "мед",
+     "pad": 2,
+     "pos": [
+      0.0,
+      60.059,
+      7.878,
+      10.352
+     ],
+     "star": [
+      86.8,
+      18.9
+     ]
+    },
+    {
+     "id": "p7_25",
+     "rect": [
+      60,
+      2,
+      30,
+      12
+     ],
+     "gen": "the first white snowflakes falling from a grey cloud in the sky",
+     "say": [
+      "oto",
+      "Brrr! Snow!"
+     ],
+     "bg": "първият сняг",
+     "pad": 2,
+     "big": 1,
+     "soft": "radial",
+     "reply": [
+      "polly",
+      "Snow! Snow!"
+     ],
+     "pos": [
+      58.138,
+      0.098,
+      33.073,
+      15.723
+     ],
+     "star": [
+      78.9,
+      20.5
+     ]
+    },
+    {
+     "id": "p7_26",
+     "rect": [
+      38,
+      24,
+      8,
+      10
+     ],
+     "gen": "autumn leaves turning orange and red on the small tree",
+     "say": [
+      "oto",
+      "Orange leaves!"
+     ],
+     "bg": "есенни листа",
+     "pad": 2,
+     "pos": [
+      36.003,
+      22.07,
+      10.938,
+      13.77
+     ],
+     "star": [
+      86.3,
+      9.9
+     ]
+    },
+    {
+     "id": "p7_27",
+     "rect": [
+      90,
+      15,
+      9,
+      20
+     ],
+     "gen": "orange and red autumn leaves on the big tree",
+     "say": [
+      "oto",
+      "Look! Leaves!"
+     ],
+     "bg": "есенни листа на голямото дърво",
+     "pad": 2,
+     "pos": [
+      88.021,
+      13.086,
+      11.914,
+      23.73
+     ],
+     "star": [
+      91.3,
+      7.0
+     ]
+    },
+    {
+     "id": "p7_28",
+     "rect": [
+      70,
+      64,
+      8,
+      6
+     ],
+     "gen": "a few fallen red apples on the grass by the river",
+     "say": [
+      "oto",
+      "Apples!"
+     ],
+     "bg": "паднали ябълки",
+     "pad": 2,
+     "pos": [
+      68.62,
+      62.012,
+      11.133,
+      8.887
+     ],
+     "star": [
+      74.3,
+      28.6
+     ]
+    },
+    {
+     "id": "p7_29",
+     "rect": [
+      95,
+      64,
+      5,
+      8
+     ],
+     "gen": "a small scarecrow with a straw hat in the field",
+     "say": [
+      "oto",
+      "Hello, scarecrow!"
+     ],
+     "bg": "плашило",
+     "pad": 2,
+     "pos": [
+      93.164,
+      62.012,
+      6.771,
+      10.742
+     ],
+     "star": [
+      85.6,
+      21.8
+     ]
+    },
+    {
+     "id": "p7_30",
+     "rect": [
+      22,
+      2,
+      22,
+      16
+     ],
+     "gen": "a big bunch of colourful balloons floating up over the orchard",
+     "say": [
+      "oto",
+      "Goodbye, Bizzy!"
+     ],
+     "bg": "балони",
+     "pad": 2,
+     "big": 1,
+     "soft": "radial",
+     "reply": [
+      "bee",
+      "Goodbye, Oto! Here you are. An apple!"
+     ],
+     "pos": [
+      20.573,
+      0.098,
+      25.0,
+      19.629
+     ],
+     "star": [
+      80.2,
+      20.4
+     ]
+    }
+   ],
+   "secrets": [
+    {
+     "id": "p7_s1",
+     "sprite_gen": "a cute little brown hedgehog carrying a red apple on its back, friendly",
+     "say": [
+      "oto",
+      "A hedgehog with an apple!"
+     ],
+     "bg": "тайна: таралеж с ябълка",
+     "pos": [
+      62.0,
+      57.0,
+      4.328,
+      6.0
+     ],
+     "tap": [
+      61.0,
+      56.0,
+      6.328,
+      8.0
+     ]
+    },
+    {
+     "id": "p7_s2",
+     "sprite_gen": "a cute little ladybird sitting on a green leaf, smiling",
+     "say": [
+      "oto",
+      "A ladybird! Red!"
+     ],
+     "bg": "тайна: калинка",
+     "pos": [
+      63.0,
+      47.5,
+      2.595,
+      3.5
+     ],
+     "tap": [
+      62.0,
+      46.5,
+      4.595,
+      5.5
+     ]
+    }
+   ]
+  },
+  "8": {
+   "base": "p8_base",
+   "oto": {
+    "x": 4,
+    "y": 31,
+    "h": 52
+   },
+   "layers": [
+    {
+     "id": "p8_01",
+     "say": [
+      "oto",
+      "A hat! Put on your hat!"
+     ],
+     "bg": "шапка на простора",
+     "where": "Where's the hat?",
+     "pos": [
+      68.0,
+      31.0,
+      4.276,
+      19.0
+     ],
+     "star": [
+      70,
+      10
+     ],
+     "sprite": "p8_01",
+     "anim": "none"
+    },
+    {
+     "id": "p8_02",
+     "say": [
+      "oto",
+      "A jacket! Put on your jacket!"
+     ],
+     "bg": "яке на простора",
+     "where": "Where's the jacket?",
+     "pos": [
+      68.0,
+      31.0,
+      4.702,
+      19.0
+     ],
+     "star": [
+      70,
+      10
+     ],
+     "sprite": "p8_02",
+     "anim": "none",
+     "z": 3
+    },
+    {
+     "id": "p8_03",
+     "rect": [
+      79,
+      19,
+      14,
+      19
+     ],
+     "gen": "bright warm golden light glowing strongly in the round window, the door window and the side window of the cabin, warm light spilling onto the snow in front of the door",
+     "say": [
+      "oto",
+      "Look! A light!"
+     ],
+     "bg": "светлина в къщичката",
+     "pad": 3,
+     "pos": [
+      76.172,
+      16.113,
+      19.336,
+      24.609
+     ],
+     "star": [
+      80.5,
+      23.4
+     ],
+     "soft": "radial"
+    },
+    {
+     "id": "p8_04",
+     "rect": [
+      47,
+      6,
+      22,
+      14
+     ],
+     "gen": "big soft snowflakes falling from the grey sky",
+     "say": [
+      "oto",
+      "Snow! It's cold!"
+     ],
+     "bg": "снежинки",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      50.0,
+      5.273,
+      20.768,
+      15.332
+     ],
+     "star": [
+      62.4,
+      42.0
+     ]
+    },
+    {
+     "id": "p8_05",
+     "sprite": "c_pippo",
+     "pos": [
+      54,
+      42,
+      7.35,
+      16
+     ],
+     "star": [
+      60,
+      8
+     ],
+     "anim": "bob",
+     "say": [
+      "penguin",
+      "Hello! I'm Pippo. Thank you! I'm warm!"
+     ],
+     "reply": [
+      "oto",
+      "Hello, Pippo!"
+     ],
+     "bg": "пингвинчето Pippo",
+     "big": 1,
+     "where": "Where's Pippo?"
+    },
+    {
+     "id": "p8_06",
+     "rect": [
+      89,
+      22,
+      6,
+      9
+     ],
+     "gen": "a thin curl of white smoke rising from the chimney",
+     "say": [
+      "oto",
+      "Smoke! It's warm!"
+     ],
+     "bg": "дим от комина",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      88.932,
+      26.074,
+      6.901,
+      5.176
+     ]
+    },
+    {
+     "id": "p8_07",
+     "rect": [
+      66,
+      28,
+      4,
+      7
+     ],
+     "gen": "a pair of striped blue socks hanging on the washing line with pegs",
+     "say": [
+      "oto",
+      "Socks!"
+     ],
+     "bg": "чорапи",
+     "pad": 2,
+     "where": "Where are the socks?",
+     "pos": [
+      65.495,
+      27.344,
+      6.38,
+      9.473
+     ],
+     "star": [
+      85.7,
+      23.7
+     ]
+    },
+    {
+     "id": "p8_08",
+     "rect": [
+      77,
+      38,
+      6,
+      5
+     ],
+     "gen": "a pair of small blue boots standing on the cabin steps",
+     "say": [
+      "oto",
+      "Shoes! Shoes for your feet!"
+     ],
+     "bg": "обувки",
+     "pad": 2,
+     "where": "Where are the shoes?",
+     "pos": [
+      75.195,
+      36.328,
+      9.635,
+      8.496
+     ],
+     "star": [
+      76.4,
+      28.7
+     ]
+    },
+    {
+     "id": "p8_09",
+     "rect": [
+      40,
+      52,
+      10,
+      8
+     ],
+     "gen": "a small wooden sled with a red blanket in the snow",
+     "say": [
+      "oto",
+      "A sled!"
+     ],
+     "bg": "шейна",
+     "pad": 2,
+     "pos": [
+      39.714,
+      51.465,
+      10.677,
+      10.156
+     ],
+     "star": [
+      86.0,
+      20.2
+     ]
+    },
+    {
+     "id": "p8_10",
+     "rect": [
+      44,
+      36,
+      14,
+      10
+     ],
+     "gen": "a big happy snowman with a carrot nose, a hat and a scarf",
+     "say": [
+      "oto",
+      "A snowman! Hello!"
+     ],
+     "bg": "снежен човек",
+     "pad": 2,
+     "big": 1,
+     "reply": [
+      "polly",
+      "Snow! Snow!"
+     ],
+     "pos": [
+      43.229,
+      34.082,
+      15.365,
+      13.77
+     ],
+     "star": [
+      71.2,
+      13.7
+     ]
+    },
+    {
+     "id": "p8_11",
+     "rect": [
+      60,
+      43,
+      10,
+      6
+     ],
+     "gen": "many small penguin footprints in the snow",
+     "say": [
+      "oto",
+      "Pippo's feet!"
+     ],
+     "bg": "стъпки в снега",
+     "pad": 2,
+     "pos": [
+      60.156,
+      41.113,
+      10.091,
+      9.57
+     ],
+     "star": [
+      91.7,
+      37.8
+     ]
+    },
+    {
+     "id": "p8_12",
+     "rect": [
+      83,
+      46,
+      8,
+      7
+     ],
+     "gen": "a small pile of round snowballs",
+     "say": [
+      "oto",
+      "Snowballs! One, two, three!"
+     ],
+     "bg": "снежни топки",
+     "pad": 2,
+     "pos": [
+      81.315,
+      45.117,
+      11.589,
+      9.766
+     ],
+     "star": [
+      74.2,
+      24.0
+     ]
+    },
+    {
+     "id": "p8_13",
+     "rect": [
+      2,
+      12,
+      10,
+      10
+     ],
+     "gen": "a small red bird sitting on the snowy fir branch",
+     "say": [
+      "oto",
+      "A bird! It's cold!"
+     ],
+     "bg": "птиче на елата",
+     "pad": 2,
+     "pos": [
+      0.0,
+      12.598,
+      12.37,
+      11.23
+     ],
+     "star": [
+      85.3,
+      44.3
+     ]
+    },
+    {
+     "id": "p8_14",
+     "rect": [
+      29,
+      39,
+      10,
+      5
+     ],
+     "gen": "a few kids' ice skates lying on the edge of the frozen river",
+     "say": [
+      "oto",
+      "Skates!"
+     ],
+     "bg": "кънки",
+     "pad": 2,
+     "pos": [
+      28.581,
+      38.477,
+      10.677,
+      7.422
+     ],
+     "star": [
+      84.8,
+      48.7
+     ]
+    },
+    {
+     "id": "p8_15",
+     "say": [
+      "oto",
+      "Phew! It's hot!"
+     ],
+     "bg": "слънцето излиза",
+     "big": 1,
+     "reply": [
+      "penguin",
+      "Phew! It's hot!"
+     ],
+     "pos": [
+      52.0,
+      9.0,
+      6.5,
+      10.0
+     ],
+     "star": [
+      70,
+      10
+     ],
+     "sprite": "p8_15",
+     "anim": "none"
+    },
+    {
+     "id": "p8_16",
+     "rect": [
+      72,
+      26,
+      4,
+      7
+     ],
+     "gen": "a turquoise T-shirt hanging on the washing line with pegs",
+     "say": [
+      "oto",
+      "A T-shirt!"
+     ],
+     "bg": "тениска",
+     "pad": 2,
+     "where": "Where's the T-shirt?",
+     "pos": [
+      70.052,
+      25.293,
+      7.552,
+      9.57
+     ],
+     "star": [
+      69.8,
+      24.5
+     ]
+    },
+    {
+     "id": "p8_17",
+     "rect": [
+      74,
+      26,
+      3,
+      8
+     ],
+     "gen": "a small pink dress hanging on the washing line with pegs",
+     "say": [
+      "oto",
+      "A pink dress!"
+     ],
+     "bg": "рокля",
+     "pad": 2,
+     "where": "Where's the dress?",
+     "pos": [
+      72.005,
+      24.902,
+      5.794,
+      10.938
+     ],
+     "star": [
+      71.9,
+      14.3
+     ]
+    },
+    {
+     "id": "p8_18",
+     "rect": [
+      70,
+      52,
+      8,
+      7
+     ],
+     "gen": "green grass and a few small spring flowers peeking through the melting snow",
+     "say": [
+      "oto",
+      "Flowers! It's hot!"
+     ],
+     "bg": "цветя под снега",
+     "pad": 2,
+     "pos": [
+      68.034,
+      51.27,
+      11.849,
+      9.57
+     ],
+     "star": [
+      89.6,
+      51.0
+     ]
+    },
+    {
+     "id": "p8_19",
+     "rect": [
+      88,
+      54,
+      8,
+      8
+     ],
+     "gen": "a small wooden bench with a folded colourful blanket",
+     "say": [
+      "oto",
+      "A blanket!"
+     ],
+     "bg": "пейка с одеяло",
+     "pad": 2,
+     "pos": [
+      86.003,
+      52.344,
+      11.914,
+      11.523
+     ],
+     "star": [
+      88.5,
+      32.2
+     ]
+    },
+    {
+     "id": "p8_20",
+     "rect": [
+      30,
+      58,
+      12,
+      10
+     ],
+     "gen": "a small pond of melted snow water sparkling in the sun with a rubber duck",
+     "say": [
+      "oto",
+      "Water! Hot, hot!"
+     ],
+     "bg": "разтопен сняг",
+     "pad": 2,
+     "big": 1,
+     "pos": [
+      28.06,
+      56.836,
+      15.82,
+      11.621
+     ],
+     "star": [
+      76.5,
+      17.6
+     ]
+    },
+    {
+     "id": "p8_21",
+     "rect": [
+      56,
+      2,
+      30,
+      16
+     ],
+     "gen": "a dark grey rain cloud with raindrops falling",
+     "say": [
+      "oto",
+      "Look! Rain!"
+     ],
+     "bg": "дъждовен облак",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      54.232,
+      0.195,
+      33.073,
+      18.945
+     ],
+     "star": [
+      81.1,
+      21.6
+     ]
+    },
+    {
+     "id": "p8_22",
+     "rect": [
+      82,
+      58,
+      8,
+      10
+     ],
+     "gen": "a bright yellow umbrella open on the snow",
+     "say": [
+      "oto",
+      "An umbrella!"
+     ],
+     "bg": "чадър",
+     "pad": 2,
+     "pos": [
+      80.013,
+      56.055,
+      11.849,
+      13.77
+     ],
+     "star": [
+      76.9,
+      12.1
+     ]
+    },
+    {
+     "id": "p8_23",
+     "rect": [
+      72,
+      58,
+      6,
+      8
+     ],
+     "gen": "a pair of red rain boots standing in the snow",
+     "say": [
+      "oto",
+      "Boots! Put on your shoes!"
+     ],
+     "bg": "гумени ботуши",
+     "pad": 2,
+     "pos": [
+      70.052,
+      56.25,
+      9.115,
+      11.621
+     ],
+     "star": [
+      72.9,
+      23.5
+     ]
+    },
+    {
+     "id": "p8_24",
+     "rect": [
+      44,
+      62,
+      10,
+      6
+     ],
+     "gen": "a few puddles with rain drops and ripples",
+     "say": [
+      "oto",
+      "Rain! One, two, three!"
+     ],
+     "bg": "локви",
+     "pad": 2,
+     "pos": [
+      42.057,
+      60.449,
+      13.867,
+      9.375
+     ],
+     "star": [
+      83.1,
+      17.7
+     ]
+    },
+    {
+     "id": "p8_25",
+     "rect": [
+      70,
+      6,
+      24,
+      18
+     ],
+     "gen": "a bright rainbow over the snowy mountain after the rain",
+     "say": [
+      "oto",
+      "Look! A rainbow!"
+     ],
+     "bg": "дъга след дъжда",
+     "pad": 2,
+     "big": 1,
+     "soft": "radial",
+     "reply": [
+      "penguin",
+      "Thank you!"
+     ],
+     "pos": [
+      69.01,
+      4.102,
+      25.977,
+      21.68
+     ],
+     "star": [
+      79.7,
+      16.2
+     ]
+    },
+    {
+     "id": "p8_26",
+     "rect": [
+      10,
+      45,
+      8,
+      10
+     ],
+     "gen": "a wooden signpost pointing down the river with a tiny painted tree house on it, no letters",
+     "say": [
+      "oto",
+      "A house in a tree! Let's go!"
+     ],
+     "bg": "табела към къщичката",
+     "pad": 2,
+     "pos": [
+      9.245,
+      43.066,
+      10.677,
+      13.77
+     ],
+     "star": [
+      89.6,
+      17.7
+     ]
+    },
+    {
+     "id": "p8_27",
+     "rect": [
+      22,
+      4,
+      14,
+      10
+     ],
+     "gen": "a flock of small birds flying in the sky",
+     "say": [
+      "oto",
+      "Birds!"
+     ],
+     "bg": "птици",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      20.638,
+      4.297,
+      15.299,
+      10.059
+     ],
+     "star": [
+      91.9,
+      22.3
+     ]
+    },
+    {
+     "id": "p8_28",
+     "rect": [
+      58,
+      64,
+      8,
+      6
+     ],
+     "gen": "a basket of warm mittens and scarves",
+     "say": [
+      "oto",
+      "Put on your hat!"
+     ],
+     "bg": "кошница с ръкавици",
+     "pad": 2,
+     "pos": [
+      56.12,
+      62.012,
+      11.719,
+      9.863
+     ],
+     "star": [
+      80.0,
+      11.9
+     ]
+    },
+    {
+     "id": "p8_29",
+     "rect": [
+      90,
+      40,
+      8,
+      8
+     ],
+     "gen": "a cute snow angel imprint in the snow",
+     "say": [
+      "oto",
+      "Look! Snow!"
+     ],
+     "bg": "снежен ангел",
+     "pad": 2,
+     "pos": [
+      88.021,
+      39.062,
+      11.458,
+      10.84
+     ],
+     "star": [
+      90.9,
+      14.1
+     ]
+    },
+    {
+     "id": "p8_30",
+     "rect": [
+      34,
+      16,
+      26,
+      16
+     ],
+     "gen": "colourful festive lights strung between the fir trees across the clearing",
+     "say": [
+      "oto",
+      "Goodbye, Pippo!"
+     ],
+     "bg": "гирлянд за сбогуване",
+     "pad": 2,
+     "big": 1,
+     "reply": [
+      "penguin",
+      "Thank you, Oto! Goodbye!"
+     ],
+     "pos": [
+      32.096,
+      15.527,
+      29.818,
+      18.359
+     ],
+     "star": [
+      89.3,
+      26.1
+     ]
+    }
+   ],
+   "secrets": [
+    {
+     "id": "p8_s1",
+     "sprite_gen": "a cute white baby polar bear sitting, facing the viewer, friendly",
+     "say": [
+      "oto",
+      "A polar bear! Hello!"
+     ],
+     "bg": "тайна: бяло мече",
+     "pos": [
+      90.0,
+      60.0,
+      6.804,
+      12.0
+     ],
+     "tap": [
+      89.0,
+      59.0,
+      8.804,
+      14.0
+     ]
+    },
+    {
+     "id": "p8_s2",
+     "sprite_gen": "a cute small white snow rabbit with long ears sitting, friendly",
+     "say": [
+      "oto",
+      "A white rabbit!"
+     ],
+     "bg": "тайна: бяло зайче",
+     "pos": [
+      3.0,
+      34.0,
+      2.278,
+      6.0
+     ],
+     "tap": [
+      2.0,
+      33.0,
+      4.278,
+      8.0
+     ]
+    }
+   ]
+  },
+  "9": {
+   "base": "p9_base",
+   "oto": {
+    "x": 13,
+    "y": 36,
+    "h": 50
+   },
+   "layers": [
+    {
+     "id": "p9_01",
+     "rect": [
+      66,
+      15,
+      6,
+      11
+     ],
+     "gen": "the same round tree house door, now wide open, warm golden light inside",
+     "say": [
+      "oto",
+      "Look! A door! Open the door!"
+     ],
+     "bg": "вратата се отваря",
+     "pad": 2,
+     "where": "Where's the door?",
+     "pos": [
+      65.69,
+      14.648,
+      8.008,
+      13.184
+     ],
+     "star": [
+      74.8,
+      15.6
+     ]
+    },
+    {
+     "id": "p9_02",
+     "rect": [
+      75,
+      15,
+      5,
+      8
+     ],
+     "gen": "warm golden light glowing in the round window",
+     "say": [
+      "oto",
+      "A window!"
+     ],
+     "bg": "светлина в прозореца",
+     "pad": 3,
+     "soft": "radial",
+     "where": "Where's the window?",
+     "pos": [
+      72.201,
+      13.184,
+      8.854,
+      12.5
+     ],
+     "star": [
+      84.6,
+      19.5
+     ]
+    },
+    {
+     "id": "p9_03",
+     "rect": [
+      73,
+      22,
+      8,
+      4
+     ],
+     "gen": "a small wooden flower box with red flowers under the window",
+     "say": [
+      "oto",
+      "Flowers! A pretty house!"
+     ],
+     "bg": "сандъче с цветя",
+     "pad": 2,
+     "pos": [
+      72.526,
+      20.703,
+      10.221,
+      7.129
+     ],
+     "star": [
+      77.7,
+      19.2
+     ]
+    },
+    {
+     "id": "p9_04",
+     "rect": [
+      56,
+      24,
+      5,
+      7
+     ],
+     "gen": "a small lit lantern hanging on the platform railing",
+     "say": [
+      "oto",
+      "A light!"
+     ],
+     "bg": "фенерче",
+     "pad": 3,
+     "soft": "radial",
+     "pos": [
+      53.451,
+      21.289,
+      8.268,
+      12.305
+     ],
+     "star": [
+      85.2,
+      25.4
+     ]
+    },
+    {
+     "id": "p9_05",
+     "sprite": "c_sammy",
+     "pos": [
+      60.5,
+      18,
+      5.82,
+      11
+     ],
+     "star": [
+      60,
+      8
+     ],
+     "anim": "bob",
+     "big": 1,
+     "say": [
+      "sammy",
+      "Hello! I'm Sammy. Come in!"
+     ],
+     "reply": [
+      "oto",
+      "Hello, Sammy!"
+     ],
+     "bg": "катеричката Sammy",
+     "where": "Where's Sammy?"
+    },
+    {
+     "id": "p9_06",
+     "rect": [
+      55,
+      51,
+      8,
+      8
+     ],
+     "gen": "a small round wooden table standing on the grass under the tree",
+     "say": [
+      "oto",
+      "A table!"
+     ],
+     "bg": "маса",
+     "pad": 2,
+     "where": "Where's the table?",
+     "pos": [
+      54.427,
+      50.195,
+      9.961,
+      9.277
+     ],
+     "star": [
+      80.4,
+      11.6
+     ]
+    },
+    {
+     "id": "p9_07",
+     "rect": [
+      64,
+      52,
+      5,
+      8
+     ],
+     "gen": "a small wooden chair standing on the grass next to the table",
+     "say": [
+      "oto",
+      "A chair!"
+     ],
+     "bg": "стол",
+     "pad": 2,
+     "where": "Where's the chair?",
+     "pos": [
+      63.216,
+      50.098,
+      6.966,
+      10.742
+     ],
+     "star": [
+      77.6,
+      12.7
+     ]
+    },
+    {
+     "id": "p9_08",
+     "rect": [
+      82,
+      44,
+      14,
+      9
+     ],
+     "gen": "a cosy hammock bed with a blue blanket and a pillow hanging between two tree roots",
+     "say": [
+      "oto",
+      "A bed! Sammy's bed!"
+     ],
+     "bg": "легло-хамак",
+     "pad": 2,
+     "where": "Where's the bed?",
+     "pos": [
+      80.013,
+      42.09,
+      17.578,
+      12.793
+     ],
+     "star": [
+      89.6,
+      21.4
+     ]
+    },
+    {
+     "id": "p9_09",
+     "rect": [
+      60,
+      60,
+      10,
+      4
+     ],
+     "gen": "a small round colourful rug lying on the grass",
+     "say": [
+      "oto",
+      "A rug!"
+     ],
+     "bg": "килимче",
+     "pad": 2,
+     "pos": [
+      59.245,
+      58.398,
+      12.63,
+      6.348
+     ],
+     "star": [
+      89.7,
+      16.9
+     ]
+    },
+    {
+     "id": "p9_10",
+     "rect": [
+      58,
+      3,
+      30,
+      30
+     ],
+     "gen": "many small warm glowing round paper lanterns hanging all around the tree house in the branches",
+     "say": [
+      "oto",
+      "Lights! Sammy's house!"
+     ],
+     "bg": "фенерчета около къщичката",
+     "pad": 2,
+     "big": 1,
+     "soft": "radial",
+     "reply": [
+      "sammy",
+      "My house! Thank you!"
+     ],
+     "pos": [
+      56.185,
+      1.66,
+      33.008,
+      32.52
+     ],
+     "star": [
+      79.9,
+      23.4
+     ]
+    },
+    {
+     "id": "p9_11",
+     "rect": [
+      51,
+      56,
+      6,
+      6
+     ],
+     "gen": "an open cardboard box standing on the grass",
+     "say": [
+      "oto",
+      "A box!"
+     ],
+     "bg": "кутия",
+     "pad": 2,
+     "where": "Where's the box?",
+     "pos": [
+      50.065,
+      54.004,
+      8.854,
+      9.863
+     ],
+     "star": [
+      81.6,
+      11.9
+     ]
+    },
+    {
+     "id": "p9_12",
+     "sprite": "w_ball",
+     "pos": [
+      52.5,
+      54,
+      1.99,
+      3
+     ],
+     "star": [
+      60,
+      8
+     ],
+     "anim": "none",
+     "say": [
+      "oto",
+      "On the box!"
+     ],
+     "bg": "топка върху кутията"
+    },
+    {
+     "id": "p9_13",
+     "rect": [
+      71,
+      53,
+      6,
+      5
+     ],
+     "gen": "a small basket full of brown acorns on the grass",
+     "say": [
+      "oto",
+      "Acorns! One, two, three!"
+     ],
+     "bg": "кошница с жълъди",
+     "pad": 2,
+     "pos": [
+      69.857,
+      51.562,
+      8.659,
+      8.301
+     ],
+     "star": [
+      70.7,
+      17.6
+     ]
+    },
+    {
+     "id": "p9_14",
+     "rect": [
+      52,
+      25,
+      5,
+      9
+     ],
+     "gen": "a small wooden bird feeder house hanging from a branch on a rope",
+     "say": [
+      "oto",
+      "A little house for birds!"
+     ],
+     "bg": "къщичка за птици",
+     "pad": 2,
+     "pos": [
+      50.13,
+      23.242,
+      8.659,
+      12.598
+     ],
+     "star": [
+      72.9,
+      17.8
+     ]
+    },
+    {
+     "id": "p9_15",
+     "rect": [
+      87,
+      52,
+      10,
+      9
+     ],
+     "gen": "an open wooden toy chest full of colourful balls standing on the grass",
+     "say": [
+      "oto",
+      "Balls! In the box!"
+     ],
+     "bg": "сандък с топки",
+     "pad": 2,
+     "big": 1,
+     "reply": [
+      "polly",
+      "In the box! In the box!"
+     ],
+     "pos": [
+      85.026,
+      50.098,
+      13.672,
+      12.793
+     ],
+     "star": [
+      83.8,
+      9.9
+     ]
+    },
+    {
+     "id": "p9_16",
+     "sprite": "w_ball",
+     "pos": [
+      57.5,
+      56.9,
+      1.73,
+      2.6
+     ],
+     "star": [
+      60,
+      8
+     ],
+     "anim": "none",
+     "say": [
+      "oto",
+      "Under the table!"
+     ],
+     "bg": "топка под масата"
+    },
+    {
+     "id": "p9_17",
+     "sprite": "w_teddy",
+     "pos": [
+      65,
+      51.9,
+      1.82,
+      3.6
+     ],
+     "star": [
+      60,
+      8
+     ],
+     "anim": "none",
+     "say": [
+      "oto",
+      "On the chair!"
+     ],
+     "bg": "мече на стола"
+    },
+    {
+     "id": "p9_18",
+     "sprite": "w_car",
+     "pos": [
+      88,
+      45.9,
+      2.34,
+      2.6
+     ],
+     "star": [
+      60,
+      8
+     ],
+     "anim": "none",
+     "say": [
+      "oto",
+      "In the bed!"
+     ],
+     "bg": "количка в хамака"
+    },
+    {
+     "id": "p9_19",
+     "rect": [
+      68,
+      46,
+      4,
+      7
+     ],
+     "gen": "a small red mailbox on a post at the foot of the rope ladder",
+     "say": [
+      "oto",
+      "A letter for Sammy!"
+     ],
+     "bg": "пощенска кутия",
+     "pad": 2,
+     "pos": [
+      66.471,
+      45.41,
+      7.096,
+      9.473
+     ],
+     "star": [
+      71.6,
+      14.4
+     ]
+    },
+    {
+     "id": "p9_20",
+     "rect": [
+      52,
+      28,
+      44,
+      26
+     ],
+     "gen": "many tiny glowing fireflies floating around the big tree",
+     "say": [
+      "oto",
+      "Look! Where's the ball? Under the bed!"
+     ],
+     "bg": "светулки",
+     "pad": 2,
+     "big": 1,
+     "soft": "radial",
+     "reply": [
+      "polly",
+      "Under the bed! Under the bed!"
+     ],
+     "pos": [
+      51.628,
+      26.465,
+      45.052,
+      28.418
+     ],
+     "star": [
+      80.1,
+      26.5
+     ]
+    },
+    {
+     "id": "p9_21",
+     "rect": [
+      84,
+      53,
+      5,
+      5
+     ],
+     "gen": "a small present box with a red ribbon on the grass",
+     "say": [
+      "oto",
+      "A present!"
+     ],
+     "bg": "подарък",
+     "pad": 2,
+     "pos": [
+      82.292,
+      52.148,
+      8.529,
+      7.52
+     ],
+     "star": [
+      63.4,
+      19.5
+     ]
+    },
+    {
+     "id": "p9_22",
+     "rect": [
+      63,
+      0,
+      9,
+      18
+     ],
+     "gen": "a bunch of colourful balloons tied to the tree house roof",
+     "say": [
+      "oto",
+      "Balloons! A party!"
+     ],
+     "bg": "балони на покрива",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      61.393,
+      0.098,
+      12.565,
+      18.457
+     ],
+     "star": [
+      80.3,
+      20.1
+     ]
+    },
+    {
+     "id": "p9_23",
+     "rect": [
+      73,
+      34,
+      5,
+      7
+     ],
+     "gen": "a child's drawing of the blue sea with a sun pinned to the tree trunk",
+     "say": [
+      "oto",
+      "The sea! Let's go!"
+     ],
+     "bg": "рисунка на морето",
+     "pad": 2,
+     "pos": [
+      71.745,
+      32.812,
+      7.617,
+      10.059
+     ],
+     "star": [
+      78.6,
+      27.2
+     ]
+    },
+    {
+     "id": "p9_24",
+     "rect": [
+      56,
+      48,
+      4,
+      4
+     ],
+     "gen": "a small cake with a candle on the table",
+     "say": [
+      "oto",
+      "A cake! A party!"
+     ],
+     "bg": "торта",
+     "pad": 2,
+     "pos": [
+      55.599,
+      46.582,
+      5.729,
+      6.934
+     ],
+     "star": [
+      68.2,
+      28.2
+     ]
+    },
+    {
+     "id": "p9_25",
+     "rect": [
+      57,
+      7,
+      28,
+      6
+     ],
+     "gen": "a garland of small colourful triangle flags along the tree house roof",
+     "say": [
+      "oto",
+      "Flags! A party at the sea!"
+     ],
+     "bg": "знаменца",
+     "pad": 2,
+     "big": 1,
+     "reply": [
+      "sammy",
+      "A party! A party!"
+     ],
+     "pos": [
+      56.38,
+      5.469,
+      29.427,
+      9.375
+     ],
+     "star": [
+      91.8,
+      25.0
+     ]
+    },
+    {
+     "id": "p9_26",
+     "rect": [
+      60,
+      72,
+      6,
+      5
+     ],
+     "gen": "a small white paper boat floating on the river",
+     "say": [
+      "oto",
+      "A little boat!"
+     ],
+     "bg": "книжна лодка",
+     "pad": 2,
+     "pos": [
+      59.896,
+      70.41,
+      6.38,
+      8.008
+     ],
+     "star": [
+      80.6,
+      19.5
+     ]
+    },
+    {
+     "id": "p9_27",
+     "rect": [
+      91,
+      58,
+      6,
+      8
+     ],
+     "gen": "a small fishing rod leaning against a rock",
+     "say": [
+      "oto",
+      "Fish! The sea!"
+     ],
+     "bg": "въдица",
+     "pad": 2,
+     "pos": [
+      89.258,
+      56.055,
+      8.984,
+      11.816
+     ],
+     "star": [
+      79.7,
+      18.2
+     ]
+    },
+    {
+     "id": "p9_28",
+     "rect": [
+      28,
+      8,
+      9,
+      7
+     ],
+     "gen": "a white seagull flying in the sky",
+     "say": [
+      "oto",
+      "A seagull! The sea!"
+     ],
+     "bg": "чайка",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      28.06,
+      8.203,
+      8.984,
+      7.715
+     ],
+     "star": [
+      81.2,
+      16.5
+     ]
+    },
+    {
+     "id": "p9_29",
+     "rect": [
+      24,
+      72,
+      8,
+      8
+     ],
+     "gen": "a small suitcase and a backpack standing on the dock",
+     "say": [
+      "oto",
+      "My bag! Let's go!"
+     ],
+     "bg": "куфарче",
+     "pad": 2,
+     "pos": [
+      22.005,
+      70.02,
+      11.914,
+      11.816
+     ],
+     "star": [
+      91.3,
+      14.9
+     ]
+    },
+    {
+     "id": "p9_30",
+     "rect": [
+      30,
+      4,
+      24,
+      24
+     ],
+     "gen": "a big bunch of colourful balloons floating over the river",
+     "say": [
+      "oto",
+      "Goodbye, house!"
+     ],
+     "bg": "балони",
+     "pad": 2,
+     "big": 1,
+     "soft": "radial",
+     "reply": [
+      "sammy",
+      "Goodbye, house! Let's go!"
+     ],
+     "pos": [
+      29.102,
+      2.441,
+      26.237,
+      27.441
+     ],
+     "star": [
+      73.2,
+      20.3
+     ]
+    }
+   ],
+   "secrets": [
+    {
+     "id": "p9_s1",
+     "sprite_gen": "a cute little woodpecker with a red cap, friendly",
+     "say": [
+      "oto",
+      "A woodpecker! Knock, knock!"
+     ],
+     "bg": "тайна: кълвач",
+     "pos": [
+      77.0,
+      38.0,
+      4.022,
+      8.0
+     ],
+     "tap": [
+      76.0,
+      37.0,
+      6.022,
+      10.0
+     ]
+    },
+    {
+     "id": "p9_s2",
+     "sprite_gen": "a cute little snail with a colourful shell, smiling",
+     "say": [
+      "oto",
+      "A snail! Hello!"
+     ],
+     "bg": "тайна: охлювче",
+     "pos": [
+      80.0,
+      59.5,
+      3.515,
+      4.5
+     ],
+     "tap": [
+      79.0,
+      58.5,
+      5.515,
+      6.5
+     ]
+    }
+   ]
+  },
+  "10": {
+   "base": "p10_base",
+   "oto": {
+    "x": 4,
+    "y": 38,
+    "h": 50
+   },
+   "layers": [
+    {
+     "id": "p10_01",
+     "rect": [
+      30,
+      0,
+      40,
+      30
+     ],
+     "gen": "the grey clouds part and a bright blue summer sky with a few white fluffy clouds appears",
+     "say": [
+      "oto",
+      "Look! The sea!"
+     ],
+     "bg": "небето се изчиства",
+     "pad": 2,
+     "soft": "radial",
+     "star": [
+      77.8,
+      18.9
+     ],
+     "pos": [
+      28.255,
+      0.195,
+      43.49,
+      31.445
+     ]
+    },
+    {
+     "id": "p10_02",
+     "rect": [
+      70,
+      4,
+      14,
+      18
+     ],
+     "gen": "a big bright warm sun shining",
+     "say": [
+      "oto",
+      "The sun! I'm happy!"
+     ],
+     "bg": "слънце",
+     "pad": 2,
+     "soft": "radial",
+     "star": [
+      73.9,
+      17.6
+     ],
+     "pos": [
+      68.229,
+      2.148,
+      16.992,
+      21.582
+     ]
+    },
+    {
+     "id": "p10_03",
+     "rect": [
+      44,
+      44,
+      9,
+      6
+     ],
+     "gen": "a red and white beach ball lying on the sand",
+     "say": [
+      "oto",
+      "A ball! Let's play!"
+     ],
+     "bg": "плажна топка",
+     "pad": 2,
+     "star": [
+      79.2,
+      24.4
+     ],
+     "pos": [
+      42.448,
+      43.066,
+      10.938,
+      8.789
+     ]
+    },
+    {
+     "id": "p10_04",
+     "rect": [
+      60,
+      46,
+      8,
+      8
+     ],
+     "gen": "a striped beach umbrella standing in the sand",
+     "say": [
+      "oto",
+      "An umbrella!"
+     ],
+     "bg": "чадър",
+     "pad": 2,
+     "star": [
+      88.5,
+      7.4
+     ],
+     "pos": [
+      58.008,
+      44.043,
+      11.914,
+      11.816
+     ]
+    },
+    {
+     "sprite": "bubbles",
+     "pos": [
+      40,
+      75,
+      5.36,
+      7
+     ],
+     "star": [
+      60,
+      8
+     ],
+     "anim": "bob",
+     "say": [
+      "bubbles",
+      "Hello, Oto! How are you?"
+     ],
+     "reply": [
+      "oto",
+      "I'm happy!"
+     ],
+     "bg": "Bubbles и Bella",
+     "id": "p10_05",
+     "big": 1,
+     "where": "Where's Bubbles?",
+     "with": [
+      {
+       "sprite": "c_bella",
+       "pos": [
+        50,
+        46,
+        5.9,
+        9
+       ],
+       "star": [
+        60,
+        8
+       ],
+       "anim": "bob",
+       "say": [
+        "bella",
+        "I'm happy! Hello, friends!"
+       ],
+       "reply": [
+        "oto",
+        "Hello, Bella!"
+       ],
+       "bg": "Bella"
+      }
+     ]
+    },
+    {
+     "id": "p10_06",
+     "rect": [
+      78,
+      40,
+      20,
+      8
+     ],
+     "gen": "a garland of colourful triangle flags strung across the wooden beach stage",
+     "say": [
+      "oto",
+      "Flags! A party!"
+     ],
+     "bg": "знаменца на сцената",
+     "pad": 2,
+     "pos": [
+      77.604,
+      39.844,
+      21.745,
+      9.668
+     ],
+     "star": [
+      89.2,
+      12.1
+     ]
+    },
+    {
+     "id": "p10_07",
+     "rect": [
+      32,
+      52,
+      10,
+      8
+     ],
+     "gen": "a big sand castle with little flags",
+     "say": [
+      "oto",
+      "A sand castle!"
+     ],
+     "bg": "пясъчен замък",
+     "pad": 2,
+     "pos": [
+      30.013,
+      50.098,
+      13.867,
+      11.719
+     ],
+     "star": [
+      83.6,
+      12.5
+     ]
+    },
+    {
+     "id": "p10_08",
+     "rect": [
+      86,
+      62,
+      10,
+      8
+     ],
+     "gen": "a big beach towel and a basket of apples on the sand",
+     "say": [
+      "oto",
+      "Apples! I'm hungry!"
+     ],
+     "bg": "кошница с ябълки",
+     "pad": 2,
+     "pos": [
+      84.049,
+      60.156,
+      13.867,
+      11.719
+     ],
+     "star": [
+      77.0,
+      25.0
+     ]
+    },
+    {
+     "id": "p10_09",
+     "rect": [
+      22,
+      46,
+      8,
+      9
+     ],
+     "gen": "a small palm tree with a hammock",
+     "say": [
+      "oto",
+      "A hammock! I'm tired!"
+     ],
+     "bg": "хамак",
+     "pad": 2,
+     "pos": [
+      20.638,
+      44.043,
+      11.263,
+      12.793
+     ],
+     "star": [
+      74.6,
+      9.9
+     ]
+    },
+    {
+     "sprite": "w_mum",
+     "pos": [
+      56,
+      54,
+      3.12,
+      10
+     ],
+     "star": [
+      60,
+      8
+     ],
+     "anim": "bob",
+     "say": [
+      "mum",
+      "Hello, Oto!"
+     ],
+     "reply": [
+      "oto",
+      "Mum! I'm happy!"
+     ],
+     "bg": "семейството, Pippo и Bizzy",
+     "id": "p10_10",
+     "big": 1,
+     "where": "Where's the baby?",
+     "with": [
+      {
+       "sprite": "w_dad",
+       "pos": [
+        61,
+        53,
+        4.33,
+        11
+       ],
+       "star": [
+        60,
+        8
+       ],
+       "anim": "bob",
+       "say": [
+        "dad",
+        "Hello, Oto!"
+       ],
+       "reply": [
+        "oto",
+        "Dad!"
+       ],
+       "bg": "татко"
+      },
+      {
+       "sprite": "w_baby",
+       "pos": [
+        65,
+        59,
+        2.12,
+        5
+       ],
+       "star": [
+        60,
+        8
+       ],
+       "anim": "bob",
+       "say": [
+        "baby",
+        "Oto! Oto!"
+       ],
+       "reply": [
+        "oto",
+        "The baby is tired."
+       ],
+       "bg": "бебето"
+      },
+      {
+       "sprite": "c_pippo",
+       "pos": [
+        69,
+        55,
+        4.13,
+        9
+       ],
+       "star": [
+        60,
+        8
+       ],
+       "anim": "bob",
+       "say": [
+        "penguin",
+        "I'm hungry!"
+       ],
+       "reply": [
+        "oto",
+        "Here you are, Pippo!"
+       ],
+       "bg": "Pippo"
+      },
+      {
+       "sprite": "c_bizzy",
+       "pos": [
+        74,
+        46,
+        4.56,
+        8
+       ],
+       "star": [
+        60,
+        8
+       ],
+       "anim": "bob",
+       "say": [
+        "bee",
+        "Bzzz! Apples and cake!"
+       ],
+       "reply": [
+        "oto",
+        "Thank you, Bizzy!"
+       ],
+       "bg": "Bizzy"
+      }
+     ]
+    },
+    {
+     "id": "p10_11",
+     "rect": [
+      60,
+      26,
+      12,
+      10
+     ],
+     "gen": "a few white seagulls flying over the sea",
+     "say": [
+      "oto",
+      "Seagulls!"
+     ],
+     "bg": "чайки",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      59.31,
+      25.977,
+      12.891,
+      8.984
+     ],
+     "star": [
+      79.3,
+      31.5
+     ]
+    },
+    {
+     "id": "p10_12",
+     "rect": [
+      44,
+      36,
+      14,
+      8
+     ],
+     "gen": "a small white sailboat on the sea",
+     "say": [
+      "oto",
+      "A boat on the sea!"
+     ],
+     "bg": "платноходка",
+     "pad": 2,
+     "pos": [
+      42.448,
+      35.645,
+      14.974,
+      10.254
+     ],
+     "star": [
+      48.7,
+      20.0
+     ]
+    },
+    {
+     "id": "p10_13",
+     "rect": [
+      86,
+      72,
+      8,
+      6
+     ],
+     "gen": "a few colourful sea shells and a starfish on the sand",
+     "say": [
+      "oto",
+      "Shells! One, two, three!"
+     ],
+     "bg": "миди",
+     "pad": 2,
+     "pos": [
+      84.375,
+      70.02,
+      11.133,
+      8.887
+     ],
+     "star": [
+      70.8,
+      18.7
+     ]
+    },
+    {
+     "id": "p10_14",
+     "rect": [
+      70,
+      54,
+      8,
+      6
+     ],
+     "gen": "a picnic blanket with cups and a jug of water",
+     "say": [
+      "oto",
+      "Water! Drink!"
+     ],
+     "bg": "пикник",
+     "pad": 2,
+     "pos": [
+      68.034,
+      55.566,
+      11.784,
+      6.25
+     ],
+     "star": [
+      81.2,
+      29.7
+     ]
+    },
+    {
+     "sprite": "c_bobby",
+     "pos": [
+      63,
+      67,
+      3.94,
+      8
+     ],
+     "star": [
+      60,
+      8
+     ],
+     "anim": "bob",
+     "say": [
+      "bobby",
+      "A present! Let's play!"
+     ],
+     "reply": [
+      "oto",
+      "Thank you, Bobby!"
+     ],
+     "bg": "Bobby и Momo",
+     "id": "p10_15",
+     "big": 1,
+     "where": "Where's the present?",
+     "with": [
+      {
+       "sprite": "w_monkey",
+       "pos": [
+        67.5,
+        67,
+        4.71,
+        9
+       ],
+       "star": [
+        60,
+        8
+       ],
+       "anim": "bob",
+       "say": [
+        "momo",
+        "Let's play!"
+       ],
+       "reply": [
+        "oto",
+        "Let's play!"
+       ],
+       "bg": "Momo"
+      },
+      {
+       "sprite": "w_present",
+       "pos": [
+        48,
+        61,
+        3.54,
+        6
+       ],
+       "star": [
+        60,
+        8
+       ],
+       "anim": "bob",
+       "say": [
+        "oto",
+        "A present! Open the present!"
+       ],
+       "reply": [
+        "polly",
+        "Present! Present!"
+       ],
+       "bg": "подаръкът"
+      }
+     ]
+    },
+    {
+     "id": "p10_16",
+     "rect": [
+      33,
+      40,
+      10,
+      8
+     ],
+     "gen": "a colourful kite flying in the sky",
+     "say": [
+      "oto",
+      "A kite! Let's play!"
+     ],
+     "bg": "хвърчило",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      31.771,
+      38.477,
+      11.523,
+      10.449
+     ],
+     "star": [
+      82.5,
+      22.4
+     ]
+    },
+    {
+     "id": "p10_17",
+     "rect": [
+      26,
+      62,
+      8,
+      7
+     ],
+     "gen": "a small toy train on the sand",
+     "say": [
+      "oto",
+      "A train!"
+     ],
+     "bg": "влакче",
+     "pad": 2,
+     "pos": [
+      24.284,
+      60.84,
+      11.589,
+      10.059
+     ],
+     "star": [
+      91.0,
+      13.6
+     ]
+    },
+    {
+     "id": "p10_18",
+     "rect": [
+      80,
+      60,
+      6,
+      5
+     ],
+     "gen": "a toy car on the sand",
+     "say": [
+      "oto",
+      "A car!"
+     ],
+     "bg": "количка",
+     "pad": 2,
+     "pos": [
+      78.06,
+      59.277,
+      9.049,
+      7.617
+     ],
+     "star": [
+      84.9,
+      24.4
+     ]
+    },
+    {
+     "id": "p10_19",
+     "rect": [
+      0,
+      4,
+      24,
+      22
+     ],
+     "gen": "colourful balloons floating in the sky",
+     "say": [
+      "oto",
+      "Balloons! A party!"
+     ],
+     "bg": "балони",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      0.846,
+      2.246,
+      25.065,
+      25.391
+     ],
+     "star": [
+      69.6,
+      21.2
+     ]
+    },
+    {
+     "id": "p10_20",
+     "rect": [
+      78,
+      46,
+      20,
+      12
+     ],
+     "gen": "the beach stage decorated with flowers and colourful lights",
+     "say": [
+      "oto",
+      "A party! Let's sing!"
+     ],
+     "bg": "сцената за шоуто",
+     "pad": 2,
+     "big": 1,
+     "reply": [
+      "polly",
+      "Party! Party!"
+     ],
+     "pos": [
+      77.148,
+      44.043,
+      21.68,
+      15.527
+     ],
+     "star": [
+      86.2,
+      17.0
+     ]
+    },
+    {
+     "id": "p10_21",
+     "say": [
+      "oto",
+      "A cake! Happy birthday!"
+     ],
+     "bg": "торта с шест свещички",
+     "where": "Where's the cake?",
+     "pos": [
+      43.0,
+      48.0,
+      7.626,
+      11.0
+     ],
+     "star": [
+      70,
+      10
+     ],
+     "sprite": "p10_21",
+     "anim": "none"
+    },
+    {
+     "id": "p10_22",
+     "rect": [
+      50,
+      4,
+      18,
+      16
+     ],
+     "gen": "colourful confetti and streamers falling from the sky",
+     "say": [
+      "oto",
+      "Hooray!"
+     ],
+     "bg": "конфети",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      48.372,
+      2.637,
+      20.312,
+      19.238
+     ],
+     "star": [
+      82.4,
+      26.9
+     ]
+    },
+    {
+     "id": "p10_23",
+     "rect": [
+      58,
+      52,
+      6,
+      5
+     ],
+     "gen": "a pile of wrapped presents with ribbons",
+     "say": [
+      "oto",
+      "Presents!"
+     ],
+     "bg": "подаръци",
+     "pad": 2,
+     "pos": [
+      56.055,
+      50.098,
+      9.831,
+      8.789
+     ],
+     "star": [
+      90.1,
+      18.9
+     ]
+    },
+    {
+     "id": "p10_24",
+     "rect": [
+      12,
+      2,
+      14,
+      14
+     ],
+     "gen": "a few colourful party lanterns hanging from the palm tree",
+     "say": [
+      "oto",
+      "Lights!"
+     ],
+     "bg": "фенерчета на палмата",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      11.589,
+      2.441,
+      15.495,
+      15.43
+     ],
+     "star": [
+      76.9,
+      19.6
+     ]
+    },
+    {
+     "sprite": "c_dina",
+     "pos": [
+      34,
+      65,
+      3.24,
+      7
+     ],
+     "star": [
+      60,
+      8
+     ],
+     "anim": "bob",
+     "say": [
+      "dina",
+      "Happy birthday, Oto!"
+     ],
+     "reply": [
+      "oto",
+      "Thank you, Dina!"
+     ],
+     "bg": "Dina и Sammy",
+     "id": "p10_25",
+     "big": 1,
+     "where": "Where's Sammy?",
+     "with": [
+      {
+       "sprite": "c_sammy",
+       "pos": [
+        28,
+        54,
+        4.23,
+        8
+       ],
+       "star": [
+        60,
+        8
+       ],
+       "anim": "bob",
+       "say": [
+        "sammy",
+        "Happy birthday, Oto!"
+       ],
+       "reply": [
+        "oto",
+        "Thank you, Sammy!"
+       ],
+       "bg": "Sammy"
+      },
+      {
+       "sprite": "w_duckling",
+       "pos": [
+        38,
+        70,
+        1.19,
+        3
+       ],
+       "star": [
+        60,
+        8
+       ],
+       "anim": "bob",
+       "say": [
+        "duckling",
+        "Quack!"
+       ],
+       "reply": [
+        "oto",
+        "A small baby!"
+       ],
+       "bg": "патенце"
+      }
+     ]
+    },
+    {
+     "id": "p10_26",
+     "rect": [
+      60,
+      62,
+      10,
+      6
+     ],
+     "gen": "big footprints and little footprints in the wet sand",
+     "say": [
+      "oto",
+      "Let's play!"
+     ],
+     "bg": "стъпки в пясъка",
+     "pad": 2,
+     "pos": [
+      58.008,
+      61.133,
+      13.867,
+      8.691
+     ],
+     "star": [
+      69.0,
+      15.7
+     ]
+    },
+    {
+     "id": "p10_27",
+     "rect": [
+      90,
+      30,
+      10,
+      14
+     ],
+     "gen": "a tall lighthouse on the rocks far away",
+     "say": [
+      "oto",
+      "A lighthouse!"
+     ],
+     "bg": "фар",
+     "pad": 2,
+     "pos": [
+      88.216,
+      38.672,
+      11.654,
+      7.129
+     ],
+     "star": [
+      91.1,
+      34.2
+     ]
+    },
+    {
+     "id": "p10_28",
+     "rect": [
+      2,
+      40,
+      14,
+      10
+     ],
+     "gen": "a wooden sign with a painted heart at the start of the boardwalk, no letters",
+     "say": [
+      "oto",
+      "I'm happy!"
+     ],
+     "bg": "табелка със сърце",
+     "pad": 2,
+     "pos": [
+      0.0,
+      38.184,
+      17.708,
+      13.672
+     ],
+     "star": [
+      82.4,
+      22.1
+     ]
+    },
+    {
+     "id": "p10_29",
+     "rect": [
+      60,
+      32,
+      30,
+      10
+     ],
+     "gen": "a few dolphins jumping in the sea",
+     "say": [
+      "oto",
+      "Dolphins! Hello!"
+     ],
+     "bg": "делфини",
+     "pad": 2,
+     "soft": "radial",
+     "pos": [
+      60.677,
+      31.543,
+      27.018,
+      11.816
+     ],
+     "star": [
+      65.1,
+      45.5
+     ]
+    },
+    {
+     "id": "p10_30",
+     "rect": [
+      20,
+      0,
+      60,
+      32
+     ],
+     "gen": "colourful fireworks bursting in the sky over the sea",
+     "say": [
+      "oto",
+      "Thank you, friends! I'm happy!"
+     ],
+     "bg": "заря",
+     "pad": 2,
+     "big": 1,
+     "soft": "radial",
+     "reply": [
+      "polly",
+      "See you soon! See you soon!"
+     ],
+     "pos": [
+      18.88,
+      0.195,
+      62.826,
+      33.691
+     ],
+     "star": [
+      79.7,
+      20.0
+     ]
+    }
+   ],
+   "secrets": [
+    {
+     "id": "p10_s1",
+     "sprite_gen": "a cute little orange crab with raised claws, smiling",
+     "say": [
+      "oto",
+      "A crab! Hello!"
+     ],
+     "bg": "тайна: раче",
+     "pos": [
+      92.0,
+      87.0,
+      3.745,
+      5.0
+     ],
+     "tap": [
+      91.0,
+      86.0,
+      5.745,
+      7.0
+     ]
+    },
+    {
+     "id": "p10_s2",
+     "sprite_gen": "a cute little green sea turtle sitting, friendly",
+     "say": [
+      "oto",
+      "A turtle! Happy birthday!"
+     ],
+     "bg": "тайна: костенурка",
+     "pos": [
+      90,
+      54,
+      4.136,
+      6.0
+     ],
+     "tap": [
+      89,
+      53,
+      6.136,
+      8.0
+     ]
+    }
+   ]
+  }
+ },
+ "voice": {
+  "tap": "Докосни искрицата!",
+  "done": "Ура! Пристанчето е готово! Рибката Bubbles ти дава своя печат.",
+  "album": "Това е албумът на Ото. Докосни нещо от картината и чуй думата.",
+  "hint": "Докосвай нещата на пристана – всяко казва своята дума. Звездичката показва какво още не си докоснал. А някъде се крият две тайни!",
+  "done2": "Ура! Поляната е цветна! Пеперудата Bella ти дава своя печат.",
+  "done3": "Ура! Цялото семейство на Ото е заедно! Семейството ти дава своя печат.",
+  "next": "Тук ще се появи нещо ново! Натисни „Продължи“ и изиграй кръга.",
+  "done4": "Ура! Пещерата свети! Прилепчето Bobby ти дава своя печат.",
+  "done5": "Ура! Водопадът блести! Патицата Dina ти дава своя печат.",
+  "done6": "Ура! Голямата гора е пълна с приятели! Маймунката Momo ти дава своя печат.",
+  "ba": "Виж! Така беше в началото… а така е сега. Това го нарисува ти!",
+  "done7": "Ура! Градината е пълна с плодове! Пчеличката Bizzy ти дава своя печат.",
+  "done8": "Ура! Снежната планина е топла и весела! Пингвинчето Pippo ти дава своя печат.",
+  "done9": "Ура! Къщичката на дървото свети! Катеричката Sammy ти дава своя печат.",
+  "done10": "Ура! Лодката стигна до морето! Всички приятели празнуват с теб!"
+ },
+ "mapsay": {
+  "1": [
+   [
+    "bubbles",
+    "Blub! Fish! Fish!"
+   ]
+  ],
+  "2": [
+   [
+    "bella",
+    "Hello! Butterfly!"
+   ]
+  ],
+  "3": [
+   [
+    "oto",
+    "My family!"
+   ]
+  ],
+  "4": [
+   [
+    "bobby",
+    "Hello! I'm Bobby."
+   ]
+  ],
+  "5": [
+   [
+    "dina",
+    "Quack! Duck!"
+   ]
+  ],
+  "6": [
+   [
+    "momo",
+    "Monkey! I can jump!"
+   ]
+  ],
+  "7": [
+   [
+    "bee",
+    "Bzzz! Bee!"
+   ]
+  ],
+  "8": [
+   [
+    "penguin",
+    "Hello! I'm Pippo."
+   ]
+  ],
+  "9": [
+   [
+    "sammy",
+    "Hello! I'm Sammy."
+   ]
+  ],
+  "10": [
+   [
+    "polly",
+    "Party! Party!"
+   ]
+  ]
+ },
+ "mapcast": {
+  "1": [
+   [
+    "polly",
+    16,
+    33,
+    7
+   ],
+   [
+    "w_fish",
+    29,
+    31,
+    3.6
+   ],
+   [
+    "w_fish",
+    19,
+    40,
+    3.2
+   ],
+   [
+    "w_fish",
+    33,
+    35,
+    3
+   ]
+  ],
+  "2": [
+   [
+    "p2_27",
+    33,
+    42,
+    5.5
+   ]
+  ],
+  "3": [
+   [
+    "w_sister",
+    62,
+    33,
+    6.88
+   ],
+   [
+    "w_grandma",
+    64.5,
+    32,
+    7.5
+   ],
+   [
+    "w_mum",
+    67,
+    32.5,
+    8.12
+   ],
+   [
+    "w_baby",
+    69.5,
+    33,
+    4.25
+   ],
+   [
+    "w_dad",
+    72,
+    32.5,
+    8.75
+   ],
+   [
+    "w_brother",
+    75,
+    33,
+    6.88
+   ],
+   [
+    "w_grandpa",
+    77.5,
+    32.5,
+    8.12
+   ]
+  ],
+  "4": [
+   [
+    "w_teddy",
+    85,
+    35,
+    4
+   ]
+  ],
+  "5": [
+   [
+    "w_duckling",
+    77,
+    67,
+    2.6
+   ],
+   [
+    "w_duckling",
+    79.5,
+    68,
+    2.6
+   ],
+   [
+    "w_duckling",
+    82,
+    67.5,
+    2.6
+   ],
+   [
+    "w_duckling",
+    84.5,
+    68.5,
+    2.4
+   ]
+  ],
+  "6": [
+   [
+    "w_snake",
+    46,
+    58,
+    3.2
+   ],
+   [
+    "w_frog",
+    59,
+    59,
+    3
+   ]
+  ],
+  "7": [
+   [
+    "w_apple",
+    14,
+    45,
+    2.6
+   ],
+   [
+    "w_banana",
+    19,
+    44,
+    2.4
+   ]
+  ],
+  "8": [
+   [
+    "c_pippo",
+    20,
+    77,
+    6
+   ]
+  ],
+  "9": [
+   [
+    "c_sammy",
+    57,
+    72,
+    7
+   ]
+  ],
+  "10": [
+   [
+    "c_bella",
+    82,
+    80,
+    5
+   ],
+   [
+    "c_bobby",
+    88,
+    79,
+    5
+   ]
+  ]
+ }
+}

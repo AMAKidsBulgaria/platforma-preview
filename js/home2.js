@@ -70,7 +70,7 @@
   // единно правило (26.10.2026): детето остава с групата – следващото домашно = НАЙ-НОВОТО възложено незавършено;
   // при еднакво време – по реда на програмата (BK < CH < MW, по номер). По-старите незавършени – „Доиграй“, по желание.
   function hwList(c) {   // възложените от учителя (от сървъра) + отворените с линк на това устройство; едно домашно – веднъж; най-новото първо
-    const srv = (rd("platforma.hw.server.v1", {})[c] || []), loc = (rd(HWK, {})[c] || []).filter(h => !srv.some(x => x.hw === h.hw));
+    const srv = (rd("platforma.hw.server.v1", {})[c] || []).filter(h => !/^EN/.test(h.lesson || "")), loc = (rd(HWK, {})[c] || []).filter(h => !srv.some(x => x.hw === h.hw));
     return srv.concat(loc).sort((a, b) => a.at > b.at ? -1 : a.at < b.at ? 1 : a.lesson < b.lesson ? -1 : 1);
   }
   function current(c) {
@@ -123,14 +123,17 @@
     // „Моят свят“ – живата картина на квартала на детето (неговите сгради и героят); докато няма нито една сграда – илюстрацията
     const built = c && Object.values(W.rounds || {}).some(r => r && r.length), live = built && window.WORLD && window.WORLD.preview ? window.WORLD.preview(W, did) : "";
     const worldArt = live ? live.replace('preserveAspectRatio="xMidYMid meet"', 'preserveAspectRatio="xMidYMid slice"') : `<img alt="" src="${H2I}tile_world.webp?v=1">`;
+    // английският (28.10.2026): отделна програма – плочка, щом учителят е възложил занятие по английски (или ?english=1 за преглед)
+    const enOn = (c && (rd("platforma.hw.server.v1", {})[c] || []).some(h => /^EN/.test(h.lesson || ""))) || /[?&]english=1/.test(location.search);
     screen().innerHTML = `<div class="h2-wrap" data-lead="${lead}" data-state="${cur.kind}">
       <header class="h2-head"><button type="button" class="h2-hero" id="h2-hero" aria-label="Моят герой">${face}</button>
         <div class="h2-hello"><h1>Здравей!</h1><p>${cur.kind === "open" ? "Да продължим ли?" : cur.kind === "done" ? "Домашното ти е готово." : "Какво ще играем днес?"}</p></div>
         <div class="h2-tr">${window.PILOT_SYNC && window.PILOT_SYNC.needsPick() ? '<button type="button" class="h2-adult" id="h2-who" aria-label="Смени дете">Смени дете</button>' : ""}<button type="button" class="h2-adult" id="h2-adult" aria-label="За възрастния">За възрастния</button></div></header>
       ${main}
-      <div class="h2-tiles">${tile("h2-world", worldArt, "Моят свят", "Какво построих", "world" + (live ? " live" : ""))}${tile("h2-learn", learnArt, "Играй и откривай", "Избери игра", "learn" + (lead === "learn" ? " lead" : ""))}</div></div>`;
+      <div class="h2-tiles">${tile("h2-world", worldArt, "Моят свят", "Какво построих", "world" + (live ? " live" : ""))}${tile("h2-learn", learnArt, "Играй и откривай", "Избери игра", "learn" + (lead === "learn" ? " lead" : ""))}${enOn ? tile("h2-en", `<img alt="" src="${H2I}tile_english.webp?v=1">`, "Английски", "Реката на Ото", "en") : ""}</div></div>`;
     const go = document.getElementById("h2-go"); if (go) go.addEventListener("click", () => launch(cur.h, cur.st.next));
     document.getElementById("h2-learn").addEventListener("click", () => window.APP.show("learn"));
+    const en = document.getElementById("h2-en"); if (en) en.addEventListener("click", () => { location.href = "english.html?go=journey"; });
     document.getElementById("h2-world").addEventListener("click", () => { window.WORLD_DISTRICT = did; window.APP.show("world"); });
     document.getElementById("h2-hero").addEventListener("click", () => { if (window.WORLD && window.WORLD.pickHero) window.WORLD.pickHero(render, !hero.av); });
     // възрастната зона: задържане 1,5 с (детето случайно не влиза); PIN – преди реалния пилот (стъпка 8)

@@ -1,0 +1,9157 @@
+[
+{
+"v": "animals",
+"t": "Goodbye, Oto!",
+"f": "animals_dc44638927.mp3"
+},
+{
+"v": "animals",
+"t": "Goodbye, Oto! See you soon!",
+"f": "animals_b1cb2f7872.mp3"
+},
+{
+"v": "animals",
+"t": "Happy birthday, Oto!",
+"f": "animals_692753cc2c.mp3"
+},
+{
+"v": "baby",
+"t": "Oto! Oto!",
+"f": "baby_a37a7830c0.mp3"
+},
+{
+"v": "bee",
+"t": "Bread, Oto?",
+"f": "bee_a8852eb727.mp3"
+},
+{
+"v": "bee",
+"t": "Bzzz! Apples and cake!",
+"f": "bee_5487af6367.mp3"
+},
+{
+"v": "bee",
+"t": "Bzzz! Bee!",
+"f": "bee_bf1ab64e6a.mp3"
+},
+{
+"v": "bee",
+"t": "Bzzz! Hello!",
+"f": "bee_062a819256.mp3"
+},
+{
+"v": "bee",
+"t": "Bzzz! Hello! I'm Bizzy.",
+"f": "bee_d1d536a798.mp3"
+},
+{
+"v": "bee",
+"t": "Bzzz! Hello! I'm Bizzy. Look! Apples! Bananas!",
+"f": "bee_755c42d0ea.mp3"
+},
+{
+"v": "bee",
+"t": "Bzzz! Here you are! Apples and cake!",
+"f": "bee_ee4a005020.mp3"
+},
+{
+"v": "bee",
+"t": "Goodbye, Oto! Here you are. An apple!",
+"f": "bee_8ae1cdf8db.mp3"
+},
+{
+"v": "bee",
+"t": "Hello!",
+"f": "bee_63508bf254.mp3"
+},
+{
+"v": "bee",
+"t": "Here you are, Oto. Cake! Eat, Oto! Eat!",
+"f": "bee_449b81d6c7.mp3"
+},
+{
+"v": "bee",
+"t": "Here you are, Polly. Drink!",
+"f": "bee_c79b47daa5.mp3"
+},
+{
+"v": "bee",
+"t": "Here you are.",
+"f": "bee_8433a519e6.mp3"
+},
+{
+"v": "bee",
+"t": "Look! Cake! Bread! Ice cream!",
+"f": "bee_fe2ea0f960.mp3"
+},
+{
+"v": "bee",
+"t": "Look! Snow!",
+"f": "bee_339013cf6f.mp3"
+},
+{
+"v": "bee",
+"t": "Mmm! I like cake!",
+"f": "bee_229d225930.mp3"
+},
+{
+"v": "bee",
+"t": "Thank you, Oto! I like oranges! I like apples!",
+"f": "bee_ebc90d728d.mp3"
+},
+{
+"v": "bella",
+"t": "Can you help me? One, two, three...",
+"f": "bella_c7f0bd8e70.mp3"
+},
+{
+"v": "bella",
+"t": "Go, Oto, go!",
+"f": "bella_14634da804.mp3"
+},
+{
+"v": "bella",
+"t": "Goodbye, Oto!",
+"f": "bella_555aafaf5d.mp3"
+},
+{
+"v": "bella",
+"t": "Hello! Butterfly!",
+"f": "bella_1ab06fe067.mp3"
+},
+{
+"v": "bella",
+"t": "Hello! I'm Bella.",
+"f": "bella_b44dce5edb.mp3"
+},
+{
+"v": "bella",
+"t": "Hello! I'm Bella. Red! Red!",
+"f": "bella_0f5efa7a9c.mp3"
+},
+{
+"v": "bella",
+"t": "How old are you, Oto?",
+"f": "bella_5b4980e3e4.mp3"
+},
+{
+"v": "bella",
+"t": "I like pink!",
+"f": "bella_75d569fc68.mp3"
+},
+{
+"v": "bella",
+"t": "I'm happy! Hello, friends!",
+"f": "bella_6cdc629ae9.mp3"
+},
+{
+"v": "bella",
+"t": "I'm sad. Where are my friends?",
+"f": "bella_47b421f046.mp3"
+},
+{
+"v": "bella",
+"t": "Jump, Oto! Turn around!",
+"f": "bella_9fc7620c23.mp3"
+},
+{
+"v": "bella",
+"t": "Oh! I'm happy!",
+"f": "bella_13eded32b4.mp3"
+},
+{
+"v": "bella",
+"t": "Orange? Purple? Pink? I like pink.",
+"f": "bella_95ed599323.mp3"
+},
+{
+"v": "bg",
+"t": "Polly казва кого или какво да посочиш. Докосни вярната картинка.",
+"f": "bg_174186b1fa.mp3"
+},
+{
+"v": "bg",
+"t": "Браво! Домашното е готово.",
+"f": "bg_6d8ffc7e93.mp3"
+},
+{
+"v": "bg",
+"t": "Браво! Играта свърши. Още веднъж?",
+"f": "bg_baaf413799.mp3"
+},
+{
+"v": "bg",
+"t": "Браво! Избери украса за пристана.",
+"f": "bg_d4bfe46605.mp3"
+},
+{
+"v": "bg",
+"t": "Браво! Лодката почива. Утре продължаваме с Ото!",
+"f": "bg_416f63b574.mp3"
+},
+{
+"v": "bg",
+"t": "Браво! Лодката стигна до морето! Ти премина целия път с Ото. Всички приятели ти благодарят!",
+"f": "bg_0fc1748e72.mp3"
+},
+{
+"v": "bg",
+"t": "Виж! Така беше в началото… а така е сега. Това го нарисува ти!",
+"f": "bg_2b504eb080.mp3"
+},
+{
+"v": "bg",
+"t": "Да",
+"f": "bg_a929e7dec8.mp3"
+},
+{
+"v": "bg",
+"t": "Двойки! Намери еднаквите картинки!",
+"f": "bg_b45254fea3.mp3"
+},
+{
+"v": "bg",
+"t": "До този пристан още не сме стигнали.",
+"f": "bg_b763acf104.mp3"
+},
+{
+"v": "bg",
+"t": "Докосвай нещата на пристана – всяко казва своята дума. Звездичката показва какво още не си докоснал. А някъде се крият две тайни!",
+"f": "bg_2da95af447.mp3"
+},
+{
+"v": "bg",
+"t": "Докосни искрицата!",
+"f": "bg_81fb65ec46.mp3"
+},
+{
+"v": "bg",
+"t": "Докосни картинка и чуй думата на английски.",
+"f": "bg_e623b1d414.mp3"
+},
+{
+"v": "bg",
+"t": "Задача за вкъщи – по желание, една минута.",
+"f": "bg_a709dbb670.mp3"
+},
+{
+"v": "bg",
+"t": "Запомни картинките. Една ще се скрие. Коя липсва?",
+"f": "bg_c450d2e0aa.mp3"
+},
+{
+"v": "bg",
+"t": "Звуков детектив! Слушай звука.",
+"f": "bg_b7530f745b.mp3"
+},
+{
+"v": "bg",
+"t": "Здравей! Домашното е готово. Избери какво да правим.",
+"f": "bg_dd0999cc79.mp3"
+},
+{
+"v": "bg",
+"t": "Здравей! Натисни „Продължи“ и тръгваме по реката.",
+"f": "bg_edfd59a4c5.mp3"
+},
+{
+"v": "bg",
+"t": "Игри! Хайде да играем!",
+"f": "bg_39dce03bd7.mp3"
+},
+{
+"v": "bg",
+"t": "Избери игра. Ото ти предлага три за днес.",
+"f": "bg_8540ef7ea2.mp3"
+},
+{
+"v": "bg",
+"t": "Избери история или песен и слушай.",
+"f": "bg_f6a3c54412.mp3"
+},
+{
+"v": "bg",
+"t": "Избери песен и пей с Поли.",
+"f": "bg_e1ca3480f0.mp3"
+},
+{
+"v": "bg",
+"t": "Избери пристан – с думите от него ще играем.",
+"f": "bg_81c542587c.mp3"
+},
+{
+"v": "bg",
+"t": "Избери цвят, който харесваш. Ото ще каже изречението – повтори го след него.",
+"f": "bg_47a83a4373.mp3"
+},
+{
+"v": "bg",
+"t": "Кажи го и го покажи като Ото!",
+"f": "bg_2d56fe4dbc.mp3"
+},
+{
+"v": "bg",
+"t": "Кажи думата на глас на английски. После натисни бутона и чуй Ото.",
+"f": "bg_da5fd684d5.mp3"
+},
+{
+"v": "bg",
+"t": "Какво липсва? Запомни картинките!",
+"f": "bg_7aa4ab4dd1.mp3"
+},
+{
+"v": "bg",
+"t": "Колко са? Да броим рибките!",
+"f": "bg_497bb9ec08.mp3"
+},
+{
+"v": "bg",
+"t": "Кръгът е готов!",
+"f": "bg_1bafafa1f2.mp3"
+},
+{
+"v": "bg",
+"t": "Къде е? Намери играчката!",
+"f": "bg_69d43656db.mp3"
+},
+{
+"v": "bg",
+"t": "Моето пътешествие! Да видим реката.",
+"f": "bg_bb0d5dc62b.mp3"
+},
+{
+"v": "bg",
+"t": "На Пипо му е студено! Слушай Ото и дай на Пипо дрехата.",
+"f": "bg_7ac3f8e6bd.mp3"
+},
+{
+"v": "bg",
+"t": "Не",
+"f": "bg_5d30986cc4.mp3"
+},
+{
+"v": "bg",
+"t": "Облечи Пипо! На Пипо му е студено.",
+"f": "bg_6f7c8fc50b.mp3"
+},
+{
+"v": "bg",
+"t": "Обръщай картите и намери двете еднакви. Слушай думата.",
+"f": "bg_b05dd70758.mp3"
+},
+{
+"v": "bg",
+"t": "Ото казва голямото или малкото. Докосни вярната картинка.",
+"f": "bg_c6db03b373.mp3"
+},
+{
+"v": "bg",
+"t": "Ото казва какво да оцветиш. Избери цвета, после докосни картинката.",
+"f": "bg_249b3bba3f.mp3"
+},
+{
+"v": "bg",
+"t": "Ото казва какво харесва и пита теб. Чуй двата отговора и избери своя – няма грешен.",
+"f": "bg_4c30f62782.mp3"
+},
+{
+"v": "bg",
+"t": "Ото пита какво е това. Натисни микрофона и го кажи на английски. После чуй себе си и Ото.",
+"f": "bg_32850632ac.mp3"
+},
+{
+"v": "bg",
+"t": "Ото пита какво можеш. Чуй „Yes!“ и „No!“ и избери истината за себе си.",
+"f": "bg_ad68098a18.mp3"
+},
+{
+"v": "bg",
+"t": "Ото пита какъв цвят е. Чуй двата отговора и избери верния.",
+"f": "bg_b97861019c.mp3"
+},
+{
+"v": "bg",
+"t": "Ото пита кой е това. Чуй двата отговора и избери верния.",
+"f": "bg_0456a7a051.mp3"
+},
+{
+"v": "bg",
+"t": "Ото пита. Чуй двата отговора и избери верния.",
+"f": "bg_11455f4364.mp3"
+},
+{
+"v": "bg",
+"t": "Ото ти задава въпрос. Отговори на глас. После избери отговора, който пасва.",
+"f": "bg_fb9ebe85be.mp3"
+},
+{
+"v": "bg",
+"t": "Оцвети! Да рисуваме с бои!",
+"f": "bg_edb1096460.mp3"
+},
+{
+"v": "bg",
+"t": "Пей с Поли и прави движенията.",
+"f": "bg_05538d7997.mp3"
+},
+{
+"v": "bg",
+"t": "Песните на Поли! Да пеем!",
+"f": "bg_bc3717b131.mp3"
+},
+{
+"v": "bg",
+"t": "Поли казва какво да правиш. Направи го и натисни „Готово“.",
+"f": "bg_0c18c25af8.mp3"
+},
+{
+"v": "bg",
+"t": "Поли казва! Прави само каквото каже Поли.",
+"f": "bg_4b65e4c431.mp3"
+},
+{
+"v": "bg",
+"t": "Помниш ли историята? Какво стана после? Чуй двата отговора и избери.",
+"f": "bg_5c687da264.mp3"
+},
+{
+"v": "bg",
+"t": "Прави само това, което Поли каже с думите „Polly says“. Ако Поли не ги каже – натисни ръчичката „стоп“.",
+"f": "bg_77337759ad.mp3"
+},
+{
+"v": "bg",
+"t": "Пристанчето е готово! Лодката тръгва по реката към Цветната поляна.",
+"f": "bg_3a3b9eff41.mp3"
+},
+{
+"v": "bg",
+"t": "Продължаваме пътешествието!",
+"f": "bg_34523ce89c.mp3"
+},
+{
+"v": "bg",
+"t": "Речник! Да разгледаме думите!",
+"f": "bg_9e1b41ce73.mp3"
+},
+{
+"v": "bg",
+"t": "Сега Ото пуска историята на парчета. Слушай думата и докосни картинката.",
+"f": "bg_a9b0fb9a78.mp3"
+},
+{
+"v": "bg",
+"t": "Сега ти си учителят! Научи мама или татко на думите. Ти казваш думата, а те отбелязват.",
+"f": "bg_5d26d68345.mp3"
+},
+{
+"v": "bg",
+"t": "Скоро! Тук ще има историите и песните на всеки пристан.",
+"f": "bg_2b560d8a5f.mp3"
+},
+{
+"v": "bg",
+"t": "Скоро! Тук ще са думите с картинки.",
+"f": "bg_ff5d00310d.mp3"
+},
+{
+"v": "bg",
+"t": "Слушай Ото и докосни правилната картинка.",
+"f": "bg_3726442097.mp3"
+},
+{
+"v": "bg",
+"t": "Слушай Ото: къде е играчката? Избери картинката.",
+"f": "bg_11d352a48d.mp3"
+},
+{
+"v": "bg",
+"t": "Слушай думата. Бръмчи ли краят, като в „shoes“? Ръка на гърлото! Натисни „да“ или „не“.",
+"f": "bg_01b761e569.mp3"
+},
+{
+"v": "bg",
+"t": "Слушай думата. Дълго ли е „и“-то, като в „sheep“ – широка усмивка? Натисни „да“ или „не“.",
+"f": "bg_7fd9186474.mp3"
+},
+{
+"v": "bg",
+"t": "Слушай думата. Жужи ли в нея звукът „th“ като в „this“? Езичето надзърта между зъбите. Натисни „да“ или „не“.",
+"f": "bg_bf43b96875.mp3"
+},
+{
+"v": "bg",
+"t": "Слушай думата. Започва ли като „hello“? Натисни „да“ или „не“.",
+"f": "bg_abed49f1b1.mp3"
+},
+{
+"v": "bg",
+"t": "Слушай думата. Има ли в нея плъзгащото се „ой“ като в „toy“? Натисни „да“ или „не“.",
+"f": "bg_53a86eeb7f.mp3"
+},
+{
+"v": "bg",
+"t": "Слушай думата. Подава ли се езичето между зъбите, като в „three“? Натисни „да“ или „не“.",
+"f": "bg_d498de5b5b.mp3"
+},
+{
+"v": "bg",
+"t": "Слушай думата. Устата широко ли се отваря, като в „apple“? Натисни „да“ или „не“.",
+"f": "bg_ad6390df2b.mp3"
+},
+{
+"v": "bg",
+"t": "Слушай думата. Устните целуват ли напред, като в „walk“? Натисни „да“ или „не“.",
+"f": "bg_aa160319f6.mp3"
+},
+{
+"v": "bg",
+"t": "Слушай историята за Ото.",
+"f": "bg_f2c79dc9db.mp3"
+},
+{
+"v": "bg",
+"t": "Слушай числото и докосни групата с толкова рибки.",
+"f": "bg_478ce23b4c.mp3"
+},
+{
+"v": "bg",
+"t": "Спирката е готова! Лодката тръгва по реката към Водопада.",
+"f": "bg_3c4d3966bb.mp3"
+},
+{
+"v": "bg",
+"t": "Спирката е готова! Лодката тръгва по реката към Голямата гора.",
+"f": "bg_0192508066.mp3"
+},
+{
+"v": "bg",
+"t": "Спирката е готова! Лодката тръгва по реката към Горичката на видрите.",
+"f": "bg_7ea20d0741.mp3"
+},
+{
+"v": "bg",
+"t": "Спирката е готова! Лодката тръгва по реката към Градината с плодовете.",
+"f": "bg_a4272d27fb.mp3"
+},
+{
+"v": "bg",
+"t": "Спирката е готова! Лодката тръгва по реката към Къщичката на дървото.",
+"f": "bg_c91573f9e1.mp3"
+},
+{
+"v": "bg",
+"t": "Спирката е готова! Лодката тръгва по реката към Морето.",
+"f": "bg_f9c39fabd9.mp3"
+},
+{
+"v": "bg",
+"t": "Спирката е готова! Лодката тръгва по реката към Пещерата на съкровищата.",
+"f": "bg_5bdff5ab0a.mp3"
+},
+{
+"v": "bg",
+"t": "Спирката е готова! Лодката тръгва по реката към Снежната планина.",
+"f": "bg_d8e51681d4.mp3"
+},
+{
+"v": "bg",
+"t": "Тази игра чака на по-нататъшен пристан по реката.",
+"f": "bg_e02fdf2a64.mp3"
+},
+{
+"v": "bg",
+"t": "Тази история идва след занятието с учителя.",
+"f": "bg_a880425705.mp3"
+},
+{
+"v": "bg",
+"t": "Това е албумът на Ото. Докосни нещо от картината и чуй думата.",
+"f": "bg_4a801f52a9.mp3"
+},
+{
+"v": "bg",
+"t": "Тук е празникът с всички приятели!",
+"f": "bg_315f3a9b62.mp3"
+},
+{
+"v": "bg",
+"t": "Тук живее семейството на Ото!",
+"f": "bg_3330ab096a.mp3"
+},
+{
+"v": "bg",
+"t": "Тук ще се появи нещо ново! Натисни „Продължи“ и изиграй кръга.",
+"f": "bg_3495f30282.mp3"
+},
+{
+"v": "bg",
+"t": "Тук ще срещнем катеричката Sammy!",
+"f": "bg_8fada08f8b.mp3"
+},
+{
+"v": "bg",
+"t": "Тук ще срещнем маймунката Momo!",
+"f": "bg_cd20e16d73.mp3"
+},
+{
+"v": "bg",
+"t": "Тук ще срещнем патето Dina!",
+"f": "bg_a2b8356a68.mp3"
+},
+{
+"v": "bg",
+"t": "Тук ще срещнем пеперудата Bella!",
+"f": "bg_4b94300a78.mp3"
+},
+{
+"v": "bg",
+"t": "Тук ще срещнем пингвинчето Пипо!",
+"f": "bg_7c2ac43c77.mp3"
+},
+{
+"v": "bg",
+"t": "Тук ще срещнем прилепчето Bobby!",
+"f": "bg_098850e1f1.mp3"
+},
+{
+"v": "bg",
+"t": "Тук ще срещнем пчеличката Bizzy!",
+"f": "bg_b8af7d4651.mp3"
+},
+{
+"v": "bg",
+"t": "Уеб учебник! Да послушаме история!",
+"f": "bg_fa3a4bcfb4.mp3"
+},
+{
+"v": "bg",
+"t": "Ура! Водопадът блести! Патицата Dina ти дава своя печат.",
+"f": "bg_84d1a04a13.mp3"
+},
+{
+"v": "bg",
+"t": "Ура! Голямата гора е пълна с приятели! Маймунката Momo ти дава своя печат.",
+"f": "bg_c755f6c82b.mp3"
+},
+{
+"v": "bg",
+"t": "Ура! Градината е пълна с плодове! Пчеличката Bizzy ти дава своя печат.",
+"f": "bg_a29b457945.mp3"
+},
+{
+"v": "bg",
+"t": "Ура! Къщичката на дървото свети! Катеричката Sammy ти дава своя печат.",
+"f": "bg_4b9f622d31.mp3"
+},
+{
+"v": "bg",
+"t": "Ура! Лодката стигна до морето! Всички приятели празнуват с теб!",
+"f": "bg_b640f18bc8.mp3"
+},
+{
+"v": "bg",
+"t": "Ура! Пещерата свети! Прилепчето Bobby ти дава своя печат.",
+"f": "bg_c300ada649.mp3"
+},
+{
+"v": "bg",
+"t": "Ура! Поляната е цветна! Пеперудата Bella ти дава своя печат.",
+"f": "bg_58a7ca036f.mp3"
+},
+{
+"v": "bg",
+"t": "Ура! Пристанчето е готово! Рибката Bubbles ти дава своя печат.",
+"f": "bg_6bf0ddb4d4.mp3"
+},
+{
+"v": "bg",
+"t": "Ура! Снежната планина е топла и весела! Пингвинчето Pippo ти дава своя печат.",
+"f": "bg_8fa27fe67c.mp3"
+},
+{
+"v": "bg",
+"t": "Ура! Цялото семейство на Ото е заедно! Семейството ти дава своя печат.",
+"f": "bg_0517eb7a25.mp3"
+},
+{
+"v": "bg",
+"t": "Чуй и докосни! Слушай Ото и докосни картинката.",
+"f": "bg_4f11d3ef98.mp3"
+},
+{
+"v": "bird",
+"t": "I can fly!",
+"f": "bird_948e19a518.mp3"
+},
+{
+"v": "bobby",
+"t": "A present! Let's play!",
+"f": "bobby_5609368186.mp3"
+},
+{
+"v": "bobby",
+"t": "A train! A robot! A bike! A kite!",
+"f": "bobby_8f4f54ddb3.mp3"
+},
+{
+"v": "bobby",
+"t": "Go, Oto, go!",
+"f": "bobby_bcd04ec018.mp3"
+},
+{
+"v": "bobby",
+"t": "Goodbye, Oto!",
+"f": "bobby_96bc1c673c.mp3"
+},
+{
+"v": "bobby",
+"t": "Hello! I'm Bobby.",
+"f": "bobby_f5aa5885c2.mp3"
+},
+{
+"v": "bobby",
+"t": "Here you are!",
+"f": "bobby_522318d379.mp3"
+},
+{
+"v": "bobby",
+"t": "Here you are.",
+"f": "bobby_b202fee783.mp3"
+},
+{
+"v": "bobby",
+"t": "Listen!",
+"f": "bobby_3eb855d080.mp3"
+},
+{
+"v": "bobby",
+"t": "Look! A tree! Can you help me?",
+"f": "bobby_0dd973d7af.mp3"
+},
+{
+"v": "bobby",
+"t": "Merry Christmas!",
+"f": "bobby_a9cad1f168.mp3"
+},
+{
+"v": "bobby",
+"t": "Nine!",
+"f": "bobby_eb247426b3.mp3"
+},
+{
+"v": "brother",
+"t": "Hello, Oto!",
+"f": "brother_a371c1c7a1.mp3"
+},
+{
+"v": "brother",
+"t": "Hello, Oto! And this is the baby!",
+"f": "brother_0abb584856.mp3"
+},
+{
+"v": "bubbles",
+"t": "Blub! Fish! Fish!",
+"f": "bubbles_ee140f81dd.mp3"
+},
+{
+"v": "bubbles",
+"t": "Blub! I'm Bubbles.",
+"f": "bubbles_c1077ea1d2.mp3"
+},
+{
+"v": "bubbles",
+"t": "Goodbye, Oto!",
+"f": "bubbles_4370e3eb43.mp3"
+},
+{
+"v": "bubbles",
+"t": "Hello! I'm Bubbles!",
+"f": "bubbles_e0b48ea4cc.mp3"
+},
+{
+"v": "bubbles",
+"t": "Hello, Oto!",
+"f": "bubbles_8b74e5ad82.mp3"
+},
+{
+"v": "bubbles",
+"t": "Hello, Oto! How are you?",
+"f": "bubbles_63f3c81c87.mp3"
+},
+{
+"v": "bubbles",
+"t": "Look! My friends!",
+"f": "bubbles_653e5a8134.mp3"
+},
+{
+"v": "chant",
+"t": "A, B, C, D, E, F, G,",
+"f": "chant_2c3b29394c.mp3"
+},
+{
+"v": "chant",
+"t": "And eyes and ears and mouth and nose,",
+"f": "chant_3066d97a5b.mp3"
+},
+{
+"v": "chant",
+"t": "And put it in the oven for baby and me!",
+"f": "chant_373bb25872.mp3"
+},
+{
+"v": "chant",
+"t": "And the little one said:",
+"f": "chant_a518697db9.mp3"
+},
+{
+"v": "chant",
+"t": "Bake me a cake as fast as you can.",
+"f": "chant_6bb6ffc7b8.mp3"
+},
+{
+"v": "chant",
+"t": "Bella has a pink flower all day long.",
+"f": "chant_65f195198f.mp3"
+},
+{
+"v": "chant",
+"t": "Bella has a pink flower, pink flower, pink flower,",
+"f": "chant_e77f480366.mp3"
+},
+{
+"v": "chant",
+"t": "Five little monkeys jumping on the bed,",
+"f": "chant_8982a2c63f.mp3"
+},
+{
+"v": "chant",
+"t": "Four little monkeys jumping on the bed,",
+"f": "chant_7999a0f586.mp3"
+},
+{
+"v": "chant",
+"t": "Good night!",
+"f": "chant_4a47031e31.mp3"
+},
+{
+"v": "chant",
+"t": "H, I, J, K, L, M, N, O, P,",
+"f": "chant_5ea56e3c6c.mp3"
+},
+{
+"v": "chant",
+"t": "Happy birthday to you!",
+"f": "chant_15108682ec.mp3"
+},
+{
+"v": "chant",
+"t": "Happy birthday to you,",
+"f": "chant_2fbba85670.mp3"
+},
+{
+"v": "chant",
+"t": "Happy birthday, dear Oto,",
+"f": "chant_25d81ee6f4.mp3"
+},
+{
+"v": "chant",
+"t": "He is under the bed! He is under the bed!",
+"f": "chant_d84501781e.mp3"
+},
+{
+"v": "chant",
+"t": "Head, shoulders, knees and toes, knees and toes!",
+"f": "chant_34e2991b28.mp3"
+},
+{
+"v": "chant",
+"t": "Head, shoulders, knees and toes, knees and toes,",
+"f": "chant_f5bceab744.mp3"
+},
+{
+"v": "chant",
+"t": "Hello, Baby, hello! Hello, Baby, hello!",
+"f": "chant_f6d8d3cc5d.mp3"
+},
+{
+"v": "chant",
+"t": "Hello, Brother, hello! Hello, Brother, hello!",
+"f": "chant_06eca3e6d9.mp3"
+},
+{
+"v": "chant",
+"t": "Hello, Daddy, hello! Hello, Daddy, hello!",
+"f": "chant_d617cf03fe.mp3"
+},
+{
+"v": "chant",
+"t": "Hello, Grandma, hello! Hello, Grandma, hello!",
+"f": "chant_b4f9153404.mp3"
+},
+{
+"v": "chant",
+"t": "Hello, Grandpa, hello! Hello, Grandpa, hello!",
+"f": "chant_a23f60e2bb.mp3"
+},
+{
+"v": "chant",
+"t": "Hello, Mummy, hello! Hello, Mummy, hello!",
+"f": "chant_bc68e6e467.mp3"
+},
+{
+"v": "chant",
+"t": "Hello, Oto! Hello, Oto!",
+"f": "chant_e76b1d17ad.mp3"
+},
+{
+"v": "chant",
+"t": "Hello, Polly! Hello, Polly!",
+"f": "chant_44232a645d.mp3"
+},
+{
+"v": "chant",
+"t": "Hello, Sister, hello! Hello, Sister, hello!",
+"f": "chant_3e2c6c8493.mp3"
+},
+{
+"v": "chant",
+"t": "Here I am! Here I am!",
+"f": "chant_dcf7e6c35d.mp3"
+},
+{
+"v": "chant",
+"t": "Hi, Oto! Hi, Oto!",
+"f": "chant_c1e7488553.mp3"
+},
+{
+"v": "chant",
+"t": "How are you? How are you?",
+"f": "chant_73d50a5c7e.mp3"
+},
+{
+"v": "chant",
+"t": "I can jump and stop!",
+"f": "chant_f8bfe4dc19.mp3"
+},
+{
+"v": "chant",
+"t": "I can jump and stop,",
+"f": "chant_aa646ded77.mp3"
+},
+{
+"v": "chant",
+"t": "I can run and stop!",
+"f": "chant_09b8057786.mp3"
+},
+{
+"v": "chant",
+"t": "I can run and stop,",
+"f": "chant_cd2b830cd5.mp3"
+},
+{
+"v": "chant",
+"t": "I can walk and stop!",
+"f": "chant_da79f3fffb.mp3"
+},
+{
+"v": "chant",
+"t": "I can walk and stop,",
+"f": "chant_2d0ff272fe.mp3"
+},
+{
+"v": "chant",
+"t": "I like to eat, eat, eat apples and bananas!",
+"f": "chant_ce5e6a9bd1.mp3"
+},
+{
+"v": "chant",
+"t": "I like to eat, eat, eat apples and bananas,",
+"f": "chant_6dd9c3b6d4.mp3"
+},
+{
+"v": "chant",
+"t": "I'm fine, too! I'm fine, too!",
+"f": "chant_1059686877.mp3"
+},
+{
+"v": "chant",
+"t": "If you're happy and you know it, clap your hands!",
+"f": "chant_4e24fda1d5.mp3"
+},
+{
+"v": "chant",
+"t": "If you're happy and you know it, shout \"Hooray!\"",
+"f": "chant_7cf5670317.mp3"
+},
+{
+"v": "chant",
+"t": "If you're happy and you know it, stamp your feet!",
+"f": "chant_c52551ee6d.mp3"
+},
+{
+"v": "chant",
+"t": "If you're happy and you know it, then your face will surely show it.",
+"f": "chant_e771944a49.mp3"
+},
+{
+"v": "chant",
+"t": "In the box? In the box?",
+"f": "chant_99dbae0e3d.mp3"
+},
+{
+"v": "chant",
+"t": "Jump, jump, jump, jump,",
+"f": "chant_04ddd4d3ee.mp3"
+},
+{
+"v": "chant",
+"t": "Look! Look! Look! Look! Look! Look!",
+"f": "chant_8d90ae905f.mp3"
+},
+{
+"v": "chant",
+"t": "Mama called the doctor and the doctor said,",
+"f": "chant_b95cf54c56.mp3"
+},
+{
+"v": "chant",
+"t": "Mary wore her red dress all day long.",
+"f": "chant_2d520b4e29.mp3"
+},
+{
+"v": "chant",
+"t": "Mary wore her red dress, red dress, red dress,",
+"f": "chant_74cac7f4fd.mp3"
+},
+{
+"v": "chant",
+"t": "Next time won't you sing with me?",
+"f": "chant_457e4289e0.mp3"
+},
+{
+"v": "chant",
+"t": "No more monkeys jumping on the bed!",
+"f": "chant_17cacb32d9.mp3"
+},
+{
+"v": "chant",
+"t": "No, he isn't in it! No, he isn't in it!",
+"f": "chant_83c9981f7b.mp3"
+},
+{
+"v": "chant",
+"t": "No, he isn't on it! No, he isn't on it!",
+"f": "chant_2f8eeae4a7.mp3"
+},
+{
+"v": "chant",
+"t": "Now I know my ABC,",
+"f": "chant_309c397eb3.mp3"
+},
+{
+"v": "chant",
+"t": "On the chair? On the chair?",
+"f": "chant_f0f780d954.mp3"
+},
+{
+"v": "chant",
+"t": "Once I caught a fish alive.",
+"f": "chant_4658a48474.mp3"
+},
+{
+"v": "chant",
+"t": "One fell off and bumped his head.",
+"f": "chant_06783aedcf.mp3"
+},
+{
+"v": "chant",
+"t": "One little monkey jumping on the bed,",
+"f": "chant_e324f6e416.mp3"
+},
+{
+"v": "chant",
+"t": "One, two, three, four, five,",
+"f": "chant_435791a3fa.mp3"
+},
+{
+"v": "chant",
+"t": "Oto has a blue boat all day long.",
+"f": "chant_19f2441a5b.mp3"
+},
+{
+"v": "chant",
+"t": "Oto has a blue boat, blue boat, blue boat,",
+"f": "chant_896d8a03f2.mp3"
+},
+{
+"v": "chant",
+"t": "Pat it and roll it and mark it with a bee,",
+"f": "chant_80f8c7b449.mp3"
+},
+{
+"v": "chant",
+"t": "Pat-a-cake, pat-a-cake, baker's man,",
+"f": "chant_11ee3f324a.mp3"
+},
+{
+"v": "chant",
+"t": "Q, R, S, T, U, V,",
+"f": "chant_8e18432c40.mp3"
+},
+{
+"v": "chant",
+"t": "Roll over! Roll over!",
+"f": "chant_1a32237ccb.mp3"
+},
+{
+"v": "chant",
+"t": "Run, run, run, run,",
+"f": "chant_14e41e939d.mp3"
+},
+{
+"v": "chant",
+"t": "Shake, shake, shake!",
+"f": "chant_d6895f4219.mp3"
+},
+{
+"v": "chant",
+"t": "Six, seven, eight, nine, ten,",
+"f": "chant_1eafe1b53d.mp3"
+},
+{
+"v": "chant",
+"t": "So they all rolled over and one fell out.",
+"f": "chant_d1c4e996bf.mp3"
+},
+{
+"v": "chant",
+"t": "Then I let it go again.",
+"f": "chant_d9724bf5c7.mp3"
+},
+{
+"v": "chant",
+"t": "There was one in the bed",
+"f": "chant_8ab78e06cc.mp3"
+},
+{
+"v": "chant",
+"t": "There were five in the bed",
+"f": "chant_7128b61419.mp3"
+},
+{
+"v": "chant",
+"t": "There were four in the bed",
+"f": "chant_8098b0a60f.mp3"
+},
+{
+"v": "chant",
+"t": "There were nine in the bed",
+"f": "chant_6c4e0401fe.mp3"
+},
+{
+"v": "chant",
+"t": "There were ten in the bed",
+"f": "chant_baf43d471f.mp3"
+},
+{
+"v": "chant",
+"t": "This is the way we put on our hat",
+"f": "chant_b4e214bc6b.mp3"
+},
+{
+"v": "chant",
+"t": "This is the way we put on our hat,",
+"f": "chant_5c7b2fcf94.mp3"
+},
+{
+"v": "chant",
+"t": "This is the way we put on our socks",
+"f": "chant_62f2840ea6.mp3"
+},
+{
+"v": "chant",
+"t": "This is the way we put on our socks,",
+"f": "chant_20ddd3c4c3.mp3"
+},
+{
+"v": "chant",
+"t": "This is the way we take off our jacket",
+"f": "chant_a5821eec1f.mp3"
+},
+{
+"v": "chant",
+"t": "This is the way we take off our jacket,",
+"f": "chant_15e9479ef8.mp3"
+},
+{
+"v": "chant",
+"t": "W, X, Y and Z.",
+"f": "chant_9a842858b7.mp3"
+},
+{
+"v": "chant",
+"t": "Walk, walk, walk, walk,",
+"f": "chant_8bb59ed5ef.mp3"
+},
+{
+"v": "chant",
+"t": "Wash your hands, wash your hands,",
+"f": "chant_ffbc27ae37.mp3"
+},
+{
+"v": "chant",
+"t": "Wash, wash, wash your hands,",
+"f": "chant_c4d35432cd.mp3"
+},
+{
+"v": "chant",
+"t": "Wave goodbye! Wave goodbye!",
+"f": "chant_d5e5044101.mp3"
+},
+{
+"v": "chant",
+"t": "Where is Baby? Where is Baby?",
+"f": "chant_74bb1cd7cd.mp3"
+},
+{
+"v": "chant",
+"t": "Where is Brother? Where is Brother?",
+"f": "chant_08998e357b.mp3"
+},
+{
+"v": "chant",
+"t": "Where is Daddy? Where is Daddy?",
+"f": "chant_eb586d1c20.mp3"
+},
+{
+"v": "chant",
+"t": "Where is Grandma? Where is Grandma?",
+"f": "chant_f009a423b8.mp3"
+},
+{
+"v": "chant",
+"t": "Where is Grandpa? Where is Grandpa?",
+"f": "chant_df675a0e34.mp3"
+},
+{
+"v": "chant",
+"t": "Where is Mummy? Where is Mummy?",
+"f": "chant_acdc194696.mp3"
+},
+{
+"v": "chant",
+"t": "Where is Oto? Where is Oto?",
+"f": "chant_2bfa10c902.mp3"
+},
+{
+"v": "chant",
+"t": "Where is Sister? Where is Sister?",
+"f": "chant_2bd8b149df.mp3"
+},
+{
+"v": "chant",
+"t": "Where is he? Where is he?",
+"f": "chant_53ee640808.mp3"
+},
+{
+"v": "chant",
+"t": "on a cold and snowy morning.",
+"f": "chant_ec674abb8f.mp3"
+},
+{
+"v": "chant",
+"t": "on a hot and sunny morning.",
+"f": "chant_18970bfb23.mp3"
+},
+{
+"v": "chant",
+"t": "put on our hat, put on our hat.",
+"f": "chant_b69f69a0c1.mp3"
+},
+{
+"v": "chant",
+"t": "put on our socks, put on our socks.",
+"f": "chant_1e34e88e8b.mp3"
+},
+{
+"v": "chant",
+"t": "take off our jacket, take off our jacket.",
+"f": "chant_a5708a1efd.mp3"
+},
+{
+"v": "dad",
+"t": "Hello, Oto!",
+"f": "dad_c897e16ba9.mp3"
+},
+{
+"v": "dina",
+"t": "Five babies! Thank you!",
+"f": "dina_8186354f32.mp3"
+},
+{
+"v": "dina",
+"t": "Goodbye, Oto! Wash your hands!",
+"f": "dina_c979cdaa21.mp3"
+},
+{
+"v": "dina",
+"t": "Happy birthday, Oto!",
+"f": "dina_fac9a926ab.mp3"
+},
+{
+"v": "dina",
+"t": "Head, eyes, ears, nose, mouth! Come, Oto!",
+"f": "dina_1a4d7ec5c1.mp3"
+},
+{
+"v": "dina",
+"t": "Here I am! Shake!",
+"f": "dina_a2ccb2056d.mp3"
+},
+{
+"v": "dina",
+"t": "It's a party!",
+"f": "dina_732459a313.mp3"
+},
+{
+"v": "dina",
+"t": "One, two, three, four, five! My babies!",
+"f": "dina_81d4564cd2.mp3"
+},
+{
+"v": "dina",
+"t": "One, two, three, four... Where's my baby?",
+"f": "dina_576547cdff.mp3"
+},
+{
+"v": "dina",
+"t": "Oto! Look! Your hands!",
+"f": "dina_c31eb08ec1.mp3"
+},
+{
+"v": "dina",
+"t": "Quack! Duck!",
+"f": "dina_c8203a8bd5.mp3"
+},
+{
+"v": "dina",
+"t": "Quack! Hello! I'm Dina.",
+"f": "dina_0d45398f69.mp3"
+},
+{
+"v": "dina",
+"t": "Quack! Hello! I'm Dina. Touch your nose!",
+"f": "dina_b5881e0652.mp3"
+},
+{
+"v": "dina",
+"t": "The Big Forest!",
+"f": "dina_1e0c8f3f7d.mp3"
+},
+{
+"v": "dina",
+"t": "Wash your hands!",
+"f": "dina_53d6462133.mp3"
+},
+{
+"v": "duckling",
+"t": "I've got two eyes! And you?",
+"f": "duckling_c9fc425347.mp3"
+},
+{
+"v": "duckling",
+"t": "Quack!",
+"f": "duckling_96b38dec63.mp3"
+},
+{
+"v": "grandma",
+"t": "Hello, Oto!",
+"f": "grandma_a7420fc5e6.mp3"
+},
+{
+"v": "grandpa",
+"t": "Hello, Oto!",
+"f": "grandpa_a6cb5bf054.mp3"
+},
+{
+"v": "grandpa",
+"t": "Look, Oto!",
+"f": "grandpa_8e5a1b0c83.mp3"
+},
+{
+"v": "grandpa",
+"t": "Look, Oto! Can you help me?",
+"f": "grandpa_5081f56f7e.mp3"
+},
+{
+"v": "grandpa",
+"t": "Red, blue, green... I like it!",
+"f": "grandpa_103a290eb0.mp3"
+},
+{
+"v": "momo",
+"t": "A big elephant!",
+"f": "momo_7640e04f49.mp3"
+},
+{
+"v": "momo",
+"t": "Go! Go!",
+"f": "momo_8dfe2f756f.mp3"
+},
+{
+"v": "momo",
+"t": "Goodbye! I can jump!",
+"f": "momo_2e3a606cb1.mp3"
+},
+{
+"v": "momo",
+"t": "Hello! I'm Momo.",
+"f": "momo_8cb8b32f32.mp3"
+},
+{
+"v": "momo",
+"t": "Hello! I'm Momo. Look! An elephant! A lion! A snake!",
+"f": "momo_3a0ea6cb91.mp3"
+},
+{
+"v": "momo",
+"t": "I can jump! I can run!",
+"f": "momo_fce930f262.mp3"
+},
+{
+"v": "momo",
+"t": "Let's play!",
+"f": "momo_b9a9c41811.mp3"
+},
+{
+"v": "momo",
+"t": "Look! A frog! A bird!",
+"f": "momo_f10f671efd.mp3"
+},
+{
+"v": "momo",
+"t": "Look! A giraffe!",
+"f": "momo_4d1f44d14d.mp3"
+},
+{
+"v": "momo",
+"t": "Monkey! I can jump!",
+"f": "momo_93307dc303.mp3"
+},
+{
+"v": "momo",
+"t": "Oto, can you fly?",
+"f": "momo_cdbceb9e91.mp3"
+},
+{
+"v": "momo",
+"t": "Thank you! Walk... stop! Go!",
+"f": "momo_31acda45b2.mp3"
+},
+{
+"v": "momo",
+"t": "Thank you, giraffe! A big giraffe!",
+"f": "momo_1efa160245.mp3"
+},
+{
+"v": "mum",
+"t": "Hello, Oto!",
+"f": "mum_6e372e8920.mp3"
+},
+{
+"v": "mum",
+"t": "Oto! Oto!",
+"f": "mum_52eba44533.mp3"
+},
+{
+"v": "oto",
+"t": "A T-shirt!",
+"f": "oto_45af53d6bb.mp3"
+},
+{
+"v": "oto",
+"t": "A ball!",
+"f": "oto_5749938cb6.mp3"
+},
+{
+"v": "oto",
+"t": "A ball! A car! A teddy!",
+"f": "oto_785e7ce541.mp3"
+},
+{
+"v": "oto",
+"t": "A ball! Let's play!",
+"f": "oto_4a18b89a71.mp3"
+},
+{
+"v": "oto",
+"t": "A basket of apples!",
+"f": "oto_a47f1defb5.mp3"
+},
+{
+"v": "oto",
+"t": "A basket! Yummy!",
+"f": "oto_fc0fedea76.mp3"
+},
+{
+"v": "oto",
+"t": "A beaver! Hello!",
+"f": "oto_9bd4ba2cb0.mp3"
+},
+{
+"v": "oto",
+"t": "A bed! Sammy's bed!",
+"f": "oto_ffbf19253e.mp3"
+},
+{
+"v": "oto",
+"t": "A beehive! Bzzz!",
+"f": "oto_6852c9c961.mp3"
+},
+{
+"v": "oto",
+"t": "A big beak!",
+"f": "oto_4dab4ce2e8.mp3"
+},
+{
+"v": "oto",
+"t": "A big giraffe!",
+"f": "oto_87f48342cf.mp3"
+},
+{
+"v": "oto",
+"t": "A big stone! A small stone!",
+"f": "oto_040026d7fd.mp3"
+},
+{
+"v": "oto",
+"t": "A bike!",
+"f": "oto_e8f573b1cd.mp3"
+},
+{
+"v": "oto",
+"t": "A bird!",
+"f": "oto_825d303ff8.mp3"
+},
+{
+"v": "oto",
+"t": "A bird! It's cold!",
+"f": "oto_73f896d6d4.mp3"
+},
+{
+"v": "oto",
+"t": "A blanket!",
+"f": "oto_6dc62dcb49.mp3"
+},
+{
+"v": "oto",
+"t": "A boat on the sea!",
+"f": "oto_af8471c5f2.mp3"
+},
+{
+"v": "oto",
+"t": "A boat!",
+"f": "oto_823fab52bf.mp3"
+},
+{
+"v": "oto",
+"t": "A boat! Who's this?",
+"f": "oto_1d32f459cf.mp3"
+},
+{
+"v": "oto",
+"t": "A box!",
+"f": "oto_b05c668ff8.mp3"
+},
+{
+"v": "oto",
+"t": "A box! A present!",
+"f": "oto_03cdd8298e.mp3"
+},
+{
+"v": "oto",
+"t": "A bridge!",
+"f": "oto_47b2d28a5d.mp3"
+},
+{
+"v": "oto",
+"t": "A butterfly!",
+"f": "oto_a7390e6a48.mp3"
+},
+{
+"v": "oto",
+"t": "A cake!",
+"f": "oto_34f16f10de.mp3"
+},
+{
+"v": "oto",
+"t": "A cake! A party!",
+"f": "oto_471f0d033a.mp3"
+},
+{
+"v": "oto",
+"t": "A cake! Happy birthday!",
+"f": "oto_8c4eae310d.mp3"
+},
+{
+"v": "oto",
+"t": "A cake! Yummy!",
+"f": "oto_c365e7f9c9.mp3"
+},
+{
+"v": "oto",
+"t": "A car!",
+"f": "oto_995ddad06d.mp3"
+},
+{
+"v": "oto",
+"t": "A chair!",
+"f": "oto_38e8827ccb.mp3"
+},
+{
+"v": "oto",
+"t": "A chameleon! Green!",
+"f": "oto_26c8d2de9a.mp3"
+},
+{
+"v": "oto",
+"t": "A cow! Moo! Milk!",
+"f": "oto_4f01f88548.mp3"
+},
+{
+"v": "oto",
+"t": "A crab! Hello!",
+"f": "oto_889f635210.mp3"
+},
+{
+"v": "oto",
+"t": "A crab! Hello, crab!",
+"f": "oto_382242f8c1.mp3"
+},
+{
+"v": "oto",
+"t": "A crocodile! A big green crocodile! Stop, boat!",
+"f": "oto_39155f68dc.mp3"
+},
+{
+"v": "oto",
+"t": "A crocodile! Stop, boat!",
+"f": "oto_c737058306.mp3"
+},
+{
+"v": "oto",
+"t": "A doll!",
+"f": "oto_3b36c21fee.mp3"
+},
+{
+"v": "oto",
+"t": "A dress! A pink dress!",
+"f": "oto_81bf678728.mp3"
+},
+{
+"v": "oto",
+"t": "A duck! Quack!",
+"f": "oto_4cca3cd067.mp3"
+},
+{
+"v": "oto",
+"t": "A fish!",
+"f": "oto_c5984ec993.mp3"
+},
+{
+"v": "oto",
+"t": "A fish! Jump!",
+"f": "oto_f749a2ba9c.mp3"
+},
+{
+"v": "oto",
+"t": "A flower!",
+"f": "oto_8a0079bd16.mp3"
+},
+{
+"v": "oto",
+"t": "A frog on the barrel!",
+"f": "oto_b27964a0d9.mp3"
+},
+{
+"v": "oto",
+"t": "A frog!",
+"f": "oto_bbc4e9c102.mp3"
+},
+{
+"v": "oto",
+"t": "A frog! Jump!",
+"f": "oto_7629055bdb.mp3"
+},
+{
+"v": "oto",
+"t": "A green tree!",
+"f": "oto_fa257fc7bc.mp3"
+},
+{
+"v": "oto",
+"t": "A hammock! I'm tired!",
+"f": "oto_aedea6ea08.mp3"
+},
+{
+"v": "oto",
+"t": "A hat!",
+"f": "oto_46eb370ccc.mp3"
+},
+{
+"v": "oto",
+"t": "A hat! Pippo, here you are!",
+"f": "oto_f757e9177e.mp3"
+},
+{
+"v": "oto",
+"t": "A hat! Pippo, here you are! Put on your hat!",
+"f": "oto_b7b0a989fa.mp3"
+},
+{
+"v": "oto",
+"t": "A hat! Put on your hat!",
+"f": "oto_b3ba3ef37b.mp3"
+},
+{
+"v": "oto",
+"t": "A hedgehog with an apple!",
+"f": "oto_f857fda74a.mp3"
+},
+{
+"v": "oto",
+"t": "A hedgehog!",
+"f": "oto_7de7ed9985.mp3"
+},
+{
+"v": "oto",
+"t": "A hedgehog! Hello!",
+"f": "oto_c82515d2b5.mp3"
+},
+{
+"v": "oto",
+"t": "A horse!",
+"f": "oto_74b81c9789.mp3"
+},
+{
+"v": "oto",
+"t": "A house in a tree! Let's go!",
+"f": "oto_bf06f567de.mp3"
+},
+{
+"v": "oto",
+"t": "A jacket! Put on your jacket!",
+"f": "oto_c74593e832.mp3"
+},
+{
+"v": "oto",
+"t": "A kite!",
+"f": "oto_c6ef9b5a98.mp3"
+},
+{
+"v": "oto",
+"t": "A kite! Let's play!",
+"f": "oto_74ea83dac3.mp3"
+},
+{
+"v": "oto",
+"t": "A ladder! Up, up!",
+"f": "oto_cead16f9f8.mp3"
+},
+{
+"v": "oto",
+"t": "A ladybird! Red!",
+"f": "oto_99c4e09b2c.mp3"
+},
+{
+"v": "oto",
+"t": "A letter for Sammy!",
+"f": "oto_436667cb54.mp3"
+},
+{
+"v": "oto",
+"t": "A light!",
+"f": "oto_2bcb4ec542.mp3"
+},
+{
+"v": "oto",
+"t": "A lighthouse!",
+"f": "oto_de2b67314f.mp3"
+},
+{
+"v": "oto",
+"t": "A lion!",
+"f": "oto_503c44faca.mp3"
+},
+{
+"v": "oto",
+"t": "A little bed!",
+"f": "oto_92a8fbf408.mp3"
+},
+{
+"v": "oto",
+"t": "A little boat!",
+"f": "oto_a17a604e81.mp3"
+},
+{
+"v": "oto",
+"t": "A little house for birds!",
+"f": "oto_53b8c1e91b.mp3"
+},
+{
+"v": "oto",
+"t": "A little pond!",
+"f": "oto_75e25b1823.mp3"
+},
+{
+"v": "oto",
+"t": "A monkey!",
+"f": "oto_dedb19ef6a.mp3"
+},
+{
+"v": "oto",
+"t": "A mouse! Hello, mouse!",
+"f": "oto_cde7b13679.mp3"
+},
+{
+"v": "oto",
+"t": "A nest! A bird family!",
+"f": "oto_50b78ddb22.mp3"
+},
+{
+"v": "oto",
+"t": "A night light!",
+"f": "oto_76e9ddade6.mp3"
+},
+{
+"v": "oto",
+"t": "A party at the sea! Let's go!",
+"f": "oto_216297c1d8.mp3"
+},
+{
+"v": "oto",
+"t": "A party! Let's sing!",
+"f": "oto_973bac3974.mp3"
+},
+{
+"v": "oto",
+"t": "A penguin! Hello!",
+"f": "oto_ed264253f8.mp3"
+},
+{
+"v": "oto",
+"t": "A picnic!",
+"f": "oto_8236785808.mp3"
+},
+{
+"v": "oto",
+"t": "A pink dress!",
+"f": "oto_7ffc4fd863.mp3"
+},
+{
+"v": "oto",
+"t": "A polar bear! Hello!",
+"f": "oto_a8c7a825bf.mp3"
+},
+{
+"v": "oto",
+"t": "A present!",
+"f": "oto_3229da8d5b.mp3"
+},
+{
+"v": "oto",
+"t": "A present! Open the present!",
+"f": "oto_f7da9ab190.mp3"
+},
+{
+"v": "oto",
+"t": "A rabbit!",
+"f": "oto_1ca1e7156f.mp3"
+},
+{
+"v": "oto",
+"t": "A raft!",
+"f": "oto_5474e35d00.mp3"
+},
+{
+"v": "oto",
+"t": "A rainbow! Goodbye, dock!",
+"f": "oto_7b1697a2dd.mp3"
+},
+{
+"v": "oto",
+"t": "A rainbow! Look!",
+"f": "oto_1eefa30fcb.mp3"
+},
+{
+"v": "oto",
+"t": "A rainbow! Seven colours!",
+"f": "oto_ea58198a3b.mp3"
+},
+{
+"v": "oto",
+"t": "A red door!",
+"f": "oto_eb80b94e74.mp3"
+},
+{
+"v": "oto",
+"t": "A red panda! Hello!",
+"f": "oto_c5e010a795.mp3"
+},
+{
+"v": "oto",
+"t": "A robot!",
+"f": "oto_bd64937e95.mp3"
+},
+{
+"v": "oto",
+"t": "A robot! I've got a robot!",
+"f": "oto_edc2eba7f8.mp3"
+},
+{
+"v": "oto",
+"t": "A rug!",
+"f": "oto_591879dd31.mp3"
+},
+{
+"v": "oto",
+"t": "A rug! Sit down!",
+"f": "oto_492440241e.mp3"
+},
+{
+"v": "oto",
+"t": "A sand castle!",
+"f": "oto_729bc657c5.mp3"
+},
+{
+"v": "oto",
+"t": "A sandcastle!",
+"f": "oto_5a90f04fcc.mp3"
+},
+{
+"v": "oto",
+"t": "A seagull! The sea!",
+"f": "oto_10569b00a7.mp3"
+},
+{
+"v": "oto",
+"t": "A sled!",
+"f": "oto_e2703cd550.mp3"
+},
+{
+"v": "oto",
+"t": "A sloth! Sleepy!",
+"f": "oto_e66bfe96f8.mp3"
+},
+{
+"v": "oto",
+"t": "A small baby!",
+"f": "oto_eb4a879f6b.mp3"
+},
+{
+"v": "oto",
+"t": "A small duck!",
+"f": "oto_b00250034d.mp3"
+},
+{
+"v": "oto",
+"t": "A snail!",
+"f": "oto_da8dc883fa.mp3"
+},
+{
+"v": "oto",
+"t": "A snail! Hello!",
+"f": "oto_078c29d3af.mp3"
+},
+{
+"v": "oto",
+"t": "A snake!",
+"f": "oto_197c628a54.mp3"
+},
+{
+"v": "oto",
+"t": "A snowman! Hello!",
+"f": "oto_a3436824cd.mp3"
+},
+{
+"v": "oto",
+"t": "A squirrel!",
+"f": "oto_70eb70ea47.mp3"
+},
+{
+"v": "oto",
+"t": "A star!",
+"f": "oto_cbc0b12860.mp3"
+},
+{
+"v": "oto",
+"t": "A table!",
+"f": "oto_9d3c7c05d6.mp3"
+},
+{
+"v": "oto",
+"t": "A teddy!",
+"f": "oto_e7019fa997.mp3"
+},
+{
+"v": "oto",
+"t": "A teddy! I've got a teddy!",
+"f": "oto_f3bab96b56.mp3"
+},
+{
+"v": "oto",
+"t": "A towel!",
+"f": "oto_5254210177.mp3"
+},
+{
+"v": "oto",
+"t": "A towel! My hands!",
+"f": "oto_c5951464d9.mp3"
+},
+{
+"v": "oto",
+"t": "A train!",
+"f": "oto_56ab913ec6.mp3"
+},
+{
+"v": "oto",
+"t": "A train! Choo choo!",
+"f": "oto_20c9ef7919.mp3"
+},
+{
+"v": "oto",
+"t": "A tree! And a small house!",
+"f": "oto_66fb9e4954.mp3"
+},
+{
+"v": "oto",
+"t": "A turtle! Happy birthday!",
+"f": "oto_d22eb14a65.mp3"
+},
+{
+"v": "oto",
+"t": "A turtle! Hello, turtle!",
+"f": "oto_abd9debbe2.mp3"
+},
+{
+"v": "oto",
+"t": "A turtle! Swim!",
+"f": "oto_c02a4039e0.mp3"
+},
+{
+"v": "oto",
+"t": "A white rabbit!",
+"f": "oto_b0fd24db1d.mp3"
+},
+{
+"v": "oto",
+"t": "A window!",
+"f": "oto_6957c06fbd.mp3"
+},
+{
+"v": "oto",
+"t": "A window! Hello?",
+"f": "oto_594359102f.mp3"
+},
+{
+"v": "oto",
+"t": "A woodpecker! Knock, knock!",
+"f": "oto_17ebbd4b5a.mp3"
+},
+{
+"v": "oto",
+"t": "A yellow flower! I like yellow!",
+"f": "oto_e0dac2df54.mp3"
+},
+{
+"v": "oto",
+"t": "Acorn.",
+"f": "oto_76455c2488.mp3"
+},
+{
+"v": "oto",
+"t": "Acorns! One, two, three!",
+"f": "oto_1929ee51e4.mp3"
+},
+{
+"v": "oto",
+"t": "Ahoy!",
+"f": "oto_8fa7681d57.mp3"
+},
+{
+"v": "oto",
+"t": "All the pairs! Well done!",
+"f": "oto_0db7ae1e83.mp3"
+},
+{
+"v": "oto",
+"t": "An elephant!",
+"f": "oto_b82e2df19d.mp3"
+},
+{
+"v": "oto",
+"t": "An orange orange!",
+"f": "oto_954594dc3f.mp3"
+},
+{
+"v": "oto",
+"t": "An orange! An orange orange!",
+"f": "oto_5831982c38.mp3"
+},
+{
+"v": "oto",
+"t": "An owl! Hello, owl!",
+"f": "oto_ac703af811.mp3"
+},
+{
+"v": "oto",
+"t": "An umbrella!",
+"f": "oto_f176944e25.mp3"
+},
+{
+"v": "oto",
+"t": "And you? Cake or bread?",
+"f": "oto_70dc4b6ad6.mp3"
+},
+{
+"v": "oto",
+"t": "And you? Can you swim?",
+"f": "oto_12e664b5e9.mp3"
+},
+{
+"v": "oto",
+"t": "And you? What's your name?",
+"f": "oto_fe38d01e44.mp3"
+},
+{
+"v": "oto",
+"t": "Another light!",
+"f": "oto_40aa5abfd4.mp3"
+},
+{
+"v": "oto",
+"t": "Apple.",
+"f": "oto_eb6e9ea91e.mp3"
+},
+{
+"v": "oto",
+"t": "Apples!",
+"f": "oto_502f9e4513.mp3"
+},
+{
+"v": "oto",
+"t": "Apples! I'm hungry!",
+"f": "oto_5bad9f5a3c.mp3"
+},
+{
+"v": "oto",
+"t": "Apples! Red apples!",
+"f": "oto_9059b7cf33.mp3"
+},
+{
+"v": "oto",
+"t": "Apples, bananas, oranges!",
+"f": "oto_8ad68345ac.mp3"
+},
+{
+"v": "oto",
+"t": "Arms.",
+"f": "oto_7ac4237bc9.mp3"
+},
+{
+"v": "oto",
+"t": "Baby birds!",
+"f": "oto_8443af14a2.mp3"
+},
+{
+"v": "oto",
+"t": "Baby.",
+"f": "oto_612cd17c98.mp3"
+},
+{
+"v": "oto",
+"t": "Ball.",
+"f": "oto_23f89c6072.mp3"
+},
+{
+"v": "oto",
+"t": "Balloons! A party!",
+"f": "oto_0628564a7b.mp3"
+},
+{
+"v": "oto",
+"t": "Balls! In the box!",
+"f": "oto_e48733c979.mp3"
+},
+{
+"v": "oto",
+"t": "Banana.",
+"f": "oto_9be06e79d9.mp3"
+},
+{
+"v": "oto",
+"t": "Bananas!",
+"f": "oto_efae776842.mp3"
+},
+{
+"v": "oto",
+"t": "Bananas! Yellow!",
+"f": "oto_4f06e66aca.mp3"
+},
+{
+"v": "oto",
+"t": "Bed.",
+"f": "oto_63b8ab4476.mp3"
+},
+{
+"v": "oto",
+"t": "Bella is sad. Can you help me?",
+"f": "oto_b9cf949b1f.mp3"
+},
+{
+"v": "oto",
+"t": "Bella!",
+"f": "oto_728ddf3b49.mp3"
+},
+{
+"v": "oto",
+"t": "Big and small butterflies!",
+"f": "oto_a1db556854.mp3"
+},
+{
+"v": "oto",
+"t": "Big and small!",
+"f": "oto_5461350509.mp3"
+},
+{
+"v": "oto",
+"t": "Big ears or small ears?",
+"f": "oto_04a2444712.mp3"
+},
+{
+"v": "oto",
+"t": "Big ears! Big, big ears!",
+"f": "oto_d9a5b6cfd8.mp3"
+},
+{
+"v": "oto",
+"t": "Big.",
+"f": "oto_2f817b3f5c.mp3"
+},
+{
+"v": "oto",
+"t": "Bike.",
+"f": "oto_56c01751d4.mp3"
+},
+{
+"v": "oto",
+"t": "Bird.",
+"f": "oto_747237f65c.mp3"
+},
+{
+"v": "oto",
+"t": "Birds!",
+"f": "oto_88b0baa75f.mp3"
+},
+{
+"v": "oto",
+"t": "Birds! Hello, birds!",
+"f": "oto_6637e3e0bf.mp3"
+},
+{
+"v": "oto",
+"t": "Birds! I can fly!",
+"f": "oto_669fb5facf.mp3"
+},
+{
+"v": "oto",
+"t": "Birds! Listen!",
+"f": "oto_eb738eeb00.mp3"
+},
+{
+"v": "oto",
+"t": "Birthday.",
+"f": "oto_dd87b7c373.mp3"
+},
+{
+"v": "oto",
+"t": "Bizzy! Hello, Bizzy!",
+"f": "oto_7590df0464.mp3"
+},
+{
+"v": "oto",
+"t": "Bizzy's house! Bzzz!",
+"f": "oto_babbd7f3ed.mp3"
+},
+{
+"v": "oto",
+"t": "Blue and pink!",
+"f": "oto_76b651a7f7.mp3"
+},
+{
+"v": "oto",
+"t": "Blue flowers!",
+"f": "oto_5811fe953b.mp3"
+},
+{
+"v": "oto",
+"t": "Blue.",
+"f": "oto_a972eec45e.mp3"
+},
+{
+"v": "oto",
+"t": "Boat.",
+"f": "oto_c39e591cb7.mp3"
+},
+{
+"v": "oto",
+"t": "Bobby!",
+"f": "oto_06c25565ea.mp3"
+},
+{
+"v": "oto",
+"t": "Bobby! Hello, Bobby!",
+"f": "oto_947dbb331f.mp3"
+},
+{
+"v": "oto",
+"t": "Boots! Put on your shoes!",
+"f": "oto_80dcbe5ea6.mp3"
+},
+{
+"v": "oto",
+"t": "Box.",
+"f": "oto_940d530a69.mp3"
+},
+{
+"v": "oto",
+"t": "Boy.",
+"f": "oto_94a04d4c61.mp3"
+},
+{
+"v": "oto",
+"t": "Bread!",
+"f": "oto_cebab9e606.mp3"
+},
+{
+"v": "oto",
+"t": "Bread! Yummy!",
+"f": "oto_c9d8a6803d.mp3"
+},
+{
+"v": "oto",
+"t": "Bread.",
+"f": "oto_c5ab456ccd.mp3"
+},
+{
+"v": "oto",
+"t": "Brother.",
+"f": "oto_1be6bac24a.mp3"
+},
+{
+"v": "oto",
+"t": "Brrr!",
+"f": "oto_948cec522b.mp3"
+},
+{
+"v": "oto",
+"t": "Brrr! Is it hot or cold?",
+"f": "oto_036dbe11fc.mp3"
+},
+{
+"v": "oto",
+"t": "Brrr! It's cold!",
+"f": "oto_c86b4e3a13.mp3"
+},
+{
+"v": "oto",
+"t": "Brrr! It's cold! Put on your...?",
+"f": "oto_83535c39c8.mp3"
+},
+{
+"v": "oto",
+"t": "Brrr! Snow!",
+"f": "oto_6888fde07d.mp3"
+},
+{
+"v": "oto",
+"t": "Bubbles!",
+"f": "oto_2ccdcd1a26.mp3"
+},
+{
+"v": "oto",
+"t": "Bubbles! Hello, Bubbles!",
+"f": "oto_764c6e79f0.mp3"
+},
+{
+"v": "oto",
+"t": "Bubbles! Lots of bubbles!",
+"f": "oto_04a0522937.mp3"
+},
+{
+"v": "oto",
+"t": "Butterflies!",
+"f": "oto_3560fcd2c6.mp3"
+},
+{
+"v": "oto",
+"t": "Cake! I like cake!",
+"f": "oto_3b93c3b57e.mp3"
+},
+{
+"v": "oto",
+"t": "Cake.",
+"f": "oto_b63e69c9e4.mp3"
+},
+{
+"v": "oto",
+"t": "Can I have a banana, please?",
+"f": "oto_49c42037a5.mp3"
+},
+{
+"v": "oto",
+"t": "Can I have an apple, please?",
+"f": "oto_1bde3d79e5.mp3"
+},
+{
+"v": "oto",
+"t": "Can I have milk, please?",
+"f": "oto_fedf292a3b.mp3"
+},
+{
+"v": "oto",
+"t": "Can I have the ball, please?",
+"f": "oto_410be00ed2.mp3"
+},
+{
+"v": "oto",
+"t": "Can I have the car, please?",
+"f": "oto_78c90673fb.mp3"
+},
+{
+"v": "oto",
+"t": "Can I have the kite, please?",
+"f": "oto_737637f5d5.mp3"
+},
+{
+"v": "oto",
+"t": "Can I have the train, please?",
+"f": "oto_4b7f4f30a6.mp3"
+},
+{
+"v": "oto",
+"t": "Can I have water, please?",
+"f": "oto_d3572b16df.mp3"
+},
+{
+"v": "oto",
+"t": "Can you fly?",
+"f": "oto_4116454067.mp3"
+},
+{
+"v": "oto",
+"t": "Can you hear it buzz like this?",
+"f": "oto_21d4c030ae.mp3"
+},
+{
+"v": "oto",
+"t": "Can you hear oy, like in toy?",
+"f": "oto_1dff8e9345.mp3"
+},
+{
+"v": "oto",
+"t": "Can you help Bizzy? Clap your hands! Jump!",
+"f": "oto_8740872055.mp3"
+},
+{
+"v": "oto",
+"t": "Can you help me?",
+"f": "oto_042cda80df.mp3"
+},
+{
+"v": "oto",
+"t": "Can you help me? Hello! Hello!",
+"f": "oto_d5b7c8d69c.mp3"
+},
+{
+"v": "oto",
+"t": "Can you help me? How many apples?",
+"f": "oto_30f981c3da.mp3"
+},
+{
+"v": "oto",
+"t": "Can you help me? How many babies?",
+"f": "oto_eb2135a41d.mp3"
+},
+{
+"v": "oto",
+"t": "Can you help me? Jump, fly or swim?",
+"f": "oto_27884e01a4.mp3"
+},
+{
+"v": "oto",
+"t": "Can you help me? Look! What's this?",
+"f": "oto_5539b43fac.mp3"
+},
+{
+"v": "oto",
+"t": "Can you help me? Mum! Dad!",
+"f": "oto_cd601466e3.mp3"
+},
+{
+"v": "oto",
+"t": "Can you help me? One, two, three... Go!",
+"f": "oto_789b6a6484.mp3"
+},
+{
+"v": "oto",
+"t": "Can you help me? One, two, three… Go!",
+"f": "oto_55e7668edc.mp3"
+},
+{
+"v": "oto",
+"t": "Can you help me? One, two...",
+"f": "oto_9c51e461a2.mp3"
+},
+{
+"v": "oto",
+"t": "Can you help me? One…",
+"f": "oto_a50586fa8a.mp3"
+},
+{
+"v": "oto",
+"t": "Can you help me? Point to Mum!",
+"f": "oto_6600341b6d.mp3"
+},
+{
+"v": "oto",
+"t": "Can you help me? Say: What's your name?",
+"f": "oto_d50b5ed1f9.mp3"
+},
+{
+"v": "oto",
+"t": "Can you help me? Stand up! One, two, three... Go!",
+"f": "oto_2e4129e25e.mp3"
+},
+{
+"v": "oto",
+"t": "Can you help me? Stop or go?",
+"f": "oto_2b62c32607.mp3"
+},
+{
+"v": "oto",
+"t": "Can you help me? Touch your head! Clap your hands! One, two, three... Go!",
+"f": "oto_979848e178.mp3"
+},
+{
+"v": "oto",
+"t": "Can you help me? Walk... stop... go!",
+"f": "oto_e26af6fcb1.mp3"
+},
+{
+"v": "oto",
+"t": "Can you help me? Walk... stop... go! One, two, three... Go!",
+"f": "oto_a14ce58c36.mp3"
+},
+{
+"v": "oto",
+"t": "Can you help me? What colour is it?",
+"f": "oto_0d8ced78e3.mp3"
+},
+{
+"v": "oto",
+"t": "Can you help me? What's this?",
+"f": "oto_5526106a65.mp3"
+},
+{
+"v": "oto",
+"t": "Can you jump?",
+"f": "oto_f39d4bbf02.mp3"
+},
+{
+"v": "oto",
+"t": "Can you run?",
+"f": "oto_3c09862584.mp3"
+},
+{
+"v": "oto",
+"t": "Can you swim?",
+"f": "oto_149982381e.mp3"
+},
+{
+"v": "oto",
+"t": "Candle.",
+"f": "oto_fc92cc8d82.mp3"
+},
+{
+"v": "oto",
+"t": "Car.",
+"f": "oto_667c3ba0aa.mp3"
+},
+{
+"v": "oto",
+"t": "Cat.",
+"f": "oto_e9d3621ce2.mp3"
+},
+{
+"v": "oto",
+"t": "Chair.",
+"f": "oto_178e1dfd30.mp3"
+},
+{
+"v": "oto",
+"t": "Clap your hands!",
+"f": "oto_c16162982a.mp3"
+},
+{
+"v": "oto",
+"t": "Close the window!",
+"f": "oto_3d560a8aea.mp3"
+},
+{
+"v": "oto",
+"t": "Cold.",
+"f": "oto_37bb8be586.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the ball blue!",
+"f": "oto_e7fa61d983.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the ball green!",
+"f": "oto_7c62d3b767.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the ball orange!",
+"f": "oto_3bbdabccfe.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the ball pink!",
+"f": "oto_e01b3dfbad.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the ball purple!",
+"f": "oto_2d7df1f225.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the ball red!",
+"f": "oto_909bd981a5.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the ball yellow!",
+"f": "oto_720dbad29d.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the balloon blue!",
+"f": "oto_26d375bc59.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the balloon green!",
+"f": "oto_b46e833a33.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the balloon orange!",
+"f": "oto_3cce88edc9.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the balloon pink!",
+"f": "oto_5e7b9c8736.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the balloon purple!",
+"f": "oto_f3b1976675.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the balloon red!",
+"f": "oto_c9585406e7.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the balloon yellow!",
+"f": "oto_68809a2e33.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the fish blue!",
+"f": "oto_a373139a7f.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the fish green!",
+"f": "oto_74d36f1d63.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the fish orange!",
+"f": "oto_6710156c04.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the fish pink!",
+"f": "oto_fa42806a27.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the fish purple!",
+"f": "oto_ac8bbb5a89.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the fish red!",
+"f": "oto_f685de8bc2.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the fish yellow!",
+"f": "oto_5221d0b128.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the flower blue!",
+"f": "oto_b13e6f5f4b.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the flower green!",
+"f": "oto_d81ec06e63.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the flower orange!",
+"f": "oto_1307e3ff36.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the flower pink!",
+"f": "oto_fb391c67f3.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the flower purple!",
+"f": "oto_cc3f791503.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the flower red!",
+"f": "oto_0f1dc67d33.mp3"
+},
+{
+"v": "oto",
+"t": "Colour the flower yellow!",
+"f": "oto_21a713076d.mp3"
+},
+{
+"v": "oto",
+"t": "Come here, Sammy!",
+"f": "oto_a17fdedf34.mp3"
+},
+{
+"v": "oto",
+"t": "Come in!",
+"f": "oto_11649e549c.mp3"
+},
+{
+"v": "oto",
+"t": "Crocodile.",
+"f": "oto_eaea23d3a4.mp3"
+},
+{
+"v": "oto",
+"t": "Dad!",
+"f": "oto_6586595dbe.mp3"
+},
+{
+"v": "oto",
+"t": "Dad.",
+"f": "oto_85e9f55a2c.mp3"
+},
+{
+"v": "oto",
+"t": "Dina!",
+"f": "oto_2330ccedd2.mp3"
+},
+{
+"v": "oto",
+"t": "Dina! Hello, Dina!",
+"f": "oto_31851bfd47.mp3"
+},
+{
+"v": "oto",
+"t": "Do you like apples?",
+"f": "oto_63dadb2caf.mp3"
+},
+{
+"v": "oto",
+"t": "Do your lips kiss, like in walk?",
+"f": "oto_bde3950cb0.mp3"
+},
+{
+"v": "oto",
+"t": "Does it start like hello?",
+"f": "oto_b5d8419503.mp3"
+},
+{
+"v": "oto",
+"t": "Does it start like red?",
+"f": "oto_5834a6a512.mp3"
+},
+{
+"v": "oto",
+"t": "Does the end buzz, like in shoes?",
+"f": "oto_e8157b17b2.mp3"
+},
+{
+"v": "oto",
+"t": "Does your tongue peek out, like in three?",
+"f": "oto_566c0e652d.mp3"
+},
+{
+"v": "oto",
+"t": "Doll.",
+"f": "oto_548234d9e4.mp3"
+},
+{
+"v": "oto",
+"t": "Dolphins! Hello!",
+"f": "oto_8b62e38177.mp3"
+},
+{
+"v": "oto",
+"t": "Door.",
+"f": "oto_444291bf21.mp3"
+},
+{
+"v": "oto",
+"t": "Dress.",
+"f": "oto_6a3bd9e09a.mp3"
+},
+{
+"v": "oto",
+"t": "Drink!",
+"f": "oto_9243b261df.mp3"
+},
+{
+"v": "oto",
+"t": "Duckling.",
+"f": "oto_6f6b9e26ed.mp3"
+},
+{
+"v": "oto",
+"t": "Ducks!",
+"f": "oto_f8bda3f1a4.mp3"
+},
+{
+"v": "oto",
+"t": "Ears.",
+"f": "oto_3731178353.mp3"
+},
+{
+"v": "oto",
+"t": "Eggs! One, two, three!",
+"f": "oto_f3399714f1.mp3"
+},
+{
+"v": "oto",
+"t": "Eight acorns! You got it!",
+"f": "oto_784dd5fda4.mp3"
+},
+{
+"v": "oto",
+"t": "Eight apples! You got it!",
+"f": "oto_becaa2db4a.mp3"
+},
+{
+"v": "oto",
+"t": "Eight balls! You got it!",
+"f": "oto_9a2762e9d5.mp3"
+},
+{
+"v": "oto",
+"t": "Eight bananas! You got it!",
+"f": "oto_d06f5c60f3.mp3"
+},
+{
+"v": "oto",
+"t": "Eight cakes!",
+"f": "oto_17089acd0a.mp3"
+},
+{
+"v": "oto",
+"t": "Eight candles! You got it!",
+"f": "oto_8258f6ca06.mp3"
+},
+{
+"v": "oto",
+"t": "Eight ducklings! You got it!",
+"f": "oto_776f36e4e5.mp3"
+},
+{
+"v": "oto",
+"t": "Eight fish! You got it!",
+"f": "oto_e13dc8e878.mp3"
+},
+{
+"v": "oto",
+"t": "Eight flowers! You got it!",
+"f": "oto_32236d77f3.mp3"
+},
+{
+"v": "oto",
+"t": "Eight frogs! You got it!",
+"f": "oto_19e6e8d0aa.mp3"
+},
+{
+"v": "oto",
+"t": "Eight monkeys! You got it!",
+"f": "oto_2998089d8f.mp3"
+},
+{
+"v": "oto",
+"t": "Eight presents! You got it!",
+"f": "oto_b128aa819e.mp3"
+},
+{
+"v": "oto",
+"t": "Eight socks! You got it!",
+"f": "oto_6e3c8f2284.mp3"
+},
+{
+"v": "oto",
+"t": "Eight teddies! You got it!",
+"f": "oto_c0ff138409.mp3"
+},
+{
+"v": "oto",
+"t": "Eight!",
+"f": "oto_7a4d10f493.mp3"
+},
+{
+"v": "oto",
+"t": "Elephant.",
+"f": "oto_4f105cba09.mp3"
+},
+{
+"v": "oto",
+"t": "Eyes.",
+"f": "oto_a557a5b3f1.mp3"
+},
+{
+"v": "oto",
+"t": "Family.",
+"f": "oto_70405dadaa.mp3"
+},
+{
+"v": "oto",
+"t": "Feet! Dina's feet!",
+"f": "oto_d70c1bde03.mp3"
+},
+{
+"v": "oto",
+"t": "Feet.",
+"f": "oto_b86a6a8ce6.mp3"
+},
+{
+"v": "oto",
+"t": "Find the big ball!",
+"f": "oto_31f92a0f78.mp3"
+},
+{
+"v": "oto",
+"t": "Find the small ball!",
+"f": "oto_5a0d1fe992.mp3"
+},
+{
+"v": "oto",
+"t": "Fish! The sea!",
+"f": "oto_98c343672c.mp3"
+},
+{
+"v": "oto",
+"t": "Fish.",
+"f": "oto_dddeebc965.mp3"
+},
+{
+"v": "oto",
+"t": "Five acorns! You got it!",
+"f": "oto_eaa892e2df.mp3"
+},
+{
+"v": "oto",
+"t": "Five apples! You got it!",
+"f": "oto_e90f7bfaf3.mp3"
+},
+{
+"v": "oto",
+"t": "Five babies!",
+"f": "oto_d73569e98e.mp3"
+},
+{
+"v": "oto",
+"t": "Five babies! Thank you!",
+"f": "oto_3839217b14.mp3"
+},
+{
+"v": "oto",
+"t": "Five balls! You got it!",
+"f": "oto_a151ec87c2.mp3"
+},
+{
+"v": "oto",
+"t": "Five bananas! You got it!",
+"f": "oto_f3c5c8f0d6.mp3"
+},
+{
+"v": "oto",
+"t": "Five candles! You got it!",
+"f": "oto_bfc9f8aef4.mp3"
+},
+{
+"v": "oto",
+"t": "Five ducklings! You got it!",
+"f": "oto_6486c31be2.mp3"
+},
+{
+"v": "oto",
+"t": "Five fish! You got it!",
+"f": "oto_3d97b16319.mp3"
+},
+{
+"v": "oto",
+"t": "Five flowers! You got it!",
+"f": "oto_1d712c10bc.mp3"
+},
+{
+"v": "oto",
+"t": "Five frogs! You got it!",
+"f": "oto_a2fa498d61.mp3"
+},
+{
+"v": "oto",
+"t": "Five monkeys! You got it!",
+"f": "oto_53ccf3e4fc.mp3"
+},
+{
+"v": "oto",
+"t": "Five presents! You got it!",
+"f": "oto_59884bd479.mp3"
+},
+{
+"v": "oto",
+"t": "Five socks! You got it!",
+"f": "oto_a5cc59e2d2.mp3"
+},
+{
+"v": "oto",
+"t": "Five teddies! You got it!",
+"f": "oto_9d6af84c81.mp3"
+},
+{
+"v": "oto",
+"t": "Five!",
+"f": "oto_c922bbabc8.mp3"
+},
+{
+"v": "oto",
+"t": "Flags! A party at the sea!",
+"f": "oto_a99f7b3b34.mp3"
+},
+{
+"v": "oto",
+"t": "Flags! A party!",
+"f": "oto_e498fa9571.mp3"
+},
+{
+"v": "oto",
+"t": "Flags! Red, yellow, blue!",
+"f": "oto_7e52a4410a.mp3"
+},
+{
+"v": "oto",
+"t": "Flower.",
+"f": "oto_379ae0eb3c.mp3"
+},
+{
+"v": "oto",
+"t": "Flowers!",
+"f": "oto_6d32b8b172.mp3"
+},
+{
+"v": "oto",
+"t": "Flowers! A pretty house!",
+"f": "oto_2155726e1b.mp3"
+},
+{
+"v": "oto",
+"t": "Flowers! Goodbye!",
+"f": "oto_fff104b549.mp3"
+},
+{
+"v": "oto",
+"t": "Flowers! It's hot!",
+"f": "oto_afe04d82f8.mp3"
+},
+{
+"v": "oto",
+"t": "Fly!",
+"f": "oto_8844b69134.mp3"
+},
+{
+"v": "oto",
+"t": "Fly! Fly! Fly!",
+"f": "oto_aff802e284.mp3"
+},
+{
+"v": "oto",
+"t": "Fly.",
+"f": "oto_e78f61e49c.mp3"
+},
+{
+"v": "oto",
+"t": "Four acorns! You got it!",
+"f": "oto_00331f8378.mp3"
+},
+{
+"v": "oto",
+"t": "Four apples! You got it!",
+"f": "oto_300d789e70.mp3"
+},
+{
+"v": "oto",
+"t": "Four balls! You got it!",
+"f": "oto_401e5d6913.mp3"
+},
+{
+"v": "oto",
+"t": "Four bananas! You got it!",
+"f": "oto_fa78a21cac.mp3"
+},
+{
+"v": "oto",
+"t": "Four candles! You got it!",
+"f": "oto_50d5e00bb0.mp3"
+},
+{
+"v": "oto",
+"t": "Four ducklings! You got it!",
+"f": "oto_ea989288b9.mp3"
+},
+{
+"v": "oto",
+"t": "Four fish! You got it!",
+"f": "oto_8511077187.mp3"
+},
+{
+"v": "oto",
+"t": "Four flowers! You got it!",
+"f": "oto_c126474a9f.mp3"
+},
+{
+"v": "oto",
+"t": "Four frogs! You got it!",
+"f": "oto_0f1aaa35f9.mp3"
+},
+{
+"v": "oto",
+"t": "Four monkeys! You got it!",
+"f": "oto_cfde2085d1.mp3"
+},
+{
+"v": "oto",
+"t": "Four presents! You got it!",
+"f": "oto_85206937a2.mp3"
+},
+{
+"v": "oto",
+"t": "Four socks! You got it!",
+"f": "oto_0d914f9af4.mp3"
+},
+{
+"v": "oto",
+"t": "Four teddies! You got it!",
+"f": "oto_49f9ee7985.mp3"
+},
+{
+"v": "oto",
+"t": "Four!",
+"f": "oto_56a6f9dcbc.mp3"
+},
+{
+"v": "oto",
+"t": "Frog.",
+"f": "oto_5d505cc6fd.mp3"
+},
+{
+"v": "oto",
+"t": "Giraffe.",
+"f": "oto_7ca08f10ce.mp3"
+},
+{
+"v": "oto",
+"t": "Goodbye!",
+"f": "oto_1e6a15f2bc.mp3"
+},
+{
+"v": "oto",
+"t": "Goodbye, Bella!",
+"f": "oto_0535290653.mp3"
+},
+{
+"v": "oto",
+"t": "Goodbye, Bizzy!",
+"f": "oto_0a67b2ae0f.mp3"
+},
+{
+"v": "oto",
+"t": "Goodbye, Bubbles!",
+"f": "oto_5b75d72bc8.mp3"
+},
+{
+"v": "oto",
+"t": "Goodbye, Dina!",
+"f": "oto_89c7f6b19e.mp3"
+},
+{
+"v": "oto",
+"t": "Goodbye, Momo!",
+"f": "oto_f03a5ffd01.mp3"
+},
+{
+"v": "oto",
+"t": "Goodbye, Mum! Goodbye, Dad! Goodbye, family!",
+"f": "oto_c186fad027.mp3"
+},
+{
+"v": "oto",
+"t": "Goodbye, Pippo!",
+"f": "oto_9d89adf48a.mp3"
+},
+{
+"v": "oto",
+"t": "Goodbye, cave!",
+"f": "oto_f9cb18fc19.mp3"
+},
+{
+"v": "oto",
+"t": "Goodbye, family!",
+"f": "oto_64c69e153d.mp3"
+},
+{
+"v": "oto",
+"t": "Goodbye, house!",
+"f": "oto_6c15349a17.mp3"
+},
+{
+"v": "oto",
+"t": "Grandma's basket!",
+"f": "oto_5eaf43ad1f.mp3"
+},
+{
+"v": "oto",
+"t": "Grandma.",
+"f": "oto_56cb171456.mp3"
+},
+{
+"v": "oto",
+"t": "Grandpa! Eight! My family!",
+"f": "oto_30ab479143.mp3"
+},
+{
+"v": "oto",
+"t": "Grandpa's chair!",
+"f": "oto_2625966973.mp3"
+},
+{
+"v": "oto",
+"t": "Grandpa.",
+"f": "oto_473c723bff.mp3"
+},
+{
+"v": "oto",
+"t": "Great! Let's go on.",
+"f": "oto_3090e9d5ec.mp3"
+},
+{
+"v": "oto",
+"t": "Green and yellow!",
+"f": "oto_a70b6f8daf.mp3"
+},
+{
+"v": "oto",
+"t": "Green!",
+"f": "oto_afa2f799e8.mp3"
+},
+{
+"v": "oto",
+"t": "Green.",
+"f": "oto_535440bd94.mp3"
+},
+{
+"v": "oto",
+"t": "Hair.",
+"f": "oto_1e8120fa7a.mp3"
+},
+{
+"v": "oto",
+"t": "Hand.",
+"f": "oto_58b3e933aa.mp3"
+},
+{
+"v": "oto",
+"t": "Hands.",
+"f": "oto_8a0acacfdb.mp3"
+},
+{
+"v": "oto",
+"t": "Happy birthday!",
+"f": "oto_6f7b4bc51c.mp3"
+},
+{
+"v": "oto",
+"t": "Happy birthday, Polly!",
+"f": "oto_e58dd7184a.mp3"
+},
+{
+"v": "oto",
+"t": "Happy.",
+"f": "oto_a65e87bea1.mp3"
+},
+{
+"v": "oto",
+"t": "Hat.",
+"f": "oto_a468dfecfb.mp3"
+},
+{
+"v": "oto",
+"t": "Hay! Yummy!",
+"f": "oto_b00b147818.mp3"
+},
+{
+"v": "oto",
+"t": "Head.",
+"f": "oto_93c79306f5.mp3"
+},
+{
+"v": "oto",
+"t": "Hello!",
+"f": "oto_8913a38b66.mp3"
+},
+{
+"v": "oto",
+"t": "Hello! I'm Oto.",
+"f": "oto_532381f6b5.mp3"
+},
+{
+"v": "oto",
+"t": "Hello! What's your name?",
+"f": "oto_2a87b2821b.mp3"
+},
+{
+"v": "oto",
+"t": "Hello, Bella!",
+"f": "oto_7c86ddcc08.mp3"
+},
+{
+"v": "oto",
+"t": "Hello, Bella! Look! Your friends!",
+"f": "oto_74cb517ea2.mp3"
+},
+{
+"v": "oto",
+"t": "Hello, Bizzy!",
+"f": "oto_77c397ef4b.mp3"
+},
+{
+"v": "oto",
+"t": "Hello, Bobby!",
+"f": "oto_6e027299a7.mp3"
+},
+{
+"v": "oto",
+"t": "Hello, Bubbles!",
+"f": "oto_c6f781617b.mp3"
+},
+{
+"v": "oto",
+"t": "Hello, Dina!",
+"f": "oto_eb0be82e4b.mp3"
+},
+{
+"v": "oto",
+"t": "Hello, Momo!",
+"f": "oto_5142966eee.mp3"
+},
+{
+"v": "oto",
+"t": "Hello, Pippo!",
+"f": "oto_74096bd5e4.mp3"
+},
+{
+"v": "oto",
+"t": "Hello, Polly!",
+"f": "oto_6022a8b97b.mp3"
+},
+{
+"v": "oto",
+"t": "Hello, Sammy!",
+"f": "oto_a7543c5137.mp3"
+},
+{
+"v": "oto",
+"t": "Hello, bird!",
+"f": "oto_b0ddd2ab24.mp3"
+},
+{
+"v": "oto",
+"t": "Hello, birds!",
+"f": "oto_4fe3374a34.mp3"
+},
+{
+"v": "oto",
+"t": "Hello, butterfly!",
+"f": "oto_4d0bf10668.mp3"
+},
+{
+"v": "oto",
+"t": "Hello, caterpillar!",
+"f": "oto_7d03b0740a.mp3"
+},
+{
+"v": "oto",
+"t": "Hello, flowers!",
+"f": "oto_f979258a09.mp3"
+},
+{
+"v": "oto",
+"t": "Hello, frog!",
+"f": "oto_87923802e2.mp3"
+},
+{
+"v": "oto",
+"t": "Hello, river! Hello, sun!",
+"f": "oto_9b2a316479.mp3"
+},
+{
+"v": "oto",
+"t": "Hello, scarecrow!",
+"f": "oto_7893381014.mp3"
+},
+{
+"v": "oto",
+"t": "Here I am!",
+"f": "oto_f5554081c7.mp3"
+},
+{
+"v": "oto",
+"t": "Here you are!",
+"f": "oto_ae5e0ef742.mp3"
+},
+{
+"v": "oto",
+"t": "Here you are! A present!",
+"f": "oto_809de12a2f.mp3"
+},
+{
+"v": "oto",
+"t": "Here you are, Pippo!",
+"f": "oto_e1cec58c5a.mp3"
+},
+{
+"v": "oto",
+"t": "Here you are.",
+"f": "oto_89b600864c.mp3"
+},
+{
+"v": "oto",
+"t": "Honey!",
+"f": "oto_fa9086c1d5.mp3"
+},
+{
+"v": "oto",
+"t": "Honey! Yummy!",
+"f": "oto_0fa8b6c3be.mp3"
+},
+{
+"v": "oto",
+"t": "Hooray!",
+"f": "oto_c0c1c081fa.mp3"
+},
+{
+"v": "oto",
+"t": "Hot.",
+"f": "oto_5ce737e1be.mp3"
+},
+{
+"v": "oto",
+"t": "House.",
+"f": "oto_7f08f32212.mp3"
+},
+{
+"v": "oto",
+"t": "How are you?",
+"f": "oto_6124a65b1c.mp3"
+},
+{
+"v": "oto",
+"t": "How is Oto?",
+"f": "oto_8cf3002896.mp3"
+},
+{
+"v": "oto",
+"t": "How many babies?",
+"f": "oto_fe4007a619.mp3"
+},
+{
+"v": "oto",
+"t": "How many ears?",
+"f": "oto_46e971977d.mp3"
+},
+{
+"v": "oto",
+"t": "How many eyes?",
+"f": "oto_2b366100c4.mp3"
+},
+{
+"v": "oto",
+"t": "How many fish?",
+"f": "oto_facd7876b6.mp3"
+},
+{
+"v": "oto",
+"t": "How many hands?",
+"f": "oto_ac09182608.mp3"
+},
+{
+"v": "oto",
+"t": "How many noses?",
+"f": "oto_8ecd981593.mp3"
+},
+{
+"v": "oto",
+"t": "How many?",
+"f": "oto_8d55be75dd.mp3"
+},
+{
+"v": "oto",
+"t": "How old are you, Polly?",
+"f": "oto_8f8601a666.mp3"
+},
+{
+"v": "oto",
+"t": "How old are you?",
+"f": "oto_1a5060a403.mp3"
+},
+{
+"v": "oto",
+"t": "Hungry.",
+"f": "oto_5e8619761e.mp3"
+},
+{
+"v": "oto",
+"t": "I can fly!",
+"f": "oto_c02d01032f.mp3"
+},
+{
+"v": "oto",
+"t": "I can jump!",
+"f": "oto_461f7a591c.mp3"
+},
+{
+"v": "oto",
+"t": "I can swim!",
+"f": "oto_4f33a43045.mp3"
+},
+{
+"v": "oto",
+"t": "I don't like it!",
+"f": "oto_c49513b519.mp3"
+},
+{
+"v": "oto",
+"t": "I like apples!",
+"f": "oto_4529103460.mp3"
+},
+{
+"v": "oto",
+"t": "I like bananas. And you?",
+"f": "oto_ceb3045737.mp3"
+},
+{
+"v": "oto",
+"t": "I like blue!",
+"f": "oto_4741b42782.mp3"
+},
+{
+"v": "oto",
+"t": "I like blue! And you?",
+"f": "oto_9397f12b6d.mp3"
+},
+{
+"v": "oto",
+"t": "I like bread. And you?",
+"f": "oto_708a2e6452.mp3"
+},
+{
+"v": "oto",
+"t": "I like cake. And you?",
+"f": "oto_27e783a695.mp3"
+},
+{
+"v": "oto",
+"t": "I like green!",
+"f": "oto_9b1e01c6d5.mp3"
+},
+{
+"v": "oto",
+"t": "I like ice cream. And you?",
+"f": "oto_dce826b783.mp3"
+},
+{
+"v": "oto",
+"t": "I like it!",
+"f": "oto_1b68e87dfd.mp3"
+},
+{
+"v": "oto",
+"t": "I like milk. And you?",
+"f": "oto_861dbf29d4.mp3"
+},
+{
+"v": "oto",
+"t": "I like orange!",
+"f": "oto_1416ee5f6a.mp3"
+},
+{
+"v": "oto",
+"t": "I like oranges. And you?",
+"f": "oto_e43db7342c.mp3"
+},
+{
+"v": "oto",
+"t": "I like pink!",
+"f": "oto_d9f78b2495.mp3"
+},
+{
+"v": "oto",
+"t": "I like purple!",
+"f": "oto_a7951ea082.mp3"
+},
+{
+"v": "oto",
+"t": "I like red!",
+"f": "oto_7531d9f3ca.mp3"
+},
+{
+"v": "oto",
+"t": "I like yellow!",
+"f": "oto_401f23c896.mp3"
+},
+{
+"v": "oto",
+"t": "I'm Oto!",
+"f": "oto_052433a018.mp3"
+},
+{
+"v": "oto",
+"t": "I'm Oto.",
+"f": "oto_82dea29970.mp3"
+},
+{
+"v": "oto",
+"t": "I'm Oto. And you?",
+"f": "oto_7d79b0aad4.mp3"
+},
+{
+"v": "oto",
+"t": "I'm cold!",
+"f": "oto_0b0c2e5ddf.mp3"
+},
+{
+"v": "oto",
+"t": "I'm five! Or six!",
+"f": "oto_effffb9566.mp3"
+},
+{
+"v": "oto",
+"t": "I'm five.",
+"f": "oto_3eb8423f49.mp3"
+},
+{
+"v": "oto",
+"t": "I'm happy!",
+"f": "oto_7ee6d422f1.mp3"
+},
+{
+"v": "oto",
+"t": "I'm happy! Thank you, friends!",
+"f": "oto_5708906387.mp3"
+},
+{
+"v": "oto",
+"t": "I'm sad.",
+"f": "oto_d24dbc6ae4.mp3"
+},
+{
+"v": "oto",
+"t": "I'm six!",
+"f": "oto_e8b558287a.mp3"
+},
+{
+"v": "oto",
+"t": "I'm warm now! Thank you, Oto!",
+"f": "oto_2dfe9d631e.mp3"
+},
+{
+"v": "oto",
+"t": "I've got a ball!",
+"f": "oto_ec2fccaa85.mp3"
+},
+{
+"v": "oto",
+"t": "I've got a car!",
+"f": "oto_f38700509f.mp3"
+},
+{
+"v": "oto",
+"t": "I've got a doll!",
+"f": "oto_2ce3ef24cf.mp3"
+},
+{
+"v": "oto",
+"t": "I've got a kite!",
+"f": "oto_e9db6cd9de.mp3"
+},
+{
+"v": "oto",
+"t": "I've got a robot!",
+"f": "oto_471acef4d2.mp3"
+},
+{
+"v": "oto",
+"t": "I've got a teddy!",
+"f": "oto_072c5e95e4.mp3"
+},
+{
+"v": "oto",
+"t": "I've got a train!",
+"f": "oto_825331fc9f.mp3"
+},
+{
+"v": "oto",
+"t": "I've got four ears.",
+"f": "oto_4fe3a1da25.mp3"
+},
+{
+"v": "oto",
+"t": "I've got one hand.",
+"f": "oto_06616844dd.mp3"
+},
+{
+"v": "oto",
+"t": "I've got one nose!",
+"f": "oto_cba59fea67.mp3"
+},
+{
+"v": "oto",
+"t": "I've got one nose.",
+"f": "oto_e4250e3ec9.mp3"
+},
+{
+"v": "oto",
+"t": "I've got three eyes.",
+"f": "oto_f323f0b659.mp3"
+},
+{
+"v": "oto",
+"t": "I've got two ears!",
+"f": "oto_37cf3d1fb9.mp3"
+},
+{
+"v": "oto",
+"t": "I've got two ears.",
+"f": "oto_24363ab6dc.mp3"
+},
+{
+"v": "oto",
+"t": "I've got two eyes!",
+"f": "oto_698a3df8b6.mp3"
+},
+{
+"v": "oto",
+"t": "I've got two eyes, too!",
+"f": "oto_a60d978918.mp3"
+},
+{
+"v": "oto",
+"t": "I've got two eyes.",
+"f": "oto_a45ab68408.mp3"
+},
+{
+"v": "oto",
+"t": "I've got two hands!",
+"f": "oto_d6c49a46f6.mp3"
+},
+{
+"v": "oto",
+"t": "I've got two hands.",
+"f": "oto_95be5e8981.mp3"
+},
+{
+"v": "oto",
+"t": "I've got two noses.",
+"f": "oto_14141ce4c2.mp3"
+},
+{
+"v": "oto",
+"t": "Ice cream!",
+"f": "oto_14b5fc625d.mp3"
+},
+{
+"v": "oto",
+"t": "Ice cream.",
+"f": "oto_1e7f190750.mp3"
+},
+{
+"v": "oto",
+"t": "In the bed!",
+"f": "oto_df9d9e247b.mp3"
+},
+{
+"v": "oto",
+"t": "In the box or on the table?",
+"f": "oto_9d6981747b.mp3"
+},
+{
+"v": "oto",
+"t": "In the box!",
+"f": "oto_19aa4adb2d.mp3"
+},
+{
+"v": "oto",
+"t": "In.",
+"f": "oto_372eb06d91.mp3"
+},
+{
+"v": "oto",
+"t": "Is it in the box? No. On the chair? No.",
+"f": "oto_933b14eff5.mp3"
+},
+{
+"v": "oto",
+"t": "Is it long, like sheep?",
+"f": "oto_88610b4951.mp3"
+},
+{
+"v": "oto",
+"t": "Is your mouth wide open, like in apple?",
+"f": "oto_03c36f6476.mp3"
+},
+{
+"v": "oto",
+"t": "It's Oto's birthday!",
+"f": "oto_a9383c7734.mp3"
+},
+{
+"v": "oto",
+"t": "It's blue!",
+"f": "oto_ced99d2c93.mp3"
+},
+{
+"v": "oto",
+"t": "It's blue.",
+"f": "oto_773c8162e9.mp3"
+},
+{
+"v": "oto",
+"t": "It's cold!",
+"f": "oto_074098bd01.mp3"
+},
+{
+"v": "oto",
+"t": "It's cold! Put on your...?",
+"f": "oto_6afdaf2982.mp3"
+},
+{
+"v": "oto",
+"t": "It's green!",
+"f": "oto_bb05e75bec.mp3"
+},
+{
+"v": "oto",
+"t": "It's green! A green tree!",
+"f": "oto_be47627c5c.mp3"
+},
+{
+"v": "oto",
+"t": "It's green.",
+"f": "oto_60c13c0b15.mp3"
+},
+{
+"v": "oto",
+"t": "It's hot!",
+"f": "oto_918a1fb909.mp3"
+},
+{
+"v": "oto",
+"t": "It's hot! Put on your...?",
+"f": "oto_1ac7f1a3e4.mp3"
+},
+{
+"v": "oto",
+"t": "It's in the box!",
+"f": "oto_2280cb26b7.mp3"
+},
+{
+"v": "oto",
+"t": "It's my baby.",
+"f": "oto_12dbd8bbbd.mp3"
+},
+{
+"v": "oto",
+"t": "It's my birthday... I'm sad.",
+"f": "oto_83b895b26b.mp3"
+},
+{
+"v": "oto",
+"t": "It's my brother!",
+"f": "oto_74fbfddb81.mp3"
+},
+{
+"v": "oto",
+"t": "It's my brother.",
+"f": "oto_29a267000f.mp3"
+},
+{
+"v": "oto",
+"t": "It's my dad!",
+"f": "oto_c314d77eac.mp3"
+},
+{
+"v": "oto",
+"t": "It's my dad.",
+"f": "oto_849bb9f58b.mp3"
+},
+{
+"v": "oto",
+"t": "It's my grandma!",
+"f": "oto_951aa5c8ab.mp3"
+},
+{
+"v": "oto",
+"t": "It's my grandma.",
+"f": "oto_0d9d8b502e.mp3"
+},
+{
+"v": "oto",
+"t": "It's my grandpa!",
+"f": "oto_2b77e7b9bf.mp3"
+},
+{
+"v": "oto",
+"t": "It's my mum!",
+"f": "oto_ee1efe0725.mp3"
+},
+{
+"v": "oto",
+"t": "It's my mum! My family!",
+"f": "oto_0847630622.mp3"
+},
+{
+"v": "oto",
+"t": "It's my mum.",
+"f": "oto_1aa9796245.mp3"
+},
+{
+"v": "oto",
+"t": "It's my sister!",
+"f": "oto_bff6f62940.mp3"
+},
+{
+"v": "oto",
+"t": "It's my sister.",
+"f": "oto_904aad8e4b.mp3"
+},
+{
+"v": "oto",
+"t": "It's on the box!",
+"f": "oto_e51d8218ed.mp3"
+},
+{
+"v": "oto",
+"t": "It's on the chair!",
+"f": "oto_d5caa46408.mp3"
+},
+{
+"v": "oto",
+"t": "It's orange.",
+"f": "oto_16a98b0614.mp3"
+},
+{
+"v": "oto",
+"t": "It's pink.",
+"f": "oto_831799e19a.mp3"
+},
+{
+"v": "oto",
+"t": "It's purple.",
+"f": "oto_ccd94d795f.mp3"
+},
+{
+"v": "oto",
+"t": "It's red!",
+"f": "oto_1b6afcc544.mp3"
+},
+{
+"v": "oto",
+"t": "It's red.",
+"f": "oto_f4a8b9a52c.mp3"
+},
+{
+"v": "oto",
+"t": "It's the baby!",
+"f": "oto_b53b1cc8b5.mp3"
+},
+{
+"v": "oto",
+"t": "It's under the bed!",
+"f": "oto_ee2dde08ee.mp3"
+},
+{
+"v": "oto",
+"t": "It's under the present!",
+"f": "oto_809525ba55.mp3"
+},
+{
+"v": "oto",
+"t": "It's under the table!",
+"f": "oto_67a3dd7d4d.mp3"
+},
+{
+"v": "oto",
+"t": "It's yellow!",
+"f": "oto_4b90dd2644.mp3"
+},
+{
+"v": "oto",
+"t": "It's yellow! A banana!",
+"f": "oto_edbbc9bfeb.mp3"
+},
+{
+"v": "oto",
+"t": "It's yellow! Mmm! A banana!",
+"f": "oto_7c39ae3c31.mp3"
+},
+{
+"v": "oto",
+"t": "It's yellow.",
+"f": "oto_8de3ae3e4c.mp3"
+},
+{
+"v": "oto",
+"t": "Jacket.",
+"f": "oto_e5dcc8a4bd.mp3"
+},
+{
+"v": "oto",
+"t": "Jump!",
+"f": "oto_4adff55e9a.mp3"
+},
+{
+"v": "oto",
+"t": "Jump! Swim!",
+"f": "oto_b8e94acebd.mp3"
+},
+{
+"v": "oto",
+"t": "Jump.",
+"f": "oto_b8a33de401.mp3"
+},
+{
+"v": "oto",
+"t": "Kite.",
+"f": "oto_e0a949ac7f.mp3"
+},
+{
+"v": "oto",
+"t": "Knock, knock!",
+"f": "oto_c07d4b7eb0.mp3"
+},
+{
+"v": "oto",
+"t": "Knock, knock! Hello!",
+"f": "oto_431aedf497.mp3"
+},
+{
+"v": "oto",
+"t": "Knock, knock! Hello?",
+"f": "oto_68a92596d8.mp3"
+},
+{
+"v": "oto",
+"t": "Legs.",
+"f": "oto_3af058fef0.mp3"
+},
+{
+"v": "oto",
+"t": "Let's go to the Big Forest!",
+"f": "oto_eaac2bf50b.mp3"
+},
+{
+"v": "oto",
+"t": "Let's go to the Fruit Garden!",
+"f": "oto_03fbdfa22e.mp3"
+},
+{
+"v": "oto",
+"t": "Let's go to the Snowy Mountain!",
+"f": "oto_d4d637f0e6.mp3"
+},
+{
+"v": "oto",
+"t": "Let's go!",
+"f": "oto_650c5919ce.mp3"
+},
+{
+"v": "oto",
+"t": "Let's play for Mum and Dad! Let's sing!",
+"f": "oto_384fba90df.mp3"
+},
+{
+"v": "oto",
+"t": "Let's play!",
+"f": "oto_318a9e631d.mp3"
+},
+{
+"v": "oto",
+"t": "Light!",
+"f": "oto_136a5e0509.mp3"
+},
+{
+"v": "oto",
+"t": "Lights!",
+"f": "oto_9cecdb49b6.mp3"
+},
+{
+"v": "oto",
+"t": "Lights! Lots of lights!",
+"f": "oto_6224e36975.mp3"
+},
+{
+"v": "oto",
+"t": "Lights! Sammy's house!",
+"f": "oto_d7067cd4a4.mp3"
+},
+{
+"v": "oto",
+"t": "Lion.",
+"f": "oto_303c693868.mp3"
+},
+{
+"v": "oto",
+"t": "Listen again. Let's try together!",
+"f": "oto_7d3e823447.mp3"
+},
+{
+"v": "oto",
+"t": "Listen!",
+"f": "oto_fdef0d1815.mp3"
+},
+{
+"v": "oto",
+"t": "Listen! Bzzz!",
+"f": "oto_6a939e14c1.mp3"
+},
+{
+"v": "oto",
+"t": "Look again!",
+"f": "oto_e8b2a68857.mp3"
+},
+{
+"v": "oto",
+"t": "Look at Polly! How is she?",
+"f": "oto_86197b3a6a.mp3"
+},
+{
+"v": "oto",
+"t": "Look! A balloon!",
+"f": "oto_969e6f702b.mp3"
+},
+{
+"v": "oto",
+"t": "Look! A bridge!",
+"f": "oto_a29ca1b729.mp3"
+},
+{
+"v": "oto",
+"t": "Look! A door! Open the door!",
+"f": "oto_81470f3722.mp3"
+},
+{
+"v": "oto",
+"t": "Look! A hot air balloon!",
+"f": "oto_2a321ea65e.mp3"
+},
+{
+"v": "oto",
+"t": "Look! A house! A door! A window!",
+"f": "oto_4c2ce3172c.mp3"
+},
+{
+"v": "oto",
+"t": "Look! A kite!",
+"f": "oto_f9db09f9cf.mp3"
+},
+{
+"v": "oto",
+"t": "Look! A light!",
+"f": "oto_3a09055f51.mp3"
+},
+{
+"v": "oto",
+"t": "Look! A picture!",
+"f": "oto_4ad4529969.mp3"
+},
+{
+"v": "oto",
+"t": "Look! A rainbow!",
+"f": "oto_fa64a8f734.mp3"
+},
+{
+"v": "oto",
+"t": "Look! A small baby! Big Dina, small baby!",
+"f": "oto_9428d8f06d.mp3"
+},
+{
+"v": "oto",
+"t": "Look! A tree! And a small house! In a tree!",
+"f": "oto_09e4a9b500.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Bella.",
+"f": "oto_d5164ad377.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Big ears or small ears?",
+"f": "oto_d115aca984.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Big ears!",
+"f": "oto_c409142f5b.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Big... big!",
+"f": "oto_6101f767e2.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Blue.",
+"f": "oto_367d736ff4.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Bobby.",
+"f": "oto_95293c483c.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Bubbles.",
+"f": "oto_da0687f056.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Colours!",
+"f": "oto_7a69f3a581.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Dad.",
+"f": "oto_d22ceda681.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Dina.",
+"f": "oto_5d12fe36db.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Dragonflies!",
+"f": "oto_3222125b04.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Flags!",
+"f": "oto_79d3660f67.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Fly.",
+"f": "oto_eb0e5221f6.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Grandma.",
+"f": "oto_6376af803f.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Grandpa.",
+"f": "oto_12705d180c.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Green.",
+"f": "oto_a08516ba9e.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Happy.",
+"f": "oto_f3edaed897.mp3"
+},
+{
+"v": "oto",
+"t": "Look! How is Bella?",
+"f": "oto_efe1ccd896.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Hungry.",
+"f": "oto_8461f051e1.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Is it hot or cold?",
+"f": "oto_46623fdcfa.mp3"
+},
+{
+"v": "oto",
+"t": "Look! It turns around!",
+"f": "oto_8e8c08b140.mp3"
+},
+{
+"v": "oto",
+"t": "Look! It's cold.",
+"f": "oto_b2b2d141d1.mp3"
+},
+{
+"v": "oto",
+"t": "Look! It's hot.",
+"f": "oto_598e73c758.mp3"
+},
+{
+"v": "oto",
+"t": "Look! It's under the bed!",
+"f": "oto_45c481fc12.mp3"
+},
+{
+"v": "oto",
+"t": "Look! It's under the present!",
+"f": "oto_19867b3c34.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Jump.",
+"f": "oto_9c5cf7a579.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Leaves!",
+"f": "oto_080854f5e0.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Little clothes!",
+"f": "oto_c65e70c7e4.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Long legs!",
+"f": "oto_88f8e6c380.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Mum.",
+"f": "oto_be3f36ba63.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Orange.",
+"f": "oto_5865b0dc94.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Oto's brother.",
+"f": "oto_9a175e2c41.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Oto's sister.",
+"f": "oto_e1a6b36c48.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Pink.",
+"f": "oto_36906075e8.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Polly! Can you help me? Say hello!",
+"f": "oto_960c17f421.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Purple.",
+"f": "oto_9e1e85ca3c.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Rain!",
+"f": "oto_229a0ee541.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Red.",
+"f": "oto_b8e633ba56.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Run.",
+"f": "oto_cbf5683493.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Sad.",
+"f": "oto_78e38e8ffe.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Shiny water!",
+"f": "oto_366c2b6e4e.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Smoke!",
+"f": "oto_65f6d51a10.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Snow!",
+"f": "oto_f9ebf83fb7.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Snow! Is it hot or cold?",
+"f": "oto_8e8ae6368b.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Swim.",
+"f": "oto_31b26156cf.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The T-shirt.",
+"f": "oto_fe95beee88.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The apple.",
+"f": "oto_34d6fb95b2.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The arms.",
+"f": "oto_086da643ad.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The baby! How is he? Can you help me?",
+"f": "oto_fab1aa175f.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The baby.",
+"f": "oto_f5ae6fa946.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The ball is in the box.",
+"f": "oto_074b19b3be.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The ball is on the box.",
+"f": "oto_dd6db26aa2.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The ball is under the table.",
+"f": "oto_827a5af53a.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The ball.",
+"f": "oto_557f6465b2.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The banana.",
+"f": "oto_36c02f9f4f.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The bed.",
+"f": "oto_3394e13c98.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The big ball.",
+"f": "oto_2c31e29e66.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The big car.",
+"f": "oto_1bbe34b103.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The big teddy.",
+"f": "oto_dd2d8f5979.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The bike.",
+"f": "oto_a9a971a3f0.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The bird.",
+"f": "oto_af3559358b.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The birthday.",
+"f": "oto_dbd2603236.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The box.",
+"f": "oto_5d7cb79341.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The bread.",
+"f": "oto_4f1ce95ae7.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The cake.",
+"f": "oto_e4e01c0067.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The car.",
+"f": "oto_68b1c820b6.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The chair.",
+"f": "oto_527d6a1e0e.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The crocodile.",
+"f": "oto_bb43c8894b.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The doll.",
+"f": "oto_4b0e14fb03.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The door.",
+"f": "oto_b7432ef92f.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The dress.",
+"f": "oto_3ac91e6574.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The ears.",
+"f": "oto_d716c7da44.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The elephant.",
+"f": "oto_2a9b95943f.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The eyes.",
+"f": "oto_bb226a4496.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The family.",
+"f": "oto_7a1ffaa15a.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The feet.",
+"f": "oto_656625ffd9.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The flower.",
+"f": "oto_4ae180113f.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The frog.",
+"f": "oto_49aee45932.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The giraffe.",
+"f": "oto_b636eadddf.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The hair.",
+"f": "oto_ccdb286c0e.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The hands.",
+"f": "oto_7295a49dbc.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The hat.",
+"f": "oto_0338da0a6e.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The head.",
+"f": "oto_eaebfe8a3b.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The house.",
+"f": "oto_22fd3b135b.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The ice cream.",
+"f": "oto_1292c21182.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The jacket.",
+"f": "oto_9aeae276ce.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The kite.",
+"f": "oto_91d709829f.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The legs.",
+"f": "oto_80d2a8b1f0.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The lion.",
+"f": "oto_f39ab40c28.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The milk.",
+"f": "oto_7de2cd5851.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The monkey.",
+"f": "oto_edfc6381a0.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The mouth.",
+"f": "oto_0161f7e2f4.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The nose.",
+"f": "oto_d14c3ba29e.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The orange.",
+"f": "oto_09249f46a3.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The party.",
+"f": "oto_077a2f68e5.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The present.",
+"f": "oto_39e0a2cf66.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The rain.",
+"f": "oto_c6e19642d5.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The robot.",
+"f": "oto_208b664401.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The sea!",
+"f": "oto_c49cd64882.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The shoes.",
+"f": "oto_02a02ee79e.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The small ball.",
+"f": "oto_403c3c701a.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The small teddy.",
+"f": "oto_bdb0136c5a.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The small tree.",
+"f": "oto_686bde71c8.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The snake.",
+"f": "oto_38d3c2bf97.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The snow.",
+"f": "oto_9e355d81fd.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The socks.",
+"f": "oto_028423933f.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The table.",
+"f": "oto_e73f568522.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The teddy is in the box.",
+"f": "oto_06c13c932d.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The teddy is on the bed.",
+"f": "oto_667b10bed4.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The teddy is under the chair.",
+"f": "oto_1be67de763.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The teddy.",
+"f": "oto_dbabdaa21b.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The train.",
+"f": "oto_54076e7c2a.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The tree.",
+"f": "oto_6b4456efe0.mp3"
+},
+{
+"v": "oto",
+"t": "Look! The window.",
+"f": "oto_85d83f1341.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Tired.",
+"f": "oto_c91871bd38.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Water.",
+"f": "oto_934a47f122.mp3"
+},
+{
+"v": "oto",
+"t": "Look! What's this?",
+"f": "oto_630dfdcf5a.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Where's the ball? Under the bed!",
+"f": "oto_53c7b32e0e.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Who's this?",
+"f": "oto_4ea8c5c5e5.mp3"
+},
+{
+"v": "oto",
+"t": "Look! Yellow.",
+"f": "oto_f338a8d9f6.mp3"
+},
+{
+"v": "oto",
+"t": "Look: one, two, three, four, five, six, seven, eight, nine, ten.",
+"f": "oto_1ef8ba8bed.mp3"
+},
+{
+"v": "oto",
+"t": "Look: one, two, three, four, five, six, seven, eight, nine.",
+"f": "oto_03660590e5.mp3"
+},
+{
+"v": "oto",
+"t": "Look: one, two, three, four, five, six, seven, eight.",
+"f": "oto_d8d9f40fe0.mp3"
+},
+{
+"v": "oto",
+"t": "Look: one, two, three, four, five, six, seven.",
+"f": "oto_5b754dccdf.mp3"
+},
+{
+"v": "oto",
+"t": "Look: one, two, three, four, five, six.",
+"f": "oto_01ed58957d.mp3"
+},
+{
+"v": "oto",
+"t": "Look: one, two, three, four, five.",
+"f": "oto_c8b064a871.mp3"
+},
+{
+"v": "oto",
+"t": "Look: one, two, three, four.",
+"f": "oto_ecea03be2d.mp3"
+},
+{
+"v": "oto",
+"t": "Look: one, two, three.",
+"f": "oto_01af1ba7a5.mp3"
+},
+{
+"v": "oto",
+"t": "Look: one, two.",
+"f": "oto_544001e668.mp3"
+},
+{
+"v": "oto",
+"t": "Look: one.",
+"f": "oto_3f05fd4b43.mp3"
+},
+{
+"v": "oto",
+"t": "Milk and water!",
+"f": "oto_bbc3203054.mp3"
+},
+{
+"v": "oto",
+"t": "Milk.",
+"f": "oto_85b4597a0f.mp3"
+},
+{
+"v": "oto",
+"t": "Mmm! Bananas!",
+"f": "oto_b2cd757566.mp3"
+},
+{
+"v": "oto",
+"t": "Mmm! Fruit!",
+"f": "oto_dd1f900377.mp3"
+},
+{
+"v": "oto",
+"t": "Monkey.",
+"f": "oto_e87557d54b.mp3"
+},
+{
+"v": "oto",
+"t": "Monkeys jumping on the bed!",
+"f": "oto_fb2223774f.mp3"
+},
+{
+"v": "oto",
+"t": "More apples!",
+"f": "oto_8bd6a2c4ef.mp3"
+},
+{
+"v": "oto",
+"t": "Mouth.",
+"f": "oto_24c94c415c.mp3"
+},
+{
+"v": "oto",
+"t": "Mum! I'm happy!",
+"f": "oto_39bc3b4f26.mp3"
+},
+{
+"v": "oto",
+"t": "Mum.",
+"f": "oto_8909bdbc35.mp3"
+},
+{
+"v": "oto",
+"t": "Mum? Dad?",
+"f": "oto_f54e6db059.mp3"
+},
+{
+"v": "oto",
+"t": "My bag! Let's go!",
+"f": "oto_abcd0cccd6.mp3"
+},
+{
+"v": "oto",
+"t": "My birthday! Thank you! I'm happy!",
+"f": "oto_0b16af27ec.mp3"
+},
+{
+"v": "oto",
+"t": "My boat!",
+"f": "oto_1f00ba7159.mp3"
+},
+{
+"v": "oto",
+"t": "My family picture!",
+"f": "oto_abf96ad3eb.mp3"
+},
+{
+"v": "oto",
+"t": "My family!",
+"f": "oto_9382dc3369.mp3"
+},
+{
+"v": "oto",
+"t": "My hair! My hands! Shake, Oto, shake!",
+"f": "oto_a78417109b.mp3"
+},
+{
+"v": "oto",
+"t": "Nine acorns! You got it!",
+"f": "oto_dd2febfa4c.mp3"
+},
+{
+"v": "oto",
+"t": "Nine apples! You got it!",
+"f": "oto_7c5edf584c.mp3"
+},
+{
+"v": "oto",
+"t": "Nine balls! You got it!",
+"f": "oto_f0f3236793.mp3"
+},
+{
+"v": "oto",
+"t": "Nine bananas! You got it!",
+"f": "oto_5e5fbf7935.mp3"
+},
+{
+"v": "oto",
+"t": "Nine candles! You got it!",
+"f": "oto_de46aff74b.mp3"
+},
+{
+"v": "oto",
+"t": "Nine ducklings! You got it!",
+"f": "oto_c128c18894.mp3"
+},
+{
+"v": "oto",
+"t": "Nine fish! You got it!",
+"f": "oto_c0dd540a60.mp3"
+},
+{
+"v": "oto",
+"t": "Nine flowers! You got it!",
+"f": "oto_aa6089cd2f.mp3"
+},
+{
+"v": "oto",
+"t": "Nine frogs! You got it!",
+"f": "oto_6fab1efa6a.mp3"
+},
+{
+"v": "oto",
+"t": "Nine monkeys! You got it!",
+"f": "oto_3cd1461269.mp3"
+},
+{
+"v": "oto",
+"t": "Nine presents! You got it!",
+"f": "oto_51196781fa.mp3"
+},
+{
+"v": "oto",
+"t": "Nine socks! You got it!",
+"f": "oto_1d4d50d34c.mp3"
+},
+{
+"v": "oto",
+"t": "Nine teddies! You got it!",
+"f": "oto_a9e79eb187.mp3"
+},
+{
+"v": "oto",
+"t": "Nine!",
+"f": "oto_0156ac4986.mp3"
+},
+{
+"v": "oto",
+"t": "Nine, ten! Ten teddies!",
+"f": "oto_427160efad.mp3"
+},
+{
+"v": "oto",
+"t": "No!",
+"f": "oto_acbeb91160.mp3"
+},
+{
+"v": "oto",
+"t": "No! I can swim!",
+"f": "oto_6058c23f14.mp3"
+},
+{
+"v": "oto",
+"t": "No! I can't fly!",
+"f": "oto_a2c4b067ad.mp3"
+},
+{
+"v": "oto",
+"t": "No, it doesn't.",
+"f": "oto_464be47b61.mp3"
+},
+{
+"v": "oto",
+"t": "No, thank you. I don't like bread. I like cake!",
+"f": "oto_35d343d285.mp3"
+},
+{
+"v": "oto",
+"t": "Nose! My nose!",
+"f": "oto_5adcdf3d5d.mp3"
+},
+{
+"v": "oto",
+"t": "Nose.",
+"f": "oto_ddab2df80d.mp3"
+},
+{
+"v": "oto",
+"t": "Oh no! Look! A tree!",
+"f": "oto_40c319156d.mp3"
+},
+{
+"v": "oto",
+"t": "Oh no! The window! Can you help me?",
+"f": "oto_779d7f8ed5.mp3"
+},
+{
+"v": "oto",
+"t": "Oh! Can you help me?",
+"f": "oto_8d92ab0bd0.mp3"
+},
+{
+"v": "oto",
+"t": "Oh! My hands! Can you help me?",
+"f": "oto_dd5f0d4e62.mp3"
+},
+{
+"v": "oto",
+"t": "On the box!",
+"f": "oto_67bfbca448.mp3"
+},
+{
+"v": "oto",
+"t": "On the chair!",
+"f": "oto_b42430d24f.mp3"
+},
+{
+"v": "oto",
+"t": "On.",
+"f": "oto_26178bffd2.mp3"
+},
+{
+"v": "oto",
+"t": "One acorn! You got it!",
+"f": "oto_505d04ef29.mp3"
+},
+{
+"v": "oto",
+"t": "One apple! You got it!",
+"f": "oto_91eac7b171.mp3"
+},
+{
+"v": "oto",
+"t": "One ball! You got it!",
+"f": "oto_cf28206488.mp3"
+},
+{
+"v": "oto",
+"t": "One banana! You got it!",
+"f": "oto_cf6f85591c.mp3"
+},
+{
+"v": "oto",
+"t": "One candle! You got it!",
+"f": "oto_f64fa9d606.mp3"
+},
+{
+"v": "oto",
+"t": "One duckling! You got it!",
+"f": "oto_dd2203e33d.mp3"
+},
+{
+"v": "oto",
+"t": "One fish!",
+"f": "oto_975409bc8d.mp3"
+},
+{
+"v": "oto",
+"t": "One fish! You got it!",
+"f": "oto_944c623677.mp3"
+},
+{
+"v": "oto",
+"t": "One fish, two fish… Can you help me?",
+"f": "oto_95b663c3e9.mp3"
+},
+{
+"v": "oto",
+"t": "One flower! You got it!",
+"f": "oto_72e7de915e.mp3"
+},
+{
+"v": "oto",
+"t": "One frog! You got it!",
+"f": "oto_ae4c25c3ea.mp3"
+},
+{
+"v": "oto",
+"t": "One monkey! You got it!",
+"f": "oto_ebb34d918e.mp3"
+},
+{
+"v": "oto",
+"t": "One present! You got it!",
+"f": "oto_c15c821fb5.mp3"
+},
+{
+"v": "oto",
+"t": "One sock, two socks. Put on your socks, Pippo!",
+"f": "oto_de7c130f6f.mp3"
+},
+{
+"v": "oto",
+"t": "One socks! You got it!",
+"f": "oto_bdbd1f4cb8.mp3"
+},
+{
+"v": "oto",
+"t": "One teddy! You got it!",
+"f": "oto_fa56b231f3.mp3"
+},
+{
+"v": "oto",
+"t": "One!",
+"f": "oto_bb1323019c.mp3"
+},
+{
+"v": "oto",
+"t": "One, two, three!",
+"f": "oto_d8e7fa6b1e.mp3"
+},
+{
+"v": "oto",
+"t": "One, two, three, four!",
+"f": "oto_123655e185.mp3"
+},
+{
+"v": "oto",
+"t": "One, two, three, four, five!",
+"f": "oto_b1d9ff8798.mp3"
+},
+{
+"v": "oto",
+"t": "One, two, three, four, five! Clap your hands!",
+"f": "oto_9dac03bedf.mp3"
+},
+{
+"v": "oto",
+"t": "One, two, three, four, five, six!",
+"f": "oto_062633a65d.mp3"
+},
+{
+"v": "oto",
+"t": "One, two, three, four, five, six! I'm six!",
+"f": "oto_fccd2581d3.mp3"
+},
+{
+"v": "oto",
+"t": "One, two, three, four, five, six, seven!",
+"f": "oto_34fc8ae63e.mp3"
+},
+{
+"v": "oto",
+"t": "One, two, three, four, five, six, seven, eight! Go!",
+"f": "oto_907df14f45.mp3"
+},
+{
+"v": "oto",
+"t": "One, two, three, four, five, six, seven, eight, nine, ten!",
+"f": "oto_0952f8205d.mp3"
+},
+{
+"v": "oto",
+"t": "One, two, three, four, five, six, seven, eight, nine, ten! Ten apples!",
+"f": "oto_ada9e560da.mp3"
+},
+{
+"v": "oto",
+"t": "One, two, three, four, five, six, seven, eight... Can you help me?",
+"f": "oto_8ba23e11a7.mp3"
+},
+{
+"v": "oto",
+"t": "One, two, three, four, five, six, seven. Seven? Can you help me?",
+"f": "oto_97618d6790.mp3"
+},
+{
+"v": "oto",
+"t": "One, two, three, four, five, six. Six?",
+"f": "oto_6f0afeebdc.mp3"
+},
+{
+"v": "oto",
+"t": "One, two, three... in the box! Close the box!",
+"f": "oto_5885bfce90.mp3"
+},
+{
+"v": "oto",
+"t": "One, two, three… Can you help me?",
+"f": "oto_8f913a25fd.mp3"
+},
+{
+"v": "oto",
+"t": "Oo-oo-aa-aa!",
+"f": "oto_33794d61a2.mp3"
+},
+{
+"v": "oto",
+"t": "Open the box!",
+"f": "oto_a36ab8c38a.mp3"
+},
+{
+"v": "oto",
+"t": "Open the door!",
+"f": "oto_50da2b3389.mp3"
+},
+{
+"v": "oto",
+"t": "Orange flowers!",
+"f": "oto_59db7ba6b5.mp3"
+},
+{
+"v": "oto",
+"t": "Orange leaves!",
+"f": "oto_caa69be6b1.mp3"
+},
+{
+"v": "oto",
+"t": "Orange.",
+"f": "oto_372176fa80.mp3"
+},
+{
+"v": "oto",
+"t": "Party.",
+"f": "oto_4d52a6f6b0.mp3"
+},
+{
+"v": "oto",
+"t": "Phew! Is it hot or cold?",
+"f": "oto_6416efa3d4.mp3"
+},
+{
+"v": "oto",
+"t": "Phew! It's hot!",
+"f": "oto_e0c67a8b8b.mp3"
+},
+{
+"v": "oto",
+"t": "Pink flowers!",
+"f": "oto_2721910416.mp3"
+},
+{
+"v": "oto",
+"t": "Pink flowers! I like pink!",
+"f": "oto_b0d46fedbf.mp3"
+},
+{
+"v": "oto",
+"t": "Pink.",
+"f": "oto_57465fcc4f.mp3"
+},
+{
+"v": "oto",
+"t": "Pink? Can you help me?",
+"f": "oto_795c658762.mp3"
+},
+{
+"v": "oto",
+"t": "Pippo is cold! Can you help me?",
+"f": "oto_4864a69ebf.mp3"
+},
+{
+"v": "oto",
+"t": "Pippo is hot! Can you help me?",
+"f": "oto_da53fc5ae3.mp3"
+},
+{
+"v": "oto",
+"t": "Pippo! Hello, Pippo!",
+"f": "oto_b3f2cc02fb.mp3"
+},
+{
+"v": "oto",
+"t": "Pippo's feet!",
+"f": "oto_6cbfcf3029.mp3"
+},
+{
+"v": "oto",
+"t": "Point to Grandpa!",
+"f": "oto_e49a3d2816.mp3"
+},
+{
+"v": "oto",
+"t": "Point to Mum!",
+"f": "oto_e3ca0bf25d.mp3"
+},
+{
+"v": "oto",
+"t": "Polly didn't say! Well done!",
+"f": "oto_c1e40aafa1.mp3"
+},
+{
+"v": "oto",
+"t": "Polly said it! Let's do it!",
+"f": "oto_6c22658726.mp3"
+},
+{
+"v": "oto",
+"t": "Polly's ball!",
+"f": "oto_b3684cdae9.mp3"
+},
+{
+"v": "oto",
+"t": "Present.",
+"f": "oto_bead3ac778.mp3"
+},
+{
+"v": "oto",
+"t": "Presents!",
+"f": "oto_962726308f.mp3"
+},
+{
+"v": "oto",
+"t": "Purple flowers!",
+"f": "oto_b956b10203.mp3"
+},
+{
+"v": "oto",
+"t": "Purple!",
+"f": "oto_36664ac176.mp3"
+},
+{
+"v": "oto",
+"t": "Purple! It's purple! Seven!",
+"f": "oto_2c6290b293.mp3"
+},
+{
+"v": "oto",
+"t": "Purple.",
+"f": "oto_0198b3b760.mp3"
+},
+{
+"v": "oto",
+"t": "Put on your T-shirt!",
+"f": "oto_aeaeb7c98c.mp3"
+},
+{
+"v": "oto",
+"t": "Put on your T-shirt, Pippo!",
+"f": "oto_45f16606ee.mp3"
+},
+{
+"v": "oto",
+"t": "Put on your dress!",
+"f": "oto_373a474871.mp3"
+},
+{
+"v": "oto",
+"t": "Put on your dress, Pippo!",
+"f": "oto_fe9b38290b.mp3"
+},
+{
+"v": "oto",
+"t": "Put on your hat!",
+"f": "oto_0153cefa29.mp3"
+},
+{
+"v": "oto",
+"t": "Put on your hat, Pippo!",
+"f": "oto_6a8b650173.mp3"
+},
+{
+"v": "oto",
+"t": "Put on your hat, Pippo! Put on your jacket!",
+"f": "oto_cc062b8f1c.mp3"
+},
+{
+"v": "oto",
+"t": "Put on your jacket!",
+"f": "oto_44c882f3c5.mp3"
+},
+{
+"v": "oto",
+"t": "Put on your jacket! Put on your hat!",
+"f": "oto_41f4ef26c8.mp3"
+},
+{
+"v": "oto",
+"t": "Put on your jacket, Pippo!",
+"f": "oto_18c34dd83d.mp3"
+},
+{
+"v": "oto",
+"t": "Put on your shoes, Pippo!",
+"f": "oto_6672ecb577.mp3"
+},
+{
+"v": "oto",
+"t": "Put on your socks, Pippo!",
+"f": "oto_10b0e0d300.mp3"
+},
+{
+"v": "oto",
+"t": "Put the ball in the box!",
+"f": "oto_6f8bef5d7e.mp3"
+},
+{
+"v": "oto",
+"t": "Put the ball on the box!",
+"f": "oto_ecbfa23f42.mp3"
+},
+{
+"v": "oto",
+"t": "Put the ball under the table!",
+"f": "oto_3d58a18d8c.mp3"
+},
+{
+"v": "oto",
+"t": "Rain! Oh no!",
+"f": "oto_21775abed8.mp3"
+},
+{
+"v": "oto",
+"t": "Rain! One, two, three!",
+"f": "oto_e4a5396088.mp3"
+},
+{
+"v": "oto",
+"t": "Rain! Rain!",
+"f": "oto_27441d7666.mp3"
+},
+{
+"v": "oto",
+"t": "Rain.",
+"f": "oto_245df3195f.mp3"
+},
+{
+"v": "oto",
+"t": "Red flowers!",
+"f": "oto_ed99cdf394.mp3"
+},
+{
+"v": "oto",
+"t": "Red – stop! Green – go!",
+"f": "oto_2358ee5709.mp3"
+},
+{
+"v": "oto",
+"t": "Red!",
+"f": "oto_4308bdd36d.mp3"
+},
+{
+"v": "oto",
+"t": "Red! A ladybird!",
+"f": "oto_7076d295e4.mp3"
+},
+{
+"v": "oto",
+"t": "Red! Yellow! Blue! Let's go to the Colourful Meadow!",
+"f": "oto_d61f37f98d.mp3"
+},
+{
+"v": "oto",
+"t": "Red, blue, yellow!",
+"f": "oto_730007c96f.mp3"
+},
+{
+"v": "oto",
+"t": "Red, yellow, blue!",
+"f": "oto_38752d5f05.mp3"
+},
+{
+"v": "oto",
+"t": "Red, yellow, blue, green!",
+"f": "oto_4775abc21d.mp3"
+},
+{
+"v": "oto",
+"t": "Red, yellow, green!",
+"f": "oto_234d6764a8.mp3"
+},
+{
+"v": "oto",
+"t": "Red.",
+"f": "oto_f63c115a52.mp3"
+},
+{
+"v": "oto",
+"t": "River.",
+"f": "oto_dc24816632.mp3"
+},
+{
+"v": "oto",
+"t": "Robot.",
+"f": "oto_ad0077647c.mp3"
+},
+{
+"v": "oto",
+"t": "Run!",
+"f": "oto_77eed62f7a.mp3"
+},
+{
+"v": "oto",
+"t": "Run! Run!",
+"f": "oto_5f2885b938.mp3"
+},
+{
+"v": "oto",
+"t": "Run.",
+"f": "oto_7e6a355e27.mp3"
+},
+{
+"v": "oto",
+"t": "Sad.",
+"f": "oto_f78f733be5.mp3"
+},
+{
+"v": "oto",
+"t": "Sammy! Hello, Sammy!",
+"f": "oto_017c74f6cb.mp3"
+},
+{
+"v": "oto",
+"t": "Say hello!",
+"f": "oto_af92753a4a.mp3"
+},
+{
+"v": "oto",
+"t": "Seagulls!",
+"f": "oto_7e87f3ba01.mp3"
+},
+{
+"v": "oto",
+"t": "Seven acorns! You got it!",
+"f": "oto_617fd81b7d.mp3"
+},
+{
+"v": "oto",
+"t": "Seven apples! You got it!",
+"f": "oto_3e01390016.mp3"
+},
+{
+"v": "oto",
+"t": "Seven balls! You got it!",
+"f": "oto_fb6a15d56e.mp3"
+},
+{
+"v": "oto",
+"t": "Seven bananas! You got it!",
+"f": "oto_f41367d9e5.mp3"
+},
+{
+"v": "oto",
+"t": "Seven candles! You got it!",
+"f": "oto_9172b2cc28.mp3"
+},
+{
+"v": "oto",
+"t": "Seven colours!",
+"f": "oto_ff45919d3a.mp3"
+},
+{
+"v": "oto",
+"t": "Seven ducklings! You got it!",
+"f": "oto_d535e90b6b.mp3"
+},
+{
+"v": "oto",
+"t": "Seven fish! You got it!",
+"f": "oto_9af18d4882.mp3"
+},
+{
+"v": "oto",
+"t": "Seven flowers! You got it!",
+"f": "oto_7f86d97d9d.mp3"
+},
+{
+"v": "oto",
+"t": "Seven frogs! You got it!",
+"f": "oto_c05684f0fb.mp3"
+},
+{
+"v": "oto",
+"t": "Seven lanterns!",
+"f": "oto_c7703ff944.mp3"
+},
+{
+"v": "oto",
+"t": "Seven monkeys! You got it!",
+"f": "oto_da96e29453.mp3"
+},
+{
+"v": "oto",
+"t": "Seven presents! You got it!",
+"f": "oto_6cd78b8288.mp3"
+},
+{
+"v": "oto",
+"t": "Seven socks! You got it!",
+"f": "oto_49599a2cd3.mp3"
+},
+{
+"v": "oto",
+"t": "Seven teddies! You got it!",
+"f": "oto_5074781a97.mp3"
+},
+{
+"v": "oto",
+"t": "Seven!",
+"f": "oto_acebc995c4.mp3"
+},
+{
+"v": "oto",
+"t": "Seven! Go!",
+"f": "oto_cdd98888cb.mp3"
+},
+{
+"v": "oto",
+"t": "Shake! Thank you!",
+"f": "oto_3ae4b58d3d.mp3"
+},
+{
+"v": "oto",
+"t": "She's happy!",
+"f": "oto_72bf8ae97a.mp3"
+},
+{
+"v": "oto",
+"t": "She's sad.",
+"f": "oto_710af11af0.mp3"
+},
+{
+"v": "oto",
+"t": "Sheep.",
+"f": "oto_e5dbcbcf9c.mp3"
+},
+{
+"v": "oto",
+"t": "Shells! One, two, three!",
+"f": "oto_a48742fa53.mp3"
+},
+{
+"v": "oto",
+"t": "Ship.",
+"f": "oto_66de91d1c9.mp3"
+},
+{
+"v": "oto",
+"t": "Shoes! Shoes for your feet!",
+"f": "oto_793977c6f8.mp3"
+},
+{
+"v": "oto",
+"t": "Shoes.",
+"f": "oto_1bfe9b03e5.mp3"
+},
+{
+"v": "oto",
+"t": "Show me blue!",
+"f": "oto_60a1610e2b.mp3"
+},
+{
+"v": "oto",
+"t": "Show me eight acorns!",
+"f": "oto_9ac28ba58b.mp3"
+},
+{
+"v": "oto",
+"t": "Show me eight apples!",
+"f": "oto_d8980ecb81.mp3"
+},
+{
+"v": "oto",
+"t": "Show me eight balls!",
+"f": "oto_b7e56a62cd.mp3"
+},
+{
+"v": "oto",
+"t": "Show me eight bananas!",
+"f": "oto_e78e382721.mp3"
+},
+{
+"v": "oto",
+"t": "Show me eight candles!",
+"f": "oto_f54966fc13.mp3"
+},
+{
+"v": "oto",
+"t": "Show me eight ducklings!",
+"f": "oto_fd5fe28cd4.mp3"
+},
+{
+"v": "oto",
+"t": "Show me eight fish!",
+"f": "oto_d678b76cbc.mp3"
+},
+{
+"v": "oto",
+"t": "Show me eight flowers!",
+"f": "oto_755f6f0e67.mp3"
+},
+{
+"v": "oto",
+"t": "Show me eight frogs!",
+"f": "oto_eabad07cdc.mp3"
+},
+{
+"v": "oto",
+"t": "Show me eight monkeys!",
+"f": "oto_4b16ec1309.mp3"
+},
+{
+"v": "oto",
+"t": "Show me eight presents!",
+"f": "oto_cbc28273a3.mp3"
+},
+{
+"v": "oto",
+"t": "Show me eight socks!",
+"f": "oto_9d2c0eb859.mp3"
+},
+{
+"v": "oto",
+"t": "Show me eight teddies!",
+"f": "oto_874d82cfc1.mp3"
+},
+{
+"v": "oto",
+"t": "Show me five acorns!",
+"f": "oto_830ecf8281.mp3"
+},
+{
+"v": "oto",
+"t": "Show me five apples!",
+"f": "oto_1bee436134.mp3"
+},
+{
+"v": "oto",
+"t": "Show me five balls!",
+"f": "oto_a75ccf7045.mp3"
+},
+{
+"v": "oto",
+"t": "Show me five bananas!",
+"f": "oto_ed928d7829.mp3"
+},
+{
+"v": "oto",
+"t": "Show me five candles!",
+"f": "oto_36b1b9eaac.mp3"
+},
+{
+"v": "oto",
+"t": "Show me five ducklings!",
+"f": "oto_9b67aa42d0.mp3"
+},
+{
+"v": "oto",
+"t": "Show me five fish!",
+"f": "oto_15d414d688.mp3"
+},
+{
+"v": "oto",
+"t": "Show me five flowers!",
+"f": "oto_7de5263653.mp3"
+},
+{
+"v": "oto",
+"t": "Show me five frogs!",
+"f": "oto_0c90006831.mp3"
+},
+{
+"v": "oto",
+"t": "Show me five monkeys!",
+"f": "oto_807c9726b2.mp3"
+},
+{
+"v": "oto",
+"t": "Show me five presents!",
+"f": "oto_4a896c75d2.mp3"
+},
+{
+"v": "oto",
+"t": "Show me five socks!",
+"f": "oto_a38019756f.mp3"
+},
+{
+"v": "oto",
+"t": "Show me five teddies!",
+"f": "oto_1db038cc4e.mp3"
+},
+{
+"v": "oto",
+"t": "Show me four acorns!",
+"f": "oto_8dafb21602.mp3"
+},
+{
+"v": "oto",
+"t": "Show me four apples!",
+"f": "oto_307a4811da.mp3"
+},
+{
+"v": "oto",
+"t": "Show me four balls!",
+"f": "oto_b7cc9a57b8.mp3"
+},
+{
+"v": "oto",
+"t": "Show me four bananas!",
+"f": "oto_b64710f2c4.mp3"
+},
+{
+"v": "oto",
+"t": "Show me four candles!",
+"f": "oto_569198cc35.mp3"
+},
+{
+"v": "oto",
+"t": "Show me four ducklings!",
+"f": "oto_59ee25bf06.mp3"
+},
+{
+"v": "oto",
+"t": "Show me four fish!",
+"f": "oto_2385112976.mp3"
+},
+{
+"v": "oto",
+"t": "Show me four flowers!",
+"f": "oto_121f544e6d.mp3"
+},
+{
+"v": "oto",
+"t": "Show me four frogs!",
+"f": "oto_c8bb84f74c.mp3"
+},
+{
+"v": "oto",
+"t": "Show me four monkeys!",
+"f": "oto_a8a3f4e1e6.mp3"
+},
+{
+"v": "oto",
+"t": "Show me four presents!",
+"f": "oto_b146e797a7.mp3"
+},
+{
+"v": "oto",
+"t": "Show me four socks!",
+"f": "oto_c4c82b2cea.mp3"
+},
+{
+"v": "oto",
+"t": "Show me four teddies!",
+"f": "oto_37b591b4ea.mp3"
+},
+{
+"v": "oto",
+"t": "Show me green!",
+"f": "oto_fcf22659fb.mp3"
+},
+{
+"v": "oto",
+"t": "Show me nine acorns!",
+"f": "oto_555e68d424.mp3"
+},
+{
+"v": "oto",
+"t": "Show me nine apples!",
+"f": "oto_f985ac2587.mp3"
+},
+{
+"v": "oto",
+"t": "Show me nine balls!",
+"f": "oto_a5de96787e.mp3"
+},
+{
+"v": "oto",
+"t": "Show me nine bananas!",
+"f": "oto_1b4ecdd014.mp3"
+},
+{
+"v": "oto",
+"t": "Show me nine candles!",
+"f": "oto_7689be3336.mp3"
+},
+{
+"v": "oto",
+"t": "Show me nine ducklings!",
+"f": "oto_f09bd0f995.mp3"
+},
+{
+"v": "oto",
+"t": "Show me nine fish!",
+"f": "oto_df6172af1f.mp3"
+},
+{
+"v": "oto",
+"t": "Show me nine flowers!",
+"f": "oto_3ae8957fd7.mp3"
+},
+{
+"v": "oto",
+"t": "Show me nine frogs!",
+"f": "oto_f81e62897a.mp3"
+},
+{
+"v": "oto",
+"t": "Show me nine monkeys!",
+"f": "oto_1355c6e975.mp3"
+},
+{
+"v": "oto",
+"t": "Show me nine presents!",
+"f": "oto_2487f0260f.mp3"
+},
+{
+"v": "oto",
+"t": "Show me nine socks!",
+"f": "oto_29a708485a.mp3"
+},
+{
+"v": "oto",
+"t": "Show me nine teddies!",
+"f": "oto_02506ea268.mp3"
+},
+{
+"v": "oto",
+"t": "Show me one acorn!",
+"f": "oto_c24f27d3a7.mp3"
+},
+{
+"v": "oto",
+"t": "Show me one apple!",
+"f": "oto_982ac064e8.mp3"
+},
+{
+"v": "oto",
+"t": "Show me one ball!",
+"f": "oto_a40b0f82c9.mp3"
+},
+{
+"v": "oto",
+"t": "Show me one banana!",
+"f": "oto_b2bf03e0bc.mp3"
+},
+{
+"v": "oto",
+"t": "Show me one candle!",
+"f": "oto_727e7117e5.mp3"
+},
+{
+"v": "oto",
+"t": "Show me one duckling!",
+"f": "oto_601e88ad29.mp3"
+},
+{
+"v": "oto",
+"t": "Show me one fish!",
+"f": "oto_2445a87f45.mp3"
+},
+{
+"v": "oto",
+"t": "Show me one flower!",
+"f": "oto_310e1da644.mp3"
+},
+{
+"v": "oto",
+"t": "Show me one frog!",
+"f": "oto_479a1b71e5.mp3"
+},
+{
+"v": "oto",
+"t": "Show me one monkey!",
+"f": "oto_0922d0ce03.mp3"
+},
+{
+"v": "oto",
+"t": "Show me one present!",
+"f": "oto_9178974974.mp3"
+},
+{
+"v": "oto",
+"t": "Show me one socks!",
+"f": "oto_d5fc1f923f.mp3"
+},
+{
+"v": "oto",
+"t": "Show me one teddy!",
+"f": "oto_1d4e775502.mp3"
+},
+{
+"v": "oto",
+"t": "Show me orange!",
+"f": "oto_bab0a754fe.mp3"
+},
+{
+"v": "oto",
+"t": "Show me pink!",
+"f": "oto_b8b85f6ef7.mp3"
+},
+{
+"v": "oto",
+"t": "Show me purple!",
+"f": "oto_da46f69d73.mp3"
+},
+{
+"v": "oto",
+"t": "Show me red!",
+"f": "oto_2fa03f5c04.mp3"
+},
+{
+"v": "oto",
+"t": "Show me seven acorns!",
+"f": "oto_ba93021ff6.mp3"
+},
+{
+"v": "oto",
+"t": "Show me seven apples!",
+"f": "oto_1c6e7cc6f5.mp3"
+},
+{
+"v": "oto",
+"t": "Show me seven balls!",
+"f": "oto_9a71b88bf0.mp3"
+},
+{
+"v": "oto",
+"t": "Show me seven bananas!",
+"f": "oto_68037baf7d.mp3"
+},
+{
+"v": "oto",
+"t": "Show me seven candles!",
+"f": "oto_ec1b2f66f0.mp3"
+},
+{
+"v": "oto",
+"t": "Show me seven ducklings!",
+"f": "oto_25db6fcee0.mp3"
+},
+{
+"v": "oto",
+"t": "Show me seven fish!",
+"f": "oto_d11091ea17.mp3"
+},
+{
+"v": "oto",
+"t": "Show me seven flowers!",
+"f": "oto_489504e1b4.mp3"
+},
+{
+"v": "oto",
+"t": "Show me seven frogs!",
+"f": "oto_72e24fca15.mp3"
+},
+{
+"v": "oto",
+"t": "Show me seven monkeys!",
+"f": "oto_ebfbdc1bfc.mp3"
+},
+{
+"v": "oto",
+"t": "Show me seven presents!",
+"f": "oto_11991dce6d.mp3"
+},
+{
+"v": "oto",
+"t": "Show me seven socks!",
+"f": "oto_40f339690f.mp3"
+},
+{
+"v": "oto",
+"t": "Show me seven teddies!",
+"f": "oto_eabdcb16e3.mp3"
+},
+{
+"v": "oto",
+"t": "Show me six acorns!",
+"f": "oto_e2d2f7eb6b.mp3"
+},
+{
+"v": "oto",
+"t": "Show me six apples!",
+"f": "oto_4e9d4363e8.mp3"
+},
+{
+"v": "oto",
+"t": "Show me six balls!",
+"f": "oto_9aad90df4a.mp3"
+},
+{
+"v": "oto",
+"t": "Show me six bananas!",
+"f": "oto_94a394d66c.mp3"
+},
+{
+"v": "oto",
+"t": "Show me six candles!",
+"f": "oto_3aa0af05f0.mp3"
+},
+{
+"v": "oto",
+"t": "Show me six ducklings!",
+"f": "oto_96add0875d.mp3"
+},
+{
+"v": "oto",
+"t": "Show me six fish!",
+"f": "oto_accd217e9a.mp3"
+},
+{
+"v": "oto",
+"t": "Show me six flowers!",
+"f": "oto_b31fabf309.mp3"
+},
+{
+"v": "oto",
+"t": "Show me six frogs!",
+"f": "oto_1c70009569.mp3"
+},
+{
+"v": "oto",
+"t": "Show me six monkeys!",
+"f": "oto_bc0505f743.mp3"
+},
+{
+"v": "oto",
+"t": "Show me six presents!",
+"f": "oto_c706427a64.mp3"
+},
+{
+"v": "oto",
+"t": "Show me six socks!",
+"f": "oto_51be3fdf10.mp3"
+},
+{
+"v": "oto",
+"t": "Show me six teddies!",
+"f": "oto_06e5248d4b.mp3"
+},
+{
+"v": "oto",
+"t": "Show me ten acorns!",
+"f": "oto_2a8e125110.mp3"
+},
+{
+"v": "oto",
+"t": "Show me ten apples!",
+"f": "oto_af9b20bf8a.mp3"
+},
+{
+"v": "oto",
+"t": "Show me ten balls!",
+"f": "oto_d4cf24f50f.mp3"
+},
+{
+"v": "oto",
+"t": "Show me ten bananas!",
+"f": "oto_0de4e7d2f3.mp3"
+},
+{
+"v": "oto",
+"t": "Show me ten candles!",
+"f": "oto_4469e187ba.mp3"
+},
+{
+"v": "oto",
+"t": "Show me ten ducklings!",
+"f": "oto_e0c472466f.mp3"
+},
+{
+"v": "oto",
+"t": "Show me ten fish!",
+"f": "oto_d6b7766668.mp3"
+},
+{
+"v": "oto",
+"t": "Show me ten flowers!",
+"f": "oto_38757516b4.mp3"
+},
+{
+"v": "oto",
+"t": "Show me ten frogs!",
+"f": "oto_059273cb4a.mp3"
+},
+{
+"v": "oto",
+"t": "Show me ten monkeys!",
+"f": "oto_994ab5ddca.mp3"
+},
+{
+"v": "oto",
+"t": "Show me ten presents!",
+"f": "oto_7c9d4c1258.mp3"
+},
+{
+"v": "oto",
+"t": "Show me ten socks!",
+"f": "oto_754a900547.mp3"
+},
+{
+"v": "oto",
+"t": "Show me ten teddies!",
+"f": "oto_3289fd5982.mp3"
+},
+{
+"v": "oto",
+"t": "Show me the big ball!",
+"f": "oto_e594bc6ffa.mp3"
+},
+{
+"v": "oto",
+"t": "Show me the big car!",
+"f": "oto_3a22c96177.mp3"
+},
+{
+"v": "oto",
+"t": "Show me the big teddy!",
+"f": "oto_42b8ac0ba5.mp3"
+},
+{
+"v": "oto",
+"t": "Show me the small ball!",
+"f": "oto_3f73b82c2f.mp3"
+},
+{
+"v": "oto",
+"t": "Show me the small teddy!",
+"f": "oto_075a05ac39.mp3"
+},
+{
+"v": "oto",
+"t": "Show me the small tree!",
+"f": "oto_e665c93a58.mp3"
+},
+{
+"v": "oto",
+"t": "Show me three acorns!",
+"f": "oto_c6104c30f8.mp3"
+},
+{
+"v": "oto",
+"t": "Show me three apples!",
+"f": "oto_20a29fe37c.mp3"
+},
+{
+"v": "oto",
+"t": "Show me three balls!",
+"f": "oto_1ae45c5cbd.mp3"
+},
+{
+"v": "oto",
+"t": "Show me three bananas!",
+"f": "oto_395a41cea3.mp3"
+},
+{
+"v": "oto",
+"t": "Show me three candles!",
+"f": "oto_1027c6f2c2.mp3"
+},
+{
+"v": "oto",
+"t": "Show me three ducklings!",
+"f": "oto_f6b6b6f42b.mp3"
+},
+{
+"v": "oto",
+"t": "Show me three fish!",
+"f": "oto_55db35565b.mp3"
+},
+{
+"v": "oto",
+"t": "Show me three flowers!",
+"f": "oto_959bcd428a.mp3"
+},
+{
+"v": "oto",
+"t": "Show me three frogs!",
+"f": "oto_613ca55f66.mp3"
+},
+{
+"v": "oto",
+"t": "Show me three monkeys!",
+"f": "oto_33f88786ed.mp3"
+},
+{
+"v": "oto",
+"t": "Show me three presents!",
+"f": "oto_2e04bb3d4e.mp3"
+},
+{
+"v": "oto",
+"t": "Show me three socks!",
+"f": "oto_798b222d63.mp3"
+},
+{
+"v": "oto",
+"t": "Show me three teddies!",
+"f": "oto_1c30470c1b.mp3"
+},
+{
+"v": "oto",
+"t": "Show me two acorns!",
+"f": "oto_87a939e8b7.mp3"
+},
+{
+"v": "oto",
+"t": "Show me two apples!",
+"f": "oto_1ed58e17be.mp3"
+},
+{
+"v": "oto",
+"t": "Show me two balls!",
+"f": "oto_dc738a99af.mp3"
+},
+{
+"v": "oto",
+"t": "Show me two bananas!",
+"f": "oto_f0e324683f.mp3"
+},
+{
+"v": "oto",
+"t": "Show me two candles!",
+"f": "oto_68ce0aa1fa.mp3"
+},
+{
+"v": "oto",
+"t": "Show me two ducklings!",
+"f": "oto_9c0a949e2b.mp3"
+},
+{
+"v": "oto",
+"t": "Show me two fish!",
+"f": "oto_e80ec782e0.mp3"
+},
+{
+"v": "oto",
+"t": "Show me two flowers!",
+"f": "oto_0da2bdae3b.mp3"
+},
+{
+"v": "oto",
+"t": "Show me two frogs!",
+"f": "oto_430363381b.mp3"
+},
+{
+"v": "oto",
+"t": "Show me two monkeys!",
+"f": "oto_eefbdb39c7.mp3"
+},
+{
+"v": "oto",
+"t": "Show me two presents!",
+"f": "oto_38dc0560bd.mp3"
+},
+{
+"v": "oto",
+"t": "Show me two socks!",
+"f": "oto_7f247050a4.mp3"
+},
+{
+"v": "oto",
+"t": "Show me two teddies!",
+"f": "oto_f199de2cac.mp3"
+},
+{
+"v": "oto",
+"t": "Show me yellow!",
+"f": "oto_29f382a920.mp3"
+},
+{
+"v": "oto",
+"t": "Sister.",
+"f": "oto_53d9455a90.mp3"
+},
+{
+"v": "oto",
+"t": "Six acorns! You got it!",
+"f": "oto_dd901a27d7.mp3"
+},
+{
+"v": "oto",
+"t": "Six apples! You got it!",
+"f": "oto_d02c91bfa4.mp3"
+},
+{
+"v": "oto",
+"t": "Six balls! You got it!",
+"f": "oto_af1b1e459a.mp3"
+},
+{
+"v": "oto",
+"t": "Six bananas! You got it!",
+"f": "oto_90402a95ee.mp3"
+},
+{
+"v": "oto",
+"t": "Six candles! You got it!",
+"f": "oto_a5542d2fad.mp3"
+},
+{
+"v": "oto",
+"t": "Six ducklings! You got it!",
+"f": "oto_1b526f5f23.mp3"
+},
+{
+"v": "oto",
+"t": "Six fish! You got it!",
+"f": "oto_28fab3b313.mp3"
+},
+{
+"v": "oto",
+"t": "Six flowers! You got it!",
+"f": "oto_a31715b705.mp3"
+},
+{
+"v": "oto",
+"t": "Six frogs! You got it!",
+"f": "oto_93cbd6ee46.mp3"
+},
+{
+"v": "oto",
+"t": "Six monkeys! You got it!",
+"f": "oto_8adf0835a1.mp3"
+},
+{
+"v": "oto",
+"t": "Six presents! You got it!",
+"f": "oto_4f919b1151.mp3"
+},
+{
+"v": "oto",
+"t": "Six socks! You got it!",
+"f": "oto_a52bde0361.mp3"
+},
+{
+"v": "oto",
+"t": "Six teddies! You got it!",
+"f": "oto_8e9f5a20f5.mp3"
+},
+{
+"v": "oto",
+"t": "Six!",
+"f": "oto_b3758c961c.mp3"
+},
+{
+"v": "oto",
+"t": "Skates!",
+"f": "oto_35936432c1.mp3"
+},
+{
+"v": "oto",
+"t": "Small hands! Hello!",
+"f": "oto_db811d4c10.mp3"
+},
+{
+"v": "oto",
+"t": "Small!",
+"f": "oto_65c70ad650.mp3"
+},
+{
+"v": "oto",
+"t": "Small.",
+"f": "oto_593ff9504d.mp3"
+},
+{
+"v": "oto",
+"t": "Smoke! It's warm!",
+"f": "oto_70c73105c5.mp3"
+},
+{
+"v": "oto",
+"t": "Snake.",
+"f": "oto_6f1f5162b5.mp3"
+},
+{
+"v": "oto",
+"t": "Snow! It's cold!",
+"f": "oto_8d98444b41.mp3"
+},
+{
+"v": "oto",
+"t": "Snow.",
+"f": "oto_401ac729e4.mp3"
+},
+{
+"v": "oto",
+"t": "Snowballs! One, two, three!",
+"f": "oto_72328852f5.mp3"
+},
+{
+"v": "oto",
+"t": "Soap! Wash your hands!",
+"f": "oto_4f3f226641.mp3"
+},
+{
+"v": "oto",
+"t": "Socks!",
+"f": "oto_25591b1f83.mp3"
+},
+{
+"v": "oto",
+"t": "Socks.",
+"f": "oto_5a58651d03.mp3"
+},
+{
+"v": "oto",
+"t": "Stop or go?",
+"f": "oto_3ca774bbd5.mp3"
+},
+{
+"v": "oto",
+"t": "Stop, boat! Stop!",
+"f": "oto_11a3cc742b.mp3"
+},
+{
+"v": "oto",
+"t": "Sun.",
+"f": "oto_1162c9a0fc.mp3"
+},
+{
+"v": "oto",
+"t": "Swim!",
+"f": "oto_e7247f9671.mp3"
+},
+{
+"v": "oto",
+"t": "Swim! I can swim!",
+"f": "oto_6a80450fe0.mp3"
+},
+{
+"v": "oto",
+"t": "Swim.",
+"f": "oto_57c546eb1f.mp3"
+},
+{
+"v": "oto",
+"t": "T-shirt.",
+"f": "oto_bdd81d09b9.mp3"
+},
+{
+"v": "oto",
+"t": "Table.",
+"f": "oto_1326586a5e.mp3"
+},
+{
+"v": "oto",
+"t": "Take off your jacket! Put on your T-shirt!",
+"f": "oto_d783516426.mp3"
+},
+{
+"v": "oto",
+"t": "Tea for Grandma!",
+"f": "oto_35e5a1e956.mp3"
+},
+{
+"v": "oto",
+"t": "Tea!",
+"f": "oto_4af38850e1.mp3"
+},
+{
+"v": "oto",
+"t": "Teddies! Lots of teddies!",
+"f": "oto_8eb46a8c12.mp3"
+},
+{
+"v": "oto",
+"t": "Teddy.",
+"f": "oto_c19d9dc2c6.mp3"
+},
+{
+"v": "oto",
+"t": "Ten acorns! You got it!",
+"f": "oto_54d77c607b.mp3"
+},
+{
+"v": "oto",
+"t": "Ten apples!",
+"f": "oto_71da483803.mp3"
+},
+{
+"v": "oto",
+"t": "Ten apples! Clap your hands!",
+"f": "oto_dfaab46870.mp3"
+},
+{
+"v": "oto",
+"t": "Ten apples! You got it!",
+"f": "oto_f8f8c281df.mp3"
+},
+{
+"v": "oto",
+"t": "Ten balls! You got it!",
+"f": "oto_88df649c78.mp3"
+},
+{
+"v": "oto",
+"t": "Ten bananas! You got it!",
+"f": "oto_62ec8586e3.mp3"
+},
+{
+"v": "oto",
+"t": "Ten candles! You got it!",
+"f": "oto_9ff2b28132.mp3"
+},
+{
+"v": "oto",
+"t": "Ten ducklings! You got it!",
+"f": "oto_b25bd01e68.mp3"
+},
+{
+"v": "oto",
+"t": "Ten fish! You got it!",
+"f": "oto_23394fc7d7.mp3"
+},
+{
+"v": "oto",
+"t": "Ten flowers! You got it!",
+"f": "oto_382627d4d4.mp3"
+},
+{
+"v": "oto",
+"t": "Ten frogs! You got it!",
+"f": "oto_f3fea647a7.mp3"
+},
+{
+"v": "oto",
+"t": "Ten monkeys! You got it!",
+"f": "oto_dac334fabb.mp3"
+},
+{
+"v": "oto",
+"t": "Ten presents! You got it!",
+"f": "oto_ce60e41d11.mp3"
+},
+{
+"v": "oto",
+"t": "Ten socks! You got it!",
+"f": "oto_24ef6f6033.mp3"
+},
+{
+"v": "oto",
+"t": "Ten teddies! You got it!",
+"f": "oto_313e320c47.mp3"
+},
+{
+"v": "oto",
+"t": "Ten!",
+"f": "oto_ad6effc753.mp3"
+},
+{
+"v": "oto",
+"t": "Ten! Go!",
+"f": "oto_a150b01d94.mp3"
+},
+{
+"v": "oto",
+"t": "Thank you!",
+"f": "oto_2d09dd279f.mp3"
+},
+{
+"v": "oto",
+"t": "Thank you! Goodbye!",
+"f": "oto_1a94c62f32.mp3"
+},
+{
+"v": "oto",
+"t": "Thank you, Bizzy!",
+"f": "oto_a7a37c2260.mp3"
+},
+{
+"v": "oto",
+"t": "Thank you, Bobby!",
+"f": "oto_a7b6bc24a9.mp3"
+},
+{
+"v": "oto",
+"t": "Thank you, Dina!",
+"f": "oto_0cf3c0820a.mp3"
+},
+{
+"v": "oto",
+"t": "Thank you, Oto!",
+"f": "oto_7157faf6ba.mp3"
+},
+{
+"v": "oto",
+"t": "Thank you, Sammy!",
+"f": "oto_cbb46dcb03.mp3"
+},
+{
+"v": "oto",
+"t": "Thank you, friends! I'm happy!",
+"f": "oto_bcb6b1b1a5.mp3"
+},
+{
+"v": "oto",
+"t": "Thank you.",
+"f": "oto_4f3798cc0a.mp3"
+},
+{
+"v": "oto",
+"t": "That's the boat! You got it!",
+"f": "oto_3c5056601e.mp3"
+},
+{
+"v": "oto",
+"t": "That's the fish! Well done!",
+"f": "oto_954f00fe6a.mp3"
+},
+{
+"v": "oto",
+"t": "That's the river! You got it!",
+"f": "oto_4e4029d326.mp3"
+},
+{
+"v": "oto",
+"t": "That's the sun! Great listening!",
+"f": "oto_c43fbce1d6.mp3"
+},
+{
+"v": "oto",
+"t": "The baby is tired.",
+"f": "oto_f12a29fa02.mp3"
+},
+{
+"v": "oto",
+"t": "The ball is in the box.",
+"f": "oto_e87f69709d.mp3"
+},
+{
+"v": "oto",
+"t": "The ball is on the box.",
+"f": "oto_fd956a05e0.mp3"
+},
+{
+"v": "oto",
+"t": "The ball is under the table.",
+"f": "oto_7e4b5fc61f.mp3"
+},
+{
+"v": "oto",
+"t": "The river!",
+"f": "oto_2337db35f1.mp3"
+},
+{
+"v": "oto",
+"t": "The sea! Let's go!",
+"f": "oto_198ad2ac01.mp3"
+},
+{
+"v": "oto",
+"t": "The sun!",
+"f": "oto_696e2bd555.mp3"
+},
+{
+"v": "oto",
+"t": "The sun! I'm happy!",
+"f": "oto_148b0bc841.mp3"
+},
+{
+"v": "oto",
+"t": "The teddy is in the box.",
+"f": "oto_d042c3db52.mp3"
+},
+{
+"v": "oto",
+"t": "The teddy is on the bed.",
+"f": "oto_fb3669ed3a.mp3"
+},
+{
+"v": "oto",
+"t": "The teddy is under the chair.",
+"f": "oto_a1f82f2537.mp3"
+},
+{
+"v": "oto",
+"t": "The tree.",
+"f": "oto_988b3919b2.mp3"
+},
+{
+"v": "oto",
+"t": "The zoo!",
+"f": "oto_a939ff09ff.mp3"
+},
+{
+"v": "oto",
+"t": "This is goodbye.",
+"f": "oto_0038015af4.mp3"
+},
+{
+"v": "oto",
+"t": "This is hello.",
+"f": "oto_4d5e9857f0.mp3"
+},
+{
+"v": "oto",
+"t": "This is my brother.",
+"f": "oto_a435f22667.mp3"
+},
+{
+"v": "oto",
+"t": "This is my dad.",
+"f": "oto_dd306492b9.mp3"
+},
+{
+"v": "oto",
+"t": "This is my grandpa.",
+"f": "oto_ae3d06f46a.mp3"
+},
+{
+"v": "oto",
+"t": "This is my mum.",
+"f": "oto_90e0fa4f36.mp3"
+},
+{
+"v": "oto",
+"t": "This is my mum. This is my dad.",
+"f": "oto_8e1bff0d2e.mp3"
+},
+{
+"v": "oto",
+"t": "This is my sister.",
+"f": "oto_674f116910.mp3"
+},
+{
+"v": "oto",
+"t": "This is the boat.",
+"f": "oto_fc811fcd6b.mp3"
+},
+{
+"v": "oto",
+"t": "This is the fish.",
+"f": "oto_78cde0a3db.mp3"
+},
+{
+"v": "oto",
+"t": "This is the river.",
+"f": "oto_d9da16ad4c.mp3"
+},
+{
+"v": "oto",
+"t": "This is the sun.",
+"f": "oto_bc82c20728.mp3"
+},
+{
+"v": "oto",
+"t": "This.",
+"f": "oto_cc90b7bffe.mp3"
+},
+{
+"v": "oto",
+"t": "Three acorns! You got it!",
+"f": "oto_a311c16f61.mp3"
+},
+{
+"v": "oto",
+"t": "Three apples! You got it!",
+"f": "oto_f12a23164f.mp3"
+},
+{
+"v": "oto",
+"t": "Three balls! You got it!",
+"f": "oto_153ce25b00.mp3"
+},
+{
+"v": "oto",
+"t": "Three bananas! You got it!",
+"f": "oto_2ef37f9fe0.mp3"
+},
+{
+"v": "oto",
+"t": "Three candles! You got it!",
+"f": "oto_830a89f6c8.mp3"
+},
+{
+"v": "oto",
+"t": "Three ducklings! You got it!",
+"f": "oto_7d334b4961.mp3"
+},
+{
+"v": "oto",
+"t": "Three fish!",
+"f": "oto_cd1f7360cd.mp3"
+},
+{
+"v": "oto",
+"t": "Three fish! You got it!",
+"f": "oto_21bcfc160b.mp3"
+},
+{
+"v": "oto",
+"t": "Three flowers! You got it!",
+"f": "oto_1016579015.mp3"
+},
+{
+"v": "oto",
+"t": "Three frogs! You got it!",
+"f": "oto_288068d99d.mp3"
+},
+{
+"v": "oto",
+"t": "Three monkeys! You got it!",
+"f": "oto_9cba8a90b0.mp3"
+},
+{
+"v": "oto",
+"t": "Three presents! You got it!",
+"f": "oto_7fd378a584.mp3"
+},
+{
+"v": "oto",
+"t": "Three socks! You got it!",
+"f": "oto_68dde07a38.mp3"
+},
+{
+"v": "oto",
+"t": "Three teddies! You got it!",
+"f": "oto_8fa5e41825.mp3"
+},
+{
+"v": "oto",
+"t": "Three!",
+"f": "oto_70f772ea9e.mp3"
+},
+{
+"v": "oto",
+"t": "Three! Three fish!",
+"f": "oto_f656f4bf31.mp3"
+},
+{
+"v": "oto",
+"t": "Three.",
+"f": "oto_813dca9023.mp3"
+},
+{
+"v": "oto",
+"t": "Tired! The baby is tired.",
+"f": "oto_a20595ffff.mp3"
+},
+{
+"v": "oto",
+"t": "Tired.",
+"f": "oto_317e4270e4.mp3"
+},
+{
+"v": "oto",
+"t": "Toy.",
+"f": "oto_ad21d945b5.mp3"
+},
+{
+"v": "oto",
+"t": "Train.",
+"f": "oto_ab6069866a.mp3"
+},
+{
+"v": "oto",
+"t": "Tree.",
+"f": "oto_6330287985.mp3"
+},
+{
+"v": "oto",
+"t": "Two acorns! You got it!",
+"f": "oto_1a7866b0bc.mp3"
+},
+{
+"v": "oto",
+"t": "Two apples! You got it!",
+"f": "oto_174faa3326.mp3"
+},
+{
+"v": "oto",
+"t": "Two balls! You got it!",
+"f": "oto_8a75f34657.mp3"
+},
+{
+"v": "oto",
+"t": "Two bananas! You got it!",
+"f": "oto_d0eb808732.mp3"
+},
+{
+"v": "oto",
+"t": "Two boats!",
+"f": "oto_ad0c91fbc1.mp3"
+},
+{
+"v": "oto",
+"t": "Two candles! You got it!",
+"f": "oto_5c6e923ad4.mp3"
+},
+{
+"v": "oto",
+"t": "Two ducklings! You got it!",
+"f": "oto_6c1cfe5eb4.mp3"
+},
+{
+"v": "oto",
+"t": "Two fish!",
+"f": "oto_2c2cb9ef89.mp3"
+},
+{
+"v": "oto",
+"t": "Two fish! You got it!",
+"f": "oto_e7da1f5f03.mp3"
+},
+{
+"v": "oto",
+"t": "Two flowers! You got it!",
+"f": "oto_0dfd336271.mp3"
+},
+{
+"v": "oto",
+"t": "Two frogs! You got it!",
+"f": "oto_d64eb0f764.mp3"
+},
+{
+"v": "oto",
+"t": "Two monkeys! You got it!",
+"f": "oto_5510755589.mp3"
+},
+{
+"v": "oto",
+"t": "Two presents! You got it!",
+"f": "oto_85fc8434c5.mp3"
+},
+{
+"v": "oto",
+"t": "Two socks! You got it!",
+"f": "oto_430f0de958.mp3"
+},
+{
+"v": "oto",
+"t": "Two swans!",
+"f": "oto_46750af860.mp3"
+},
+{
+"v": "oto",
+"t": "Two teddies! You got it!",
+"f": "oto_7870622fea.mp3"
+},
+{
+"v": "oto",
+"t": "Two!",
+"f": "oto_ba0f98d7c0.mp3"
+},
+{
+"v": "oto",
+"t": "Under the table!",
+"f": "oto_ddb7eaf8b7.mp3"
+},
+{
+"v": "oto",
+"t": "Under.",
+"f": "oto_fcb5bc7820.mp3"
+},
+{
+"v": "oto",
+"t": "Walk.",
+"f": "oto_2df6f14798.mp3"
+},
+{
+"v": "oto",
+"t": "Walk... stop... go!",
+"f": "oto_3cfb6c521c.mp3"
+},
+{
+"v": "oto",
+"t": "Water!",
+"f": "oto_cca3dfa8b9.mp3"
+},
+{
+"v": "oto",
+"t": "Water! Bizzy, can I have water, please?",
+"f": "oto_1aedca88a0.mp3"
+},
+{
+"v": "oto",
+"t": "Water! Can I have water, please?",
+"f": "oto_20914ad87a.mp3"
+},
+{
+"v": "oto",
+"t": "Water! Drink!",
+"f": "oto_629e7ca523.mp3"
+},
+{
+"v": "oto",
+"t": "Water! Hot, hot!",
+"f": "oto_b3f3dab669.mp3"
+},
+{
+"v": "oto",
+"t": "Water! Wash your hands!",
+"f": "oto_adf10869ad.mp3"
+},
+{
+"v": "oto",
+"t": "Water.",
+"f": "oto_2b1cd015b8.mp3"
+},
+{
+"v": "oto",
+"t": "Well done! You did it!",
+"f": "oto_1f1d5204ae.mp3"
+},
+{
+"v": "oto",
+"t": "What can Oto do?",
+"f": "oto_9a5c801a64.mp3"
+},
+{
+"v": "oto",
+"t": "What can you do?",
+"f": "oto_3cff3a04eb.mp3"
+},
+{
+"v": "oto",
+"t": "What colour do you like?",
+"f": "oto_46e0a4c94a.mp3"
+},
+{
+"v": "oto",
+"t": "What colour does Bella like?",
+"f": "oto_f7865290cf.mp3"
+},
+{
+"v": "oto",
+"t": "What colour is it?",
+"f": "oto_cda0b14973.mp3"
+},
+{
+"v": "oto",
+"t": "What do you want?",
+"f": "oto_47d87a313f.mp3"
+},
+{
+"v": "oto",
+"t": "What has Oto got?",
+"f": "oto_72383cd05d.mp3"
+},
+{
+"v": "oto",
+"t": "What have you got?",
+"f": "oto_63a9b9d572.mp3"
+},
+{
+"v": "oto",
+"t": "What's missing?",
+"f": "oto_560834e3d1.mp3"
+},
+{
+"v": "oto",
+"t": "What's this?",
+"f": "oto_db8f9cac24.mp3"
+},
+{
+"v": "oto",
+"t": "What's this? Can you help me?",
+"f": "oto_bd4b97b565.mp3"
+},
+{
+"v": "oto",
+"t": "What's your name?",
+"f": "oto_51d766b9d5.mp3"
+},
+{
+"v": "oto",
+"t": "Where are the apples?",
+"f": "oto_2caf5149a7.mp3"
+},
+{
+"v": "oto",
+"t": "Where are the arms?",
+"f": "oto_30db334c71.mp3"
+},
+{
+"v": "oto",
+"t": "Where are the babies?",
+"f": "oto_f62e2aa2e4.mp3"
+},
+{
+"v": "oto",
+"t": "Where are the bananas?",
+"f": "oto_8643fcaba3.mp3"
+},
+{
+"v": "oto",
+"t": "Where are the blue flowers?",
+"f": "oto_cfad0d1c77.mp3"
+},
+{
+"v": "oto",
+"t": "Where are the ducks?",
+"f": "oto_d9424cb192.mp3"
+},
+{
+"v": "oto",
+"t": "Where are the ears?",
+"f": "oto_ad13c420aa.mp3"
+},
+{
+"v": "oto",
+"t": "Where are the eyes?",
+"f": "oto_75a59d7296.mp3"
+},
+{
+"v": "oto",
+"t": "Where are the feet?",
+"f": "oto_02789a33ea.mp3"
+},
+{
+"v": "oto",
+"t": "Where are the hands?",
+"f": "oto_ac2bcac1c3.mp3"
+},
+{
+"v": "oto",
+"t": "Where are the legs?",
+"f": "oto_be7be84db5.mp3"
+},
+{
+"v": "oto",
+"t": "Where are the oranges?",
+"f": "oto_65cfc060ed.mp3"
+},
+{
+"v": "oto",
+"t": "Where are the pink flowers?",
+"f": "oto_9629273a6b.mp3"
+},
+{
+"v": "oto",
+"t": "Where are the red flowers?",
+"f": "oto_5a733bf426.mp3"
+},
+{
+"v": "oto",
+"t": "Where are the shoes?",
+"f": "oto_7351d49f42.mp3"
+},
+{
+"v": "oto",
+"t": "Where are the socks?",
+"f": "oto_90a38f993e.mp3"
+},
+{
+"v": "oto",
+"t": "Where are the yellow flowers?",
+"f": "oto_5ea3ceda4e.mp3"
+},
+{
+"v": "oto",
+"t": "Where's Bizzy?",
+"f": "oto_99809c0d05.mp3"
+},
+{
+"v": "oto",
+"t": "Where's Bobby?",
+"f": "oto_0a3718dc15.mp3"
+},
+{
+"v": "oto",
+"t": "Where's Bubbles?",
+"f": "oto_dd0e0383f1.mp3"
+},
+{
+"v": "oto",
+"t": "Where's Dad?",
+"f": "oto_a925561405.mp3"
+},
+{
+"v": "oto",
+"t": "Where's Dina?",
+"f": "oto_5b62f99ca4.mp3"
+},
+{
+"v": "oto",
+"t": "Where's Grandma?",
+"f": "oto_3265937ec7.mp3"
+},
+{
+"v": "oto",
+"t": "Where's Grandpa?",
+"f": "oto_1b550cfc43.mp3"
+},
+{
+"v": "oto",
+"t": "Where's Momo?",
+"f": "oto_be5d174603.mp3"
+},
+{
+"v": "oto",
+"t": "Where's Mum?",
+"f": "oto_3f74de89fa.mp3"
+},
+{
+"v": "oto",
+"t": "Where's Oto's brother?",
+"f": "oto_8bd3cd1372.mp3"
+},
+{
+"v": "oto",
+"t": "Where's Oto's sister?",
+"f": "oto_bf11288de3.mp3"
+},
+{
+"v": "oto",
+"t": "Where's Oto?",
+"f": "oto_a93b9abea8.mp3"
+},
+{
+"v": "oto",
+"t": "Where's Pippo?",
+"f": "oto_f8be908aa8.mp3"
+},
+{
+"v": "oto",
+"t": "Where's Sammy?",
+"f": "oto_40aa785bf0.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the T-shirt?",
+"f": "oto_024d73fcef.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the apple?",
+"f": "oto_60f6246a7c.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the baby?",
+"f": "oto_9a62477b8c.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the ball?",
+"f": "oto_41f43b3b99.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the ball? Can you help me?",
+"f": "oto_d3b67d7f9e.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the banana?",
+"f": "oto_39d3490dde.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the bed?",
+"f": "oto_97606d7cff.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the bee?",
+"f": "oto_c7ad9bf5b1.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the bike?",
+"f": "oto_e21674b18b.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the bird?",
+"f": "oto_8290f8fe52.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the birthday?",
+"f": "oto_0fcbb79368.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the boat?",
+"f": "oto_26d19003f8.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the box?",
+"f": "oto_a8b73e0653.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the bread?",
+"f": "oto_bdd270b1c7.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the bridge?",
+"f": "oto_da4dd61388.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the butterfly?",
+"f": "oto_6ad26baebe.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the cake?",
+"f": "oto_0bf07892a1.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the car?",
+"f": "oto_caf1048b8f.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the chair?",
+"f": "oto_201a590371.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the crocodile?",
+"f": "oto_689a03f80d.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the doll?",
+"f": "oto_7b804dd16d.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the door?",
+"f": "oto_446a38e6b8.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the dress?",
+"f": "oto_4100d008f4.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the elephant?",
+"f": "oto_b055d20009.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the family?",
+"f": "oto_655eced7fd.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the fish?",
+"f": "oto_e75b214829.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the flower?",
+"f": "oto_674899b2a0.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the frog?",
+"f": "oto_ccefba4f98.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the giraffe?",
+"f": "oto_1edd6404c9.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the hair?",
+"f": "oto_6cbb4b81ca.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the hat?",
+"f": "oto_57440e5c03.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the head?",
+"f": "oto_dedfe3ef36.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the house?",
+"f": "oto_fd7c531815.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the ice cream?",
+"f": "oto_b67c31439d.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the jacket?",
+"f": "oto_d56ed4a18c.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the kite?",
+"f": "oto_0e0a69ae19.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the lion?",
+"f": "oto_25bf346319.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the milk?",
+"f": "oto_e723f83946.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the monkey?",
+"f": "oto_f4f0d3ae0f.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the mouth?",
+"f": "oto_90241da8be.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the nose?",
+"f": "oto_8915885475.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the orange?",
+"f": "oto_2c31af55b0.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the party?",
+"f": "oto_615053d24c.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the present?",
+"f": "oto_2a9d8fdc9a.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the rain?",
+"f": "oto_4633ccf3f1.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the rainbow?",
+"f": "oto_2764066d90.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the river?",
+"f": "oto_34b3fa0fb9.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the robot?",
+"f": "oto_425bd1307f.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the snake?",
+"f": "oto_7e2b144075.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the snow?",
+"f": "oto_777e3b9c64.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the sun?",
+"f": "oto_cff1a42a95.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the table?",
+"f": "oto_861860305d.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the teddy?",
+"f": "oto_a68265b290.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the train?",
+"f": "oto_fb7add9b02.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the tree?",
+"f": "oto_8afc000f27.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the water?",
+"f": "oto_75d3682cdd.mp3"
+},
+{
+"v": "oto",
+"t": "Where's the window?",
+"f": "oto_fdb8b7011a.mp3"
+},
+{
+"v": "oto",
+"t": "Who's happy?",
+"f": "oto_5a0cb3728c.mp3"
+},
+{
+"v": "oto",
+"t": "Who's hungry?",
+"f": "oto_5b94226140.mp3"
+},
+{
+"v": "oto",
+"t": "Who's sad?",
+"f": "oto_a51962275c.mp3"
+},
+{
+"v": "oto",
+"t": "Who's this?",
+"f": "oto_dbe198e5ef.mp3"
+},
+{
+"v": "oto",
+"t": "Who's this? Can you help me?",
+"f": "oto_ec58c79c05.mp3"
+},
+{
+"v": "oto",
+"t": "Who's tired?",
+"f": "oto_65482f32c7.mp3"
+},
+{
+"v": "oto",
+"t": "Window.",
+"f": "oto_46197e8ca2.mp3"
+},
+{
+"v": "oto",
+"t": "Yellow flowers!",
+"f": "oto_af1fac5a26.mp3"
+},
+{
+"v": "oto",
+"t": "Yellow.",
+"f": "oto_e1053a58eb.mp3"
+},
+{
+"v": "oto",
+"t": "Yes!",
+"f": "oto_6c35ee2fce.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Bella is happy!",
+"f": "oto_e14583fd38.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Bella!",
+"f": "oto_e7ce4b1267.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Blue!",
+"f": "oto_508af7ffcb.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Bobby!",
+"f": "oto_c56baca0c6.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Bubbles!",
+"f": "oto_25d781690b.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Dad!",
+"f": "oto_0e8494a22f.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Dina!",
+"f": "oto_b4e0585203.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Fly!",
+"f": "oto_a2653c2a1f.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Goodbye!",
+"f": "oto_2f3747aa77.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Grandma!",
+"f": "oto_37630b535d.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Grandpa!",
+"f": "oto_810396cb7c.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Green!",
+"f": "oto_2132a85b6a.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Happy!",
+"f": "oto_487b27d667.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Hello!",
+"f": "oto_7f7606caa0.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Hungry!",
+"f": "oto_e05e5944f9.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! I can jump!",
+"f": "oto_ebc2b8b2ea.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! I can run!",
+"f": "oto_54b66f73b3.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! I can swim!",
+"f": "oto_8d1d6d3f84.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! I'm Oto. And you?",
+"f": "oto_1547f59a5d.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! I've got one nose.",
+"f": "oto_33ad1782c7.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! I've got two ears.",
+"f": "oto_06493a3bb7.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! I've got two eyes.",
+"f": "oto_a1a451f66a.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! I've got two hands.",
+"f": "oto_09fda05202.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! In the boat!",
+"f": "oto_d567b31533.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! In the box!",
+"f": "oto_db0d482093.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! It's Bubbles!",
+"f": "oto_669dd4bee2.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! It's Oto!",
+"f": "oto_f08c98f831.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! It's blue!",
+"f": "oto_874cbee2ae.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! It's cold!",
+"f": "oto_005f9ba0ca.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! It's green!",
+"f": "oto_8196bcda2f.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! It's hot!",
+"f": "oto_701fd4add4.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! It's my baby!",
+"f": "oto_28c0961890.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! It's my brother!",
+"f": "oto_7b4e4958ea.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! It's my dad!",
+"f": "oto_dc74a23bde.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! It's my sister!",
+"f": "oto_97eacffde6.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! It's orange!",
+"f": "oto_48920156df.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! It's pink!",
+"f": "oto_5a263b77a1.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! It's red!",
+"f": "oto_552b903226.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! It's yellow!",
+"f": "oto_744cac4c07.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Jump!",
+"f": "oto_459b6732eb.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Let's play!",
+"f": "oto_6faabb9ddb.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Mum!",
+"f": "oto_9b11e7669d.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! On the bed!",
+"f": "oto_d94d304c78.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! On the box!",
+"f": "oto_28c3a808b5.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Orange!",
+"f": "oto_5f3fc4de93.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Oto's brother!",
+"f": "oto_938ee6fe22.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Oto's mum!",
+"f": "oto_5331be64f8.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Oto's sister!",
+"f": "oto_46bd310e0c.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Pink!",
+"f": "oto_31aa190368.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Polly is happy!",
+"f": "oto_7a0331a23a.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Purple!",
+"f": "oto_6f552574af.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Put on your T-shirt!",
+"f": "oto_e1b1d4e628.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Put on your hat!",
+"f": "oto_c8beb1877b.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Put on your jacket!",
+"f": "oto_b4cc907850.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Red!",
+"f": "oto_3a72dc1989.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Run!",
+"f": "oto_2820bb36f7.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Sad!",
+"f": "oto_a0a7f8792e.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Swim!",
+"f": "oto_8a133da571.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The T-shirt!",
+"f": "oto_e74a63e76e.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The apple!",
+"f": "oto_5e4528fea1.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The arms!",
+"f": "oto_cb01510e26.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The baby!",
+"f": "oto_9c036cecd3.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The ball!",
+"f": "oto_64037a6746.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The banana!",
+"f": "oto_1ae3371e6f.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The bed!",
+"f": "oto_4511132e7f.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The big ball!",
+"f": "oto_2a0c70aa89.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The big car!",
+"f": "oto_906547c5a9.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The big teddy!",
+"f": "oto_9da2c90635.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The bike!",
+"f": "oto_f1af5b46d1.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The bird!",
+"f": "oto_215e9a90d4.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The birthday!",
+"f": "oto_6ab880d8a3.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The box!",
+"f": "oto_2355d942ad.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The bread!",
+"f": "oto_9a7c0352ed.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The cake!",
+"f": "oto_1dcfc6e8d3.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The car!",
+"f": "oto_a4e931ce41.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The chair!",
+"f": "oto_3da1b805f5.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The crocodile!",
+"f": "oto_cc8122294d.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The doll!",
+"f": "oto_1c0c2a4f13.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The door!",
+"f": "oto_b738664e94.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The dress!",
+"f": "oto_0ad6ebde4e.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The ears!",
+"f": "oto_d606b1cd86.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The elephant!",
+"f": "oto_8b66761458.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The eyes!",
+"f": "oto_d81dd851fb.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The family!",
+"f": "oto_dec1599fe4.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The feet!",
+"f": "oto_e95b3e3e74.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The flower!",
+"f": "oto_be1bb91abf.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The frog!",
+"f": "oto_df3d90257d.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The giraffe!",
+"f": "oto_b1e612754a.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The hair!",
+"f": "oto_d937780166.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The hands!",
+"f": "oto_403e08c0d4.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The hat!",
+"f": "oto_b346a243dc.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The head!",
+"f": "oto_cea9210338.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The house!",
+"f": "oto_adb04d228b.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The ice cream!",
+"f": "oto_10ebf18a1b.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The jacket!",
+"f": "oto_30e8721125.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The kite!",
+"f": "oto_6c1d3f460e.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The legs!",
+"f": "oto_abe2ef3d5b.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The lion!",
+"f": "oto_986b6eecef.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The milk!",
+"f": "oto_31661b4567.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The monkey!",
+"f": "oto_0a669fa5e3.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The mouth!",
+"f": "oto_162052aaee.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The nose!",
+"f": "oto_004b33ec1d.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The orange!",
+"f": "oto_8fe87579bd.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The party!",
+"f": "oto_b2ed3e944d.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The present!",
+"f": "oto_b7558fe966.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The rain!",
+"f": "oto_8ec5588941.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The robot!",
+"f": "oto_958da2ebf2.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The shoes!",
+"f": "oto_4ff02a6e4d.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The small ball!",
+"f": "oto_4291dddbc2.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The small teddy!",
+"f": "oto_601ac9b1d5.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The small tree!",
+"f": "oto_1e2e35e6d4.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The snake!",
+"f": "oto_bdee4fa8e5.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The snow!",
+"f": "oto_1de7ea226d.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The socks!",
+"f": "oto_05b8cfeb94.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The table!",
+"f": "oto_b826bd58e7.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The teddy!",
+"f": "oto_0ca6353577.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The train!",
+"f": "oto_498c9ee096.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The tree!",
+"f": "oto_2eed069897.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The water!",
+"f": "oto_62aa9244c3.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! The window!",
+"f": "oto_4b58985ab8.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! This is my mum!",
+"f": "oto_e2d291403a.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! This is my mum. What colour is it?",
+"f": "oto_637dfed82e.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Three fish!",
+"f": "oto_dfc9871015.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Tired!",
+"f": "oto_6e596386ea.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Under the chair!",
+"f": "oto_af9da267a3.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Under the table!",
+"f": "oto_4adbdd7294.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! Yellow!",
+"f": "oto_aeeea77d2c.mp3"
+},
+{
+"v": "oto",
+"t": "Yes! You remember!",
+"f": "oto_ce02d3c41e.mp3"
+},
+{
+"v": "oto",
+"t": "Yes, it does!",
+"f": "oto_f0a20b7423.mp3"
+},
+{
+"v": "oto",
+"t": "You found it!",
+"f": "oto_3d49d33d59.mp3"
+},
+{
+"v": "oto",
+"t": "You listened carefully!",
+"f": "oto_f6bbd8f61b.mp3"
+},
+{
+"v": "oto",
+"t": "You tried again!",
+"f": "oto_f3f574183f.mp3"
+},
+{
+"v": "penguin",
+"t": "Brrr! It's cold!",
+"f": "penguin_621ad9abcb.mp3"
+},
+{
+"v": "penguin",
+"t": "Brrr! My feet!",
+"f": "penguin_95e7780ab8.mp3"
+},
+{
+"v": "penguin",
+"t": "Hello!",
+"f": "penguin_4f51cfa021.mp3"
+},
+{
+"v": "penguin",
+"t": "Hello! I'm Pippo.",
+"f": "penguin_865dcf4c05.mp3"
+},
+{
+"v": "penguin",
+"t": "Hello! I'm Pippo. Brrr! It's cold!",
+"f": "penguin_043a5aa3ac.mp3"
+},
+{
+"v": "penguin",
+"t": "Hello! I'm Pippo. Thank you! I'm warm!",
+"f": "penguin_d13ed5263c.mp3"
+},
+{
+"v": "penguin",
+"t": "I'm hungry!",
+"f": "penguin_da821b5a26.mp3"
+},
+{
+"v": "penguin",
+"t": "Phew! It's hot!",
+"f": "penguin_f6ac384ce7.mp3"
+},
+{
+"v": "penguin",
+"t": "Thank you!",
+"f": "penguin_17e9942583.mp3"
+},
+{
+"v": "penguin",
+"t": "Thank you, Oto!",
+"f": "penguin_79b47829f4.mp3"
+},
+{
+"v": "penguin",
+"t": "Thank you, Oto! Goodbye!",
+"f": "penguin_fc98dc7e30.mp3"
+},
+{
+"v": "polly",
+"t": "A lion! Roar!",
+"f": "polly_bc7503db00.mp3"
+},
+{
+"v": "polly",
+"t": "A snake! Sss!",
+"f": "polly_94e165eeef.mp3"
+},
+{
+"v": "polly",
+"t": "A teddy! A teddy!",
+"f": "polly_db8ae2afb5.mp3"
+},
+{
+"v": "polly",
+"t": "Baby! Baby!",
+"f": "polly_b49f2a823d.mp3"
+},
+{
+"v": "polly",
+"t": "Bobby! Bobby!",
+"f": "polly_80bd36b283.mp3"
+},
+{
+"v": "polly",
+"t": "Bubbles! Bubbles!",
+"f": "polly_82529f5c6e.mp3"
+},
+{
+"v": "polly",
+"t": "Bzzz! Bzzz!",
+"f": "polly_106a2a5a84.mp3"
+},
+{
+"v": "polly",
+"t": "Cake! Cake!",
+"f": "polly_0e0064a5b5.mp3"
+},
+{
+"v": "polly",
+"t": "Can I have milk, please? Milk, please!",
+"f": "polly_ceb157bb2e.mp3"
+},
+{
+"v": "polly",
+"t": "Clap your hands!",
+"f": "polly_b55c747e93.mp3"
+},
+{
+"v": "polly",
+"t": "Close the door!",
+"f": "polly_6928d5c6ff.mp3"
+},
+{
+"v": "polly",
+"t": "Close the window!",
+"f": "polly_85f34ca040.mp3"
+},
+{
+"v": "polly",
+"t": "Close the window! Close the window!",
+"f": "polly_b6c24aadee.mp3"
+},
+{
+"v": "polly",
+"t": "Close your eyes!",
+"f": "polly_8b0dcb8eca.mp3"
+},
+{
+"v": "polly",
+"t": "Cold! Cold!",
+"f": "polly_683678c7db.mp3"
+},
+{
+"v": "polly",
+"t": "Come here!",
+"f": "polly_4f358d33ad.mp3"
+},
+{
+"v": "polly",
+"t": "Come in! Come in!",
+"f": "polly_6a5bb699d1.mp3"
+},
+{
+"v": "polly",
+"t": "Crocodile! Crocodile!",
+"f": "polly_2e87970a56.mp3"
+},
+{
+"v": "polly",
+"t": "Drink!",
+"f": "polly_8c3a47b3df.mp3"
+},
+{
+"v": "polly",
+"t": "Drink! Drink!",
+"f": "polly_93091b0070.mp3"
+},
+{
+"v": "polly",
+"t": "Eat!",
+"f": "polly_e9e8768b11.mp3"
+},
+{
+"v": "polly",
+"t": "Eight! Eight!",
+"f": "polly_be31ab22ab.mp3"
+},
+{
+"v": "polly",
+"t": "Feet! Feet!",
+"f": "polly_c3c7ec6de1.mp3"
+},
+{
+"v": "polly",
+"t": "Fly!",
+"f": "polly_866b5221f2.mp3"
+},
+{
+"v": "polly",
+"t": "Frog! Frog!",
+"f": "polly_a07896c596.mp3"
+},
+{
+"v": "polly",
+"t": "Give me the ball!",
+"f": "polly_117b153e4c.mp3"
+},
+{
+"v": "polly",
+"t": "Give me the doll!",
+"f": "polly_61e12cf2fa.mp3"
+},
+{
+"v": "polly",
+"t": "Give me the teddy!",
+"f": "polly_87d0040b0d.mp3"
+},
+{
+"v": "polly",
+"t": "Go!",
+"f": "polly_948937146b.mp3"
+},
+{
+"v": "polly",
+"t": "Goodbye! Goodbye!",
+"f": "polly_aef812f422.mp3"
+},
+{
+"v": "polly",
+"t": "Green! Green!",
+"f": "polly_8b7a46b3ba.mp3"
+},
+{
+"v": "polly",
+"t": "Happy birthday! And here's my present. A song!",
+"f": "polly_ead3d53acd.mp3"
+},
+{
+"v": "polly",
+"t": "Hello! Hello!",
+"f": "polly_ba4e856761.mp3"
+},
+{
+"v": "polly",
+"t": "Hello, Bella! Hello!",
+"f": "polly_7891a07048.mp3"
+},
+{
+"v": "polly",
+"t": "Hello, Oto!",
+"f": "polly_13d20875ff.mp3"
+},
+{
+"v": "polly",
+"t": "Hello, sun!",
+"f": "polly_388c520df7.mp3"
+},
+{
+"v": "polly",
+"t": "House! House!",
+"f": "polly_2e242a6a78.mp3"
+},
+{
+"v": "polly",
+"t": "Hungry! Hungry!",
+"f": "polly_1b7bc55fc0.mp3"
+},
+{
+"v": "polly",
+"t": "I can fly! I can fly!",
+"f": "polly_4a1b52ab19.mp3"
+},
+{
+"v": "polly",
+"t": "I don't like milk!",
+"f": "polly_bab329ee4b.mp3"
+},
+{
+"v": "polly",
+"t": "I like it! I like it!",
+"f": "polly_935dda55db.mp3"
+},
+{
+"v": "polly",
+"t": "I like pink! I like pink!",
+"f": "polly_85d2a8f10b.mp3"
+},
+{
+"v": "polly",
+"t": "I'm five!",
+"f": "polly_065e80cc4c.mp3"
+},
+{
+"v": "polly",
+"t": "I'm five! I'm five!",
+"f": "polly_b254b5d5f7.mp3"
+},
+{
+"v": "polly",
+"t": "In the box! In the box!",
+"f": "polly_6ba0c83726.mp3"
+},
+{
+"v": "polly",
+"t": "Jump!",
+"f": "polly_66eafca896.mp3"
+},
+{
+"v": "polly",
+"t": "Let's play! Let's play!",
+"f": "polly_5575ab2614.mp3"
+},
+{
+"v": "polly",
+"t": "Listen!",
+"f": "polly_1267b6f773.mp3"
+},
+{
+"v": "polly",
+"t": "Listen! Listen!",
+"f": "polly_205750f3b6.mp3"
+},
+{
+"v": "polly",
+"t": "Look!",
+"f": "polly_772f8d34ba.mp3"
+},
+{
+"v": "polly",
+"t": "Merry Christmas! Merry Christmas!",
+"f": "polly_42408aa19d.mp3"
+},
+{
+"v": "polly",
+"t": "Mum! Dad!",
+"f": "polly_4103f8f10d.mp3"
+},
+{
+"v": "polly",
+"t": "My ball! My ball!",
+"f": "polly_f7195ad499.mp3"
+},
+{
+"v": "polly",
+"t": "Nose! Nose!",
+"f": "polly_77a7d6aa11.mp3"
+},
+{
+"v": "polly",
+"t": "Open the door!",
+"f": "polly_bb218ed02d.mp3"
+},
+{
+"v": "polly",
+"t": "Open the window!",
+"f": "polly_674551a780.mp3"
+},
+{
+"v": "polly",
+"t": "Orange! Orange!",
+"f": "polly_97a58a2aea.mp3"
+},
+{
+"v": "polly",
+"t": "Party! Party!",
+"f": "polly_921b84bdad.mp3"
+},
+{
+"v": "polly",
+"t": "Please!",
+"f": "polly_e53dc4e505.mp3"
+},
+{
+"v": "polly",
+"t": "Point to Dad!",
+"f": "polly_58ba2dc97a.mp3"
+},
+{
+"v": "polly",
+"t": "Point to Mum!",
+"f": "polly_34cacfcbf6.mp3"
+},
+{
+"v": "polly",
+"t": "Point to the kite!",
+"f": "polly_c1cd8dc3bc.mp3"
+},
+{
+"v": "polly",
+"t": "Point to the tree!",
+"f": "polly_8db4513f92.mp3"
+},
+{
+"v": "polly",
+"t": "Polly says: clap your hands!",
+"f": "polly_dd74aea195.mp3"
+},
+{
+"v": "polly",
+"t": "Polly says: jump!",
+"f": "polly_7022192628.mp3"
+},
+{
+"v": "polly",
+"t": "Polly says: listen!",
+"f": "polly_67972e2137.mp3"
+},
+{
+"v": "polly",
+"t": "Polly says: look!",
+"f": "polly_9aa7879e87.mp3"
+},
+{
+"v": "polly",
+"t": "Polly says: sit down!",
+"f": "polly_04090efcd2.mp3"
+},
+{
+"v": "polly",
+"t": "Polly says: stand up!",
+"f": "polly_e28838e395.mp3"
+},
+{
+"v": "polly",
+"t": "Polly says: stop!",
+"f": "polly_01e5b801ce.mp3"
+},
+{
+"v": "polly",
+"t": "Polly says: touch your nose!",
+"f": "polly_1a1614aee9.mp3"
+},
+{
+"v": "polly",
+"t": "Polly says: turn around!",
+"f": "polly_0d5fdb3663.mp3"
+},
+{
+"v": "polly",
+"t": "Polly says: walk!",
+"f": "polly_232ae07acf.mp3"
+},
+{
+"v": "polly",
+"t": "Polly says: wash your hands!",
+"f": "polly_3f8bd29434.mp3"
+},
+{
+"v": "polly",
+"t": "Present! Present!",
+"f": "polly_87e5ba4695.mp3"
+},
+{
+"v": "polly",
+"t": "Purple! Purple!",
+"f": "polly_0e302d20af.mp3"
+},
+{
+"v": "polly",
+"t": "Put on your T-shirt!",
+"f": "polly_802401d2a2.mp3"
+},
+{
+"v": "polly",
+"t": "Put on your hat!",
+"f": "polly_b0d3899f4a.mp3"
+},
+{
+"v": "polly",
+"t": "Put on your jacket!",
+"f": "polly_961b5737e7.mp3"
+},
+{
+"v": "polly",
+"t": "Put on your shoes!",
+"f": "polly_6caa37a0d5.mp3"
+},
+{
+"v": "polly",
+"t": "Put on your socks!",
+"f": "polly_753ac51241.mp3"
+},
+{
+"v": "polly",
+"t": "Rain! Rain!",
+"f": "polly_6bcfe033cc.mp3"
+},
+{
+"v": "polly",
+"t": "Rainbow! Rainbow!",
+"f": "polly_ff6decf0d7.mp3"
+},
+{
+"v": "polly",
+"t": "Red! Red!",
+"f": "polly_eded40b8e9.mp3"
+},
+{
+"v": "polly",
+"t": "Run!",
+"f": "polly_5b1b08a4ce.mp3"
+},
+{
+"v": "polly",
+"t": "See you soon! See you soon!",
+"f": "polly_056960157b.mp3"
+},
+{
+"v": "polly",
+"t": "Shake!",
+"f": "polly_cdee18f02d.mp3"
+},
+{
+"v": "polly",
+"t": "Shoes! Shoes!",
+"f": "polly_73bffbe4a8.mp3"
+},
+{
+"v": "polly",
+"t": "Show me the robot!",
+"f": "polly_189ef5b612.mp3"
+},
+{
+"v": "polly",
+"t": "Show me the train!",
+"f": "polly_9838c3b925.mp3"
+},
+{
+"v": "polly",
+"t": "Sit down!",
+"f": "polly_3cf064bf9c.mp3"
+},
+{
+"v": "polly",
+"t": "Small! Small!",
+"f": "polly_e0e0c2f31a.mp3"
+},
+{
+"v": "polly",
+"t": "Snow! Snow!",
+"f": "polly_385ab72aa6.mp3"
+},
+{
+"v": "polly",
+"t": "Stand up!",
+"f": "polly_67ff2e3bdf.mp3"
+},
+{
+"v": "polly",
+"t": "Stop!",
+"f": "polly_72e6645ab8.mp3"
+},
+{
+"v": "polly",
+"t": "Swim!",
+"f": "polly_42e179a664.mp3"
+},
+{
+"v": "polly",
+"t": "Swim! Swim!",
+"f": "polly_9539e8c310.mp3"
+},
+{
+"v": "polly",
+"t": "T-shirt! T-shirt!",
+"f": "polly_ca3935dea8.mp3"
+},
+{
+"v": "polly",
+"t": "Take off your hat!",
+"f": "polly_17670c748d.mp3"
+},
+{
+"v": "polly",
+"t": "Take off your jacket!",
+"f": "polly_7a1728d3be.mp3"
+},
+{
+"v": "polly",
+"t": "Ten apples!",
+"f": "polly_3a61e4db71.mp3"
+},
+{
+"v": "polly",
+"t": "Ten! Ten!",
+"f": "polly_04e8fd852b.mp3"
+},
+{
+"v": "polly",
+"t": "Thank you! Goodbye!",
+"f": "polly_fcc9e4e1e1.mp3"
+},
+{
+"v": "polly",
+"t": "Thank you! I can fly! I can fly!",
+"f": "polly_58cbb32216.mp3"
+},
+{
+"v": "polly",
+"t": "Thank you! Thank you!",
+"f": "polly_584f78eb7f.mp3"
+},
+{
+"v": "polly",
+"t": "Three fish!",
+"f": "polly_c345de0502.mp3"
+},
+{
+"v": "polly",
+"t": "Touch green!",
+"f": "polly_c368fc4c1b.mp3"
+},
+{
+"v": "polly",
+"t": "Touch red!",
+"f": "polly_2c0604875c.mp3"
+},
+{
+"v": "polly",
+"t": "Touch the baby!",
+"f": "polly_1970e3ee75.mp3"
+},
+{
+"v": "polly",
+"t": "Touch the tree!",
+"f": "polly_659d402455.mp3"
+},
+{
+"v": "polly",
+"t": "Touch your arms!",
+"f": "polly_87bb15aa45.mp3"
+},
+{
+"v": "polly",
+"t": "Touch your ears!",
+"f": "polly_dcb7a1c1d4.mp3"
+},
+{
+"v": "polly",
+"t": "Touch your eyes!",
+"f": "polly_94be842453.mp3"
+},
+{
+"v": "polly",
+"t": "Touch your feet!",
+"f": "polly_d59dcd4340.mp3"
+},
+{
+"v": "polly",
+"t": "Touch your hair!",
+"f": "polly_ef81ac7226.mp3"
+},
+{
+"v": "polly",
+"t": "Touch your head!",
+"f": "polly_2cd93dc44f.mp3"
+},
+{
+"v": "polly",
+"t": "Touch your legs!",
+"f": "polly_f14682acc0.mp3"
+},
+{
+"v": "polly",
+"t": "Touch your mouth!",
+"f": "polly_6c5a74232b.mp3"
+},
+{
+"v": "polly",
+"t": "Touch your nose!",
+"f": "polly_6eb2ab09e2.mp3"
+},
+{
+"v": "polly",
+"t": "Turn around!",
+"f": "polly_3fa5062554.mp3"
+},
+{
+"v": "polly",
+"t": "Under the bed! Under the bed!",
+"f": "polly_c4ef7e2af6.mp3"
+},
+{
+"v": "polly",
+"t": "Under the present! Under the present!",
+"f": "polly_d44c409325.mp3"
+},
+{
+"v": "polly",
+"t": "Walk!",
+"f": "polly_1d68c6d730.mp3"
+},
+{
+"v": "polly",
+"t": "Wash your hands!",
+"f": "polly_33a09fac5d.mp3"
+},
+{
+"v": "polly",
+"t": "Wash your hands! Wash your hands!",
+"f": "polly_280dc1fb2c.mp3"
+},
+{
+"v": "polly",
+"t": "Where's Oto? Look! Listen!",
+"f": "polly_9eb6dab07e.mp3"
+},
+{
+"v": "sammy",
+"t": "A party! A party!",
+"f": "sammy_9c6aeaf9f4.mp3"
+},
+{
+"v": "sammy",
+"t": "Brrr! It's cold!",
+"f": "sammy_519fca59bf.mp3"
+},
+{
+"v": "sammy",
+"t": "Can I come?",
+"f": "sammy_6031c9fa3b.mp3"
+},
+{
+"v": "sammy",
+"t": "Goodbye, house! Let's go!",
+"f": "sammy_a46682dfa8.mp3"
+},
+{
+"v": "sammy",
+"t": "Happy birthday, Oto!",
+"f": "sammy_ccc88d1201.mp3"
+},
+{
+"v": "sammy",
+"t": "Hello! I'm Sammy.",
+"f": "sammy_4922372a9c.mp3"
+},
+{
+"v": "sammy",
+"t": "Hello! I'm Sammy. Come in!",
+"f": "sammy_5a22b2d63f.mp3"
+},
+{
+"v": "sammy",
+"t": "Look! A box! A present!",
+"f": "sammy_cd29e015bf.mp3"
+},
+{
+"v": "sammy",
+"t": "Look! My table! My chair! My bed!",
+"f": "sammy_1ed4cdb6d3.mp3"
+},
+{
+"v": "sammy",
+"t": "My ball! Where's my ball?",
+"f": "sammy_52dd5c1492.mp3"
+},
+{
+"v": "sammy",
+"t": "My bed! Thank you!",
+"f": "sammy_c297c95c51.mp3"
+},
+{
+"v": "sammy",
+"t": "My house! Thank you!",
+"f": "sammy_2f561011e3.mp3"
+},
+{
+"v": "sammy",
+"t": "Oh no! My balls!",
+"f": "sammy_8e03418f4d.mp3"
+},
+{
+"v": "sammy",
+"t": "Oh no! Where's the ball?",
+"f": "sammy_dcbb5ce5e3.mp3"
+},
+{
+"v": "sister",
+"t": "Hello, Oto!",
+"f": "sister_c1b86e097f.mp3"
+}
+]

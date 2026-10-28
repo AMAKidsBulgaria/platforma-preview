@@ -1,0 +1,342 @@
+{
+  "version": "0.1",
+  "note": "Игрите на модула „Английски език“, Ниво 0 – свободна игра с думите от посетените пристани. Отключват се с напредъка по реката, не като награда. Без таймери и сърца; отчита се само проверено разбиране (първият опит).",
+  "start": {
+    "journey": {
+      "title": "Моето пътешествие",
+      "sub": "Реката на Ото"
+    },
+    "games": {
+      "title": "Игри",
+      "sub": "Играй и учи"
+    },
+    "book": {
+      "title": "Уеб учебник",
+      "sub": "Истории и песни"
+    },
+    "dict": {
+      "title": "Речник",
+      "sub": "Думите с картинки"
+    }
+  },
+  "games": [
+    {
+      "id": "listen",
+      "title": "Чуй и докосни",
+      "icon": "oto_listen",
+      "zone": 1,
+      "topic": true,
+      "art": "g_listen",
+      "color": "green",
+      "say": "Чуй и докосни! Слушай Ото и докосни картинката."
+    },
+    {
+      "id": "polly",
+      "title": "Polly казва",
+      "icon": "polly",
+      "zone": 1,
+      "art": "g_polly",
+      "color": "green",
+      "say": "Поли казва! Прави само каквото каже Поли."
+    },
+    {
+      "id": "count",
+      "title": "Колко са?",
+      "icon": "w_fish",
+      "zone": 1,
+      "art": "g_count",
+      "color": "yellow",
+      "say": "Колко са? Да броим рибките!"
+    },
+    {
+      "id": "missing",
+      "title": "Какво липсва?",
+      "icon": "oto_look",
+      "zone": 1,
+      "topic": true,
+      "art": "g_missing",
+      "color": "purple",
+      "say": "Какво липсва? Запомни картинките!"
+    },
+    {
+      "id": "sound",
+      "title": "Звуков детектив",
+      "icon": "w_hat",
+      "zone": 1,
+      "art": "g_sound",
+      "color": "green",
+      "say": "Звуков детектив! Слушай звука."
+    },
+    {
+      "id": "pairs",
+      "title": "Двойки",
+      "icon": "w_teddy",
+      "zone": 1,
+      "topic": true,
+      "art": "g_pairs",
+      "color": "purple",
+      "say": "Двойки! Намери еднаквите картинки!"
+    },
+    {
+      "id": "colour",
+      "title": "Оцвети",
+      "icon": "w_red",
+      "zone": 2,
+      "art": "g_colour",
+      "color": "blue",
+      "say": "Оцвети! Да рисуваме с бои!"
+    },
+    {
+      "id": "dress",
+      "title": "Облечи Пипо",
+      "icon": "w_pippo",
+      "zone": 8,
+      "art": "g_dress",
+      "color": "blue",
+      "say": "Облечи Пипо! На Пипо му е студено."
+    },
+    {
+      "id": "where",
+      "title": "Къде е?",
+      "icon": "w_in",
+      "zone": 9,
+      "art": "g_where",
+      "color": "orange",
+      "say": "Къде е? Намери играчката!"
+    },
+    {
+      "id": "songs",
+      "title": "Песните на Polly",
+      "icon": "bubbles",
+      "zone": 1,
+      "art": "g_songs",
+      "color": "pink",
+      "say": "Песните на Поли! Да пеем!"
+    }
+  ],
+  "zoneIcons": {
+    "1": "w_boat",
+    "2": "w_flower",
+    "3": "w_family",
+    "4": "w_teddy",
+    "5": "w_nose",
+    "6": "w_monkey",
+    "7": "w_apple",
+    "8": "w_jacket",
+    "9": "w_house",
+    "10": "w_present"
+  },
+  "zoneNames": {
+    "1": "Пристанчето",
+    "2": "Цветната поляна",
+    "3": "Горичката на видрите",
+    "4": "Пещерата на съкровищата",
+    "5": "Водопадът",
+    "6": "Голямата гора",
+    "7": "Градината с плодовете",
+    "8": "Снежната планина",
+    "9": "Къщичката на дървото",
+    "10": "Морето"
+  },
+  "numbers": [
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+    "ten"
+  ],
+  "numberZone": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    3,
+    4,
+    4
+  ],
+  "pollyCommands": [
+    {
+      "c": "stand up",
+      "zone": 1,
+      "img": "oto_standup"
+    },
+    {
+      "c": "sit down",
+      "zone": 1,
+      "img": "oto_sitdown"
+    },
+    {
+      "c": "look",
+      "zone": 1,
+      "img": "oto_look"
+    },
+    {
+      "c": "listen",
+      "zone": 1,
+      "img": "oto_listen"
+    },
+    {
+      "c": "clap your hands",
+      "zone": 1,
+      "img": "oto_clap"
+    },
+    {
+      "c": "jump",
+      "zone": 2,
+      "img": "w_jump"
+    },
+    {
+      "c": "turn around",
+      "zone": 2,
+      "img": "polly"
+    },
+    {
+      "c": "touch your nose",
+      "zone": 5,
+      "img": "w_nose"
+    },
+    {
+      "c": "wash your hands",
+      "zone": 5,
+      "img": "w_hands"
+    },
+    {
+      "c": "walk",
+      "zone": 6,
+      "img": "w_run"
+    },
+    {
+      "c": "stop",
+      "zone": 6,
+      "img": "polly"
+    }
+  ],
+  "colourObjects": [
+    "fish",
+    "ball",
+    "flower",
+    "balloon"
+  ],
+  "dress": [
+    "hat",
+    "jacket",
+    "shoes",
+    "socks",
+    "t-shirt",
+    "dress"
+  ],
+  "where": {
+    "in": "Put the ball in the box!",
+    "on": "Put the ball on the box!",
+    "under": "Put the ball under the table!"
+  },
+  "instructions": {
+    "games": "Избери игра. Ото ти предлага три за днес.",
+    "topic": "Избери пристан – с думите от него ще играем.",
+    "locked": "Тази игра чака на по-нататъшен пристан по реката.",
+    "polly": "Прави само това, което Поли каже с думите „Polly says“. Ако Поли не ги каже – натисни ръчичката „стоп“.",
+    "pairs": "Обръщай картите и намери двете еднакви. Слушай думата.",
+    "colour": "Ото казва какво да оцветиш. Избери цвета, после докосни картинката.",
+    "dress": "На Пипо му е студено! Слушай Ото и дай на Пипо дрехата.",
+    "where": "Слушай Ото: къде е играчката? Избери картинката.",
+    "songs": "Избери песен и пей с Поли.",
+    "game_done": "Браво! Играта свърши. Още веднъж?",
+    "soon": "Скоро! Тук ще има историите и песните на всеки пристан.",
+    "soon_dict": "Скоро! Тук ще са думите с картинки.",
+    "dict": "Докосни картинка и чуй думата на английски.",
+    "book": "Избери история или песен и слушай.",
+    "book_locked": "Тази история идва след занятието с учителя.",
+    "locked_stop": "До този пристан още не сме стигнали.",
+    "deco": "Браво! Избери украса за пристана."
+  },
+  "lines": {
+    "polly_didnt": "Polly didn't say! Well done!",
+    "polly_did": "Polly said it! Let's do it!",
+    "pairs_done": "All the pairs! Well done!",
+    "pippo_cold": "Brrr! It's cold!",
+    "pippo_thanks": "Thank you, Oto!",
+    "pippo_warm": "I'm warm now! Thank you, Oto!"
+  },
+  "voice": {
+    "hi": "Здравей! Натисни „Продължи“ и тръгваме по реката.",
+    "hi_done": "Здравей! Домашното е готово. Избери какво да правим.",
+    "cont": "Продължаваме пътешествието!",
+    "journey": "Моето пътешествие! Да видим реката.",
+    "games": "Игри! Хайде да играем!",
+    "book": "Уеб учебник! Да послушаме история!",
+    "dict": "Речник! Да разгледаме думите!"
+  },
+  "whereSets": [
+    {
+      "obj": "ball",
+      "items": [
+        {
+          "p": "in",
+          "img": "w_in",
+          "say": "The ball is in the box.",
+          "yes": "Yes! In the box!",
+          "model": "Look! The ball is in the box."
+        },
+        {
+          "p": "on",
+          "img": "w_on",
+          "say": "The ball is on the box.",
+          "yes": "Yes! On the box!",
+          "model": "Look! The ball is on the box."
+        },
+        {
+          "p": "under",
+          "img": "w_under",
+          "say": "The ball is under the table.",
+          "yes": "Yes! Under the table!",
+          "model": "Look! The ball is under the table."
+        }
+      ]
+    },
+    {
+      "obj": "teddy",
+      "items": [
+        {
+          "p": "in",
+          "img": "w_t_in",
+          "say": "The teddy is in the box.",
+          "yes": "Yes! In the box!",
+          "model": "Look! The teddy is in the box."
+        },
+        {
+          "p": "on",
+          "img": "w_t_on",
+          "say": "The teddy is on the bed.",
+          "yes": "Yes! On the bed!",
+          "model": "Look! The teddy is on the bed."
+        },
+        {
+          "p": "under",
+          "img": "w_t_under",
+          "say": "The teddy is under the chair.",
+          "yes": "Yes! Under the chair!",
+          "model": "Look! The teddy is under the chair."
+        }
+      ]
+    }
+  ],
+  "peek": {
+    "2": "Тук ще срещнем пеперудата Bella!",
+    "3": "Тук живее семейството на Ото!",
+    "4": "Тук ще срещнем прилепчето Bobby!",
+    "5": "Тук ще срещнем патето Dina!",
+    "6": "Тук ще срещнем маймунката Momo!",
+    "7": "Тук ще срещнем пчеличката Bizzy!",
+    "8": "Тук ще срещнем пингвинчето Пипо!",
+    "9": "Тук ще срещнем катеричката Sammy!",
+    "10": "Тук е празникът с всички приятели!"
+  }
+}
