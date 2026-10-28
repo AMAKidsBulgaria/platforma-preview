@@ -22,6 +22,10 @@
   const GKEY = "platforma.en.group.v1";
   if (Q.get("enclass")) try { localStorage.setItem(GKEY, String(Math.max(1, +Q.get("enclass") || 1))); } catch (e) {}
   const ROSTER = !!(PS && PS.needsPick());
+  // родител без съгласие за запис на гласа: ?nomic=КОД,КОД (на таблета) – това дете казва думата без запис („Казах го“); nomic=- изчиства
+  const NKEY = "platforma.en.nomic.v1";
+  if (Q.get("nomic")) try { localStorage.setItem(NKEY, JSON.stringify(Q.get("nomic") === "-" ? [] : Q.get("nomic").toUpperCase().split(",").filter(Boolean))); } catch (e) {}
+  const NOMIC = (() => { try { return !!CHILD && (JSON.parse(localStorage.getItem(NKEY) || "[]") || []).includes(CHILD); } catch (e) { return false; } })();
   // демо сценарии (за преглед): ?scenario=missed – проведени 3 занятия, домашното на занятие 1 е готово, на 2 – наполовина, на 3 – незапочнато
   const SCEN = { missed: { classAt: 3, done: { EN0101: [0, 1, 2, 3, 4], EN0102: [0, 1] }, stickers: { 1: 7 }, learned: { hello: ["2026-10-20", "2026-10-22"], river: ["2026-10-22"] } },
     fresh: { classAt: 1, done: {}, stickers: {}, learned: {} },
@@ -787,7 +791,7 @@
   };
 
   // ---------- „Кажи го“: запис само на таблета (не се качва никъде), после детето чува себе си и модела ----------
-  let MIC = !!(navigator.mediaDevices && window.MediaRecorder);
+  let MIC = !NOMIC && !!(navigator.mediaDevices && window.MediaRecorder);
   async function recordOrSay() {
     const box = app.querySelector(".en-mic"); if (!box) return;
     if (!MIC) { box.innerHTML = `<button class="en-micbtn" type="button">🗣️ Казах го</button>`; await tapOnce(".en-micbtn"); box.innerHTML = ""; return; }
@@ -1129,7 +1133,7 @@
     D = d; au.forEach(x => { A[x.v + "|" + x.t] = x.f; }); G = gm; PIER = pr; D.words = wb.words; D.numbers = gm.numbers;
     fromServer();
     Z = zoneNow();
-    window.EN = { D, report, get Z() { return Z; }, PIER, album, finishPier, shown, prog, current, olderOpen, assigned, lessonsDone, home, river, teacher, start, games, dict, book, lessonPage, play: (id, zs) => play(G.games.find(g => g.id === id), zs) };
+    window.EN = { D, report, nomic: NOMIC, get Z() { return Z; }, PIER, album, finishPier, shown, prog, current, olderOpen, assigned, lessonsDone, home, river, teacher, start, games, dict, book, lessonPage, play: (id, zs) => play(G.games.find(g => g.id === id), zs) };
     if (Q.get("report") === "1") report();
     else if (ROSTER && (!CHILD || Q.get("who") === "1")) PS.pick(() => location.replace("english.html"));   // „Кой играе?“: след линка на групата или 👥; без pilotgroup в адреса – иначе изборът се нулира
     else if (Q.get("go") === "journey") home(); else start();
