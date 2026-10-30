@@ -1133,7 +1133,7 @@
     D = d; au.forEach(x => { A[x.v + "|" + x.t] = x.f; }); G = gm; PIER = pr; D.words = wb.words; D.numbers = gm.numbers;
     fromServer();
     Z = zoneNow();
-    window.EN = { D, report, nomic: NOMIC, get Z() { return Z; }, PIER, album, finishPier, shown, prog, current, olderOpen, assigned, lessonsDone, home, river, teacher, start, games, dict, book, lessonPage, play: (id, zs) => play(G.games.find(g => g.id === id), zs) };
+    window.EN = { D, report, parentBox, nomic: NOMIC, get Z() { return Z; }, PIER, album, finishPier, shown, prog, current, olderOpen, assigned, lessonsDone, home, river, teacher, start, games, dict, book, lessonPage, play: (id, zs) => play(G.games.find(g => g.id === id), zs) };
     if (Q.get("report") === "1") report();
     else if (ROSTER && (!CHILD || Q.get("who") === "1")) PS.pick(() => location.replace("english.html"));   // „Кой играе?“: след линка на групата или 👥; без pilotgroup в адреса – иначе изборът се нулира
     else if (Q.get("go") === "journey") home(); else start();
