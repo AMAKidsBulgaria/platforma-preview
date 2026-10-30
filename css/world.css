@@ -187,7 +187,7 @@
 .wcam.wworld { top: 74px !important; }
 .vpad-cur.pulse { animation: vpulse 1s ease-in-out 3; } @keyframes vpulse { 50% { stroke-width: 12; stroke: #FFE89A; } }
 /* режим „преглед“: ясен знак, че всичко е отключено само за разглеждане */
-html.review-mode::after { content: "Преглед – всичко е отключено"; position: fixed; left: 50%; bottom: 6px; transform: translateX(-50%); z-index: 100000; background: #7A4FB5; color: #fff; font: 700 13px/1 Nunito, system-ui, sans-serif; padding: 6px 12px; border-radius: 999px; pointer-events: none; opacity: .9; }
+html.review-mode::after { content: "Преглед – всичко е отключено"; position: fixed; left: 8px; bottom: 6px; z-index: 100000; background: #7A4FB5; color: #fff; font: 700 13px/1 Nunito, system-ui, sans-serif; padding: 6px 12px; border-radius: 999px; pointer-events: none; opacity: .9; }
 /* „Продължи строежа“: малко контекстно хапче до строежа и панел при докосване на сградата (само при незавършено домашно) */
 .wcont { position: absolute; z-index: 30; display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px 7px 7px; border-radius: 999px; border: 3px solid #F2B705; background: #FFF8EC; color: #3A2F25; font: 800 17px/1 Nunito, system-ui, sans-serif; box-shadow: 0 3px 0 #D9A400, 0 6px 14px rgba(60, 40, 10, .18); cursor: pointer; white-space: nowrap; }
 .wcont-pl { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #F0A43A; }
