@@ -41,7 +41,7 @@
       }
       st = push(st, { rod, bead: "h", d: 5 }, out); return d > 5 ? push(st, { rod, bead: "e", d: d - 5 }, out) : st;
     }
-    flags.friend = true;   // +d = +10 (едно вляво) −(10−d) тук; първо десетицата, както се учи в часа
+    flags.friend = true;   // +d = +10 (едно в следващата пръчка) −(10−d) тук; първо десетицата, както се учи в часа
     const hi = {}; st = addDigit(st, rod + 1, 1, out, hi); if (hi.brother || hi.friend) flags.transition = true; if (hi.overflow) flags.overflow = true;
     const inner = {}; st = subDigit(st, rod, 10 - d, out, inner); if (inner.brother) flags.friendBrother = true;
     return st;
@@ -57,7 +57,7 @@
       }
       st = push(st, { rod, bead: "h", d: -5 }, out); return d > 5 ? push(st, { rod, bead: "e", d: -(d - 5) }, out) : st;
     }
-    flags.friend = true;   // −d = −10 (едно вляво) +(10−d) тук; първо десетицата
+    flags.friend = true;   // −d = −10 (едно в следващата пръчка) +(10−d) тук; първо десетицата
     const hi = {}; st = subDigit(st, rod + 1, 1, out, hi); if (hi.brother || hi.friend) flags.transition = true; if (hi.overflow) flags.overflow = true;
     const inner = {}; st = addDigit(st, rod, 10 - d, out, inner); if (inner.brother) flags.friendBrother = true;
     return st;
@@ -123,6 +123,10 @@ const ruleOf = (f) => f.transition ? "Преход" : f.friendBrother ? "При�
     return { correct: false, code: "wrong_value", rule: p.rule, got, target };
   }
 
+  // подредба на пръчките: единиците са НАЙ-ВЛЯВО, вдясно от тях – десетиците, стотиците (решение 9.11.2026; ?units=right връща стандартния соробан)
+  const UNITS_LEFT = !(typeof location !== "undefined" && /[?&]units=right\b/.test(location.search));
+  const SIDE = UNITS_LEFT ? "вдясно" : "вляво";                    // къде е по-старшата пръчка – за подсказките
+  const col = (i, R) => UNITS_LEFT ? i : R - 1 - i;               // пръчка i (0 = единиците) → колона отляво надясно
   // подсказки по стъпки (дава насока, не отговор) – текстовете се озвучават
   const NAME = { 1: "едно", 2: "две", 3: "три", 4: "четири", 5: "пет", 6: "шест", 7: "седем", 8: "осем", 9: "девет" };
   function hints(task) {
@@ -132,8 +136,8 @@ const ruleOf = (f) => f.transition ? "Преход" : f.friendBrother ? "При�
       ? [`Долу няма достатъчно топчета. Какво можем да направим?`, `Помогни си с брат: плюс ${NAME[n]} е плюс пет, минус ${NAME[5 - n]}.`, "Първо свали горното топче."]
       : [`Долу няма достатъчно топчета за махане. Какво можем да направим?`, `Помогни си с брат: минус ${NAME[n]} е плюс ${NAME[5 - n]}, минус пет.`, (5 - n === 1 ? "Първо вдигни едно долно топче." : `Първо вдигни ${NAME[5 - n]} долни топчета.`)];
     return plus
-      ? [`На тази пръчка не стига място. Погледни съседната пръчка вляво.`, `Помогни си с приятел: плюс ${NAME[n]} е плюс едно вляво и минус ${NAME[10 - n]} тук.`]
-      : [`Тук не стигат топчета. Погледни съседната пръчка вляво.`, `Помогни си с приятел: минус ${NAME[n]} е минус едно вляво и плюс ${NAME[10 - n]} тук.`];
+      ? [`На тази пръчка не стига място. Погледни съседната пръчка ${SIDE}.`, `Помогни си с приятел: плюс ${NAME[n]} е плюс едно ${SIDE} и минус ${NAME[10 - n]} тук.`]
+      : [`Тук не стигат топчета. Погледни съседната пръчка ${SIDE}.`, `Помогни си с приятел: минус ${NAME[n]} е минус едно ${SIDE} и плюс ${NAME[10 - n]} тук.`];
   }
   const FEEDBACK = {
     ok: "Браво! Точно така.",
@@ -141,8 +145,8 @@ const ruleOf = (f) => f.transition ? "Преход" : f.friendBrother ? "При�
     set_result: "Отговорът е верен, но не е сметнат с правилото. Нека опитаме заедно – стъпка по стъпка.",
     forgot_complement: "Добави пет, но не махна брата. Колко трябва да махнем?",
     used_number_not_brother: "Махни брата, а не числото. Кой е братът на това число?",
-    forgot_carry: "Не забравяй едното вляво – на пръчката на десетиците.",
-    forgot_borrow: "Не забравяй да махнеш едно вляво – от десетиците.",
+    forgot_carry: `Не забравяй едното ${SIDE} – на пръчката на десетиците.`,
+    forgot_borrow: `Не забравяй да махнеш едно ${SIDE} – от десетиците.`,
     wrong_value: "Почти! Нека опитаме пак – погледни какво число показваш сега.",
     impossible: "Това движение не става – погледни топчетата."
   };
@@ -242,5 +246,5 @@ const ruleOf = (f) => f.transition ? "Преход" : f.friendBrother ? "При�
     if (k < nums.length) out.push({ i: k, n: nums[k], from: start, to: target, code: "not_reached", rule: plan(start, nums[k] >= 0 ? "+" : "-", Math.abs(nums[k]), rods).rule });
     return { steps: out, final: value(st), ok: k >= nums.length && value(st) === nums.reduce((a, b) => a + b, 0) };
   }
-  root.ABACUS_ENGINE = { make, fromValue, value, rodVal, apply, tapMove, plan, judge, consistent, norm, hints, FEEDBACK, tasksFor, chain, TOPICS, simpleExample, simpleOperands, judgeChain };
+  root.ABACUS_ENGINE = { UNITS_LEFT, SIDE, col, make, fromValue, value, rodVal, apply, tapMove, plan, judge, consistent, norm, hints, FEEDBACK, tasksFor, chain, TOPICS, simpleExample, simpleOperands, judgeChain };
 })(typeof window !== "undefined" ? window : this);

@@ -16,7 +16,7 @@
     const bead = (x, y, c) => `<path d="M${x - 46} ${y} L${x - 23} ${y - 17} L${x + 23} ${y - 17} L${x + 46} ${y} L${x + 23} ${y + 17} L${x - 23} ${y + 17} Z" fill="${c}"/>`;
     let s = `<svg viewBox="0 0 ${w} ${H + (big ? 50 : 0)}" class="${big ? "ab-big" : "ab-small"}" role="img" aria-label="Абакус"><rect x="5" y="5" width="${w - 10}" height="${H - 10}" rx="16" fill="#FBF3E4" stroke="#C89B62" stroke-width="10"/><rect x="10" y="${B - 4}" width="${w - 20}" height="8" fill="#8A6234"/>`;
     for (let i = 0; i < R; i++) {
-      const x = X0 + (R - 1 - i) * W, [h, e] = st[i] || [0, 0];
+      const x = X0 + ABACUS_ENGINE.col(i, R) * W, [h, e] = st[i] || [0, 0];
       s += `<line x1="${x}" y1="12" x2="${x}" y2="${H - 12}" stroke="#7A5A35" stroke-width="5"/>`;
       s += bead(x, h ? B - 22 : 32, h ? "#2B5FA3" : "#7FA6D6");
       for (let k = 1; k <= 4; k++) s += bead(x, k <= e ? B + 22 + (k - 1) * 38 : H - 28 - (4 - k) * 38, k <= e ? "#D9531E" : "#EBA27E");
@@ -89,7 +89,7 @@
     const rb = $("#replay"); if (rb) rb.onclick = () => replay(focus);
   }
   const CODE = { ok: "✓", wrong_method: "верен отговор, друг път", set_result: "нагласи отговора без правилото", forgot_complement: "забрави брата", used_number_not_brother: "махна числото вместо брата",
-    forgot_carry: "забрави едното вляво", forgot_borrow: "забрави да махне едно вляво", wrong_value: "грешно", not_reached: "не стигна до", impossible: "невъзможно движение" };
+    forgot_carry: "забрави едното " + ABACUS_ENGINE.SIDE, forgot_borrow: "забрави да махне едно " + ABACUS_ENGINE.SIDE, wrong_value: "грешно", not_reached: "не стигна до", impossible: "невъзможно движение" };
   const fmtN = (nums) => nums.map((n, i) => i === 0 ? String(n) : (n > 0 ? "+" + n : "−" + -n)).join(" ");
   function resBadge(k) { const r = k.result; if (!r) return ""; if (r.pending) return '<div class="lv-res wait">смята…</div>';
     return `<div class="lv-res ${r.ok ? "ok" : "no"}">${r.ok ? "✓ " : "✗ "}${r.value} · ${r.sec.toFixed(1)} с</div>`; }

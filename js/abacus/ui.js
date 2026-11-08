@@ -50,16 +50,16 @@
   function draw() {
     const wTot = X0 * 2 + (RODS - 1) * W;
     let s = `<svg viewBox="0 0 ${wTot} ${H + 70}" role="img" aria-label="Соробан"><g id="ab-body"><rect x="8" y="8" width="${wTot - 16}" height="${H - 16}" rx="26" fill="#FBF3E4" stroke="var(--wood)" stroke-width="16"/>`;
-    for (let i = 0; i < RODS; i++) { const x = X0 + (RODS - 1 - i) * W; s += `<line x1="${x}" y1="20" x2="${x}" y2="${H - 20}" stroke="var(--rod)" stroke-width="8"/>`; }
+    for (let i = 0; i < RODS; i++) { const x = X0 + E.col(i, RODS) * W; s += `<line x1="${x}" y1="20" x2="${x}" y2="${H - 20}" stroke="var(--rod)" stroke-width="8"/>`; }
     s += `<rect x="16" y="${BEAM - 6}" width="${wTot - 32}" height="14" fill="var(--wood-d)"/>`;
-    for (let i = 0; i < RODS; i++) { const x = X0 + (RODS - 1 - i) * W; s += `<circle cx="${x}" cy="${BEAM + 1}" r="5" fill="#FBF3E4"/>`; }
+    for (let i = 0; i < RODS; i++) { const x = X0 + E.col(i, RODS) * W; s += `<circle cx="${x}" cy="${BEAM + 1}" r="5" fill="#FBF3E4"/>`; }
     for (let i = 0; i < RODS; i++) {
-      const x = X0 + (RODS - 1 - i) * W;
+      const x = X0 + E.col(i, RODS) * W;
       s += `<g class="ab-bead" data-rod="${i}" data-bead="h"><path class="b" d="${beadPath(0, 0, 130, 56)}"/></g>`;
       for (let k = 1; k <= 4; k++) s += `<g class="ab-bead" data-rod="${i}" data-bead="e" data-k="${k}"><path class="b" d="${beadPath(0, 0, 130, 56)}"/></g>`;
     }
     s += `</g><text id="ab-hidden" x="${wTot / 2}" y="${H / 2 + 30}" text-anchor="middle" style="font:900 120px Nunito,sans-serif;fill:#D9C6A3;display:none">?</text>`;
-    s += `<g id="ab-nums">${Array.from({ length: RODS }, (_, i) => `<text class="ab-num" x="${X0 + (RODS - 1 - i) * W}" y="${H + 50}" text-anchor="middle">0</text>`).join("")}</g></svg>`;
+    s += `<g id="ab-nums">${Array.from({ length: RODS }, (_, i) => `<text class="ab-num" x="${X0 + E.col(i, RODS) * W}" y="${H + 50}" text-anchor="middle">0</text>`).join("")}</g></svg>`;
     $("#ab-board").innerHTML = s;
     $("#ab-board").querySelectorAll(".ab-bead").forEach(g => g.addEventListener("pointerdown", ev => { ev.preventDefault(); tap(g); }));
     update(); applyView();
@@ -68,11 +68,11 @@
   function update() {
     try { if (window.ABACUS_HOOK) setTimeout(((m) => () => window.ABACUS_HOOK(m))(pendingMove), 0); } catch (e) {} pendingMove = null;
     $("#ab-board").querySelectorAll(".ab-bead").forEach(g => {
-      const i = +g.dataset.rod, r = st[i], x = X0 + (RODS - 1 - i) * W, p = g.querySelector(".b");
+      const i = +g.dataset.rod, r = st[i], x = X0 + E.col(i, RODS) * W, p = g.querySelector(".b");
       if (g.dataset.bead === "h") { g.style.transform = `translate(${x}px,${hY(r.h)}px)`; p.setAttribute("fill", r.h ? "var(--heaven-on)" : "var(--heaven)"); }
       else { const k = +g.dataset.k; g.style.transform = `translate(${x}px,${eY(k, r.e)}px)`; p.setAttribute("fill", k <= r.e ? "var(--bead-on)" : "var(--bead)"); }
     });
-    $("#ab-nums").querySelectorAll("text").forEach((t, j) => { t.textContent = E.rodVal(st[j]); });   // надпис j стои под пръчка j (единиците – вдясно)
+    $("#ab-nums").querySelectorAll("text").forEach((t, j) => { t.textContent = E.rodVal(st[j]); });   // надпис j стои под пръчка j
   }
   let hidden = false;
   function applyView() {   // видимост: избраната опора + скриване в режимите за памет/наум
