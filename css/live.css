@@ -13,7 +13,7 @@ html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--in
 @media (max-width: 820px) { .lv-main { grid-template-columns: 1fr; } }
 .lv-focus { background: var(--card); border: 3px solid var(--line); border-radius: 22px; padding: 16px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .lv-fname { font: 900 28px "Nunito", sans-serif; } .lv-off { color: #B9AE9C; font-size: 18px; }
-.ab-big { width: auto; height: min(58vh, 520px); max-width: 100%; }
+.ab-big { width: auto; height: min(40vh, 400px); max-width: 100%; }
 .lv-moves { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; font: 700 15px "Nunito", sans-serif; color: var(--muted); max-width: 600px; }
 .lv-moves span { background: #fff; border: 1px solid var(--line); border-radius: 99px; padding: 2px 10px; }
 .lv-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; align-content: start; }
@@ -24,3 +24,14 @@ html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--in
 .ab-small { width: auto; height: 130px; max-width: 100%; }
 .lv-tinfo { font: 700 13px "Nunito", sans-serif; color: var(--muted); } .lv-tinfo b { color: var(--ink); font-size: 16px; }
 .lv-empty { color: var(--muted); font: 700 16px "Nunito", sans-serif; padding: 20px; text-align: center; }
+.lv-ctrl { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; background: var(--card); border: 2px solid var(--line); border-radius: 16px; padding: 8px 12px; }
+.lv-ctrl label { font: 800 14px "Nunito", sans-serif; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.lv-ctrl select { font: 800 15px "Nunito", sans-serif; border-radius: 10px; border: 2px solid var(--line); padding: 4px 6px; background: #fff; }
+.lv-send { font: 900 16px "Nunito", sans-serif; border: 0; border-radius: 12px; background: var(--ok); color: #fff; padding: 8px 14px; cursor: pointer; }
+.lv-send.alt { background: var(--acc); }
+.lv-res { font: 800 13px "Nunito", sans-serif; border-radius: 99px; padding: 2px 10px; }
+.lv-res.ok { background: #E2F4E8; color: #1F6F3F; } .lv-res.no { background: #FBE3DA; color: #A23B1B; } .lv-res.wait { background: #FFF3D6; color: #8A5A00; }
+.lv-rp { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.lv-rq { font: 900 26px "Nunito", sans-serif; } .lv-ra { font: 800 18px "Nunito", sans-serif; } .lv-ra.ok { color: var(--ok); } .lv-ra.no { color: #C2410C; }
+.lv-steps { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; } .lv-steps span { font: 700 14px "Nunito", sans-serif; border-radius: 99px; padding: 2px 10px; background: #E2F4E8; }
+.lv-steps span.no { background: #FBE3DA; }

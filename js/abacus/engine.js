@@ -143,7 +143,7 @@ const ruleOf = (f) => f.transition ? "Преход" : f.friendBrother ? "При�
     used_number_not_brother: "Махни брата, а не числото. Кой е братът на това число?",
     forgot_carry: "Не забравяй едното вляво – на пръчката на десетиците.",
     forgot_borrow: "Не забравяй да махнеш едно вляво – от десетиците.",
-    wrong_value: "Почти! Нека опитаме пак – погледни колко е на абакуса сега.",
+    wrong_value: "Почти! Нека опитаме пак – погледни какво число показваш сега.",
     impossible: "Това движение не става – погледни топчетата."
   };
 
@@ -226,5 +226,21 @@ const ruleOf = (f) => f.transition ? "Преход" : f.friendBrother ? "При�
     }
     return null;
   }
-  root.ABACUS_ENGINE = { make, fromValue, value, rodVal, apply, tapMove, plan, judge, consistent, norm, hints, FEEDBACK, tasksFor, chain, TOPICS, simpleExample, simpleOperands };
+  // оценка на верига (пример от тренажора): движенията на детето се разделят по стъпки – стъпка свършва, щом абакусът покаже междинния резултат
+  // → [{ i, n, from, to, code, rule }] ; code: ok | wrong_method | set_result | ... | not_reached (не стигна до междинния резултат)
+  function judgeChain(nums, childMoves, rods) {
+    rods = rods || 3; const out = []; let v = 0, st = make(rods), k = 0, seg = [], start = 0;
+    let target = nums[0];
+    for (const m of childMoves) {
+      const ns = apply(st, m); if (!ns) continue; st = ns; seg.push(m);
+      if (value(st) === target) {
+        const n = nums[k], task = { start, op: n >= 0 ? "+" : "-", n: Math.abs(n), rods }, j = judge(task, seg);
+        out.push({ i: k, n, from: start, to: target, code: j.code, rule: j.rule });
+        k++; seg = []; start = target; if (k >= nums.length) break; target = start + nums[k];
+      }
+    }
+    if (k < nums.length) out.push({ i: k, n: nums[k], from: start, to: target, code: "not_reached", rule: plan(start, nums[k] >= 0 ? "+" : "-", Math.abs(nums[k]), rods).rule });
+    return { steps: out, final: value(st), ok: k >= nums.length && value(st) === nums.reduce((a, b) => a + b, 0) };
+  }
+  root.ABACUS_ENGINE = { make, fromValue, value, rodVal, apply, tapMove, plan, judge, consistent, norm, hints, FEEDBACK, tasksFor, chain, TOPICS, simpleExample, simpleOperands, judgeChain };
 })(typeof window !== "undefined" ? window : this);
