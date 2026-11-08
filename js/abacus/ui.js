@@ -72,7 +72,7 @@
       if (g.dataset.bead === "h") { g.style.transform = `translate(${x}px,${hY(r.h)}px)`; p.setAttribute("fill", r.h ? "var(--heaven-on)" : "var(--heaven)"); }
       else { const k = +g.dataset.k; g.style.transform = `translate(${x}px,${eY(k, r.e)}px)`; p.setAttribute("fill", k <= r.e ? "var(--bead-on)" : "var(--bead)"); }
     });
-    $("#ab-nums").querySelectorAll("text").forEach((t, j) => { t.textContent = E.rodVal(st[RODS - 1 - j]); });
+    $("#ab-nums").querySelectorAll("text").forEach((t, j) => { t.textContent = E.rodVal(st[j]); });   // надпис j стои под пръчка j (единиците – вдясно)
   }
   let hidden = false;
   function applyView() {   // видимост: избраната опора + скриване в режимите за памет/наум
