@@ -1,0 +1,37 @@
+/* Тренажор „Просто“ (trainer.html) */
+:root { --bg: #F6EFE2; --ink: #2B2620; --card: #FFF8EC; --line: #D9C6A3; --acc: #2B5FA3; --plus: #2B5FA3; --minus: #C2410C; --ok: #2E9E5B; --muted: #6E6458; }
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink); font-family: "Nunito", system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+.tr-app { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; padding: max(14px, env(safe-area-inset-top)) 16px 20px; gap: 14px; }
+.tr-head { width: 100%; max-width: 980px; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.tr-title { font: 900 30px/1 "Nunito", sans-serif; }
+.tr-seg { display: flex; background: var(--card); border: 3px solid var(--line); border-radius: 18px; padding: 4px; }
+.tr-seg button { font: 800 18px "Nunito", sans-serif; border: 0; background: none; padding: 8px 16px; border-radius: 13px; color: var(--muted); cursor: pointer; }
+.tr-seg button.on { background: var(--acc); color: #fff; }
+.tr-set { width: 100%; max-width: 980px; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.tr-card { background: var(--card); border: 3px solid var(--line); border-radius: 20px; padding: 14px 16px; }
+.tr-card h3 { margin: 0 0 8px; font: 800 15px "Nunito", sans-serif; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.tr-card select { width: 100%; font: 800 18px "Nunito", sans-serif; padding: 8px; border-radius: 12px; border: 2px solid var(--line); background: #fff; color: var(--ink); }
+.tr-step { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.tr-step b { font: 900 34px "Nunito", sans-serif; min-width: 80px; text-align: center; }
+.tr-step button { width: 52px; height: 52px; border-radius: 50%; border: 0; background: var(--acc); color: #fff; font: 900 26px "Nunito", sans-serif; cursor: pointer; }
+.tr-tog { display: flex; align-items: center; gap: 8px; font: 700 16px "Nunito", sans-serif; margin: 6px 0; }
+.tr-tog input { width: 20px; height: 20px; }
+.tr-start { font: 900 30px "Nunito", sans-serif; border: 0; border-radius: 22px; background: var(--ok); color: #fff; padding: 16px 60px; box-shadow: 0 6px 0 #1F7A44; cursor: pointer; }
+.tr-stage { width: 100%; max-width: 1100px; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; }
+.tr-num { font: 900 min(42vh, 30vw)/1 "Nunito", sans-serif; letter-spacing: -.02em; min-height: 1em; text-align: center; font-variant-numeric: tabular-nums; }
+.tr-num.plus { color: var(--plus); } .tr-num.minus { color: var(--minus); } .tr-num.ask { color: var(--ink); font-size: min(30vh, 22vw); }
+.tr-info { font: 800 20px "Nunito", sans-serif; color: var(--muted); text-align: center; }
+.tr-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.tr-btn { font: 800 22px "Nunito", sans-serif; border-radius: 18px; border: 3px solid var(--line); background: var(--card); color: var(--ink); padding: 12px 22px; cursor: pointer; }
+.tr-btn.primary { background: var(--ok); color: #fff; border-color: #1F7A44; }
+.tr-pad { display: grid; grid-template-columns: repeat(5, 70px); gap: 10px; justify-content: center; }
+.tr-pad button { height: 70px; border-radius: 16px; border: 3px solid var(--line); background: var(--card); font: 900 30px "Nunito", sans-serif; color: var(--ink); cursor: pointer; }
+.tr-pad button.ok { background: var(--ok); color: #fff; border-color: #1F7A44; }
+.tr-typed { font: 900 64px "Nunito", sans-serif; min-height: 70px; text-align: center; }
+.tr-res { font: 900 34px "Nunito", sans-serif; text-align: center; }
+.tr-res.ok { color: var(--ok); } .tr-res.no { color: var(--minus); }
+.tr-sum { background: var(--card); border: 3px solid var(--line); border-radius: 20px; padding: 18px 26px; font: 800 20px "Nunito", sans-serif; text-align: center; }
+.tr-ex { font: 700 16px ui-monospace, Menlo, monospace; color: var(--muted); }
+[hidden] { display: none !important; }
+@media (max-width: 520px) { .tr-set .tr-card { grid-column: auto !important; } }
