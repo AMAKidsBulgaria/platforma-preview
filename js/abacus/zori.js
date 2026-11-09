@@ -18,7 +18,7 @@
     <header class="zd-top"><div class="zd-title">Зори показва</div>
       <nav class="zd-lessons">${["1 · Палецът вдига", "2 · Показалецът сваля", "3 · Двете ръце", "4 · Брат и поправка"].map((t, i) => `<button data-l="${i + 1}">${t}</button>`).join("")}</nav></header>
     <main class="zd-stage">
-      <div class="zd-zori"><img id="zd-pose" src="assets/img/zori/z_explain.png" alt="Зори"><div class="zd-bubble" id="zd-say">Избери урок.</div></div>
+      <div class="zd-zori"><img id="zd-pose" src="assets/img/zori/z_explain.png" alt="Зори"><div class="zd-bubble" id="zd-say">Здравей! Аз съм Зори. Избери урок.</div></div>
       <div class="zd-board" id="zd-board"></div>
     </main>
     <div class="zd-row"><div class="zd-task" id="zd-task"></div><button id="zd-demo">▶ Покажи ми</button><button id="zd-again">↺ Отначало</button></div>
@@ -56,14 +56,16 @@
   }
 
   // ---- глас и поза ----
-  let AUD = {}; fetch("config/abacus-audio.json?v=2").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
+  let AUD = {}, AUDZ = {};   // AUDZ – гласът на Зори (Борислав, по-висок тон); AUD – разказвачът (Калина), ако репликата я няма при Зори
+  fetch("config/abacus-audio-zori.json?v=1").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
+  fetch("config/abacus-audio.json?v=2").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
   let bgVoice = null; try { const pick = () => { bgVoice = (speechSynthesis.getVoices() || []).find(v => /^bg/i.test(v.lang)) || null; }; pick(); speechSynthesis.onvoiceschanged = pick; } catch (e) {}
   let cur = null;
   function say(text, pose) {
     $("#zd-say").textContent = text; if (pose) $("#zd-pose").src = `assets/img/zori/${POSE[pose]}.png`;
     if (Q.get("voice") === "0") return;
     try { if (cur) cur.pause(); speechSynthesis && speechSynthesis.cancel(); } catch (e) {}
-    if (AUD[text]) { cur = new Audio("assets/audio/abacus/" + AUD[text]); cur.play().catch(() => {}); return; }
+    const f = AUDZ[text] || AUD[text]; if (f) { cur = new Audio("assets/audio/abacus/" + f); cur.play().catch(() => {}); return; }
     try { if (bgVoice) { const u = new SpeechSynthesisUtterance(text); u.voice = bgVoice; u.lang = bgVoice.lang; u.rate = .95; speechSynthesis.speak(u); } } catch (e) {}
   }
   let gen = 0;
