@@ -1,5 +1,5 @@
 /* Виртуален соробан – прототип за теста (abacus.html) */
-:root { --wood: #C89B62; --wood-d: #8A6234; --rod: #7A5A35; --bead: #E2743A; --bead-on: #D9531E; --heaven: #3E7BC4; --heaven-on: #2B5FA3; --bg: #F6EFE2; --ink: #2B2620; --ok: #2E9E5B; --warn: #E0A82E; }
+:root { --wood: #C89B62; --wood-d: #8A6234; --rod: #7A5A35; --bead: #E2743A; --bead-on: #D9531E; --heaven: #3E7BC4; --heaven-on: #2B5FA3; --bead-off: #C9C1B5; --heaven-off: #B9C0C9; --bg: #F6EFE2; --ink: #2B2620; --ok: #2E9E5B; --warn: #E0A82E; }
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font-family: "Nunito", system-ui, sans-serif; -webkit-tap-highlight-color: transparent; user-select: none; }
 .ab-app { min-height: 100%; display: flex; flex-direction: column; align-items: center; padding: max(12px, env(safe-area-inset-top)) 16px 16px; gap: 10px; }

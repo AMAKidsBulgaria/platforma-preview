@@ -18,8 +18,8 @@
     for (let i = 0; i < R; i++) {
       const x = X0 + ABACUS_ENGINE.col(i, R) * W, [h, e] = st[i] || [0, 0];
       s += `<line x1="${x}" y1="12" x2="${x}" y2="${H - 12}" stroke="#7A5A35" stroke-width="5"/>`;
-      s += bead(x, h ? B - 22 : 32, h ? "#2B5FA3" : "#7FA6D6");
-      for (let k = 1; k <= 4; k++) s += bead(x, k <= e ? B + 22 + (k - 1) * 38 : H - 28 - (4 - k) * 38, k <= e ? "#D9531E" : "#EBA27E");
+      s += bead(x, h ? B - 22 : 32, h ? "#2B5FA3" : "#B9C0C9");
+      for (let k = 1; k <= 4; k++) s += bead(x, k <= e ? B + 22 + (k - 1) * 38 : H - 28 - (4 - k) * 38, k <= e ? "#D9531E" : "#C9C1B5");
       if (big) s += `<text x="${x}" y="${H + 38}" text-anchor="middle" font-family="Nunito" font-weight="900" font-size="34" fill="#2B2620">${5 * h + e}</text>`;
     }
     return s + "</svg>";

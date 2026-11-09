@@ -65,13 +65,25 @@
     update(); applyView();
   }
   let pendingMove = null;   // онлайн занятие: всяка промяна на абакуса (с движението, ако е от детето) отива при учителя – js/live/child.js
+  // два вида дигитално сметало (9.11.2026): „плъзгане“ – като истинско: топчето се мести и свети, докато е до гредата (иначе сиво);
+  // „докосване“ – опора за въображаемото: топчетата стоят на място и са сиви, при докосване светват за миг; стойността се пази (учителят я вижда)
+  let touch = Q.get("touch") === "1", prevSt = null;
   function update() {
     try { if (window.ABACUS_HOOK) setTimeout(((m) => () => window.ABACUS_HOOK(m))(pendingMove), 0); } catch (e) {} pendingMove = null;
+    const flash = [];
     $("#ab-board").querySelectorAll(".ab-bead").forEach(g => {
-      const i = +g.dataset.rod, r = st[i], x = X0 + E.col(i, RODS) * W, p = g.querySelector(".b");
-      if (g.dataset.bead === "h") { g.style.transform = `translate(${x}px,${hY(r.h)}px)`; p.setAttribute("fill", r.h ? "var(--heaven-on)" : "var(--heaven)"); }
-      else { const k = +g.dataset.k; g.style.transform = `translate(${x}px,${eY(k, r.e)}px)`; p.setAttribute("fill", k <= r.e ? "var(--bead-on)" : "var(--bead)"); }
+      const i = +g.dataset.rod, r = st[i], o = prevSt && prevSt[i], x = X0 + E.col(i, RODS) * W, p = g.querySelector(".b");
+      if (g.dataset.bead === "h") {
+        const on = !!r.h; g.style.transform = `translate(${x}px,${hY(touch ? 0 : r.h)}px)`;
+        p.setAttribute("fill", on && !touch ? "var(--heaven-on)" : "var(--heaven-off)"); if (touch && o && o.h !== r.h) flash.push([p, "var(--heaven-on)"]);
+      } else {
+        const k = +g.dataset.k, on = k <= r.e; g.style.transform = `translate(${x}px,${eY(k, touch ? 0 : r.e)}px)`;
+        p.setAttribute("fill", on && !touch ? "var(--bead-on)" : "var(--bead-off)");
+        if (touch && o && (k <= r.e) !== (k <= o.e)) flash.push([p, "var(--bead-on)"]);
+      }
     });
+    prevSt = st.map(r => ({ h: r.h, e: r.e }));
+    if (flash.length) { flash.forEach(([p, c]) => p.setAttribute("fill", c)); setTimeout(() => flash.forEach(([p, c]) => { if (touch) p.setAttribute("fill", c.includes("heaven") ? "var(--heaven-off)" : "var(--bead-off)"); }), 350); }
     $("#ab-nums").querySelectorAll("text").forEach((t, j) => { t.textContent = E.rodVal(st[j]); });   // надпис j стои под пръчка j
   }
   let hidden = false;
@@ -219,6 +231,7 @@
   document.body.innerHTML = `<div class="ab-app">
     <div class="ab-top"><select id="ab-mode" aria-label="Режим">${MODES.map(m => `<option value="${m[0]}">${m[1]}</option>`).join("")}</select>
       <label class="ab-fade">Абакус <select id="ab-fade" aria-label="Видимост"><option value="1">видим</option><option value=".45">полупрозрачен</option><option value=".12">едва видим</option></select></label>
+      <label class="ab-fade">Топчета <select id="ab-touch" aria-label="Вид сметало"><option value="0">плъзгане</option><option value="1">докосване</option></select></label>
       <label class="ab-fade"><input type="checkbox" id="ab-shownum" checked> числата</label>
       <button class="ab-human" id="ab-human" title="За наблюдаващия учител">👩‍🏫 Помогнах</button></div>
     <div class="ab-task" id="ab-task"></div>
@@ -231,6 +244,7 @@
   $("#ab-mode").addEventListener("change", e => setMode(e.target.value));
   $("#ab-fade").addEventListener("change", e => { applyView(); log("fade", { v: e.target.value }); });
   $("#ab-shownum").addEventListener("change", applyView);
+  $("#ab-touch").value = touch ? "1" : "0"; $("#ab-touch").addEventListener("change", e => { touch = e.target.value === "1"; prevSt = null; update(); log("touch", { v: touch }); });
   $("#ab-reset").addEventListener("click", reset); $("#ab-hint").addEventListener("click", hint); $("#ab-demo").addEventListener("click", demo);
   $("#ab-next").addEventListener("click", () => { if (busy) return; log("skip"); next(); });
   $("#ab-done").addEventListener("click", done); $("#ab-human").addEventListener("click", humanHelp);
