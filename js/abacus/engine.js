@@ -123,8 +123,8 @@ const ruleOf = (f) => f.transition ? "Преход" : f.friendBrother ? "При�
     return { correct: false, code: "wrong_value", rule: p.rule, got, target };
   }
 
-  // подредба на пръчките: единиците са НАЙ-ВЛЯВО, вдясно от тях – десетиците, стотиците (решение 9.11.2026; ?units=right връща стандартния соробан)
-  const UNITS_LEFT = !(typeof location !== "undefined" && /[?&]units=right\b/.test(location.search));
+  // подредба на пръчките: единиците са НАЙ-ВДЯСНО, вляво от тях – десетиците, стотиците (стандартният соробан; така е и в дигиталния абакус в центровете – решение 9.11.2026). ?units=left обръща реда
+  const UNITS_LEFT = typeof location !== "undefined" && /[?&]units=left\b/.test(location.search);
   const SIDE = UNITS_LEFT ? "вдясно" : "вляво";                    // къде е по-старшата пръчка – за подсказките
   const col = (i, R) => UNITS_LEFT ? i : R - 1 - i;               // пръчка i (0 = единиците) → колона отляво надясно
   // подсказки по стъпки (дава насока, не отговор) – текстовете се озвучават
