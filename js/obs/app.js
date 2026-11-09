@@ -28,11 +28,11 @@
   // ---- профили (демо) ----
   const AV = ["a1", "a4", "n1", "a2", "n3", "a6"];
   const DEMO = [
-    { id: "maria", name: "Мария", av: "a1", age: 5, cur: 7, b: { 1: 3, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1 }, halo: { 1: 1, 2: 1, 3: 1 } },
+    { id: "lora", name: "Лора", av: "a1", age: 5, cur: 7, b: { 1: 3, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1 }, halo: { 1: 1, 2: 1, 3: 1 } },
     { id: "ivo", name: "Иво", av: "a4", age: 6, cur: 2, b: { 1: 2 }, halo: {} },
     { id: "nia", name: "Ния", av: "n1", age: 5, cur: 1, b: {}, halo: {} }
   ];
-  const KEY = "obs.proto.v1";
+  const KEY = "obs.proto.v2";
   let DB = (() => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } })();
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(DB)); } catch (e) {} };
   const prof = (id) => { if (!DB[id]) { const d = DEMO.find(x => x.id === id); DB[id] = JSON.parse(JSON.stringify(d)); save(); } return DB[id]; };
@@ -187,7 +187,7 @@
     return new Promise(res => row.querySelectorAll("button").forEach(b => b.onclick = () => { row.querySelectorAll("button").forEach(x => { x.disabled = true; if (+x.dataset.v === right) x.classList.add("ok"); }); if (+b.dataset.v !== right) b.classList.add("no"); setTimeout(() => res(+b.dataset.v === right), 700 * FAST); }));
   }
   async function stageFlash(i, count, sec) {
-    shell(i, STAR[M.n].title); say(i === 0 ? "Първо – флашкарти. Снимай числото с очите!" : "Още флашкарти – малко по-бързо.", "point"); await wait(2600);
+    shell(i, STAR[M.n].title); say(i === 0 ? "Първо – флашкарти. Гледай внимателно и запомни числото!" : "Още флашкарти – малко по-бързо.", "point"); await wait(2600);
     for (let k = 0; k < count; k++) {
       const v = Math.floor(Math.random() * (M.max + 1)), w = $("#o-work");
       w.innerHTML = `<div class="o-flash">${abImg(v, 1)}</div>`; await wait(sec * 1000);
