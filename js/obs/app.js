@@ -108,10 +108,10 @@
       <div class="o-top"><button class="o-me" id="o-me"><img src="assets/img/world/avatars/${P.av}.webp" alt=""><b>${P.name}</b></button><div class="o-area">Аврора</div></div>
       <div class="o-stage">${zori("explain")}<img class="o-kid" src="assets/img/world/avatars/${P.av}.webp" alt=""></div>
       <div class="o-say">Здравей! Да започваме ли наблюдението?</div>
-      <div class="o-cta"><button class="o-go" id="o-go">▶ Продължи мисията<small>Звезда: ${st.title} · ${"★".repeat(lv)}${"☆".repeat(3 - lv)}</small></button><button class="o-sec" id="o-map">Небето ☾</button></div>`;
+      <div class="o-cta"><button class="o-go" id="o-go">▶ Продължи мисията<small>Звезда: ${st.title} · ${"★".repeat(lv)}${"☆".repeat(3 - lv)}</small></button><button class="o-sec" id="o-map">Небето ☾</button><button class="o-sec" id="o-games">Игри ✦</button></div>`;
     voice("Здравей! Да започваме ли наблюдението?");
     $("#o-go").onclick = () => startMission(P.cur);
-    $("#o-map").onclick = screenMap; $("#o-win").onclick = screenMap; $("#o-me").onclick = screenProfiles;
+    $("#o-map").onclick = screenMap; $("#o-games").onclick = screenGames; $("#o-win").onclick = screenMap; $("#o-me").onclick = screenProfiles;
   }
 
   // ---- екран 3: звездната карта ----
@@ -171,7 +171,7 @@
 
   // ---- мисията ----
   const shuffle = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
-  const STAGES = ["Флашкарти", "Абакус", "Флашкарти", "Без телескоп", "Звездно броене"];
+  const STAGES = ["Флашкарти", "Абакус", "Флашкарти", "Без телескоп", "Игра"];
   let M = null;
   function shell(i, title) {
     app.className = "o-scr o-mis";
@@ -185,7 +185,7 @@
     M = { n, ex, par, max, flash: [0, 0], ab: [0, 0], meth: [0, 0], im: [0, 0], help: 0 };
     try {
       shell(0, STAR[n].title); await talk("Тази вечер звездата ни още е бледа. Ще я направим ли по-ярка?", "explain");
-      await stageFlash(0, 6, par[1]); await stageAbacus(); await stageFlash(2, 4, Math.max(.8, par[1] - .3)); await stageMental(); await stageCount(); await finish();
+      await stageFlash(0, 6, par[1]); await stageAbacus(); await stageFlash(2, 4, Math.max(.8, par[1] - .3)); await stageMental(); await [stageCount, gameFix, gameMemory][Math.floor(Math.random() * 3)](); await finish();
     } catch (e) { if (e !== "stale") throw e; }
   }
   function choices(right, max) { const s = new Set([right]); while (s.size < Math.min(3, max + 1)) s.add(Math.floor(Math.random() * (max + 1))); return shuffle([...s]); }
@@ -240,6 +240,61 @@
       w.innerHTML = `<svg viewBox="0 0 420 300" class="o-cnt">${pts.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="14" fill="#F5C04A"/>`).join("")}</svg>`; await wait(1300);
       w.innerHTML = `<div class="o-flash o-q">?</div>`; await ask(choices(v, 9), v);
     }
+  }
+  // ---- игри (наши): всяка тренира умение от МА; в мисията са последният етап (~2 мин), от обсерваторията – свободно, с ясен край ----
+  const inMission = () => !!M && !M.free;
+  function gameShell(title) { if (inMission()) shell(4, STAR[M.n].title); else { shell(-1, title); $(".o-pips").innerHTML = ""; } }
+  // „Поправи телескопа“: абакусът показва почти вярно число – детето го поправя с ЕДНО движение (четене на числото + правилното движение)
+  async function gameFix(rounds) {
+    gameShell("Поправи телескопа"); await talk("Поправи телескопа! Направи числото с едно движение.", "point");
+    const max = M.max; let score = 0;
+    for (let k = 0; k < (rounds || 5); k++) {
+      let t, wrong, m;
+      for (let g = 0; g < 50; g++) { t = Math.floor(Math.random() * (max + 1)); const st0 = E.fromValue(t, 1), opts = [];
+        for (let d = 1; d <= 4; d++) { opts.push({ rod: 0, bead: "e", d }, { rod: 0, bead: "e", d: -d }); } opts.push({ rod: 0, bead: "h", d: 5 }, { rod: 0, bead: "h", d: -5 });
+        const ok = opts.filter(o => { const ns = E.apply(st0, o); return ns && E.value(ns) <= Math.max(max, 4); }); if (ok.length) { m = ok[Math.floor(Math.random() * ok.length)]; wrong = E.value(E.apply(st0, m)); break; } }
+      const w = $("#o-work"); w.innerHTML = `<div class="o-num">${t}</div><div class="o-abhost" id="o-abh"></div><div class="o-row"><button class="o-done" id="o-done">✓ Готово</button></div>`;
+      const ab = abacus($("#o-abh"), 1); ab.set(wrong); ab.reset0 = true;
+      await new Promise(res => { $("#o-done").onclick = res; });
+      ab.enable(false); const right = ab.value() === t, one = ab.moves().length === 1;
+      if (right && one) { score++; say("Браво! Точно така.", "joy"); } else if (right) say("Вярно! А можеш ли с едно движение?", "explain"); else { say("Почти! Виж как е правилно.", "wait"); ab.set(t); }
+      await wait(right ? 1300 : 2400);
+    }
+    return score;
+  }
+  // „Нощна памет“: 2–3 абакуса проблясват един след друг – детето избира числата в същия ред (зрителна памет – основа за смятането наум)
+  async function gameMemory(rounds) {
+    gameShell("Нощна памет"); await talk("Нощна памет: запомни звездите по ред.", "explain");
+    const max = M.max; let score = 0;
+    for (let k = 0; k < (rounds || 4); k++) {
+      const len = k < 2 ? 2 : 3, seq = []; while (seq.length < len) { const v = Math.floor(Math.random() * (max + 1)); if (seq[seq.length - 1] !== v) seq.push(v); }
+      const w = $("#o-work");
+      for (const v of seq) { w.innerHTML = `<div class="o-flash">${abImg(v, 1)}</div>`; await wait(1400); w.innerHTML = `<div class="o-flash"></div>`; await wait(350); }
+      say("Кои числа видя? Подреди ги по ред.", "point");
+      const opts = shuffle([...new Set([...seq, ...shuffle(Array.from({ length: max + 1 }, (_, i) => i)).slice(0, 3)])]).slice(0, Math.max(4, len + 2));
+      seq.forEach(v => { if (!opts.includes(v)) opts[Math.floor(Math.random() * opts.length)] = v; });
+      w.innerHTML = `<div class="o-seq">${seq.map(() => '<b>?</b>').join("")}</div><div class="o-ch">${[...new Set(opts)].map(v => `<button data-v="${v}">${v}</button>`).join("")}</div>`;
+      const got = await new Promise(res => { const pick = []; w.querySelectorAll(".o-ch button").forEach(b => b.onclick = () => { pick.push(+b.dataset.v); const slots = w.querySelectorAll(".o-seq b"); slots[pick.length - 1].textContent = b.dataset.v; if (pick.length === seq.length) { w.querySelectorAll(".o-ch button").forEach(x => x.disabled = true); setTimeout(() => res(pick), 400 * FAST); } }); });
+      const ok = got.every((v, i) => v === seq[i]);
+      w.querySelectorAll(".o-seq b").forEach((b, i) => { b.className = got[i] === seq[i] ? "ok" : "no"; b.textContent = seq[i]; });
+      if (ok) score++; say(ok ? "Браво! Точно така." : "Почти! Виж как е правилно.", ok ? "joy" : "wait"); await wait(ok ? 1300 : 2200);
+    }
+    return score;
+  }
+  // свободни игри от обсерваторията
+  function screenGames() {
+    gen++; const n = Math.min(P.cur, 9);
+    app.className = "o-scr o-map";
+    app.innerHTML = `<div class="o-maptop"><button class="o-back" id="o-back">← Обсерватория</button><div><div class="o-mt">Игри</div><div class="o-ms">по едно кратко наблюдение – после обратно в обсерваторията</div></div></div>
+      <div class="o-glist">${[["fix", "Поправи телескопа", "с едно движение"], ["mem", "Нощна памет", "запомни по ред"], ["cnt", "Звездно броене", "колко светнаха?"]].map(g => `<button class="o-gcard" data-g="${g[0]}"><b>${g[1]}</b><span>${g[2]}</span></button>`).join("")}</div>`;
+    $("#o-back").onclick = screenHome;
+    app.querySelectorAll(".o-gcard").forEach(b => b.onclick = async () => {
+      gen++; M = { n, ex: EX[n] || EX[1], par: PAR[n] || PAR[1], max: MAXN[n] || 9, free: true, flash: [0, 0], ab: [0, 0], meth: [0, 0], im: [0, 0] };
+      try { const g = b.dataset.g; if (g === "fix") await gameFix(5); else if (g === "mem") await gameMemory(4); else await stageCount();
+        const w = $("#o-work"); say("Край на играта. Звездите ще ни чакат утре!", "joy");
+        w.innerHTML = `<button class="o-go" id="o-gh">Към обсерваторията</button>`; $("#o-gh").onclick = screenHome; }
+      catch (e) { if (e !== "stale") throw e; }
+    });
   }
   async function finish() {
     const r = (a) => a[1] ? a[0] / a[1] : 0, n = M.n;

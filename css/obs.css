@@ -99,3 +99,12 @@ button { font-family: inherit; cursor: pointer; }
   .o-mbody { flex-direction: column; } .o-mz { width: auto; flex-direction: row; } .o-mz .o-zori { height: 90px; }
   .o-ch button { width: 74px; height: 74px; font-size: 36px; }
 }
+
+/* игри */
+.o-glist { flex: 1; display: flex; gap: 18px; align-items: center; justify-content: center; flex-wrap: wrap; }
+.o-gcard { width: min(30vw, 240px); min-height: 160px; border-radius: 26px; border: 3px solid #F5C04A66; background: #ffffff10; color: var(--ink); display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 16px; }
+.o-gcard b { font: 900 24px "Nunito"; color: var(--gold); } .o-gcard span { font-weight: 700; color: var(--muted); }
+.o-seq { display: flex; gap: 12px; } .o-seq b { width: 80px; height: 80px; border-radius: 20px; border: 3px dashed #ffffff40; display: grid; place-items: center; font: 900 40px "Nunito"; }
+.o-seq b.ok { border: 3px solid #2E9E5B; background: #2E9E5B55; } .o-seq b.no { border: 3px solid #B04A3A; background: #B04A3A55; }
+.o-flash:empty { border: 0; }
+@media (max-width: 760px) { .o-gcard { width: 80vw; min-height: 100px; } }
