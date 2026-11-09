@@ -1,7 +1,7 @@
 /* Зори показва движенията върху ТОЧЕН соробан (zori-demo.html).
    Математиката и последователността на движенията идват само от двигателя (engine.js → plan/judge); абакусът се рисува от кода;
-   Зори и ръката му са картинки, които се местят по координатите на топчетата. Нищо математическо не се генерира от AI.
-   Пръсти (техниката за соробан): земно топче нагоре – палец; земно надолу – показалец; небесното – показалец.
+   Зори е картинка; движението се показва със светещи топчета и стрелка (посока и брой). Нищо математическо не се генерира от AI.
+   Техниката на пръстите (палец вдига, показалец сваля, щипка, двете ръце едновременно) е същата и на дигиталния абакус – показва я учителят, а за AI тутора – видеа с истински ръце.
    Четири урока: 1 палецът вдига, 2 показалецът сваля, 3 двете ръце (двуцифрено), 4 брат и поправка на грешен опит. След всяка демонстрация детето опитва само. */
 (function () {
   const E = window.ABACUS_ENGINE, Q = new URLSearchParams(location.search);
@@ -11,7 +11,6 @@
   const BW = 150, BH = 60;                                   // размер на топчето
   const xOf = (rod) => X0 + E.col(rod, RODS) * W;
   // ръцете: къде е върхът на пръста в картинката (px от горе-ляво при височина 400)
-  const HAND = { thumb: { src: "assets/img/zori/h_thumb.png", w: 132, h: 400, tx: 59, ty: 0 }, index: { src: "assets/img/zori/h_index.png", w: 138, h: 400, tx: 96, ty: 399 }, palm: { src: "assets/img/zori/h_palm.png", w: 192, h: 400, tx: 82, ty: 0 } };
   const POSE = { explain: "z_explain", point: "z_point", wait: "z_wait", joy: "z_joy" };
 
   const $ = (s) => document.querySelector(s);
@@ -30,7 +29,7 @@
   const beadPath = (w, h) => `M${-w / 2} 0 L${-w / 4} ${-h / 2} L${w / 4} ${-h / 2} L${w / 2} 0 L${w / 4} ${h / 2} L${-w / 4} ${h / 2} Z`;
   function draw() {
     const wTot = X0 * 2 + (RODS - 1) * W;
-    let s = `<svg viewBox="0 0 ${wTot} ${H + 60}" id="zd-svg"><rect x="10" y="10" width="${wTot - 20}" height="${H - 20}" rx="28" fill="#1E2350" stroke="#B88A4E" stroke-width="18"/>`;
+    let s = `<svg viewBox="0 0 ${wTot + 70} ${H + 60}" id="zd-svg"><rect x="10" y="10" width="${wTot - 20}" height="${H - 20}" rx="28" fill="#1E2350" stroke="#B88A4E" stroke-width="18"/>`;
     for (let i = 0; i < RODS; i++) s += `<line x1="${xOf(i)}" y1="24" x2="${xOf(i)}" y2="${H - 24}" stroke="#8D6A3E" stroke-width="9"/>`;
     s += `<rect x="20" y="${BEAM - 7}" width="${wTot - 40}" height="16" fill="#B88A4E"/>`;
     for (let i = 0; i < RODS; i++) {
@@ -70,39 +69,32 @@
   let gen = 0;
   const wait = (ms) => { const g = gen; return new Promise((res, rej) => setTimeout(() => g === gen ? res() : rej("stale"), ms)); };
 
-  // ---- ръката ----
-  function handEl(id, kind) {
-    let el = document.getElementById(id); const H_ = HAND[kind];
-    if (!el) { el = document.createElement("img"); el.id = id; el.className = "zd-hand"; $("#zd-fx").appendChild(el); }
-    if (el.dataset.kind !== kind) { el.src = H_.src; el.dataset.kind = kind; }
-    return el;
+  // ---- показване на движението: кои топчета (светят) и накъде (стрелка с броя). Без нарисувана ръка –
+  //      техниката на пръстите (палец, показалец, щипка, двете ръце) ще се показва с видеа с истински ръце (за AI тутора) и от учителя ----
+  function movingBeads(m) {
+    const r = st[m.rod];
+    if (m.bead === "h") return [{ b: "h", k: 0 }];
+    const ks = []; if (m.d > 0) for (let k = r.e + 1; k <= r.e + m.d; k++) ks.push(k); else for (let k = r.e + m.d + 1; k <= r.e; k++) ks.push(k);
+    return ks.map(k => ({ b: "e", k }));
   }
-  // постави ръката така, че върхът на пръста да е в точка (x,y) от viewBox-а
-  function placeHand(el, kind, x, y, instant) {
-    const H_ = HAND[kind], p = pt(x, y), sc = p.s * 0.55;     // ръката е ~55% от мащаба на абакуса
-    el.style.width = H_.w * sc + "px"; el.style.height = H_.h * sc + "px";
-    el.style.transition = instant ? "none" : "";
-    el.style.transform = `translate(${p.x - H_.tx * sc}px,${p.y - H_.ty * sc}px)`;
+  function arrow(m) {
+    const r = st[m.rod], x = xOf(m.rod) + BW / 2 + 26, ks = movingBeads(m);
+    let y0, y1;
+    if (m.bead === "h") { y0 = hY(r.h); y1 = hY(1 - r.h); }
+    else { const mid = (e) => ks.reduce((a, o) => a + eY(o.k, e), 0) / ks.length; y0 = mid(r.e); y1 = mid(r.e + m.d); }
+    const dir = Math.sign(y1 - y0), tip = y1 + dir * 6, g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    g.setAttribute("class", "zd-arrow");
+    g.innerHTML = `<line x1="${x}" y1="${y0}" x2="${x}" y2="${tip - dir * 18}" /><path d="M${x - 16} ${tip - dir * 22} L${x + 16} ${tip - dir * 22} L${x} ${tip} Z"/>` +
+      `<text x="${x + 22}" y="${(y0 + y1) / 2 + 12}">${m.d > 0 ? "+" : "−"}${Math.abs(m.d)}</text>`;
+    $("#zd-svg").appendChild(g); return g;
   }
-  const hide = (id) => { const el = document.getElementById(id); if (el) el.style.opacity = 0; };
-  const show = (el) => { el.style.opacity = 1; };
-
-  // контактна точка и посока за движение m при текущото състояние
-  function contact(m) {
-    const r = st[m.rod], x = xOf(m.rod);
-    if (m.bead === "h") return m.d > 0 ? { kind: "index", x: x + 20, y: hY(0) - BH / 2 + 6 } : { kind: "index", x: x + 20, y: hY(1) + BH / 2 - 4, under: true };
-    if (m.d > 0) { const k = r.e + m.d; return { kind: "thumb", x: x - 10, y: eY(k, r.e) + BH / 2 - 6 }; }   // палецът – под най-долното топче, което тръгва нагоре
-    const k = r.e + m.d + 1; return { kind: "index", x: x + 10, y: eY(k, r.e) - BH / 2 + 6 };                 // показалецът – върху най-горното, което тръгва надолу
-  }
-  // една или няколко едновременни движения (двете ръце): ръката идва, бутва, топчетата и ръката се местят заедно
-  async function perform(ms) {
-    const hs = ms.map((m, j) => { const c = contact(m), id = "zd-h" + j, el = handEl(id, c.kind), r = st[m.rod];
-      const dy = m.bead === "h" ? hY(m.d > 0 ? 1 : 0) - hY(m.d > 0 ? 0 : 1) : (m.d > 0 ? eY(r.e + m.d, r.e + m.d) - eY(r.e + m.d, r.e) : eY(r.e + m.d + 1, r.e + m.d) - eY(r.e + m.d + 1, r.e));
-      const below = c.kind === "thumb" || (m.bead === "h" && m.d < 0); placeHand(el, c.kind, c.x + 40, c.y + (below ? 90 : -90), true); return { m, c, el, dy }; });
-    await wait(30); hs.forEach(h => { show(h.el); placeHand(h.el, h.c.kind, h.c.x, h.c.y); });
-    await wait(450);
-    hs.forEach(h => { st = E.apply(st, h.m) || st; placeHand(h.el, h.c.kind, h.c.x, h.c.y + h.dy); }); update();
-    await wait(420); hs.forEach(h => { h.el.style.opacity = 0; }); await wait(200);
+  const beadEl = (rod, o) => $(`#zd-board .zd-bead[data-rod="${rod}"][data-b="${o.b}"]` + (o.b === "e" ? `[data-k="${o.k}"]` : ""));
+  // едно или няколко едновременни движения (двете ръце): топчетата светват, стрелка показва посоката, после се местят
+  async function perform(ms, ghost) {
+    const marks = ms.map(m => { const els = movingBeads(m).map(o => beadEl(m.rod, o)); els.forEach(e => e.classList.add(ghost ? "try" : "go")); return { m, els, a: arrow(m) }; });
+    await wait(900);
+    marks.forEach(x => { st = E.apply(st, x.m) || st; }); update();
+    await wait(650); marks.forEach(x => { x.a.remove(); x.els.forEach(e => e.classList.remove("go", "try")); }); await wait(150);
   }
   // светлинката: тръгва от върха на главата на Зори и посочва топче
   async function spark(m) {
@@ -136,8 +128,7 @@
   // урок 4: „детето“ опитва грешно (+1 и не стига), Зори спира, светлинката сочи небесното топче, после показва брата
   async function runBrother(l) {
     say(l.text[0], "explain"); $("#zd-task").textContent = "3 + 4 = ?"; await wait(1800);
-    const ghost = handEl("zd-h0", "thumb"); ghost.classList.add("ghost");
-    await perform([l.wrong]); ghost.classList.remove("ghost");
+    await perform([l.wrong], true);
     say("Почакай! Долу няма достатъчно топчета.", "wait"); await wait(2400);
     st = E.fromValue(3, RODS); update(); await wait(300);
     const p = E.plan(3, "+", 4, RODS);
@@ -176,7 +167,6 @@
   document.querySelectorAll(".zd-lessons button").forEach(b => b.addEventListener("click", () => run(+b.dataset.l)));
   $("#zd-demo").addEventListener("click", demoCurrent);
   $("#zd-again").addEventListener("click", () => run(lesson || 1));
-  addEventListener("resize", () => { document.querySelectorAll(".zd-hand").forEach(h => h.style.opacity = 0); });
   window.ZORI_DEMO = { run, state: () => st, task: () => task, tap: (rod, b, k) => childTap({ dataset: { rod, b, k } }) };
   if (Q.get("l")) run(+Q.get("l"));
 })();

@@ -101,7 +101,7 @@
   function tap(g) {
     if (busy || hidden) return;
     const m = E.tapMove(st, +g.dataset.rod, g.dataset.bead, +g.dataset.k || 0), ns = E.apply(st, m); if (!ns) return;
-    st = ns; moves.push(m); pendingMove = m; update(); log("move", { m, value: E.value(st) });
+    m.t = Math.round(performance.now()); st = ns; moves.push(m); pendingMove = m;   // t: за измерване на техниката (щипка/двете ръце = движения почти едновременно) update(); log("move", { m, value: E.value(st) });
     if (mode === "free") { say(T.number(E.value(st)), "info"); return; }
     if (awaiting) return;   // памет/наум: чакаме „Готово“
     if (!task) return;
