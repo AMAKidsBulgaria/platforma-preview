@@ -1,0 +1,101 @@
+/* Звездна обсерватория – нощ, злато, големи бутони за 5–6-годишни (таблет хоризонтално; работи и на телефон) */
+:root { --night: #12163A; --night2: #232A63; --gold: #F5C04A; --ink: #F7F1E3; --muted: #B9B4D8; --earth-on: #F2A23A; --off: #5A5F8E; }
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--night); color: var(--ink); font-family: "Nunito", system-ui, sans-serif; -webkit-tap-highlight-color: transparent; user-select: none; overflow: hidden; }
+button { font-family: inherit; cursor: pointer; }
+.o-scr { position: fixed; inset: 0; padding: max(14px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(14px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); }
+/* профили */
+.o-profiles { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; background: radial-gradient(ellipse at 50% 20%, var(--night2), var(--night) 70%); }
+.o-ptitle { font: 900 clamp(26px, 4vw, 40px) "Nunito"; color: var(--gold); text-align: center; }
+.o-plist { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; }
+.o-pcard { width: min(30vw, 200px); background: #ffffff10; border: 3px solid #ffffff26; border-radius: 24px; padding: 14px 10px; color: var(--ink); display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.o-pcard img { height: min(26vh, 190px); }
+.o-pcard b { font-size: 24px; } .o-pcard span { color: var(--gold); font-weight: 800; }
+.o-pcard:active { transform: scale(.97); }
+.o-note { color: var(--muted); font-size: 13px; } .o-link { background: none; border: 0; color: var(--muted); text-decoration: underline; }
+/* обсерваторията */
+.o-home .o-bg { position: absolute; inset: 0; background: url(../assets/img/obs/home.jpg) center 60% / cover no-repeat; }
+.o-window { position: absolute; left: 50%; top: 4%; width: min(46vw, 66vh); aspect-ratio: 1; transform: translateX(-50%); border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 10px #4a3420, 0 0 40px #F5C04A33; cursor: pointer; background: #0d1030; }
+.o-window .o-sky { width: 100%; height: 100%; }
+.o-top { position: absolute; left: max(16px, env(safe-area-inset-left)); right: max(16px, env(safe-area-inset-right)); top: max(12px, env(safe-area-inset-top)); display: flex; justify-content: space-between; align-items: center; }
+.o-me { display: flex; align-items: center; gap: 8px; background: #0d1030cc; border: 2px solid #ffffff30; border-radius: 99px; padding: 4px 14px 4px 4px; color: var(--ink); font-size: 18px; }
+.o-me img { height: 40px; width: 40px; object-fit: cover; object-position: top; border-radius: 50%; background: #ffffff20; }
+.o-area { background: #0d1030cc; border-radius: 99px; padding: 6px 14px; color: var(--gold); font-weight: 900; letter-spacing: .04em; }
+.o-stage { position: absolute; left: 0; right: 0; bottom: 4%; display: flex; justify-content: center; align-items: flex-end; gap: 4vw; pointer-events: none; }
+.o-stage .o-zori { height: min(42vh, 360px); filter: drop-shadow(0 10px 16px #0009); }
+.o-stage .o-kid { height: min(36vh, 300px); filter: drop-shadow(0 10px 16px #0009); }
+.o-home .o-say { position: absolute; left: 6%; bottom: 46%; max-width: 30vw; }
+.o-say { background: var(--ink); color: #2B2140; font: 800 clamp(16px, 2vw, 21px)/1.3 "Nunito"; border-radius: 18px; padding: 10px 16px; box-shadow: 0 6px 16px #0007; }
+.o-say:empty { display: none; }
+.o-cta { position: absolute; right: max(16px, env(safe-area-inset-right)); bottom: 6%; display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+.o-go { background: var(--gold); color: #2B2140; border: 0; border-radius: 22px; padding: 14px 24px; font: 900 clamp(20px, 2.6vw, 28px) "Nunito"; box-shadow: 0 6px 0 #a87a1c, 0 10px 24px #0008; display: flex; flex-direction: column; align-items: flex-start; }
+.o-go small { font: 800 15px "Nunito"; opacity: .8; }
+.o-go.sm { font-size: 20px; padding: 10px 18px; }
+.o-go:active { transform: translateY(3px); box-shadow: 0 3px 0 #a87a1c; }
+.o-sec { background: #0d1030cc; color: var(--ink); border: 2px solid #ffffff40; border-radius: 18px; padding: 10px 18px; font: 800 18px "Nunito"; }
+/* небето */
+.o-sky { display: block; width: 100%; height: 100%; }
+.o-ln { stroke: #7F86B855; stroke-width: 2; stroke-dasharray: 5 7; } .o-ln.lit { stroke: #F5C04A99; stroke-dasharray: none; }
+.o-core { fill: #4A5088; } .o-core.lv1 { fill: #C9A24A; } .o-core.lv2 { fill: #EDB840; } .o-core.lv3 { fill: #FFD970; }
+.o-halo { fill: none; stroke: #FFE9A8; stroke-width: 2; stroke-dasharray: 3 5; opacity: .9; }
+.o-ring { fill: none; stroke: #fff; stroke-width: 2.5; animation: oring 1.6s ease-in-out infinite; }
+@keyframes oring { 50% { opacity: .25; } }
+.o-star { cursor: pointer; } .o-star.locked .o-core { fill: #2E3366; } .o-star.locked .o-lab { fill: #6E73A3; }
+.o-lab { font: 800 20px "Nunito"; fill: var(--ink); }
+.o-cname { font: 900 30px "Nunito"; fill: var(--gold); } .o-csub { font: 800 18px "Nunito"; fill: var(--muted); }
+.o-far circle { opacity: .7; } .o-far text { font: 800 20px "Nunito"; fill: #9AA0D0; } .o-far .o-farsub { font-size: 15px; fill: #6E73A3; }
+.o-star.pulse .o-core { animation: opulse 1s ease-in-out 3; transform-box: fill-box; transform-origin: center; }
+@keyframes opulse { 50% { transform: scale(1.8); } }
+/* картата */
+.o-map { background: radial-gradient(ellipse at 40% 30%, var(--night2), var(--night) 75%); display: flex; flex-direction: column; gap: 6px; }
+.o-maptop { display: flex; align-items: center; gap: 14px; }
+.o-back { background: #ffffff14; border: 2px solid #ffffff30; color: var(--ink); border-radius: 14px; padding: 8px 14px; font: 800 17px "Nunito"; }
+.o-mt { font: 900 30px "Nunito"; color: var(--gold); line-height: 1; } .o-ms { color: var(--muted); font-weight: 700; }
+.o-mapwrap { flex: 1; min-height: 0; overflow-x: auto; }
+.o-mapwrap .o-sky { min-width: 760px; }
+.o-card { position: absolute; right: max(16px, env(safe-area-inset-right)); top: 80px; width: min(340px, 90vw); background: #1C2150f2; border: 2px solid #ffffff30; border-radius: 22px; padding: 16px 18px; box-shadow: 0 10px 30px #000a; }
+.o-x { position: absolute; right: 10px; top: 8px; background: none; border: 0; color: var(--muted); font-size: 20px; }
+.o-ct { font: 900 26px "Nunito"; color: var(--gold); } .o-cs { color: var(--muted); font-weight: 700; margin-bottom: 8px; }
+.o-bars { display: grid; gap: 6px; margin: 8px 0 12px; } .o-bar { display: flex; align-items: center; gap: 10px; font-weight: 800; } .o-bar span { width: 76px; }
+.o-bar b { flex: 1; height: 12px; border-radius: 99px; background: #ffffff1c; } .o-bar b.on { background: var(--gold); box-shadow: 0 0 10px #F5C04A88; }
+.o-hl { color: #FFE9A8; font-weight: 800; }
+.o-legend { display: flex; gap: 16px; flex-wrap: wrap; color: var(--muted); font-weight: 700; font-size: 14px; }
+.o-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+.o-legend .lv1 { background: #C9A24A; } .o-legend .lv3 { background: #FFD970; box-shadow: 0 0 8px #FFD970; } .o-legend .halo { border: 2px dashed #FFE9A8; }
+/* мисията */
+.o-mis { background: radial-gradient(ellipse at 50% 0%, var(--night2), var(--night) 70%); display: flex; flex-direction: column; gap: 10px; }
+.o-mtop { display: flex; align-items: center; gap: 14px; }
+.o-pips { flex: 1; display: flex; gap: 8px; } .o-pips b { flex: 1; height: 12px; border-radius: 99px; background: #ffffff1f; } .o-pips b.d { background: var(--gold); } .o-pips b.c { background: #F5C04A88; animation: oring 1.6s infinite; }
+.o-mname { font: 900 20px "Nunito"; color: var(--gold); }
+.o-mbody { flex: 1; min-height: 0; display: flex; gap: 14px; align-items: center; }
+.o-mz { width: min(28vw, 260px); display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.o-mz .o-zori { height: min(40vh, 300px); filter: drop-shadow(0 8px 14px #0008); }
+.o-mwork { flex: 1; min-width: 0; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
+.o-flash { height: min(56vh, 420px); aspect-ratio: 280 / 560; display: grid; place-items: center; }
+.o-flash .o-ab { height: 100%; width: auto; }
+.o-q { font: 900 120px "Nunito"; color: #ffffff30; border: 4px dashed #ffffff26; border-radius: 24px; }
+.o-ab { display: block; touch-action: none; }
+.o-ab path { fill: var(--off); stroke: #0003; stroke-width: 3; } .o-ab path.on { fill: var(--earth-on); } .o-ab path.on.h { fill: var(--gold); }
+.o-b { transition: transform .3s cubic-bezier(.3,1.2,.5,1); cursor: pointer; }
+.o-abhost { height: min(54vh, 420px); } .o-abhost .o-ab { height: 100%; width: auto; }
+.o-ghost { height: min(40vh, 300px); opacity: .12; } .o-ghost .o-ab { height: 100%; width: auto; }
+.o-num { font: 900 clamp(48px, 8vw, 84px)/1 "Nunito"; min-height: 1.1em; color: #8FC7FF; } .o-num.minus { color: #FF9C8A; }
+.o-ch { display: flex; gap: 14px; } .o-ch button { width: 92px; height: 92px; border-radius: 24px; border: 3px solid #ffffff40; background: #ffffff14; color: var(--ink); font: 900 44px "Nunito"; }
+.o-ch button.ok { background: #2E9E5B; border-color: #2E9E5B; } .o-ch button.no { background: #B04A3A; border-color: #B04A3A; }
+.o-row { display: flex; gap: 10px; } .o-done { background: #2E9E5B; color: #fff; border: 0; border-radius: 18px; padding: 12px 26px; font: 900 24px "Nunito"; box-shadow: 0 5px 0 #1d6b3c; }
+.o-cnt { height: min(48vh, 340px); width: auto; max-width: 100%; }
+/* откритие */
+.o-end { background: var(--night); display: flex; align-items: flex-end; justify-content: center; gap: 20px; }
+.o-endsky { position: absolute; inset: 0; opacity: .9; } .o-endsky .o-sky { width: 100%; height: 100%; }
+.o-endbox { position: relative; background: #12163Ae6; border: 2px solid #ffffff2a; border-radius: 28px; padding: 18px 26px; display: flex; flex-direction: column; align-items: center; gap: 10px; max-width: 92vw; }
+.o-endbox .o-zori { height: min(22vh, 180px); margin-top: -90px; }
+.o-res { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; } .o-res div { text-align: center; color: var(--muted); font-weight: 700; font-size: 14px; } .o-res b { display: block; color: var(--ink); font-size: 26px; }
+.o-stars { font-size: 44px; color: var(--gold); letter-spacing: .1em; text-shadow: 0 0 16px #F5C04A88; }
+@media (max-width: 760px), (max-height: 520px) {
+  .o-window { width: min(70vw, 40vh); top: 9%; }
+  .o-home .o-say { left: 16px; right: 16px; bottom: auto; top: calc(9% + min(70vw, 40vh) + 16px); max-width: none; }
+  .o-stage { justify-content: flex-start; padding-left: 4vw; } .o-stage .o-zori { height: 26vh; } .o-stage .o-kid { height: 22vh; }
+  .o-cta { bottom: 3%; left: 16px; right: 16px; align-items: stretch; } .o-cta .o-go { align-items: center; } .o-stage { bottom: 150px; justify-content: center; }
+  .o-mbody { flex-direction: column; } .o-mz { width: auto; flex-direction: row; } .o-mz .o-zori { height: 90px; }
+  .o-ch button { width: 74px; height: 74px; font-size: 36px; }
+}
