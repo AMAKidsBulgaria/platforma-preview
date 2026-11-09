@@ -45,12 +45,19 @@
   function voice(text) {
     if (Q.get("voice") === "0") return;
     try { if (cur) cur.pause(); } catch (e) {}
-    const f = AUDZ[text] || AUD[text]; if (f) { cur = new Audio("assets/audio/abacus/" + f); cur.play().catch(() => {}); }
+    cur = null; const f = AUDZ[text] || AUD[text]; if (f) { cur = new Audio("assets/audio/abacus/" + f); cur.play().catch(() => {}); }
   }
   let gen = 0;
-  const FAST = Q.get("fast") ? 0.08 : 1;   // ?fast=1 – само за автоматичните проверки
+  const FAST_ON = !!Q.get("fast"), FAST = FAST_ON ? 0.08 : 1;   // ?fast=1 – само за автоматичните проверки
   const wait = (ms) => { const g = gen; return new Promise((res, rej) => setTimeout(() => g === gen ? res() : rej("stale"), ms * FAST)); };
   const zori = (pose) => `<img class="o-zori" src="assets/img/zori/z_${pose}.png" alt="Зори">`;
+  // изчаква записа да свърши (иначе следващата реплика го прекъсва); без запис – по дължината на текста
+  function talk(text, pose) {
+    say(text, pose); const g = gen, min = Math.max(1600, text.length * 75) * FAST;
+    return new Promise((res, rej) => { const done = () => g === gen ? res() : rej("stale");
+      const a = cur; if (a && !FAST_ON && Q.get("voice") !== "0") { let fin = false; const end = () => { if (!fin) { fin = true; setTimeout(done, 350); } };
+        a.addEventListener("ended", end); a.addEventListener("error", end); setTimeout(end, 9000); } else setTimeout(done, min); });
+  }
   function say(text, pose) { const b = $(".o-say"); if (b) b.textContent = text; const z = $(".o-zori"); if (z && pose) z.src = `assets/img/zori/z_${pose}.png`; voice(text); }
 
   // ---- екран 1: кой наблюдава ----
@@ -65,6 +72,7 @@
     $("#o-reset").onclick = () => { DB = {}; save(); screenProfiles(); };
   }
 
+  const starPath = (R) => { let d = ""; for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? R * .45 : R; d += (i ? "L" : "M") + (rr * Math.cos(a)).toFixed(1) + " " + (rr * Math.sin(a)).toFixed(1); } return d + "Z"; };
   // ---- небето като SVG (използва се и в прозореца на обсерваторията, и в картата) ----
   function skySVG(opts) {
     const o = opts || {}, b = P.b || {}, halo = P.halo || {};
@@ -80,7 +88,7 @@
       s += `<g class="o-star${isCur ? " cur" : ""}${avail ? "" : " locked"}" data-n="${st.n}" transform="translate(${st.x} ${st.y})">`;
       if (halo[st.n]) s += `<circle r="${r + 14}" class="o-halo"/>`;
       if (lv > 0) s += `<circle r="${r * 2.6}" fill="url(#gl)" opacity="${.18 + lv * .17}"/>`;
-      s += `<circle r="${r}" class="o-core lv${lv}"/>`;
+      s += `<path d="${starPath(r * 1.35)}" class="o-core lv${lv}"/>`;
       if (isCur) s += `<circle r="${r + 8}" class="o-ring"/>`;
       if (o.labels) s += `<text y="${r + 24}" text-anchor="middle" class="o-lab">${st.title}</text>`;
       s += `</g>`;
@@ -176,7 +184,7 @@
     const ex = EX[n] || EX[1], par = PAR[n] || PAR[1], max = MAXN[n] || 9;
     M = { n, ex, par, max, flash: [0, 0], ab: [0, 0], meth: [0, 0], im: [0, 0], help: 0 };
     try {
-      shell(0, STAR[n].title); say("Тази вечер звездата ни още е бледа. Ще я направим ли по-ярка?", "explain"); await wait(3200);
+      shell(0, STAR[n].title); await talk("Тази вечер звездата ни още е бледа. Ще я направим ли по-ярка?", "explain");
       await stageFlash(0, 6, par[1]); await stageAbacus(); await stageFlash(2, 4, Math.max(.8, par[1] - .3)); await stageMental(); await stageCount(); await finish();
     } catch (e) { if (e !== "stale") throw e; }
   }
@@ -187,7 +195,7 @@
     return new Promise(res => row.querySelectorAll("button").forEach(b => b.onclick = () => { row.querySelectorAll("button").forEach(x => { x.disabled = true; if (+x.dataset.v === right) x.classList.add("ok"); }); if (+b.dataset.v !== right) b.classList.add("no"); setTimeout(() => res(+b.dataset.v === right), 700 * FAST); }));
   }
   async function stageFlash(i, count, sec) {
-    shell(i, STAR[M.n].title); say(i === 0 ? "Първо – флашкарти. Гледай внимателно и запомни числото!" : "Още флашкарти – малко по-бързо.", "point"); await wait(2600);
+    shell(i, STAR[M.n].title); await talk(i === 0 ? "Първо – флашкарти. Гледай внимателно и запомни числото!" : "Още флашкарти – малко по-бързо.", "point");
     for (let k = 0; k < count; k++) {
       const v = Math.floor(Math.random() * (M.max + 1)), w = $("#o-work");
       w.innerHTML = `<div class="o-flash">${abImg(v, 1)}</div>`; await wait(sec * 1000);
@@ -196,7 +204,7 @@
     }
   }
   async function stageAbacus() {
-    shell(1, STAR[M.n].title); say("Сега – абакусът. Смятай, докато виждаш числата.", "explain"); await wait(2800);
+    shell(1, STAR[M.n].title); await talk("Сега – абакусът. Смятай, докато виждаш числата.", "explain");
     const list = shuffle(M.ex).slice(0, 4);
     for (const nums of list) {
       const w = $("#o-work"); w.innerHTML = `<div class="o-num" id="o-num"></div><div class="o-abhost" id="o-abh"></div><div class="o-row"><button class="o-done" id="o-done" hidden>✓ Готово</button></div>`;
@@ -214,7 +222,7 @@
     }
   }
   async function stageMental() {
-    shell(3, STAR[M.n].title); say("Наблюдение без телескоп! Смятай наум.", "point"); await wait(2600);
+    shell(3, STAR[M.n].title); await talk("Наблюдение без телескоп! Смятай наум.", "point");
     const list = shuffle(M.ex).slice(0, 3);
     for (const nums of list) {
       const w = $("#o-work"); w.innerHTML = `<div class="o-num" id="o-num"></div><div class="o-ghost">${abImg(0, 1)}</div>`; await wait(500);
@@ -225,7 +233,7 @@
     }
   }
   async function stageCount() {
-    shell(4, STAR[M.n].title); say("Звездно броене: колко звезди светнаха?", "explain"); await wait(2400);
+    shell(4, STAR[M.n].title); await talk("Звездно броене: колко звезди светнаха?", "explain");
     for (let k = 0; k < 4; k++) {
       const v = 1 + Math.floor(Math.random() * Math.min(9, M.max + 2)), w = $("#o-work");
       const pts = shuffle(Array.from({ length: 12 }, (_, i) => i)).slice(0, v).map(i => [60 + (i % 4) * 90 + (i * 13) % 30, 50 + Math.floor(i / 4) * 90 + (i * 7) % 25]);
@@ -245,7 +253,7 @@
       <div class="o-res"><div><b>${M.flash[0]}/${M.flash[1]}</b>флашкарти</div><div><b>${M.ab[0]}/${M.ab[1]}</b>абакус</div><div><b>${M.meth[0]}/${M.meth[1]}</b>правилни движения</div><div><b>${M.im[0]}/${M.im[1]}</b>без телескоп</div></div>
       <div class="o-stars">${"★".repeat(after)}${"☆".repeat(3 - after)}</div>
       <button class="o-go" id="o-home">Към обсерваторията</button></div>`;
-    say(after > before ? "Небето е подредено за тази вечер. Звездата стана по-ярка!" : "Небето е подредено за тази вечер. Утре ще я наблюдаваме пак.", "joy");
+    say(after > before ? "Небето е подредено за тази вечер. Звездата стана по-ярка!" : "Небето е подредено за тази вечер. Утре ще го наблюдаваме пак.", "joy");
     const g = app.querySelector(`.o-star[data-n="${n}"]`); if (g) g.classList.add("pulse");
     $("#o-home").onclick = screenHome;
   }
