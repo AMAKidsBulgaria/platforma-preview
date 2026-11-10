@@ -272,3 +272,8 @@ html.o-still .o-burst { display: none; }
 @keyframes olens { 0% { transform: scale(.55); } 45% { transform: scale(.75); } 100% { transform: scale(5.5); opacity: 0; } }
 /* В: тих астролаб на картата */
 .o-astro circle, .o-astro line { fill: none; stroke: #8FA0FF; stroke-opacity: .07; stroke-width: 2; }
+
+/* звездни сигнали: светещ сигнал → изгасен абакус с дискретно „?“ */
+.o-flash.o-sig { animation: ofade .25s ease-out; } .o-flash.o-sig .o-ab { filter: drop-shadow(0 0 18px #F5C04A55); }
+.o-flash.o-dim { position: relative; } .o-flash.o-dim .o-ab { opacity: .35; filter: saturate(.3); }
+.o-flash.o-dim span { position: absolute; inset: 0; display: grid; place-items: center; font: 900 clamp(48px, 9vw, 90px) "Nunito"; color: #ffffff55; }

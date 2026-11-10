@@ -262,7 +262,7 @@
       M.isNew = !(P.b[n] > 0) && !!NEWSTAR[n]; STAGES = M.isNew ? ["Нова звезда", ...BASE_STAGES] : BASE_STAGES.slice();
       if (M.isNew) await stageNew(n);
       else { shell(0, STAR[n].title); await talk("Тази вечер звездата ни още е бледа. Ще я направим ли по-ярка?", "explain"); }
-      await stageFlash(0, 6, par[1]); await stageAbacus(); await stageFlash(2, 4, Math.max(.8, par[1] - .3)); await stageMental(); await missionGame(); await finish();
+      const fs = n <= 3 ? 3 : n <= 6 ? 2.5 : 2; await stageFlash(0, 5, fs); await stageAbacus(); await stageFlash(2, 3, fs - .5); await stageMental(); await missionGame(); await finish();
     } catch (e) { if (e !== "stale") throw e; }
   }
   // приключва при „Готово“ или автоматично, щом абакусът покаже верния резултат
@@ -278,30 +278,59 @@
     row.innerHTML = opts.map(v => `<button data-v="${v}">${v}</button>`).join(""); w.appendChild(row);
     return new Promise(res => row.querySelectorAll("button").forEach(b => b.onclick = () => { row.querySelectorAll("button").forEach(x => { x.disabled = true; if (+x.dataset.v === right) x.classList.add("ok"); }); if (+b.dataset.v !== right) b.classList.add("no"); setTimeout(() => res(+b.dataset.v === right), 700 * FAST); }));
   }
-  async function stageFlash(i, count, sec) {
-    shell(i, STAR[M.n].title); await talk(i === 0 ? "Първо – флашкарти. Гледай внимателно и запомни числото!" : "Още флашкарти – малко по-бързо.", "point");
-    for (let k = 0; k < count; k++) {
-      const v = Math.floor(Math.random() * (M.max + 1)), w = $("#o-work");
-      w.innerHTML = `<div class="o-flash">${abImg(v, 1)}</div>`; await wait(sec * 1000);
-      w.innerHTML = `<div class="o-flash o-q">?</div>`; const ok = await ask(choices(v, M.max), v);
-      M.flash[0] += ok ? 1 : 0; M.flash[1]++; if (ok) say("Браво! Точно така.", "joy"); await wait(500);
+  // Зори говори по моменти: подготовка (глас само в първия кръг, после само надпис), показване – тишина, след скриване – въпрос, вярно / грешно.
+  const once = (k, text, pose) => { if (k === 0) say(text, pose); else { const b = $(".o-say"); if (b) b.textContent = text; const z = $(".o-zori"); if (z && pose) z.src = `assets/img/zori/z_${pose}.png`; } };
+  const thank = (v) => v <= 99 ? `Точно така! Това беше ${v}!` : "Точно така!";
+  const dimAb = (rods) => `<div class="o-flash r${rods} o-dim">${abImg(0, rods)}<span>?</span></div>`;   // изгасен абакус с дискретно „?“
+  // един „звезден сигнал“: число на абакуса за sec секунди → изгасен абакус → „Кое число видя?“ (3 бутона) → вярно / повторно показване и нов опит
+  async function signalRound(t, sec, k, rec) {
+    const w = $("#o-work"), v = randVal(t); rec.n = v; rec.showMs = Math.round(sec * 1000);
+    const show = async (again) => { once(k || again ? 1 : 0, "Погледни абакуса!", "point"); if (!again) await wait(900);
+      w.innerHTML = `${again ? '<div class="o-again">↺ Същият сигнал – още веднъж</div>' : ""}<div class="o-flash r${t.rods} o-sig">${abImg(v, t.rods)}</div>`; await wait(sec * 1000); };
+    await show(false);
+    const opts = new Set([v]); let g = 0; while (opts.size < 3 && g++ < 99) opts.add(randVal(t)); const list = shuffle([...opts]), tried = new Set(); let first = true;
+    while (true) {
+      w.innerHTML = `${dimAb(t.rods)}<div class="o-ch big">${list.map(x => `<button data-v="${x}"${tried.has(x) ? ' class="tried" disabled' : ""}>${x}</button>`).join("")}</div>`;
+      once(first && k === 0 ? 0 : 1, "Кое число видя?", "explain"); if (first && k > 0) voice("Кое число видя?");
+      const t0 = performance.now(), pick = await new Promise(res => w.querySelectorAll(".o-ch button").forEach(b => b.onclick = () => res(+b.dataset.v)));
+      if (first) { rec.choice = pick; rec.rtMs = Math.round(performance.now() - t0); }
+      if (pick === v) { rec.correct = first; w.querySelector(`.o-ch button[data-v="${v}"]`).classList.add("ok"); say(thank(v), "joy"); const z = $(".o-zori"); if (z) { z.classList.remove("hop"); void z.offsetWidth; z.classList.add("hop"); } await wait(1300); return first; }
+      if (!first) { w.innerHTML = `<div class="o-flash r${t.rods}">${abImg(v, t.rods)}</div><div class="o-cq">${v}</div>`; say("Ето кое число беше.", "explain"); await wait(1900); return false; }
+      first = false; rec.retries = 1; tried.add(pick); await talk("Нека го видим още веднъж.", "explain"); await show(true);
     }
   }
+  // адаптивно време на сигналите (правило за методиста): ≥ 8 от последните 10 верни от първия опит в ≥ 2 различни дни → една стъпка по-бързо;
+  // под 60% → една стъпка по-бавно; по време на игра не се променя
+  const SIG = [5, 4, 3, 2.5, 2, 1.5, 1.2, 1, .8, .6, .4];
+  function sigSpeed(topic) { P.ad = P.ad || {}; const a = P.ad["flash:" + topic]; return a ? a.speed : 3; }
+  function sigAdapt(topic, results) {
+    P.ad = P.ad || {}; const key = "flash:" + topic, a = P.ad[key] || (P.ad[key] = { speed: 3, hist: [] }), day = new Date().toDateString();
+    results.forEach(c => a.hist.push({ d: day, c })); a.hist = a.hist.slice(-10);
+    const okN = a.hist.filter(h => h.c).length, days = new Set(a.hist.map(h => h.d)).size, i = SIG.indexOf(a.speed);
+    if (a.hist.length >= 10 && okN >= 8 && days >= 2 && i < SIG.length - 1) { a.speed = SIG[i + 1]; a.hist = []; }
+    else if (a.hist.length >= 5 && okN / a.hist.length < .6 && i > 0) { a.speed = SIG[i - 1]; a.hist = []; }
+    save();
+  }
+  async function stageFlash(i, count, sec) {
+    shell(i, STAR[M.n].title); await talk(i === 0 ? "Звездни сигнали!" : "Още звездни сигнали – малко по-бързо.", "point");
+    const t = { rods: 1, stateMax: M.max };
+    for (let k = 0; k < count; k++) { const rec = {}; const ok = await signalRound(t, sec, k, rec); M.flash[0] += ok ? 1 : 0; M.flash[1]++; }
+  }
   async function stageAbacus() {
-    shell(1, STAR[M.n].title); await talk("Сега – абакусът. Смятай, докато виждаш числата.", "explain");
+    shell(1, STAR[M.n].title); await talk("Абакус!", "explain"); let k = -1;
     const list = shuffle(M.ex).slice(0, 4);
     for (const nums of list) {
       const w = $("#o-work"); w.innerHTML = `<div class="o-num" id="o-num"></div><div class="o-abhost" id="o-abh"></div><div class="o-row"><button class="o-done" id="o-done" hidden>✓ Готово</button></div>`;
-      const ab = abacus($("#o-abh"), 1); await wait(600);
+      const ab = abacus($("#o-abh"), 1); k++; once(k, "Смятай на абакуса!", "point"); await wait(k ? 600 : 1600);
       for (let i = 0; i < nums.length; i++) { const n = nums[i]; $("#o-num").textContent = i === 0 ? n : (n > 0 ? "+ " + n : "− " + -n); $("#o-num").className = "o-num" + (n < 0 && i ? " minus" : ""); await wait(M.par[0] * 1000 - 200); $("#o-num").textContent = ""; await wait(200); }
-      const target = nums.reduce((a, b) => a + b, 0); $("#o-num").textContent = "= ?";
+      const target = nums.reduce((a, b) => a + b, 0); $("#o-num").textContent = "= ?"; once(k, "Колко стана?", "explain"); if (k) voice("Колко стана?");
       await untilDone(ab, target);
       ab.enable(false); const got = ab.value(), j = E.judgeChain(nums, ab.moves(), 1);
       const right = got === target, method = right && j.steps.every(s => s.code === "ok");
       M.ab[0] += right ? 1 : 0; M.ab[1]++; M.meth[0] += method ? 1 : 0; M.meth[1]++;
-      if (method) good();
+      if (method) { good(thank(target)); }
       else if (right) say("Отговорът е верен! Следващия път – с правилните движения.", "explain");
-      else { say("Почти! Виж как е правилно.", "wait"); ab.set(target); }
+      else { say("Почти! Ето колко стана.", "wait"); ab.set(target); }
       $("#o-num").textContent = "= " + target; await wait(right ? 1400 : 2600);
     }
   }
@@ -332,8 +361,8 @@
   const GAMES = {
     trainer: { name: "Тренажор", sub: "примери за смятане", skill: "смятане на абакуса и наум",
       opts: { topic: "тема", count: [3, 5, 7, 10], speed: SPEEDS, rounds: [3, 5, 8], mode: [["ab", "с абакус"], ["mind", "без телескоп"]] } },
-    flash: { name: "Флашкарти", sub: "познай числото", skill: "образа на числото",
-      opts: { topic: "тема", speed: SPEEDS, rounds: [5, 8, 12] } },
+    flash: { name: "Звездни сигнали", adult: "Флашкарти", sub: "кое число видя?", skill: "разпознаване на образа на числото (първо точно, после по-бързо)",
+      opts: { topic: "тема", speed: [["auto", "авто"], 5, 4, 3, 2.5, 2, 1.5, 1, .8, .6], rounds: [5, 8, 12] } },
     fix: { name: "Поправи телескопа", sub: "с едно движение", skill: "четене на числото и правилното движение",
       opts: { topic: "тема", rounds: [3, 5, 8] } },
     memory: { name: "Нощна памет", sub: "виж и нареди", skill: "образа на числото – основа за въображаемия абакус",
@@ -344,7 +373,7 @@
   const OPTNAME = { topic: "Тема", count: "Брой числа", speed: "Скорост (сек.)", rounds: "Кръгове", mode: "Начин", len: "Колко числа", upto: "До" };
   function defaults(id) {
     const n = Math.min(P.cur, 21), sp = (PAR[n] || PAR[9]);
-    return { topic: TOPIC_OF[n] || "s9", count: 5, speed: id === "flash" ? 1.6 : id === "memory" ? 1.3 : 2, rounds: GAMES[id].opts.rounds[1], mode: "ab", len: 2, upto: n < 3 ? 3 : n < 6 ? 5 : 10, ...(P.set && P.set[id] || {}) };
+    return { topic: TOPIC_OF[n] || "s9", count: 5, speed: id === "flash" ? "auto" : id === "memory" ? 2 : 2, rounds: GAMES[id].opts.rounds[1], mode: "ab", len: 2, upto: n < 3 ? 3 : n < 6 ? 5 : 10, ...(P.set && P.set[id] || {}) };
   }
   // случайно число, позволено от темата (цифрите ≤ stateMax; кръгли/11–19)
   function randVal(t) {
@@ -385,25 +414,25 @@
       pip(k); const ex = E.simpleExample({ ...t, count: c.count }), nums = ex.nums, w = $("#o-work");
       const mind = c.mode === "mind";
       w.innerHTML = `<div class="o-num" id="o-num"></div>${mind ? `<div class="o-ghost">${abImg(0, t.rods)}</div>` : `<div class="o-abhost" id="o-abh"></div>`}<div class="o-row"><button class="o-done" id="o-done" hidden>✓ Готово</button></div>`;
-      const ab = mind ? null : abacus($("#o-abh"), t.rods); await wait(700);
+      const ab = mind ? null : abacus($("#o-abh"), t.rods); once(k, mind ? "Смятай наум!" : "Смятай на абакуса!", "point"); await wait(k ? 700 : 1600);
       for (let i = 0; i < nums.length; i++) { const n = nums[i], el = $("#o-num"); el.textContent = i === 0 ? n : (n > 0 ? "+ " + n : "− " + -n); el.className = "o-num pop" + (n < 0 && i ? " minus" : ""); await wait(c.speed * 1000 - 200); el.textContent = ""; el.className = "o-num"; await wait(200); }
-      const target = nums.reduce((a, b) => a + b, 0); $("#o-num").textContent = "= ?";
+      const target = nums.reduce((a, b) => a + b, 0); $("#o-num").textContent = "= ?"; once(k, "Колко стана?", "explain"); if (k) voice("Колко стана?");
       let right;
       if (mind) { right = await ask(choices(target, Math.max(9, target + 3)), target); }
       else { await untilDone(ab, target); ab.enable(false); right = ab.value() === target; if (!right) ab.set(target); }
-      $("#o-num").textContent = "= " + target; if (right) { ok++; good(); } else bad(); await wait(right ? 1300 : 2400);
+      $("#o-num").textContent = "= " + target; if (right) { ok++; pipStar(k); say(thank(target), "joy"); } else say("Почти! Ето колко стана.", "wait"); await wait(right ? 1300 : 2400);
     }
     return [ok, c.rounds];
   }
   async function playFlash(c) {
-    const t = topicFor(c.topic); let ok = 0;
+    const t = topicFor(c.topic), auto = c.speed === "auto", sec = auto ? sigSpeed(t.id) : +c.speed; let ok = 0; const res = [];
+    P.log = P.log || {}; P.log.flash = P.log.flash || [];
     for (let k = 0; k < c.rounds; k++) {
-      pip(k); const v = randVal(t), w = $("#o-work");
-      w.innerHTML = `<div class="o-flash r${t.rods} pop">${abImg(v, t.rods)}</div>`; await wait(c.speed * 1000);
-      w.innerHTML = `<div class="o-flash r${t.rods} o-q">?</div>`;
-      const opts = new Set([v]); while (opts.size < 3) opts.add(randVal(t)); const r = await ask(shuffle([...opts]), v);
-      if (r) { ok++; good(); } else bad(); await wait(600);
+      pip(k); const rec = { t: Date.now(), topic: t.id, choice: null, correct: false, retries: 0, rtMs: null };
+      const first = await signalRound(t, sec, k, rec); if (first) { ok++; pipStar(k); } res.push(first);
+      P.log.flash.push(rec); if (P.log.flash.length > 300) P.log.flash.splice(0, P.log.flash.length - 300); save();
     }
+    if (auto) sigAdapt(t.id, res);
     return [ok, c.rounds];
   }
   const TELE = (parts, total) => { const p = (i) => i < parts ? "on" : "";   // телескопът се сглобява: статив, тръба, окуляр, леща, светлина
@@ -418,11 +447,14 @@
         for (let d = 1; d <= 4; d++) opts.push({ rod, bead: "e", d }, { rod, bead: "e", d: -d }); opts.push({ rod, bead: "h", d: 5 }, { rod, bead: "h", d: -5 });
         const okm = opts.filter(o => E.apply(st0, o)); if (okm.length) { wrong = E.value(E.apply(st0, okm[Math.floor(Math.random() * okm.length)])); break; } }
       const w = $("#o-work"); w.innerHTML = `<div class="o-fixrow"><div class="o-telebox">${TELE(Math.round(ok * 5 / total), 5)}</div><div class="o-fixcol"><div class="o-num pop">${target}</div><div class="o-abhost" id="o-abh"></div><div class="o-row"><button class="o-done" id="o-done">✓ Готово</button></div></div></div>`;
-      const ab = abacus($("#o-abh"), t.rods); ab.set(wrong);
-      await untilDone(ab, target); ab.enable(false);
-      const right = ab.value() === target, one = ab.moves().length === 1;
-      if (right && one) { ok++; good(); $(".o-telebox").innerHTML = TELE(Math.round(ok * 5 / total), 5); }
-      else if (right) say("Вярно! А можеш ли с едно движение?", "explain"); else { bad(); ab.set(target); }
+      const ab = abacus($("#o-abh"), t.rods); ab.set(wrong); once(k, "Поправи числото!", "point");
+      let right = false, one = false;
+      for (let tr = 0; tr < 2; tr++) {
+        await untilDone(ab, target); ab.enable(false); right = ab.value() === target; one = ab.moves().length === 1;
+        if (right || tr) break; await talk("Нека опитаме пак.", "explain"); ab.set(wrong); ab.enable(true);
+      }
+      if (right && one) { ok++; pipStar(k); say("Точно така!", "joy"); $(".o-telebox").innerHTML = TELE(Math.round(ok * 5 / total), 5); }
+      else if (right) say("Вярно! А можеш ли с едно движение?", "explain"); else { say("Почти! Ето как е правилно.", "wait"); ab.set(target); }
       await wait(right ? 1300 : 2400);
     }
     if (ok >= total * .6) { $("#o-work").innerHTML = `<div class="o-telebox big">${TELE(5, 5)}</div>`; say("Телескопът отново вижда звездите!", "joy"); burst(); await wait(2200); }
@@ -432,12 +464,17 @@
     const t = topicFor(c.topic); let ok = 0;
     for (let k = 0; k < c.rounds; k++) {
       pip(k); const v = randVal(t) || 1, w = $("#o-work");
-      w.innerHTML = `<div class="o-flash r${t.rods} pop">${abImg(v, t.rods)}</div>`; await wait(c.speed * 1000);
-      w.innerHTML = `<div class="o-num">?</div><div class="o-abhost" id="o-abh"></div><div class="o-row"><button class="o-done" id="o-done">✓ Готово</button></div>`;
-      say("Нареди същото число на абакуса.", "point");
-      const ab = abacus($("#o-abh"), t.rods); await untilDone(ab, v); ab.enable(false);
-      const right = ab.value() === v; $(".o-num").textContent = v;
-      if (right) { ok++; good(); } else { bad(); ab.set(v); } await wait(right ? 1300 : 2400);
+      const show = async (again) => { once(k || again ? 1 : 0, "Погледни и запомни!", "point"); if (!again) await wait(900);
+        w.innerHTML = `${again ? '<div class="o-again">↺ Същото число – още веднъж</div>' : ""}<div class="o-flash r${t.rods} o-sig">${abImg(v, t.rods)}</div>`; await wait(c.speed * 1000); };
+      await show(false); let right = false;
+      for (let tr = 0; tr < 2; tr++) {
+        w.innerHTML = `<div class="o-num">?</div><div class="o-abhost" id="o-abh"></div><div class="o-row"><button class="o-done" id="o-done">✓ Готово</button></div>`;
+        once(k || tr ? 1 : 0, "Нареди същото число.", "explain"); if (k && !tr) voice("Нареди същото число.");
+        const ab = abacus($("#o-abh"), t.rods); await untilDone(ab, v); ab.enable(false); right = ab.value() === v;
+        if (right) { if (!tr) { ok++; pipStar(k); } $(".o-num").textContent = v; say(thank(v), "joy"); await wait(1300); break; }
+        if (tr) { $(".o-num").textContent = v; ab.set(v); say("Ето кое число беше.", "explain"); await wait(2000); break; }
+        await talk("Нека го видим още веднъж.", "explain"); await show(true);
+      }
     }
     return [ok, c.rounds];
   }
@@ -491,7 +528,7 @@
     return [ok, c.rounds];
   }
   const PLAY = { trainer: playTrainer, flash: playFlash, fix: playFix, memory: playMemory, count: playCount };
-  const INTRO = { trainer: "Тренажор! Смятай, докато виждаш числата.", flash: "Първо – флашкарти. Гледай внимателно и запомни числото!", fix: "Поправи телескопа! Направи числото с едно движение.", memory: "Нощна памет: запомни числото и го нареди на абакуса.", count: "Звездно броене!" };
+  const INTRO = { trainer: "Тренажор!", flash: "Звездни сигнали!", fix: "Поправи телескопа!", memory: "Нощна памет!", count: "Звездно броене!" };
 
   // в мисията: последният етап – една от игрите, с параметрите на занятието
   async function missionGame() {   // (фонът „нощно небе“ за броенето се слага в playCount)
@@ -528,7 +565,7 @@
       else chips = o.map(v => Array.isArray(v) ? chip(k, v[0], v[1]) : chip(k, v, String(v).replace(".", ","))).join("");
       return `<div class="o-srow"><div class="o-sk">${OPTNAME[k]}</div><div class="o-chips">${chips}</div></div>`; };
     app.className = "o-scr o-map o-gamesbg";
-    app.innerHTML = `<div class="o-maptop"><button class="o-back" id="o-back">← Назад</button><div class="o-grow"><div class="o-mt">${g.name}</div><div class="o-ms">Настройки за възрастен · тренира: ${g.skill}</div></div></div>
+    app.innerHTML = `<div class="o-maptop"><button class="o-back" id="o-back">← Назад</button><div class="o-grow"><div class="o-mt">${g.name}</div><div class="o-ms">Настройки за възрастен${g.adult ? " · " + g.adult : ""} · тренира: ${g.skill}</div></div></div>
       <div class="o-set"><div class="o-gic big">${ICON[id]}</div><div class="o-srows">${Object.keys(g.opts).map(row).join("")}<div class="o-srow"><div class="o-sk">Анимации</div><div class="o-chips">${[["full", "нормални"], ["calm", "намалени"], ["off", "без"]].map(m => `<button class="o-chip o-motion${(P.motion || "full") === m[0] ? " on" : ""}" data-m="${m[0]}">${m[1]}</button>`).join("")}</div></div></div></div>
       <div class="o-sbar"><button class="o-sec" id="o-home2">Към обсерваторията</button><button class="o-go" id="o-start">▶ Старт</button></div>`;
     app.querySelectorAll(".o-chip").forEach(b => b.onclick = () => { const k = b.dataset.k, v = b.dataset.v; c[k] = isNaN(+v) ? v : +v;
