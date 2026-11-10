@@ -28,9 +28,9 @@
   // ---- профили (демо) ----
   const AV = ["a1", "a4", "n1", "a2", "n3", "a6"];
   const DEMO = [
-    { id: "lora", name: "Лора", av: "a1", age: 5, cur: 7, classAt: 7, hwTo: 6, b: { 1: 3, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1 }, halo: { 1: 1, 2: 1, 3: 1 } },
-    { id: "ivo", name: "Иво", av: "a4", age: 6, cur: 2, classAt: 2, hwTo: 1, b: { 1: 2 }, halo: {} },
-    { id: "nia", name: "Ния", av: "n1", age: 5, cur: 1, classAt: 1, b: {}, halo: {} }
+    { id: "lora", name: "Лора", av: "a1", age: 5, cur: 7, classAt: 7, hwTo: 6, format: "center", b: { 1: 3, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1 }, halo: { 1: 1, 2: 1, 3: 1 } },
+    { id: "ivo", name: "Иво", av: "a4", age: 6, cur: 2, classAt: 2, hwTo: 1, format: "online", b: { 1: 2 }, halo: {} },
+    { id: "nia", name: "Ния", av: "n1", age: 5, cur: 1, classAt: 1, format: "ai", b: {}, halo: {} }
   ];
   const KEY = "obs.proto.v3";
   let DB = (() => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } })();
@@ -54,6 +54,9 @@
   const hwOlder = () => { const c = hwCurrent(); return assignedL().filter(L => L !== c && !hwState(L).complete); };
   const unlockAt = (id) => { const u = HW.unlock.find(x => x.game === id); return u ? u.from : 1; };
   const isOpen = (id) => REVIEW || unlockAt(id) <= classAt();
+  // формата на обучение (от профила на детето): присъствено → физически абакус; онлайн / AI тутор → дигитален абакус
+  const FORMATS = [["center", "присъствено"], ["online", "онлайн"], ["ai", "с AI тутор"]];
+  const usesDigital = () => (P.format || "center") !== "center";
   // връзка с платформата (както в АЕ): пилотното дете идва от js/sync.js (?pilot=… или „Кой играе?“ на общ таблет)
   const PS = window.PILOT_SYNC || null, CHILD = PS && PS.status && PS.status().child;
   // от сървъра: възложените от учителя занятия MA01…MA21 (най-новото определя докъде е групата) и изиграните кръгове (и от други таблети)
@@ -223,11 +226,13 @@
     const un = HW.unlock.map(u => `<tr class="${u.from <= at ? "ok" : "fut"}"><td>${u.name}</td><td>от занятие ${u.from}</td><td>${u.why}</td></tr>`).join("");
     app.className = "o-scr o-map o-gamesbg";
     app.innerHTML = `<div class="o-maptop"><button class="o-back" id="o-back">← Към обсерваторията</button><div class="o-grow"><div class="o-mt">За учителя</div><div class="o-ms">демо · ${P.name} · проведени занятия: ${at} от ${max}</div></div>
+        <label class="o-tfmt">Форма на обучение <select id="o-t-fmt">${FORMATS.map(([k, v]) => `<option value="${k}" ${(P.format || "center") === k ? "selected" : ""}>${v}</option>`).join("")}</select></label>
         <button class="o-sec" id="o-t-reset">Започни отначало</button><button class="o-go sm" id="o-t-next" ${at >= max ? "disabled" : ""}>Проведи занятие ${Math.min(max, at + 1)}</button></div>
-      <div class="o-teachbox"><p class="o-tnote">В истинската платформа учителят възлага домашното от своя профил (офис → „Пилот“ → „Домашни“). Тук: всяко проведено занятие = възложено домашно. „Продължи“ води към най-новото незавършено; по-старите – „Доиграй“, по желание.</p>
+      <div class="o-teachbox"><p class="o-tnote">Формата на обучение определя абакуса в „Звездни сметки“: присъствено – физически (отговорът с клавиатурата), онлайн и с AI тутор – дигиталният абакус до примерите. В платформата идва от профила на детето. В истинската платформа учителят възлага домашното от своя профил (офис → „Пилот“ → „Домашни“). Тук: всяко проведено занятие = възложено домашно. „Продължи“ води към най-новото незавършено; по-старите – „Доиграй“, по желание.</p>
         <table class="o-ttbl"><thead><tr><th>Код</th><th>Занятие</th><th>Кръгове на домашното</th><th>Състояние</th></tr></thead><tbody>${rows}</tbody></table>
         <h3>Свободни игри – отключване <small>(${HW.unlock_status || ""})</small></h3><table class="o-ttbl"><tbody>${un}</tbody></table></div>`;
     $("#o-back").onclick = screenHome;
+    $("#o-t-fmt").onchange = (e) => { P.format = e.target.value; save(); };
     $("#o-t-next").onclick = () => { P.classAt = Math.min(max, at + 1); save(); screenHome(); };
     $("#o-t-reset").onclick = () => { P.classAt = 1; P.hw = {}; P.hwres = {}; P.b = {}; P.halo = {}; save(); screenHome(); };
   }
@@ -485,7 +490,7 @@
   };
   const GAMES = {
     trainer: { name: "Звездни сметки", adult: "Тренажор", sub: "смятай примерите", skill: "смятане на абакуса и наум",
-      opts: { topic: "тема", count: [3, 5, 7, 10], speed: SPEEDS, rounds: [3, 5, 8], mode: [["ab", "с абакус"], ["mind", "наум (без телескоп)"]], tool: [["phys", "физически абакус"], ["digi", "дигитален абакус"]], voice: [["off", "без глас"], ["on", "с глас"]] } },
+      opts: { topic: "тема", count: [3, 5, 7, 10], speed: SPEEDS, rounds: [3, 5, 8], voice: [["off", "без глас"], ["on", "с глас"]] } },
     flash: { name: "Звездни сигнали", adult: "Флашкарти", sub: "кое число видя?", skill: "разпознаване на образа на числото (първо точно, после по-бързо)",
       opts: { topic: "тема", speed: [["auto", "авто"], 5, 4, 3, 2.5, 2, 1.5, 1, .8, .6], rounds: [5, 8, 12] } },
     fix: { name: "Поправи телескопа", sub: "с едно движение", skill: "четене на числото и правилното движение",
@@ -504,9 +509,10 @@
   const OPTNAME = { tool: "Абакус", voice: "Глас за числата", topic: "Тема", count: "Брой числа", speed: "Скорост (сек.)", rounds: "Кръгове", mode: "Начин", len: "Колко числа", upto: "До" };
   function defaults(id, bare) {
     const n = Math.min(classAt(), 21), mine = (!bare && P.set && P.set[id]) || {};
-    const keep = (P.set && P.set[id]) || {};   // абакусът и гласът са на детето – важат и в домашното
-    const c = { tool: keep.tool || "phys", voice: keep.voice || "off", topic: TOPIC_OF[n] || "s9", count: 5, speed: id === "flash" ? "auto" : id === "constel" ? 3 : id === "comet" ? 8 : 2, rounds: GAMES[id].opts.rounds[1], mode: "ab", len: 2, upto: n < 3 ? 3 : n < 6 ? 5 : 10, ...mine };
-    if (!bare && !topicOpen(c.topic)) c.topic = TOPIC_OF[n] || "s9";   // запомнена тема, която още не е учена → текущата
+    const keep = (P.set && P.set[id]) || {};   // гласът е избор за детето – важи и в домашното
+    const c = { voice: keep.voice || "off", topic: TOPIC_OF[n] || "s9", count: 5, speed: id === "flash" ? "auto" : id === "constel" ? 3 : id === "comet" ? 8 : 2, rounds: GAMES[id].opts.rounds[1], mode: "ab", len: 2, upto: n < 3 ? 3 : n < 6 ? 5 : 10, ...mine };
+    if (!bare && !topicOpen(c.topic)) c.topic = TOPIC_OF[n] || "s9";
+    if (!bare) c.mode = "ab";   // „наум“ е само вид кръг в домашното („Без телескоп“), не настройка   // запомнена тема, която още не е учена → текущата
     return c;
   }
   // темите в настройките – само до учените (по проведеното занятие); в „преглед“ – всички
@@ -564,7 +570,7 @@
   }
   let ABMSG = null; window.addEventListener("message", (e) => { const d = e.data || {}; if (d.src === "abacus" && ABMSG) ABMSG(d); });
   async function playTrainer(c) {
-    const t = topicFor(c.topic), mind = c.mode === "mind", digi = !mind && c.tool === "digi", talkN = c.voice === "on"; let ok = 0;
+    const t = topicFor(c.topic), mind = c.mode === "mind", digi = !mind && usesDigital(), talkN = c.voice === "on"; let ok = 0;   // „наум“ – само като кръг „Без телескоп“ в домашното
     P.log = P.log || {}; P.log.trainer = P.log.trainer || []; const w = $("#o-work"); w.classList.add("o-trw");
     w.innerHTML = `<div class="o-trl${digi ? "" : " solo"}"><div class="o-trn" id="o-num"></div><div class="o-trq" id="o-trq"></div></div>` +
       (digi ? `<div class="o-trab" style="aspect-ratio:${220 + 180 * (t.rods - 1)} / 630"><iframe id="o-abf" title="Дигитален абакус" src="abacus.html?embed=1&mode=free&voice=0&rods=${t.rods}${P.touch ? "&touch=1" : ""}"></iframe></div>` : "");
@@ -589,7 +595,7 @@
           ABMSG.on = null;
         } else ans = await keypad(q, String(Math.pow(10, t.rods + 1)).length - 1);
         const right = ans === target;
-        P.log.trainer.push({ t: Date.now(), topic: t.id, nums, speed: c.speed, voice: talkN, src: mind ? "mind" : c.tool, answer: ans, correct: right, rtMs: Date.now() - tq, shownMs: shown, rules, moves: digi ? abMoves.map(m => ({ ...m, ms: m.at - t0 })) : null });
+        P.log.trainer.push({ t: Date.now(), topic: t.id, nums, speed: c.speed, voice: talkN, src: mind ? "mind" : digi ? "digi" : "phys", answer: ans, correct: right, rtMs: Date.now() - tq, shownMs: shown, rules, moves: digi ? abMoves.map(m => ({ ...m, ms: m.at - t0 })) : null });
         if (P.log.trainer.length > 400) P.log.trainer.splice(0, P.log.trainer.length - 400); save();
         num.textContent = "= " + target; q.innerHTML = right ? "" : `<p class="o-trhint">Ти: ${ans}</p>`;
         if (right) { ok++; pipStar(k); say(thank(target), "joy"); } else say("Почти! Ето колко стана.", "wait"); await wait(right ? 1300 : 2400);
