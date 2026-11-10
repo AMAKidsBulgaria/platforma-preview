@@ -40,7 +40,7 @@
 
   // ---- глас: Зори (zr_*), иначе разказвачът (Калина) ----
   let AUDZ = {}, AUD = {}, cur = null;
-  fetch("config/abacus-audio-zori.json?v=2").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
+  fetch("config/abacus-audio-zori.json?v=3").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
   fetch("config/abacus-audio.json?v=3").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
   function voice(text) {
     if (Q.get("voice") === "0") return;
@@ -186,14 +186,21 @@
       if (m.bead === "h") { y0 = hY(r.h); y1 = hY(1 - r.h); } else { const ks = moving(m).map(g => +g.dataset.k), mid = (e) => ks.reduce((a, k) => a + eY(k, e), 0) / ks.length; y0 = mid(r.e); y1 = mid(r.e + m.d); }
       const dir = Math.sign(y1 - y0), a = document.createElementNS(NS, "g"); a.setAttribute("class", "o-arrow");
       a.innerHTML = `<line x1="${x}" y1="${y0}" x2="${x}" y2="${y1 - dir * 14}"/><path d="M${x - 14} ${y1 - dir * 18} L${x + 14} ${y1 - dir * 18} L${x} ${y1 + dir * 4} Z"/>`;
+      if (m.finger) { const ty = Math.min(y0, y1) + Math.abs(y1 - y0) / 2, lb = document.createElementNS(NS, "g"); lb.setAttribute("class", "o-finger");
+        lb.innerHTML = `<rect x="${x + 26}" y="${ty - 30}" width="${m.finger.length * 26 + 60}" height="60" rx="30"/><text x="${x + 56}" y="${ty + 12}">${m.finger} ${dir < 0 ? "↑" : "↓"}</text>`; a.appendChild(lb); }
       svg.appendChild(a); const els = moving(m); els.forEach(e => e.classList.add("go")); return () => { a.remove(); els.forEach(e => e.classList.remove("go")); };
     }
-    async function demo(ms, together) {   // показва движенията (по едно или наведнъж – щипка)
+    function focus(rod) {   // рамка около една пръчка (подсказка „погледни тук“), без да показва движението
+      const f = document.createElementNS(NS, "rect"); f.setAttribute("class", "o-focus");
+      f.setAttribute("x", xOf(rod) - BW / 2 - 18); f.setAttribute("y", 24); f.setAttribute("width", BW + 36); f.setAttribute("height", H - 48); f.setAttribute("rx", 30);
+      svg.appendChild(f); return () => f.remove();
+    }
+    async function demo(ms, together, slow) {   // показва движенията (по едно или наведнъж – щипка); slow – за „Зори показва“
       const groups = together ? [ms] : ms.map(m => [m]);
-      for (const gr of groups) { const un = gr.map(mark); await wait(1000); gr.forEach(m => { st = E.apply(st, m) || st; }); upd(); await wait(700); un.forEach(f => f()); await wait(250); }
+      for (const gr of groups) { const un = gr.map(mark); await wait(slow ? 1800 : 1000); gr.forEach(m => { st = E.apply(st, m) || st; }); upd(); await wait(slow ? 1400 : 700); un.forEach(f => f()); await wait(250); }
     }
     return { reset: () => { st = E.make(rods); moves = []; upd(); }, set: (v) => { st = E.fromValue(v, rods); moves = []; upd(); }, value: () => E.value(st), moves: () => moves.slice(), enable: (v) => { on = v; },
-      onChange: (f) => { onChange = f; }, demo, hint: (ms) => { const un = ms.map(mark); setTimeout(() => un.forEach(f => f()), 2600); } };
+      onChange: (f) => { onChange = f; }, demo, focus, state: () => JSON.stringify(st), hint: (ms) => { const un = ms.map(mark); setTimeout(() => un.forEach(f => f()), 2600); } };
   }
   // статична картинка на число (за флашкартите)
   function abImg(v, rods) {
@@ -405,7 +412,7 @@
     $("#o-gx").onclick = () => { gen++; screenGames(); }; holdBtn($("#o-gs"), () => { gen++; screenSettings(id); });
   }
   const inMission = () => !!M && !M.free;
-  function pip(round) { const b = app.querySelectorAll(".o-game .o-pips b"); b.forEach((x, j) => x.className = j < round ? "d" : j === round ? "c" : ""); }
+  function pip(round) { const b = app.querySelectorAll(".o-game .o-pips b"); b.forEach((x, j) => { const st = x.classList.contains("star"); x.className = j < round ? "d" : j === round ? "c" : ""; if (st) x.classList.add("star"); }); }
 
   // ---- самите игри: връщат [верни, общо] ----
   async function playTrainer(c) {
@@ -439,26 +446,90 @@
     return `<svg viewBox="0 0 220 200" class="o-tele${parts >= total ? " done" : ""}"><g class="t-leg ${p(0)}"><path d="M110 120 L70 190 M110 120 L110 190 M110 120 L150 190"/></g>
       <g class="t-tube ${p(1)}"><rect x="40" y="88" width="120" height="30" rx="10" transform="rotate(-24 100 103)"/></g><g class="t-eye ${p(2)}"><rect x="22" y="112" width="28" height="18" rx="5" transform="rotate(-24 36 121)"/></g>
       <g class="t-lens ${p(3)}"><circle cx="166" cy="72" r="18"/></g><g class="t-beam ${p(4)}"><path d="M180 64 L216 20 L216 60 Z"/></g></svg>`; };
+  // „Поправи телескопа“: на абакуса е число с едно сгрешено движение; детето го поправя с едно движение.
+  // Проверяват се отделно: (1) крайното число и (2) броят и видът на движенията (спрямо единственото правилно движение).
+  // 1-ва грешка → подсказка без решението (рамка около пръчката + „повече/по-малко“ или „с едно движение“);
+  // 2-ра грешка → „Зори показва“: същият абакус и същият модел, бавно движение със стрелка и пръст; връщане в началото → „Сега опитай ти“.
+  // Звездичка (самостоятелно) – само от първия опит без помощ. След показване следва сходна задача (същото движение), за да видим дали вече го може само.
+  const NUMW = ["", "едно топче", "две топчета", "три топчета", "четирите топчета"];
+  function fixSay(m) {
+    if (m.bead === "h") return m.d > 0 ? "Показалецът сваля небесното топче до гредата." : "Показалецът вдига небесното топче от гредата.";
+    const n = Math.abs(m.d), one = n === 1 ? "" : " – наведнъж";
+    return m.d > 0 ? `Палецът вдига ${NUMW[n]} до гредата${one}.` : `Показалецът сваля ${NUMW[n]} от гредата${one}.`;
+  }
+  const fixFinger = (m) => m.bead === "e" && m.d > 0 ? "палец" : "показалец";
+  function fixTask(t, like, avoid) {   // like = {bead, d} на правилното движение → сходна задача
+    for (let g = 0; g < 300; g++) { const target = randVal(t), st0 = E.fromValue(target, t.rods), rod = Math.floor(Math.random() * t.rods), opts = [];
+      for (let d = 1; d <= 4; d++) opts.push({ rod, bead: "e", d }, { rod, bead: "e", d: -d }); opts.push({ rod, bead: "h", d: 5 }, { rod, bead: "h", d: -5 });
+      const okm = opts.filter(o => E.apply(st0, o) && (!like || (o.bead === like.bead && -o.d === like.d))); if (!okm.length || (like && target === avoid)) continue;
+      const o = okm[Math.floor(Math.random() * okm.length)];
+      return { target, wrong: E.value(E.apply(st0, o)), fix: { rod, bead: o.bead, d: -o.d } }; }
+    return like ? fixTask(t) : { target: 0, wrong: 1, fix: { rod: 0, bead: "e", d: -1 } };
+  }
+  function fixJudge(ab, task) {   // отделно: числото и движенията
+    const ms = ab.moves(), valueOk = ab.value() === task.target, f = task.fix;
+    const movesOk = ms.length === 1 && ms[0].rod === f.rod && ms[0].bead === f.bead && ms[0].d === f.d;
+    return { value: ab.value(), valueOk, moves: ms.map(m => ({ rod: m.rod, bead: m.bead, d: m.d })), movesOk };
+  }
+  // чака детето: „Провери“ е активно чак след първото движение; при верен резултат приключва само
+  function fixAttempt(ab, task) {
+    const b = $("#o-done"); b.disabled = true; b.hidden = false; ab.enable(true);
+    return new Promise(res => { let fin = false; const end = () => { if (!fin) { fin = true; ab.onChange(null); ab.enable(false); b.disabled = true; res(fixJudge(ab, task)); } };
+      b.onclick = end; ab.onChange(() => { b.disabled = false; if (ab.value() === task.target) setTimeout(end, 600 * FAST); }); });
+  }
   async function playFix(c) {
-    const t = topicFor(c.topic); let ok = 0; const total = c.rounds;
+    const t = topicFor(c.topic); let solo = 0, built = 0; const total = c.rounds, tele = () => TELE(Math.round(built * 5 / total), 5);
+    P.log = P.log || {}; P.log.fix = P.log.fix || []; let like = null, prev = null;
     for (let k = 0; k < c.rounds; k++) {
-      pip(k); let target = 0, wrong = 0;
-      for (let g = 0; g < 80; g++) { target = randVal(t); const st0 = E.fromValue(target, t.rods), rod = Math.floor(Math.random() * t.rods), opts = [];
-        for (let d = 1; d <= 4; d++) opts.push({ rod, bead: "e", d }, { rod, bead: "e", d: -d }); opts.push({ rod, bead: "h", d: 5 }, { rod, bead: "h", d: -5 });
-        const okm = opts.filter(o => E.apply(st0, o)); if (okm.length) { wrong = E.value(E.apply(st0, okm[Math.floor(Math.random() * okm.length)])); break; } }
-      const w = $("#o-work"); w.innerHTML = `<div class="o-fixrow"><div class="o-telebox">${TELE(Math.round(ok * 5 / total), 5)}</div><div class="o-fixcol"><div class="o-num pop">${target}</div><div class="o-abhost" id="o-abh"></div><div class="o-row"><button class="o-done" id="o-done">✓ Готово</button></div></div></div>`;
-      const ab = abacus($("#o-abh"), t.rods); ab.set(wrong); once(k, "Поправи числото!", "point");
-      let right = false, one = false;
-      for (let tr = 0; tr < 2; tr++) {
-        await untilDone(ab, target); ab.enable(false); right = ab.value() === target; one = ab.moves().length === 1;
-        if (right || tr) break; await talk("Нека опитаме пак.", "explain"); ab.set(wrong); ab.enable(true);
+      pip(k); const task = fixTask(t, like, prev && prev.target), rec = { t: Date.now(), topic: t.id, target: task.target, wrong: task.wrong, fix: task.fix, similar: !!like, tries: [], hints: [], shown: 0, repeated: null, solo: false };
+      const w = $("#o-work"); w.innerHTML = `<div class="o-fix"><div class="o-fixhead"><div class="o-fixgoal">Направи <b class="o-num pop">${task.target}</b></div>
+        <div class="o-telebox" title="Телескоп">${tele()}<span>${built}/${total}</span></div></div><div class="o-fixmsg" id="o-fixmsg"></div>
+        <div class="o-abhost" id="o-abh"></div><div class="o-row"><button class="o-sec o-rew" id="o-rew" hidden>↺ Гледай пак</button><button class="o-done" id="o-done">✓ Провери</button></div></div>`;
+      const ab = abacus($("#o-abh"), t.rods), msg = (x) => { $("#o-fixmsg").textContent = x; };
+      ab.set(task.wrong); const start = ab.state();
+      if (FAST_ON) window.OBS_T = { task, ab, rec };   // само за автоматичните проверки
+      if (like) await talk("Още едно такова!", "point"); else once(k, "Поправи числото!", "point");
+      // опит 1
+      let r = await fixAttempt(ab, task); rec.tries.push(r);
+      if (!(r.valueOk && r.movesOk)) {
+        // подсказка без решението
+        let unf = null;
+        if (r.valueOk) { rec.hints.push("one-move"); await talk("Вярно! Сега опитай с едно движение.", "explain"); }
+        else { rec.hints.push("rod"); ab.set(task.wrong); unf = ab.focus(task.fix.rod); await talk(task.target > task.wrong ? "Погледни тази пръчка. Трябва да стане повече." : "Погледни тази пръчка. Трябва да стане по-малко.", "point"); }
+        ab.set(task.wrong); r = await fixAttempt(ab, task); rec.tries.push(r); if (unf) unf();
+        if (!(r.valueOk && r.movesOk)) {
+          // „Зори показва“ – същият абакус, същият модел; после обратно в началото
+          const show = async () => { rec.shown++; msg("Зори показва"); $("#o-rew").hidden = true; $("#o-done").hidden = true; ab.enable(false); ab.set(task.wrong);
+            say(rec.shown === 1 ? "Гледай!" : "Гледай още веднъж.", "point"); await wait(900);
+            const m = { ...task.fix, finger: fixFinger(task.fix) }; say(fixSay(task.fix), "explain");
+            $("#o-fixmsg").innerHTML = `Зори показва · <i>${m.finger} ${m.bead === "e" ? (m.d > 0 ? "↑" : "↓") : (m.d > 0 ? "↓" : "↑")}</i>`; await ab.demo([m], true, true); await wait(900);
+            ab.set(task.wrong); if (ab.state() !== start) throw new Error("fix: началното състояние не е възстановено");
+            msg("Сега опитай ти"); $("#o-rew").hidden = false; await talk("Сега опитай ти.", "point"); };
+          let r2Resolve = null, busy = false;
+          $("#o-rew").onclick = async () => { if (busy) return; busy = true; ab.onChange(null); try { await show(); } catch (e) { if (e !== "stale") throw e; return; } finally { busy = false; } if (r2Resolve) r2Resolve(); };
+          busy = true; await show(); busy = false;
+          for (;;) {   // повторение след показване (↺ „Гледай пак“ започва опита отначало)
+            const p = fixAttempt(ab, task), again = new Promise(res => { r2Resolve = () => res("again"); }); const x = await Promise.race([p, again]);
+            if (x === "again") continue; r = x; break;
+          }
+          rec.tries.push(r); rec.repeated = r.valueOk && r.movesOk; $("#o-rew").hidden = true; msg("");
+        }
       }
-      if (right && one) { ok++; pipStar(k); say("Точно така!", "joy"); $(".o-telebox").innerHTML = TELE(Math.round(ok * 5 / total), 5); }
-      else if (right) say("Вярно! А можеш ли с едно движение?", "explain"); else { say("Почти! Ето как е правилно.", "wait"); ab.set(target); }
-      await wait(right ? 1300 : 2400);
+      const okNow = r.valueOk && r.movesOk;
+      rec.solo = rec.tries.length === 1 && okNow;
+      if (prev && rec.similar) prev.nextSolo = rec.solo;
+      if (okNow) built++;
+      if (rec.solo) { solo++; pipStar(k); say("Точно така!", "joy"); }
+      else if (okNow && !rec.shown) say("Браво! Справи се.", "joy");
+      else if (okNow) say("Браво! Ти го направи.", "joy");
+      else { say("Ще го упражним пак.", "wait"); ab.set(task.target); }
+      $(".o-telebox").innerHTML = tele() + `<span>${built}/${total}</span>`;
+      P.log.fix.push(rec); if (P.log.fix.length > 300) P.log.fix.splice(0, P.log.fix.length - 300); save();
+      like = rec.shown ? { bead: task.fix.bead, d: task.fix.d } : null; prev = rec.shown ? rec : null;
+      await wait(okNow ? 1400 : 2400);
     }
-    if (ok >= total * .6) { $("#o-work").innerHTML = `<div class="o-telebox big">${TELE(5, 5)}</div>`; say("Телескопът отново вижда звездите!", "joy"); burst(); await wait(2200); }
-    return [ok, c.rounds];
+    if (built >= total * .6) { $("#o-work").innerHTML = `<div class="o-telebox big">${TELE(5, 5)}</div>`; say("Телескопът отново вижда звездите!", "joy"); burst(); await wait(2200); }
+    return [solo, c.rounds];
   }
   async function playMemory(c) {
     const t = topicFor(c.topic); let ok = 0;

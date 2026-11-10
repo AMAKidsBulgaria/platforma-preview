@@ -277,3 +277,31 @@ html.o-still .o-burst { display: none; }
 .o-flash.o-sig { animation: ofade .25s ease-out; } .o-flash.o-sig .o-ab { filter: drop-shadow(0 0 18px #F5C04A55); }
 .o-flash.o-dim { position: relative; } .o-flash.o-dim .o-ab { opacity: .35; filter: saturate(.3); }
 .o-flash.o-dim span { position: absolute; inset: 0; display: grid; place-items: center; font: 900 clamp(48px, 9vw, 90px) "Nunito"; color: #ffffff55; }
+/* „Поправи телескопа“ v2: абакусът в центъра, телескопът – ясен брояч горе вдясно, „Зори показва“ */
+.o-fix { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 0; }
+.o-fixhead { width: 100%; display: flex; align-items: center; justify-content: center; position: relative; min-height: 64px; }
+.o-fixgoal { font: 900 clamp(22px, 3vw, 32px) "Nunito"; color: var(--ink); display: flex; align-items: center; gap: 14px; } .o-fixgoal .o-num { font-size: clamp(44px, 7vw, 76px); min-height: 0; }
+.o-fix .o-telebox { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); width: clamp(90px, 13vw, 150px); display: flex; flex-direction: column; align-items: center; gap: 2px;
+  background: #0d1030aa; border: 2px solid #B88A4E88; border-radius: 18px; padding: 6px 8px 4px; }
+.o-fix .o-telebox span { font: 900 15px "Nunito"; color: #FFE9A8; letter-spacing: .04em; }
+.o-tele g { opacity: 1; } .o-tele g:not(.on) * { fill: none !important; stroke: #FFE9A8aa !important; stroke-width: 4 !important; stroke-dasharray: 8 7; }
+.o-tele .t-leg:not(.on) path { stroke-width: 6 !important; }
+.o-fixmsg { font: 900 clamp(18px, 2.4vw, 24px) "Nunito"; color: #FFE9A8; min-height: 1.2em; }
+.o-fix .o-abhost { height: clamp(220px, calc(100dvh - 330px), 720px) !important; }
+.o-fix .o-done:disabled { opacity: .45; box-shadow: none; }
+.o-focus { fill: #8FC7FF14; stroke: #8FC7FF; stroke-width: 8; stroke-dasharray: 22 14; animation: ofocus 1.2s ease-in-out infinite alternate; }
+@keyframes ofocus { from { opacity: .55; } to { opacity: 1; } }
+.o-finger rect { fill: #0d1030; stroke: var(--gold); stroke-width: 4; } .o-finger text { fill: #FFE9A8; font: 900 34px "Nunito"; }
+html.o-still .o-focus { animation: none; }
+.o-fix .o-ab { overflow: visible; }
+/* „Поправи телескопа“ на по-малки екрани: броячът е в реда със задачата, етикетът с пръста – в надписа */
+.o-fixmsg i { font-style: normal; color: var(--gold); }
+@media (max-width: 1000px), (max-height: 600px) {
+  .o-fixhead { justify-content: space-between; gap: 10px; min-height: 0; } .o-fix .o-telebox { position: static; transform: none; width: 92px; flex-direction: row; padding: 4px 8px; width: 116px; }
+  .o-fix .o-telebox .o-tele { width: 56px; } .o-finger { display: none; }
+}
+@media (max-height: 520px) {
+  .o-fix { gap: 4px; } .o-fixgoal { font-size: 20px; } .o-fixgoal .o-num { font-size: 36px; } .o-fixmsg { font-size: 16px; min-height: 1.1em; }
+  .o-fix .o-abhost { height: calc(100dvh - 205px) !important; } .o-fix .o-done, .o-fix .o-rew { padding: 6px 16px; font-size: 18px; }
+}
+@media (max-width: 760px) and (min-height: 521px) { .o-fix .o-abhost { height: clamp(180px, calc(100dvh - 520px), 480px) !important; } }
