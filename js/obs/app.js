@@ -279,6 +279,12 @@
       if (b) b.onclick = end; if (ab.value() === target) return setTimeout(end, 500 * FAST);
       ab.onChange(() => { if (ab.value() === target) setTimeout(end, 500 * FAST); }); });
   }
+  // без бутон: приключва, щом числото стане вярно, или ако след поне едно движение детето спре за IDLE мс
+  const IDLE = 4000;
+  function untilIdle(ab, target) {
+    return new Promise(res => { let fin = false, tm = null; const end = () => { if (!fin) { fin = true; clearTimeout(tm); ab.onChange(null); res(); } };
+      ab.onChange(() => { clearTimeout(tm); if (ab.value() === target) setTimeout(end, 500 * FAST); else tm = setTimeout(end, IDLE * FAST); }); });
+  }
   function choices(right, max) { const s = new Set([right]); while (s.size < Math.min(3, max + 1)) s.add(Math.floor(Math.random() * (max + 1))); return shuffle([...s]); }
   async function ask(opts, right) {
     const w = $("#o-work"); const row = document.createElement("div"); row.className = "o-ch";
@@ -539,9 +545,9 @@
         w.innerHTML = `${again ? '<div class="o-again">↺ Същото число – още веднъж</div>' : ""}<div class="o-flash r${t.rods} o-sig">${abImg(v, t.rods)}</div>`; await wait(c.speed * 1000); };
       await show(false); let right = false;
       for (let tr = 0; tr < 2; tr++) {
-        w.innerHTML = `<div class="o-num">?</div><div class="o-abhost" id="o-abh"></div><div class="o-row"><button class="o-done" id="o-done">✓ Готово</button></div>`;
+        w.innerHTML = `<div class="o-num">?</div><div class="o-abhost" id="o-abh"></div>`;
         once(k || tr ? 1 : 0, "Нареди същото число.", "explain"); if (k && !tr) voice("Нареди същото число.");
-        const ab = abacus($("#o-abh"), t.rods); await untilDone(ab, v); ab.enable(false); right = ab.value() === v;
+        const ab = abacus($("#o-abh"), t.rods); await untilIdle(ab, v); ab.enable(false); right = ab.value() === v;
         if (right) { if (!tr) { ok++; pipStar(k); } $(".o-num").textContent = v; say(thank(v), "joy"); await wait(1300); break; }
         if (tr) { $(".o-num").textContent = v; ab.set(v); say("Ето кое число беше.", "explain"); await wait(2000); break; }
         await talk("Нека го видим още веднъж.", "explain"); await show(true);
