@@ -236,3 +236,13 @@ html.o-still .o-burst { display: none; }
   .o-stage { bottom: 186px; } .o-stage .o-zori { height: clamp(120px, 26dvh, 240px); } .o-stage .o-kid { height: clamp(90px, 19dvh, 180px); }
   .o-mtop .o-back { padding: 6px 10px; font-size: 15px; }
 }
+
+/* „Звездно броене“ v3 – съзвездия, меко светване, звездички в лентата */
+.o-cbox .o-cnt { width: min(100%, 520px); }
+.o-cbox .o-cs { fill: var(--gold); animation: oon .3s ease-out both, oglow 1.4s ease-in-out .3s infinite alternate; }
+@keyframes oon { from { opacity: 0; transform: scale(.6); } } 
+.o-clink { stroke: #F5C04A44; stroke-width: 2; stroke-dasharray: 3 6; }
+.o-cbox.out { animation: oout .3s ease-in forwards; }
+.o-cq.soft { color: var(--muted); font-size: clamp(22px, 3.4vw, 34px); animation: ofade .3s; }
+.o-pips b.star { background: none; height: 22px; margin-top: -5px; position: relative; } .o-pips b.star::after { content: "★"; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -52%); color: var(--gold); font-size: 22px; text-shadow: 0 0 10px #F5C04A; animation: opop .4s cubic-bezier(.3,1.6,.5,1); }
+.o-pips b.star::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 12px; margin-top: -6px; border-radius: 99px; background: #F5C04A55; }

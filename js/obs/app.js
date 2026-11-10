@@ -336,13 +336,13 @@
       opts: { topic: "тема", rounds: [3, 5, 8] } },
     memory: { name: "Нощна памет", sub: "виж и нареди", skill: "образа на числото – основа за въображаемия абакус",
       opts: { topic: "тема", speed: SPEEDS, rounds: [3, 5, 8] } },
-    count: { name: "Звездно броене", sub: "колко звезди светнаха?", skill: "виждане на групи по 5 и 10",
-      opts: { upto: [5, 10, 15], speed: SPEEDS, rounds: [4, 6, 8] } }
+    count: { name: "Звездно броене", sub: "колко звезди видя?", skill: "виждане на количество с един поглед; 6–10 като 5 и още",
+      opts: { upto: [3, 5, 10], speed: [3, 2, 1.5, 1], rounds: [4, 6, 8] } }
   };
   const OPTNAME = { topic: "Тема", count: "Брой числа", speed: "Скорост (сек.)", rounds: "Кръгове", mode: "Начин", len: "Колко числа", upto: "До" };
   function defaults(id) {
     const n = Math.min(P.cur, 21), sp = (PAR[n] || PAR[9]);
-    return { topic: TOPIC_OF[n] || "s9", count: 5, speed: id === "flash" ? 1.6 : id === "memory" ? 1.3 : 2, rounds: GAMES[id].opts.rounds[1], mode: "ab", len: 2, upto: n < 4 ? 5 : 10, ...(P.set && P.set[id] || {}) };
+    return { topic: TOPIC_OF[n] || "s9", count: 5, speed: id === "flash" ? 1.6 : id === "memory" ? 1.3 : 2, rounds: GAMES[id].opts.rounds[1], mode: "ab", len: 2, upto: n < 3 ? 3 : n < 6 ? 5 : 10, ...(P.set && P.set[id] || {}) };
   }
   // случайно число, позволено от темата (цифрите ≤ stateMax; кръгли/11–19)
   function randVal(t) {
@@ -439,46 +439,52 @@
     }
     return [ok, c.rounds];
   }
-  // „Звездно броене“: звездите се появяват едновременно в центъра (фиксирани позиции на групи по 5, без припокриване), изчезват едновременно;
-  // „Колко звезди видя?“ + 3 големи бутона; при грешка – „Виж пак“ (без наказание); всяка задача се записва (P.log.count).
+  // „Звездно броене“ v3: малки съзвездия с фиксирани позиции (без припокриване); 6–10 = „петица“ + остатък (връзката с небесното топче = 5).
+  // Ход: „Гледай звездите!“ (~1 с) → звездите светват едновременно → угасват едновременно → „Колко звезди видя?“ + 3 бутона (без лимит на времето)
+  // → вярно: звездичка светва в горната лента, кратка реакция на Зори, следваща задача; грешно: спокойно повторно наблюдение. Всяка задача се записва (P.log.count).
+  const PAT = { 1: [[100, 100]], 2: [[62, 70], [138, 130]], 3: [[100, 48], [52, 140], [148, 140]], 4: [[58, 58], [142, 58], [58, 142], [142, 142]],
+                5: [[100, 30], [38, 82], [162, 82], [64, 160], [136, 160]] };
+  const LNK = { 2: [[0, 1]], 3: [[0, 1], [1, 2], [2, 0]], 4: [[0, 1], [1, 3], [3, 2], [2, 0]], 5: [[0, 1], [1, 3], [3, 4], [4, 2], [2, 0]] };
+  function cluster(n, ox) { const p = PAT[n] || []; return (LNK[n] || []).map(([a, b]) => `<line x1="${ox + p[a][0]}" y1="${p[a][1]}" x2="${ox + p[b][0]}" y2="${p[b][1]}" class="o-clink"/>`).join("") +
+    p.map(([x, y]) => `<g transform="translate(${ox + x} ${y})"><path class="o-cs" d="${starPath(26)}"/></g>`).join(""); }
   function countSVG(v) {
-    const rows = []; for (let i = 0; i < v; i += 5) rows.push(Math.min(5, v - i));
-    const SP = 84, RW = 5 * SP + 40, W = RW + 40, H = rows.length * 104 + 30;
-    return `<svg viewBox="0 0 ${W} ${H}" class="o-cnt">${rows.map((n, ri) => { const y = 20 + ri * 104;
-      return `<rect x="20" y="${y}" width="${RW}" height="88" rx="22" class="o-five"/>` + Array.from({ length: n }, (_, j) => `<g transform="translate(${20 + 20 + SP / 2 + j * SP} ${y + 44})"><path class="o-cs" d="${starPath(30)}"/></g>`).join(""); }).join("")}</svg>`;
+    if (v <= 5) return `<svg viewBox="-10 0 220 200" class="o-cnt">${cluster(v, 0)}</svg>`;
+    return `<svg viewBox="-10 0 500 200" class="o-cnt">${cluster(5, 0)}${cluster(v - 5, 280)}</svg>`;
   }
+  function pipStar(k) { const b = app.querySelectorAll(".o-pips b")[k]; if (b) b.classList.add("star"); }
   async function playCount(c) {
     let ok = 0; P.log = P.log || {}; P.log.count = P.log.count || [];
     for (let k = 0; k < c.rounds; k++) {
       pip(k); const v = 1 + Math.floor(Math.random() * c.upto), w = $("#o-work"), showMs = Math.round(c.speed * 1000);
       const rec = { t: Date.now(), n: v, showMs, choice: null, correct: false, retries: 0, rtMs: null };
-      const look = async () => { w.innerHTML = `<div class="o-cbox">${countSVG(v)}</div>`; await wait(showMs); const b = $(".o-cbox"); if (b) b.classList.add("out"); await wait(220); };
+      const look = async () => {
+        w.innerHTML = `<div class="o-cq soft">Гледай звездите!</div>`; if (k === 0 || rec.retries) say("Гледай звездите!", "point"); await wait(1000);
+        w.innerHTML = `<div class="o-cbox">${countSVG(v)}</div>`; await wait(showMs);
+        const b = $(".o-cbox"); if (b) b.classList.add("out"); await wait(320); };
       await look();
       const near = [v - 2, v - 1, v + 1, v + 2].filter(x => x >= 1 && x <= Math.max(c.upto, 5)); const opts = shuffle([v, ...shuffle(near).slice(0, 2)]);
       let first = true;
       while (true) {
         w.innerHTML = `<div class="o-cq">Колко звезди видя?</div><div class="o-ch big">${opts.map(x => `<button data-v="${x}">${x}</button>`).join("")}</div>`;
-        if (first) say("Колко звезди видя?", "explain");
+        if (first) voice("Колко звезди видя?");
         const t0 = performance.now();
         const pick = await new Promise(res => w.querySelectorAll(".o-ch button").forEach(b => b.onclick = () => res(+b.dataset.v)));
         if (first) { rec.choice = pick; rec.rtMs = Math.round(performance.now() - t0); }
-        if (pick === v) { rec.correct = first; if (first) ok++; w.querySelector(`.o-ch button[data-v="${v}"]`).classList.add("ok"); good("Браво!"); await wait(900); break; }
-        if (rec.retries >= 1) {   // втори опит също неточен – показваме спокойно колко бяха и продължаваме
-          w.innerHTML = `<div class="o-cbox">${countSVG(v)}</div><div class="o-cq">${v}</div>`; say("Ето колко бяха.", "explain"); await wait(1800); break; }
-        first = false; rec.retries++;
-        w.innerHTML = `<div class="o-cq">Да погледнем пак?</div><div class="o-row"><button class="o-go sm" id="o-look">👀 Виж пак</button></div>`; say("Да погледнем пак?", "explain");
-        await new Promise(res => { $("#o-look").onclick = res; }); await look();
+        if (pick === v) { rec.correct = first; if (first) { ok++; pipStar(k); } w.querySelector(`.o-ch button[data-v="${v}"]`).classList.add("ok");
+          say("Браво!", "joy"); const z = $(".o-zori"); if (z) { z.classList.remove("hop"); void z.offsetWidth; z.classList.add("hop"); } await wait(1000); break; }
+        if (rec.retries >= 1) { w.innerHTML = `<div class="o-cbox">${countSVG(v)}</div><div class="o-cq">${v}</div>`; say("Ето колко бяха.", "explain"); await wait(1800); break; }
+        first = false; rec.retries++; say("Да погледнем пак!", "explain"); await wait(900); await look();
       }
       P.log.count.push(rec); if (P.log.count.length > 300) P.log.count.splice(0, P.log.count.length - 300); save();
     }
     return [ok, c.rounds];
   }
   const PLAY = { trainer: playTrainer, flash: playFlash, fix: playFix, memory: playMemory, count: playCount };
-  const INTRO = { trainer: "Тренажор! Смятай, докато виждаш числата.", flash: "Първо – флашкарти. Гледай внимателно и запомни числото!", fix: "Поправи телескопа! Направи числото с едно движение.", memory: "Нощна памет: запомни числото и го нареди на абакуса.", count: "Звездно броене: колко звезди светнаха?" };
+  const INTRO = { trainer: "Тренажор! Смятай, докато виждаш числата.", flash: "Първо – флашкарти. Гледай внимателно и запомни числото!", fix: "Поправи телескопа! Направи числото с едно движение.", memory: "Нощна памет: запомни числото и го нареди на абакуса.", count: "Звездно броене!" };
 
   // в мисията: последният етап – една от игрите, с параметрите на занятието
   async function missionGame() {
-    const id = ["count", "fix", "memory"][Math.floor(Math.random() * 3)], c = { ...defaults(id), rounds: id === "count" ? 4 : id === "fix" ? 4 : 3, upto: M.max < 5 ? 5 : 10 };
+    const id = ["count", "fix", "memory"][Math.floor(Math.random() * 3)], c = { ...defaults(id), rounds: id === "count" ? 4 : id === "fix" ? 4 : 3, upto: M.max < 3 ? 3 : M.max < 6 ? 5 : 10 };
     shell(4, STAR[M.n].title); await talk(INTRO[id], "explain"); return PLAY[id](c);
   }
 
@@ -558,6 +564,6 @@
 
   // ---- старт ----
   if (Q.get("p")) { P = prof(Q.get("p")); applyMotion(); Q.get("m") ? startMission(+Q.get("m")) : Q.get("map") ? screenMap() : screenHome(); } else screenProfiles();
-  window.OBS = { screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
+  window.OBS = { _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
     testFinish: (n, r) => { M = Object.assign({ n, ex: [], par: PAR[n], max: MAXN[n], flash: [5, 6], ab: [3, 4], meth: [3, 4], im: [2, 3], help: 0 }, r || {}); return finish(); } };   // само за проверки
 })();
