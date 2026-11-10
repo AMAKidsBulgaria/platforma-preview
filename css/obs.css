@@ -418,3 +418,17 @@ html.o-still .o-gc2 { animation: none; }
 @media (max-height: 520px) { .o-ghead { min-height: 44px; } .o-gz { display: none; } .o-ggrid { gap: 8px; } .o-gtx { padding: 4px 10px 6px; } .o-gtx small { display: none; } .o-gtitle small { display: none; } }
 @media (max-width: 760px) and (orientation: portrait) { .o-gz { display: none; } .o-ggrid { grid-auto-rows: minmax(160px, auto); } }
 .o-gstart { --c: #F5C04A; width: min(42vh, 360px); aspect-ratio: 1; border-radius: 32px; overflow: hidden; box-shadow: 0 0 0 4px var(--c), 0 10px 30px #0008; } .o-gstart img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* ===== „Звездни сметки“ (10.11): само примерите; абакусът – отделен инструмент вдясно (дигитален) или в ръцете на детето ===== */
+.o-mwork.o-trw { flex-direction: row; align-items: stretch; gap: 14px; }
+.o-trl { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+.o-trn { font: 900 clamp(64px, 13vw, 170px)/1 "Nunito"; color: #8FC7FF; min-height: 1.05em; text-shadow: 0 0 30px #8FC7FF55; font-variant-numeric: tabular-nums; } .o-trn.minus { color: #FF9C8A; text-shadow: 0 0 30px #FF9C8A55; }
+.o-trl:not(.solo) .o-trn { font-size: clamp(56px, 9vw, 130px); }
+.o-trab { flex: none; height: 100%; max-width: 55%; border-radius: 20px; overflow: hidden; background: #F4EBDD; box-shadow: 0 0 0 3px #B88A4E88; }
+.o-trab iframe { width: 100%; height: 100%; border: 0; display: block; }
+.o-trhint { font: 800 clamp(16px, 2vw, 20px) "Nunito"; color: var(--muted); margin: 0; }
+.o-kp { display: grid; justify-items: center; gap: 10px; } .o-kpv { font: 900 clamp(40px, 6vw, 64px)/1 "Nunito"; color: var(--ink); min-width: 3ch; text-align: center; background: #0d1030; border: 2px solid #ffffff30; border-radius: 16px; padding: 6px 18px; }
+.o-kpk { display: grid; grid-template-columns: repeat(3, clamp(58px, 8vw, 82px)); gap: 8px; }
+.o-kpk button { height: clamp(52px, 7.5vw, 74px); border-radius: 16px; border: 2px solid #ffffff30; background: #232A63; color: var(--ink); font: 900 clamp(24px, 3.4vw, 34px) "Nunito"; box-shadow: 0 4px 0 #0d1030; }
+.o-kpk button:active { transform: translateY(3px); box-shadow: 0 1px 0 #0d1030; } .o-kpk button.ok { background: #2E9E5B; border-color: #2E9E5B; } .o-kpk button:disabled { opacity: .4; }
+@media (max-height: 520px) { .o-kp { grid-template-columns: auto auto; display: flex; align-items: center; } .o-kpk { grid-template-columns: repeat(6, 50px); } .o-kpk button { height: 46px; font-size: 22px; } .o-trn { font-size: 64px; } }
+@media (orientation: portrait) { .o-mwork.o-trw { flex-direction: column; } .o-trab { height: auto; width: min(100%, 46dvh); max-width: none; align-self: center; flex: 1 1 auto; min-height: 0; } .o-trl:not(.solo) { flex: none; } .o-trl:not(.solo) .o-trn { font-size: 64px; } }

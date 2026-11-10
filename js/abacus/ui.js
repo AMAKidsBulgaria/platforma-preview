@@ -14,6 +14,8 @@
 (function () {
   const E = window.ABACUS_ENGINE, T = window.ABACUS_TEXTS, Q = new URLSearchParams(location.search), DEBUG = Q.get("debug") === "1";
   const RODS = Math.max(1, Math.min(3, +Q.get("rods") || 1));
+  // ?embed=1 – само сметалото (инструмент до „Звездни сметки“ в обсерваторията): без менюта, цифри и глас; всяко движение → parent.postMessage
+  const EMBED = Q.get("embed") === "1";
   const LKEY = "ma.proto.v1", SKEY = "ma.seen.v1";
   const W = 180, H = 560, BEAM = 175, X0 = 110;
   const MODES = [["free", "Свободно"], ["simple", "Просто"], ["brothers", "Братя"], ["chain-simple", "Вериги · Просто"], ["chain-brothers", "Вериги · Братя"],
@@ -33,7 +35,7 @@
   // глас: записан файл за изречението (config/abacus-audio.json), иначе синтез на устройството
   let AUD = {}, cur = null; fetch("config/abacus-audio.json?v=1").then(r => r.ok ? r.json() : []).then(a => { a.forEach(x => { AUD[x.t] = x.f; }); }).catch(() => {});
   function say(text, cls) { const s = $("#ab-say"); s.textContent = text || ""; s.className = "ab-say " + (cls || "info");
-    if (!text || Q.get("voice") === "0") return;
+    if (!text || Q.get("voice") === "0" || EMBED) return;
     try { if (cur) { cur.pause(); cur = null; } speechSynthesis && speechSynthesis.cancel(); } catch (e) {}
     if (AUD[text]) { cur = new Audio("assets/audio/abacus/" + AUD[text]); cur.play().catch(() => {}); log("voice", { f: AUD[text] }); return; }
     try { if (bgVoice) { const u = new SpeechSynthesisUtterance(text); u.voice = bgVoice; u.lang = bgVoice.lang; u.rate = 0.95; speechSynthesis.speak(u); } } catch (e) {} }
@@ -69,7 +71,9 @@
   // „докосване“ – опора за въображаемото: топчетата стоят на място и са сиви, при докосване светват за миг; стойността се пази (учителят я вижда)
   let touch = Q.get("touch") === "1", prevSt = null;
   function update() {
-    try { if (window.ABACUS_HOOK) setTimeout(((m) => () => window.ABACUS_HOOK(m))(pendingMove), 0); } catch (e) {} pendingMove = null;
+    try { if (window.ABACUS_HOOK) setTimeout(((m) => () => window.ABACUS_HOOK(m))(pendingMove), 0); } catch (e) {}
+    if (EMBED && window.parent !== window) try { window.parent.postMessage({ src: "abacus", value: E.value(st), move: pendingMove ? { rod: pendingMove.rod, bead: pendingMove.bead, d: pendingMove.d, t: pendingMove.t } : null }, "*"); } catch (e) {}
+    pendingMove = null;
     const flash = [];
     $("#ab-board").querySelectorAll(".ab-bead").forEach(g => {
       const i = +g.dataset.rod, r = st[i], o = prevSt && prevSt[i], x = X0 + E.col(i, RODS) * W, p = g.querySelector(".b");
@@ -251,6 +255,12 @@
   $("#ab-pad").addEventListener("click", e => { const d = e.target.dataset && e.target.dataset.d; if (d == null || busy) return;
     if (d === "back") typed = typed.slice(0, -1); else if (d === "ok") return flashAnswer(); else if (typed.length < RODS) typed += d; showTyped(); });
   const M = Q.get("mode"); setMode(MODES.some(m => m[0] === M) ? M : "free");
+  if (EMBED) {   // команди от обсерваторията: нулиране (нов пример), вид сметало
+    document.body.classList.add("ab-embed"); $("#ab-shownum").checked = false; applyView();
+    window.addEventListener("message", (e) => { const d = e.data || {}; if (d.src !== "obs") return;
+      if (d.type === "reset") { st = E.make(RODS); moves = []; prevSt = null; update(); }
+      if (d.type === "touch") { touch = !!d.on; prevSt = null; update(); } });
+  }
   window.ABACUS_UI = { state: () => st, task: () => task, chain: () => chain, say: () => $("#ab-say").textContent, setMode, score: () => score, target: () => flashTarget,
     tap: (rod, bead, k) => { const g = document.querySelector(`.ab-bead[data-rod="${rod}"][data-bead="${bead}"]${bead === "e" ? `[data-k="${k}"]` : ""}`); if (g) tap(g); },
     type: (s) => { typed = String(s); showTyped(); flashAnswer(); }, set: (v) => { st = E.fromValue(v, RODS); update(); }, done, humanHelp };

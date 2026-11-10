@@ -76,7 +76,7 @@
   // ---- глас: Зори (zr_*), иначе разказвачът (Калина) ----
   let AUDZ = {}, AUD = {}, cur = null;
   fetch("config/abacus-audio-zori.json?v=8").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
-  fetch("config/abacus-audio.json?v=3").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
+  fetch("config/abacus-audio.json?v=4").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
   function voice(text) {
     if (Q.get("voice") === "0") return;
     try { if (cur) cur.pause(); } catch (e) {}
@@ -484,8 +484,8 @@
     count: `<svg viewBox="0 0 100 100"><g fill="#F5C04A"><path class="ic-s1" d="M30 18l5 11 12 1-9 8 3 12-11-6-10 6 3-12-9-8 12-1z"/><path class="ic-s2" d="M70 34l5 11 12 1-9 8 3 12-11-6-10 6 3-12-9-8 12-1z"/><path class="ic-s3" d="M38 58l5 11 12 1-9 8 3 12-11-6-10 6 3-12-9-8 12-1z"/></g></svg>`
   };
   const GAMES = {
-    trainer: { name: "Тренажор", sub: "примери за смятане", skill: "смятане на абакуса и наум",
-      opts: { topic: "тема", count: [3, 5, 7, 10], speed: SPEEDS, rounds: [3, 5, 8], mode: [["ab", "с абакус"], ["mind", "без телескоп"]] } },
+    trainer: { name: "Звездни сметки", adult: "Тренажор", sub: "смятай примерите", skill: "смятане на абакуса и наум",
+      opts: { topic: "тема", count: [3, 5, 7, 10], speed: SPEEDS, rounds: [3, 5, 8], mode: [["ab", "с абакус"], ["mind", "наум (без телескоп)"]], tool: [["phys", "физически абакус"], ["digi", "дигитален абакус"]], voice: [["off", "без глас"], ["on", "с глас"]] } },
     flash: { name: "Звездни сигнали", adult: "Флашкарти", sub: "кое число видя?", skill: "разпознаване на образа на числото (първо точно, после по-бързо)",
       opts: { topic: "тема", speed: [["auto", "авто"], 5, 4, 3, 2.5, 2, 1.5, 1, .8, .6], rounds: [5, 8, 12] } },
     fix: { name: "Поправи телескопа", sub: "с едно движение", skill: "четене на числото и правилното движение",
@@ -501,10 +501,11 @@
     oops: { name: "Провери Зори", sub: "вярно ли смята?", skill: "разбиране на правилото и самопроверка",
       opts: { topic: "тема", rounds: [4, 6, 8] } }
   };
-  const OPTNAME = { topic: "Тема", count: "Брой числа", speed: "Скорост (сек.)", rounds: "Кръгове", mode: "Начин", len: "Колко числа", upto: "До" };
+  const OPTNAME = { tool: "Абакус", voice: "Глас за числата", topic: "Тема", count: "Брой числа", speed: "Скорост (сек.)", rounds: "Кръгове", mode: "Начин", len: "Колко числа", upto: "До" };
   function defaults(id, bare) {
     const n = Math.min(classAt(), 21), mine = (!bare && P.set && P.set[id]) || {};
-    const c = { topic: TOPIC_OF[n] || "s9", count: 5, speed: id === "flash" ? "auto" : id === "constel" ? 3 : id === "comet" ? 8 : 2, rounds: GAMES[id].opts.rounds[1], mode: "ab", len: 2, upto: n < 3 ? 3 : n < 6 ? 5 : 10, ...mine };
+    const keep = (P.set && P.set[id]) || {};   // абакусът и гласът са на детето – важат и в домашното
+    const c = { tool: keep.tool || "phys", voice: keep.voice || "off", topic: TOPIC_OF[n] || "s9", count: 5, speed: id === "flash" ? "auto" : id === "constel" ? 3 : id === "comet" ? 8 : 2, rounds: GAMES[id].opts.rounds[1], mode: "ab", len: 2, upto: n < 3 ? 3 : n < 6 ? 5 : 10, ...mine };
     if (!bare && !topicOpen(c.topic)) c.topic = TOPIC_OF[n] || "s9";   // запомнена тема, която още не е учена → текущата
     return c;
   }
@@ -543,20 +544,57 @@
   function pip(round) { const b = app.querySelectorAll(".o-game .o-pips b"); b.forEach((x, j) => { const st = x.classList.contains("star"); x.className = j < round ? "d" : j === round ? "c" : ""; if (st) x.classList.add("star"); }); }
 
   // ---- самите игри: връщат [верни, общо] ----
+  // ---- „Звездни сметки“ (за възрастните – „Тренажор“): само примерите, като истинския тренажор; детето смята на своя абакус ----
+  // Абакусът е отделен инструмент, не е част от играта: физически (отговорът – с клавиатурата), дигитален (abacus.html?embed=1 до примерите;
+  // отговорът и всички движения идват от него) или наум (клавиатура). Глас за числата – по избор (вкл./изкл.).
+  // Запис за всеки пример (P.log.trainer) – основа за AI тутора: числа, скорост, глас, откъде е отговорът, отговор, време, кога е показано всяко число,
+  // движенията (при дигитален) и правилото на всяка стъпка от двигателя.
+  function numSay(i, n) {   // „5“, „плюс 3“ (запис), иначе „плюс“ + „37“ един след друг
+    if (Q.get("voice") === "0") return; const op = n < 0 ? "минус" : "плюс", a = Math.abs(n);
+    const parts = i === 0 ? [String(n)] : AUD[`${op} ${a}`] ? [`${op} ${a}`] : [op, String(a)];
+    try { if (cur) cur.pause(); } catch (e) {}
+    const play = (k) => { const f = AUD[parts[k]]; if (!f) return; const au = new Audio("assets/audio/abacus/" + f); cur = au; au.play().catch(() => {}); if (k + 1 < parts.length) au.addEventListener("ended", () => { if (cur === au) play(k + 1); }); };
+    play(0);
+  }
+  function keypad(host, maxLen) {   // голяма клавиатура за отговора: 0–9, ⌫, ✓
+    host.innerHTML = `<div class="o-kp"><div class="o-kpv" id="o-kpv">?</div><div class="o-kpk">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(d => `<button data-d="${d}">${d}</button>`).join("")}<button data-d="back" aria-label="Изтрий">⌫</button><button data-d="0">0</button><button data-d="ok" class="ok" aria-label="Готово" disabled>✓</button></div></div>`;
+    let v = ""; const show = () => { host.querySelector("#o-kpv").textContent = v || "?"; host.querySelector('[data-d="ok"]').disabled = !v; };
+    return new Promise(res => host.querySelectorAll("button").forEach(b => b.onclick = () => { const d = b.dataset.d;
+      if (d === "back") v = v.slice(0, -1); else if (d === "ok") { if (v) { host.querySelectorAll("button").forEach(x => x.disabled = true); return res(+v); } } else if (v.length < maxLen) v = (v === "0" ? "" : v) + d; show(); }));
+  }
+  let ABMSG = null; window.addEventListener("message", (e) => { const d = e.data || {}; if (d.src === "abacus" && ABMSG) ABMSG(d); });
   async function playTrainer(c) {
-    const t = topicFor(c.topic); let ok = 0;
-    for (let k = 0; k < c.rounds; k++) {
-      pip(k); const ex = E.simpleExample({ ...t, count: c.count }), nums = ex.nums, w = $("#o-work");
-      const mind = c.mode === "mind";
-      w.innerHTML = `<div class="o-num" id="o-num"></div>${mind ? `<div class="o-ghost">${abImg(0, t.rods)}</div>` : `<div class="o-abhost" id="o-abh"></div>`}<div class="o-row"><button class="o-done" id="o-done" hidden>✓ Готово</button></div>`;
-      const ab = mind ? null : abacus($("#o-abh"), t.rods); once(k, mind ? "Смятай наум!" : "Смятай на абакуса!", "point"); await wait(k ? 700 : 1600);
-      for (let i = 0; i < nums.length; i++) { const n = nums[i], el = $("#o-num"); el.textContent = i === 0 ? n : (n > 0 ? "+ " + n : "− " + -n); el.className = "o-num pop" + (n < 0 && i ? " minus" : ""); await wait(c.speed * 1000 - 200); el.textContent = ""; el.className = "o-num"; await wait(200); }
-      const target = nums.reduce((a, b) => a + b, 0); $("#o-num").textContent = "= ?"; once(k, "Колко стана?", "explain"); if (k) voice("Колко стана?");
-      let right;
-      if (mind) { right = await ask(choices(target, Math.max(9, target + 3)), target); }
-      else { await untilDone(ab, target); ab.enable(false); right = ab.value() === target; if (!right) ab.set(target); }
-      $("#o-num").textContent = "= " + target; if (right) { ok++; pipStar(k); say(thank(target), "joy"); } else say("Почти! Ето колко стана.", "wait"); await wait(right ? 1300 : 2400);
-    }
+    const t = topicFor(c.topic), mind = c.mode === "mind", digi = !mind && c.tool === "digi", talkN = c.voice === "on"; let ok = 0;
+    P.log = P.log || {}; P.log.trainer = P.log.trainer || []; const w = $("#o-work"); w.classList.add("o-trw");
+    w.innerHTML = `<div class="o-trl${digi ? "" : " solo"}"><div class="o-trn" id="o-num"></div><div class="o-trq" id="o-trq"></div></div>` +
+      (digi ? `<div class="o-trab" style="aspect-ratio:${220 + 180 * (t.rods - 1)} / 630"><iframe id="o-abf" title="Дигитален абакус" src="abacus.html?embed=1&mode=free&voice=0&rods=${t.rods}${P.touch ? "&touch=1" : ""}"></iframe></div>` : "");
+    const abf = digi ? $("#o-abf") : null; let abVal = 0, abMoves = [];
+    if (digi) { await new Promise(r => { abf.addEventListener("load", r, { once: true }); setTimeout(r, 4000); }); ABMSG = (d) => { abVal = d.value; if (d.move) abMoves.push({ ...d.move, at: Date.now() }); if (ABMSG.on) ABMSG.on(); }; }
+    const abReset = () => { abVal = 0; abMoves = []; try { abf.contentWindow.postMessage({ src: "obs", type: "reset" }, "*"); } catch (e) {} };
+    try {
+      for (let k = 0; k < c.rounds; k++) {
+        pip(k); const ex = E.simpleExample({ ...t, count: c.count }), nums = ex.nums, num = $("#o-num"), q = $("#o-trq"); q.innerHTML = ""; if (digi) abReset();
+        once(k, mind ? "Смятай наум!" : "Смятай на абакуса!", "point"); await wait(k ? 700 : 1600);
+        const shown = [], t0 = Date.now(); let acc = 0; const rules = [];
+        for (let i = 0; i < nums.length; i++) { const n = nums[i];
+          if (i) { const p = E.plan(acc, n < 0 ? "-" : "+", Math.abs(n), t.rods); rules.push(p.rule); } acc += n;
+          num.textContent = i === 0 ? n : (n > 0 ? "+ " + n : "− " + -n); num.className = "o-trn pop" + (n < 0 && i ? " minus" : ""); shown.push(Date.now() - t0);
+          if (talkN) numSay(i, n); await wait(c.speed * 1000 - 200); num.textContent = ""; await wait(200); }
+        const target = acc, tq = Date.now(); if (FAST_ON) window.OBS_T = { target, nums }; num.textContent = "= ?"; num.className = "o-trn"; once(k, "Колко стана?", "explain"); if (k) voice("Колко стана?");
+        let ans;
+        if (digi) {   // отговорът е на абакуса: верен → продължава; иначе 4 s без движение → приема се
+          q.innerHTML = `<p class="o-trhint">Нареди отговора на абакуса</p>`;
+          ans = await new Promise(res => { let tm = null; const chk = () => { clearTimeout(tm); if (abVal === target) tm = setTimeout(() => res(abVal), 500 * FAST); else if (abMoves.length) tm = setTimeout(() => res(abVal), IDLE * FAST); };
+            ABMSG.on = chk; chk(); wait(120000).then(() => res(abVal), () => {}); });
+          ABMSG.on = null;
+        } else ans = await keypad(q, String(Math.pow(10, t.rods + 1)).length - 1);
+        const right = ans === target;
+        P.log.trainer.push({ t: Date.now(), topic: t.id, nums, speed: c.speed, voice: talkN, src: mind ? "mind" : c.tool, answer: ans, correct: right, rtMs: Date.now() - tq, shownMs: shown, rules, moves: digi ? abMoves.map(m => ({ ...m, ms: m.at - t0 })) : null });
+        if (P.log.trainer.length > 400) P.log.trainer.splice(0, P.log.trainer.length - 400); save();
+        num.textContent = "= " + target; q.innerHTML = right ? "" : `<p class="o-trhint">Ти: ${ans}</p>`;
+        if (right) { ok++; pipStar(k); say(thank(target), "joy"); } else say("Почти! Ето колко стана.", "wait"); await wait(right ? 1300 : 2400);
+      }
+    } finally { ABMSG = null; }
     return [ok, c.rounds];
   }
   async function playFlash(c) {
@@ -823,7 +861,7 @@
     return [ok, c.rounds];
   }
   const PLAY = { trainer: playTrainer, flash: playFlash, fix: playFix, memory: playMemory, count: playCount, constel: playConst, comet: playComet, oops: playOops };
-  const INTRO = { trainer: "Тренажор!", flash: "Звездни сигнали!", fix: "Поправи телескопа!", memory: "Нощна памет!", count: "Звездно броене!", constel: "Съзвездие-число!", comet: "Комета!", oops: "Провери Зори!" };
+  const INTRO = { trainer: "Звездни сметки!", flash: "Звездни сигнали!", fix: "Поправи телескопа!", memory: "Нощна памет!", count: "Звездно броене!", constel: "Съзвездие-число!", comet: "Комета!", oops: "Провери Зори!" };
 
   // в мисията: последният етап – една от игрите, с параметрите на занятието
   async function missionGame() {   // (фонът „нощно небе“ за броенето се слага в playCount)

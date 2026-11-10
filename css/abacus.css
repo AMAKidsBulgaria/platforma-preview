@@ -36,3 +36,8 @@ html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); 
 .live-badge[data-s="live"] { color: #2E9E5B; border-color: #9FD6B4; }
 .live-done { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); font-size: 26px; padding: 12px 34px; z-index: 5; }
 .ab-task.minus { color: #C2410C; } .ab-task.plus { color: #2B5FA3; }
+/* вграден в „Звездни сметки“ (?embed=1): само сметалото, на цялата височина */
+body.ab-embed { margin: 0; background: transparent; overflow: hidden; }
+.ab-embed .ab-app { padding: 0; height: 100vh; height: 100dvh; display: flex; align-items: center; justify-content: center; }
+.ab-embed .ab-top, .ab-embed .ab-task, .ab-embed .ab-say, .ab-embed .ab-row, .ab-embed .ab-stats, .ab-embed .ab-pad { display: none !important; }
+.ab-embed .ab-board svg { height: calc(100dvh - 8px); min-height: 0; }
