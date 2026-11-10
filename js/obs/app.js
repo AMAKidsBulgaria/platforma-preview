@@ -84,6 +84,7 @@
     s += `<defs><radialGradient id="gl"><stop offset="0" stop-color="#FFF6D8"/><stop offset=".45" stop-color="#F5C04A"/><stop offset="1" stop-color="#F5C04A" stop-opacity="0"/></radialGradient>
       <radialGradient id="mist"><stop offset="0" stop-color="#8E7BD8" stop-opacity=".45"/><stop offset="1" stop-color="#8E7BD8" stop-opacity="0"/></radialGradient><filter id="blur"><feGaussianBlur stdDeviation="8"/></filter></defs>`;
     s += `<g class="o-field">`; for (let i = 0; i < 110; i++) { const x = (i * 337) % 1440, y = 40 + (i * 211) % 560, r = (i % 3) * .5 + .6; s += `<circle cx="${x}" cy="${y}" r="${r}" fill="#fff" opacity="${.15 + (i % 5) * .07}" class="${i % 7 ? "" : "tw"}"/>`; } s += `</g>`;
+    if (o.labels) { s += `<g class="o-astro">${[160, 300, 440, 580].map(r => `<circle cx="560" cy="330" r="${r}"/>`).join("")}${Array.from({ length: 12 }, (_, i) => `<line x1="560" y1="330" x2="${560 + 700 * Math.cos(i * Math.PI / 6)}" y2="${330 + 700 * Math.sin(i * Math.PI / 6)}"/>`).join("")}</g>`; }
     if (o.far) FAR.forEach((f, i) => { const known = i === 0 && P.cur >= 17;
       s += `<g class="o-far"><ellipse cx="${f[2]}" cy="${f[3]}" rx="70" ry="44" fill="url(#mist)"/><text x="${f[2]}" y="${f[3] + 8}" text-anchor="middle">${known ? f[0] : "?"}</text></g>`; });
     CONST.forEach(c => { if (visibleC(c.id)) return; const xs = c.stars.map(x => x[2]), ys = c.stars.map(x => x[3]), cx = (Math.min(...xs) + Math.max(...xs)) / 2, cy = (Math.min(...ys) + Math.max(...ys)) / 2;
@@ -257,6 +258,7 @@
     const ex = EX[n] || EX[1], par = PAR[n] || PAR[1], max = MAXN[n] || 9;
     M = { n, ex, par, max, flash: [0, 0], ab: [0, 0], meth: [0, 0], im: [0, 0], help: 0 };
     try {
+      await telescopeIn();
       M.isNew = !(P.b[n] > 0) && !!NEWSTAR[n]; STAGES = M.isNew ? ["Нова звезда", ...BASE_STAGES] : BASE_STAGES.slice();
       if (M.isNew) await stageNew(n);
       else { shell(0, STAR[n].title); await talk("Тази вечер звездата ни още е бледа. Ще я направим ли по-ярка?", "explain"); }
@@ -446,14 +448,21 @@
                 5: [[100, 30], [38, 82], [162, 82], [64, 160], [136, 160]] };
   const LNK = { 2: [[0, 1]], 3: [[0, 1], [1, 2], [2, 0]], 4: [[0, 1], [1, 3], [3, 2], [2, 0]], 5: [[0, 1], [1, 3], [3, 4], [4, 2], [2, 0]] };
   function cluster(n, ox) { const p = PAT[n] || []; return (LNK[n] || []).map(([a, b]) => `<line x1="${ox + p[a][0]}" y1="${p[a][1]}" x2="${ox + p[b][0]}" y2="${p[b][1]}" class="o-clink"/>`).join("") +
-    p.map(([x, y]) => `<g transform="translate(${ox + x} ${y})"><path class="o-cs" d="${starPath(26)}"/></g>`).join(""); }
+    p.map(([x, y]) => `<g transform="translate(${ox + x} ${y})"><path class="o-cs" fill="url(#csg)" d="${starPath(26)}"/></g>`).join(""); }
+  const CSG = `<defs><radialGradient id="csg" cx=".5" cy=".42" r=".62"><stop offset="0" stop-color="#FFFBEA"/><stop offset=".45" stop-color="#FFD36A"/><stop offset="1" stop-color="#F29A2E"/></radialGradient></defs>`;
   function countSVG(v) {
-    if (v <= 5) return `<svg viewBox="-10 0 220 200" class="o-cnt">${cluster(v, 0)}</svg>`;
-    return `<svg viewBox="-10 0 500 200" class="o-cnt">${cluster(5, 0)}${cluster(v - 5, 280)}</svg>`;
+    if (v <= 5) return `<svg viewBox="-10 0 220 200" class="o-cnt">${CSG}${cluster(v, 0)}</svg>`;
+    return `<svg viewBox="-10 0 500 200" class="o-cnt">${CSG}${cluster(5, 0)}${cluster(v - 5, 280)}</svg>`;
+  }
+  function telescopeIn() {
+    const m = document.documentElement; if (m.classList.contains("o-calm") || m.classList.contains("o-still") || FAST_ON) return Promise.resolve();
+    const o = document.createElement("div"); o.className = "o-zoom"; o.innerHTML = `<div class="o-lens"></div>`; document.body.appendChild(o);
+    return new Promise(r => setTimeout(() => { o.remove(); r(); }, 1300));
   }
   function pipStar(k) { const b = app.querySelectorAll(".o-pips b")[k]; if (b) b.classList.add("star"); }
   async function playCount(c) {
     let ok = 0; P.log = P.log || {}; P.log.count = P.log.count || [];
+    const wk = $("#o-work"); if (wk) wk.classList.add("o-skyfield"); if (!inMission()) await telescopeIn();
     for (let k = 0; k < c.rounds; k++) {
       pip(k); const v = 1 + Math.floor(Math.random() * c.upto), w = $("#o-work"), showMs = Math.round(c.speed * 1000);
       const rec = { t: Date.now(), n: v, showMs, choice: null, correct: false, retries: 0, rtMs: null };
@@ -485,7 +494,7 @@
   const INTRO = { trainer: "Тренажор! Смятай, докато виждаш числата.", flash: "Първо – флашкарти. Гледай внимателно и запомни числото!", fix: "Поправи телескопа! Направи числото с едно движение.", memory: "Нощна памет: запомни числото и го нареди на абакуса.", count: "Звездно броене!" };
 
   // в мисията: последният етап – една от игрите, с параметрите на занятието
-  async function missionGame() {
+  async function missionGame() {   // (фонът „нощно небе“ за броенето се слага в playCount)
     const id = ["count", "fix", "memory"][Math.floor(Math.random() * 3)], c = { ...defaults(id), rounds: id === "count" ? 4 : id === "fix" ? 4 : 3, upto: M.max < 3 ? 3 : M.max < 6 ? 5 : 10 };
     shell(4, STAR[M.n].title); await talk(INTRO[id], "explain"); return PLAY[id](c);
   }

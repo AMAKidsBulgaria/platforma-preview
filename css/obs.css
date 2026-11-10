@@ -249,3 +249,26 @@ html.o-still .o-burst { display: none; }
 
 .o-again { font: 900 clamp(18px, 2.6vw, 26px) "Nunito"; color: #8FC7FF; background: #8FC7FF1f; border: 2px solid #8FC7FF66; border-radius: 99px; padding: 4px 16px; }
 .o-ch button.tried { opacity: .35; text-decoration: line-through; }
+
+/* Б: нощно небе с мъглявини за игровото поле – приглушено в центъра, без точки в зоната за броене */
+.o-mwork.o-skyfield { background:
+  radial-gradient(ellipse 55% 40% at 50% 46%, #141A4A 0%, #141A4A00 70%),
+  radial-gradient(ellipse 45% 35% at 16% 18%, #8E5BD455 0%, #8E5BD400 70%),
+  radial-gradient(ellipse 50% 32% at 86% 82%, #3FA8D644 0%, #3FA8D600 70%),
+  linear-gradient(180deg, #0E1240, #231F66 70%, #2E2770); border-color: #4a3a7a; overflow: hidden; }
+.o-mwork.o-skyfield::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+  background-image: radial-gradient(1px 1px at 8% 12%, #fff, transparent), radial-gradient(1px 1px at 22% 70%, #fff, transparent), radial-gradient(1.2px 1.2px at 90% 20%, #fff, transparent), radial-gradient(1px 1px at 78% 62%, #fff, transparent), radial-gradient(1px 1px at 12% 88%, #fff, transparent), radial-gradient(1.2px 1.2px at 64% 8%, #fff, transparent), radial-gradient(1px 1px at 95% 90%, #fff, transparent), radial-gradient(1px 1px at 38% 6%, #fff, transparent);
+  -webkit-mask-image: radial-gradient(ellipse 42% 40% at 50% 46%, transparent 0 75%, #000 100%); mask-image: radial-gradient(ellipse 42% 40% at 50% 46%, transparent 0 75%, #000 100%); }
+.o-mwork.o-skyfield::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 14%; pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 60' preserveAspectRatio='none'%3E%3Cpath d='M0 30 Q50 14 100 24 T200 22 T300 20 T400 18 V60 H0Z' fill='%23120E2E'/%3E%3Cpath d='M300 22 a18 15 0 0 1 36 0z' fill='%231d1840'/%3E%3C/svg%3E") bottom / 100% 100% no-repeat; }
+.o-mwork.o-skyfield > * { position: relative; z-index: 1; }
+.o-cbox .o-cs { filter: none; animation: oon .35s ease-out both, oglow2 1.6s ease-in-out .35s infinite alternate; }
+@keyframes oon { from { opacity: 0; transform: scale(.6); filter: none; } to { filter: drop-shadow(0 0 8px #FFD36A); } }
+@keyframes oglow2 { from { filter: drop-shadow(0 0 8px #FFD36A); } to { filter: drop-shadow(0 0 16px #FFD36A); } }
+/* А: кратко приближаване през телескопа (тъмна тръба с пръстени → небето) */
+.o-zoom { position: fixed; inset: 0; z-index: 50; pointer-events: none; display: grid; place-items: center; overflow: hidden; }
+.o-lens { width: 46vmin; height: 46vmin; border-radius: 50%; box-shadow: 0 0 0 12px #17181e, 0 0 0 16px #3a3d48, 0 0 0 32px #202229, 0 0 0 36px #3a3d48, 0 0 0 48px #0e0f13, 0 0 0 200vmax #05060f, inset 0 0 50px 14px #000d;
+  background: radial-gradient(circle at 34% 30%, #ffffff22, transparent 30%); animation: olens 1.3s cubic-bezier(.6,0,.3,1) forwards; }
+@keyframes olens { 0% { transform: scale(.55); } 45% { transform: scale(.75); } 100% { transform: scale(5.5); opacity: 0; } }
+/* В: тих астролаб на картата */
+.o-astro circle, .o-astro line { fill: none; stroke: #8FA0FF; stroke-opacity: .07; stroke-width: 2; }
