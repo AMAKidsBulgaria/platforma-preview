@@ -471,11 +471,11 @@
     const movesOk = ms.length === 1 && ms[0].rod === f.rod && ms[0].bead === f.bead && ms[0].d === f.d;
     return { value: ab.value(), valueOk, moves: ms.map(m => ({ rod: m.rod, bead: m.bead, d: m.d })), movesOk };
   }
-  // чака детето: „Провери“ е активно чак след първото движение; при верен резултат приключва само
+  // задачата е едно движение → проверява се сама след първото движение (без бутон)
   function fixAttempt(ab, task) {
-    const b = $("#o-done"); b.disabled = true; b.hidden = false; ab.enable(true);
-    return new Promise(res => { let fin = false; const end = () => { if (!fin) { fin = true; ab.onChange(null); ab.enable(false); b.disabled = true; res(fixJudge(ab, task)); } };
-      b.onclick = end; ab.onChange(() => { b.disabled = false; if (ab.value() === task.target) setTimeout(end, 600 * FAST); }); });
+    ab.enable(true);
+    return new Promise(res => { let fin = false; const end = () => { if (!fin) { fin = true; ab.onChange(null); ab.enable(false); res(fixJudge(ab, task)); } };
+      ab.onChange(() => { ab.enable(false); setTimeout(end, 700 * FAST); }); });
   }
   async function playFix(c) {
     const t = topicFor(c.topic); let solo = 0, built = 0; const total = c.rounds, tele = () => TELE(Math.round(built * 5 / total), 5);
@@ -484,7 +484,7 @@
       pip(k); const task = fixTask(t, like, prev && prev.target), rec = { t: Date.now(), topic: t.id, target: task.target, wrong: task.wrong, fix: task.fix, similar: !!like, tries: [], hints: [], shown: 0, repeated: null, solo: false };
       const w = $("#o-work"); w.innerHTML = `<div class="o-fix"><div class="o-fixhead"><div class="o-fixgoal">Направи <b class="o-num pop">${task.target}</b></div>
         <div class="o-telebox" title="Телескоп">${tele()}<span>${built}/${total}</span></div></div><div class="o-fixmsg" id="o-fixmsg"></div>
-        <div class="o-abhost" id="o-abh"></div><div class="o-row"><button class="o-sec o-rew" id="o-rew" hidden>↺ Гледай пак</button><button class="o-done" id="o-done">✓ Провери</button></div></div>`;
+        <div class="o-abhost" id="o-abh"></div><div class="o-row"><button class="o-sec o-rew" id="o-rew" hidden>↺ Гледай пак</button></div></div>`;
       const ab = abacus($("#o-abh"), t.rods), msg = (x) => { $("#o-fixmsg").textContent = x; };
       ab.set(task.wrong); const start = ab.state();
       if (FAST_ON) window.OBS_T = { task, ab, rec };   // само за автоматичните проверки
@@ -499,7 +499,7 @@
         ab.set(task.wrong); r = await fixAttempt(ab, task); rec.tries.push(r); if (unf) unf();
         if (!(r.valueOk && r.movesOk)) {
           // „Зори показва“ – същият абакус, същият модел; после обратно в началото
-          const show = async () => { rec.shown++; msg("Зори показва"); $("#o-rew").hidden = true; $("#o-done").hidden = true; ab.enable(false); ab.set(task.wrong);
+          const show = async () => { rec.shown++; msg("Зори показва"); $("#o-rew").hidden = true; ab.enable(false); ab.set(task.wrong);
             say(rec.shown === 1 ? "Гледай!" : "Гледай още веднъж.", "point"); await wait(900);
             const m = { ...task.fix, finger: fixFinger(task.fix) }; say(fixSay(task.fix), "explain");
             $("#o-fixmsg").innerHTML = `Зори показва · <i>${m.finger} ${m.bead === "e" ? (m.d > 0 ? "↑" : "↓") : (m.d > 0 ? "↓" : "↑")}</i>`; await ab.demo([m], true, true); await wait(900);
