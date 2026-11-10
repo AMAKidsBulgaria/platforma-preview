@@ -35,7 +35,7 @@
      "set": {
       "topic": "s2",
       "mode": "ab",
-      "count": 2,
+      "count": 4,
       "speed": 2.5,
       "rounds": 5
      }
@@ -46,9 +46,9 @@
      "set": {
       "topic": "s2",
       "mode": "mind",
-      "count": 2,
+      "count": 3,
       "speed": 2.5,
-      "rounds": 2
+      "rounds": 4
      }
     },
     {
@@ -83,9 +83,9 @@
      "set": {
       "topic": "s3",
       "mode": "ab",
-      "count": 2,
+      "count": 4,
       "speed": 2.0,
-      "rounds": 8
+      "rounds": 5
      }
     },
     {
@@ -103,9 +103,9 @@
      "set": {
       "topic": "s3",
       "mode": "mind",
-      "count": 2,
+      "count": 3,
       "speed": 2.5,
-      "rounds": 3
+      "rounds": 4
      }
     },
     {
@@ -140,9 +140,9 @@
      "set": {
       "topic": "s4",
       "mode": "ab",
-      "count": 3,
+      "count": 8,
       "speed": 2.0,
-      "rounds": 8
+      "rounds": 5
      }
     },
     {
@@ -160,9 +160,9 @@
      "set": {
       "topic": "s4",
       "mode": "mind",
-      "count": 2,
+      "count": 5,
       "speed": 2.0,
-      "rounds": 3
+      "rounds": 4
      }
     },
     {
@@ -206,9 +206,9 @@
      "set": {
       "topic": "s5",
       "mode": "ab",
-      "count": 3,
+      "count": 8,
       "speed": 2.0,
-      "rounds": 8
+      "rounds": 5
      }
     },
     {
@@ -226,7 +226,7 @@
      "set": {
       "topic": "s5",
       "mode": "mind",
-      "count": 2,
+      "count": 5,
       "speed": 2.0,
       "rounds": 4
      }
@@ -275,9 +275,9 @@
      "set": {
       "topic": "s6",
       "mode": "ab",
-      "count": 3,
+      "count": 8,
       "speed": 2.2,
-      "rounds": 8
+      "rounds": 5
      }
     },
     {
@@ -295,7 +295,7 @@
      "set": {
       "topic": "s6",
       "mode": "mind",
-      "count": 2,
+      "count": 5,
       "speed": 2.0,
       "rounds": 4
      }
@@ -344,9 +344,9 @@
      "set": {
       "topic": "s7",
       "mode": "ab",
-      "count": 3,
+      "count": 8,
       "speed": 2.0,
-      "rounds": 8
+      "rounds": 5
      }
     },
     {
@@ -364,9 +364,9 @@
      "set": {
       "topic": "s7",
       "mode": "mind",
-      "count": 2,
+      "count": 5,
       "speed": 2.0,
-      "rounds": 5
+      "rounds": 4
      }
     },
     {
@@ -413,9 +413,9 @@
      "set": {
       "topic": "s8",
       "mode": "ab",
-      "count": 3,
+      "count": 8,
       "speed": 2.0,
-      "rounds": 8
+      "rounds": 5
      }
     },
     {
@@ -433,9 +433,9 @@
      "set": {
       "topic": "s8",
       "mode": "mind",
-      "count": 2,
+      "count": 5,
       "speed": 2.0,
-      "rounds": 5
+      "rounds": 4
      }
     },
     {
@@ -482,9 +482,9 @@
      "set": {
       "topic": "s9",
       "mode": "ab",
-      "count": 3,
+      "count": 8,
       "speed": 2.0,
-      "rounds": 8
+      "rounds": 5
      }
     },
     {
@@ -502,9 +502,9 @@
      "set": {
       "topic": "s9",
       "mode": "mind",
-      "count": 2,
+      "count": 5,
       "speed": 2.0,
-      "rounds": 6
+      "rounds": 4
      }
     },
     {
@@ -539,7 +539,7 @@
      "set": {
       "topic": "s9",
       "mode": "ab",
-      "count": 4,
+      "count": 10,
       "speed": 2,
       "rounds": 5
      }
@@ -550,7 +550,7 @@
      "set": {
       "topic": "s9",
       "mode": "mind",
-      "count": 3,
+      "count": 5,
       "speed": 2.5,
       "rounds": 4
      }
@@ -589,9 +589,9 @@
      "set": {
       "topic": "t10",
       "mode": "ab",
-      "count": 3,
+      "count": 6,
       "speed": 2.5,
-      "rounds": 7
+      "rounds": 5
      }
     },
     {
@@ -609,9 +609,9 @@
      "set": {
       "topic": "s9",
       "mode": "mind",
-      "count": 2,
+      "count": 4,
       "speed": 2.0,
-      "rounds": 6
+      "rounds": 4
      }
     },
     {
@@ -646,9 +646,9 @@
      "set": {
       "topic": "t19",
       "mode": "ab",
-      "count": 3,
+      "count": 6,
       "speed": 2.5,
-      "rounds": 6
+      "rounds": 5
      }
     },
     {
@@ -666,9 +666,9 @@
      "set": {
       "topic": "t10",
       "mode": "mind",
-      "count": 2,
+      "count": 4,
       "speed": 2.0,
-      "rounds": 5
+      "rounds": 4
      }
     },
     {
@@ -703,9 +703,9 @@
      "set": {
       "topic": "t19",
       "mode": "ab",
-      "count": 3,
+      "count": 6,
       "speed": 2.5,
-      "rounds": 7
+      "rounds": 5
      }
     },
     {
@@ -723,9 +723,9 @@
      "set": {
       "topic": "t19",
       "mode": "mind",
-      "count": 2,
+      "count": 4,
       "speed": 2.2,
-      "rounds": 5
+      "rounds": 4
      }
     },
     {
@@ -760,9 +760,9 @@
      "set": {
       "topic": "d44",
       "mode": "ab",
-      "count": 3,
+      "count": 6,
       "speed": 2.5,
-      "rounds": 8
+      "rounds": 5
      }
     },
     {
@@ -780,9 +780,9 @@
      "set": {
       "topic": "d44",
       "mode": "mind",
-      "count": 2,
+      "count": 4,
       "speed": 2.2,
-      "rounds": 5
+      "rounds": 4
      }
     },
     {
@@ -817,9 +817,9 @@
      "set": {
       "topic": "d55",
       "mode": "ab",
-      "count": 3,
+      "count": 6,
       "speed": 2.5,
-      "rounds": 8
+      "rounds": 5
      }
     },
     {
@@ -837,9 +837,9 @@
      "set": {
       "topic": "d44",
       "mode": "mind",
-      "count": 2,
+      "count": 4,
       "speed": 2.2,
-      "rounds": 5
+      "rounds": 4
      }
     },
     {
@@ -886,9 +886,9 @@
      "set": {
       "topic": "d99",
       "mode": "ab",
-      "count": 3,
+      "count": 6,
       "speed": 2.5,
-      "rounds": 7
+      "rounds": 5
      }
     },
     {
@@ -906,7 +906,7 @@
      "set": {
       "topic": "d55",
       "mode": "mind",
-      "count": 2,
+      "count": 4,
       "speed": 2.5,
       "rounds": 4
      }
@@ -943,9 +943,9 @@
      "set": {
       "topic": "d99",
       "mode": "ab",
-      "count": 3,
+      "count": 6,
       "speed": 2.5,
-      "rounds": 8
+      "rounds": 5
      }
     },
     {
@@ -963,9 +963,9 @@
      "set": {
       "topic": "d99",
       "mode": "mind",
-      "count": 2,
+      "count": 4,
       "speed": 2.5,
-      "rounds": 5
+      "rounds": 4
      }
     },
     {
@@ -1000,7 +1000,7 @@
      "set": {
       "topic": "d99",
       "mode": "ab",
-      "count": 4,
+      "count": 8,
       "speed": 2,
       "rounds": 5
      }
@@ -1011,7 +1011,7 @@
      "set": {
       "topic": "d55",
       "mode": "mind",
-      "count": 3,
+      "count": 4,
       "speed": 2.5,
       "rounds": 4
      }
@@ -1050,9 +1050,9 @@
      "set": {
       "topic": "h444",
       "mode": "ab",
-      "count": 3,
+      "count": 5,
       "speed": 3.0,
-      "rounds": 6
+      "rounds": 5
      }
     },
     {
@@ -1070,9 +1070,9 @@
      "set": {
       "topic": "d55",
       "mode": "mind",
-      "count": 2,
+      "count": 4,
       "speed": 2.5,
-      "rounds": 5
+      "rounds": 4
      }
     },
     {
@@ -1107,9 +1107,9 @@
      "set": {
       "topic": "h555",
       "mode": "ab",
-      "count": 3,
+      "count": 5,
       "speed": 3.0,
-      "rounds": 6
+      "rounds": 5
      }
     },
     {
@@ -1127,9 +1127,9 @@
      "set": {
       "topic": "d99",
       "mode": "mind",
-      "count": 2,
+      "count": 4,
       "speed": 2.5,
-      "rounds": 5
+      "rounds": 4
      }
     },
     {
@@ -1164,9 +1164,9 @@
      "set": {
       "topic": "h999",
       "mode": "ab",
-      "count": 3,
+      "count": 5,
       "speed": 3.0,
-      "rounds": 7
+      "rounds": 5
      }
     },
     {
@@ -1184,9 +1184,9 @@
      "set": {
       "topic": "d99",
       "mode": "mind",
-      "count": 2,
+      "count": 4,
       "speed": 2.5,
-      "rounds": 5
+      "rounds": 4
      }
     },
     {
@@ -1221,7 +1221,7 @@
      "set": {
       "topic": "h999",
       "mode": "ab",
-      "count": 4,
+      "count": 6,
       "speed": 2,
       "rounds": 5
      }
@@ -1232,7 +1232,7 @@
      "set": {
       "topic": "d55",
       "mode": "mind",
-      "count": 3,
+      "count": 4,
       "speed": 2.5,
       "rounds": 4
      }

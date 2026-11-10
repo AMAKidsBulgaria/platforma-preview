@@ -44,7 +44,7 @@
   // „Продължи“ води към следващия незавършен кръг на НАЙ-НОВОТО възложено незавършено домашно (детето остава с групата);
   // по-старите незавършени – „Доиграй“, по желание. Демо: възложени са занятията до P.classAt (?class=N или „За учителя“).
   let HW = { lessons: [], unlock: [] };
-  const hwReady = fetch("config/ma-homework.json?v=1").then(r => r.json()).then(j => { HW = j; }).catch(() => {});
+  const hwReady = fetch("config/ma-homework.json?v=2").then(r => r.json()).then(j => { HW = j; }).catch(() => {});
   const REVIEW = (() => { const r = Q.get("review"); try { if (r === "1") sessionStorage.setItem("obs.review", "1"); if (r === "0") sessionStorage.removeItem("obs.review"); return sessionStorage.getItem("obs.review") === "1"; } catch (e) { return r === "1"; } })();
   const classAt = () => Math.max(1, Math.min(HW.lessons.length || 21, P.classAt || P.cur || 1));
   const assignedL = () => HW.lessons.filter(L => L.n <= classAt());
@@ -510,8 +510,10 @@
   function defaults(id, bare) {
     const n = Math.min(classAt(), 21), mine = (!bare && P.set && P.set[id]) || {};
     const keep = (P.set && P.set[id]) || {};   // гласът е избор за детето – важи и в домашното
-    const c = { voice: keep.voice || "off", topic: TOPIC_OF[n] || "s9", count: 5, speed: id === "flash" ? "auto" : id === "constel" ? 3 : id === "comet" ? 8 : 2, rounds: GAMES[id].opts.rounds[1], mode: "ab", len: 2, upto: n < 3 ? 3 : n < 6 ? 5 : 10, ...mine };
+    const L = HW.lessons.find(x => x.n === n), ab = L && (L.rounds.find(r => r.game === "trainer" && r.set.mode === "ab" && r.label === "Абакус") || {}).set;   // дължина и скорост – от домашното на последното занятие
+    const c = { voice: keep.voice || "off", topic: TOPIC_OF[n] || "s9", count: id === "trainer" && ab ? ab.count : 5, speed: id === "flash" ? "auto" : id === "constel" ? 3 : id === "comet" ? 8 : 2, rounds: GAMES[id].opts.rounds[1], mode: "ab", len: 2, upto: n < 3 ? 3 : n < 6 ? 5 : 10, ...mine };
     if (!bare && !topicOpen(c.topic)) c.topic = TOPIC_OF[n] || "s9";
+    if (!bare && id === "trainer" && ab && !(mine.speed)) c.speed = ab.speed;
     if (!bare) c.mode = "ab";   // „наум“ е само вид кръг в домашното („Без телескоп“), не настройка   // запомнена тема, която още не е учена → текущата
     return c;
   }
@@ -579,7 +581,7 @@
     const abReset = () => { abVal = 0; abMoves = []; try { abf.contentWindow.postMessage({ src: "obs", type: "reset" }, "*"); } catch (e) {} };
     try {
       for (let k = 0; k < c.rounds; k++) {
-        pip(k); const ex = E.simpleExample({ ...t, count: c.count }), nums = ex.nums, num = $("#o-num"), q = $("#o-trq"); q.innerHTML = ""; if (digi) abReset();
+        pip(k); const ex = E.simpleExample({ ...t, count: c.count, must: t.rods === 1 && !t.round && !t.teen && k % 2 === 0 ? t.opMax : 0 }), nums = ex.nums, num = $("#o-num"), q = $("#o-trq"); q.innerHTML = ""; if (digi) abReset();
         once(k, mind ? "Смятай наум!" : "Смятай на абакуса!", "point"); await wait(k ? 700 : 1600);
         const shown = [], t0 = Date.now(); let acc = 0; const rules = [];
         for (let i = 0; i < nums.length; i++) { const n = nums[i];

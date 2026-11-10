@@ -211,24 +211,35 @@ const ruleOf = (f) => f.transition ? "Преход" : f.friendBrother ? "При�
     }
     return out;
   }
+  // Правила (10.11.2026, сравнено с тренажора на AMAKids – docs/research/ma-reference/trainer-generator.md):
+  //  – само „просто“ движения; при ±1…±4 междинните резултати остават до N (в занятие 1 не се появяват 3 и 4);
+  //  – няма еднакво действие подред („+2, +2“); при N ≥ 5 няма обезсилващо действие подред („+3, −3“), освен последното;
+  //  – крайният отговор е до N (по разряди), освен при кръгли и 11–19;
+  //  – o.must = N: примерът съдържа поне веднъж ±N (новото число на занятието).
   function simpleExample(o, rng) {
     rng = rng || Math.random; const ops = simpleOperands(o), count = Math.max(1, o.count || 5), max = Math.pow(10, o.rods) - 1;
-    for (let tries = 0; tries < 400; tries++) {
+    const N = o.opMax, smax = N < 5 ? Math.min(o.stateMax, N) : o.stateMax, plain = !o.round && !o.teen;
+    for (let tries = 0; tries < 600; tries++) {
       let v = 0; const nums = [];
       for (let i = 0; i < count; i++) {
-        const cand = [];
+        const cand = [], last = i === count - 1, prev = nums[i - 1];
         for (const n of ops) for (const op of (i === 0 ? ["+"] : ["+", "-"])) {
-          const t = op === "+" ? v + n : v - n; if (t < 0 || t > max) continue;
-          if (digitsOf(t, o.rods).some(x => x > o.stateMax)) continue;
+          const t = op === "+" ? v + n : v - n, x = op === "+" ? n : -n; if (t < 0 || t > max) continue;
+          if (digitsOf(t, o.rods).some(d => d > smax)) continue;
+          if (x === prev) continue;
+          if (N >= 5 && x === -prev && !last) continue;
+          if (last && plain && digitsOf(t, o.rods).some(d => d > N)) continue;
           if (plan(v, op, n, o.rods).rule !== "Просто") continue;
-          cand.push(op === "+" ? n : -n);
+          cand.push(x);
         }
         if (!cand.length) break;
         const pick = cand[Math.floor(rng() * cand.length)]; nums.push(pick); v += pick;
       }
-      if (nums.length === count) return { nums, answer: v };
+      if (nums.length !== count) continue;
+      if (o.must && !nums.some(n => Math.abs(n) === o.must)) continue;
+      return { nums, answer: v };
     }
-    return null;
+    return o.must ? simpleExample({ ...o, must: 0 }, rng) : null;
   }
   // оценка на верига (пример от тренажора): движенията на детето се разделят по стъпки – стъпка свършва, щом абакусът покаже междинния резултат
   // → [{ i, n, from, to, code, rule }] ; code: ok | wrong_method | set_result | ... | not_reached (не стигна до междинния резултат)
