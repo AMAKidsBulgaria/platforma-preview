@@ -490,7 +490,7 @@
   };
   const GAMES = {
     trainer: { name: "Звездни сметки", adult: "Тренажор", sub: "смятай примерите", skill: "смятане на абакуса и наум",
-      opts: { topic: "тема", count: [3, 5, 7, 10], speed: SPEEDS, rounds: [3, 5, 8], voice: [["off", "без глас"], ["on", "с глас"]] } },
+      opts: { topic: "тема", count: [3, 5, 7, 10], speed: SPEEDS, rounds: [3, 5, 8], voice: [["off", "без глас"], ["on", "с глас (под 1 сек. – без)"]] } },
     flash: { name: "Звездни сигнали", adult: "Флашкарти", sub: "кое число видя?", skill: "разпознаване на образа на числото (първо точно, после по-бързо)",
       opts: { topic: "тема", speed: [["auto", "авто"], 5, 4, 3, 2.5, 2, 1.5, 1, .8, .6], rounds: [5, 8, 12] } },
     fix: { name: "Поправи телескопа", sub: "с едно движение", skill: "четене на числото и правилното движение",
@@ -557,11 +557,24 @@
   // отговорът и всички движения идват от него) или наум (клавиатура). Глас за числата – по избор (вкл./изкл.).
   // Запис за всеки пример (P.log.trainer) – основа за AI тутора: числа, скорост, глас, откъде е отговорът, отговор, време, кога е показано всяко число,
   // движенията (при дигитален) и правилото на всяка стъпка от двигателя.
-  function numSay(i, n) {   // „5“, „плюс 3“ (запис), иначе „плюс“ + „37“ един след друг
-    if (Q.get("voice") === "0") return; const op = n < 0 ? "минус" : "плюс", a = Math.abs(n);
-    const parts = i === 0 ? [String(n)] : AUD[`${op} ${a}`] ? [`${op} ${a}`] : [op, String(a)];
-    try { if (cur) cur.pause(); } catch (e) {}
-    const play = (k) => { const f = AUD[parts[k]]; if (!f) return; const au = new Audio("assets/audio/abacus/" + f); cur = au; au.play().catch(() => {}); if (k + 1 < parts.length) au.addEventListener("ended", () => { if (cur === au) play(k + 1); }); };
+  // глас за числата: под 1 сек. на число се изключва сам; иначе записите се забързват (без промяна на тона), за да свършат преди следващото число
+  const VOICE_MIN = 1, VOICE_FIT = .85, VOICE_MAXRATE = 2.5;
+  let TRIM = {}; fetch("config/abacus-audio-trim.json?v=1").then(r => r.ok ? r.json() : {}).then(j => { TRIM = j; }).catch(() => {});   // [начало, край] на говора във всеки запис
+  function numParts(i, n) { const op = n < 0 ? "минус" : "плюс", a = Math.abs(n); return i === 0 ? [String(n)] : AUD[`${op} ${a}`] ? [`${op} ${a}`] : [op, String(a)]; }
+  async function numPrep(nums, sec) {   // зарежда записите на целия пример и изчислява скоростта на всяко число
+    if (Q.get("voice") === "0" || sec < VOICE_MIN) return null;
+    const meta = (f) => new Promise(res => { const a = new Audio("assets/audio/abacus/" + f); a.preload = "auto"; let ok = false;
+      const done = () => { if (!ok) { ok = true; res(a); } }; a.addEventListener("loadedmetadata", done, { once: true }); a.addEventListener("error", done, { once: true }); setTimeout(done, 1500); a.load(); });
+    return Promise.all(nums.map(async (n, i) => { const fs = numParts(i, n).map(p => AUD[p]).filter(Boolean), as = await Promise.all(fs.map(meta));
+      as.forEach((a, k) => { const tr = TRIM[fs[k]]; a._from = tr ? tr[0] : 0; a._len = tr ? tr[1] - tr[0] : (isFinite(a.duration) ? a.duration : .8); });
+      const dur = as.reduce((t, a) => t + a._len, 0) + (as.length - 1) * .03;
+      const rate = Math.min(VOICE_MAXRATE, Math.max(1, dur / (sec * VOICE_FIT))); as.forEach(a => { a.playbackRate = rate; try { a.preservesPitch = true; a.webkitPreservesPitch = true; } catch (e) {} });
+      return { as, rate }; }));
+  }
+  function numSay(clip) {
+    if (!clip || !clip.as.length) return; try { if (cur) cur.pause(); } catch (e) {}
+    const play = (k) => { const au = clip.as[k]; try { au.currentTime = au._from || 0; } catch (e) {} au.playbackRate = clip.rate; cur = au; au.play().catch(() => {});
+      setTimeout(() => { if (cur !== au) return; if (k + 1 < clip.as.length) { au.pause(); play(k + 1); } else au.pause(); }, (au._len / clip.rate) * 1000 + 20); };   // само говорът, без тишината
     play(0);
   }
   function keypad(host, maxLen) {   // голяма клавиатура за отговора: 0–9, ⌫, ✓
@@ -583,11 +596,12 @@
       for (let k = 0; k < c.rounds; k++) {
         pip(k); const ex = E.simpleExample({ ...t, count: c.count, must: t.rods === 1 && !t.round && !t.teen && k % 2 === 0 ? t.opMax : 0 }), nums = ex.nums, num = $("#o-num"), q = $("#o-trq"); q.innerHTML = ""; if (digi) abReset();
         once(k, mind ? "Смятай наум!" : "Смятай на абакуса!", "point"); await wait(k ? 700 : 1600);
+        const clips = talkN ? await numPrep(nums, c.speed) : null;   // под 1 сек. – без глас
         const shown = [], t0 = Date.now(); let acc = 0; const rules = [];
         for (let i = 0; i < nums.length; i++) { const n = nums[i];
           if (i) { const p = E.plan(acc, n < 0 ? "-" : "+", Math.abs(n), t.rods); rules.push(p.rule); } acc += n;
           num.textContent = i === 0 ? n : (n > 0 ? "+ " + n : "− " + -n); num.className = "o-trn pop" + (n < 0 && i ? " minus" : ""); shown.push(Date.now() - t0);
-          if (talkN) numSay(i, n); await wait(c.speed * 1000 - 200); num.textContent = ""; await wait(200); }
+          if (clips) numSay(clips[i]); await wait(c.speed * 1000 - 200); num.textContent = ""; await wait(200); }
         const target = acc, tq = Date.now(); if (FAST_ON) window.OBS_T = { target, nums }; num.textContent = "= ?"; num.className = "o-trn"; once(k, "Колко стана?", "explain"); if (k) voice("Колко стана?");
         let ans;
         if (digi) {   // отговорът е на абакуса: верен → продължава; иначе 4 s без движение → приема се
@@ -597,7 +611,7 @@
           ABMSG.on = null;
         } else ans = await keypad(q, String(Math.pow(10, t.rods + 1)).length - 1);
         const right = ans === target;
-        P.log.trainer.push({ t: Date.now(), topic: t.id, nums, speed: c.speed, voice: talkN, src: mind ? "mind" : digi ? "digi" : "phys", answer: ans, correct: right, rtMs: Date.now() - tq, shownMs: shown, rules, moves: digi ? abMoves.map(m => ({ ...m, ms: m.at - t0 })) : null });
+        P.log.trainer.push({ t: Date.now(), topic: t.id, nums, speed: c.speed, voice: !!clips, voiceRate: clips ? Math.max(...clips.map(x => x.rate)) : null, src: mind ? "mind" : digi ? "digi" : "phys", answer: ans, correct: right, rtMs: Date.now() - tq, shownMs: shown, rules, moves: digi ? abMoves.map(m => ({ ...m, ms: m.at - t0 })) : null });
         if (P.log.trainer.length > 400) P.log.trainer.splice(0, P.log.trainer.length - 400); save();
         num.textContent = "= " + target; q.innerHTML = right ? "" : `<p class="o-trhint">Ти: ${ans}</p>`;
         if (right) { ok++; pipStar(k); say(thank(target), "joy"); } else say("Почти! Ето колко стана.", "wait"); await wait(right ? 1300 : 2400);
