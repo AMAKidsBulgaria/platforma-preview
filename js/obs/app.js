@@ -40,7 +40,7 @@
 
   // ---- глас: Зори (zr_*), иначе разказвачът (Калина) ----
   let AUDZ = {}, AUD = {}, cur = null;
-  fetch("config/abacus-audio-zori.json?v=3").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
+  fetch("config/abacus-audio-zori.json?v=4").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
   fetch("config/abacus-audio.json?v=3").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
   function voice(text) {
     if (Q.get("voice") === "0") return;
@@ -109,19 +109,32 @@
   }
 
   // ---- екран 2: обсерваторията ----
+  // начален екран в общата рамка на платформата (както „Моето пътешествие“ в АЕ): горе ⌂ · герой · програма · профил;
+  // вляво голямото поле с обсерваторията и „Продължи“ (с реалния напредък); вдясно две карти – „Звездна карта“ и „Игри“
+  function homeLine(isNew, lv) { return isNew ? "Здравей! Днес откриваме нова звезда." : lv ? "Здравей! Да направим звездата още по-ярка." : "Здравей! Да започваме ли наблюдението?"; }
   function screenHome() {
     gen++; M = null;
-    const st = STAR[P.cur], lv = P.b[P.cur] || 0;
-    app.className = "o-scr o-home";
-    app.innerHTML = `<div class="o-bg"></div>
-      <div class="o-window" id="o-win"><div class="o-proj">${skySVG({ vb: "40 80 460 460" })}</div><div class="o-glass"></div></div>
-      <div class="o-top"><button class="o-me" id="o-me"><img src="assets/img/world/avatars/${P.av}.webp" alt=""><b>${P.name}</b><span>смени</span></button><div class="o-area">Аврора</div></div>
-      <div class="o-stage">${zori("explain")}<button class="o-kidb" id="o-kid"><img class="o-kid" src="assets/img/world/avatars/${P.av}.webp" alt=""><span>${P.name} · ти</span></button></div>
-      <div class="o-say">Здравей! Да започваме ли наблюдението?</div>
-      <div class="o-cta"><button class="o-go" id="o-go">▶ Продължи мисията<small>Звезда: ${st.title} · ${"★".repeat(lv)}${"☆".repeat(3 - lv)}</small></button>
-        <div class="o-big2"><button class="o-bigb" id="o-map"><svg viewBox="0 0 40 40"><path d="${starPath(14)}" transform="translate(20 21)" fill="#F5C04A"/></svg>Небето</button><button class="o-bigb" id="o-games"><svg viewBox="0 0 40 40"><rect x="10" y="6" width="20" height="28" rx="4" fill="none" stroke="#F5C04A" stroke-width="3"/><path d="M14 14h12M14 20h12M14 26h8" stroke="#F5C04A" stroke-width="3"/></svg>Игри</button></div></div>`;
-    voice("Здравей! Да започваме ли наблюдението?");
-    $("#o-go").onclick = () => startMission(P.cur);
+    const n = P.cur, st = STAR[n], lv = P.b[n] || 0, isNew = !(lv > 0) && !!NEWSTAR[n], mc = (P.mc || {})[n] || 0;
+    const all = Object.keys(STAR), lit = all.filter(k => (P.b[k] || 0) >= 3).length, line = homeLine(isNew, lv);
+    const sub = isNew ? "Нова звезда – да я открием!" : `${st.title} · мисия ${mc + 1}`;
+    const bright = `<span class="o-hst" aria-label="яркост ${lv} от 3">${"★".repeat(lv)}<i>${"★".repeat(3 - lv)}</i></span>`;
+    app.className = "o-scr o-hubscr";
+    app.innerHTML = `<section class="o-hub">
+      <header class="o-hhead"><a class="o-hh" href="index.html" aria-label="Към Моят свят">⌂</a><img class="o-hz" src="assets/img/zori/z_explain.png" alt=""><b>Ментална аритметика</b><span class="o-sp"></span>
+        <button class="o-me" id="o-me"><img src="assets/img/world/avatars/${P.av}.webp" alt=""><b>${P.name}</b><span>смени</span></button></header>
+      <div class="o-hgrid">
+        <div class="o-hero">
+          <div class="o-hbg"></div><button class="o-hwin" id="o-win" aria-label="Звездна карта"><div class="o-proj">${skySVG({ vb: "40 80 460 460" })}</div><div class="o-glass"></div></button>
+          <div class="o-htitle"><b>Звездна обсерватория</b><small>Област Аврора</small></div>
+          <div class="o-hbadge"><b>${st.title}</b><small>${isNew ? "нова звезда" : "яркост"}</small>${isNew ? "" : bright}</div>
+          <div class="o-hstage"><div class="o-say">${line}</div>${zori("explain")}<button class="o-kidb" id="o-kid"><img class="o-kid" src="assets/img/world/avatars/${P.av}.webp" alt=""><span>${P.name} · ти</span></button></div>
+          <button class="o-hgo" id="o-go"><em>▶</em><span><b>Продължи</b><small>${sub}</small></span></button>
+        </div>
+        <button class="o-hcard" id="o-map"><img src="assets/img/obs/card_map.webp" alt=""><span class="o-htx"><b>Звездна карта</b><small>Моите открития</small><small class="o-hcount">★ ${lit} от ${all.length} звезди светят</small></span><i>›</i></button>
+        <button class="o-hcard" id="o-games"><img src="assets/img/obs/card_games.webp" alt=""><span class="o-htx"><b>Игри</b><small>Тренирай уменията си</small></span><i>›</i></button>
+      </div></section>`;
+    voice(line);
+    $("#o-go").onclick = () => startMission(n);
     $("#o-map").onclick = () => screenMap(); $("#o-games").onclick = screenGames; $("#o-win").onclick = () => screenMap(); $("#o-me").onclick = screenAvatar; $("#o-kid").onclick = screenAvatar;
   }
   // детето избира своя герой (същите аватари като в „Моят свят“); профилите – от бутона долу
@@ -674,6 +687,7 @@
     const before = P.b[n] || 0, after = Math.min(3, before + (earned >= 2 ? 1 : 0));   // най-много +1 яркост на мисия (усвояването иска няколко различни дни)
     const today = new Date().toDateString(); P.done = P.done || {}; P.rev = P.rev || {};
     if (before >= 3 && earned >= 2 && P.done[n] && P.done[n] !== today) P.rev[n] = 1; if (after >= 3 && !P.done[n]) P.done[n] = today;
+    P.mc = P.mc || {}; P.mc[n] = (P.mc[n] || 0) + 1;
     P.b[n] = after; if (r(M.im) >= .67 && after >= 3) P.halo[n] = 1;
     if (after >= 3 && n === P.cur && n < 9) P.cur = n + 1; save();
     gen++; app.className = "o-scr o-end";

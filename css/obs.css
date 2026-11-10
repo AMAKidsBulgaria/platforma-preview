@@ -305,3 +305,57 @@ html.o-still .o-focus { animation: none; }
   .o-fix .o-abhost { height: calc(100dvh - 205px) !important; } .o-fix .o-done, .o-fix .o-rew { padding: 6px 16px; font-size: 18px; }
 }
 @media (max-width: 760px) and (min-height: 521px) { .o-fix .o-abhost { height: clamp(180px, calc(100dvh - 520px), 480px) !important; } }
+/* ===== начален екран в общата рамка (10.11): горе ⌂ · герой · програма · профил; вляво обсерваторията + „Продължи“; вдясно 2 карти ===== */
+.o-hubscr { display: flex; }
+.o-hub { flex: 1; min-width: 0; display: grid; grid-template-rows: auto 1fr; gap: 12px; }
+.o-hhead { display: flex; align-items: center; gap: 12px; }
+.o-hh { width: 52px; height: 52px; border-radius: 50%; background: #0d1030; border: 2px solid #ffffff30; color: var(--ink); display: grid; place-items: center; font: 900 26px "Nunito"; text-decoration: none; box-shadow: 0 4px 0 #05071a; }
+.o-hz { height: 52px; width: 52px; object-fit: contain; } .o-hhead > b { font: 900 clamp(20px, 2.6vw, 28px) "Nunito"; color: var(--gold); } .o-sp { flex: 1; }
+.o-hgrid { display: grid; grid-template-columns: 1.65fr 1fr; grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 14px; min-height: 0; }
+.o-hero { grid-row: 1 / 3; position: relative; border-radius: 28px; overflow: hidden; box-shadow: 0 6px 0 #05071a, 0 0 0 2px #B88A4E66; min-height: 0; }
+.o-hbg { position: absolute; inset: 0; background: url(../assets/img/obs/home.jpg) center 55% / cover no-repeat; }
+.o-hbg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, #05071a55, transparent 30%, transparent 55%, #05071acc); }
+.o-hwin { position: absolute; left: 50%; top: 6%; width: min(52%, 62%); max-width: 70%; height: auto; aspect-ratio: 1; max-height: 64%; transform: translateX(-50%); border-radius: 50%; overflow: hidden; padding: 0; border: 0; background: #0b0e2a;
+  box-shadow: 0 0 0 8px #4a3420, 0 0 0 13px #B88A4E55, 0 0 50px #F5C04A33; cursor: pointer; }
+.o-hwin .o-sky { width: 100%; height: 100%; }
+.o-htitle { position: absolute; left: 18px; top: 16px; background: #0d1030d9; border: 2px solid #B88A4E77; border-radius: 20px; padding: 10px 18px; display: grid; gap: 2px; max-width: 46%; }
+.o-htitle b { font: 900 clamp(22px, 3vw, 36px)/1.05 "Nunito"; color: var(--gold); text-wrap: balance; } .o-htitle small { font: 800 15px "Nunito"; color: var(--ink); opacity: .85; }
+.o-hbadge { position: absolute; right: 16px; top: 16px; background: #F7F1E3f0; color: #2B2140; border-radius: 16px; padding: 8px 14px; display: grid; gap: 1px; justify-items: start; }
+.o-hbadge b { font: 900 17px "Nunito"; } .o-hbadge small { font: 700 13px "Nunito"; opacity: .7; }
+.o-hst { color: #E0A21C; font-size: 20px; letter-spacing: 2px; line-height: 1; } .o-hst i { font-style: normal; color: #2B214033; }
+.o-hstage { position: absolute; left: 3%; bottom: 0; display: flex; align-items: flex-end; gap: 8px; pointer-events: none; }
+.o-hstage .o-zori { height: clamp(150px, 46%, 360px); height: min(40dvh, 340px); filter: drop-shadow(0 10px 16px #0009); }
+.o-hstage .o-kidb { margin-bottom: 8px; } .o-hstage .o-kid { height: min(24dvh, 200px); filter: drop-shadow(0 10px 16px #0009); }
+.o-hstage .o-say { position: absolute; left: 0; bottom: calc(min(40dvh, 340px) + 6px); width: max-content; max-width: min(34vw, 380px); }
+.o-hgo { position: absolute; right: 22px; bottom: 22px; display: flex; align-items: center; gap: 14px; padding: 14px 30px 14px 24px; border-radius: 999px; border: 0; background: var(--gold); color: #2B2140; box-shadow: 0 7px 0 #a87a1c, 0 12px 26px #0009; text-align: left; max-width: 52%; }
+.o-hgo em { font-style: normal; font-size: 30px; } .o-hgo span { display: grid; } .o-hgo b { font: 900 clamp(24px, 3vw, 34px)/1 "Nunito"; } .o-hgo small { font: 800 15px "Nunito"; opacity: .8; }
+.o-hgo:active { transform: translateY(5px); box-shadow: 0 2px 0 #a87a1c; }
+.o-hcard { position: relative; border-radius: 22px; overflow: hidden; padding: 0; border: 0; text-align: left; color: var(--ink); background: #1B2263; box-shadow: 0 5px 0 #05071a, 0 0 0 2px #B88A4E44; min-height: 0; }
+.o-hcard img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: right center; }
+#o-games::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(100deg, #6B2FA066, #6B2FA022 55%, transparent 80%); } .o-htx, .o-hcard > i { z-index: 2; }
+.o-htx { position: absolute; left: 18px; top: 14px; display: grid; gap: 2px; max-width: 60%; }
+.o-htx b { font: 900 clamp(24px, 3vw, 36px)/1.05 "Nunito"; color: #fff; text-shadow: 0 2px 8px #0008; } .o-htx small { font: 800 16px "Nunito"; color: var(--ink); opacity: .9; }
+.o-htx .o-hcount { margin-top: 6px; color: var(--gold); opacity: 1; font-size: 14px; }
+.o-hcard > i { position: absolute; right: 12px; bottom: 12px; width: 42px; height: 42px; border-radius: 50%; background: var(--ink); color: #2B2140; display: grid; place-items: center; font: 900 28px/1 "Nunito"; font-style: normal; box-shadow: 0 3px 0 #0006; }
+.o-hcard:active, .o-hwin:active { transform: translateY(3px); }
+@media (orientation: portrait) {
+  .o-hgrid { grid-template-columns: 1fr 1fr; grid-template-rows: 2.2fr 1fr; } .o-hero { grid-row: 1; grid-column: 1 / 3; }
+  .o-hwin { width: 56%; top: 16%; } .o-htitle { max-width: 60%; } .o-hgo { max-width: 70%; right: 14px; bottom: 14px; }
+  .o-hstage .o-zori { height: min(24dvh, 260px); } .o-hstage .o-kid { height: min(15dvh, 150px); } .o-hstage .o-say { bottom: calc(min(24dvh, 260px) + 6px); max-width: 60vw; }
+}
+@media (max-width: 760px) and (orientation: portrait) {
+  .o-hhead > b { font-size: 18px; } .o-hz { display: none; } .o-me span { display: none; }
+  .o-hwin { width: 62%; top: 22%; } .o-htitle { left: 10px; top: 10px; padding: 6px 12px; } .o-htitle b { font-size: 20px; } .o-hbadge { right: 10px; top: 10px; padding: 6px 10px; }
+  .o-hgo { left: 12px; right: 12px; max-width: none; justify-content: center; padding: 12px 18px; } .o-hstage { bottom: 84px; } .o-hstage .o-kidb { display: none; }
+  .o-hstage .o-zori { height: min(20dvh, 170px); } .o-hstage .o-say { bottom: calc(min(20dvh, 170px) + 4px); font-size: 15px; max-width: 70vw; }
+  .o-htx { left: 12px; top: 10px; max-width: 80%; } .o-htx b { font-size: 20px; } .o-htx small { font-size: 13px; } .o-htx .o-hcount { display: none; }
+}
+@media (max-height: 520px) {
+  .o-hub { gap: 6px; } .o-hh, .o-hz { width: 40px; height: 40px; font-size: 20px; } .o-me img { width: 32px; height: 32px; }
+  .o-hwin { width: 40%; top: 8%; max-height: 70%; } .o-htitle { padding: 6px 12px; } .o-htitle b { font-size: 20px; } .o-htitle small { font-size: 12px; } .o-hbadge { padding: 4px 10px; }
+  .o-hstage .o-zori { height: 46dvh; } .o-hstage .o-kidb { display: none; } .o-hstage .o-say { display: none; }
+  .o-hgo { right: 12px; bottom: 12px; padding: 8px 18px 8px 14px; } .o-hgo b { font-size: 22px; } .o-hgo small { font-size: 12px; }
+  .o-htx { left: 12px; top: 8px; } .o-htx b { font-size: 20px; } .o-htx small { font-size: 12px; } .o-hcard > i { width: 32px; height: 32px; font-size: 22px; }
+}
+.o-hcard::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, #0b0e2acc, #0b0e2a33 38%, transparent 55%); }
+@media (max-width: 760px) and (orientation: portrait) { .o-hcard img { top: auto; bottom: 0; height: 64%; object-position: 85% center; -webkit-mask-image: linear-gradient(180deg, transparent, #000 30%); mask-image: linear-gradient(180deg, transparent, #000 30%); } }
