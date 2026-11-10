@@ -101,10 +101,45 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 /* игри */
-.o-glist { flex: 1; display: flex; gap: 18px; align-items: center; justify-content: center; flex-wrap: wrap; }
-.o-gcard { width: min(30vw, 240px); min-height: 160px; border-radius: 26px; border: 3px solid #F5C04A66; background: #ffffff10; color: var(--ink); display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 16px; }
-.o-gcard b { font: 900 24px "Nunito"; color: var(--gold); } .o-gcard span { font-weight: 700; color: var(--muted); }
-.o-seq { display: flex; gap: 12px; } .o-seq b { width: 80px; height: 80px; border-radius: 20px; border: 3px dashed #ffffff40; display: grid; place-items: center; font: 900 40px "Nunito"; }
-.o-seq b.ok { border: 3px solid #2E9E5B; background: #2E9E5B55; } .o-seq b.no { border: 3px solid #B04A3A; background: #B04A3A55; }
-.o-flash:empty { border: 0; }
-@media (max-width: 760px) { .o-gcard { width: 80vw; min-height: 100px; } }
+.o-grow { flex: 1; min-width: 0; }
+.o-maptop { flex-wrap: wrap; }
+.o-gamesbg { background: radial-gradient(ellipse at 30% 0%, #2E3680, var(--night) 70%); }
+.o-gamesbg::before, .o-game::before { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(2px 2px at 12% 22%, #fff, transparent), radial-gradient(1.5px 1.5px at 72% 18%, #fff, transparent), radial-gradient(2px 2px at 40% 70%, #fff, transparent), radial-gradient(1.5px 1.5px at 85% 60%, #fff, transparent), radial-gradient(1.5px 1.5px at 25% 85%, #fff, transparent), radial-gradient(2px 2px at 58% 40%, #fff, transparent); background-size: 420px 300px; animation: otw 4s ease-in-out infinite alternate; opacity: .5; }
+@keyframes otw { to { opacity: .15; } }
+.o-glist { position: relative; flex: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; align-content: center; max-width: 1100px; width: 100%; margin: 0 auto; }
+.o-gcard { position: relative; min-height: 210px; border-radius: 28px; border: 3px solid #F5C04A55; background: linear-gradient(160deg, #ffffff18, #ffffff06); color: var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 14px; box-shadow: 0 10px 24px #0006; animation: oin .5s cubic-bezier(.3,1.4,.5,1) both; transition: transform .15s; }
+.o-gcard:hover { transform: translateY(-4px) scale(1.02); border-color: var(--gold); box-shadow: 0 0 0 4px #F5C04A33, 0 14px 30px #0008; }
+.o-gcard:active { transform: scale(.97); }
+.o-gcard b { font: 900 23px "Nunito"; color: var(--gold); text-align: center; } .o-gcard span { font-weight: 700; color: var(--muted); }
+@keyframes oin { from { opacity: 0; transform: translateY(24px) scale(.9); } }
+.o-gic { width: 96px; height: 96px; } .o-gic svg { width: 100%; height: 100%; overflow: visible; } .o-gic.big { width: 150px; height: 150px; flex: 0 0 auto; }
+.ic-b1 { animation: obead 2.4s ease-in-out infinite; } .ic-b2 { animation: obead 2.4s ease-in-out .6s infinite; }
+@keyframes obead { 50% { transform: translateY(-6px); } }
+.ic-card { animation: ocard 3s ease-in-out infinite; transform-origin: 42px 80px; } .ic-card2 { animation: ocard 3s ease-in-out .4s infinite reverse; transform-origin: 58px 86px; }
+@keyframes ocard { 50% { transform: rotate(-8deg); } }
+.ic-tel { animation: otel 3s ease-in-out infinite; transform-origin: 45px 50px; } @keyframes otel { 50% { transform: rotate(6deg); } }
+.ic-tw, .ic-s1, .ic-s2, .ic-s3 { animation: otwi 1.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; } .ic-s2 { animation-delay: .5s; } .ic-s3 { animation-delay: 1s; }
+@keyframes otwi { 50% { transform: scale(.75); opacity: .6; } }
+/* настройки */
+.o-set { position: relative; flex: 1; min-height: 0; display: flex; gap: 22px; align-items: center; justify-content: center; overflow: auto; }
+.o-srows { display: grid; gap: 14px; max-width: 760px; }
+.o-srow { display: grid; gap: 6px; } .o-sk { font: 900 18px "Nunito"; color: var(--gold); }
+.o-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.o-chip { border: 2px solid #ffffff38; background: #ffffff12; color: var(--ink); border-radius: 16px; padding: 8px 14px; font: 800 16px "Nunito"; min-width: 52px; transition: transform .12s; }
+.o-chip.on { background: var(--gold); border-color: var(--gold); color: #2B2140; box-shadow: 0 0 14px #F5C04A77; transform: scale(1.05); }
+.o-sbar { position: relative; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; align-items: center; }
+.o-sbar .o-go { flex-direction: row; }
+/* в играта */
+.o-game { background: radial-gradient(ellipse at 50% 0%, #2E3680, var(--night) 70%); }
+.o-mtop { position: relative; } .o-mbody { position: relative; }
+.o-flash.r2 { aspect-ratio: 480 / 560; } .o-flash.r3 { aspect-ratio: 680 / 560; }
+.pop { animation: opop .35s cubic-bezier(.3,1.6,.5,1); } @keyframes opop { from { transform: scale(.4); opacity: 0; } }
+.o-zori.hop { animation: ohop .6s ease; } @keyframes ohop { 30% { transform: translateY(-26px) rotate(-4deg); } 60% { transform: translateY(0) rotate(3deg); } }
+.o-cs { fill: var(--gold); filter: drop-shadow(0 0 8px #F5C04A); animation: opop .4s cubic-bezier(.3,1.6,.5,1) both, otwi 1.6s ease-in-out .4s infinite; transform-box: fill-box; transform-origin: center; }
+.o-burst { position: absolute; left: 50%; top: 45%; width: 0; height: 0; pointer-events: none; z-index: 5; }
+.o-burst i { position: absolute; width: 18px; height: 18px; margin: -9px; background: var(--gold); clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); animation: oburst .9s ease-out forwards; }
+@keyframes oburst { from { transform: translate(0, 0) scale(.4); opacity: 1; } to { transform: translate(var(--dx), var(--dy)) scale(1.1) rotate(160deg); opacity: 0; } }
+.o-mwork { position: relative; }
+.o-gres { font: 800 20px "Nunito"; color: var(--muted); } .o-gres b { color: var(--ink); }
+.o-stars.big span { display: inline-block; font-size: 64px; color: #ffffff22; } .o-stars.big span.on { color: var(--gold); text-shadow: 0 0 18px #F5C04A; animation: opop .5s cubic-bezier(.3,1.6,.5,1) both; }
+@media (max-width: 760px) { .o-glist { grid-template-columns: 1fr 1fr; } .o-gcard { min-height: 150px; } .o-gic { width: 64px; height: 64px; } .o-set { flex-direction: column; } .o-gic.big { width: 90px; height: 90px; } }
