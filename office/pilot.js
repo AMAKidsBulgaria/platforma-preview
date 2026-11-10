@@ -47,10 +47,12 @@
   async function load() {
     if (S.status === "loading") return; S.status = "loading"; S.err = null;
     try {
-      const [cfg, hw, wt, mb, en, enw] = await Promise.all([getJSON("../config/pilot-db.json?v=" + Date.now()).catch(() => ({})), getJSON("../config/homework-map.json"), getJSON("../config/world-tasks.json"), getJSON("../config/math-banks.json"),
-        getJSON("../config/english-l0.json").catch(() => null), getJSON("../config/english-words.json").catch(() => null)]);
+      const [cfg, hw, wt, mb, en, enw, ma] = await Promise.all([getJSON("../config/pilot-db.json?v=" + Date.now()).catch(() => ({})), getJSON("../config/homework-map.json"), getJSON("../config/world-tasks.json"), getJSON("../config/math-banks.json"),
+        getJSON("../config/english-l0.json").catch(() => null), getJSON("../config/english-words.json").catch(() => null), getJSON("../config/ma-homework.json").catch(() => null)]);
       // английският (отделна програма): занятията EN0101…EN1006 по 5 кръга, от един източник с модула
       S.EN = en ? en.zones.flatMap(z => z.lessons.map(l => ({ id: l.id, title: `${z.name} · ${l.n}. ${l.title}`, rounds: l.rounds.length }))) : []; S.ENW = (enw && enw.words) || {};
+      // ментална аритметика (модул „Просто“): занятията MA01…MA21; кръговете = игрите от домашното с настройките им (config/ma-homework.json)
+      S.MA = ma ? ma.lessons.map(l => ({ id: l.id, title: `Занятие ${l.n} · ${l.title}`, rounds: l.rounds.length })) : [];
       S.hw = hw; S.wt = wt; S.mb = mb.slots || {}; S.cfg = cfg && cfg.url && cfg.anon_key ? cfg : null;
       S.HW = {}; hw.lessons.forEach(l => l.rounds.forEach(r => r.assignments.forEach(a => { (S.HW[`${l.id}.${r.round}.${a.game}`] = S.HW[`${l.id}.${r.round}.${a.game}`] || []).push(Object.assign({ lesson: l.id, round: r.round }, a)); })));
       S.ITEM = {}; wt.items.forEach(x => S.ITEM[x.id] = x);
@@ -244,13 +246,13 @@
 
   // f) домашни: учителят възлага занятие на децата от групата; таблетът го получава от сървъра („Моят свят“ → „Продължи“)
   //    правило на таблета (26.10.2026): първо най-новото възложено незавършено – детето остава с групата; по-старите – „Доиграй“, по желание; оттеглено домашно изчезва от таблета при следващата връзка
-  const MODN = { BK: "Букварика", CH: "Читарика", MW: "Математика и околен свят", EN: "Английски език" };
+  const MODN = { BK: "Букварика", CH: "Читарика", MW: "Математика и околен свят", EN: "Английски език", MA: "Ментална аритметика" };
   function vHomework() {
     const kids = childrenF(), groups = [...new Set(kids.map(c => c.group_code))].sort(), g = S.hwGroup && groups.includes(S.hwGroup) ? S.hwGroup : groups[0];
     const inG = kids.filter(c => c.group_code === g), ss = S.data.sessions || [], hws = (S.data.homeworks || []).filter(h => kids.some(c => c.code === h.child_code));
-    const need = l => { const E = (S.EN || []).find(x => x.id === l); if (E) return E.rounds; const L = S.hw.lessons.find(x => x.id === l); return L ? L.rounds.length : 4; };
+    const need = l => { const E = (S.EN || []).concat(S.MA || []).find(x => x.id === l); if (E) return E.rounds; const L = S.hw.lessons.find(x => x.id === l); return L ? L.rounds.length : 4; };
     const doneR = (c, l) => new Set(ss.filter(x => x.child_code === c && x.lesson_id === l).map(x => x.round_id)).size;
-    const opts = Object.entries(MODN).map(([k, v]) => `<optgroup label="${v}">${S.hw.lessons.concat(S.EN || []).filter(l => l.id.startsWith(k)).map(l => `<option value="${l.id}" ${S.hwLesson === l.id ? "selected" : ""}>${l.id} · ${esc(l.title)}</option>`).join("")}</optgroup>`).join("");
+    const opts = Object.entries(MODN).map(([k, v]) => `<optgroup label="${v}">${S.hw.lessons.concat(S.EN || [], S.MA || []).filter(l => l.id.startsWith(k)).map(l => `<option value="${l.id}" ${S.hwLesson === l.id ? "selected" : ""}>${l.id} · ${esc(l.title)}</option>`).join("")}</optgroup>`).join("");
     const open = hws.filter(h => !h.revoked_at);
     const form = `<div class="panel"><h2>Възложи домашно</h2><p class="muted pilot-note">Домашното е едно занятие (всичките му кръгове). Таблетът на детето показва „Продължи“ към следващия незавършен кръг; при няколко незавършени – първо най-новото (детето остава с групата); по-старите остават отворени по желание. ${S.mode === "db" ? "" : '<span class="pill w">демо – записва се само в този браузър</span>'}</p>
       <div class="form" style="display:flex;gap:12px;flex-wrap:wrap;align-items:end"><label>Група <select id="hw-g">${groups.map(x => `<option ${x === g ? "selected" : ""}>${esc(x)}</option>`).join("")}</select></label>

@@ -377,3 +377,20 @@ html.o-still .o-focus { animation: none; }
 .o-yn button[data-v="0"] { background: #3A2A5E; border-color: #FF9C8A; }
 @media (max-height: 520px) { .o-csky { height: 70px; } .o-cab { height: calc(100dvh - 250px) !important; } .o-cbox2 { height: calc(100dvh - 200px); } .o-yn button { padding: 8px 16px; font-size: 20px !important; } }
 @media (max-width: 760px) and (min-height: 521px) { .o-cab { height: clamp(160px, calc(100dvh - 560px), 420px) !important; } .o-cbox2 { height: clamp(160px, calc(100dvh - 470px), 400px); } }
+/* ===== домашно, „За учителя“, заключени игри (10.11) ===== */
+.o-hdots { display: flex; gap: 5px; margin-top: 4px; } .o-hdots i { width: 12px; height: 12px; border-radius: 50%; background: #2B214022; border: 2px solid #2B214055; }
+.o-hdots i.on { background: #2E9E5B; border-color: #2E9E5B; } .o-hdots i.now { border-color: #E0A21C; background: #F5C04A; }
+.o-hdots.big { justify-content: center; gap: 10px; margin: 10px 0; } .o-hdots.big i { width: 22px; height: 22px; background: #ffffff1a; border-color: #ffffff44; } .o-hdots.big i.on { background: #2E9E5B; border-color: #2E9E5B; }
+.o-hold { position: absolute; right: 22px; bottom: calc(22px + 92px); background: #0d1030d9; color: var(--ink); border: 2px solid #ffffff40; border-radius: 99px; padding: 8px 16px; font: 800 15px "Nunito"; }
+.o-teach { position: relative; width: 48px; height: 48px; border-radius: 50%; background: #0d1030; border: 2px solid #ffffff30; font-size: 22px; overflow: hidden; }
+.o-teach i { position: absolute; left: 0; bottom: 0; height: 4px; width: 0; background: var(--gold); } .o-teach.hold i { width: 100%; transition: width 1s linear; }
+.o-review { background: #7B4FD0; color: #fff; border-radius: 99px; padding: 3px 10px; font: 800 13px "Nunito"; }
+.o-mname small { display: block; font: 800 13px "Nunito"; color: var(--muted); }
+.o-gcard { position: relative; } .o-gcard.lock { opacity: .55; filter: saturate(.4); } .o-gcard.lock span { color: #FFE9A8; }
+.o-new { position: absolute; right: -6px; top: -8px; background: #FF7A59; color: #fff; font: 900 13px "Nunito"; font-style: normal; padding: 3px 10px; border-radius: 99px; transform: rotate(5deg); box-shadow: 0 3px 0 #c95637; }
+.o-teachbox { position: absolute; left: 16px; right: 16px; top: 84px; bottom: 12px; overflow: auto; background: #0d1030e6; border: 2px solid #B88A4E55; border-radius: 20px; padding: 14px 16px; user-select: text; }
+.o-tnote { color: var(--muted); font: 700 14px/1.45 "Nunito"; margin: 0 0 10px; max-width: 75ch; } .o-teachbox h3 { color: var(--gold); margin: 18px 0 6px; } .o-teachbox h3 small { color: var(--muted); font-weight: 700; }
+.o-ttbl { width: 100%; border-collapse: collapse; font: 700 14px/1.35 "Nunito"; } .o-ttbl td, .o-ttbl th { padding: 6px 8px; border-bottom: 1px solid #ffffff1a; text-align: left; vertical-align: top; }
+.o-ttbl th { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; } .o-ttbl tr.fut { opacity: .45; } .o-ttbl tr.ok td:last-child { color: #9FE3B8; } .o-ttbl tr.open td:last-child { color: #FFE08A; }
+@media (max-height: 520px) { .o-hold { bottom: 70px; right: 12px; padding: 4px 10px; font-size: 12px; } .o-teachbox { top: 64px; } }
+@media (max-width: 760px) and (orientation: portrait) { .o-hold { left: 12px; right: auto; bottom: 84px; } .o-teach { width: 40px; height: 40px; font-size: 18px; } }
