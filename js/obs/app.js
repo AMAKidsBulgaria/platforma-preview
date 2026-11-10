@@ -75,7 +75,7 @@
 
   // ---- глас: Зори (zr_*), иначе разказвачът (Калина) ----
   let AUDZ = {}, AUD = {}, cur = null;
-  fetch("config/abacus-audio-zori.json?v=7").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
+  fetch("config/abacus-audio-zori.json?v=8").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
   fetch("config/abacus-audio.json?v=3").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
   function voice(text) {
     if (Q.get("voice") === "0") return;
@@ -498,7 +498,7 @@
       opts: { topic: "тема", speed: [4, 3, 2, 1.5, 1], rounds: [5, 8, 12] } },
     comet: { name: "Комета", sub: "нареди, преди да отлети", skill: "бързо и точно нареждане на числото",
       opts: { topic: "тема", speed: [8, 6, 5, 4], rounds: [5, 8, 12] } },
-    oops: { name: "Зори сбърка", sub: "вярно ли смята Зори?", skill: "разбиране на правилото и самопроверка",
+    oops: { name: "Провери Зори", sub: "вярно ли смята?", skill: "разбиране на правилото и самопроверка",
       opts: { topic: "тема", rounds: [4, 6, 8] } }
   };
   const OPTNAME = { topic: "Тема", count: "Брой числа", speed: "Скорост (сек.)", rounds: "Кръгове", mode: "Начин", len: "Колко числа", upto: "До" };
@@ -571,12 +571,15 @@
     return [ok, c.rounds];
   }
   // ---- „Съзвездие-число“: само светещите топчета, като звезди на техните места (без рамка и пръчки) – стъпка към въображаемия абакус ----
-  function constSVG(v, rods, dim) {
-    const W = 170, X0 = 95, wTot = X0 * 2 + (rods - 1) * W, st = E.fromValue(v, rods), xOf = (r) => X0 + (rods - 1 - r) * W;
-    const star = (x, y, on) => on ? `<g class="cs-on" transform="translate(${x} ${y})"><circle r="38" fill="url(#csg)"/><path d="${starPath(26)}" fill="#FFE08A"/></g>` : `<circle cx="${x}" cy="${y}" r="5" fill="#ffffff22"/>`;
-    let s = `<svg viewBox="0 0 ${wTot} 480" class="o-const${dim ? " dim" : ""}"><defs><radialGradient id="csg"><stop offset="0" stop-color="#F5C04A" stop-opacity=".55"/><stop offset="1" stop-color="#F5C04A" stop-opacity="0"/></radialGradient></defs>`;
-    s += `<line x1="24" y1="150" x2="${wTot - 24}" y2="150" stroke="#B88A4E" stroke-width="5" stroke-dasharray="2 14" stroke-linecap="round" opacity=".7"/>`;
-    for (let i = 0; i < rods; i++) { const r = st[i], x = xOf(i); s += star(x, 70, !dim && r.h); for (let k = 1; k <= 4; k++) s += star(x, 150 + k * 70, !dim && k <= r.e); }
+  function constSVG(v, rods, dim) {   // звездите стоят точно където са топчетата: светещите – допрени до гредата; бледите контури – „свалени“, далеч от нея
+    const W = 170, X0 = 95, H = 500, BEAM = 140, wTot = X0 * 2 + (rods - 1) * W, st = E.fromValue(v, rods), xOf = (r) => X0 + (rods - 1 - r) * W;
+    const eY = (k, e) => k <= e ? BEAM + 46 + (k - 1) * 60 : H - 34 - (4 - k) * 60, hY = (h) => h ? BEAM - 46 : 40;
+    const star = (x, y, on) => on ? `<g class="cs-on" transform="translate(${x} ${y})"><circle r="40" fill="url(#csg)"/><path d="${starPath(27)}" fill="#FFE08A"/></g>`
+      : `<path class="cs-off" transform="translate(${x} ${y})" d="${starPath(22)}" fill="none" stroke="#B9B4D8" stroke-opacity=".45" stroke-width="3" stroke-linejoin="round"/>`;
+    let s = `<svg viewBox="0 0 ${wTot} ${H}" class="o-const${dim ? " dim" : ""}"><defs><radialGradient id="csg"><stop offset="0" stop-color="#F5C04A" stop-opacity=".6"/><stop offset="1" stop-color="#F5C04A" stop-opacity="0"/></radialGradient></defs>`;
+    for (let i = 0; i < rods; i++) s += `<line x1="${xOf(i)}" y1="14" x2="${xOf(i)}" y2="${H - 10}" stroke="#ffffff" stroke-opacity=".08" stroke-width="3"/>`;
+    s += `<line x1="20" y1="${BEAM}" x2="${wTot - 20}" y2="${BEAM}" stroke="#B88A4E" stroke-width="7" stroke-linecap="round"/>`;
+    for (let i = 0; i < rods; i++) { const r = st[i], x = xOf(i); s += star(x, hY(!dim && r.h), !dim && r.h); for (let k = 1; k <= 4; k++) s += star(x, eY(k, dim ? 0 : r.e), !dim && k <= r.e); }
     return s + `</svg>`;
   }
   const CONST_LOOK = (t) => ({ draw: (v) => `<div class="o-cbox2 o-sig">${constSVG(v, t.rods)}</div>`, dim: () => `<div class="o-cbox2 o-dim">${constSVG(0, t.rods, true)}<span>?</span></div>`,
@@ -619,8 +622,8 @@
     return [ok, c.rounds];
   }
 
-  // ---- „Зори сбърка“: Зори смята пример на абакуса (бавно, със стрелки). Понякога смята вярно, понякога мести с едно топче повече/по-малко
-  // или на грешната пръчка. Детето казва „Вярно“ или „Зори сбърка“; ако е сбъркала – детето показва как е правилно (проверка на числото и на движенията).
+  // ---- „Провери Зори“: Зори смята пример на абакуса (бавно, със стрелки). Понякога смята вярно, понякога мести с едно топче повече/по-малко
+  // или на грешната пръчка. Детето казва „Вярно“ или „Грешно“; ако е сбъркала – детето показва как е правилно (проверка на числото и на движенията).
   function oopsTask(t) {
     for (let g = 0; g < 200; g++) {
       const ex = E.simpleExample({ ...t, count: 2 }), a = ex.nums[0], n = ex.nums[1], op = n < 0 ? "-" : "+", k = Math.abs(n);
@@ -639,7 +642,7 @@
     const t = topicFor(c.topic); let ok = 0; P.log = P.log || {}; P.log.oops = P.log.oops || [];
     for (let k = 0; k < c.rounds; k++) {
       pip(k); const q = oopsTask(t); if (!q) break; const w = $("#o-work"), ex = `${q.a} ${q.op === "+" ? "+" : "−"} ${q.k}`;
-      w.innerHTML = `<div class="o-num" id="o-num">${ex}</div><div class="o-abhost" id="o-abh"></div><div class="o-ch big o-yn" id="o-yn" hidden><button data-v="1">✓ Вярно</button><button data-v="0">✗ Зори сбърка</button></div>`;
+      w.innerHTML = `<div class="o-num" id="o-num">${ex}</div><div class="o-abhost" id="o-abh"></div><div class="o-ch big o-yn" id="o-yn" hidden><button data-v="1">✓ Вярно</button><button data-v="0">✗ Грешно</button></div>`;
       const ab = abacus($("#o-abh"), t.rods); ab.enable(false); ab.set(q.a); if (FAST_ON) window.OBS_T = { ab, q };
       const play = async (ms) => { ab.set(q.a); await wait(500); await ab.demo(ms, false, true); };
       if (!k) await talk("Гледай как смятам. Вярно ли е?", "point"); else { say("Гледай как смятам!", "point"); await wait(600); }
@@ -820,7 +823,7 @@
     return [ok, c.rounds];
   }
   const PLAY = { trainer: playTrainer, flash: playFlash, fix: playFix, memory: playMemory, count: playCount, constel: playConst, comet: playComet, oops: playOops };
-  const INTRO = { trainer: "Тренажор!", flash: "Звездни сигнали!", fix: "Поправи телескопа!", memory: "Нощна памет!", count: "Звездно броене!", constel: "Съзвездие-число!", comet: "Комета!", oops: "Зори сбърка!" };
+  const INTRO = { trainer: "Тренажор!", flash: "Звездни сигнали!", fix: "Поправи телескопа!", memory: "Нощна памет!", count: "Звездно броене!", constel: "Съзвездие-число!", comet: "Комета!", oops: "Провери Зори!" };
 
   // в мисията: последният етап – една от игрите, с параметрите на занятието
   async function missionGame() {   // (фонът „нощно небе“ за броенето се слага в playCount)
@@ -830,14 +833,20 @@
 
   // ---- екрани: Игри → Настройки → игра → резултат ----
   function navBar(extra) { return `<div class="o-maptop"><button class="o-back" id="o-back">← Към обсерваторията</button>${extra || ""}</div>`; }
+  // екран „Игри“: илюстровани карти като на началния екран; цвят по игра; заключените „чакат“ (от занятие N), новоотключената – „Ново!“
   function screenGames() {
     gen++; M = null;
-    app.className = "o-scr o-map o-gamesbg";
-    app.innerHTML = navBar(`<div><div class="o-mt">Игри</div><div class="o-ms">избери игра – после „Настройки“ или „Старт“</div></div>`) +
-      `<div class="o-glist">${Object.entries(GAMES).map(([id, g], i) => { const op = isOpen(id), fresh = op && !REVIEW && unlockAt(id) === classAt() && unlockAt(id) > 1;
-        return `<button class="o-gcard${op ? "" : " lock"}" data-g="${id}" style="animation-delay:${i * .07}s">${fresh ? '<em class="o-new">Ново!</em>' : ""}<div class="o-gic">${ICON[id]}</div><b>${g.name}</b><span>${op ? g.sub : `чака · от занятие ${unlockAt(id)}`}</span></button>`; }).join("")}</div>`;
+    app.className = "o-scr o-gscr";
+    app.innerHTML = `<div class="o-gbg"></div><section class="o-gwrap">
+      <header class="o-ghead"><button class="o-back" id="o-back">← Към обсерваторията</button><div class="o-gtitle"><b>Игри</b><small>Тренирай уменията си</small></div><span class="o-sp"></span>
+        <div class="o-gz"><div class="o-say">Избери игра!</div>${zori("point")}</div></header>
+      <div class="o-ggrid">${Object.entries(GAMES).map(([id, g], i) => { const op = isOpen(id), fresh = op && !REVIEW && unlockAt(id) === classAt() && unlockAt(id) > 1;
+        return `<button class="o-gc2 g-${id}${op ? "" : " lock"}" data-g="${id}" style="animation-delay:${i * .05}s">${fresh ? '<em class="o-new">Ново!</em>' : ""}
+          <span class="o-gart"><img src="assets/img/obs/g_${id}.webp" alt="">${op ? "" : `<i class="o-glock">🔒 от занятие ${unlockAt(id)}</i>`}</span>
+          <span class="o-gtx"><b>${g.name}</b><small>${g.sub}</small></span></button>`; }).join("")}</div></section>`;
+    voice("Избери игра!");
     $("#o-back").onclick = screenHome;
-    app.querySelectorAll(".o-gcard").forEach(b => b.onclick = () => isOpen(b.dataset.g) ? screenStart(b.dataset.g) : say("Тази игра ще се отключи по-късно.", "explain"));
+    app.querySelectorAll(".o-gc2").forEach(b => b.onclick = () => isOpen(b.dataset.g) ? screenStart(b.dataset.g) : say("Тази игра ще се отключи по-късно.", "explain"));
   }
   // старт на игра: голям „Старт“; „Настройки за възрастен“ се отварят само със задържане (1 сек.), както в ПУ и АЕ
   function holdBtn(el, fn) { let t = null; const go = (e) => { e.preventDefault(); el.classList.add("hold"); t = setTimeout(() => { el.classList.remove("hold"); fn(); }, 1000); }, stop = () => { clearTimeout(t); el.classList.remove("hold"); };
@@ -846,7 +855,7 @@
     gen++; const g = GAMES[id];
     app.className = "o-scr o-map o-gamesbg";
     app.innerHTML = `<div class="o-maptop"><button class="o-back" id="o-back">← Към игрите</button><div class="o-grow"><div class="o-mt">${g.name}</div><div class="o-ms">${g.sub}</div></div></div>
-      <div class="o-set"><div class="o-gic big">${ICON[id]}</div><div class="o-startz">${zori("explain")}</div></div>
+      <div class="o-set"><div class="o-gstart g-${id}"><img src="assets/img/obs/g_${id}.webp" alt=""></div><div class="o-startz">${zori("explain")}</div></div>
       <div class="o-sbar"><button class="o-sec o-adult" id="o-adult"><i></i>⚙ Настройки за възрастен <small>задръж</small></button><button class="o-go" id="o-start">▶ Старт</button></div>`;
     $("#o-back").onclick = screenGames; $("#o-start").onclick = () => runGame(id); holdBtn($("#o-adult"), () => screenSettings(id));
   }
@@ -909,6 +918,6 @@
     if (CHILD) { DB[CHILD] = DB[CHILD] || { id: CHILD, name: "Аз", av: "a1", cur: 1, classAt: 1, b: {}, halo: {}, hw: {} }; P = DB[CHILD]; fromServer(); applyMotion(); screenHome(); return; }
     if (Q.get("p")) { P = prof(Q.get("p")); if (Q.get("class")) { P.classAt = +Q.get("class"); save(); } applyMotion(); Q.get("m") ? startMission(+Q.get("m")) : Q.get("map") ? screenMap() : screenHome(); } else screenProfiles();
   });
-  window.OBS = { _hw: () => HW, runHw, screenTeacher, _hwComplete: (n) => hwComplete(HW.lessons.find(x => x.n === n)), _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
+  window.OBS = { _const: (v, r, d) => constSVG(v, r, d), _hw: () => HW, runHw, screenTeacher, _hwComplete: (n) => hwComplete(HW.lessons.find(x => x.n === n)), _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
     testFinish: (n, r) => { M = Object.assign({ n, ex: [], par: PAR[n], max: MAXN[n], flash: [5, 6], ab: [3, 4], meth: [3, 4], im: [2, 3], help: 0 }, r || {}); return finish(); } };   // само за проверки
 })();

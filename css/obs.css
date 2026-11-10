@@ -360,11 +360,11 @@ html.o-still .o-focus { animation: none; }
 .o-hcard::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, #0b0e2acc, #0b0e2a33 38%, transparent 55%); }
 @media (max-width: 760px) and (orientation: portrait) { .o-hcard img { top: auto; bottom: 0; height: 64%; object-position: 85% center; -webkit-mask-image: linear-gradient(180deg, transparent, #000 30%); mask-image: linear-gradient(180deg, transparent, #000 30%); } }
 /* ===== „Съзвездие-число“, „Комета“, „Зори сбърка“ (10.11) ===== */
-.o-cbox2 { position: relative; height: clamp(200px, calc(100dvh - 330px), 480px); aspect-ratio: 190 / 480; display: block; flex: none; }
+.o-cbox2 { position: relative; height: clamp(200px, calc(100dvh - 330px), 480px); aspect-ratio: 190 / 500; display: block; flex: none; }
 .o-cbox2 .o-const { display: block; width: 100%; height: 100%; overflow: visible; }
 .o-cbox2.o-dim > span { left: 50%; top: 50%; transform: translate(-50%, -50%); } .o-cbox2.o-sig .cs-on { animation: ofade .3s ease-out; }
 .o-cbox2.o-dim .o-const { opacity: .5; } .o-cbox2.o-dim > span { position: absolute; font: 900 clamp(48px, 7vw, 80px) "Nunito"; color: #FFE9A8aa; }
-.o-cbox2:has(.o-const[viewBox^="0 0 360"]) { aspect-ratio: 360 / 480; } .o-cbox2:has(.o-const[viewBox^="0 0 530"]) { aspect-ratio: 530 / 480; }
+.o-cbox2:has(.o-const[viewBox^="0 0 360"]) { aspect-ratio: 360 / 500; } .o-cbox2:has(.o-const[viewBox^="0 0 530"]) { aspect-ratio: 530 / 500; }
 .o-csky { position: relative; width: 100%; height: clamp(90px, 16dvh, 150px); flex: none; }
 .o-comet { position: absolute; top: 18%; left: -8%; display: flex; align-items: center; transform: translateX(-50%); }
 .o-comet i { width: clamp(90px, 14vw, 180px); height: 18px; border-radius: 99px; background: linear-gradient(90deg, transparent, #8FC7FF66, #FFE9A8cc); margin-right: -12px; }
@@ -394,3 +394,27 @@ html.o-still .o-focus { animation: none; }
 .o-ttbl th { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; } .o-ttbl tr.fut { opacity: .45; } .o-ttbl tr.ok td:last-child { color: #9FE3B8; } .o-ttbl tr.open td:last-child { color: #FFE08A; }
 @media (max-height: 520px) { .o-hold { bottom: 70px; right: 12px; padding: 4px 10px; font-size: 12px; } .o-teachbox { top: 64px; } }
 @media (max-width: 760px) and (orientation: portrait) { .o-hold { left: 12px; right: auto; bottom: 84px; } .o-teach { width: 40px; height: 40px; font-size: 18px; } }
+/* ===== екран „Игри“ v2 (10.11): илюстровани карти, цвят по игра ===== */
+.o-gscr { display: flex; }
+.o-gbg { position: absolute; inset: 0; background: url(../assets/img/obs/home.jpg) center / cover no-repeat; filter: blur(6px) brightness(.38) saturate(.9); transform: scale(1.06); }
+.o-gwrap { position: relative; flex: 1; min-width: 0; display: grid; grid-template-rows: auto 1fr; gap: 10px; }
+.o-ghead { display: flex; align-items: center; gap: 14px; min-height: 64px; }
+.o-gtitle { display: grid; } .o-gtitle b { font: 900 clamp(26px, 3.4vw, 38px)/1 "Nunito"; color: var(--gold); } .o-gtitle small { font: 800 15px "Nunito"; color: var(--muted); }
+.o-gz { display: flex; align-items: center; gap: 6px; } .o-gz .o-zori { height: clamp(64px, 11dvh, 110px); filter: drop-shadow(0 6px 10px #0008); } .o-gz .o-say { font-size: 17px; padding: 8px 14px; }
+.o-ggrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: minmax(0, 1fr); gap: clamp(10px, 1.6vw, 18px); min-height: 0; padding-bottom: 4px; }
+.o-gc2 { --c: #F5C04A; position: relative; display: flex; flex-direction: column; min-height: 0; padding: 0; border: 0; border-radius: 24px; overflow: hidden; text-align: left; color: var(--ink); cursor: pointer;
+  background: linear-gradient(180deg, #1B2263, #12163A); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 70%, transparent), 0 6px 0 #05071a, 0 12px 24px #0007; animation: opop .45s both; }
+.o-gc2:active { transform: translateY(4px); box-shadow: 0 0 0 3px var(--c), 0 2px 0 #05071a; }
+.o-gart { position: relative; flex: 1; min-height: 0; overflow: hidden; background: radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--c) 30%, transparent), transparent 70%); }
+.o-gart img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; } .o-gc2:hover .o-gart img { transform: scale(1.05); }
+.o-gtx { display: grid; gap: 1px; padding: 8px 14px 10px; background: linear-gradient(90deg, color-mix(in srgb, var(--c) 26%, #12163A), #12163A); border-top: 2px solid color-mix(in srgb, var(--c) 60%, transparent); }
+.o-gtx b { font: 900 clamp(17px, 2vw, 24px)/1.1 "Nunito"; color: #fff; } .o-gtx small { font: 800 clamp(12px, 1.3vw, 14px) "Nunito"; color: color-mix(in srgb, var(--c) 55%, #fff); }
+.g-trainer { --c: #F5C04A; } .g-flash { --c: #FF9F43; } .g-fix { --c: #D9A066; } .g-memory { --c: #B69CFF; } .g-count { --c: #FFE066; } .g-constel { --c: #5FD3E8; } .g-comet { --c: #6FA8FF; } .g-oops { --c: #5FD38A; }
+.o-gc2.lock .o-gart img { filter: grayscale(.85) brightness(.55); } .o-gc2.lock .o-gtx { opacity: .7; }
+.o-glock { position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); white-space: nowrap; font: 800 13px "Nunito"; font-style: normal; color: #FFE9A8; background: #0d1030e6; border: 1px solid #FFE9A855; border-radius: 99px; padding: 4px 10px; }
+.o-gc2 .o-new { z-index: 2; right: 8px; top: 8px; }
+html.o-still .o-gc2 { animation: none; }
+@media (orientation: portrait) { .o-ggrid { grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: auto; grid-auto-rows: minmax(190px, 1fr); } .o-gz .o-say { display: none; } }
+@media (max-height: 520px) { .o-ghead { min-height: 44px; } .o-gz { display: none; } .o-ggrid { gap: 8px; } .o-gtx { padding: 4px 10px 6px; } .o-gtx small { display: none; } .o-gtitle small { display: none; } }
+@media (max-width: 760px) and (orientation: portrait) { .o-gz { display: none; } .o-ggrid { grid-auto-rows: minmax(160px, auto); } }
+.o-gstart { --c: #F5C04A; width: min(42vh, 360px); aspect-ratio: 1; border-radius: 32px; overflow: hidden; box-shadow: 0 0 0 4px var(--c), 0 10px 30px #0008; } .o-gstart img { width: 100%; height: 100%; object-fit: cover; display: block; }
