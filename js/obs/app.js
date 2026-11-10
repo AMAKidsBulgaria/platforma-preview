@@ -457,15 +457,15 @@
     for (let k = 0; k < c.rounds; k++) {
       pip(k); const v = 1 + Math.floor(Math.random() * c.upto), w = $("#o-work"), showMs = Math.round(c.speed * 1000);
       const rec = { t: Date.now(), n: v, showMs, choice: null, correct: false, retries: 0, rtMs: null };
-      const look = async () => {
-        w.innerHTML = `<div class="o-cq soft">Гледай звездите!</div>`; if (k === 0 || rec.retries) say("Гледай звездите!", "point"); await wait(1000);
-        w.innerHTML = `<div class="o-cbox">${countSVG(v)}</div>`; await wait(showMs);
+      const look = async (again) => {   // again = повторно наблюдение на СЪЩИТЕ звезди (след грешен отговор)
+        if (!again) { w.innerHTML = `<div class="o-cq soft">Гледай звездите!</div>`; if (k === 0) say("Гледай звездите!", "point"); else { const sb = $(".o-say"); if (sb) sb.textContent = "Гледай звездите!"; } await wait(1000); }
+        w.innerHTML = `${again ? '<div class="o-again">↺ Същите звезди – още веднъж</div>' : ""}<div class="o-cbox">${countSVG(v)}</div>`; await wait(showMs);
         const b = $(".o-cbox"); if (b) b.classList.add("out"); await wait(320); };
       await look();
       const near = [v - 2, v - 1, v + 1, v + 2].filter(x => x >= 1 && x <= Math.max(c.upto, 5)); const opts = shuffle([v, ...shuffle(near).slice(0, 2)]);
-      let first = true;
+      let first = true; const tried = new Set();
       while (true) {
-        w.innerHTML = `<div class="o-cq">Колко звезди видя?</div><div class="o-ch big">${opts.map(x => `<button data-v="${x}">${x}</button>`).join("")}</div>`;
+        w.innerHTML = `<div class="o-cq">Колко звезди видя?</div><div class="o-ch big">${opts.map(x => `<button data-v="${x}"${tried.has(x) ? ' class="tried" disabled' : ""}>${x}</button>`).join("")}</div>`;
         if (first) voice("Колко звезди видя?");
         const t0 = performance.now();
         const pick = await new Promise(res => w.querySelectorAll(".o-ch button").forEach(b => b.onclick = () => res(+b.dataset.v)));
@@ -473,7 +473,9 @@
         if (pick === v) { rec.correct = first; if (first) { ok++; pipStar(k); } w.querySelector(`.o-ch button[data-v="${v}"]`).classList.add("ok");
           say("Браво!", "joy"); const z = $(".o-zori"); if (z) { z.classList.remove("hop"); void z.offsetWidth; z.classList.add("hop"); } await wait(1000); break; }
         if (rec.retries >= 1) { w.innerHTML = `<div class="o-cbox">${countSVG(v)}</div><div class="o-cq">${v}</div>`; say("Ето колко бяха.", "explain"); await wait(1800); break; }
-        first = false; rec.retries++; say("Да погледнем пак!", "explain"); await wait(900); await look();
+        first = false; rec.retries++; tried.add(pick);
+        w.querySelector(`.o-ch button[data-v="${pick}"]`).classList.add("tried"); w.querySelectorAll(".o-ch button").forEach(b => b.disabled = true);
+        await talk("Да погледнем пак!", "explain"); await look(true);
       }
       P.log.count.push(rec); if (P.log.count.length > 300) P.log.count.splice(0, P.log.count.length - 300); save();
     }
