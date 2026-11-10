@@ -359,3 +359,21 @@ html.o-still .o-focus { animation: none; }
 }
 .o-hcard::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, #0b0e2acc, #0b0e2a33 38%, transparent 55%); }
 @media (max-width: 760px) and (orientation: portrait) { .o-hcard img { top: auto; bottom: 0; height: 64%; object-position: 85% center; -webkit-mask-image: linear-gradient(180deg, transparent, #000 30%); mask-image: linear-gradient(180deg, transparent, #000 30%); } }
+/* ===== „Съзвездие-число“, „Комета“, „Зори сбърка“ (10.11) ===== */
+.o-cbox2 { position: relative; height: clamp(200px, calc(100dvh - 330px), 480px); aspect-ratio: 190 / 480; display: block; flex: none; }
+.o-cbox2 .o-const { display: block; width: 100%; height: 100%; overflow: visible; }
+.o-cbox2.o-dim > span { left: 50%; top: 50%; transform: translate(-50%, -50%); } .o-cbox2.o-sig .cs-on { animation: ofade .3s ease-out; }
+.o-cbox2.o-dim .o-const { opacity: .5; } .o-cbox2.o-dim > span { position: absolute; font: 900 clamp(48px, 7vw, 80px) "Nunito"; color: #FFE9A8aa; }
+.o-cbox2:has(.o-const[viewBox^="0 0 360"]) { aspect-ratio: 360 / 480; } .o-cbox2:has(.o-const[viewBox^="0 0 530"]) { aspect-ratio: 530 / 480; }
+.o-csky { position: relative; width: 100%; height: clamp(90px, 16dvh, 150px); flex: none; }
+.o-comet { position: absolute; top: 18%; left: -8%; display: flex; align-items: center; transform: translateX(-50%); }
+.o-comet i { width: clamp(90px, 14vw, 180px); height: 18px; border-radius: 99px; background: linear-gradient(90deg, transparent, #8FC7FF66, #FFE9A8cc); margin-right: -12px; }
+.o-comet b { width: clamp(64px, 8vw, 96px); height: clamp(64px, 8vw, 96px); border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 40% 35%, #FFF6D6, #F5C04A 70%); color: #2B2140;
+  font: 900 clamp(30px, 4vw, 46px) "Nunito"; box-shadow: 0 0 30px #F5C04Aaa, 0 0 70px #F5C04A55; }
+.o-comet.caught b { background: radial-gradient(circle at 40% 35%, #E4FFE9, #5FD38A 70%); box-shadow: 0 0 40px #5FD38Aaa; } .o-comet.gone { opacity: .35; }
+.o-cbar { position: absolute; left: 10%; right: 10%; bottom: 6px; height: 8px; border-radius: 99px; background: #ffffff1a; overflow: hidden; } .o-cbar i { display: block; height: 100%; width: 100%; background: #8FC7FF; border-radius: 99px; }
+.o-cab { height: clamp(180px, calc(100dvh - 420px), 480px) !important; }
+.o-yn button { width: auto !important; height: auto !important; padding: 14px 26px; font-size: clamp(22px, 3vw, 30px) !important; }
+.o-yn button[data-v="0"] { background: #3A2A5E; border-color: #FF9C8A; }
+@media (max-height: 520px) { .o-csky { height: 70px; } .o-cab { height: calc(100dvh - 250px) !important; } .o-cbox2 { height: calc(100dvh - 200px); } .o-yn button { padding: 8px 16px; font-size: 20px !important; } }
+@media (max-width: 760px) and (min-height: 521px) { .o-cab { height: clamp(160px, calc(100dvh - 560px), 420px) !important; } .o-cbox2 { height: clamp(160px, calc(100dvh - 470px), 400px); } }

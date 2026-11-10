@@ -40,7 +40,7 @@
 
   // ---- глас: Зори (zr_*), иначе разказвачът (Калина) ----
   let AUDZ = {}, AUD = {}, cur = null;
-  fetch("config/abacus-audio-zori.json?v=4").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
+  fetch("config/abacus-audio-zori.json?v=5").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
   fetch("config/abacus-audio.json?v=3").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
   function voice(text) {
     if (Q.get("voice") === "0") return;
@@ -309,19 +309,20 @@
   const thank = (v) => v <= 99 ? `Точно така! Това беше ${v}!` : "Точно така!";
   const dimAb = (rods) => `<div class="o-flash r${rods} o-dim">${abImg(0, rods)}<span>?</span></div>`;   // изгасен абакус с дискретно „?“
   // един „звезден сигнал“: число на абакуса за sec секунди → изгасен абакус → „Кое число видя?“ (3 бутона) → вярно / повторно показване и нов опит
-  async function signalRound(t, sec, k, rec) {
+  async function signalRound(t, sec, k, rec, look) {   // look = вид „сигнал“: абакус (по подразбиране) или съзвездие
+    look = look || { draw: (v) => `<div class="o-flash r${t.rods} o-sig">${abImg(v, t.rods)}</div>`, dim: () => dimAb(t.rods), say: "Погледни абакуса!", again: "↺ Същият сигнал – още веднъж" };
     const w = $("#o-work"), v = randVal(t); rec.n = v; rec.showMs = Math.round(sec * 1000);
-    const show = async (again) => { once(k || again ? 1 : 0, "Погледни абакуса!", "point"); if (!again) await wait(900);
-      w.innerHTML = `${again ? '<div class="o-again">↺ Същият сигнал – още веднъж</div>' : ""}<div class="o-flash r${t.rods} o-sig">${abImg(v, t.rods)}</div>`; await wait(sec * 1000); };
+    const show = async (again) => { once(k || again ? 1 : 0, look.say, "point"); if (!again) await wait(900);
+      w.innerHTML = `${again ? `<div class="o-again">${look.again}</div>` : ""}${look.draw(v)}`; await wait(sec * 1000); };
     await show(false);
     const opts = new Set([v]); let g = 0; while (opts.size < 3 && g++ < 99) opts.add(randVal(t)); const list = shuffle([...opts]), tried = new Set(); let first = true;
     while (true) {
-      w.innerHTML = `${dimAb(t.rods)}<div class="o-ch big">${list.map(x => `<button data-v="${x}"${tried.has(x) ? ' class="tried" disabled' : ""}>${x}</button>`).join("")}</div>`;
+      w.innerHTML = `${look.dim()}<div class="o-ch big">${list.map(x => `<button data-v="${x}"${tried.has(x) ? ' class="tried" disabled' : ""}>${x}</button>`).join("")}</div>`;
       once(first && k === 0 ? 0 : 1, "Кое число видя?", "explain"); if (first && k > 0) voice("Кое число видя?");
       const t0 = performance.now(), pick = await new Promise(res => w.querySelectorAll(".o-ch button").forEach(b => b.onclick = () => res(+b.dataset.v)));
       if (first) { rec.choice = pick; rec.rtMs = Math.round(performance.now() - t0); }
       if (pick === v) { rec.correct = first; w.querySelector(`.o-ch button[data-v="${v}"]`).classList.add("ok"); say(thank(v), "joy"); const z = $(".o-zori"); if (z) { z.classList.remove("hop"); void z.offsetWidth; z.classList.add("hop"); } await wait(1300); return first; }
-      if (!first) { w.innerHTML = `<div class="o-flash r${t.rods}">${abImg(v, t.rods)}</div><div class="o-cq">${v}</div>`; say("Ето кое число беше.", "explain"); await wait(1900); return false; }
+      if (!first) { w.innerHTML = `${look.draw(v).replace(" o-sig", "")}<div class="o-cq">${v}</div>`; say("Ето кое число беше.", "explain"); await wait(1900); return false; }
       first = false; rec.retries = 1; tried.add(pick); await talk("Нека го видим още веднъж.", "explain"); await show(true);
     }
   }
@@ -382,6 +383,9 @@
     flash: `<svg viewBox="0 0 100 100"><rect class="ic-card" x="20" y="16" width="44" height="64" rx="8" fill="#F7F1E3"/><rect class="ic-card2" x="36" y="22" width="44" height="64" rx="8" fill="#F5C04A"/><text x="58" y="66" text-anchor="middle" font-size="34" font-weight="900" fill="#2B2140" font-family="Nunito">7</text></svg>`,
     fix: `<svg viewBox="0 0 100 100"><g class="ic-tel"><rect x="18" y="38" width="54" height="18" rx="6" transform="rotate(-25 45 47)" fill="#C9A24A"/><rect x="64" y="22" width="14" height="22" rx="4" transform="rotate(-25 71 33)" fill="#B88A4E"/></g><path d="M40 60 L30 88 M50 60 L50 88 M60 60 L70 88" stroke="#8D6A3E" stroke-width="5" stroke-linecap="round"/><circle class="ic-tw" cx="82" cy="16" r="5" fill="#FFE9A8"/></svg>`,
     memory: `<svg viewBox="0 0 100 100"><path d="M62 18a32 32 0 1 0 20 52 26 26 0 1 1-20-52z" fill="#F5C04A"/><g class="ic-tw" fill="#FFE9A8"><circle cx="30" cy="30" r="4"/><circle cx="22" cy="58" r="3"/><circle cx="44" cy="78" r="3.5"/></g></svg>`,
+    constel: `<svg viewBox="0 0 100 100"><line x1="14" y1="38" x2="86" y2="38" stroke="#B88A4E" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"/><g fill="#FFE08A"><path class="ic-s1" d="M50 8l4 9 10 1-8 6 3 10-9-5-9 5 3-10-8-6 10-1z"/><path class="ic-s2" d="M50 44l4 9 10 1-8 6 3 10-9-5-9 5 3-10-8-6 10-1z"/><path class="ic-s3" d="M50 70l4 9 10 1-8 6 3 10-9-5-9 5 3-10-8-6 10-1z"/></g></svg>`,
+    comet: `<svg viewBox="0 0 100 100"><path class="ic-tail" d="M12 82 L62 40 L70 50 Z" fill="#8FC7FF" opacity=".55"/><circle class="ic-head" cx="68" cy="40" r="17" fill="#FFE08A"/><text x="68" y="47" text-anchor="middle" font-size="20" font-weight="900" fill="#2B2140" font-family="Nunito">7</text></svg>`,
+    oops: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="#232A63" stroke="#B88A4E" stroke-width="5"/><text x="50" y="66" text-anchor="middle" font-size="46" font-weight="900" fill="#F5C04A" font-family="Nunito" class="ic-q">?</text><path class="ic-tw" d="M80 16l3 7 7 1-5 5 2 7-7-4-6 4 2-7-5-5 7-1z" fill="#FFE9A8"/></svg>`,
     count: `<svg viewBox="0 0 100 100"><g fill="#F5C04A"><path class="ic-s1" d="M30 18l5 11 12 1-9 8 3 12-11-6-10 6 3-12-9-8 12-1z"/><path class="ic-s2" d="M70 34l5 11 12 1-9 8 3 12-11-6-10 6 3-12-9-8 12-1z"/><path class="ic-s3" d="M38 58l5 11 12 1-9 8 3 12-11-6-10 6 3-12-9-8 12-1z"/></g></svg>`
   };
   const GAMES = {
@@ -394,12 +398,18 @@
     memory: { name: "Нощна памет", sub: "виж и нареди", skill: "образа на числото – основа за въображаемия абакус",
       opts: { topic: "тема", speed: SPEEDS, rounds: [3, 5, 8] } },
     count: { name: "Звездно броене", sub: "колко звезди видя?", skill: "виждане на количество с един поглед; 6–10 като 5 и още",
-      opts: { upto: [3, 5, 10], speed: [3, 2, 1.5, 1], rounds: [4, 6, 8] } }
+      opts: { upto: [3, 5, 10], speed: [3, 2, 1.5, 1], rounds: [4, 6, 8] } },
+    constel: { name: "Съзвездие-число", sub: "звезди като топчета", skill: "образа на числото без абакуса – стъпка към смятането наум",
+      opts: { topic: "тема", speed: [4, 3, 2, 1.5, 1], rounds: [5, 8, 12] } },
+    comet: { name: "Комета", sub: "нареди, преди да отлети", skill: "бързо и точно нареждане на числото",
+      opts: { topic: "тема", speed: [8, 6, 5, 4], rounds: [5, 8, 12] } },
+    oops: { name: "Зори сбърка", sub: "вярно ли смята Зори?", skill: "разбиране на правилото и самопроверка",
+      opts: { topic: "тема", rounds: [4, 6, 8] } }
   };
   const OPTNAME = { topic: "Тема", count: "Брой числа", speed: "Скорост (сек.)", rounds: "Кръгове", mode: "Начин", len: "Колко числа", upto: "До" };
   function defaults(id) {
     const n = Math.min(P.cur, 21), sp = (PAR[n] || PAR[9]);
-    return { topic: TOPIC_OF[n] || "s9", count: 5, speed: id === "flash" ? "auto" : id === "memory" ? 2 : 2, rounds: GAMES[id].opts.rounds[1], mode: "ab", len: 2, upto: n < 3 ? 3 : n < 6 ? 5 : 10, ...(P.set && P.set[id] || {}) };
+    return { topic: TOPIC_OF[n] || "s9", count: 5, speed: id === "flash" ? "auto" : id === "constel" ? 3 : id === "comet" ? 8 : 2, rounds: GAMES[id].opts.rounds[1], mode: "ab", len: 2, upto: n < 3 ? 3 : n < 6 ? 5 : 10, ...(P.set && P.set[id] || {}) };
   }
   // случайно число, позволено от темата (цифрите ≤ stateMax; кръгли/11–19)
   function randVal(t) {
@@ -459,6 +469,99 @@
       P.log.flash.push(rec); if (P.log.flash.length > 300) P.log.flash.splice(0, P.log.flash.length - 300); save();
     }
     if (auto) sigAdapt(t.id, res);
+    return [ok, c.rounds];
+  }
+  // ---- „Съзвездие-число“: само светещите топчета, като звезди на техните места (без рамка и пръчки) – стъпка към въображаемия абакус ----
+  function constSVG(v, rods, dim) {
+    const W = 170, X0 = 95, wTot = X0 * 2 + (rods - 1) * W, st = E.fromValue(v, rods), xOf = (r) => X0 + (rods - 1 - r) * W;
+    const star = (x, y, on) => on ? `<g class="cs-on" transform="translate(${x} ${y})"><circle r="38" fill="url(#csg)"/><path d="${starPath(26)}" fill="#FFE08A"/></g>` : `<circle cx="${x}" cy="${y}" r="5" fill="#ffffff22"/>`;
+    let s = `<svg viewBox="0 0 ${wTot} 480" class="o-const${dim ? " dim" : ""}"><defs><radialGradient id="csg"><stop offset="0" stop-color="#F5C04A" stop-opacity=".55"/><stop offset="1" stop-color="#F5C04A" stop-opacity="0"/></radialGradient></defs>`;
+    s += `<line x1="24" y1="150" x2="${wTot - 24}" y2="150" stroke="#B88A4E" stroke-width="5" stroke-dasharray="2 14" stroke-linecap="round" opacity=".7"/>`;
+    for (let i = 0; i < rods; i++) { const r = st[i], x = xOf(i); s += star(x, 70, !dim && r.h); for (let k = 1; k <= 4; k++) s += star(x, 150 + k * 70, !dim && k <= r.e); }
+    return s + `</svg>`;
+  }
+  const CONST_LOOK = (t) => ({ draw: (v) => `<div class="o-cbox2 o-sig">${constSVG(v, t.rods)}</div>`, dim: () => `<div class="o-cbox2 o-dim">${constSVG(0, t.rods, true)}<span>?</span></div>`,
+    say: "Погледни съзвездието!", again: "↺ Същото съзвездие – още веднъж" });
+  async function playConst(c) {
+    const t = topicFor(c.topic); let ok = 0; P.log = P.log || {}; P.log.const = P.log.const || [];
+    const wk = $("#o-work"); if (wk) wk.classList.add("o-skyfield");
+    for (let k = 0; k < c.rounds; k++) {
+      pip(k); const rec = { t: Date.now(), topic: t.id, choice: null, correct: false, retries: 0, rtMs: null };
+      if (await signalRound(t, +c.speed, k, rec, CONST_LOOK(t))) { ok++; pipStar(k); }
+      P.log.const.push(rec); if (P.log.const.length > 300) P.log.const.splice(0, P.log.const.length - 300); save();
+    }
+    return [ok, c.rounds];
+  }
+
+  // ---- „Комета“: числото лети на кометата; детето го нарежда, преди кометата да излезе от небето. Скоростта се нагласява в играта:
+  // хванато → следващата комета малко по-бърза; изпусната → по-бавна. Няма „живот“ и наказание – изпуснатата комета просто показва числото.
+  function cometFly(el, bar, ms) {   // движение с rAF (не зависи от CSS анимациите); при „без анимации“ кометата стои, а лентата намалява
+    const still = document.documentElement.classList.contains("o-still"), t0 = performance.now(), g = gen; let stop = false;
+    const step = (now) => { if (stop || g !== gen) return; const p = Math.min(1, (now - t0) / (ms * FAST));
+      if (!still) el.style.left = (-8 + p * 100) + "%"; bar.style.width = (100 - p * 100) + "%"; if (p < 1) requestAnimationFrame(step); };
+    if (still) el.style.left = "42%"; requestAnimationFrame(step); return () => { stop = true; };
+  }
+  async function playComet(c) {
+    const t = topicFor(c.topic); let ok = 0, dur = +c.speed * 1000; const min = 2500, max = +c.speed * 1000 * 1.4;
+    P.log = P.log || {}; P.log.comet = P.log.comet || [];
+    for (let k = 0; k < c.rounds; k++) {
+      pip(k); const v = randVal(t) || 1, w = $("#o-work"); w.classList.add("o-skyfield");
+      w.innerHTML = `<div class="o-csky"><div class="o-comet" id="o-comet"><i></i><b>${v}</b></div><div class="o-cbar"><i id="o-cbar"></i></div></div><div class="o-abhost o-cab" id="o-abh"></div>`;
+      const ab = abacus($("#o-abh"), t.rods); ab.enable(false); if (FAST_ON) window.OBS_T = { ab, v };
+      if (!k) await talk("Нареди числото, преди кометата да отлети!", "point"); else { say("Ето още една комета!", "point"); await wait(700); }
+      ab.enable(true); const t0 = performance.now(), stopFly = cometFly($("#o-comet"), $("#o-cbar"), dur);
+      const caught = await new Promise(res => { let fin = false; const end = (x) => { if (!fin) { fin = true; ab.onChange(null); res(x); } };
+        ab.onChange(() => { if (ab.value() === v) setTimeout(() => end(true), 250 * FAST); }); wait(dur).then(() => end(ab.value() === v), () => {}); });
+      stopFly(); ab.enable(false); const rt = Math.round(performance.now() - t0);
+      P.log.comet.push({ t: Date.now(), topic: t.id, n: v, ms: Math.round(dur), caught, rtMs: caught ? rt : null }); if (P.log.comet.length > 300) P.log.comet.splice(0, P.log.comet.length - 300); save();
+      if (caught) { ok++; pipStar(k); $("#o-comet").classList.add("caught"); burst(); say(thank(v), "joy"); dur = Math.max(min, dur * .88); await wait(1400); }
+      else { $("#o-comet").classList.add("gone"); ab.set(v); say("Кометата отлетя. Ето числото.", "explain"); dur = Math.min(max, dur * 1.15); await wait(2400); }
+    }
+    return [ok, c.rounds];
+  }
+
+  // ---- „Зори сбърка“: Зори смята пример на абакуса (бавно, със стрелки). Понякога смята вярно, понякога мести с едно топче повече/по-малко
+  // или на грешната пръчка. Детето казва „Вярно“ или „Зори сбърка“; ако е сбъркала – детето показва как е правилно (проверка на числото и на движенията).
+  function oopsTask(t) {
+    for (let g = 0; g < 200; g++) {
+      const ex = E.simpleExample({ ...t, count: 2 }), a = ex.nums[0], n = ex.nums[1], op = n < 0 ? "-" : "+", k = Math.abs(n);
+      const p = E.plan(a, op, k, t.rods); if (!p.ok || !p.moves.length) continue;
+      const right = a + n, wrongKind = Math.random() < .4 ? null : (t.rods > 1 && Math.random() < .3 ? "rod" : "count");
+      if (!wrongKind) return { a, op, k, right, moves: p.moves, shown: right, wrong: null };
+      const ms = p.moves.map(m => ({ ...m })), last = ms[ms.length - 1];
+      if (wrongKind === "rod") { const r2 = last.rod ? 0 : 1; last.rod = r2; }
+      else { const opts = last.bead === "e" ? [last.d + 1, last.d - 1].filter(d => d && Math.sign(d) === Math.sign(last.d)) : []; if (!opts.length) continue; last.d = opts[Math.floor(Math.random() * opts.length)]; }
+      let st = E.fromValue(a, t.rods); for (const m of ms) { st = st && E.apply(st, m); } if (!st) continue; const got = E.value(st); if (got === right) continue;
+      return { a, op, k, right, moves: ms, shown: got, wrong: wrongKind, good: p.moves };
+    }
+    return null;
+  }
+  async function playOops(c) {
+    const t = topicFor(c.topic); let ok = 0; P.log = P.log || {}; P.log.oops = P.log.oops || [];
+    for (let k = 0; k < c.rounds; k++) {
+      pip(k); const q = oopsTask(t); if (!q) break; const w = $("#o-work"), ex = `${q.a} ${q.op === "+" ? "+" : "−"} ${q.k}`;
+      w.innerHTML = `<div class="o-num" id="o-num">${ex}</div><div class="o-abhost" id="o-abh"></div><div class="o-ch big o-yn" id="o-yn" hidden><button data-v="1">✓ Вярно</button><button data-v="0">✗ Зори сбърка</button></div>`;
+      const ab = abacus($("#o-abh"), t.rods); ab.enable(false); ab.set(q.a); if (FAST_ON) window.OBS_T = { ab, q };
+      const play = async (ms) => { ab.set(q.a); await wait(500); await ab.demo(ms, false, true); };
+      if (!k) await talk("Гледай как смятам. Вярно ли е?", "point"); else { say("Гледай как смятам!", "point"); await wait(600); }
+      await play(q.moves); $("#o-num").textContent = `${ex} = ${q.shown}`; once(k, "Вярно ли смятах?", "explain"); if (k) voice("Вярно ли смятах?");
+      const yn = $("#o-yn"); yn.hidden = false;
+      const said = await new Promise(res => yn.querySelectorAll("button").forEach(b => b.onclick = () => res(b.dataset.v === "1"))); yn.hidden = true;
+      const rec = { t: Date.now(), topic: t.id, ex, shown: q.shown, wrong: q.wrong, said: said ? "right" : "wrong", spotted: said === !q.wrong, fixed: null };
+      let star = rec.spotted;
+      if (!q.wrong && said) { say("Точно така! Този път смятах вярно.", "joy"); await wait(1500); }
+      else if (!q.wrong && !said) { await talk("Този път смятах вярно. Гледай още веднъж.", "explain"); await play(q.moves); await wait(800); }
+      else if (q.wrong && said) { await talk("Ох, всъщност сбърках! Гледай как е правилно.", "wait"); await play(q.good); $("#o-num").textContent = `${ex} = ${q.right}`; await wait(1200); }
+      else {   // хванато! детето показва как е правилно
+        await talk("Браво, хвана грешката! Покажи ми как е правилно.", "joy"); ab.set(q.a); $("#o-num").textContent = ex; ab.enable(true);
+        await untilIdle(ab, q.right); ab.enable(false);
+        const j = E.judge({ start: q.a, op: q.op, n: q.k, rods: t.rods }, ab.moves()); rec.fixed = j.correct; rec.method = !!j.method;
+        if (j.correct) { $("#o-num").textContent = `${ex} = ${q.right}`; say(thank(q.right), "joy"); await wait(1400); }
+        else { star = false; await talk("Почти! Гледай как е правилно.", "wait"); await play(q.good); $("#o-num").textContent = `${ex} = ${q.right}`; await wait(1200); }
+      }
+      if (star) { ok++; pipStar(k); }
+      P.log.oops.push(rec); if (P.log.oops.length > 300) P.log.oops.splice(0, P.log.oops.length - 300); save();
+    }
     return [ok, c.rounds];
   }
   const TELE = (parts, total) => { const p = (i) => i < parts ? "on" : "";   // телескопът се сглобява: статив, тръба, окуляр, леща, светлина
@@ -617,12 +720,12 @@
     }
     return [ok, c.rounds];
   }
-  const PLAY = { trainer: playTrainer, flash: playFlash, fix: playFix, memory: playMemory, count: playCount };
-  const INTRO = { trainer: "Тренажор!", flash: "Звездни сигнали!", fix: "Поправи телескопа!", memory: "Нощна памет!", count: "Звездно броене!" };
+  const PLAY = { trainer: playTrainer, flash: playFlash, fix: playFix, memory: playMemory, count: playCount, constel: playConst, comet: playComet, oops: playOops };
+  const INTRO = { trainer: "Тренажор!", flash: "Звездни сигнали!", fix: "Поправи телескопа!", memory: "Нощна памет!", count: "Звездно броене!", constel: "Съзвездие-число!", comet: "Комета!", oops: "Зори сбърка!" };
 
   // в мисията: последният етап – една от игрите, с параметрите на занятието
   async function missionGame() {   // (фонът „нощно небе“ за броенето се слага в playCount)
-    const id = ["count", "fix", "memory"][Math.floor(Math.random() * 3)], c = { ...defaults(id), rounds: id === "count" ? 4 : id === "fix" ? 4 : 3, upto: M.max < 3 ? 3 : M.max < 6 ? 5 : 10 };
+    const pool = ["count", "fix", "memory", "constel", "oops"], id = pool[Math.floor(Math.random() * pool.length)], c = { ...defaults(id), rounds: id === "count" || id === "fix" || id === "oops" ? 4 : id === "constel" ? 5 : 3, upto: M.max < 3 ? 3 : M.max < 6 ? 5 : 10 };
     shell(4, STAR[M.n].title); await talk(INTRO[id], "explain"); return PLAY[id](c);
   }
 
