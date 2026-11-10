@@ -60,6 +60,8 @@
   }
   function say(text, pose) { const b = $(".o-say"); if (b) b.textContent = text; const z = $(".o-zori"); if (z && pose) z.src = `assets/img/zori/z_${pose}.png`; voice(text); }
 
+  function applyMotion() { const m = (P && P.motion) || (matchMedia("(prefers-reduced-motion: reduce)").matches ? "calm" : "full");
+    document.documentElement.classList.toggle("o-calm", m === "calm"); document.documentElement.classList.toggle("o-still", m === "off"); }
   // ---- екран 1: кой наблюдава ----
   function screenProfiles() {
     gen++;
@@ -68,7 +70,7 @@
       <div class="o-plist">${DEMO.map(d => { const p = DB[d.id] || d; const lit = Object.values(p.b || {}).filter(v => v >= 3).length;
         return `<button class="o-pcard" data-id="${d.id}"><img src="assets/img/world/avatars/${p.av}.webp" alt=""><b>${p.name}</b><span>★ ${lit} звезди</span></button>`; }).join("")}</div>
       <p class="o-note">Прототип · демо профили · <button class="o-link" id="o-reset">нулирай демото</button></p>`;
-    app.querySelectorAll(".o-pcard").forEach(b => b.onclick = () => { P = prof(b.dataset.id); screenHome(); });
+    app.querySelectorAll(".o-pcard").forEach(b => b.onclick = () => { P = prof(b.dataset.id); applyMotion(); screenHome(); });
     $("#o-reset").onclick = () => { DB = {}; save(); screenProfiles(); };
   }
 
@@ -366,10 +368,10 @@
   function gameShell(id, round, total) {
     if (inMission()) { shell(4, STAR[M.n].title); return; }
     app.className = "o-scr o-mis o-game";
-    app.innerHTML = `<div class="o-mtop"><button class="o-back" id="o-gx">✕ Изход</button><button class="o-back" id="o-gs">⚙ Настройки</button>
+    app.innerHTML = `<div class="o-mtop"><button class="o-back" id="o-gx">✕ Изход</button><button class="o-back o-adult" id="o-gs"><i></i>⚙ <small>задръж</small></button>
       <div class="o-pips">${Array.from({ length: total }, (_, j) => `<b class="${j < round ? "d" : j === round ? "c" : ""}"></b>`).join("")}</div><div class="o-mname">${GAMES[id].name}</div></div>
       <div class="o-mbody"><div class="o-mz">${zori("explain")}<div class="o-say"></div></div><div class="o-mwork" id="o-work"></div></div>`;
-    $("#o-gx").onclick = () => { gen++; screenGames(); }; $("#o-gs").onclick = () => { gen++; screenSettings(id); };
+    $("#o-gx").onclick = () => { gen++; screenGames(); }; holdBtn($("#o-gs"), () => { gen++; screenSettings(id); });
   }
   const inMission = () => !!M && !M.free;
   function pip(round) { const b = app.querySelectorAll(".o-game .o-pips b"); b.forEach((x, j) => x.className = j < round ? "d" : j === round ? "c" : ""); }
@@ -437,18 +439,37 @@
     }
     return [ok, c.rounds];
   }
+  // „Звездно броене“: звездите се появяват едновременно в центъра (фиксирани позиции на групи по 5, без припокриване), изчезват едновременно;
+  // „Колко звезди видя?“ + 3 големи бутона; при грешка – „Виж пак“ (без наказание); всяка задача се записва (P.log.count).
+  function countSVG(v) {
+    const rows = []; for (let i = 0; i < v; i += 5) rows.push(Math.min(5, v - i));
+    const SP = 84, RW = 5 * SP + 40, W = RW + 40, H = rows.length * 104 + 30;
+    return `<svg viewBox="0 0 ${W} ${H}" class="o-cnt">${rows.map((n, ri) => { const y = 20 + ri * 104;
+      return `<rect x="20" y="${y}" width="${RW}" height="88" rx="22" class="o-five"/>` + Array.from({ length: n }, (_, j) => `<g transform="translate(${20 + 20 + SP / 2 + j * SP} ${y + 44})"><path class="o-cs" d="${starPath(30)}"/></g>`).join(""); }).join("")}</svg>`;
+  }
   async function playCount(c) {
-    let ok = 0;
+    let ok = 0; P.log = P.log || {}; P.log.count = P.log.count || [];
     for (let k = 0; k < c.rounds; k++) {
-      pip(k); const v = 1 + Math.floor(Math.random() * c.upto), w = $("#o-work");
-      // групи по 5: всяка петица е в своя „кутия“; така детето вижда 5 + 2, а не брои по едно
-      const groups = []; for (let i = 0; i < v; i += 5) groups.push(Math.min(5, v - i));
-      const W = 110 + 5 * 74, H = 40 + groups.length * 110;
-      w.innerHTML = `<svg viewBox="0 0 ${W} ${H}" class="o-cnt">${groups.map((gsz, gi) => `<rect x="30" y="${20 + gi * 110}" width="${5 * 74 + 50}" height="94" rx="22" class="o-five"/>` +
-        Array.from({ length: gsz }, (_, j) => `<g transform="translate(${80 + j * 74} ${67 + gi * 110})"><path class="o-cs" style="animation-delay:${(gi * 5 + j) * .06}s" d="${starPath(28)}"/></g>`).join("")).join("")}</svg>`;
-      await wait(c.speed * 1000);
-      w.innerHTML = `<div class="o-flash o-q">?</div>`; const opts = new Set([v]); while (opts.size < 3) opts.add(1 + Math.floor(Math.random() * c.upto));
-      const r = await ask(shuffle([...opts]), v); if (r) { ok++; good(); } else bad(); await wait(600);
+      pip(k); const v = 1 + Math.floor(Math.random() * c.upto), w = $("#o-work"), showMs = Math.round(c.speed * 1000);
+      const rec = { t: Date.now(), n: v, showMs, choice: null, correct: false, retries: 0, rtMs: null };
+      const look = async () => { w.innerHTML = `<div class="o-cbox">${countSVG(v)}</div>`; await wait(showMs); const b = $(".o-cbox"); if (b) b.classList.add("out"); await wait(220); };
+      await look();
+      const near = [v - 2, v - 1, v + 1, v + 2].filter(x => x >= 1 && x <= Math.max(c.upto, 5)); const opts = shuffle([v, ...shuffle(near).slice(0, 2)]);
+      let first = true;
+      while (true) {
+        w.innerHTML = `<div class="o-cq">Колко звезди видя?</div><div class="o-ch big">${opts.map(x => `<button data-v="${x}">${x}</button>`).join("")}</div>`;
+        if (first) say("Колко звезди видя?", "explain");
+        const t0 = performance.now();
+        const pick = await new Promise(res => w.querySelectorAll(".o-ch button").forEach(b => b.onclick = () => res(+b.dataset.v)));
+        if (first) { rec.choice = pick; rec.rtMs = Math.round(performance.now() - t0); }
+        if (pick === v) { rec.correct = first; if (first) ok++; w.querySelector(`.o-ch button[data-v="${v}"]`).classList.add("ok"); good("Браво!"); await wait(900); break; }
+        if (rec.retries >= 1) {   // втори опит също неточен – показваме спокойно колко бяха и продължаваме
+          w.innerHTML = `<div class="o-cbox">${countSVG(v)}</div><div class="o-cq">${v}</div>`; say("Ето колко бяха.", "explain"); await wait(1800); break; }
+        first = false; rec.retries++;
+        w.innerHTML = `<div class="o-cq">Да погледнем пак?</div><div class="o-row"><button class="o-go sm" id="o-look">👀 Виж пак</button></div>`; say("Да погледнем пак?", "explain");
+        await new Promise(res => { $("#o-look").onclick = res; }); await look();
+      }
+      P.log.count.push(rec); if (P.log.count.length > 300) P.log.count.splice(0, P.log.count.length - 300); save();
     }
     return [ok, c.rounds];
   }
@@ -469,7 +490,18 @@
     app.innerHTML = navBar(`<div><div class="o-mt">Игри</div><div class="o-ms">избери игра – после „Настройки“ или „Старт“</div></div>`) +
       `<div class="o-glist">${Object.entries(GAMES).map(([id, g], i) => `<button class="o-gcard" data-g="${id}" style="animation-delay:${i * .07}s"><div class="o-gic">${ICON[id]}</div><b>${g.name}</b><span>${g.sub}</span></button>`).join("")}</div>`;
     $("#o-back").onclick = screenHome;
-    app.querySelectorAll(".o-gcard").forEach(b => b.onclick = () => screenSettings(b.dataset.g));
+    app.querySelectorAll(".o-gcard").forEach(b => b.onclick = () => screenStart(b.dataset.g));
+  }
+  // старт на игра: голям „Старт“; „Настройки за възрастен“ се отварят само със задържане (1 сек.), както в ПУ и АЕ
+  function holdBtn(el, fn) { let t = null; const go = (e) => { e.preventDefault(); el.classList.add("hold"); t = setTimeout(() => { el.classList.remove("hold"); fn(); }, 1000); }, stop = () => { clearTimeout(t); el.classList.remove("hold"); };
+    el.addEventListener("pointerdown", go); el.addEventListener("pointerup", stop); el.addEventListener("pointerleave", stop); el.addEventListener("pointercancel", stop); }
+  function screenStart(id) {
+    gen++; const g = GAMES[id];
+    app.className = "o-scr o-map o-gamesbg";
+    app.innerHTML = `<div class="o-maptop"><button class="o-back" id="o-back">← Към игрите</button><div class="o-grow"><div class="o-mt">${g.name}</div><div class="o-ms">${g.sub}</div></div></div>
+      <div class="o-set"><div class="o-gic big">${ICON[id]}</div><div class="o-startz">${zori("explain")}</div></div>
+      <div class="o-sbar"><button class="o-sec o-adult" id="o-adult"><i></i>⚙ Настройки за възрастен <small>задръж</small></button><button class="o-go" id="o-start">▶ Старт</button></div>`;
+    $("#o-back").onclick = screenGames; $("#o-start").onclick = () => runGame(id); holdBtn($("#o-adult"), () => screenSettings(id));
   }
   function screenSettings(id) {
     gen++; const g = GAMES[id], c = defaults(id);
@@ -479,12 +511,13 @@
       else chips = o.map(v => Array.isArray(v) ? chip(k, v[0], v[1]) : chip(k, v, String(v).replace(".", ","))).join("");
       return `<div class="o-srow"><div class="o-sk">${OPTNAME[k]}</div><div class="o-chips">${chips}</div></div>`; };
     app.className = "o-scr o-map o-gamesbg";
-    app.innerHTML = `<div class="o-maptop"><button class="o-back" id="o-back">← Към игрите</button><div><div class="o-mt">${g.name}</div><div class="o-ms">Настройки · тренира: ${g.skill}</div></div></div>
-      <div class="o-set"><div class="o-gic big">${ICON[id]}</div><div class="o-srows">${Object.keys(g.opts).map(row).join("")}</div></div>
+    app.innerHTML = `<div class="o-maptop"><button class="o-back" id="o-back">← Назад</button><div class="o-grow"><div class="o-mt">${g.name}</div><div class="o-ms">Настройки за възрастен · тренира: ${g.skill}</div></div></div>
+      <div class="o-set"><div class="o-gic big">${ICON[id]}</div><div class="o-srows">${Object.keys(g.opts).map(row).join("")}<div class="o-srow"><div class="o-sk">Анимации</div><div class="o-chips">${[["full", "нормални"], ["calm", "намалени"], ["off", "без"]].map(m => `<button class="o-chip o-motion${(P.motion || "full") === m[0] ? " on" : ""}" data-m="${m[0]}">${m[1]}</button>`).join("")}</div></div></div></div>
       <div class="o-sbar"><button class="o-sec" id="o-home2">Към обсерваторията</button><button class="o-go" id="o-start">▶ Старт</button></div>`;
     app.querySelectorAll(".o-chip").forEach(b => b.onclick = () => { const k = b.dataset.k, v = b.dataset.v; c[k] = isNaN(+v) ? v : +v;
       app.querySelectorAll(`.o-chip[data-k="${k}"]`).forEach(x => x.classList.toggle("on", x === b)); P.set = P.set || {}; P.set[id] = { ...(P.set[id] || {}), [k]: c[k] }; save(); });
-    $("#o-back").onclick = screenGames; $("#o-home2").onclick = screenHome; $("#o-start").onclick = () => runGame(id);
+    $("#o-back").onclick = () => screenStart(id); $("#o-home2").onclick = screenHome; $("#o-start").onclick = () => runGame(id);
+    app.querySelectorAll(".o-motion").forEach(b => b.onclick = () => { P.motion = b.dataset.m; save(); applyMotion(); app.querySelectorAll(".o-motion").forEach(x => x.classList.toggle("on", x === b)); });
   }
   async function runGame(id) {
     gen++; const c = defaults(id); M = { free: true, n: Math.min(P.cur, 9), max: 9 };
@@ -524,7 +557,7 @@
   }
 
   // ---- старт ----
-  if (Q.get("p")) { P = prof(Q.get("p")); Q.get("m") ? startMission(+Q.get("m")) : Q.get("map") ? screenMap() : screenHome(); } else screenProfiles();
+  if (Q.get("p")) { P = prof(Q.get("p")); applyMotion(); Q.get("m") ? startMission(+Q.get("m")) : Q.get("map") ? screenMap() : screenHome(); } else screenProfiles();
   window.OBS = { screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
     testFinish: (n, r) => { M = Object.assign({ n, ex: [], par: PAR[n], max: MAXN[n], flash: [5, 6], ab: [3, 4], meth: [3, 4], im: [2, 3], help: 0 }, r || {}); return finish(); } };   // само за проверки
 })();

@@ -185,3 +185,54 @@ button { font-family: inherit; cursor: pointer; }
 .o-mind { fill: #FFE9A8; }
 .o-legend .lk { background: #4A5088; } .o-legend .rv { border: 2px solid #9FE3B8; background: transparent; } .o-legend .mind { color: #FFE9A8; font-style: normal; width: auto; height: auto; }
 @media (max-width: 760px), (max-height: 520px) { .o-stage .o-zori { height: 30vh; } .o-bigb { width: 50%; height: 64px; flex-direction: row; } .o-big2 { width: 100%; } .o-bigb svg { width: 30px; height: 30px; } .o-pcard.sm { width: 26vw; } }
+
+/* „Звездно броене“ v2 */
+.o-cbox { flex: 1; min-height: 0; width: 100%; display: grid; place-items: center; animation: ofade .25s ease-out; }
+.o-cbox .o-cnt { width: min(100%, 560px); height: auto; max-height: 100%; }
+.o-cbox.out { animation: oout .2s ease-in forwards; } @keyframes ofade { from { opacity: 0; } } @keyframes oout { to { opacity: 0; } }
+.o-cbox .o-cs { animation: oglow 1.2s ease-in-out infinite alternate; filter: drop-shadow(0 0 6px #F5C04A); }
+@keyframes oglow { to { filter: drop-shadow(0 0 14px #F5C04A); } }
+.o-cq { font: 900 clamp(28px, 4.4vw, 44px) "Nunito"; color: var(--ink); text-align: center; }
+.o-ch.big button { width: clamp(88px, 14vw, 130px); height: clamp(88px, 14vw, 130px); font-size: clamp(40px, 6vw, 60px); border-radius: 28px; }
+.o-ch.big button.ok { background: #2E9E5B; border-color: #2E9E5B; }
+/* бутон за възрастен – задръж 1 сек. */
+.o-adult { position: relative; overflow: hidden; } .o-adult small { opacity: .7; font-size: 12px; }
+.o-adult i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: #F5C04A44; } .o-adult.hold i { width: 100%; transition: width 1s linear; }
+.o-startz .o-zori { height: min(40vh, 320px); }
+/* по-малко движение: намалени / без */
+html.o-calm .o-proj, html.o-calm .o-sky .tw, html.o-calm .o-gamesbg::before, html.o-calm .o-game::before, html.o-calm [class^="ic-"], html.o-calm .o-cbox .o-cs { animation: none !important; }
+html.o-calm .o-burst { display: none; } html.o-calm .o-zori.hop { animation: none; }
+html.o-still *, html.o-still *::before, html.o-still *::after { animation: none !important; transition: none !important; }
+html.o-still .o-burst { display: none; }
+/* приспособяване към екрана (таблети с различни пропорции, телефони) */
+.o-scr { overflow: hidden; }
+.o-map, .o-mis { min-height: 0; }
+.o-mtop { flex-wrap: nowrap; min-width: 0; } .o-mtop .o-pips { min-width: 40px; } .o-mname { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 32vw; }
+.o-maptop { min-width: 0; } .o-maptop .o-mt { font-size: clamp(22px, 3vw, 30px); }
+.o-mbody { min-height: 0; } .o-mwork { min-height: 0; overflow: hidden; }
+.o-abhost { height: clamp(200px, calc(100dvh - 300px), 560px) !important; }
+.o-flash { height: clamp(180px, calc(100dvh - 330px), 500px); }
+.o-mis .o-mz .o-zori { height: clamp(90px, 30vh, 230px); }
+.o-set, .o-glist { overflow: auto; }
+.o-window { width: min(46vw, 62dvh); }
+.o-stage .o-zori { height: clamp(150px, 48dvh, 460px); } .o-stage .o-kid { height: clamp(110px, 30dvh, 280px); }
+.o-cta { max-width: 44vw; }
+@media (max-aspect-ratio: 4/3) and (min-width: 761px) {   /* 4:3 и изправени таблети */
+  .o-window { width: min(56vw, 46dvh); top: 7%; }
+  .o-home .o-say { left: 4%; bottom: auto; top: calc(7% + min(56vw, 46dvh) + 14px); max-width: 44vw; }
+  .o-stage { justify-content: flex-start; padding-left: 5vw; } .o-stage .o-zori { height: clamp(150px, 34dvh, 360px); }
+  .o-mis .o-mbody { flex-direction: column; } .o-mis .o-mz { width: auto; flex-direction: row; } .o-mis .o-mz .o-zori { height: 13dvh; }
+  .o-abhost { height: clamp(200px, calc(100dvh - 380px), 560px) !important; }
+}
+@media (max-height: 520px) {   /* телефон легнал */
+  .o-mis .o-mz { display: none; } .o-mis .o-mbody { gap: 6px; } .o-abhost { height: calc(100dvh - 170px) !important; } .o-flash { height: calc(100dvh - 190px); }
+  .o-mis .o-num { font-size: 36px; } .o-ch button { width: 64px; height: 64px; font-size: 30px; }
+}
+@media (max-width: 760px) and (min-height: 521px) {   /* телефон изправен */
+  .o-abhost { height: clamp(180px, calc(100dvh - 430px), 480px) !important; } .o-flash { height: clamp(160px, calc(100dvh - 450px), 420px); }
+}
+@media (max-width: 760px) {   /* телефон: последна дума за началния екран */
+  .o-cta { max-width: none; } .o-cta .o-go { width: 100%; flex-direction: row; justify-content: center; gap: 10px; flex-wrap: wrap; }
+  .o-stage { bottom: 186px; } .o-stage .o-zori { height: clamp(120px, 26dvh, 240px); } .o-stage .o-kid { height: clamp(90px, 19dvh, 180px); }
+  .o-mtop .o-back { padding: 6px 10px; font-size: 15px; }
+}
