@@ -75,7 +75,7 @@
   }
   // към сървъра: всеки завършен кръг като „activity_completed“ (същият договор като ПУ и АЕ)
   function sendRound(L, i, id, ok, tot, t0) {
-    if (!PS || !CHILD) return;
+    if (!PS || !CHILD || !P || P.id !== CHILD) return;   // тестовите/демо профили не пишат в профила на влязлото дете
     try { PS.enqueue({ at: new Date(t0).toISOString(), lesson_id: L.id, round_id: i + 1, gameId: "ma_" + id, gameName: "Ментална аритметика: " + GAMES[id].name, hw: (P.hwid || {})[L.id] || null, st: i,
       total: tot || null, answered: tot || null, correct: tot ? ok : null, accuracy: tot ? Math.round(ok * 100 / tot) : null, seconds: Math.round((Date.now() - t0) / 1000), early: false, program: "mental_arithmetic", answers: [], events: [] }); } catch (e) { console.warn(e); }
   }
@@ -997,8 +997,9 @@
 
   // ---- старт ----
   hwReady.then(() => {
-    if (CHILD) { DB[CHILD] = DB[CHILD] || { id: CHILD, name: "Аз", av: "a1", cur: 1, classAt: 1, b: {}, halo: {}, hw: {} }; P = DB[CHILD]; fromServer(); applyMotion(); screenHome(); return; }
     if (Q.get("test") === "1" || Q.get("test") === "0") { TESTMODE = Q.get("test") === "1"; try { localStorage.setItem("obs.test", Q.get("test")); } catch (e) {} }
+    // тест с деца: винаги изборът „Дете 1–6“, дори ако на устройството има влязло дете от платформата
+    if (CHILD && !TESTMODE) { DB[CHILD] = DB[CHILD] || { id: CHILD, name: "Аз", av: "a1", cur: 1, classAt: 1, b: {}, halo: {}, hw: {} }; P = DB[CHILD]; fromServer(); applyMotion(); screenHome(); return; }
     if (Q.get("p") && ALLP.some(x => x.id === Q.get("p"))) { P = prof(Q.get("p")); if (Q.get("class")) { P.classAt = +Q.get("class"); save(); } applyMotion(); Q.get("m") ? startMission(+Q.get("m")) : Q.get("map") ? screenMap() : screenHome(); } else screenProfiles();
   });
   window.OBS = { _const: (v, r, d) => constSVG(v, r, d), _hw: () => HW, runHw, screenTeacher, _hwComplete: (n) => hwComplete(HW.lessons.find(x => x.n === n)), _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
