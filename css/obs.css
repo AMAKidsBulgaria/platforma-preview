@@ -437,3 +437,15 @@ html.o-still .o-gc2 { animation: none; }
 .o-abac { display: flex; align-items: center; gap: 8px; height: 48px; padding: 0 16px 0 12px; border-radius: 99px; background: #1B2263; color: var(--ink); text-decoration: none; box-shadow: 0 4px 0 #05071a, 0 0 0 2px #B88A4E66; font: 900 18px "Nunito", sans-serif; }
 .o-abac svg { width: 34px; height: 28px; color: var(--gold); } .o-abac:active { transform: translateY(3px); box-shadow: 0 1px 0 #05071a; }
 @media (max-width: 760px) { .o-abac b { display: none; } .o-abac { padding: 0 10px; } }
+/* телефон вертикално: горната лента се събира в ширината (бутонът „Абакус“ я беше разширил) */
+@media (max-width: 520px) {
+  .o-hhead { gap: 8px; min-width: 0; } .o-hhead > b { min-width: 0; font-size: 16px; line-height: 1.15; }
+  .o-hh { width: 40px; height: 40px; font-size: 20px; flex: none; }
+  .o-abac { height: 40px; padding: 0 8px; flex: none; } .o-abac svg { width: 28px; height: 24px; }
+  .o-teach { width: 40px; height: 40px; font-size: 18px; flex: none; }
+  .o-me { padding: 3px; flex: none; } .o-me b, .o-me span { display: none; } .o-me img { width: 34px; height: 34px; }
+}
+@media (max-width: 520px) and (orientation: portrait) {
+  .o-htitle { max-width: calc(100% - 20px); } .o-hbadge { left: 10px; right: auto; top: 80px; }
+  .o-hold { bottom: 132px; }
+}
