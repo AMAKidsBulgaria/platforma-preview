@@ -66,7 +66,7 @@
     fetch(u).then(r => r.json()).then(j => { HWS[g] = j; }).catch(() => {}))).then(() => { HW = HWS[5]; });
   const groupOf = (p) => p && p.group ? String(p.group) : p && p.age >= 10 ? "10" : p && p.age >= 7 ? "7" : "5";
   function useGroup(p) { const g = groupOf(p); HW = HWS[g] || HWS[5]; CONST = g === "5" ? CONST5 : CONST7; LINES = g === "5" ? LINES5 : LINES7; buildStars();
-    document.documentElement.classList.toggle("o-g7", g !== "5"); return g; }
+    document.documentElement.classList.toggle("o-g7", g !== "5"); document.documentElement.classList.toggle("o-g10", g === "10"); return g; }
   const REVIEW = (() => { const r = Q.get("review"); try { if (r === "1") sessionStorage.setItem("obs.review", "1"); if (r === "0") sessionStorage.removeItem("obs.review"); return sessionStorage.getItem("obs.review") === "1"; } catch (e) { return r === "1"; } })();
   const classAt = () => Math.max(1, Math.min(HW.lessons.length || 21, P.classAt || P.cur || 1));
   const assignedL = () => HW.lessons.filter(L => L.n <= classAt());
@@ -120,7 +120,7 @@
   const zori = (pose) => `<img class="o-zori" src="assets/img/zori/z_${pose}.png" alt="Зори">`;
   // изчаква записа да свърши (иначе следващата реплика го прекъсва); без запис – по дължината на текста
   function talk(text, pose) {
-    text = tone(text); say(text, pose); const g = gen, min = Math.max(1600, text.length * 75) * FAST;
+    text = tone(text); say(text, pose); const g = gen, min = (groupOf(P) === "10" ? Math.max(500, text.length * 30) : Math.max(1600, text.length * 75)) * FAST;
     return new Promise((res, rej) => { const done = () => g === gen ? res() : rej("stale");
       const a = cur; if (a && !FAST_ON && Q.get("voice") !== "0") { let fin = false; const end = () => { if (!fin) { fin = true; setTimeout(done, 350); } };
         a.addEventListener("ended", end); a.addEventListener("error", end); setTimeout(end, 9000); } else setTimeout(done, min); });
@@ -140,6 +140,19 @@
     if (news.length) { if (M) M.recs = (M.recs || []).concat(news); toast("★ Нов рекорд: " + news.join(" · ")); }
   }
   function toast(t) { const d = document.createElement("div"); d.className = "o-toast"; d.textContent = t; document.body.appendChild(d); setTimeout(() => d.remove(), 2600 * FAST); }
+  // 10+: „изследователска станция“ – напредъкът в числа: точност по дни (последните 7 дни с игра) + рекордите
+  function statsPanel() {
+    const L = P.log || {}, days = {}; [].concat(L.trainer || [], L.flash || []).forEach(x => { if (!x || !x.t) return; const d = new Date(x.t).toISOString().slice(0, 10); (days[d] = days[d] || [0, 0])[1]++; if (x.correct) days[d][0]++; });
+    const pts = Object.keys(days).sort().slice(-7).map(d => ({ d, a: days[d][0] / days[d][1] })), r = P.rec || {};
+    const last = pts.length ? Math.round(pts[pts.length - 1].a * 100) + "%" : "—";
+    let spark = `<p class="o-snone">Графиката се появява след първия ден с игри.</p>`;
+    if (pts.length) { const W = 220, H = 56, X = (i) => pts.length === 1 ? W / 2 : 8 + i * (W - 16) / (pts.length - 1), Y = (a) => H - 6 - a * (H - 14);
+      const line = pts.map((p, i) => `${i ? "L" : "M"}${X(i).toFixed(1)} ${Y(p.a).toFixed(1)}`).join(" ");
+      spark = `<svg class="o-spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Точност по дни"><line x1="0" y1="${Y(1)}" x2="${W}" y2="${Y(1)}" class="g"/><line x1="0" y1="${Y(.5)}" x2="${W}" y2="${Y(.5)}" class="g"/>
+        <path d="${line} L${X(pts.length - 1)} ${H} L${X(0)} ${H} Z" class="a"/><path d="${line}" class="l"/><circle cx="${X(pts.length - 1)}" cy="${Y(pts[pts.length - 1].a)}" r="4" class="e"/></svg>`; }
+    const cell = (v, t) => `<span><b>${v}</b>${t}</span>`;
+    return `<div class="o-stat"><i>Станция Аврора · напредък</i><div class="o-statrow">${cell(last, "точност днес")}${cell(r.ab ? fmtS(r.ab) : "—", "абакус")}${cell(r.fl ? fmtS(r.fl) : "—", "сигнали")}${cell(r.streak || 0, "верни подред")}</div>${spark}<small>точност по дни · последните ${pts.length || 0}</small></div>`;
+  }
   const recLine = () => { const r = P.rec || {}; const a = [];
     if (r.ab) a.push(`<span><b>${fmtS(r.ab)}</b>абакус</span>`); if (r.fl) a.push(`<span><b>${fmtS(r.fl)}</b>сигнали</span>`); if (r.streak) a.push(`<span><b>${r.streak}</b>верни подред</span>`);
     if ((P.badges || []).length) a.push(`<span><b>${P.badges.length}</b>${P.badges.length === 1 ? "значка" : "значки"}</span>`);
@@ -150,7 +163,7 @@
   // ---- екран 1: кой наблюдава ----
   function screenProfiles() {
     gen++;
-    document.documentElement.classList.remove("o-g7"); app.className = "o-scr o-profiles"; voice("Кой наблюдава тази вечер?");
+    document.documentElement.classList.remove("o-g7", "o-g10"); app.className = "o-scr o-profiles"; voice("Кой наблюдава тази вечер?");
     const list = TESTMODE ? TEST : DEMO;
     app.innerHTML = `<div class="o-ptitle">Кой наблюдава тази вечер?</div>
       <div class="o-plist${TESTMODE ? " test" : ""}">${list.map(d => { const p = DB[d.id] || d; const lit = Object.values(p.b || {}).filter(v => v >= 3).length;
@@ -215,7 +228,7 @@
           <div class="o-hbg"></div><button class="o-hwin" id="o-win" aria-label="Звездна карта"><div class="o-proj">${skySVG({ vb: "40 80 460 460" })}</div><div class="o-glass"></div></button>
           <div class="o-htitle"><b>Звездна обсерватория</b><small>Област Аврора</small></div>
           ${LL ? `<div class="o-hbadge"><b>Занятие ${LL.n}</b><small>${LL.title}</small>${dots}</div>` : ""}
-          <div class="o-hstage"><div class="o-say">${line}</div>${zori(L ? "explain" : "joy")}${grown() ? "" : `<button class="o-kidb" id="o-kid"><img class="o-kid" src="assets/img/world/avatars/${P.av}.webp" alt=""><span>${P.name} · ти</span></button>`}</div>${grown() ? recLine() : ""}
+          <div class="o-hstage"><div class="o-say">${line}</div>${zori(L ? "explain" : "joy")}${grown() ? "" : `<button class="o-kidb" id="o-kid"><img class="o-kid" src="assets/img/world/avatars/${P.av}.webp" alt=""><span>${P.name} · ти</span></button>`}</div>${groupOf(P) === "10" ? statsPanel() : grown() ? recLine() : ""}
           ${older.length ? `<button class="o-hold" id="o-older">Доиграй: занятие ${older[older.length - 1].n}</button>` : ""}
           <button class="o-hgo" id="o-go"><em>${L ? "▶" : "★"}</em><span><b>${L ? "Продължи" : "Звездна карта"}</b><small>${sub}</small></span></button>
         </div>
