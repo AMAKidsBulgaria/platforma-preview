@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Абакус</title>
+<meta name="theme-color" content="#26325C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Абакус">
+<link rel="manifest" href="abacus.webmanifest">
+<link rel="apple-touch-icon" href="assets/img/abacus/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap">
+<link rel="stylesheet" href="css/abacus-app.css?v=2">
+</head>
+<body>
+<!-- Дигитален абакус – самостоятелно приложение, свързано с платформата (11.11.2026).
+     Хоризонтален екран, 5 пръчки, три режима: класически (плъзгане), докосване (светват), мислено (светват за миг, числото е скрито).
+     Всяко движение се записва (и в мисления режим) – localStorage ma.abacus.v1; при онлайн занятие отива при учителя.
+     Параметри: ?live=СТАЯ&name=Име (онлайн занятие), ?debug=1 (дневник на движенията), ?mode=classic|touch|mind (направо в абакуса). -->
+<script src="js/abacus/engine.js?v=11"></script>
+<script src="js/abacus/app.js?v=1"></script>
+<script src="js/live/rt.js?v=1"></script>
+<script src="js/live/child.js?v=3"></script>
+</body>
+</html>
