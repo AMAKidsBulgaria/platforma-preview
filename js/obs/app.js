@@ -65,7 +65,8 @@
   const hwReady = Promise.all([["5", "config/ma-homework.json?v=2"], ["7", "config/ma-homework-7.json?v=1"], ["10", "config/ma-homework-10.json?v=1"]].map(([g, u]) =>
     fetch(u).then(r => r.json()).then(j => { HWS[g] = j; }).catch(() => {}))).then(() => { HW = HWS[5]; });
   const groupOf = (p) => p && p.group ? String(p.group) : p && p.age >= 10 ? "10" : p && p.age >= 7 ? "7" : "5";
-  function useGroup(p) { const g = groupOf(p); HW = HWS[g] || HWS[5]; CONST = g === "5" ? CONST5 : CONST7; LINES = g === "5" ? LINES5 : LINES7; buildStars(); return g; }
+  function useGroup(p) { const g = groupOf(p); HW = HWS[g] || HWS[5]; CONST = g === "5" ? CONST5 : CONST7; LINES = g === "5" ? LINES5 : LINES7; buildStars();
+    document.documentElement.classList.toggle("o-g7", g !== "5"); return g; }
   const REVIEW = (() => { const r = Q.get("review"); try { if (r === "1") sessionStorage.setItem("obs.review", "1"); if (r === "0") sessionStorage.removeItem("obs.review"); return sessionStorage.getItem("obs.review") === "1"; } catch (e) { return r === "1"; } })();
   const classAt = () => Math.max(1, Math.min(HW.lessons.length || 21, P.classAt || P.cur || 1));
   const assignedL = () => HW.lessons.filter(L => L.n <= classAt());
@@ -101,8 +102,15 @@
   let AUDZ = {}, AUD = {}, cur = null;
   fetch("config/abacus-audio-zori.json?v=8").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
   fetch("config/abacus-audio.json?v=4").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
+  // „пораснал“ режим (7+, 11.11.2026): Зори е спътник – кратки реплики, само текст (гласът по избор: P.zv); рекорди и значки
+  const grown = () => !!P && groupOf(P) !== "5";
+  const SHORT7 = { "Здравей! Днес имаме ново домашно.": "Ново домашно.", "Здравей! Да продължим домашното.": "Продължаваме.", "Браво! Домашното е готово.": "Домашното е готово.",
+    "Браво! Още един кръг е готов.": "Кръгът е готов.", "Браво! Точно така.": "Точно.", "Край на играта. Звездите ще ни чакат утре!": "Край на играта.", "Избери игра!": "Избери игра.",
+    "Почти! Ето колко стана.": "Не. Ето отговора.", "Тази вечер звездата ни още е бледа. Ще я направим ли по-ярка?": "Да направим звездата по-ярка." };
+  const tone = (text) => grown() ? (SHORT7[text] || text) : text;
   function voice(text) {
     if (Q.get("voice") === "0") return;
+    if (grown() && !P.zv) return;
     try { if (cur) cur.pause(); } catch (e) {}
     cur = null; const f = AUDZ[text] || AUD[text]; if (f) { cur = new Audio("assets/audio/abacus/" + f); cur.play().catch(() => {}); }
   }
@@ -112,19 +120,37 @@
   const zori = (pose) => `<img class="o-zori" src="assets/img/zori/z_${pose}.png" alt="Зори">`;
   // изчаква записа да свърши (иначе следващата реплика го прекъсва); без запис – по дължината на текста
   function talk(text, pose) {
-    say(text, pose); const g = gen, min = Math.max(1600, text.length * 75) * FAST;
+    text = tone(text); say(text, pose); const g = gen, min = Math.max(1600, text.length * 75) * FAST;
     return new Promise((res, rej) => { const done = () => g === gen ? res() : rej("stale");
       const a = cur; if (a && !FAST_ON && Q.get("voice") !== "0") { let fin = false; const end = () => { if (!fin) { fin = true; setTimeout(done, 350); } };
         a.addEventListener("ended", end); a.addEventListener("error", end); setTimeout(end, 9000); } else setTimeout(done, min); });
   }
-  function say(text, pose) { const b = $(".o-say"); if (b) b.textContent = text; const z = $(".o-zori"); if (z && pose) z.src = `assets/img/zori/z_${pose}.png`; voice(text); }
+  function say(text, pose) { text = tone(text); const b = $(".o-say"); if (b) b.textContent = text; const z = $(".o-zori"); if (z && pose) z.src = `assets/img/zori/z_${pose}.png`; voice(text); }
+
+  // рекорди (7+): серия верни подред (сигнали и сметки), най-бърза скорост с поне 3 верни подред – за абакуса и за сигналите
+  const BADGES = [["s10", "Серия 10", (r) => r.streak >= 10], ["s25", "Серия 25", (r) => r.streak >= 25], ["s50", "Серия 50", (r) => r.streak >= 50],
+    ["ab15", "Абакус 1,5 с", (r) => r.ab && r.ab <= 1.5], ["ab1", "Абакус 1 с", (r) => r.ab && r.ab <= 1], ["fl1", "Сигнали 1 с", (r) => r.fl && r.fl <= 1], ["fl07", "Сигнали 0,7 с", (r) => r.fl && r.fl <= .7]];
+  const fmtS = (x) => String(x).replace(".", ",") + " с";
+  function track(kind, right, speed) {   // kind: "ab" | "fl"
+    if (!grown()) return; const r = P.rec = P.rec || { streak: 0 }; const cs = P.cs = P.cs || { n: 0, sp: {} }; const news = [];
+    if (right) { cs.n++; cs.sp[kind + speed] = (cs.sp[kind + speed] || 0) + 1; } else { cs.n = 0; cs.sp = {}; }
+    if (cs.n > (r.streak || 0)) { r.streak = cs.n; if ([10, 15, 20, 25, 30, 40, 50].includes(cs.n)) news.push("серия " + cs.n); }
+    const sp = +speed; if (right && sp > 0 && cs.sp[kind + speed] >= 3 && (!r[kind] || sp < r[kind])) { r[kind] = sp; news.push((kind === "ab" ? "абакус " : "сигнали ") + fmtS(sp)); }
+    P.badges = P.badges || []; BADGES.forEach(([id, name, ok]) => { if (!P.badges.includes(id) && ok(r)) { P.badges.push(id); news.push("значка „" + name + "“"); } });
+    if (news.length) { if (M) M.recs = (M.recs || []).concat(news); toast("★ Нов рекорд: " + news.join(" · ")); }
+  }
+  function toast(t) { const d = document.createElement("div"); d.className = "o-toast"; d.textContent = t; document.body.appendChild(d); setTimeout(() => d.remove(), 2600 * FAST); }
+  const recLine = () => { const r = P.rec || {}; const a = [];
+    if (r.ab) a.push(`<span><b>${fmtS(r.ab)}</b>абакус</span>`); if (r.fl) a.push(`<span><b>${fmtS(r.fl)}</b>сигнали</span>`); if (r.streak) a.push(`<span><b>${r.streak}</b>верни подред</span>`);
+    if ((P.badges || []).length) a.push(`<span><b>${P.badges.length}</b>${P.badges.length === 1 ? "значка" : "значки"}</span>`);
+    return a.length ? `<div class="o-hrec"><i>Моите рекорди</i>${a.join("")}</div>` : `<div class="o-hrec"><i>Моите рекорди</i><span class="e">Още няма – първият идва след 3 верни подред.</span></div>`; };
 
   function applyMotion() { const m = (P && P.motion) || (matchMedia("(prefers-reduced-motion: reduce)").matches ? "calm" : "full");
     document.documentElement.classList.toggle("o-calm", m === "calm"); document.documentElement.classList.toggle("o-still", m === "off"); }
   // ---- екран 1: кой наблюдава ----
   function screenProfiles() {
     gen++;
-    app.className = "o-scr o-profiles"; voice("Кой наблюдава тази вечер?");
+    document.documentElement.classList.remove("o-g7"); app.className = "o-scr o-profiles"; voice("Кой наблюдава тази вечер?");
     const list = TESTMODE ? TEST : DEMO;
     app.innerHTML = `<div class="o-ptitle">Кой наблюдава тази вечер?</div>
       <div class="o-plist${TESTMODE ? " test" : ""}">${list.map(d => { const p = DB[d.id] || d; const lit = Object.values(p.b || {}).filter(v => v >= 3).length;
@@ -176,7 +202,7 @@
     gen++; M = null; P.cur = classAt();
     const all = Object.keys(STAR), lit = all.filter(k => (P.b[k] || 0) >= 3).length, L = hwCurrent(), older = hwOlder();
     const LL = L || assignedL().slice(-1)[0], st = LL ? hwState(LL) : { done: [] };
-    const line = !L ? "Браво! Домашното е готово." : st.done.length ? "Здравей! Да продължим домашното." : "Здравей! Днес имаме ново домашно.";
+    const line = tone(!L ? "Браво! Домашното е готово." : st.done.length ? "Здравей! Да продължим домашното." : "Здравей! Днес имаме ново домашно.");
     const dots = LL ? `<span class="o-hdots">${LL.rounds.map((_, k) => `<i class="${st.done.includes(k) ? "on" : L && k === st.next ? "now" : ""}"></i>`).join("")}</span>` : "";
     const sub = L ? `Занятие ${L.n} · ${L.rounds[st.next].label} · кръг ${st.next + 1} от ${L.rounds.length}` : "Домашното е готово – виж звездите";
     app.className = "o-scr o-hubscr";
@@ -189,7 +215,7 @@
           <div class="o-hbg"></div><button class="o-hwin" id="o-win" aria-label="Звездна карта"><div class="o-proj">${skySVG({ vb: "40 80 460 460" })}</div><div class="o-glass"></div></button>
           <div class="o-htitle"><b>Звездна обсерватория</b><small>Област Аврора</small></div>
           ${LL ? `<div class="o-hbadge"><b>Занятие ${LL.n}</b><small>${LL.title}</small>${dots}</div>` : ""}
-          <div class="o-hstage"><div class="o-say">${line}</div>${zori(L ? "explain" : "joy")}<button class="o-kidb" id="o-kid"><img class="o-kid" src="assets/img/world/avatars/${P.av}.webp" alt=""><span>${P.name} · ти</span></button></div>
+          <div class="o-hstage"><div class="o-say">${line}</div>${zori(L ? "explain" : "joy")}${grown() ? "" : `<button class="o-kidb" id="o-kid"><img class="o-kid" src="assets/img/world/avatars/${P.av}.webp" alt=""><span>${P.name} · ти</span></button>`}</div>${grown() ? recLine() : ""}
           ${older.length ? `<button class="o-hold" id="o-older">Доиграй: занятие ${older[older.length - 1].n}</button>` : ""}
           <button class="o-hgo" id="o-go"><em>${L ? "▶" : "★"}</em><span><b>${L ? "Продължи" : "Звездна карта"}</b><small>${sub}</small></span></button>
         </div>
@@ -197,9 +223,12 @@
         <button class="o-hcard" id="o-games"><img src="assets/img/obs/card_games.webp" alt=""><span class="o-htx"><b>Игри</b><small>Тренирай уменията си</small></span><i>›</i></button>
       </div></section>`;
     voice(line);
+    if (grown()) { const zb = document.createElement("button"); zb.className = "o-zv"; zb.setAttribute("aria-pressed", P.zv ? "true" : "false"); zb.textContent = P.zv ? "🔊 Зори" : "🔈 Зори";
+      zb.title = "Гласът на Зори"; zb.onclick = () => { P.zv = !P.zv; save(); zb.textContent = P.zv ? "🔊 Зори" : "🔈 Зори"; zb.setAttribute("aria-pressed", P.zv ? "true" : "false"); if (P.zv) voice(tone(line)); };
+      $(".o-hstage").appendChild(zb); }
     $("#o-go").onclick = () => L ? runHw(L, st.next) : screenMap();
     const ob = $("#o-older"); if (ob) ob.onclick = () => { const O = older[older.length - 1]; runHw(O, hwState(O).next); };
-    $("#o-map").onclick = () => screenMap(); $("#o-games").onclick = screenGames; $("#o-win").onclick = () => screenMap(); $("#o-me").onclick = screenAvatar; $("#o-kid").onclick = screenAvatar;
+    $("#o-map").onclick = () => screenMap(); $("#o-games").onclick = screenGames; $("#o-win").onclick = () => screenMap(); $("#o-me").onclick = screenAvatar; const kb = $("#o-kid"); if (kb) kb.onclick = screenAvatar;
     holdBtn($("#o-teach"), screenTeacher);
   }
 
@@ -218,7 +247,7 @@
     gen++; const st = hwState(L), nx = st.next;
     app.className = "o-scr o-end";
     app.innerHTML = `<div class="o-endbox">${zori("joy")}<div class="o-say"></div>
-      <div class="o-gres">Занятие ${L.n} · ${L.rounds[i].label}: <b>${ok} от ${tot}</b></div>
+      <div class="o-gres">Занятие ${L.n} · ${L.rounds[i].label}: <b>${ok} от ${tot}</b></div>${M && M.recs && M.recs.length ? `<div class="o-newrec">★ Нов рекорд: ${M.recs.join(" · ")}</div>` : ""}
       <div class="o-hdots big">${L.rounds.map((_, k) => `<i class="${st.done.includes(k) ? "on" : k === nx ? "now" : ""}"></i>`).join("")}</div>
       <div class="o-sbar"><button class="o-sec" id="o-rh">Към обсерваторията</button><button class="o-go" id="o-next">▶ Продължи<small>${L.rounds[nx].label} · кръг ${nx + 1} от ${L.rounds.length}</small></button></div></div>`;
     say("Браво! Още един кръг е готов.", "joy"); setTimeout(burst, 300);
@@ -695,7 +724,7 @@
         } else ans = await keypad(q, String(Math.pow(10, t.rods + 1)).length - 1);
         const right = ans === target;
         P.log.trainer.push({ t: Date.now(), topic: t.id, nums, speed: c.speed, voice: !!clips, voiceRate: clips ? Math.max(...clips.map(x => x.rate)) : null, src: mind ? "mind" : digi ? "digi" : "phys", answer: ans, correct: right, rtMs: Date.now() - tq, shownMs: shown, rules, moves: digi ? abMoves.map(m => ({ ...m, ms: m.at - t0 })) : null });
-        if (P.log.trainer.length > 400) P.log.trainer.splice(0, P.log.trainer.length - 400); save();
+        if (P.log.trainer.length > 400) P.log.trainer.splice(0, P.log.trainer.length - 400); if (!mind) track("ab", right, c.speed); save();
         num.textContent = "= " + target; q.innerHTML = right ? "" : `<p class="o-trhint">Ти: ${ans}</p>`;
         if (right) { ok++; pipStar(k); say(thank(target), "joy"); } else say("Почти! Ето колко стана.", "wait"); await wait(right ? 1300 : 2400);
       }
@@ -708,7 +737,7 @@
     for (let k = 0; k < c.rounds; k++) {
       pip(k); const rec = { t: Date.now(), topic: t.id, choice: null, correct: false, retries: 0, rtMs: null };
       const first = await signalRound(t, sec, k, rec); if (first) { ok++; pipStar(k); } res.push(first);
-      P.log.flash.push(rec); if (P.log.flash.length > 300) P.log.flash.splice(0, P.log.flash.length - 300); save();
+      track("fl", first, sec); P.log.flash.push(rec); if (P.log.flash.length > 300) P.log.flash.splice(0, P.log.flash.length - 300); save();
     }
     if (auto) sigAdapt(t.id, res);
     return [ok, c.rounds];
@@ -1029,7 +1058,7 @@
     gen++; const r = tot ? ok / tot : 0, stars = r >= .9 ? 3 : r >= .6 ? 2 : r > 0 ? 1 : 0;
     app.className = "o-scr o-end";
     app.innerHTML = `<div class="o-endbox">${zori(stars >= 2 ? "joy" : "explain")}<div class="o-say"></div>
-      <div class="o-gres">${GAMES[id].name}: <b>${ok} от ${tot}</b></div>
+      <div class="o-gres">${GAMES[id].name}: <b>${ok} от ${tot}</b></div>${M && M.recs && M.recs.length ? `<div class="o-newrec">★ Нов рекорд: ${M.recs.join(" · ")}</div>` : ""}
       <div class="o-stars big">${[0, 1, 2].map(i => `<span class="${i < stars ? "on" : ""}" style="animation-delay:${.15 + i * .2}s">★</span>`).join("")}</div>
       <div class="o-sbar"><button class="o-sec" id="o-rg">Към игрите</button><button class="o-go" id="o-again">↻ Играй пак</button><button class="o-sec" id="o-rh">Към обсерваторията</button></div></div>`;
     say(stars >= 2 ? "Браво! Точно така." : "Край на играта. Звездите ще ни чакат утре!", stars >= 2 ? "joy" : "explain");
@@ -1063,6 +1092,6 @@
     if (CHILD && !TESTMODE) { DB[CHILD] = DB[CHILD] || { id: CHILD, name: "Аз", av: "a1", cur: 1, classAt: 1, b: {}, halo: {}, hw: {} }; P = DB[CHILD]; useGroup(P); fromServer(); applyMotion(); screenHome(); return; }
     if (Q.get("p") && ALLP.some(x => x.id === Q.get("p"))) { P = prof(Q.get("p")); if (Q.get("class")) { P.classAt = +Q.get("class"); save(); } applyMotion(); Q.get("m") ? startMission(+Q.get("m")) : Q.get("map") ? screenMap() : screenHome(); } else screenProfiles();
   });
-  window.OBS = { _const: (v, r, d) => constSVG(v, r, d), _hw: () => HW, runHw, screenTeacher, _hwComplete: (n) => hwComplete(HW.lessons.find(x => x.n === n)), _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
+  window.OBS = { _track: (k, r, s) => track(k, r, s), _const: (v, r, d) => constSVG(v, r, d), _hw: () => HW, runHw, screenTeacher, _hwComplete: (n) => hwComplete(HW.lessons.find(x => x.n === n)), _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
     testFinish: (n, r) => { M = Object.assign({ n, ex: [], par: PAR[n], max: MAXN[n], flash: [5, 6], ab: [3, 4], meth: [3, 4], im: [2, 3], help: 0 }, r || {}); return finish(); } };   // само за проверки
 })();

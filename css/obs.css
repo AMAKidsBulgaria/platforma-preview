@@ -479,3 +479,27 @@ html.o-still .o-gc2 { animation: none; }
 .o-och button.on.g { background: #1E8E5A; border-color: #6FD8A2; } .o-och button.on.m { background: #8A6200; border-color: #F2C766; } .o-och button.on.b { background: #9A2532; border-color: #FF8E98; } .o-och button.on.n { background: #3A3F70; border-color: #A6ABCF; }
 .o-ogames { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 6px; } .o-ogames label { display: flex; gap: 8px; align-items: center; font: 700 15px "Nunito"; background: #0d1030; border-radius: 10px; padding: 7px 10px; } .o-ogames input { width: auto; }
 .o-ocount { display: flex; align-items: center; gap: 14px; } .o-ocount button { width: 48px; height: 48px; border-radius: 12px; border: 2px solid #ffffff30; background: #0d1030; color: var(--ink); font: 900 24px "Nunito"; } .o-ocount b { font: 900 28px "Nunito"; min-width: 30px; text-align: center; }
+/* „пораснал“ режим (7+): Зори по-малък и встрани, по-кратки реплики, рекорди на началния екран */
+html.o-g7 .o-hstage .o-zori { height: min(30vh, 220px); }
+html.o-g7 .o-say { font-size: clamp(15px, 1.6vw, 19px); }
+html.o-g7 .o-mz .o-zori { height: min(18vh, 130px); }
+html.o-g7 .o-endbox .o-zori { height: min(18vh, 140px); }
+html.o-g7 .o-htitle { display: none; }
+.o-hrec { position: absolute; left: 18px; top: 16px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; max-width: min(52%, 420px); z-index: 3; background: #0d1030b3; border: 2px solid #B88A4E77; border-radius: 18px; padding: 10px 12px; }
+.o-hrec i { font: 800 12px "Nunito"; font-style: normal; color: var(--gold); letter-spacing: .06em; text-transform: uppercase; width: 100%; }
+.o-hrec span { background: #0d1030d9; border: 1px solid #ffffff30; border-radius: 12px; padding: 4px 10px; font: 700 12px "Nunito"; color: var(--muted); display: grid; }
+.o-hrec span b { font: 900 18px "Nunito"; color: var(--ink); font-variant-numeric: tabular-nums; }
+.o-hrec span.e { display: block; font-size: 13px; }
+.o-zv { pointer-events: auto; align-self: flex-start; margin-top: 10px; order: -1; font: 800 13px "Nunito"; color: var(--ink); background: #0d1030cc; border: 1px solid #ffffff30; border-radius: 99px; padding: 4px 10px; }
+.o-toast { position: fixed; left: 50%; top: max(14px, env(safe-area-inset-top)); transform: translateX(-50%); z-index: 60; background: var(--gold); color: #2B2140; font: 900 16px "Nunito"; border-radius: 99px; padding: 8px 18px; box-shadow: 0 6px 18px #0008; animation: o-toast 2.6s ease both; }
+@keyframes o-toast { 0% { opacity: 0; transform: translate(-50%, -10px); } 10%, 85% { opacity: 1; transform: translate(-50%, 0); } 100% { opacity: 0; } }
+.o-newrec { font: 900 16px "Nunito"; color: #2B2140; background: var(--gold); border-radius: 99px; padding: 6px 16px; }
+@media (max-width: 520px) and (orientation: portrait) { .o-hrec { top: 10px; left: 10px; max-width: calc(100% - 20px); } html.o-g7 .o-hbadge { top: auto; bottom: 150px; } .o-hrec span b { font-size: 15px; } }
+@media (max-height: 520px) { .o-hrec { top: 8px; padding: 6px 8px; } .o-hrec i { display: none; } .o-hrec span { padding: 2px 8px; } .o-hrec span b { font-size: 14px; } }
+@media (max-width: 520px) and (orientation: portrait) {
+  html.o-g7 .o-hstage .o-zori, html.o-g7 .o-hstage .o-say { display: none; }
+  .o-hrec { flex-wrap: nowrap; gap: 4px; padding: 8px; } .o-hrec i { display: none; }
+  .o-hrec span { padding: 3px 6px; font-size: 11px; flex: 1 1 0; min-width: 0; }
+  html.o-g7 .o-hbadge { top: 96px; bottom: auto; }
+  html.o-g7 .o-hstage { bottom: 140px; flex-direction: column; align-items: flex-start; gap: 6px; } html.o-g7 .o-hstage .o-zv { margin: 0; order: 2; }
+}
