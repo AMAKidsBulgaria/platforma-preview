@@ -8,7 +8,7 @@
   const app = document.getElementById("obs");
 
   // ---- небето: област „Аврора“ (модул „Просто“) – 3 съзвездия, 21 звезди (= занятията) ----
-  const CONST = [
+  const CONST5 = [
     { id: "A", name: "Първи светлини", sub: "числата 0–9", stars: [
       [1, "0, 1, 2", 110, 430], [2, "Числото 3", 170, 360], [3, "Числото 4", 245, 400], [4, "Числото 5", 300, 320], [5, "Щипката · 6", 380, 350],
       [6, "Числото 7", 430, 270], [7, "Числото 8", 360, 210], [8, "Числото 9", 280, 230], [9, "Звездна нощ", 210, 160, 1]] },
@@ -18,8 +18,18 @@
     { id: "C", name: "Далечни звезди", sub: "до 999 · по желание", stars: [
       [18, "Стотиците", 860, 470], [19, "До 555", 920, 410], [20, "До 999", 960, 340], [21, "Звездна нощ", 975, 270, 1]] }
   ];
-  const STAR = {}; CONST.forEach(c => c.stars.forEach(s => { STAR[s[0]] = { n: s[0], title: s[1], x: s[2], y: s[3], big: !!s[4], c: c.id }; }));
-  const LINES = { A: [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9]], B: [[10, 11], [11, 12], [12, 13], [13, 14], [14, 15], [15, 16], [16, 17]], C: [[18, 19], [19, 20], [20, 21]] };
+  const LINES5 = { A: [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9]], B: [[10, 11], [11, 12], [12, 13], [13, 14], [14, 15], [15, 16], [16, 17]], C: [[18, 19], [19, 20], [20, 21]] };
+  // по-големите (7–9 и 10+, 11.11.2026): същото небе, 13 звезди = 13-те занятия на старшата програма (новото число и новият разряд заедно)
+  const CONST7 = [
+    { id: "A", name: "Първи светлини", sub: "0–9 и двуцифрени", stars: [
+      [1, "0–4", 110, 430], [2, "Числото 5", 170, 360], [3, "Десетиците", 245, 400], [4, "6 · до 66", 300, 320], [5, "7 · до 77", 380, 350],
+      [6, "8 · до 88", 430, 270], [7, "9 · до 99", 360, 210], [8, "Звездна нощ", 280, 230, 1]] },
+    { id: "B", name: "Далечни звезди", sub: "до 999", stars: [
+      [9, "Стотиците", 560, 420], [10, "До 999", 640, 360], [11, "Затвърждаване", 720, 395], [12, "Подготовка", 790, 320], [13, "Контролна", 860, 250, 1]] }];
+  const LINES7 = { A: [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8]], B: [[9, 10], [10, 11], [11, 12], [12, 13]] };
+  let CONST = CONST5, LINES = LINES5, STAR = {};
+  const buildStars = () => { STAR = {}; CONST.forEach(c => c.stars.forEach(s => { STAR[s[0]] = { n: s[0], title: s[1], x: s[2], y: s[3], big: !!s[4], c: c.id }; })); };
+  buildStars();
   const FAR = [["Орион", "Братя", 1140, 120], ["Плеяди", "Приятели", 1250, 330], ["Вега", "Преход", 1200, 560], ["Андромеда", "Приятели и братя", 1340, 450], ["Поларис", "наум", 1360, 110]];
   // параметри на мисията по занятие (от картата на модула): скорост на абакуса, на флашкартите, на въображаемия
   const PAR = { 1: [2.5, 1.8, 2.5], 2: [2.0, 1.8, 2.5], 3: [2.0, 1.6, 2.0], 4: [2.0, 1.6, 2.0], 5: [2.2, 1.5, 2.0], 6: [2.0, 1.4, 2.0], 7: [2.0, 1.4, 2.0], 8: [2.0, 1.2, 2.0], 9: [1.8, 1.2, 2.0] };
@@ -30,7 +40,9 @@
   const DEMO = [
     { id: "lora", name: "Лора", av: "a1", age: 5, cur: 7, classAt: 7, hwTo: 6, format: "center", b: { 1: 3, 2: 3, 3: 3, 4: 3, 5: 2, 6: 1 }, halo: { 1: 1, 2: 1, 3: 1 } },
     { id: "ivo", name: "Иво", av: "a4", age: 6, cur: 2, classAt: 2, hwTo: 1, format: "online", b: { 1: 2 }, halo: {} },
-    { id: "nia", name: "Ния", av: "n1", age: 5, cur: 1, classAt: 1, format: "ai", b: {}, halo: {} }
+    { id: "nia", name: "Ния", av: "n1", age: 5, cur: 1, classAt: 1, format: "ai", b: {}, halo: {} },
+    { id: "mira", name: "Мира", av: "n3", age: 8, group: "7", cur: 4, classAt: 4, hwTo: 3, format: "center", b: { 1: 3, 2: 3, 3: 2 }, halo: {} },
+    { id: "kalin", name: "Калин", av: "a6", age: 11, group: "10", cur: 2, classAt: 2, hwTo: 1, format: "online", b: { 1: 3 }, halo: {} }
   ];
   // тест с деца (11.2026): 6 профила без истински имена; всяко дете започва от занятието си („За учителя“ → „Проведи занятие“)
   const TEST = [1, 2, 3, 4, 5, 6].map(i => ({ id: "t" + i, name: "Дете " + i, av: AV[i - 1], age: 5, cur: 1, classAt: 1, format: "center", b: {}, halo: {} }));
@@ -39,7 +51,7 @@
   const KEY = "obs.proto.v3";
   let DB = (() => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } })();
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(DB)); } catch (e) {} };
-  const prof = (id) => { if (!DB[id]) { const d = ALLP.find(x => x.id === id); DB[id] = JSON.parse(JSON.stringify(d));
+  const prof = (id) => { useGroup(DB[id] || ALLP.find(x => x.id === id)); if (!DB[id]) { const d = ALLP.find(x => x.id === id); DB[id] = JSON.parse(JSON.stringify(d));
       DB[id].hw = {}; HW.lessons.filter(L => L.n <= (d.hwTo || 0)).forEach(L => { DB[id].hw[L.id] = L.rounds.map((_, i) => i); }); save(); }   // демо: по-старите домашни са изиграни
     return DB[id]; };
   let P = null;
@@ -48,7 +60,12 @@
   // „Продължи“ води към следващия незавършен кръг на НАЙ-НОВОТО възложено незавършено домашно (детето остава с групата);
   // по-старите незавършени – „Доиграй“, по желание. Демо: възложени са занятията до P.classAt (?class=N или „За учителя“).
   let HW = { lessons: [], unlock: [] };
-  const hwReady = fetch("config/ma-homework.json?v=2").then(r => r.json()).then(j => { HW = j; }).catch(() => {});
+  // възрастова група: 5 (5–6 г., 21 занятия), 7 (7–9 г.) и 10 (10+) – по 13 занятия; групата избира плана, небето и параметрите
+  const HWS = { 5: HW, 7: HW, 10: HW };
+  const hwReady = Promise.all([["5", "config/ma-homework.json?v=2"], ["7", "config/ma-homework-7.json?v=1"], ["10", "config/ma-homework-10.json?v=1"]].map(([g, u]) =>
+    fetch(u).then(r => r.json()).then(j => { HWS[g] = j; }).catch(() => {}))).then(() => { HW = HWS[5]; });
+  const groupOf = (p) => p && p.group ? String(p.group) : p && p.age >= 10 ? "10" : p && p.age >= 7 ? "7" : "5";
+  function useGroup(p) { const g = groupOf(p); HW = HWS[g] || HWS[5]; CONST = g === "5" ? CONST5 : CONST7; LINES = g === "5" ? LINES5 : LINES7; buildStars(); return g; }
   const REVIEW = (() => { const r = Q.get("review"); try { if (r === "1") sessionStorage.setItem("obs.review", "1"); if (r === "0") sessionStorage.removeItem("obs.review"); return sessionStorage.getItem("obs.review") === "1"; } catch (e) { return r === "1"; } })();
   const classAt = () => Math.max(1, Math.min(HW.lessons.length || 21, P.classAt || P.cur || 1));
   const assignedL = () => HW.lessons.filter(L => L.n <= classAt());
@@ -66,10 +83,10 @@
   // от сървъра: възложените от учителя занятия MA01…MA21 (най-новото определя докъде е групата) и изиграните кръгове (и от други таблети)
   function fromServer() {
     if (!CHILD) return; const rj = (k) => { try { return JSON.parse(localStorage.getItem(k) || "null") || {}; } catch (e) { return {}; } };
-    const ids = HW.lessons.map(L => L.id), hw = (rj("platforma.hw.server.v1")[CHILD] || []).filter(h => /^MA\d{2}$/.test(h.lesson || ""));
+    const ids = HW.lessons.map(L => L.id), hw = (rj("platforma.hw.server.v1")[CHILD] || []).filter(h => /^M[AS]\d{2}$/.test(h.lesson || ""));
     if (hw.length) { const at = Math.max(...hw.map(h => ids.indexOf(h.lesson) + 1)); if (at > 0) P.classAt = at; P.hwid = {}; hw.forEach(h => { P.hwid[h.lesson] = h.hw; }); }
     const led = rj("platforma.rounds.v1")[CHILD] || {}; P.hw = P.hw || {};
-    Object.keys(led).filter(k => /^MA\d{2}$/.test(k)).forEach(k => { const L = HW.lessons.find(x => x.id === k), d = P.hw[k] = P.hw[k] || [];
+    Object.keys(led).filter(k => /^M[AS]\d{2}$/.test(k)).forEach(k => { const L = HW.lessons.find(x => x.id === k), d = P.hw[k] = P.hw[k] || [];
       led[k].forEach(n => { const i = Number(n) - 1; if (L && i >= 0 && i < L.rounds.length && !d.includes(i)) d.push(i); }); });
     save();
   }
@@ -121,7 +138,7 @@
   const starPath = (R) => { let d = ""; for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? R * .45 : R; d += (i ? "L" : "M") + (rr * Math.cos(a)).toFixed(1) + " " + (rr * Math.sin(a)).toFixed(1); } return d + "Z"; };
   // ---- небето като SVG (използва се и в прозореца на обсерваторията, и в картата) ----
   // видими съзвездия: А винаги; Б – щом детето стигне до него; В – след „Двете ръце“ (по желание). Останалите – мъглявини „?“
-  const visibleC = (c) => c === "A" || (c === "B" && P.cur >= 10) || (c === "C" && (P.b[17] || 0) >= 3);
+  const visibleC = (c) => groupOf(P) !== "5" ? (c === "A" || (c === "B" && classAt() >= 9)) : c === "A" || (c === "B" && P.cur >= 10) || (c === "C" && (P.b[17] || 0) >= 3);
   function skySVG(opts) {
     const o = opts || {}, b = P.b || {}, halo = P.halo || {}, rev = P.rev || {};
     let s = `<svg viewBox="${o.vb || "0 60 1440 520"}" class="o-sky" role="img" aria-label="Небето на ${P.name}">`;
@@ -234,7 +251,7 @@
     app.className = "o-scr o-map o-gamesbg o-tscr";
     app.innerHTML = `<div class="o-maptop"><button class="o-back" id="o-back">← Към обсерваторията</button><div class="o-grow"><div class="o-mt">За учителя</div><div class="o-ms">${/^t\d$/.test(P.id) ? "тест" : "демо"} · ${P.name} · проведени занятия: ${at} от ${max}</div></div>
         <label class="o-tfmt">Форма на обучение <select id="o-t-fmt">${FORMATS.map(([k, v]) => `<option value="${k}" ${(P.format || "center") === k ? "selected" : ""}>${v}</option>`).join("")}</select></label>
-        <button class="o-sec" id="o-t-obs">📝 Наблюдение</button><button class="o-sec" id="o-t-exp">📤 Данни от теста</button><button class="o-sec" id="o-t-reset">Започни отначало</button><label class="o-tfmt">Детето е на <select id="o-t-at">${HW.lessons.map(L => `<option value="${L.n}" ${L.n === at ? "selected" : ""}>занятие ${L.n}</option>`).join("")}</select></label><button class="o-go sm" id="o-t-next" ${at >= max ? "disabled" : ""}>Проведи занятие ${Math.min(max, at + 1)}</button></div>
+        <button class="o-sec" id="o-t-obs">📝 Наблюдение</button><button class="o-sec" id="o-t-exp">📤 Данни от теста</button><button class="o-sec" id="o-t-reset">Започни отначало</button><label class="o-tfmt">Възраст <select id="o-t-grp">${[["5", "5–6 г."], ["7", "7–9 г."], ["10", "10+"]].map(([k, v]) => `<option value="${k}" ${groupOf(P) === k ? "selected" : ""}>${v}</option>`).join("")}</select></label><label class="o-tfmt">Детето е на <select id="o-t-at">${HW.lessons.map(L => `<option value="${L.n}" ${L.n === at ? "selected" : ""}>занятие ${L.n}</option>`).join("")}</select></label><button class="o-go sm" id="o-t-next" ${at >= max ? "disabled" : ""}>Проведи занятие ${Math.min(max, at + 1)}</button></div>
       <div class="o-teachbox"><p class="o-tnote">Формата на обучение определя абакуса в „Звездни сметки“: присъствено – физически (отговорът с клавиатурата), онлайн и с AI тутор – дигиталният абакус до примерите. В платформата идва от профила на детето. В истинската платформа учителят възлага домашното от своя профил (офис → „Пилот“ → „Домашни“). Тук: всяко проведено занятие = възложено домашно. „Продължи“ води към най-новото незавършено; по-старите – „Доиграй“, по желание.</p>
         <table class="o-ttbl"><thead><tr><th>Код</th><th>Занятие</th><th>Кръгове на домашното</th><th>Състояние</th></tr></thead><tbody>${rows}</tbody></table>
         <h3>Свободни игри – отключване <small>(${HW.unlock_status || ""})</small></h3><table class="o-ttbl"><tbody>${un}</tbody></table></div>`;
@@ -243,6 +260,8 @@
     $("#o-t-next").onclick = () => { P.classAt = Math.min(max, at + 1); save(); screenHome(); };
     $("#o-t-exp").onclick = exportData; $("#o-t-obs").onclick = () => screenObserve();
     // тест: детето започва от занятието, на което е в групата – по-старите домашни се броят за изиграни (както при демо профилите)
+    // смяна на възрастовата група: друг план (21 или 13 занятия) – започва отначало
+    $("#o-t-grp").onchange = (e) => { P.group = e.target.value; P.classAt = 1; P.hw = {}; P.hwres = {}; P.b = {}; P.halo = {}; useGroup(P); save(); screenTeacher(); };
     $("#o-t-at").onchange = (e) => { const n = +e.target.value; P.classAt = n; P.hw = P.hw || {};
       HW.lessons.forEach(L => { if (L.n < n && !(P.hw[L.id] || []).length) P.hw[L.id] = L.rounds.map((_, i) => i); }); save(); screenTeacher(); };
     $("#o-t-reset").onclick = () => { P.classAt = 1; P.hw = {}; P.hwres = {}; P.b = {}; P.halo = {}; save(); screenHome(); };
@@ -321,7 +340,7 @@
     app.querySelectorAll(".o-star").forEach(g => g.addEventListener("click", () => { app.querySelectorAll(".o-lab.tmp").forEach(t => t.remove()); }));
   }
   function card(n) {
-    const st = STAR[n], lv = P.b[n] || 0, el = $("#o-card"), locked = n > classAt() || (st.c === "C" && (P.b[17] || 0) < 3);
+    const st = STAR[n], lv = P.b[n] || 0, el = $("#o-card"), locked = n > classAt() || (groupOf(P) === "5" && st.c === "C" && (P.b[17] || 0) < 3);
     const bars = ["Точност", "Начин", "Сам/а"].map((t, i) => `<div class="o-bar"><span>${t}</span><b class="${i < lv ? "on" : ""}"></b></div>`).join("");
     el.innerHTML = `<button class="o-x" aria-label="Затвори">✕</button><div class="o-ct">${st.title}</div>
       <div class="o-cs">${CONST.find(c => c.id === st.c).name}${st.big ? " · Звездна нощ" : ""}</div>
@@ -572,14 +591,17 @@
     const n = Math.min(classAt(), 21), mine = (!bare && P.set && P.set[id]) || {};
     const keep = (P.set && P.set[id]) || {};   // гласът е избор за детето – важи и в домашното
     const L = HW.lessons.find(x => x.n === n), ab = L && (L.rounds.find(r => r.game === "trainer" && r.set.mode === "ab" && r.label === "Абакус") || {}).set;   // дължина и скорост – от домашното на последното занятие
-    const c = { voice: keep.voice || "off", topic: TOPIC_OF[n] || "s9", count: id === "trainer" && ab ? ab.count : 5, speed: id === "flash" ? "auto" : id === "constel" ? 3 : id === "comet" ? 8 : 2, rounds: GAMES[id].opts.rounds[1], mode: "ab", len: 2, upto: n < 3 ? 3 : n < 6 ? 5 : 10, ...mine };
-    if (!bare && !topicOpen(c.topic)) c.topic = TOPIC_OF[n] || "s9";
+    const c = { voice: keep.voice || "off", topic: lessonTopic(n), count: id === "trainer" && ab ? ab.count : 5, speed: id === "flash" ? "auto" : id === "constel" ? 3 : id === "comet" ? 8 : 2, rounds: GAMES[id].opts.rounds[1], mode: "ab", len: 2, upto: n < 3 ? 3 : n < 6 ? 5 : 10, ...mine };
+    if (!bare && !topicOpen(c.topic)) c.topic = lessonTopic(n);
     if (!bare && id === "trainer" && ab && !(mine.speed)) c.speed = ab.speed;
     if (!bare) c.mode = "ab";   // „наум“ е само вид кръг в домашното („Без телескоп“), не настройка   // запомнена тема, която още не е учена → текущата
     return c;
   }
   // темите в настройките – само до учените (по проведеното занятие); в „преглед“ – всички
-  const topicOpen = (id) => REVIEW || TOP.findIndex(t => t.id === id) <= TOP.findIndex(t => t.id === (TOPIC_OF[Math.min(classAt(), 21)] || "s9"));
+  // отворени теми: до най-напредналата тема в възложените занятия (по плана на групата на детето)
+  const topicOpen = (id) => { if (REVIEW) return true; let mx = 0; assignedL().forEach(L => L.rounds.forEach(r => { const i = TOP.findIndex(t => t.id === (r.set || {}).topic); if (i > mx) mx = i; }));
+    return TOP.findIndex(t => t.id === id) <= mx; };
+  const lessonTopic = (n) => (HW.lessons.find(L => L.n === n) || {}).topic || TOPIC_OF[n] || "s9";
   // случайно число, позволено от темата (цифрите ≤ stateMax; кръгли/11–19)
   function randVal(t) {
     for (let g = 0; g < 200; g++) { const max = Math.pow(10, t.rods) - 1, v = Math.floor(Math.random() * (max + 1));
@@ -1038,7 +1060,7 @@
   hwReady.then(() => {
     if (Q.get("test") === "1" || Q.get("test") === "0") { TESTMODE = Q.get("test") === "1"; try { localStorage.setItem("obs.test", Q.get("test")); } catch (e) {} }
     // тест с деца: винаги изборът „Дете 1–6“, дори ако на устройството има влязло дете от платформата
-    if (CHILD && !TESTMODE) { DB[CHILD] = DB[CHILD] || { id: CHILD, name: "Аз", av: "a1", cur: 1, classAt: 1, b: {}, halo: {}, hw: {} }; P = DB[CHILD]; fromServer(); applyMotion(); screenHome(); return; }
+    if (CHILD && !TESTMODE) { DB[CHILD] = DB[CHILD] || { id: CHILD, name: "Аз", av: "a1", cur: 1, classAt: 1, b: {}, halo: {}, hw: {} }; P = DB[CHILD]; useGroup(P); fromServer(); applyMotion(); screenHome(); return; }
     if (Q.get("p") && ALLP.some(x => x.id === Q.get("p"))) { P = prof(Q.get("p")); if (Q.get("class")) { P.classAt = +Q.get("class"); save(); } applyMotion(); Q.get("m") ? startMission(+Q.get("m")) : Q.get("map") ? screenMap() : screenHome(); } else screenProfiles();
   });
   window.OBS = { _const: (v, r, d) => constSVG(v, r, d), _hw: () => HW, runHw, screenTeacher, _hwComplete: (n) => hwComplete(HW.lessons.find(x => x.n === n)), _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,

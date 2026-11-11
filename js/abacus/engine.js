@@ -193,6 +193,8 @@ const ruleOf = (f) => f.transition ? "Преход" : f.friendBrother ? "При�
     { id: "t10", name: "Кръгли десетици 10–90", rods: 2, opMax: 9, stateMax: 9, round: 1 },
     { id: "t19", name: "Числата 11–19", rods: 2, opMax: 9, stateMax: 9, teen: true },
     { id: "d44", name: "Двуцифрени до 44", rods: 2, opMax: 4, stateMax: 4 }, { id: "d55", name: "Двуцифрени до 55", rods: 2, opMax: 5, stateMax: 5 },
+    { id: "d66", name: "Двуцифрени до 66", rods: 2, opMax: 6, stateMax: 9 }, { id: "d77", name: "Двуцифрени до 77", rods: 2, opMax: 7, stateMax: 9 },
+    { id: "d88", name: "Двуцифрени до 88", rods: 2, opMax: 8, stateMax: 9 },   // старши (7+): новото число и новият разряд заедно
     { id: "d99", name: "Двуцифрени до 99", rods: 2, opMax: 9, stateMax: 9 },
     { id: "h100", name: "Кръгли стотици 100–900", rods: 3, opMax: 9, stateMax: 9, round: 2 },
     { id: "h444", name: "Трицифрени до 444", rods: 3, opMax: 4, stateMax: 4 }, { id: "h555", name: "Трицифрени до 555", rods: 3, opMax: 5, stateMax: 5 },

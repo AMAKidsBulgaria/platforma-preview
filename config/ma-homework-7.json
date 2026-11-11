@@ -1,0 +1,949 @@
+{
+ "program": "MA",
+ "module": "Просто",
+ "group": "7",
+ "group_name": "7–9 г.",
+ "note": "Генерирано от tools/build_ma_homework_senior.py – не редактирай ръчно. Параметрите – за ревизия от методиста.",
+ "lessons": [
+  {
+   "id": "MS01",
+   "n": 1,
+   "stage": "S",
+   "title": "Числата 0–4",
+   "topic": "s4",
+   "rounds": [
+    {
+     "game": "flash",
+     "label": "Звездни сигнали",
+     "set": {
+      "topic": "s4",
+      "speed": 1.2,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Абакус",
+     "set": {
+      "topic": "s4",
+      "mode": "ab",
+      "count": 5,
+      "speed": 1.8,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "flash",
+     "label": "Звездни сигнали – по-бързо",
+     "set": {
+      "topic": "s4",
+      "speed": 1.0,
+      "rounds": 3
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Без телескоп",
+     "set": {
+      "topic": "s4",
+      "mode": "mind",
+      "count": 4,
+      "speed": 2.4,
+      "rounds": 4
+     }
+    },
+    {
+     "game": "count",
+     "label": "Игра",
+     "set": {
+      "rounds": 4,
+      "upto": 10
+     }
+    }
+   ]
+  },
+  {
+   "id": "MS02",
+   "n": 2,
+   "stage": "S",
+   "title": "Числото 5 · поглед към 6–9",
+   "topic": "s5",
+   "rounds": [
+    {
+     "game": "flash",
+     "label": "Звездни сигнали",
+     "set": {
+      "topic": "s5",
+      "speed": 1.2,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "flash",
+     "label": "Звездни сигнали 6–9",
+     "set": {
+      "topic": "s9",
+      "speed": 1.6,
+      "rounds": 3
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Абакус",
+     "set": {
+      "topic": "s5",
+      "mode": "ab",
+      "count": 7,
+      "speed": 1.8,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "flash",
+     "label": "Звездни сигнали – по-бързо",
+     "set": {
+      "topic": "s5",
+      "speed": 1.0,
+      "rounds": 3
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Без телескоп",
+     "set": {
+      "topic": "s4",
+      "mode": "mind",
+      "count": 4,
+      "speed": 2.4,
+      "rounds": 4
+     }
+    },
+    {
+     "game": "memory",
+     "label": "Игра",
+     "set": {
+      "rounds": 4,
+      "topic": "s5"
+     }
+    }
+   ]
+  },
+  {
+   "id": "MS03",
+   "n": 3,
+   "stage": "S",
+   "title": "Двуцифрени: кръгли десетици и до 55",
+   "topic": "d55",
+   "rounds": [
+    {
+     "game": "flash",
+     "label": "Звездни сигнали",
+     "set": {
+      "topic": "t10",
+      "speed": 1.4,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Кръгли десетици",
+     "set": {
+      "topic": "t10",
+      "mode": "ab",
+      "count": 6,
+      "speed": 2.2,
+      "rounds": 4
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Абакус",
+     "set": {
+      "topic": "d55",
+      "mode": "ab",
+      "count": 6,
+      "speed": 2.2,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "flash",
+     "label": "Звездни сигнали – по-бързо",
+     "set": {
+      "topic": "t10",
+      "speed": 1.0,
+      "rounds": 3
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Без телескоп",
+     "set": {
+      "topic": "s5",
+      "mode": "mind",
+      "count": 4,
+      "speed": 2.4,
+      "rounds": 4
+     }
+    },
+    {
+     "game": "fix",
+     "label": "Игра",
+     "set": {
+      "rounds": 4,
+      "topic": "d55"
+     }
+    }
+   ]
+  },
+  {
+   "id": "MS04",
+   "n": 4,
+   "stage": "S",
+   "title": "Числото 6 · двуцифрени до 66",
+   "topic": "d66",
+   "rounds": [
+    {
+     "game": "flash",
+     "label": "Звездни сигнали",
+     "set": {
+      "topic": "d66",
+      "speed": 1.4,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Щипка",
+     "set": {
+      "topic": "s6",
+      "mode": "ab",
+      "count": 2,
+      "speed": 2.0,
+      "rounds": 4
+     },
+     "note": "+6 / −6"
+    },
+    {
+     "game": "trainer",
+     "label": "Абакус – едноцифрени",
+     "set": {
+      "topic": "s6",
+      "mode": "ab",
+      "count": 7,
+      "speed": 1.8,
+      "rounds": 4
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Абакус",
+     "set": {
+      "topic": "d66",
+      "mode": "ab",
+      "count": 6,
+      "speed": 2.2,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "flash",
+     "label": "Звездни сигнали – по-бързо",
+     "set": {
+      "topic": "d66",
+      "speed": 1.0,
+      "rounds": 3
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Без телескоп",
+     "set": {
+      "topic": "d44",
+      "mode": "mind",
+      "count": 4,
+      "speed": 2.8,
+      "rounds": 4
+     }
+    },
+    {
+     "game": "constel",
+     "label": "Игра",
+     "set": {
+      "rounds": 4,
+      "topic": "d66"
+     }
+    }
+   ]
+  },
+  {
+   "id": "MS05",
+   "n": 5,
+   "stage": "S",
+   "title": "Числото 7 · двуцифрени до 77",
+   "topic": "d77",
+   "rounds": [
+    {
+     "game": "flash",
+     "label": "Звездни сигнали",
+     "set": {
+      "topic": "d77",
+      "speed": 1.4,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Щипка",
+     "set": {
+      "topic": "s7",
+      "mode": "ab",
+      "count": 2,
+      "speed": 2.0,
+      "rounds": 4
+     },
+     "note": "+7 / −7"
+    },
+    {
+     "game": "trainer",
+     "label": "Абакус – едноцифрени",
+     "set": {
+      "topic": "s7",
+      "mode": "ab",
+      "count": 7,
+      "speed": 1.8,
+      "rounds": 4
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Абакус",
+     "set": {
+      "topic": "d77",
+      "mode": "ab",
+      "count": 6,
+      "speed": 2.2,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "flash",
+     "label": "Звездни сигнали – по-бързо",
+     "set": {
+      "topic": "d77",
+      "speed": 1.0,
+      "rounds": 3
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Без телескоп",
+     "set": {
+      "topic": "d55",
+      "mode": "mind",
+      "count": 4,
+      "speed": 2.8,
+      "rounds": 4
+     }
+    },
+    {
+     "game": "oops",
+     "label": "Игра",
+     "set": {
+      "rounds": 4,
+      "topic": "d77"
+     }
+    }
+   ]
+  },
+  {
+   "id": "MS06",
+   "n": 6,
+   "stage": "S",
+   "title": "Числото 8 · двуцифрени до 88",
+   "topic": "d88",
+   "rounds": [
+    {
+     "game": "flash",
+     "label": "Звездни сигнали",
+     "set": {
+      "topic": "d88",
+      "speed": 1.4,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Щипка",
+     "set": {
+      "topic": "s8",
+      "mode": "ab",
+      "count": 2,
+      "speed": 2.0,
+      "rounds": 4
+     },
+     "note": "+8 / −8"
+    },
+    {
+     "game": "trainer",
+     "label": "Абакус – едноцифрени",
+     "set": {
+      "topic": "s8",
+      "mode": "ab",
+      "count": 7,
+      "speed": 1.8,
+      "rounds": 4
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Абакус",
+     "set": {
+      "topic": "d88",
+      "mode": "ab",
+      "count": 6,
+      "speed": 2.2,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "flash",
+     "label": "Звездни сигнали – по-бързо",
+     "set": {
+      "topic": "d88",
+      "speed": 1.0,
+      "rounds": 3
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Без телескоп",
+     "set": {
+      "topic": "d66",
+      "mode": "mind",
+      "count": 4,
+      "speed": 2.8,
+      "rounds": 4
+     }
+    },
+    {
+     "game": "fix",
+     "label": "Игра",
+     "set": {
+      "rounds": 4,
+      "topic": "d88"
+     }
+    }
+   ]
+  },
+  {
+   "id": "MS07",
+   "n": 7,
+   "stage": "S",
+   "title": "Числото 9 · двуцифрени до 99",
+   "topic": "d99",
+   "rounds": [
+    {
+     "game": "flash",
+     "label": "Звездни сигнали",
+     "set": {
+      "topic": "d99",
+      "speed": 1.4,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Щипка",
+     "set": {
+      "topic": "s9",
+      "mode": "ab",
+      "count": 2,
+      "speed": 2.0,
+      "rounds": 4
+     },
+     "note": "+9 / −9"
+    },
+    {
+     "game": "trainer",
+     "label": "Абакус – едноцифрени",
+     "set": {
+      "topic": "s9",
+      "mode": "ab",
+      "count": 7,
+      "speed": 1.8,
+      "rounds": 4
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Абакус",
+     "set": {
+      "topic": "d99",
+      "mode": "ab",
+      "count": 6,
+      "speed": 2.2,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "flash",
+     "label": "Звездни сигнали – по-бързо",
+     "set": {
+      "topic": "d99",
+      "speed": 1.0,
+      "rounds": 3
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Без телескоп",
+     "set": {
+      "topic": "d99",
+      "mode": "mind",
+      "count": 4,
+      "speed": 2.8,
+      "rounds": 4
+     }
+    },
+    {
+     "game": "comet",
+     "label": "Игра",
+     "set": {
+      "rounds": 4,
+      "topic": "d99"
+     }
+    }
+   ]
+  },
+  {
+   "id": "MS08",
+   "n": 8,
+   "stage": "S",
+   "title": "Затвърждаване на двуцифрените",
+   "topic": "d99",
+   "rounds": [
+    {
+     "game": "flash",
+     "label": "Звездни сигнали",
+     "set": {
+      "topic": "d99",
+      "speed": 1.4,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Абакус",
+     "set": {
+      "topic": "d99",
+      "mode": "ab",
+      "count": 6,
+      "speed": 2.0,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "flash",
+     "label": "Звездни сигнали – по-бързо",
+     "set": {
+      "topic": "d99",
+      "speed": 1.0,
+      "rounds": 3
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Без телескоп",
+     "set": {
+      "topic": "d99",
+      "mode": "mind",
+      "count": 4,
+      "speed": 2.8,
+      "rounds": 4
+     }
+    },
+    {
+     "game": "constel",
+     "label": "Игра",
+     "set": {
+      "rounds": 4,
+      "topic": "d99"
+     }
+    }
+   ]
+  },
+  {
+   "id": "MS09",
+   "n": 9,
+   "stage": "S",
+   "title": "Трицифрени: кръгли стотици и до 444",
+   "topic": "h444",
+   "rounds": [
+    {
+     "game": "flash",
+     "label": "Звездни сигнали",
+     "set": {
+      "topic": "h100",
+      "speed": 1.6,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Кръгли стотици",
+     "set": {
+      "topic": "h100",
+      "mode": "ab",
+      "count": 5,
+      "speed": 2.8,
+      "rounds": 4
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Абакус",
+     "set": {
+      "topic": "h444",
+      "mode": "ab",
+      "count": 5,
+      "speed": 2.8,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "flash",
+     "label": "Звездни сигнали – по-бързо",
+     "set": {
+      "topic": "h100",
+      "speed": 1.0,
+      "rounds": 3
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Без телескоп",
+     "set": {
+      "topic": "d99",
+      "mode": "mind",
+      "count": 4,
+      "speed": 2.8,
+      "rounds": 4
+     }
+    },
+    {
+     "game": "oops",
+     "label": "Игра",
+     "set": {
+      "rounds": 4,
+      "topic": "h444"
+     }
+    }
+   ]
+  },
+  {
+   "id": "MS10",
+   "n": 10,
+   "stage": "S",
+   "title": "Трицифрени до 999",
+   "topic": "h999",
+   "rounds": [
+    {
+     "game": "flash",
+     "label": "Звездни сигнали",
+     "set": {
+      "topic": "h999",
+      "speed": 1.6,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Абакус",
+     "set": {
+      "topic": "h999",
+      "mode": "ab",
+      "count": 5,
+      "speed": 2.8,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "flash",
+     "label": "Звездни сигнали – по-бързо",
+     "set": {
+      "topic": "h999",
+      "speed": 1.0,
+      "rounds": 3
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Без телескоп",
+     "set": {
+      "topic": "h444",
+      "mode": "mind",
+      "count": 3,
+      "speed": 3.4,
+      "rounds": 4
+     }
+    },
+    {
+     "game": "comet",
+     "label": "Игра",
+     "set": {
+      "rounds": 4,
+      "topic": "h999"
+     }
+    }
+   ]
+  },
+  {
+   "id": "MS11",
+   "n": 11,
+   "stage": "S",
+   "title": "Затвърждаване на 999",
+   "topic": "h999",
+   "rounds": [
+    {
+     "game": "flash",
+     "label": "Звездни сигнали",
+     "set": {
+      "topic": "h999",
+      "speed": 1.6,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Абакус",
+     "set": {
+      "topic": "h999",
+      "mode": "ab",
+      "count": 5,
+      "speed": 2.8,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "flash",
+     "label": "Звездни сигнали – по-бързо",
+     "set": {
+      "topic": "h999",
+      "speed": 1.0,
+      "rounds": 3
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Без телескоп",
+     "set": {
+      "topic": "h555",
+      "mode": "mind",
+      "count": 3,
+      "speed": 3.4,
+      "rounds": 4
+     }
+    },
+    {
+     "game": "fix",
+     "label": "Игра",
+     "set": {
+      "rounds": 4,
+      "topic": "h999"
+     }
+    }
+   ]
+  },
+  {
+   "id": "MS12",
+   "n": 12,
+   "stage": "S",
+   "title": "Подготовка за контролната",
+   "topic": "h999",
+   "rounds": [
+    {
+     "game": "flash",
+     "label": "Звездни сигнали",
+     "set": {
+      "topic": "h999",
+      "speed": 1.6,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Абакус",
+     "set": {
+      "topic": "h999",
+      "mode": "ab",
+      "count": 5,
+      "speed": 2.6,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "flash",
+     "label": "Звездни сигнали – по-бързо",
+     "set": {
+      "topic": "h999",
+      "speed": 1.0,
+      "rounds": 3
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Без телескоп",
+     "set": {
+      "topic": "h999",
+      "mode": "mind",
+      "count": 3,
+      "speed": 3.4,
+      "rounds": 4
+     }
+    },
+    {
+     "game": "constel",
+     "label": "Игра",
+     "set": {
+      "rounds": 4,
+      "topic": "h999"
+     }
+    }
+   ]
+  },
+  {
+   "id": "MS13",
+   "n": 13,
+   "stage": "S",
+   "title": "Обобщение и контролна за „Просто“",
+   "topic": "h999",
+   "rounds": [
+    {
+     "game": "flash",
+     "label": "Звездни сигнали",
+     "set": {
+      "topic": "h999",
+      "speed": 1.6,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Абакус",
+     "set": {
+      "topic": "h999",
+      "mode": "ab",
+      "count": 5,
+      "speed": 2.8,
+      "rounds": 5
+     }
+    },
+    {
+     "game": "flash",
+     "label": "Звездни сигнали – по-бързо",
+     "set": {
+      "topic": "h999",
+      "speed": 1.0,
+      "rounds": 3
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Без телескоп",
+     "set": {
+      "topic": "h999",
+      "mode": "mind",
+      "count": 3,
+      "speed": 3.4,
+      "rounds": 4
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Едноцифрени",
+     "set": {
+      "topic": "s9",
+      "mode": "ab",
+      "count": 7,
+      "speed": 1.8,
+      "rounds": 4
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Двуцифрени",
+     "set": {
+      "topic": "d99",
+      "mode": "ab",
+      "count": 6,
+      "speed": 2.2,
+      "rounds": 4
+     }
+    },
+    {
+     "game": "trainer",
+     "label": "Без телескоп – двуцифрени",
+     "set": {
+      "topic": "d99",
+      "mode": "mind",
+      "count": 4,
+      "speed": 2.8,
+      "rounds": 4
+     }
+    }
+   ]
+  }
+ ],
+ "unlock": [
+  {
+   "game": "count",
+   "from": 1,
+   "name": "Звездно броене",
+   "why": "количество с един поглед"
+  },
+  {
+   "game": "flash",
+   "from": 1,
+   "name": "Звездни сигнали",
+   "why": "образът на числото от първото занятие"
+  },
+  {
+   "game": "trainer",
+   "from": 1,
+   "name": "Звездни сметки",
+   "why": "примери от първото занятие"
+  },
+  {
+   "game": "memory",
+   "from": 1,
+   "name": "Нощна памет",
+   "why": "виж и нареди – 0–4 от първото занятие"
+  },
+  {
+   "game": "fix",
+   "from": 2,
+   "name": "Поправи телескопа",
+   "why": "след 5 има достатъчно различни движения"
+  },
+  {
+   "game": "constel",
+   "from": 2,
+   "name": "Съзвездие-число",
+   "why": "след небесното топче"
+  },
+  {
+   "game": "oops",
+   "from": 4,
+   "name": "Провери Зори",
+   "why": "след щипката (6)"
+  },
+  {
+   "game": "comet",
+   "from": 5,
+   "name": "Комета",
+   "why": "натиск за време – когато едноцифрените са уверени"
+  }
+ ],
+ "unlock_status": "предварително – за ревизия от методиста"
+}

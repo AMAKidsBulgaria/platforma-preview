@@ -47,12 +47,14 @@
   async function load() {
     if (S.status === "loading") return; S.status = "loading"; S.err = null;
     try {
-      const [cfg, hw, wt, mb, en, enw, ma] = await Promise.all([getJSON("../config/pilot-db.json?v=" + Date.now()).catch(() => ({})), getJSON("../config/homework-map.json"), getJSON("../config/world-tasks.json"), getJSON("../config/math-banks.json"),
-        getJSON("../config/english-l0.json").catch(() => null), getJSON("../config/english-words.json").catch(() => null), getJSON("../config/ma-homework.json").catch(() => null)]);
+      const [cfg, hw, wt, mb, en, enw, ma, ms] = await Promise.all([getJSON("../config/pilot-db.json?v=" + Date.now()).catch(() => ({})), getJSON("../config/homework-map.json"), getJSON("../config/world-tasks.json"), getJSON("../config/math-banks.json"),
+        getJSON("../config/english-l0.json").catch(() => null), getJSON("../config/english-words.json").catch(() => null), getJSON("../config/ma-homework.json").catch(() => null), getJSON("../config/ma-homework-7.json").catch(() => null)]);
       // английският (отделна програма): занятията EN0101…EN1006 по 5 кръга, от един източник с модула
       S.EN = en ? en.zones.flatMap(z => z.lessons.map(l => ({ id: l.id, title: `${z.name} · ${l.n}. ${l.title}`, rounds: l.rounds.length }))) : []; S.ENW = (enw && enw.words) || {};
       // ментална аритметика (модул „Просто“): занятията MA01…MA21; кръговете = игрите от домашното с настройките им (config/ma-homework.json)
       S.MA = ma ? ma.lessons.map(l => ({ id: l.id, title: `Занятие ${l.n} · ${l.title}`, rounds: l.rounds.length })) : [];
+      // по-големите (7–9 и 10+): MS01…MS13 – еднакви занятия, параметрите идват от групата на детето (config/ma-homework-7/10.json)
+      if (ms) S.MA = S.MA.concat(ms.lessons.map(l => ({ id: l.id, title: `7+ · Занятие ${l.n} · ${l.title}`, rounds: l.rounds.length })));
       S.hw = hw; S.wt = wt; S.mb = mb.slots || {}; S.cfg = cfg && cfg.url && cfg.anon_key ? cfg : null;
       S.HW = {}; hw.lessons.forEach(l => l.rounds.forEach(r => r.assignments.forEach(a => { (S.HW[`${l.id}.${r.round}.${a.game}`] = S.HW[`${l.id}.${r.round}.${a.game}`] || []).push(Object.assign({ lesson: l.id, round: r.round }, a)); })));
       S.ITEM = {}; wt.items.forEach(x => S.ITEM[x.id] = x);
@@ -246,7 +248,7 @@
 
   // f) домашни: учителят възлага занятие на децата от групата; таблетът го получава от сървъра („Моят свят“ → „Продължи“)
   //    правило на таблета (26.10.2026): първо най-новото възложено незавършено – детето остава с групата; по-старите – „Доиграй“, по желание; оттеглено домашно изчезва от таблета при следващата връзка
-  const MODN = { BK: "Букварика", CH: "Читарика", MW: "Математика и околен свят", EN: "Английски език", MA: "Ментална аритметика" };
+  const MODN = { BK: "Букварика", CH: "Читарика", MW: "Математика и околен свят", EN: "Английски език", MA: "Ментална аритметика 5–6", MS: "Ментална аритметика 7+" };
   function vHomework() {
     const kids = childrenF(), groups = [...new Set(kids.map(c => c.group_code))].sort(), g = S.hwGroup && groups.includes(S.hwGroup) ? S.hwGroup : groups[0];
     const inG = kids.filter(c => c.group_code === g), ss = S.data.sessions || [], hws = (S.data.homeworks || []).filter(h => kids.some(c => c.code === h.child_code));
