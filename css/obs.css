@@ -467,3 +467,15 @@ html.o-still .o-gc2 { animation: none; }
   .o-tscr .o-teachbox { position: static; margin: 10px 0 16px; overflow-x: auto; }
   .o-tscr .o-ttbl { font-size: 13px; }
 }
+/* наблюдение на треньора */
+.o-obs { display: grid; gap: 10px; align-content: start; }
+.o-obs h3 { margin: 10px 0 0; } .o-obs h3 small { color: var(--muted); font-weight: 700; }
+.o-of { display: grid; gap: 4px; font: 800 13px "Nunito"; color: var(--muted); max-width: 320px; }
+.o-obs input, .o-obs select, .o-obs textarea { font: 700 16px "Nunito"; color: var(--ink); background: #0d1030; border: 2px solid #ffffff30; border-radius: 12px; padding: 8px 10px; width: 100%; }
+.o-obs textarea { min-height: 54px; }
+.o-oq { display: grid; gap: 6px; } .o-oq > span { font: 800 15px "Nunito"; }
+.o-och { display: flex; flex-wrap: wrap; gap: 6px; }
+.o-och button { font: 800 14px "Nunito"; border-radius: 99px; border: 2px solid #ffffff30; background: #0d1030; color: var(--ink); padding: 7px 12px; }
+.o-och button.on.g { background: #1E8E5A; border-color: #6FD8A2; } .o-och button.on.m { background: #8A6200; border-color: #F2C766; } .o-och button.on.b { background: #9A2532; border-color: #FF8E98; } .o-och button.on.n { background: #3A3F70; border-color: #A6ABCF; }
+.o-ogames { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 6px; } .o-ogames label { display: flex; gap: 8px; align-items: center; font: 700 15px "Nunito"; background: #0d1030; border-radius: 10px; padding: 7px 10px; } .o-ogames input { width: auto; }
+.o-ocount { display: flex; align-items: center; gap: 14px; } .o-ocount button { width: 48px; height: 48px; border-radius: 12px; border: 2px solid #ffffff30; background: #0d1030; color: var(--ink); font: 900 24px "Nunito"; } .o-ocount b { font: 900 28px "Nunito"; min-width: 30px; text-align: center; }

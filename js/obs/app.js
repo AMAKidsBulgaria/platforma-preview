@@ -234,18 +234,57 @@
     app.className = "o-scr o-map o-gamesbg o-tscr";
     app.innerHTML = `<div class="o-maptop"><button class="o-back" id="o-back">← Към обсерваторията</button><div class="o-grow"><div class="o-mt">За учителя</div><div class="o-ms">${/^t\d$/.test(P.id) ? "тест" : "демо"} · ${P.name} · проведени занятия: ${at} от ${max}</div></div>
         <label class="o-tfmt">Форма на обучение <select id="o-t-fmt">${FORMATS.map(([k, v]) => `<option value="${k}" ${(P.format || "center") === k ? "selected" : ""}>${v}</option>`).join("")}</select></label>
-        <button class="o-sec" id="o-t-exp">📤 Данни от теста</button><button class="o-sec" id="o-t-reset">Започни отначало</button><label class="o-tfmt">Детето е на <select id="o-t-at">${HW.lessons.map(L => `<option value="${L.n}" ${L.n === at ? "selected" : ""}>занятие ${L.n}</option>`).join("")}</select></label><button class="o-go sm" id="o-t-next" ${at >= max ? "disabled" : ""}>Проведи занятие ${Math.min(max, at + 1)}</button></div>
+        <button class="o-sec" id="o-t-obs">📝 Наблюдение</button><button class="o-sec" id="o-t-exp">📤 Данни от теста</button><button class="o-sec" id="o-t-reset">Започни отначало</button><label class="o-tfmt">Детето е на <select id="o-t-at">${HW.lessons.map(L => `<option value="${L.n}" ${L.n === at ? "selected" : ""}>занятие ${L.n}</option>`).join("")}</select></label><button class="o-go sm" id="o-t-next" ${at >= max ? "disabled" : ""}>Проведи занятие ${Math.min(max, at + 1)}</button></div>
       <div class="o-teachbox"><p class="o-tnote">Формата на обучение определя абакуса в „Звездни сметки“: присъствено – физически (отговорът с клавиатурата), онлайн и с AI тутор – дигиталният абакус до примерите. В платформата идва от профила на детето. В истинската платформа учителят възлага домашното от своя профил (офис → „Пилот“ → „Домашни“). Тук: всяко проведено занятие = възложено домашно. „Продължи“ води към най-новото незавършено; по-старите – „Доиграй“, по желание.</p>
         <table class="o-ttbl"><thead><tr><th>Код</th><th>Занятие</th><th>Кръгове на домашното</th><th>Състояние</th></tr></thead><tbody>${rows}</tbody></table>
         <h3>Свободни игри – отключване <small>(${HW.unlock_status || ""})</small></h3><table class="o-ttbl"><tbody>${un}</tbody></table></div>`;
     $("#o-back").onclick = screenHome;
     $("#o-t-fmt").onchange = (e) => { P.format = e.target.value; save(); };
     $("#o-t-next").onclick = () => { P.classAt = Math.min(max, at + 1); save(); screenHome(); };
-    $("#o-t-exp").onclick = exportData;
+    $("#o-t-exp").onclick = exportData; $("#o-t-obs").onclick = () => screenObserve();
     // тест: детето започва от занятието, на което е в групата – по-старите домашни се броят за изиграни (както при демо профилите)
     $("#o-t-at").onchange = (e) => { const n = +e.target.value; P.classAt = n; P.hw = P.hw || {};
       HW.lessons.forEach(L => { if (L.n < n && !(P.hw[L.id] || []).length) P.hw[L.id] = L.rounds.map((_, i) => i); }); save(); screenTeacher(); };
     $("#o-t-reset").onclick = () => { P.classAt = 1; P.hw = {}; P.hwres = {}; P.b = {}; P.halo = {}; save(); screenHome(); };
+  }
+  // наблюдение на треньора (тест с деца): същите въпроси като страницата за записите; пази се в P.obs и влиза във файла „Данни от теста“ – без профили и вход
+  const OBSQ = [
+    ["1. Домашното през „Продължи“", [["hw", "Справи се", [["self", "Само", "g"], ["help", "С малко помощ", "m"], ["no", "Не успя", "b"]]]], "hw"],
+    ["2. Дигитален абакус", [["ab_swipe", "Плъзгане", [["easy", "Естествено", "g"], ["shown", "След показване", "m"], ["hard", "Трудно", "b"], ["na", "Не е пробвано", "n"]]],
+      ["ab_hit", "Уцелва ли топчетата", [["ok", "Уцелва", "g"], ["some", "Понякога грешно", "m"], ["often", "Често грешно", "b"], ["na", "Не е пробвано", "n"]]],
+      ["ab_mind", "Просветване (мислено)", [["helps", "Помага", "g"], ["short", "Твърде кратко", "m"], ["unused", "Не го ползва", "b"], ["na", "Не е пробвано", "n"]]]], "ab"],
+    ["3. Звездни сметки", [["tr_speed", "Скорост", [["slow", "Твърде бавно", "m"], ["good", "Добре", "g"], ["fast", "Твърде бързо", "b"], ["na", "Не е играно", "n"]]],
+      ["tr_voice", "Гласът", [["clear", "Разбираем", "g"], ["unclear", "Неразбираем", "b"], ["off", "Без глас", "n"]]]], "tr"],
+    ["4. Поправи телескопа", [["fx_hint", "Подсказката", [["yes", "Помогна", "g"], ["no", "Не помогна", "b"], ["na", "Не се стигна", "n"]]],
+      ["fx_demo", "„Зори показва“", [["yes", "Помогна", "g"], ["no", "Не помогна", "b"], ["na", "Не се стигна", "n"]]],
+      ["fx_next", "Следващият подобен", [["self", "Сам", "g"], ["help", "С помощ", "m"], ["na", "Не се стигна", "n"]]]], null]];
+  function screenObserve() {
+    gen++; P.obs = P.obs || []; const day = new Date().toISOString().slice(0, 10);
+    let o = P.obs.find(x => x.date === day); if (!o) { o = { date: day, ratings: {}, notes: {}, games: [], adultHelp: 0, device: /iPhone|iPad/.test(navigator.userAgent) ? "iPhone" : /Android/.test(navigator.userAgent) ? "Android" : "", lesson: classAt(), format: usesDigital() ? "дигитален абакус" : "физическо сметало" }; P.obs.push(o); }
+    const names = Object.keys(GAMES).map(k => GAMES[k].name);
+    app.className = "o-scr o-map o-gamesbg o-tscr";
+    app.innerHTML = `<div class="o-maptop"><button class="o-back" id="o-back">← За учителя</button><div class="o-grow"><div class="o-mt">Наблюдение</div><div class="o-ms">${P.name} · ${day} · занятие ${o.lesson}</div></div></div>
+      <div class="o-teachbox o-obs">
+        <label class="o-of">Наблюдател (инициали)<input id="ob-who" maxlength="12" value="${(o.observer || "").replace(/"/g, "&quot;")}"></label>
+        <label class="o-of">Възраст<select id="ob-age"><option value="5">5 г.</option><option value="6">6 г.</option></select></label>
+        ${OBSQ.map(([t, qs, nk]) => `<h3>${t}</h3>${qs.map(([k, lab, ops]) => `<div class="o-oq"><span>${lab}</span><div class="o-och" data-k="${k}">${ops.map(([v, txt, c]) => `<button class="${c}${o.ratings[k] === v ? " on" : ""}" data-v="${v}">${txt}</button>`).join("")}</div></div>`).join("")}
+          ${nk ? `<textarea data-n="${nk}" placeholder="Бележки">${(o.notes[nk] || "").replace(/</g, "&lt;")}</textarea>` : ""}`).join("")}
+        <h3>5. Свободни игри <small>кои избра само</small></h3><div class="o-ogames">${names.map(n => `<label><input type="checkbox" value="${n}" ${o.games.includes(n) ? "checked" : ""}>${n}</label>`).join("")}</div>
+        <label class="o-of">Минути общо<input id="ob-min" type="number" inputmode="numeric" min="0" max="120" value="${o.minutes == null ? "" : o.minutes}"></label>
+        <h3>Помощ от възрастен</h3><div class="o-ocount"><button id="ob-hm">−</button><b id="ob-h">${o.adultHelp}</b><button id="ob-hp">+</button></div>
+        <h3>С думите на детето</h3><textarea data-n="liked" placeholder="Хареса му">${(o.notes.liked || "").replace(/</g, "&lt;")}</textarea><textarea data-n="disliked" placeholder="Не му хареса">${(o.notes.disliked || "").replace(/</g, "&lt;")}</textarea><textarea data-n="other" placeholder="Други бележки">${(o.notes.other || "").replace(/</g, "&lt;")}</textarea>
+        <p class="o-tnote">Записва се веднага на този телефон и влиза във файла „📤 Данни от теста“.</p>
+      </div>`;
+    $("#ob-age").value = String(o.age || P.age || 5);
+    const keep = () => { o.observer = $("#ob-who").value.trim(); o.age = +$("#ob-age").value; o.minutes = $("#ob-min").value === "" ? null : +$("#ob-min").value;
+      app.querySelectorAll("textarea[data-n]").forEach(t => { o.notes[t.dataset.n] = t.value.trim(); });
+      o.games = [...app.querySelectorAll(".o-ogames input:checked")].map(x => x.value); o.savedAt = new Date().toISOString(); save(); };
+    app.querySelectorAll(".o-och button").forEach(b => b.onclick = () => { const k = b.parentElement.dataset.k, on = b.classList.contains("on");
+      b.parentElement.querySelectorAll("button").forEach(x => x.classList.remove("on")); if (!on) b.classList.add("on"); o.ratings[k] = on ? null : b.dataset.v; keep(); });
+    app.querySelectorAll("input, select, textarea").forEach(e => e.addEventListener("change", keep));
+    const hb = (d) => { o.adultHelp = Math.max(0, (o.adultHelp || 0) + d); $("#ob-h").textContent = o.adultHelp; keep(); };
+    $("#ob-hm").onclick = () => hb(-1); $("#ob-hp").onclick = () => hb(1);
+    $("#o-back").onclick = () => { keep(); screenTeacher(); };
   }
   // данни от теста: профилът (домашни, резултати, дневниците на игрите) + сесиите на абакуса за това дете → един JSON файл.
   // Телефон: „Сподели“ (Viber, имейл, Файлове); иначе – сваляне; ако и това не стане – текстът за копиране.
