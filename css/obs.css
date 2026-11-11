@@ -433,3 +433,7 @@ html.o-still .o-gc2 { animation: none; }
 @media (max-height: 520px) { .o-kp { grid-template-columns: auto auto; display: flex; align-items: center; } .o-kpk { grid-template-columns: repeat(6, 50px); } .o-kpk button { height: 46px; font-size: 22px; } .o-trn { font-size: 64px; } }
 @media (orientation: portrait) { .o-mwork.o-trw { flex-direction: column; } .o-trab { height: auto; width: min(100%, 46dvh); max-width: none; align-self: center; flex: 1 1 auto; min-height: 0; } .o-trl:not(.solo) { flex: none; } .o-trl:not(.solo) .o-trn { font-size: 64px; } }
 .o-tfmt { display: flex; align-items: center; gap: 8px; font: 800 14px "Nunito"; color: var(--muted); } .o-tfmt select { font: 800 15px "Nunito"; border-radius: 10px; padding: 6px 8px; background: #0d1030; color: var(--ink); border: 2px solid #ffffff30; }
+/* бутон към дигиталния абакус (abacus-app.html) в горната лента */
+.o-abac { display: flex; align-items: center; gap: 8px; height: 48px; padding: 0 16px 0 12px; border-radius: 99px; background: #1B2263; color: var(--ink); text-decoration: none; box-shadow: 0 4px 0 #05071a, 0 0 0 2px #B88A4E66; font: 900 18px "Nunito", sans-serif; }
+.o-abac svg { width: 34px; height: 28px; color: var(--gold); } .o-abac:active { transform: translateY(3px); box-shadow: 0 1px 0 #05071a; }
+@media (max-width: 760px) { .o-abac b { display: none; } .o-abac { padding: 0 10px; } }

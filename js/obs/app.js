@@ -159,6 +159,7 @@
     app.className = "o-scr o-hubscr";
     app.innerHTML = `<section class="o-hub">
       <header class="o-hhead"><a class="o-hh" href="index.html" aria-label="Към Моят свят">⌂</a><img class="o-hz" src="assets/img/zori/z_explain.png" alt=""><b>Ментална аритметика</b>${REVIEW ? '<span class="o-review">преглед</span>' : ""}<span class="o-sp"></span>
+        <a class="o-abac" href="abacus-app.html?p=${encodeURIComponent(P.id)}" aria-label="Абакус"><svg viewBox="0 0 40 32" aria-hidden="true"><rect x="2" y="2" width="36" height="28" rx="5" fill="none" stroke="currentColor" stroke-width="3"/><path d="M2 12h36M12 2v28M20 2v28M28 2v28" stroke="currentColor" stroke-width="2"/><g fill="#5BE08A"><rect x="7.5" y="5" width="9" height="5" rx="2.5"/><rect x="15.5" y="14" width="9" height="5" rx="2.5"/><rect x="23.5" y="14" width="9" height="5" rx="2.5"/><rect x="23.5" y="20" width="9" height="5" rx="2.5"/></g></svg><b>Абакус</b></a>
         <button class="o-teach" id="o-teach" aria-label="За учителя (задръж)">👩‍🏫<i></i></button><button class="o-me" id="o-me"><img src="assets/img/world/avatars/${P.av}.webp" alt=""><b>${P.name}</b><span>смени</span></button></header>
       <div class="o-hgrid">
         <div class="o-hero">

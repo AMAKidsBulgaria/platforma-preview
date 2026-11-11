@@ -6,8 +6,8 @@
    Сесиите: localStorage ma.abacus.v1 (последните 60). Онлайн занятие: window.ABACUS_HOOK (js/live/child.js) получава всяко движение. */
 (function () {
   const E = window.ABACUS_ENGINE, Q = new URLSearchParams(location.search), DEBUG = Q.get("debug") === "1";
-  const RODS = 5, CW = 190, BW = 168, BH = 66, PADX = 34, FR = 14;
-  const SKEY = "ma.abacus.set", LKEY = "ma.abacus.v1", EXIT = "observatory.html";
+  const RODS = 5, CW = 190, BW = 136, BH = 66, PADX = 34, FR = 14;
+  const SKEY = "ma.abacus.set", LKEY = "ma.abacus.v1";
   const MODES = {
     classic: { name: "Класически", sub: "топчетата се плъзгат", cls: "m-classic" },
     touch: { name: "Докосване", sub: "топчетата светват", cls: "m-touch" },
@@ -28,6 +28,9 @@
   const save = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
   let set = load(SKEY, { design: "emerald", sound: true, mode: "classic" });
   if (!DESIGNS[set.design]) set.design = "emerald";
+  // ✕ / ← връщат в началния екран на детето в платформата (профилът идва от бутона „Абакус“ там и се помни за отваряне от иконата)
+  if (/^[a-z0-9_-]{1,32}$/i.test(Q.get("p") || "")) { set.p = Q.get("p"); save(SKEY, set); }
+  const EXIT = "observatory.html" + (set.p ? "?p=" + encodeURIComponent(set.p) : "");
   let st = E.make(RODS), mode = set.mode, sess = null;
 
   // ---- звук: кратко дървено щракване (Web Audio), без файлове ----
@@ -126,7 +129,7 @@
   }
 
   // ---- докосване и плъзгане ----
-  // classic: докосване мести топчето (и тези между него и гредата); плъзгане нагоре/надолу – само в посоката на пръста.
+  // classic: само плъзгане (като истинския абакус) – нагоре/надолу в посоката на пръста; докосване без плъзгане не мести нищо.
   // touch/mind: действа веднага при докосване (две ръце / щипка – едновременно, всяка с отделен пръст).
   function act(el) {
     const m = E.tapMove(st, +el.dataset.rod, el.dataset.bead, +el.dataset.k || 0), ns = E.apply(st, m); if (!ns) return null;
@@ -141,7 +144,7 @@
         p.done = true; const m = E.tapMove(st, +el.dataset.rod, el.dataset.bead, +el.dataset.k || 0);
         const towardBeam = el.dataset.bead === "h" ? dy > 0 : dy < 0;   // към гредата = включва топчето
         if (towardBeam === (m.d > 0)) act(el); };
-      const up = (e) => { if (e.pointerId !== p.id) return; if (!p.done) act(el); window.removeEventListener("pointermove", move); window.removeEventListener("pointerup", up); window.removeEventListener("pointercancel", up); };
+      const up = (e) => { if (e.pointerId !== p.id) return; window.removeEventListener("pointermove", move); window.removeEventListener("pointerup", up); window.removeEventListener("pointercancel", up); };
       window.addEventListener("pointermove", move); window.addEventListener("pointerup", up); window.addEventListener("pointercancel", up);
     });
   }
