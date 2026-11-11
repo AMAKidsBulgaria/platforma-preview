@@ -451,3 +451,9 @@ html.o-still .o-gc2 { animation: none; }
 }
 /* телефон вертикално: заглавието на обсерваторията се скрива (програмата е в горната лента), карето със занятието е горе вляво – не се застъпва с репликата на Зори */
 @media (max-width: 520px) and (orientation: portrait) { .o-htitle { display: none; } .o-hbadge { top: 10px; } }
+/* телефон легнал в браузъра (лентите на Safari оставят ~200 px височина): само най-важното */
+@media (max-height: 360px) {
+  .o-htitle, .o-htx .o-hcount, .o-hz { display: none; }
+  .o-hhead > b { font-size: 18px; } .o-hh, .o-teach { width: 36px; height: 36px; font-size: 18px; } .o-abac { height: 36px; } .o-me img { width: 30px; height: 30px; }
+  .o-hbadge { left: 10px; right: auto; top: 8px; } .o-hbadge small { display: none; } .o-hold { bottom: auto; top: 8px; right: 12px; left: auto; }
+}

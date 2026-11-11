@@ -1,0 +1,14 @@
+{
+ "name": "Ментална аритметика",
+ "short_name": "Обсерватория",
+ "lang": "bg",
+ "start_url": "observatory.html",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#141A4A",
+ "theme_color": "#141A4A",
+ "icons": [
+  { "src": "assets/img/obs/icon-192.png", "sizes": "192x192", "type": "image/png" },
+  { "src": "assets/img/obs/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+ ]
+}
