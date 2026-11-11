@@ -51,7 +51,7 @@
   }
 
   // ---- запис ----
-  function startSession() { sess = { id: "s" + Date.now().toString(36), at: new Date().toISOString(), mode, design: set.design, moves: [] }; sess.t0 = performance.now(); }
+  function startSession() { sess = { id: "s" + Date.now().toString(36), at: new Date().toISOString(), p: set.p || null, mode, design: set.design, moves: [] }; sess.t0 = performance.now(); }
   function store() {
     if (!sess || !sess.moves.length) return;
     try { const a = JSON.parse(localStorage.getItem(LKEY) || "[]"), i = a.findIndex(x => x.id === sess.id), o = Object.assign({}, sess); delete o.t0;

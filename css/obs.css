@@ -457,3 +457,13 @@ html.o-still .o-gc2 { animation: none; }
   .o-hhead > b { font-size: 18px; } .o-hh, .o-teach { width: 36px; height: 36px; font-size: 18px; } .o-abac { height: 36px; } .o-me img { width: 30px; height: 30px; }
   .o-hbadge { left: 10px; right: auto; top: 8px; } .o-hbadge small { display: none; } .o-hold { bottom: auto; top: 8px; right: 12px; left: auto; }
 }
+.o-plist.test .o-pcard { width: min(28vw, 150px); padding: 10px 8px; } .o-plist.test .o-pcard img { height: min(18vh, 130px); } .o-plist.test .o-pcard b { font-size: 20px; }
+.o-exp { width: 100%; height: 120px; font: 11px ui-monospace, Menlo, monospace; border-radius: 10px; margin-bottom: 10px; }
+/* „За учителя“ на телефон: една колона, превърта се */
+@media (max-width: 900px), (max-height: 520px) {
+  .o-tscr { overflow-y: auto; display: block; }
+  .o-tscr .o-maptop { flex-wrap: wrap; gap: 8px; position: static; }
+  .o-tscr .o-maptop .o-grow { flex: 1 1 100%; order: -1; } .o-tscr .o-mt { font-size: 22px; }
+  .o-tscr .o-teachbox { position: static; margin: 10px 0 16px; overflow-x: auto; }
+  .o-tscr .o-ttbl { font-size: 13px; }
+}

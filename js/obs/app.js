@@ -32,10 +32,14 @@
     { id: "ivo", name: "Иво", av: "a4", age: 6, cur: 2, classAt: 2, hwTo: 1, format: "online", b: { 1: 2 }, halo: {} },
     { id: "nia", name: "Ния", av: "n1", age: 5, cur: 1, classAt: 1, format: "ai", b: {}, halo: {} }
   ];
+  // тест с деца (11.2026): 6 профила без истински имена; всяко дете започва от занятието си („За учителя“ → „Проведи занятие“)
+  const TEST = [1, 2, 3, 4, 5, 6].map(i => ({ id: "t" + i, name: "Дете " + i, av: AV[i - 1], age: 5, cur: 1, classAt: 1, format: "center", b: {}, halo: {} }));
+  const ALLP = DEMO.concat(TEST);
+  let TESTMODE = (() => { try { return localStorage.getItem("obs.test") === "1"; } catch (e) { return false; } })();
   const KEY = "obs.proto.v3";
   let DB = (() => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } })();
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(DB)); } catch (e) {} };
-  const prof = (id) => { if (!DB[id]) { const d = DEMO.find(x => x.id === id); DB[id] = JSON.parse(JSON.stringify(d));
+  const prof = (id) => { if (!DB[id]) { const d = ALLP.find(x => x.id === id); DB[id] = JSON.parse(JSON.stringify(d));
       DB[id].hw = {}; HW.lessons.filter(L => L.n <= (d.hwTo || 0)).forEach(L => { DB[id].hw[L.id] = L.rounds.map((_, i) => i); }); save(); }   // демо: по-старите домашни са изиграни
     return DB[id]; };
   let P = null;
@@ -104,12 +108,14 @@
   function screenProfiles() {
     gen++;
     app.className = "o-scr o-profiles"; voice("Кой наблюдава тази вечер?");
+    const list = TESTMODE ? TEST : DEMO;
     app.innerHTML = `<div class="o-ptitle">Кой наблюдава тази вечер?</div>
-      <div class="o-plist">${DEMO.map(d => { const p = DB[d.id] || d; const lit = Object.values(p.b || {}).filter(v => v >= 3).length;
+      <div class="o-plist${TESTMODE ? " test" : ""}">${list.map(d => { const p = DB[d.id] || d; const lit = Object.values(p.b || {}).filter(v => v >= 3).length;
         return `<button class="o-pcard" data-id="${d.id}"><img src="assets/img/world/avatars/${p.av}.webp" alt=""><b>${p.name}</b><span>★ ${lit} звезди</span></button>`; }).join("")}</div>
-      <p class="o-note">Прототип · демо профили · <button class="o-link" id="o-reset">нулирай демото</button></p>`;
+      <p class="o-note">${TESTMODE ? "Тест с деца · " : "Прототип · демо профили · "}<button class="o-link" id="o-tmode">${TESTMODE ? "към демо профилите" : "тестови профили (Дете 1–6)"}</button>${TESTMODE ? "" : ' · <button class="o-link" id="o-reset">нулирай демото</button>'}</p>`;
     app.querySelectorAll(".o-pcard").forEach(b => b.onclick = () => { P = prof(b.dataset.id); applyMotion(); screenHome(); });
-    $("#o-reset").onclick = () => { DB = {}; save(); screenProfiles(); };
+    const rs = $("#o-reset"); if (rs) rs.onclick = () => { DEMO.forEach(d => delete DB[d.id]); save(); screenProfiles(); };
+    $("#o-tmode").onclick = () => { TESTMODE = !TESTMODE; try { localStorage.setItem("obs.test", TESTMODE ? "1" : "0"); } catch (e) {} screenProfiles(); };
   }
 
   const starPath = (R) => { let d = ""; for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? R * .45 : R; d += (i ? "L" : "M") + (rr * Math.cos(a)).toFixed(1) + " " + (rr * Math.sin(a)).toFixed(1); } return d + "Z"; };
@@ -225,17 +231,32 @@
       const s = L.n > at ? "не е проведено" : st.complete ? "домашното е готово" : d ? `незавършено: ${d} от ${k} кръга` : "домашното не е започнато";
       return `<tr class="${L.n > at ? "fut" : st.complete ? "ok" : "open"}"><td>${L.id}</td><td>${L.title}</td><td>${L.rounds.map(r => r.label === "Игра" ? GAMES[r.game].name : r.label).join(" · ")}</td><td>${s}</td></tr>`; }).join("");
     const un = HW.unlock.map(u => `<tr class="${u.from <= at ? "ok" : "fut"}"><td>${u.name}</td><td>от занятие ${u.from}</td><td>${u.why}</td></tr>`).join("");
-    app.className = "o-scr o-map o-gamesbg";
-    app.innerHTML = `<div class="o-maptop"><button class="o-back" id="o-back">← Към обсерваторията</button><div class="o-grow"><div class="o-mt">За учителя</div><div class="o-ms">демо · ${P.name} · проведени занятия: ${at} от ${max}</div></div>
+    app.className = "o-scr o-map o-gamesbg o-tscr";
+    app.innerHTML = `<div class="o-maptop"><button class="o-back" id="o-back">← Към обсерваторията</button><div class="o-grow"><div class="o-mt">За учителя</div><div class="o-ms">${/^t\d$/.test(P.id) ? "тест" : "демо"} · ${P.name} · проведени занятия: ${at} от ${max}</div></div>
         <label class="o-tfmt">Форма на обучение <select id="o-t-fmt">${FORMATS.map(([k, v]) => `<option value="${k}" ${(P.format || "center") === k ? "selected" : ""}>${v}</option>`).join("")}</select></label>
-        <button class="o-sec" id="o-t-reset">Започни отначало</button><button class="o-go sm" id="o-t-next" ${at >= max ? "disabled" : ""}>Проведи занятие ${Math.min(max, at + 1)}</button></div>
+        <button class="o-sec" id="o-t-exp">📤 Данни от теста</button><button class="o-sec" id="o-t-reset">Започни отначало</button><label class="o-tfmt">Детето е на <select id="o-t-at">${HW.lessons.map(L => `<option value="${L.n}" ${L.n === at ? "selected" : ""}>занятие ${L.n}</option>`).join("")}</select></label><button class="o-go sm" id="o-t-next" ${at >= max ? "disabled" : ""}>Проведи занятие ${Math.min(max, at + 1)}</button></div>
       <div class="o-teachbox"><p class="o-tnote">Формата на обучение определя абакуса в „Звездни сметки“: присъствено – физически (отговорът с клавиатурата), онлайн и с AI тутор – дигиталният абакус до примерите. В платформата идва от профила на детето. В истинската платформа учителят възлага домашното от своя профил (офис → „Пилот“ → „Домашни“). Тук: всяко проведено занятие = възложено домашно. „Продължи“ води към най-новото незавършено; по-старите – „Доиграй“, по желание.</p>
         <table class="o-ttbl"><thead><tr><th>Код</th><th>Занятие</th><th>Кръгове на домашното</th><th>Състояние</th></tr></thead><tbody>${rows}</tbody></table>
         <h3>Свободни игри – отключване <small>(${HW.unlock_status || ""})</small></h3><table class="o-ttbl"><tbody>${un}</tbody></table></div>`;
     $("#o-back").onclick = screenHome;
     $("#o-t-fmt").onchange = (e) => { P.format = e.target.value; save(); };
     $("#o-t-next").onclick = () => { P.classAt = Math.min(max, at + 1); save(); screenHome(); };
+    $("#o-t-exp").onclick = exportData;
+    // тест: детето започва от занятието, на което е в групата – по-старите домашни се броят за изиграни (както при демо профилите)
+    $("#o-t-at").onchange = (e) => { const n = +e.target.value; P.classAt = n; P.hw = P.hw || {};
+      HW.lessons.forEach(L => { if (L.n < n && !(P.hw[L.id] || []).length) P.hw[L.id] = L.rounds.map((_, i) => i); }); save(); screenTeacher(); };
     $("#o-t-reset").onclick = () => { P.classAt = 1; P.hw = {}; P.hwres = {}; P.b = {}; P.halo = {}; save(); screenHome(); };
+  }
+  // данни от теста: профилът (домашни, резултати, дневниците на игрите) + сесиите на абакуса за това дете → един JSON файл.
+  // Телефон: „Сподели“ (Viber, имейл, Файлове); иначе – сваляне; ако и това не стане – текстът за копиране.
+  async function exportData() {
+    let ab = []; try { ab = JSON.parse(localStorage.getItem("ma.abacus.v1") || "[]").filter(x => x.p === P.id); } catch (e) {}
+    const data = { kind: "ma-test-export", v: 1, exportedAt: new Date().toISOString(), child: P.id, name: P.name, device: navigator.userAgent, screen: [screen.width, screen.height], profile: P, abacus: ab };
+    const txt = JSON.stringify(data), fn = `ma-test-${P.id}-${new Date().toISOString().slice(0, 16).replace(/[:T]/g, "-")}.json`;
+    try { const f = new File([txt], fn, { type: "application/json" });
+      if (navigator.canShare && navigator.canShare({ files: [f] })) { await navigator.share({ files: [f], title: "Данни от теста – " + P.name }); return; } } catch (e) { if (e && e.name === "AbortError") return; }
+    try { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([txt], { type: "application/json" })); a.download = fn; document.body.appendChild(a); a.click(); a.remove(); return; } catch (e) {}
+    const box = $(".o-teachbox"); if (box) box.insertAdjacentHTML("afterbegin", `<textarea class="o-exp" readonly>${txt.replace(/</g, "&lt;")}</textarea>`);
   }
   // детето избира своя герой (същите аватари като в „Моят свят“); профилите – от бутона долу
   function screenAvatar() {
@@ -977,7 +998,8 @@
   // ---- старт ----
   hwReady.then(() => {
     if (CHILD) { DB[CHILD] = DB[CHILD] || { id: CHILD, name: "Аз", av: "a1", cur: 1, classAt: 1, b: {}, halo: {}, hw: {} }; P = DB[CHILD]; fromServer(); applyMotion(); screenHome(); return; }
-    if (Q.get("p")) { P = prof(Q.get("p")); if (Q.get("class")) { P.classAt = +Q.get("class"); save(); } applyMotion(); Q.get("m") ? startMission(+Q.get("m")) : Q.get("map") ? screenMap() : screenHome(); } else screenProfiles();
+    if (Q.get("test") === "1" || Q.get("test") === "0") { TESTMODE = Q.get("test") === "1"; try { localStorage.setItem("obs.test", Q.get("test")); } catch (e) {} }
+    if (Q.get("p") && ALLP.some(x => x.id === Q.get("p"))) { P = prof(Q.get("p")); if (Q.get("class")) { P.classAt = +Q.get("class"); save(); } applyMotion(); Q.get("m") ? startMission(+Q.get("m")) : Q.get("map") ? screenMap() : screenHome(); } else screenProfiles();
   });
   window.OBS = { _const: (v, r, d) => constSVG(v, r, d), _hw: () => HW, runHw, screenTeacher, _hwComplete: (n) => hwComplete(HW.lessons.find(x => x.n === n)), _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
     testFinish: (n, r) => { M = Object.assign({ n, ex: [], par: PAR[n], max: MAXN[n], flash: [5, 6], ab: [3, 4], meth: [3, 4], im: [2, 3], help: 0 }, r || {}); return finish(); } };   // само за проверки
