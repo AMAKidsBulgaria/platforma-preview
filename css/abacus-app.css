@@ -46,13 +46,11 @@ body[data-mode="mind"] .aa-val { color: #9FB0E8; letter-spacing: .3em; }
 .aa-mi svg { width: 40px; height: 50px; }
 .m-classic { background: linear-gradient(135deg, #F7B547, #EC8E1E); } .m-touch { background: linear-gradient(135deg, #5C86F0, #3D5FD1); } .m-mind { background: linear-gradient(135deg, #8B5CF0, #5E35C9); }
 
-/* портрет: само абакусът се показва хоризонтално (завъртян на 90°) – детето просто обръща устройството;
-   началният екран (вид топчета, режим) остава вертикален. */
+/* портрет: цялото приложение (изборът и абакусът) се показва хоризонтално, завъртяно на 90° – детето просто обръща устройството.
+   .aa-root е съдържащият блок за fixed секциите (transform), затова те заемат завъртяната площ. */
 .aa-root { position: fixed; inset: 0; }
 @media (orientation: portrait) and (max-width: 1100px) {
-  .aa-play { inset: auto; top: 0; left: 0; width: 100vh; height: 100vw; width: 100dvh; height: 100dvw; transform-origin: 0 0; transform: rotate(90deg) translateY(-100%); }
-  .aa-home { overflow-y: auto; }
-  .aa-home .aa-cols { grid-template-columns: 1fr; align-content: start; gap: 22px; padding-top: 8px; }
+  .aa-root { inset: auto; top: 0; left: 0; width: 100vh; height: 100vw; width: 100dvh; height: 100dvw; transform-origin: 0 0; transform: rotate(90deg) translateY(-100%); }
 }
 /* малки височини (телефон хоризонтално) */
 @media (max-height: 430px), (orientation: portrait) and (max-width: 430px) {

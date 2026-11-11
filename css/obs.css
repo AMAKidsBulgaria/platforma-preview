@@ -449,3 +449,5 @@ html.o-still .o-gc2 { animation: none; }
   .o-htitle { max-width: calc(100% - 20px); } .o-hbadge { left: 10px; right: auto; top: 80px; }
   .o-hold { bottom: 132px; }
 }
+/* телефон вертикално: заглавието на обсерваторията се скрива (програмата е в горната лента), карето със занятието е горе вляво – не се застъпва с репликата на Зори */
+@media (max-width: 520px) and (orientation: portrait) { .o-htitle { display: none; } .o-hbadge { top: 10px; } }
