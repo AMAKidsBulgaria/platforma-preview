@@ -46,14 +46,14 @@ body[data-mode="mind"] .aa-val { color: #9FB0E8; letter-spacing: .3em; }
 .aa-mi svg { width: 40px; height: 50px; }
 .m-classic { background: linear-gradient(135deg, #F7B547, #EC8E1E); } .m-touch { background: linear-gradient(135deg, #5C86F0, #3D5FD1); } .m-mind { background: linear-gradient(135deg, #8B5CF0, #5E35C9); }
 
-/* портрет: молба за завъртане */
-.aa-turn { display: none; position: fixed; inset: 0; z-index: 50; background: var(--night); color: #fff; flex-direction: column; align-items: center; justify-content: center; gap: 22px; font: 800 22px "Nunito", sans-serif; text-align: center; padding: 24px; }
-.aa-phone { width: 64px; height: 108px; border: 5px solid #fff; border-radius: 14px; animation: aa-rot 2.2s ease-in-out infinite; }
-@keyframes aa-rot { 0%, 25% { transform: rotate(0); } 55%, 100% { transform: rotate(-90deg); } }
-@media (orientation: portrait) and (max-width: 1100px) { .aa-turn { display: flex; } }
-
+/* портрет: целият екран се показва хоризонтално (завъртян на 90°) – детето просто обръща устройството.
+   .aa-root е съдържащият блок за fixed секциите (transform), затова те заемат завъртяната площ. */
+.aa-root { position: fixed; inset: 0; }
+@media (orientation: portrait) and (max-width: 1100px) {
+  .aa-root { inset: auto; top: 0; left: 0; width: 100vh; height: 100vw; width: 100dvh; height: 100dvw; transform-origin: 0 0; transform: rotate(90deg) translateY(-100%); }
+}
 /* малки височини (телефон хоризонтално) */
-@media (max-height: 430px) {
+@media (max-height: 430px), (orientation: portrait) and (max-width: 430px) {
   .aa-bar { height: 42px; } .aa-ib, .aa-val { height: 40px; } .aa-ib { width: 54px; font-size: 20px; } .aa-val { font-size: 24px; }
   .aa-bar h1 { font-size: 22px; } .aa-cols { gap: 14px; } .aa-col h2 { font-size: 14px; margin-bottom: 6px; }
   .aa-designs { gap: 6px; } .aa-dz { padding: 4px; font-size: 12px; } .aa-dz svg { max-height: 30px; }

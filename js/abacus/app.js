@@ -24,6 +24,8 @@
   };
   const GREY = ["#E6E8EF", "#A9AEBD", "#6D7285"];
   const $ = (s) => document.querySelector(s);
+  // устройство в портрет (iPhone/iPad не позволяват уеб страница да заключи ориентацията): показваме абакуса хоризонтално, завъртян с CSS
+  const ROT = matchMedia("(orientation: portrait) and (max-width: 1100px)");
   const load = (k, d) => { try { return Object.assign({}, d, JSON.parse(localStorage.getItem(k) || "{}")); } catch (e) { return d; } };
   const save = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
   let set = load(SKEY, { design: "emerald", sound: true, mode: "classic" });
@@ -139,8 +141,9 @@
     el.addEventListener("pointerdown", ev => {
       ev.preventDefault(); if (ac && ac.state === "suspended") ac.resume();
       if (mode !== "classic") { act(el); return; }
-      const p = { id: ev.pointerId, y0: ev.clientY, done: false };
-      const move = (e) => { if (e.pointerId !== p.id || p.done) return; const dy = e.clientY - p.y0; if (Math.abs(dy) < 10) return;
+      const p = { id: ev.pointerId, x0: ev.clientX, y0: ev.clientY, done: false };
+      // в портрет екранът е завъртян на 90° (CSS) – „нагоре“ по абакуса е надясно по екрана
+      const move = (e) => { if (e.pointerId !== p.id || p.done) return; const dy = ROT.matches ? p.x0 - e.clientX : e.clientY - p.y0; if (Math.abs(dy) < 10) return;
         p.done = true; const m = E.tapMove(st, +el.dataset.rod, el.dataset.bead, +el.dataset.k || 0);
         const towardBeam = el.dataset.bead === "h" ? dy > 0 : dy < 0;   // към гредата = включва топчето
         if (towardBeam === (m.d > 0)) act(el); };
@@ -152,8 +155,7 @@
   // ---- екрани ----
   function swatch(id) { const D = DESIGNS[id]; return `<svg viewBox="-95 -40 190 80" aria-hidden="true"><g style="--b1:${D.c[0]};--b2:${D.c[1]};--b3:${D.c[2]}">${beadSVG("sw-" + id, D.f)}</g><defs>${grad("sw-" + id, D.c)}</defs></svg>`; }
   function render() {
-    document.body.innerHTML = `
-    <div class="aa-turn" aria-hidden="true"><div class="aa-phone"></div><b>Завърти устройството хоризонтално</b></div>
+    document.body.innerHTML = `<div class="aa-root">
     <section class="aa-home" id="aa-home">
       <header class="aa-bar"><button class="aa-ib back" id="aa-exit1" aria-label="Към платформата">←</button><h1>Абакус</h1><button class="aa-ib close" id="aa-close1" aria-label="Затвори">✕</button></header>
       <div class="aa-cols">
@@ -170,7 +172,7 @@
         <button class="aa-ib snd" id="aa-snd" aria-label="Звук"></button><button class="aa-ib close" id="aa-close2" aria-label="Затвори">✕</button></header>
       <div class="aa-board" id="aa-board"></div>
       <div class="ab-say" id="ab-say"></div>${DEBUG ? '<pre class="aa-log" id="aa-log"></pre>' : ""}
-    </section>`;
+    </section></div>`;
     document.querySelectorAll(".aa-dz").forEach(b => b.onclick = () => { set.design = b.dataset.d; save(SKEY, set);
       document.querySelectorAll(".aa-dz").forEach(x => { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", x === b); }); });
     document.querySelectorAll(".aa-mode").forEach(b => b.onclick = () => open(b.dataset.m));
