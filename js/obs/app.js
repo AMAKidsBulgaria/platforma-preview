@@ -248,7 +248,8 @@
     const LL = L || assignedL().slice(-1)[0], st = LL ? hwState(LL) : { done: [] };
     const line = tone(!L ? "Браво! Домашното е готово." : st.done.length ? "Здравей! Да продължим домашното." : "Здравей! Днес имаме ново домашно.");
     const dots = LL ? `<span class="o-hdots">${LL.rounds.map((_, k) => `<i class="${st.done.includes(k) ? "on" : L && k === st.next ? "now" : ""}"></i>`).join("")}</span>` : "";
-    const sub = L ? `Занятие ${L.n} · ${L.rounds[st.next].label} · кръг ${st.next + 1} от ${L.rounds.length}` : "Домашното е готово – виж звездите";
+    let sub = L ? `Занятие ${L.n} · ${L.rounds[st.next].label} · кръг ${st.next + 1} от ${L.rounds.length}` : "Домашното е готово – виж звездите";
+    if (isTutor()) { const tp = TU.plan(tutorState()); sub = "Урок със Зори · " + (tp.current ? TU.BY[tp.current].name : "модулът е завършен"); }
     app.className = "o-scr o-hubscr";
     app.innerHTML = `<section class="o-hub">
       <header class="o-hhead"><a class="o-hh" href="index.html" aria-label="Към Моят свят">⌂</a><img class="o-hz" src="assets/img/zori/z_explain.png" alt=""><b>Ментална аритметика</b>${REVIEW ? '<span class="o-review">преглед</span>' : ""}<span class="o-sp"></span>
@@ -261,7 +262,7 @@
           ${LL ? `<div class="o-hbadge"><b>Занятие ${LL.n}</b><small>${LL.title}</small>${dots}</div>` : ""}
           <div class="o-hstage"><div class="o-say">${line}</div>${zori(L ? "explain" : "joy")}${grown() ? "" : `<button class="o-kidb" id="o-kid"><img class="o-kid" src="assets/img/world/avatars/${P.av}.webp" alt=""><span>${P.name} · ти</span></button>`}</div>${groupOf(P) === "10" ? statsPanel() : grown() ? recLine() : ""}
           ${older.length ? `<button class="o-hold" id="o-older">Доиграй: занятие ${older[older.length - 1].n}</button>` : ""}
-          <button class="o-hgo" id="o-go"><em>${L ? "▶" : "★"}</em><span><b>${L ? "Продължи" : "Звездна карта"}</b><small>${sub}</small></span></button>
+          <button class="o-hgo" id="o-go"><em>${L || isTutor() ? "▶" : "★"}</em><span><b>${L || isTutor() ? "Продължи" : "Звездна карта"}</b><small>${sub}</small></span></button>
         </div>
         <button class="o-hcard" id="o-map"><img src="assets/img/obs/card_map.webp" alt=""><span class="o-htx"><b>Звездна карта</b><small>Моите открития</small><small class="o-hcount">★ ${lit} от ${all.length} звезди светят</small></span><i>›</i></button>
         <button class="o-hcard" id="o-games"><img src="assets/img/obs/card_games.webp" alt=""><span class="o-htx"><b>Игри</b><small>Тренирай уменията си</small></span><i>›</i></button>
@@ -270,7 +271,7 @@
     if (grown()) { const zb = document.createElement("button"); zb.className = "o-zv"; zb.setAttribute("aria-pressed", P.zv ? "true" : "false"); zb.textContent = P.zv ? "🔊 Зори" : "🔈 Зори";
       zb.title = "Гласът на Зори"; zb.onclick = () => { P.zv = !P.zv; save(); zb.textContent = P.zv ? "🔊 Зори" : "🔈 Зори"; zb.setAttribute("aria-pressed", P.zv ? "true" : "false"); if (P.zv) voice(tone(line)); };
       $(".o-hstage").appendChild(zb); }
-    $("#o-go").onclick = () => L ? runHw(L, st.next) : screenMap();
+    $("#o-go").onclick = () => isTutor() ? runTutor() : L ? runHw(L, st.next) : screenMap();
     const ob = $("#o-older"); if (ob) ob.onclick = () => { const O = older[older.length - 1]; runHw(O, hwState(O).next); };
     $("#o-map").onclick = () => screenMap(); $("#o-games").onclick = screenGames; $("#o-win").onclick = () => screenMap(); $("#o-me").onclick = screenAvatar; const kb = $("#o-kid"); if (kb) kb.onclick = screenAvatar;
     holdBtn($("#o-teach"), screenTeacher);
@@ -324,13 +325,14 @@
     app.className = "o-scr o-map o-gamesbg o-tscr";
     app.innerHTML = `<div class="o-maptop"><button class="o-back" id="o-back">← Към обсерваторията</button><div class="o-grow"><div class="o-mt">За учителя</div><div class="o-ms">${/^t\d$/.test(P.id) ? "тест" : "демо"} · ${P.name} · проведени занятия: ${at} от ${max}</div></div>
         <label class="o-tfmt">Форма на обучение <select id="o-t-fmt">${FORMATS.map(([k, v]) => `<option value="${k}" ${(P.format || "center") === k ? "selected" : ""}>${v}</option>`).join("")}</select></label>
-        <button class="o-sec" id="o-t-obs">📝 Наблюдение</button><button class="o-sec" id="o-t-exp">📤 Данни от теста</button><button class="o-sec" id="o-t-reset">Започни отначало</button><label class="o-tfmt">Възраст <select id="o-t-grp">${[["5", "5–6 г."], ["7", "7–9 г."], ["10", "10+"]].map(([k, v]) => `<option value="${k}" ${groupOf(P) === k ? "selected" : ""}>${v}</option>`).join("")}</select></label><label class="o-tfmt">Детето е на <select id="o-t-at">${HW.lessons.map(L => `<option value="${L.n}" ${L.n === at ? "selected" : ""}>занятие ${L.n}</option>`).join("")}</select></label><button class="o-go sm" id="o-t-next" ${at >= max ? "disabled" : ""}>Проведи занятие ${Math.min(max, at + 1)}</button></div>
+        <button class="o-sec" id="o-t-rep">📄 Отчет за родителя</button><button class="o-sec" id="o-t-obs">📝 Наблюдение</button><button class="o-sec" id="o-t-exp">📤 Данни от теста</button><button class="o-sec" id="o-t-reset">Започни отначало</button><label class="o-tfmt">Възраст <select id="o-t-grp">${[["5", "5–6 г."], ["7", "7–9 г."], ["10", "10+"]].map(([k, v]) => `<option value="${k}" ${groupOf(P) === k ? "selected" : ""}>${v}</option>`).join("")}</select></label><label class="o-tfmt">Детето е на <select id="o-t-at">${HW.lessons.map(L => `<option value="${L.n}" ${L.n === at ? "selected" : ""}>занятие ${L.n}</option>`).join("")}</select></label><button class="o-go sm" id="o-t-next" ${at >= max ? "disabled" : ""}>Проведи занятие ${Math.min(max, at + 1)}</button></div>
       <div class="o-teachbox"><p class="o-tnote">Формата на обучение определя абакуса в „Звездни сметки“: присъствено – физически (отговорът с клавиатурата), онлайн и с AI тутор – дигиталният абакус до примерите. В платформата идва от профила на детето. В истинската платформа учителят възлага домашното от своя профил (офис → „Пилот“ → „Домашни“). Тук: всяко проведено занятие = възложено домашно. „Продължи“ води към най-новото незавършено; по-старите – „Доиграй“, по желание.</p>
         <table class="o-ttbl"><thead><tr><th>Код</th><th>Занятие</th><th>Кръгове на домашното</th><th>Състояние</th></tr></thead><tbody>${rows}</tbody></table>
         <h3>Свободни игри – отключване <small>(${HW.unlock_status || ""})</small></h3><table class="o-ttbl"><tbody>${un}</tbody></table></div>`;
     $("#o-back").onclick = screenHome;
     $("#o-t-fmt").onchange = (e) => { P.format = e.target.value; save(); };
     $("#o-t-next").onclick = () => { P.classAt = Math.min(max, at + 1); save(); screenHome(); };
+    $("#o-t-rep").onclick = () => TU ? screenParentReport() : null;
     $("#o-t-exp").onclick = exportData; $("#o-t-obs").onclick = () => screenObserve();
     // тест: детето започва от занятието, на което е в групата – по-старите домашни се броят за изиграни (както при демо профилите)
     // смяна на възрастовата група: друг план (21 или 13 занятия) – започва отначало
@@ -1172,6 +1174,181 @@
     if (CHILD && !TESTMODE) { DB[CHILD] = DB[CHILD] || { id: CHILD, name: "Аз", av: "a1", cur: 1, classAt: 1, b: {}, halo: {}, hw: {} }; P = DB[CHILD]; useGroup(P); fromServer(); applyMotion(); screenHome(); return; }
     if (Q.get("p") && ALLP.some(x => x.id === Q.get("p"))) { P = prof(Q.get("p")); if (Q.get("class")) { P.classAt = +Q.get("class"); save(); } applyMotion(); Q.get("m") ? startMission(+Q.get("m")) : Q.get("map") ? screenMap() : screenHome(); } else screenProfiles();
   });
-  window.OBS = { screenRegion, _track: (k, r, s) => track(k, r, s), _const: (v, r, d) => constSVG(v, r, d), _hw: () => HW, runHw, screenTeacher, _hwComplete: (n) => hwComplete(HW.lessons.find(x => x.n === n)), _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
+  // ======================= AI ТУТОР (етап 1, 12.11.2026) =======================
+  // Детето с форма „с AI тутор“ (5–6 г.): „Продължи“ пуска урок със Зори вместо домашно. Решенията – от js/tutor/core.js (граф, усвояване, стратегии);
+  // проверката – от двигателя (E.judge); демонстрациите – движения от двигателя. Учител не участва. Всяка стратегия и резултатът ѝ се записват.
+  const TU = window.MA_TUTOR;
+  const isTutor = () => !!(TU && P && P.format === "ai" && groupOf(P) === "5");
+  function tutorState() { if (!P.tutor) P.tutor = TU.newState(); TU.refresh(P.tutor); return P.tutor; }
+  const SKILL_LESSON = { P1: 1, P2: 1, P3: 2, P4: 3, P5: 4, PN: 5, P6: 5, P7: 6, P8: 7, P9: 8, CH: 9 };   // звездата на картата за всяко умение
+  function tutorStars() {   // яркостта на звездите от състоянието на уменията (усвоено → 3, чака проверка → 2, учи се → 1)
+    const st = P.tutor; if (!st) return; const lv = { mastered: 3, pending: 2, practiced: 2, learning: 1, stalled: 1 };
+    Object.entries(SKILL_LESSON).forEach(([id, n]) => { const k = st.skills[id]; if (!k) return; const v = lv[k.status] || 0; P.b[n] = Math.max(P.b[n] || 0, v); });
+    ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9"].forEach(id => { const k = st.skills[id]; if (k && k.status === "mastered") P.halo[SKILL_LESSON["P" + id.slice(1)]] = 1; });
+    P.classAt = Math.max(P.classAt || 1, ...Object.entries(SKILL_LESSON).filter(([id]) => st.skills[id] && st.skills[id].status !== "locked").map(([, n]) => n));
+  }
+  const INTRO_T = { G: "Да видим кои цифри познаваш!", A1: "Това е абакусът. Броим само топчетата до гредата.", C1: "Земните топчета струват по едно. Палецът ги вдига.",
+    C2: "Небесното топче е пет! Мести го с показалеца.", PN: "Щипка: небесното и земните топчета – заедно, с едно движение.", CH: "Звездна нощ! Смятаме наум с всички числа." };
+  const introOf = (s) => INTRO_T[s.id] || (s.kind === "mind" ? `Сега ±${s.n} наум – представи си абакуса!` : `Учим ±${s.n}!`);
+  function tShell(title, blocks, i) {
+    app.className = "o-scr o-mis o-tutor";
+    app.innerHTML = `<div class="o-mtop"><button class="o-back" id="o-quit">✕ Изход</button><div class="o-pips">${blocks.map((t, j) => `<b class="${j < i ? "d" : j === i ? "c" : ""}" title="${t}"></b>`).join("")}</div><div class="o-mname">${title}</div></div>
+      <div class="o-mbody"><div class="o-mz">${zori("explain")}<div class="o-say"></div></div><div class="o-mwork" id="o-work"></div></div>`;
+    $("#o-quit").onclick = () => { gen++; screenHome(); };
+  }
+  const TBLOCKS = ["Поздрав", "Загрявка", "Повторение", "Урок", "Наум", "Игра", "Край"];
+  function tStep(i) { app.querySelectorAll(".o-pips b").forEach((b, j) => { b.className = j < i ? "d" : j === i ? "c" : ""; }); }
+  // задача за умение: a ± n с едно действие по правилото „Просто“ (числата до 9)
+  function opTask(s, easy) {
+    const ns = s.id === "PN" ? [6, 7, 8, 9] : s.n === 1 ? [1] : s.n === 2 ? [1, 2] : [s.n];
+    for (let g = 0; g < 200; g++) { const n = ns[Math.floor(Math.random() * ns.length)], op = easy || Math.random() < .55 ? "+" : "-";
+      const a = easy ? (op === "+" ? 0 : n) : Math.floor(Math.random() * 10), b = op === "+" ? a + n : a - n; if (b < 0 || b > 9) continue;
+      if (s.n <= 4 && s.id !== "PN" && (a > 4 || b > 4)) continue;   // до ±4 – само земните топчета
+      const p = E.plan(a, op, n, 1); if (p.rule !== "Просто") continue; if (s.id === "PN" && !(p.moves.length === 2 && p.moves.some(m => m.bead === "h"))) continue;
+      return { a, op, n, target: b, moves: p.moves }; }
+    return { a: 0, op: "+", n: ns[0], target: ns[0], moves: E.plan(0, "+", ns[0], 1).moves };
+  }
+  const errKind = (task, moves) => { const hTask = task.moves.some(m => m.bead === "h"), hDid = moves.some(m => m.bead === "h"), eTask = task.moves.some(m => m.bead === "e"), eDid = moves.some(m => m.bead === "e");
+    if (hTask && eTask && hDid !== eDid) return "combined"; if (hTask !== hDid) return "heaven"; if (eTask && !eDid) return "earth"; return "value"; };
+  // един пример; връща { ok, method, helped, err }
+  async function tItem(s, opts) {
+    opts = opts || {}; const w = $("#o-work"), t0 = Date.now();
+    if (s.kind === "ready") {   // разпознава цифрата: Зори казва число → детето избира
+      const v = Math.floor(Math.random() * 10); w.innerHTML = `<div class="o-num">?</div>`; say(`Покажи числото ${v}.`, "point"); voice(String(v));
+      if (FAST_ON) window.OBS_T = { tutor: 1, kind: "ready", target: v }; const opts3 = choices(v, 9), pick = await ask(opts3, v); return { ok: pick === true || pick === v, method: true, helped: false, rt: Date.now() - t0, target: v };
+    }
+    w.innerHTML = `<div class="o-num" id="o-num"></div><div class="o-abhost" id="o-abh"></div>`;
+    const ab = abacus($("#o-abh"), 1);
+    if (FAST_ON) window.OBS_T = { tutor: 1, kind: s.kind, ab };
+    if (s.kind === "intro") { const v = 1 + Math.floor(Math.random() * 9); ab.set(v); if (FAST_ON) window.OBS_T.target = 0; $("#o-num").textContent = "→ 0"; say("Нулирай абакуса.", "point");
+      await untilIdle(ab, 0); ab.enable(false); return { ok: ab.value() === 0, method: true, helped: !!opts.helped, rt: Date.now() - t0 }; }
+    if (s.kind === "set") { const v = s.id === "C1" ? 1 + Math.floor(Math.random() * 4) : 5 + Math.floor(Math.random() * 5); ab.reset(); $("#o-num").textContent = v; say(`Покажи ${v}.`, "point"); if (FAST_ON) window.OBS_T.target = v;
+      await untilIdle(ab, v); ab.enable(false); return { ok: ab.value() === v, method: true, helped: !!opts.helped, rt: Date.now() - t0, v }; }
+    const task = opts.task || opTask(s, opts.easy), ex = `${task.a} ${task.op === "+" ? "+" : "−"} ${task.n}`;
+    if (s.kind === "mind" || s.kind === "chain") {
+      $("#o-abh").remove(); let target = task.target, shown = ex;
+      if (s.kind === "chain") { const e3 = E.simpleExample({ ...topicFor("s9"), count: 3 }); target = e3.answer; shown = e3.nums.map((x, i) => i ? (x > 0 ? "+ " : "− ") + Math.abs(x) : x).join(" "); }
+      $("#o-num").textContent = shown + " = ?"; say("Смятай наум!", "point"); if (FAST_ON) window.OBS_T = { tutor: 1, kind: "mind", target }; const host = document.createElement("div"); w.appendChild(host);
+      const ans = await keypad(host, 2); return { ok: ans === target, method: true, helped: false, rt: Date.now() - t0, target, ans };
+    }
+    if (FAST_ON) window.OBS_T = { tutor: 1, kind: opts.together ? "together" : "ab", ab, task, target: task.target };
+    ab.set(task.a); $("#o-num").textContent = ex; if (!opts.quiet) say(opts.line || "Смятай на абакуса.", "point");
+    if (opts.together) {   // „заедно“: туторът осветява всяко следващо движение, детето го прави
+      for (const m of task.moves) { ab.hint([m]); say(fixSay(m), "explain"); await new Promise(r => ab.onChange(() => r())); ab.onChange(null); await wait(300); }
+      ab.enable(false); const j = E.judge({ start: task.a, op: task.op, n: task.n, rods: 1 }, ab.moves()); return { ok: j.correct, method: !!j.method, helped: true, rt: Date.now() - t0, task };
+    }
+    await untilIdle(ab, task.target); ab.enable(false);
+    const j = E.judge({ start: task.a, op: task.op, n: task.n, rods: 1 }, ab.moves());
+    return { ok: j.correct, method: !!j.method, helped: !!opts.helped, rt: Date.now() - t0, err: j.correct && j.method ? null : errKind(task, ab.moves()), task, ab };
+  }
+  // стратегия при затруднение (каталогът от core.js); движенията винаги от двигателя
+  async function tStrategy(s, r, last, sess) {
+    sess.strategies.push(r.strategy || r.action); const w = $("#o-work"), task = last.task;
+    if (r.action === "hint") {
+      if (task && last.ab) { const un = last.ab.focus(0); await talk(task.target > (last.ab.value ? last.ab.value() : task.a) ? "Почти! Трябва да стане повече." : "Почти! Трябва да стане по-малко.", "point"); un(); }
+      else await talk(s.kind === "mind" ? "Помисли за топчетата на абакуса." : "Почти! Опитай пак.", "explain");
+      return;
+    }
+    if (r.action === "prereq") {   // кратко връщане към предпоставката (напр. да нареди 5–9), записва се към нея
+      const ps = TU.BY[r.prereq]; await talk("Да си припомним нещо по-лесно.", "explain");
+      for (let i = 0; i < 3; i++) { const x = await tItem(ps, {}); TU.record(P.tutor, ps.id, { ok: x.ok, method: x.method, rtMs: x.rt }); }
+      return;
+    }
+    const st = r.strategy;
+    if (st === "demo" || st === "video" || st === "split") {   // видео още няма → бавна демонстрация; „разделяне“ – движение по движение с обяснение
+      if (!task) { await talk("Гледай как се прави.", "point"); return; }
+      w.innerHTML = `<div class="o-num">${task.a} ${task.op === "+" ? "+" : "−"} ${task.n}</div><div class="o-abhost" id="o-abh"></div>`; const ab = abacus($("#o-abh"), 1); ab.enable(false); ab.set(task.a);
+      await talk(st === "split" ? "Ще го направим на части. Гледай!" : "Гледай как го правя!", "point");
+      if (st === "split") for (const m of task.moves) { say(fixSay(m), "explain"); await ab.demo([m], false, true); await wait(500); }
+      else await ab.demo(task.moves.map(m => ({ ...m, finger: fixFinger(m) })), task.moves.length > 1, true);
+      await talk("Сега ти – с нов пример.", "point"); return;
+    }
+    if (st === "explain") { const v = last.target; if (v != null) { $("#o-work").innerHTML = `<div class="o-num" style="font-size:min(30vh,200px)">${v}</div>`; say(`Това е числото ${v}.`, "explain"); voice(String(v)); await wait(2200); } return; }
+    if (st === "compare" && !task && last.target != null && s.kind !== "ready") {   // наум: картината на отговора
+      $("#o-work").innerHTML = `<div class="o-cmp"><div><small>отговорът</small>${abImg(last.target, 1)}<b>${last.target}</b></div></div>`; await talk("Ето как изглежда отговорът на абакуса.", "explain"); await wait(1800); return; }
+    if (st === "together") { await talk("Да го направим заедно!", "joy"); const x = await tItem(s, { task, together: true }); TU.record(P.tutor, s.id, { ok: x.ok, method: x.method, helped: true, rtMs: x.rt }); await talk("Браво! Сега сам.", "joy"); return; }
+    if (st === "compare" && task) {   // преди и след
+      w.innerHTML = `<div class="o-cmp"><div><small>преди</small>${abImg(task.a, 1)}<b>${task.a}</b></div><div class="o-cmpa">${task.op === "+" ? "+" : "−"} ${task.n} →</div><div><small>след</small>${abImg(task.target, 1)}<b>${task.target}</b></div></div>`;
+      await talk("Виж какво се променя. Кои топчета се местят?", "explain"); await wait(2600); return;
+    }
+    if (st === "game") { await talk("Да поиграем с това движение!", "joy"); const keep = $("#o-work").innerHTML; try { await PLAY.fix({ topic: s.topic || "s4", rounds: 2 }); } catch (e) { if (e === "stale") throw e; } return; }
+    if (st === "easier") { sess.easy = 2; await talk("Да опитаме с по-лесен пример.", "explain"); return; }
+  }
+  async function runTutor() {
+    gen++; if (!isTutor()) return screenHome(); const st = tutorState(), now = Date.now(), pl = TU.startSession(st, now);
+    M = { free: true, tutor: true, n: 1, max: 9 }; const sess = { t0: now, items: 0, ok: 0, indep: 0, strategies: [], learned: [], easy: 0, before: {} };
+    TU.SKILLS.forEach(s => { sess.before[s.id] = (st.skills[s.id] || {}).status; });
+    try {
+      tShell("Урок със Зори", TBLOCKS, 0);
+      await talk(`Здравей, ${P.name}! ${pl.pauseNew ? "Днес ще упражним нещо, което още е трудно." : pl.isNew ? "Днес ще научим нещо ново!" : "Да продължим!"}`, "joy");
+      // загрявка: Звездни сигнали на познати числа
+      const known = [9, 8, 7, 6, 5, 4, 3].find(n => TU.done(st, "P" + n)) || (TU.done(st, "C2") ? 9 : TU.done(st, "C1") ? 4 : 0);
+      if (known) { tStep(1); await PLAY.flash({ topic: "s" + Math.max(2, Math.min(9, known)), speed: 2.5, rounds: 4 }); }
+      // повторение: проверка „помни ли“ – без подсказки
+      if (pl.reviews.length) { tStep(2); await talk("Да видим дали помниш!", "point");
+        for (const id of pl.reviews) { const s = TU.BY[id]; let good = 0; for (let i = 0; i < 3; i++) { const x = await tItem(s, { quiet: i > 0 }); if (x.ok && x.method) good++; sess.items++; } TU.review(st, id, good >= 2, Date.now()); save(); } }
+      // урокът: текущото умение (най-много едно ново), докато е време и детето не е уморено
+      tStep(3); let cur = TU.plan(st).current, newDone = 0; const tries = [];
+      while (cur && sess.items < 14) {
+        const s = TU.BY[cur], k = st.skills[cur];
+        if (k.status === "ready") { if (newDone >= 2 || (newDone >= 1 && sess.items >= 8)) break; newDone++;
+          await talk(introOf(s), "explain");
+          if (s.kind === "ab" || s.id === "PN") { const t1 = opTask(s, true); $("#o-work").innerHTML = `<div class="o-num">${t1.a} ${t1.op === "+" ? "+" : "−"} ${t1.n}</div><div class="o-abhost" id="o-abh"></div>`; const ab = abacus($("#o-abh"), 1); ab.enable(false); ab.set(t1.a);
+            await ab.demo(t1.moves.map(m => ({ ...m, finger: fixFinger(m) })), t1.moves.length > 1, true);
+            await talk("Сега заедно!", "joy"); const x = await tItem(s, { task: opTask(s, true), together: true }); TU.record(st, s.id, { ok: x.ok, method: x.method, helped: true, rtMs: x.rt }); await talk("Сега сам!", "joy"); } }
+        if (s.kind === "mind") tStep(4);
+        const x = await tItem(s, { easy: sess.easy > 0 }); if (sess.easy > 0) sess.easy--; sess.items++;
+        const strat = st.skills[cur].strategy; TU.record(st, s.id, { ok: x.ok, method: x.method, helped: x.helped, strategy: strat, rtMs: x.rt }); tutorStars(); save();   // запис след всеки пример – нищо не се губи при изход
+        tries.push({ ok: x.ok && x.method, rt: x.rt }); if (x.ok && x.method) { sess.ok++; sess.indep++; say(thank(x.task ? x.task.target : x.target || x.v || 0), "joy"); burst(); await wait(1100); }
+        else { const r = TU.onError(st, s.id, x.err || "value"); await tStrategy(s, r, x, sess); }
+        if (TU.tired(tries)) { await talk("Добре се справи! Да си починем с една игра.", "joy"); break; }
+        const nx = TU.plan(st).current; if (nx !== cur) { if (["practiced", "pending", "mastered"].includes(st.skills[cur].status)) { sess.learned.push(cur); await talk("Браво! Научи го!", "joy"); burst(); } }
+        cur = nx;
+      }
+      // игра за награда с текущото движение
+      tStep(5); const gs = TU.BY[cur || "P1"]; if (FAST_ON) {} else if (gs && (gs.kind === "ab" || gs.kind === "mind")) await PLAY.fix({ topic: gs.topic || "s4", rounds: 2 }); else if (known) await PLAY.flash({ topic: "s" + Math.max(2, known), speed: 2.5, rounds: 3 });
+      TU.endSession(st, Date.now()); tutorStars();
+      const rep = tutorReport(sess); (P.treports = P.treports || []).push(rep); if (P.treports.length > 60) P.treports.shift(); save();
+      tStep(6); screenTutorEnd(rep);
+    } catch (e) { if (e !== "stale") throw e; }
+  }
+  // отчетът след урок (за родителя; същият формат като при другите форми на обучение)
+  function tutorReport(sess) {
+    const st = P.tutor, now = Date.now(), wk = (P.treports || []).filter(r => now - r.t < 7 * TU.DAY), days = new Set(wk.map(r => new Date(r.t).toDateString())); days.add(new Date(now).toDateString());
+    const nx = TU.plan(st).current, learned = sess.learned.map(id => TU.BY[id].name);
+    const tips = ["Похвалете усилието – не само верните отговори.", "Попитайте детето какво е научило днес – нека ви покаже на абакуса.", "Кратко всеки ден е по-добре от дълго веднъж седмично."];
+    return { t: now, mins: Math.max(1, Math.round((now - sess.t0) / 6e4)), items: sess.items, ok: sess.ok, learned, next: nx ? TU.BY[nx].name : "модулът е завършен", days: days.size,
+      strategies: sess.strategies, notices: st.notices.filter(n => n.t >= sess.t0).map(n => n.text), tip: tips[(P.treports || []).length % tips.length] };
+  }
+  function screenTutorEnd(rep) {
+    gen++; app.className = "o-scr o-end";
+    app.innerHTML = `<div class="o-endbox">${zori("joy")}<div class="o-say"></div>
+      <div class="o-gres">Урокът е готов!</div>
+      <div class="o-res"><div><b>${rep.ok} от ${rep.items}</b>сам, без помощ</div><div><b>${rep.mins} мин</b>днес</div><div><b>${rep.days} от 5</b>дни тази седмица</div></div>
+      ${rep.learned.length ? `<div class="o-newrec">★ Научи: ${rep.learned.join(" · ")}</div>` : ""}
+      <div class="o-sbar"><button class="o-sec" id="o-tomap">Към картата</button><button class="o-go" id="o-home">Към обсерваторията</button></div></div>`;
+    say(rep.learned.length ? "Браво! Днес научи нещо ново!" : "Браво! Утре продължаваме.", "joy"); burst();
+    $("#o-tomap").onclick = () => screenMap(); $("#o-home").onclick = () => screenHome();
+  }
+  // отчетът за родителя (последните уроци + седмицата)
+  function screenParentReport() {
+    gen++; const R = (P.treports || []).slice().reverse(), now = Date.now(), wk = R.filter(r => now - r.t < 7 * TU.DAY), st = P.tutor;
+    const sum = wk.reduce((a, r) => [a[0] + r.ok, a[1] + r.items, a[2] + r.mins], [0, 0, 0]), days = new Set(wk.map(r => new Date(r.t).toDateString())).size;
+    const learned = [].concat(...wk.map(r => r.learned)), next = st ? (TU.plan(st).current ? TU.BY[TU.plan(st).current].name : "модулът е завършен") : "—";
+    const notices = st ? st.notices.slice(-3) : [];
+    app.className = "o-scr o-map o-gamesbg o-tscr";
+    app.innerHTML = `<div class="o-maptop"><button class="o-back" id="o-back">← Назад</button><div class="o-grow"><div class="o-mt">Отчет за родителя</div><div class="o-ms">${P.name} · последните 7 дни</div></div></div>
+      <div class="o-teachbox o-rep">
+        <div class="o-reprow"><span>Научи</span><b>${learned.length ? learned.join(" · ") : "упражнява – новото идва, когато е готов/а"}</b></div>
+        <div class="o-reprow"><span>Упражнява</span><b>${days} от 5 дни · ${sum[2]} минути</b></div>
+        <div class="o-reprow"><span>Как се справя</span><b>${sum[1] ? `${sum[0]} от ${sum[1]} примера сам/а, без помощ` : "още няма уроци"}</b></div>
+        <div class="o-reprow"><span>Следва</span><b>${next}</b></div>
+        ${notices.map(n => `<div class="o-repwarn">⚠ ${n.text}</div>`).join("")}
+        ${R[0] ? `<div class="o-reptip">💡 ${R[0].tip}</div>` : ""}
+        <h3>Уроци</h3>${R.slice(0, 10).map(r => `<div class="o-reprow"><span>${new Date(r.t).toLocaleDateString("bg-BG")} · ${r.mins} мин</span><b>${r.ok} от ${r.items} сам/а${r.learned.length ? " · научи: " + r.learned.join(", ") : ""}</b></div>`).join("") || "<p class='o-tnote'>Още няма уроци.</p>"}
+      </div>`;
+    $("#o-back").onclick = screenTeacher;
+  }
+  window.OBS = { runTutor, screenParentReport, screenRegion, _track: (k, r, s) => track(k, r, s), _const: (v, r, d) => constSVG(v, r, d), _hw: () => HW, runHw, screenTeacher, _hwComplete: (n) => hwComplete(HW.lessons.find(x => x.n === n)), _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
     testFinish: (n, r) => { M = Object.assign({ n, ex: [], par: PAR[n], max: MAXN[n], flash: [5, 6], ab: [3, 4], meth: [3, 4], im: [2, 3], help: 0 }, r || {}); return finish(); } };   // само за проверки
 })();
