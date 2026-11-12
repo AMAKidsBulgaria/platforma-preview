@@ -552,3 +552,7 @@ html.o-still .o-regbox { animation: none; }
 @media (max-width: 520px) { .o-reprow { grid-template-columns: 1fr; gap: 2px; } }
 .o-digits { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; max-width: 520px; margin: auto; } .o-digits b { font: 900 clamp(34px, 6vw, 60px) "Nunito"; color: var(--ink); background: #0d1030; border: 2px solid #ffffff30; border-radius: 16px; text-align: center; padding: 6px 0; }
 .o-tutor .o-ch { flex-wrap: wrap; justify-content: center; max-width: 620px; margin: 0 auto; } .o-tutor .o-ch button { min-width: 72px; }
+/* верига в урока със Зори: числото вляво, абакусът вдясно (вертикално – под числото) */
+.o-trabk { flex: none; height: 100%; max-width: 50%; display: flex; align-items: center; justify-content: center; }
+.o-trabk .o-abhost { height: 100%; display: flex; align-items: center; } .o-trabk .o-ab { height: 100%; width: auto; max-height: 100%; }
+@media (orientation: portrait) { .o-trabk { height: auto; max-width: none; flex: 1 1 auto; min-height: 0; align-self: center; } }

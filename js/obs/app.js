@@ -120,7 +120,7 @@
 
   // ---- глас: Зори (zr_*), иначе разказвачът (Калина) ----
   let AUDZ = {}, AUD = {}, cur = null;
-  fetch("config/abacus-audio-zori.json?v=9").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
+  fetch("config/abacus-audio-zori.json?v=10").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
   fetch("config/abacus-audio.json?v=4").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
   // „пораснал“ режим (7+, 11.11.2026): Зори е спътник – кратки реплики, само текст (гласът по избор: P.zv); рекорди и значки
   const grown = () => !!P && groupOf(P) !== "5";
@@ -727,7 +727,7 @@
   // глас за числата: под 1 сек. на число се изключва сам; иначе записите се забързват (без промяна на тона), за да свършат преди следващото число
   const VOICE_MIN = 1, VOICE_FIT = .85, VOICE_MAXRATE = 2.5;
   let TRIM = {}; fetch("config/abacus-audio-trim.json?v=1").then(r => r.ok ? r.json() : {}).then(j => { TRIM = j; }).catch(() => {});   // [начало, край] на говора във всеки запис
-  function numParts(i, n) { const op = n < 0 ? "минус" : "плюс", a = Math.abs(n); return i === 0 ? [String(n)] : AUD[`${op} ${a}`] ? [`${op} ${a}`] : [op, String(a)]; }
+  function numParts(i, n) { const op = n < 0 ? "минус" : "плюс", a = Math.abs(n); return AUD[`${op} ${a}`] ? [`${op} ${a}`] : [op, String(a)]; }
   async function numPrep(nums, sec) {   // зарежда записите на целия пример и изчислява скоростта на всяко число
     if (Q.get("voice") === "0" || sec < VOICE_MIN) return null;
     const meta = (f) => new Promise(res => { const a = new Audio("assets/audio/abacus/" + f); a.preload = "auto"; let ok = false;
@@ -1213,7 +1213,52 @@
       if (k >= idx) { idx = k + 1; show(); return; }
       if (k < 0 && cur !== JSON.stringify(E.fromValue(start, 1))) { setTimeout(() => { ab.set(start); idx = 0; show(); }, 600 * FAST); } }));
     ab.enable(false); }
-  async function teach(s) {
+  // ---- упражнение като в плановете (младша група, „Просто“): вериги, които растат по брой действия и скорост ----
+  // [начало и таван на действията на абакуса, начало и таван наум] за всяко число; скорост от 2,0 с надолу до 1,0 с (наум от 2,2 с)
+  const TPAR = { 1: [5, 10, 4, 10], 2: [5, 10, 4, 10], 3: [6, 15, 4, 10], 4: [6, 15, 4, 10], 5: [6, 15, 4, 10], 6: [6, 15, 4, 10], 7: [7, 20, 5, 15], 8: [7, 20, 5, 17], 9: [7, 25, 5, 20] };
+  function tPar(id) { const s = TU.BY[id], k = P.tutor.skills[id]; if (!k.par) { const p = TPAR[s.n || 9] || TPAR[9]; k.par = s.kind === "mind" || s.kind === "chain" ? { count: p[2], max: p[3], speed: 2.2 } : { count: p[0], max: p[1], speed: 2.0 }; } return k.par; }
+  function tParStep(par, ok) {   // 2 успеха подред → едно действие повече (до тавана), после по-бързо; грешка → по-кратко и по-бавно
+    if (ok) { par.wins = (par.wins || 0) + 1; if (par.wins >= 2) { par.wins = 0; if (par.count < par.max) par.count++; else par.speed = Math.max(1.0, Math.round((par.speed - .1) * 10) / 10); } }
+    else { par.wins = 0; par.count = Math.max(3, par.count - 1); par.speed = Math.min(2.5, Math.round((par.speed + .1) * 10) / 10); }
+  }
+  const signTxt = (x) => (x > 0 ? "+ " : "− ") + Math.abs(x);
+  const signVoice = (x) => voice(`${x > 0 ? "плюс" : "минус"} ${Math.abs(x)}`);
+  // чака абакусът да стане target (true) или детето да спре за ms без да стигне (false)
+  function waitValue(ab, target, ms) { return new Promise(res => { let tm = setTimeout(() => { ab.onChange(null); res(ab.value() === target); }, ms * FAST);
+    ab.onChange(() => { clearTimeout(tm); if (ab.value() === target) { tm = setTimeout(() => { ab.onChange(null); res(true); }, 350 * FAST); } else tm = setTimeout(() => { ab.onChange(null); res(false); }, ms * FAST); }); }); }
+  // диктовка: Зори казва всяко действие (с думи „нагоре/надолу“ или със знаци), детето мести; при грешна стъпка – показва и продължава
+  async function dictation(s, words) {
+    const ex = E.simpleExample({ ...topicFor(s.topic), count: 5, must: s.id === "PN" ? 6 : s.n }); if (!ex) return;
+    const ab = abHere(0, ""); ab.enable(true); let v = 0;
+    for (const x of ex.nums) { const a = Math.abs(x); v += x;
+      $("#o-num").textContent = words ? `${x > 0 ? "нагоре" : "надолу"} ${a}` : signTxt(x);
+      if (words) say(`${x > 0 ? "Нагоре" : "Надолу"} ${a}.`, "point"); else { say(signTxt(x), "point"); signVoice(x); }
+      if (FAST_ON) window.OBS_T = { tutor: 1, kind: "ab", ab, target: v };
+      const ok = await waitValue(ab, v, 6000);
+      if (!ok) { ab.enable(false); ab.set(v - x); await talk("Гледай!", "point"); const p = E.plan(v - x, x > 0 ? "+" : "-", a, 1); await ab.demo(fingered(p.moves), p.moves.length > 1, true); ab.set(v); ab.enable(true); } }
+    ab.enable(false); $("#o-num").textContent = `= ${v}`; await talk(`Браво! Стана ${v}.`, "joy");
+  }
+  // верига: числата се показват едно по едно със зададената скорост; детето смята на абакуса докато ги вижда (или наум, после въвежда)
+  async function tChain(s, par, mind) {
+    const t = topicFor(s.topic || "s9"), ex = E.simpleExample({ ...t, count: par.count, must: s.kind === "chain" ? 0 : s.id === "PN" ? 6 : s.n }) || E.simpleExample({ ...t, count: par.count });
+    const nums = ex.nums, w = $("#o-work"), t0 = Date.now();
+    w.classList.add("o-trw"); w.innerHTML = `<div class="o-trl${mind ? " solo" : ""}"><div class="o-trn" id="o-num"></div><div class="o-trq" id="o-trq"></div></div>${mind ? "" : `<div class="o-trabk"><div class="o-abhost" id="o-abh"></div></div>`}`;
+    const ab = mind ? null : abacus($("#o-abh"), 1); if (ab) ab.enable(true);
+    say(mind ? "Смятай наум!" : "Смятай на абакуса!", "point"); await wait(900);
+    let acc = 0;
+    for (let i = 0; i < nums.length; i++) { const n = nums[i]; acc += n; const el = $("#o-num"); el.textContent = signTxt(n); el.className = "o-trn pop" + (n < 0 ? " minus" : "");
+      if (P.voiceOn !== false) signVoice(n); if (FAST_ON) window.OBS_T = mind ? { tutor: 1, kind: "wait" } : { tutor: 1, kind: "ab", ab, target: acc };
+      await wait(FAST_ON ? 700 / FAST : par.speed * 1000 - 200); el.textContent = ""; await wait(200); }
+    $("#o-num").textContent = "= ?"; $("#o-num").className = "o-trn";
+    if (mind) { const host = $("#o-trq"); if (FAST_ON) window.OBS_T = { tutor: 1, kind: "mind", target: ex.answer }; say("Колко стана?", "explain"); const ans = await keypad(host, 2);
+      return { ok: ans === ex.answer, method: true, rt: Date.now() - t0, target: ex.answer, nums }; }
+    if (ab.value() !== ex.answer) await waitValue(ab, ex.answer, 4000); ab.enable(false);
+    const j = E.judgeChain(nums, ab.moves(), 1), bad = (j.steps || []).find(x => x.code !== "ok"), ok = ab.value() === ex.answer;
+    let task = null; if (bad) { const n = bad.n, from = bad.from != null ? bad.from : 0, op = n > 0 ? "+" : "-"; task = { a: from, op, n: Math.abs(n), target: from + n, moves: E.plan(from, op, Math.abs(n), 1).moves }; }
+    return { ok, method: ok && !bad, rt: Date.now() - t0, target: ex.answer, nums, task, err: bad ? (bad.code === "wrong_method" ? "value" : bad.code) : null, ab };
+  }
+  const unTrw = () => { const w = $("#o-work"); if (w) w.classList.remove("o-trw"); };
+  async function teach(s) { unTrw();
     if (s.kind === "ready") { $("#o-work").innerHTML = `<div class="o-digits">${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(d => `<b>${d}</b>`).join("")}</div>`;
       await talk("Това са цифрите от нула до девет.", "explain"); await talk("Ще ти казвам число, а ти го намираш.", "point"); return; }
     if (s.id === "A1") { let ab = abHere(0); let un = ab.focus(0); await talk("Това е абакусът. Топчетата се движат по пръчката.", "explain"); un();
@@ -1232,7 +1277,10 @@
       for (const easy of [true, false]) { const t = opTask(s, easy), ab = abHere(t.a, `${t.a} ${t.op === "+" ? "+" : "−"} ${t.n}`); say("Гледай!", "point");
         await ab.demo(fingered(t.moves), t.moves.length > 1, true); $("#o-num").textContent += ` = ${t.target}`; await afterSay(900); }
       await talk("Сега заедно!", "joy"); const t = opTask(s, true), ab = abHere(t.a, `${t.a} ${t.op === "+" ? "+" : "−"} ${t.n}`); await togetherDo(ab, t.moves);
-      TU.record(P.tutor, s.id, { ok: ab.value() === t.target, method: true, helped: true }); await talk("Браво! Сега сам.", "joy"); return; }
+      TU.record(P.tutor, s.id, { ok: ab.value() === t.target, method: true, helped: true });
+      await talk("Сега диктовка: слушай и мести топчетата.", "point");
+      if (s.kind === "ab" && s.n <= 4) { await dictation(s, true); await talk("Сега със знаци.", "point"); }
+      await dictation(s, false); await talk("Браво! Сега сам.", "joy"); return; }
     if (s.kind === "mind") { const t = opTask(TU.BY["P" + s.n], false), ab = abHere(t.a, `${t.a} ${t.op === "+" ? "+" : "−"} ${t.n}`);
       await talk("Сега наум: представи си абакуса.", "explain"); await ab.demo(fingered(t.moves), t.moves.length > 1, true); $("#o-num").textContent += ` = ${t.target}`;
       await talk("Сега смятай без абакус – само в главата си.", "point"); return; }
@@ -1289,7 +1337,7 @@
     return { ok: j.correct, method: !!j.method, helped: !!opts.helped, rt: Date.now() - t0, err: j.correct && j.method ? null : errKind(task, ab.moves()), task, ab };
   }
   // стратегия при затруднение (каталогът от core.js); движенията винаги от двигателя
-  async function tStrategy(s, r, last, sess) {
+  async function tStrategy(s, r, last, sess) { unTrw();
     sess.strategies.push(r.strategy || r.action); const w = $("#o-work"), task = last.task;
     if (r.action === "hint") {
       if (task && last.ab) { const un = last.ab.focus(0); await talk(task.target > (last.ab.value ? last.ab.value() : task.a) ? "Почти! Трябва да стане повече." : "Почти! Трябва да стане по-малко.", "point"); un(); }
@@ -1332,6 +1380,13 @@
       // загрявка: Звездни сигнали на познати числа
       const known = [9, 8, 7, 6, 5, 4, 3].find(n => TU.done(st, "P" + n)) || (TU.done(st, "C2") ? 9 : TU.done(st, "C1") ? 4 : 0);
       if (known) { tStep(1); await PLAY.flash({ topic: "s" + Math.max(2, Math.min(9, known)), speed: 2.5, rounds: 4 }); }
+      // „Звездна проверка“ веднъж седмично (както в групата): 10 примера – 5 на абакуса и 5 наум, с текущите параметри; 6 верни = звездичка
+      const bestP = [9, 8, 7, 6, 5, 4, 3, 2, 1].find(n => TU.done(st, "P" + n));
+      if (bestP && st.sessions >= 3 && Date.now() - (st.lastCheck || 0) >= 7 * TU.DAY) { tStep(2); await talk("Звездна проверка! Десет примера – пет на абакуса и пет наум.", "joy");
+        let good = 0; const sa = TU.BY["P" + bestP], sm = TU.BY["M" + bestP], pa = { ...tPar(sa.id) }, pm = { ...tPar(sm.id) };
+        for (let i = 0; i < 10; i++) { const x = await tChain(i < 5 ? sa : sm, i < 5 ? pa : pm, i >= 5); if (x.ok) { good++; burst(); } sess.items++; }
+        st.lastCheck = Date.now(); (st.checks = st.checks || []).push({ t: st.lastCheck, good, n: bestP }); sess.check = { good, star: good >= 6 }; save();
+        await talk(good >= 6 ? "Звездичка! Справи се отлично." : "Добре се справи! Следващата седмица пак.", "joy"); }
       // повторение: проверка „помни ли“ – без подсказки
       if (pl.reviews.length) { tStep(2); await talk("Да видим дали помниш!", "point");
         for (const id of pl.reviews) { const s = TU.BY[id]; let good = 0; for (let i = 0; i < 3; i++) { const x = await tItem(s, { quiet: i > 0 }); if (x.ok && x.method) good++; sess.items++; } TU.review(st, id, good >= 2, Date.now()); save(); } }
@@ -1340,8 +1395,12 @@
       while (cur && sess.items < 16) {
         const s = TU.BY[cur], k = st.skills[cur];
         if (k.status === "ready") { if (newDone >= 3 || (newDone >= 1 && sess.items >= 10)) break; newDone++; await teach(s); }
-        if (s.kind === "mind") tStep(4);
-        const x = await tItem(s, { easy: sess.easy > 0 }); if (sess.easy > 0) sess.easy--; sess.items++;
+        if (s.kind === "mind") { tStep(4); if (!sess.ritual) { sess.ritual = 1; $("#o-work").innerHTML = `<div class="o-flash r1 o-dim">${abImg(0, 1)}</div>`;
+          await talk("Затвори очи за миг и си представи абакуса: рамката, гредата, топчетата.", "explain"); await talk("Отвори очи. Смятай наум – пръстчетата могат да ти помагат във въздуха.", "point"); } }
+        const chainable = ["ab", "pinch", "mind", "chain"].includes(s.kind), par = chainable ? tPar(cur) : null;
+        if (par && sess.easy > 0) { par.count = Math.max(3, par.count - 2); }
+        const x = chainable ? await tChain(s, par, s.kind === "mind" || s.kind === "chain") : (unTrw(), await tItem(s, { easy: sess.easy > 0 })); if (sess.easy > 0) sess.easy--; sess.items++;
+        if (par) { tParStep(par, x.ok && x.method); if (x.rt) x.rt = x.rt / Math.max(1, (x.nums || [1]).length); }
         const strat = st.skills[cur].strategy; TU.record(st, s.id, { ok: x.ok, method: x.method, helped: x.helped, strategy: strat, rtMs: x.rt }); tutorStars(); save();   // запис след всеки пример – нищо не се губи при изход
         tries.push({ ok: x.ok && x.method, rt: x.rt }); if (x.ok && x.method) { sess.ok++; sess.indep++; say(thank(x.task ? x.task.target : x.target || x.v || 0), "joy"); burst(); await afterSay(1100); }
         else { const r = TU.onError(st, s.id, x.err || "value"); await tStrategy(s, r, x, sess); }
@@ -1362,14 +1421,14 @@
     const nx = TU.plan(st).current, learned = sess.learned.map(id => TU.BY[id].name);
     const tips = ["Похвалете усилието – не само верните отговори.", "Попитайте детето какво е научило днес – нека ви покаже на абакуса.", "Кратко всеки ден е по-добре от дълго веднъж седмично."];
     return { t: now, mins: Math.max(1, Math.round((now - sess.t0) / 6e4)), items: sess.items, ok: sess.ok, learned, next: nx ? TU.BY[nx].name : "модулът е завършен", days: days.size,
-      strategies: sess.strategies, notices: st.notices.filter(n => n.t >= sess.t0).map(n => n.text), tip: tips[(P.treports || []).length % tips.length] };
+      check: sess.check || null, strategies: sess.strategies, notices: st.notices.filter(n => n.t >= sess.t0).map(n => n.text), tip: tips[(P.treports || []).length % tips.length] };
   }
   function screenTutorEnd(rep) {
     gen++; app.className = "o-scr o-end";
     app.innerHTML = `<div class="o-endbox">${zori("joy")}<div class="o-say"></div>
       <div class="o-gres">Урокът е готов!</div>
       <div class="o-res"><div><b>${rep.ok} от ${rep.items}</b>сам, без помощ</div><div><b>${rep.mins} мин</b>днес</div><div><b>${rep.days} от 5</b>дни тази седмица</div></div>
-      ${rep.learned.length ? `<div class="o-newrec">★ Научи: ${rep.learned.join(" · ")}</div>` : ""}
+      ${rep.learned.length ? `<div class="o-newrec">★ Научи: ${rep.learned.join(" · ")}</div>` : ""}${rep.check ? `<div class="o-newrec">Звездна проверка: ${rep.check.good} от 10${rep.check.star ? " ★" : ""}</div>` : ""}
       <div class="o-sbar"><button class="o-sec" id="o-tomap">Към картата</button><button class="o-go" id="o-home">Към обсерваторията</button></div></div>`;
     say(rep.learned.length ? "Браво! Днес научи нещо ново!" : "Браво! Утре продължаваме.", "joy"); burst();
     $("#o-tomap").onclick = () => screenMap(); $("#o-home").onclick = () => screenHome();
@@ -1393,6 +1452,6 @@
       </div>`;
     $("#o-back").onclick = screenTeacher;
   }
-  window.OBS = { runTutor, screenParentReport, screenRegion, _track: (k, r, s) => track(k, r, s), _const: (v, r, d) => constSVG(v, r, d), _hw: () => HW, runHw, screenTeacher, _hwComplete: (n) => hwComplete(HW.lessons.find(x => x.n === n)), _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
+  window.OBS = { _tchain: (id, mind) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return tChain(TU.BY[id], { count: 5, speed: 2 }, mind); }, runTutor, screenParentReport, screenRegion, _track: (k, r, s) => track(k, r, s), _const: (v, r, d) => constSVG(v, r, d), _hw: () => HW, runHw, screenTeacher, _hwComplete: (n) => hwComplete(HW.lessons.find(x => x.n === n)), _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
     testFinish: (n, r) => { M = Object.assign({ n, ex: [], par: PAR[n], max: MAXN[n], flash: [5, 6], ab: [3, 4], meth: [3, 4], im: [2, 3], help: 0 }, r || {}); return finish(); } };   // само за проверки
 })();
