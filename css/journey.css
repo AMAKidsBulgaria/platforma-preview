@@ -69,3 +69,15 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; }
 .j-again { pointer-events: auto; font: 800 15px "Nunito"; padding: 6px 14px; border-radius: 99px; background: #ffffff18; border: 1px solid #ffffff40; } .j-again:disabled { opacity: .4; } .j-again[hidden] { display: none; }
 @media (max-height: 500px) { .j-ask { font-size: 20px; } .j-flash { height: 48%; } }
 .j-flash { aspect-ratio: 220 / 440; max-width: 100%; } .j-abw, .j-flash .j-ab { width: 100%; height: 100%; }
+/* обсерваторията: надписи върху предметите, леща на телескопа */
+.j-hot { position: absolute; transform: translate(-50%, -50%); pointer-events: auto; padding: 8px 16px; border-radius: 99px; background: var(--glass); border: 2px solid var(--line); backdrop-filter: blur(6px); box-shadow: 0 6px 18px #0008; display: grid; text-align: center; line-height: 1.1; }
+.j-hot b { font: 800 18px "Baloo 2"; color: var(--ink); } .j-hot small { font: 800 12px "Nunito"; opacity: .8; } .j-hot[hidden] { display: none; }
+.j-hot-big { padding: 12px 26px; background: linear-gradient(180deg, #FFD86A, #F5A623); border: 0; box-shadow: 0 6px 0 #B36B00, 0 14px 30px #000a; } .j-hot-big b { font-size: 26px; color: #3A2400; } .j-hot-big small { color: #3A2400; }
+.j-hbub { position: absolute; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translateX(-50%); max-width: min(560px, 80vw); margin: 0; text-align: center; }
+.j-lens { position: fixed; z-index: 30; width: 10px; height: 10px; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; opacity: 0; background: radial-gradient(circle, #0B0E2A 0 55%, #1C2370 70%, #FFE9A8 74%, #C9A24A 78%, transparent 80%); }
+.j-lensout { position: fixed; inset: 0; z-index: 30; background: #0B0E2A; pointer-events: none; }
+.j-toast { position: fixed; left: 50%; top: 80px; transform: translateX(-50%); z-index: 45; background: var(--glass); border: 2px solid var(--line); border-radius: 99px; padding: 8px 18px; font: 800 16px "Nunito"; }
+.j-home { width: 46px; justify-content: center; padding: 0; font-size: 22px; }
+@media (orientation: portrait) { .j-hot-big b { font-size: 22px; } .j-title b { font-size: 20px; } }
+@media (max-height: 500px) { .j-hot-big { padding: 8px 18px; } .j-hot-big b { font-size: 20px; } .j-hot b { font-size: 15px; } .j-hot { padding: 5px 12px; } .j-hbub { font-size: 14px; } }
+@media (orientation: portrait) { .j-hbub { left: auto; right: 12px; transform: none; max-width: 58vw; bottom: max(14px, env(safe-area-inset-bottom)); } }
