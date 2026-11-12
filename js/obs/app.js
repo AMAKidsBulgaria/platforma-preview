@@ -809,7 +809,23 @@
 
   // ---- „Провери Зори“: Зори смята пример на абакуса (бавно, със стрелки). Понякога смята вярно, понякога мести с едно топче повече/по-малко
   // или на грешната пръчка. Детето казва „Вярно“ или „Грешно“; ако е сбъркала – детето показва как е правилно (проверка на числото и на движенията).
+  // Братя: действието винаги иска брат; типичните грешки на Зори – „забрави брата“ (само ±5) или „грешен брат“ (с едно земно топче повече/по-малко)
+  function oopsBroTask(t) {
+    for (let g = 0; g < 300; g++) {
+      const ex = E.brothersExample({ rods: t.rods, count: 2, allowed: t.bro, fresh: t.fresh }); if (!ex) continue;
+      const a = ex.nums[0], n = ex.nums[1], op = n < 0 ? "-" : "+", k = Math.abs(n), b = E.brothersOf(a, op, k, t.rods); if (!b || !b.length) continue;
+      const p = E.plan(a, op, k, t.rods), right = a + n, r = Math.random(), kind = r < .35 ? null : r < .7 ? "forgot" : "wrongbro";
+      if (!kind) return { a, op, k, right, moves: p.moves, shown: right, wrong: null };
+      const ms = p.moves.map(m => ({ ...m })), ei = ms.findIndex((m, i) => m.bead === "e" && ms.some((h, j) => j !== i && h.bead === "h" && h.rod === m.rod));
+      if (ei < 0) continue;
+      if (kind === "forgot") ms.splice(ei, 1); else { const e = ms[ei], alt = [e.d + 1, e.d - 1].filter(d => d && Math.sign(d) === Math.sign(e.d)); if (!alt.length) continue; e.d = alt[Math.floor(Math.random() * alt.length)]; }
+      let st = E.fromValue(a, t.rods); for (const m of ms) st = st && E.apply(st, m); if (!st) continue; const got = E.value(st); if (got === right) continue;
+      return { a, op, k, right, moves: ms, shown: got, wrong: kind, good: p.moves };
+    }
+    return null;
+  }
   function oopsTask(t) {
+    if (t.bro) return oopsBroTask(t);
     for (let g = 0; g < 200; g++) {
       const ex = E.simpleExample({ ...t, count: 2 }), a = ex.nums[0], n = ex.nums[1], op = n < 0 ? "-" : "+", k = Math.abs(n);
       const p = E.plan(a, op, k, t.rods); if (!p.ok || !p.moves.length) continue;
@@ -829,7 +845,7 @@
       pip(k); const q = oopsTask(t); if (!q) break; const w = $("#o-work"), ex = `${q.a} ${q.op === "+" ? "+" : "−"} ${q.k}`;
       w.innerHTML = `<div class="o-num" id="o-num">${ex}</div><div class="o-abhost" id="o-abh"></div><div class="o-ch big o-yn" id="o-yn" hidden><button data-v="1">✓ Вярно</button><button data-v="0">✗ Грешно</button></div>`;
       const ab = abacus($("#o-abh"), t.rods); ab.enable(false); ab.set(q.a); if (FAST_ON) window.OBS_T = { ab, q };
-      const play = async (ms) => { ab.set(q.a); await wait(500); await ab.demo(ms, false, true); };
+      const play = async (ms) => { ab.set(q.a); await wait(500); await ab.demo(ms, !!t.bro, true); };   // братя: щипка – двете топчета наведнъж
       if (!k) await talk("Гледай как смятам. Вярно ли е?", "point"); else { say("Гледай как смятам!", "point"); await wait(600); }
       await play(q.moves); $("#o-num").textContent = `${ex} = ${q.shown}`; once(k, "Вярно ли смятах?", "explain"); if (k) voice("Вярно ли смятах?");
       const yn = $("#o-yn"); yn.hidden = false;
@@ -867,7 +883,22 @@
     return m.d > 0 ? `Палецът вдига ${NUMW[n]} до гредата${one}.` : `Показалецът сваля ${NUMW[n]} от гредата${one}.`;
   }
   const fixFinger = (m) => m.bead === "e" && m.d > 0 ? "палец" : "показалец";
+  // Братя: Зори смята a ± N с брат и прави само половината от щипката (само небесното или само брата); детето довършва с едно движение
+  function fixBroTask(t, like, avoid) {
+    const max = Math.pow(10, t.rods) - 1;
+    for (let g = 0; g < 400; g++) {
+      const rod = Math.floor(Math.random() * t.rods), k = t.fresh * Math.pow(10, rod), a = Math.floor(Math.random() * (max + 1)), op = Math.random() < .5 ? "+" : "-";
+      const b = E.brothersOf(a, op, k, t.rods); if (!b || !b.includes(t.fresh)) continue;
+      const p = E.plan(a, op, k, t.rods); if (p.moves.length !== 2) continue;
+      const miss = like ? p.moves.findIndex(m => m.bead === like.bead) : Math.floor(Math.random() * 2); if (miss < 0) continue;
+      const target = op === "+" ? a + k : a - k; if (like && target === avoid) continue;
+      const done = p.moves[1 - miss], wrong = E.value(E.apply(E.fromValue(a, t.rods), done));
+      return { target, wrong, fix: { ...p.moves[miss] }, ex: `${a} ${op === "+" ? "+" : "−"} ${k}` };
+    }
+    return null;
+  }
   function fixTask(t, like, avoid) {   // like = {bead, d} на правилното движение → сходна задача
+    if (t.bro) { const x = fixBroTask(t, like, avoid); if (x) return x; }
     for (let g = 0; g < 300; g++) { const target = randVal(t), st0 = E.fromValue(target, t.rods), rod = Math.floor(Math.random() * t.rods), opts = [];
       for (let d = 1; d <= 4; d++) opts.push({ rod, bead: "e", d }, { rod, bead: "e", d: -d }); opts.push({ rod, bead: "h", d: 5 }, { rod, bead: "h", d: -5 });
       const okm = opts.filter(o => E.apply(st0, o) && (!like || (o.bead === like.bead && -o.d === like.d))); if (!okm.length || (like && target === avoid)) continue;
@@ -892,12 +923,12 @@
     for (let k = 0; k < c.rounds; k++) {
       pip(k); const task = fixTask(t, like, prev && prev.target), rec = { t: Date.now(), topic: t.id, target: task.target, wrong: task.wrong, fix: task.fix, similar: !!like, tries: [], hints: [], shown: 0, repeated: null, solo: false };
       const w = $("#o-work"); w.innerHTML = `<div class="o-fix"><div class="o-fixhead"><div class="o-fixgoal">Направи <b class="o-num pop">${task.target}</b></div>
-        <div class="o-telebox" title="Телескоп">${tele()}<span>${built}/${total}</span></div></div><div class="o-fixmsg" id="o-fixmsg"></div>
+        <div class="o-telebox" title="Телескоп">${tele()}<span>${built}/${total}</span></div></div><div class="o-fixmsg" id="o-fixmsg">${task.ex ? `Зори смята ${task.ex} – и забрави едно движение` : ""}</div>
         <div class="o-abhost" id="o-abh"></div><div class="o-row"><button class="o-sec o-rew" id="o-rew" hidden>↺ Гледай пак</button></div></div>`;
       const ab = abacus($("#o-abh"), t.rods), msg = (x) => { $("#o-fixmsg").textContent = x; };
       ab.set(task.wrong); const start = ab.state();
       if (FAST_ON) window.OBS_T = { task, ab, rec };   // само за автоматичните проверки
-      if (like) await talk("Още едно такова!", "point"); else once(k, "Поправи числото!", "point");
+      if (like) await talk("Още едно такова!", "point"); else once(k, task.ex ? "Довърши щипката!" : "Поправи числото!", "point");
       // опит 1
       let r = await fixAttempt(ab, task); rec.tries.push(r);
       if (!(r.valueOk && r.movesOk)) {

@@ -199,6 +199,10 @@ const ruleOf = (f) => f.transition ? "Преход" : f.friendBrother ? "При�
     { id: "h100", name: "Кръгли стотици 100–900", rods: 3, opMax: 9, stateMax: 9, round: 2 },
     { id: "h444", name: "Трицифрени до 444", rods: 3, opMax: 4, stateMax: 4 }, { id: "h555", name: "Трицифрени до 555", rods: 3, opMax: 5, stateMax: 5 },
     { id: "h999", name: "Трицифрени до 999", rods: 3, opMax: 9, stateMax: 9 }];
+  // „Братя“: по една тема на брат и разряд; научените братя се натрупват в реда BRO_ORDER (решение на методиста – засега ±4 → ±1, както при AMAKids)
+  const BRO_ORDER = [4, 3, 2, 1];
+  BRO_ORDER.forEach((k, i) => [1, 2, 3].forEach(r => TOPICS.push({ id: `b${k}${["", "", "d", "h"][r]}`, name: `Братя ±${k}${["", "", " · двуцифрени", " · трицифрени"][r]}`,
+    rods: r, opMax: 9, stateMax: 9, bro: BRO_ORDER.slice(0, i + 1), fresh: k })));
   const digitsOf = (v, rods) => Array.from({ length: rods }, (_, i) => Math.floor(v / Math.pow(10, i)) % 10);
   function simpleOperands(o) {   // всички допустими числа за темата
     const out = [], max = Math.pow(10, o.rods) - 1;
@@ -219,6 +223,7 @@ const ruleOf = (f) => f.transition ? "Преход" : f.friendBrother ? "При�
   //  – крайният отговор е до N (по разряди), освен при кръгли и 11–19;
   //  – o.must = N: примерът съдържа поне веднъж ±N (новото число на занятието).
   function simpleExample(o, rng) {
+    if (o.bro) return brothersExample({ rods: o.rods, count: o.count, allowed: o.bro, fresh: o.fresh }, rng);   // теми „Братя“
     rng = rng || Math.random; const ops = simpleOperands(o), count = Math.max(1, o.count || 5), max = Math.pow(10, o.rods) - 1;
     const N = o.opMax, smax = N < 5 ? Math.min(o.stateMax, N) : o.stateMax, plain = !o.round && !o.teen;
     for (let tries = 0; tries < 600; tries++) {
@@ -243,6 +248,45 @@ const ruleOf = (f) => f.transition ? "Преход" : f.friendBrother ? "При�
     }
     return o.must ? simpleExample({ ...o, must: 0 }, rng) : null;
   }
+  // ---- „Братя“ (11.11.2026, след прегледа на генератора на AMAKids – docs/research/ma-reference/trainer-generator.md) ----
+  // братята, нужни за действието: цифрите d (1–4), които по своята пръчка се правят с „брат“ (+d = +5 −(5−d); −d = −5 +(5−d)); null – ако трябват Приятели
+  function brothersOf(v, op, n, rods) {
+    const st = fromValue(v, rods), digs = digitsOf(n, rods), out = [];
+    for (let i = 0; i < rods; i++) { const d = digs[i]; if (!d) continue; const r = st[i], x = rodVal(r);
+      if (op === "+") { if (x + d > 9) return null; if (d <= 4 && r.e + d > 4) out.push(d); }
+      else { if (x - d < 0) return null; if (d <= 4 && r.e < d) out.push(d); } }
+    return out;
+  }
+  // пример за Братя: o = { rods, count, allowed: [научени братя], fresh: новият брат, mix: позволява 0 в по-старшите разряди }
+  // правила: започва от 0 с „+“; всяко действие е „просто“ или с брат от научените (без Приятели); единиците никога не са 0;
+  // без повторение и обезсилване на предишното (освен последното); новият брат – в поне една трета от действията (насочване: 2 от 3 избора
+  // са действие с новия брат, ако има такова, иначе „подготвящо“ действие, след което новият брат е възможен); отговорът – без ограничение
+  function brothersExample(o, rng) {
+    rng = rng || Math.random; const rods = Math.max(1, o.rods || 1), count = Math.max(2, o.count || 5), max = Math.pow(10, rods) - 1;
+    const allowed = new Set(o.allowed && o.allowed.length ? o.allowed : [1, 2, 3, 4]), fresh = o.fresh || Math.max(...allowed);
+    const ops = []; for (let n = 1; n <= max; n++) { if (n % 10 === 0) continue; if (rods > 1 && !o.mix && n < Math.pow(10, rods - 1)) continue; if (rods > 1 && !o.mix && digitsOf(n, rods).some(d => d === 0)) continue; ops.push(n); }
+    const need = Math.max(1, Math.floor(count / 3));
+    // единици, от които новият брат е възможен (при +: 5−N…4; при −: 5…4+N)
+    const ready = (t) => { const u = t % 10; return (u >= 5 - fresh && u <= 4) || (u >= 5 && u <= 4 + fresh); };
+    for (let tries = 0; tries < 400; tries++) {
+      let v = 0, used = 0; const nums = [];
+      for (let i = 0; i < count; i++) {
+        const last = i === count - 1, prev = nums[i - 1], A = [], B = [], C = [];
+        for (const n of ops) for (const op of (i === 0 ? ["+"] : ["+", "-"])) {
+          const x = op === "+" ? n : -n, t = v + x; if (t < 0 || t > max) continue;
+          if (x === prev || (x === -prev && !last)) continue;
+          const b = brothersOf(v, op, n, rods); if (!b || b.some(d => !allowed.has(d))) continue;
+          (b.includes(fresh) ? A : ready(t) ? B : C).push(x);
+        }
+        const r = rng(), pool = A.length && r < 2 / 3 ? A : B.length && r < 2 / 3 ? B : A.concat(B, C);
+        if (!pool.length) break;
+        const pick = pool[Math.floor(rng() * pool.length)]; if (A.includes(pick)) used++; nums.push(pick); v += pick;
+      }
+      if (nums.length === count && used >= need) return { nums, answer: v, fresh, uses: used };
+    }
+    return null;
+  }
+
   // оценка на верига (пример от тренажора): движенията на детето се разделят по стъпки – стъпка свършва, щом абакусът покаже междинния резултат
   // → [{ i, n, from, to, code, rule }] ; code: ok | wrong_method | set_result | ... | not_reached (не стигна до междинния резултат)
   function judgeChain(nums, childMoves, rods) {
@@ -259,5 +303,5 @@ const ruleOf = (f) => f.transition ? "Преход" : f.friendBrother ? "При�
     if (k < nums.length) out.push({ i: k, n: nums[k], from: start, to: target, code: "not_reached", rule: plan(start, nums[k] >= 0 ? "+" : "-", Math.abs(nums[k]), rods).rule });
     return { steps: out, final: value(st), ok: k >= nums.length && value(st) === nums.reduce((a, b) => a + b, 0) };
   }
-  root.ABACUS_ENGINE = { UNITS_LEFT, SIDE, col, make, fromValue, value, rodVal, apply, tapMove, plan, judge, consistent, norm, hints, FEEDBACK, tasksFor, chain, TOPICS, simpleExample, simpleOperands, judgeChain };
+  root.ABACUS_ENGINE = { UNITS_LEFT, SIDE, col, make, fromValue, value, rodVal, apply, tapMove, plan, judge, consistent, norm, hints, FEEDBACK, tasksFor, chain, TOPICS, simpleExample, simpleOperands, judgeChain, brothersExample, brothersOf, BRO_ORDER };
 })(typeof window !== "undefined" ? window : this);
