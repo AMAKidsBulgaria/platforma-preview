@@ -120,7 +120,7 @@
 
   // ---- глас: Зори (zr_*), иначе разказвачът (Калина) ----
   let AUDZ = {}, AUD = {}, cur = null;
-  fetch("config/abacus-audio-zori.json?v=8").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
+  fetch("config/abacus-audio-zori.json?v=9").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
   fetch("config/abacus-audio.json?v=4").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
   // „пораснал“ режим (7+, 11.11.2026): Зори е спътник – кратки реплики, само текст (гласът по избор: P.zv); рекорди и значки
   const grown = () => !!P && groupOf(P) !== "5";
@@ -343,7 +343,7 @@
     $("#o-t-grp").onchange = (e) => { P.group = e.target.value; P.classAt = 1; P.hw = {}; P.hwres = {}; P.b = {}; P.halo = {}; useGroup(P); save(); screenTeacher(); };
     $("#o-t-at").onchange = (e) => { const n = +e.target.value; P.classAt = n; P.hw = P.hw || {};
       HW.lessons.forEach(L => { if (L.n < n && !(P.hw[L.id] || []).length) P.hw[L.id] = L.rounds.map((_, i) => i); }); save(); screenTeacher(); };
-    $("#o-t-reset").onclick = () => { P.classAt = 1; P.hw = {}; P.hwres = {}; P.b = {}; P.halo = {}; save(); screenHome(); };
+    $("#o-t-reset").onclick = () => { P.classAt = 1; P.hw = {}; P.hwres = {}; P.b = {}; P.halo = {}; P.tutor = null; P.treports = []; save(); screenHome(); };
   }
   // наблюдение на треньора (тест с деца): същите въпроси като страницата за записите; пази се в P.obs и влиза във файла „Данни от теста“ – без профили и вход
   const OBSQ = [
@@ -1195,6 +1195,49 @@
   const INTRO_T = { G: "Да видим кои цифри познаваш!", A1: "Това е абакусът. Броим само топчетата до гредата.", C1: "Земните топчета струват по едно. Палецът ги вдига.",
     C2: "Небесното топче е пет! Мести го с показалеца.", PN: "Щипка: небесното и земните топчета – заедно, с едно движение.", CH: "Звездна нощ! Смятаме наум с всички числа." };
   const introOf = (s) => INTRO_T[s.id] || (s.kind === "mind" ? `Сега ±${s.n} наум – представи си абакуса!` : `Учим ±${s.n}!`);
+  // „покажи и обясни“ преди детето да опита само: ново умение = обяснение → Зори показва → заедно → сам
+  const TEACH_P = { 1: "Плюс едно: палецът вдига едно топче до гредата. Минус едно: показалецът го сваля.", 2: "Плюс две: палецът вдига две топчета наведнъж.",
+    3: "Плюс три: три топчета наведнъж. Минус три: показалецът сваля три.", 4: "Плюс четири: всичките четири земни топчета с едно движение.",
+    5: "Плюс пет: показалецът сваля небесното топче до гредата. Минус пет: вдига го.", 6: "Плюс шест е щипка: небесното и едно земно топче заедно.",
+    7: "Плюс седем: щипка с две земни топчета.", 8: "Плюс осем: щипка с три земни топчета.", 9: "Плюс девет: щипка с всичките топчета." };
+  const fingered = (ms) => ms.map(m => ({ ...m, finger: fixFinger(m) }));
+  function abHere(v, label) { $("#o-work").innerHTML = `<div class="o-num" id="o-num">${label == null ? "" : label}</div><div class="o-abhost" id="o-abh"></div>`; const ab = abacus($("#o-abh"), 1); ab.enable(false); ab.set(v || 0); return ab; }
+  // „заедно“: туторът осветява следващото движение; следим състоянието на абакуса (бърза щипка = двете движения почти наведнъж – не се губи);
+  // ако детето се отклони – връщаме началото и показваме отново
+  async function togetherDo(ab, moves) {
+    const start = ab.value(), sts = []; let x = E.fromValue(start, 1); moves.forEach(m => { x = E.apply(x, m); sts.push(JSON.stringify(x)); });
+    if (FAST_ON) window.OBS_T = { tutor: 1, kind: "together", task: { a: start, moves } };
+    ab.enable(true); let idx = 0; const show = () => { ab.hint([moves[idx]]); say(fixSay(moves[idx]), "explain"); }; show();
+    await new Promise(res => ab.onChange(() => { const cur = ab.state(), k = sts.indexOf(cur);
+      if (k === sts.length - 1) { ab.onChange(null); return res(); }
+      if (k >= idx) { idx = k + 1; show(); return; }
+      if (k < 0 && cur !== JSON.stringify(E.fromValue(start, 1))) { setTimeout(() => { ab.set(start); idx = 0; show(); }, 600 * FAST); } }));
+    ab.enable(false); }
+  async function teach(s) {
+    if (s.kind === "ready") { $("#o-work").innerHTML = `<div class="o-digits">${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(d => `<b>${d}</b>`).join("")}</div>`;
+      await talk("Това са цифрите от нула до девет.", "explain"); await talk("Ще ти казвам число, а ти го намираш.", "point"); return; }
+    if (s.id === "A1") { let ab = abHere(0); let un = ab.focus(0); await talk("Това е абакусът. Топчетата се движат по пръчката.", "explain"); un();
+      await talk("Отгоре е небесното топче, отдолу са четирите земни топчета.", "point"); await talk("Броим само топчетата, които са до гредата.", "explain");
+      ab = abHere(3, "3"); await talk("Тук са три.", "point"); await talk("Нулираме: връщаме топчетата от гредата.", "explain");
+      await ab.demo(fingered(E.plan(3, "-", 3, 1).moves), false, true); $("#o-num").textContent = "0"; await talk("Сега е нула. Да опитаме заедно!", "joy");
+      ab = abHere(2, "→ 0"); await togetherDo(ab, E.plan(2, "-", 2, 1).moves); await talk("Браво! Сега сам.", "joy"); return; }
+    if (s.id === "C1") { await talk("Земните топчета струват по едно. Палецът ги вдига.", "explain");
+      for (const v of [1, 2, 3, 4]) { const ab = abHere(0, v); say(`Това е ${v}.`, "point"); await ab.demo(fingered(E.plan(0, "+", v, 1).moves), false, true); await afterSay(600); }
+      await talk("Да покажем две заедно!", "joy"); const ab = abHere(0, 2); await togetherDo(ab, E.plan(0, "+", 2, 1).moves); await talk("Браво! Сега сам.", "joy"); return; }
+    if (s.id === "C2") { await talk("Небесното топче е пет! Мести го с показалеца.", "explain");
+      for (const v of [5, 7, 9]) { const ab = abHere(0, v); say(v === 5 ? "Това е 5." : `Това е ${v}: пет и още ${v - 5}.`, "point"); await ab.demo(fingered(E.plan(0, "+", v, 1).moves), true, true); await afterSay(600); }
+      await talk("Да покажем шест заедно!", "joy"); const ab = abHere(0, 6); await togetherDo(ab, E.plan(0, "+", 6, 1).moves); await talk("Браво! Сега сам.", "joy"); return; }
+    if (s.kind === "ab" || s.kind === "pinch") {
+      await talk(s.kind === "pinch" ? "Щипка: небесното и земните топчета – заедно, с едно движение." : TEACH_P[s.n], "explain");
+      for (const easy of [true, false]) { const t = opTask(s, easy), ab = abHere(t.a, `${t.a} ${t.op === "+" ? "+" : "−"} ${t.n}`); say("Гледай!", "point");
+        await ab.demo(fingered(t.moves), t.moves.length > 1, true); $("#o-num").textContent += ` = ${t.target}`; await afterSay(900); }
+      await talk("Сега заедно!", "joy"); const t = opTask(s, true), ab = abHere(t.a, `${t.a} ${t.op === "+" ? "+" : "−"} ${t.n}`); await togetherDo(ab, t.moves);
+      TU.record(P.tutor, s.id, { ok: ab.value() === t.target, method: true, helped: true }); await talk("Браво! Сега сам.", "joy"); return; }
+    if (s.kind === "mind") { const t = opTask(TU.BY["P" + s.n], false), ab = abHere(t.a, `${t.a} ${t.op === "+" ? "+" : "−"} ${t.n}`);
+      await talk("Сега наум: представи си абакуса.", "explain"); await ab.demo(fingered(t.moves), t.moves.length > 1, true); $("#o-num").textContent += ` = ${t.target}`;
+      await talk("Сега смятай без абакус – само в главата си.", "point"); return; }
+    if (s.kind === "chain") { await talk("Звездна нощ! Смятаме наум с всички числа.", "explain"); return; }
+  }
   function tShell(title, blocks, i) {
     app.className = "o-scr o-mis o-tutor";
     app.innerHTML = `<div class="o-mtop"><button class="o-back" id="o-quit">✕ Изход</button><div class="o-pips">${blocks.map((t, j) => `<b class="${j < i ? "d" : j === i ? "c" : ""}" title="${t}"></b>`).join("")}</div><div class="o-mname">${title}</div></div>
@@ -1220,7 +1263,7 @@
     opts = opts || {}; const w = $("#o-work"), t0 = Date.now();
     if (s.kind === "ready") {   // разпознава цифрата: Зори казва число → детето избира
       const v = Math.floor(Math.random() * 10); w.innerHTML = `<div class="o-num">?</div>`; say(`Покажи числото ${v}.`, "point"); voice(String(v));
-      if (FAST_ON) window.OBS_T = { tutor: 1, kind: "ready", target: v }; const opts3 = choices(v, 9), pick = await ask(opts3, v); return { ok: pick === true || pick === v, method: true, helped: false, rt: Date.now() - t0, target: v };
+      if (FAST_ON) window.OBS_T = { tutor: 1, kind: "ready", target: v }; const pick = await ask([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], v); return { ok: pick === true || pick === v, method: true, helped: false, rt: Date.now() - t0, target: v };
     }
     w.innerHTML = `<div class="o-num" id="o-num"></div><div class="o-abhost" id="o-abh"></div>`;
     const ab = abacus($("#o-abh"), 1);
@@ -1239,8 +1282,7 @@
     if (FAST_ON) window.OBS_T = { tutor: 1, kind: opts.together ? "together" : "ab", ab, task, target: task.target };
     ab.set(task.a); $("#o-num").textContent = ex; if (!opts.quiet) say(opts.line || "Смятай на абакуса.", "point");
     if (opts.together) {   // „заедно“: туторът осветява всяко следващо движение, детето го прави
-      for (const m of task.moves) { ab.hint([m]); say(fixSay(m), "explain"); await new Promise(r => ab.onChange(() => r())); ab.onChange(null); await wait(300); }
-      ab.enable(false); const j = E.judge({ start: task.a, op: task.op, n: task.n, rods: 1 }, ab.moves()); return { ok: j.correct, method: !!j.method, helped: true, rt: Date.now() - t0, task };
+      await togetherDo(ab, task.moves); const j = E.judge({ start: task.a, op: task.op, n: task.n, rods: 1 }, ab.moves()); return { ok: j.correct, method: !!j.method, helped: true, rt: Date.now() - t0, task };
     }
     await untilIdle(ab, task.target); ab.enable(false);
     const j = E.judge({ start: task.a, op: task.op, n: task.n, rods: 1 }, ab.moves());
@@ -1285,7 +1327,8 @@
     TU.SKILLS.forEach(s => { sess.before[s.id] = (st.skills[s.id] || {}).status; });
     try {
       tShell("Урок със Зори", TBLOCKS, 0);
-      await talk(`Здравей, ${P.name}! ${pl.pauseNew ? "Днес ще упражним нещо, което още е трудно." : pl.isNew ? "Днес ще научим нещо ново!" : "Да продължим!"}`, "joy");
+      say(`Здравей, ${P.name}!`, "joy"); voice("Здравей!"); await afterSay(1200);
+      await talk(pl.pauseNew ? "Днес ще упражним нещо, което още е трудно." : pl.isNew ? "Днес ще научим нещо ново!" : "Да продължим!", "joy");
       // загрявка: Звездни сигнали на познати числа
       const known = [9, 8, 7, 6, 5, 4, 3].find(n => TU.done(st, "P" + n)) || (TU.done(st, "C2") ? 9 : TU.done(st, "C1") ? 4 : 0);
       if (known) { tStep(1); await PLAY.flash({ topic: "s" + Math.max(2, Math.min(9, known)), speed: 2.5, rounds: 4 }); }
@@ -1294,13 +1337,9 @@
         for (const id of pl.reviews) { const s = TU.BY[id]; let good = 0; for (let i = 0; i < 3; i++) { const x = await tItem(s, { quiet: i > 0 }); if (x.ok && x.method) good++; sess.items++; } TU.review(st, id, good >= 2, Date.now()); save(); } }
       // урокът: текущото умение (най-много едно ново), докато е време и детето не е уморено
       tStep(3); let cur = TU.plan(st).current, newDone = 0; const tries = [];
-      while (cur && sess.items < 14) {
+      while (cur && sess.items < 16) {
         const s = TU.BY[cur], k = st.skills[cur];
-        if (k.status === "ready") { if (newDone >= 2 || (newDone >= 1 && sess.items >= 8)) break; newDone++;
-          await talk(introOf(s), "explain");
-          if (s.kind === "ab" || s.id === "PN") { const t1 = opTask(s, true); $("#o-work").innerHTML = `<div class="o-num">${t1.a} ${t1.op === "+" ? "+" : "−"} ${t1.n}</div><div class="o-abhost" id="o-abh"></div>`; const ab = abacus($("#o-abh"), 1); ab.enable(false); ab.set(t1.a);
-            await ab.demo(t1.moves.map(m => ({ ...m, finger: fixFinger(m) })), t1.moves.length > 1, true);
-            await talk("Сега заедно!", "joy"); const x = await tItem(s, { task: opTask(s, true), together: true }); TU.record(st, s.id, { ok: x.ok, method: x.method, helped: true, rtMs: x.rt }); await talk("Сега сам!", "joy"); } }
+        if (k.status === "ready") { if (newDone >= 3 || (newDone >= 1 && sess.items >= 10)) break; newDone++; await teach(s); }
         if (s.kind === "mind") tStep(4);
         const x = await tItem(s, { easy: sess.easy > 0 }); if (sess.easy > 0) sess.easy--; sess.items++;
         const strat = st.skills[cur].strategy; TU.record(st, s.id, { ok: x.ok, method: x.method, helped: x.helped, strategy: strat, rtMs: x.rt }); tutorStars(); save();   // запис след всеки пример – нищо не се губи при изход

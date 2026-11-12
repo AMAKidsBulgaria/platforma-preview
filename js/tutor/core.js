@@ -46,7 +46,8 @@
     const n = last.filter(x => x.indep).length;
     if (k.status === "learning" || k.status === "stalled") {
       if (s.kind === "mind" || s.kind === "chain") { if (last.length >= RULE.mindWindow && n >= RULE.mindNeed) promote(st, id, t); }
-      else if (s.kind === "ready" || s.kind === "intro") { if (n >= 2) promote(st, id, t); }
+      else if (s.kind === "ready") { const l6 = k.tries.slice(-6); if (l6.length >= 6 && l6.filter(x => x.indep).length >= 5) promote(st, id, t); }   // всичките цифри: 5 от 6
+      else if (s.kind === "intro") { if (k.tries.slice(-3).filter(x => x.indep).length >= 3) promote(st, id, t); }
       else if (s.kind === "set" || s.kind === "pinch") { if (last.length >= 5 && last.slice(-5).filter(x => x.indep).length >= 4) promote(st, id, t); }
       else if (last.length >= RULE.window && n >= RULE.need) promote(st, id, t);
     }
@@ -110,10 +111,11 @@
 
   // ---- (4) сесия ----
   // умора: отговорите с 40% по-бавни от медианата на сесията или 3 грешки в последните 5
-  function tired(tries) {
-    if (tries.length < 6) return false; const rts = tries.map(x => x.rt).filter(Boolean), last5 = tries.slice(-5);
+  function tired(tries) {   // поне 8 примера в сесията, преди да съдим за умора
+    if (tries.length < 8) return false; const last5 = tries.slice(-5);
     if (last5.filter(x => !x.ok).length >= 3) return true;
-    if (rts.length >= 6) { const sorted = rts.slice(0, -3).sort((a, b) => a - b), med = sorted[Math.floor(sorted.length / 2)], recent = rts.slice(-3).reduce((a, b) => a + b, 0) / 3; if (recent > med * 1.4) return true; }
+    const rts = tries.map(x => x.rt).filter(Boolean);
+    if (rts.length >= 10) { const sorted = rts.slice(0, -3).sort((a, b) => a - b), med = sorted[Math.floor(sorted.length / 2)], recent = rts.slice(-3).reduce((a, b) => a + b, 0) / 3; if (recent > med * 1.4) return true; }
     return false;
   }
   // план на следващата сесия: повторения, които са дошли; текущото умение; ново ли е; пауза при застой

@@ -550,3 +550,5 @@ html.o-still .o-regbox { animation: none; }
 .o-repwarn { background: #3E2A10; border: 1px solid #F2C766; border-radius: 12px; padding: 8px 12px; font: 700 14px "Nunito"; color: #FFE3A8; }
 .o-reptip { background: #2E2714; border-radius: 12px; padding: 8px 12px; font: 700 14px "Nunito"; }
 @media (max-width: 520px) { .o-reprow { grid-template-columns: 1fr; gap: 2px; } }
+.o-digits { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; max-width: 520px; margin: auto; } .o-digits b { font: 900 clamp(34px, 6vw, 60px) "Nunito"; color: var(--ink); background: #0d1030; border: 2px solid #ffffff30; border-radius: 16px; text-align: center; padding: 6px 0; }
+.o-tutor .o-ch { flex-wrap: wrap; justify-content: center; max-width: 620px; margin: 0 auto; } .o-tutor .o-ch button { min-width: 72px; }
