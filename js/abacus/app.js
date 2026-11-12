@@ -131,7 +131,7 @@
   }
 
   // ---- докосване и плъзгане ----
-  // classic: само плъзгане (като истинския абакус) – нагоре/надолу в посоката на пръста; докосване без плъзгане не мести нищо.
+  // classic: плъзгане в посоката на пръста (като истинския абакус) или докосване (12.11.2026 – по-лесно при по-висока скорост).
   // touch/mind: действа веднага при докосване (две ръце / щипка – едновременно, всяка с отделен пръст).
   function act(el) {
     const m = E.tapMove(st, +el.dataset.rod, el.dataset.bead, +el.dataset.k || 0), ns = E.apply(st, m); if (!ns) return null;
@@ -147,7 +147,7 @@
         p.done = true; const m = E.tapMove(st, +el.dataset.rod, el.dataset.bead, +el.dataset.k || 0);
         const towardBeam = el.dataset.bead === "h" ? dy > 0 : dy < 0;   // към гредата = включва топчето
         if (towardBeam === (m.d > 0)) act(el); };
-      const up = (e) => { if (e.pointerId !== p.id) return; window.removeEventListener("pointermove", move); window.removeEventListener("pointerup", up); window.removeEventListener("pointercancel", up); };
+      const up = (e) => { if (e.pointerId !== p.id) return; if (!p.done) act(el); window.removeEventListener("pointermove", move); window.removeEventListener("pointerup", up); window.removeEventListener("pointercancel", up); };
       window.addEventListener("pointermove", move); window.addEventListener("pointerup", up); window.addEventListener("pointercancel", up);
     });
   }
@@ -167,7 +167,7 @@
       </div>
     </section>
     <section class="aa-play" id="aa-play" hidden>
-      <header class="aa-bar"><button class="aa-ib back" id="aa-back" aria-label="Назад към избора">←</button>
+      <header class="aa-bar"><button class="aa-ib back" id="aa-back" aria-label="Назад към избора">←</button><button class="aa-ib zero" id="aa-zero" aria-label="Нулирай абакуса">0</button>
         <div class="aa-val" id="aa-val" aria-live="off">0</div><div class="ab-task" id="ab-task"></div>
         <button class="aa-ib snd" id="aa-snd" aria-label="Звук"></button><button class="aa-ib close" id="aa-close2" aria-label="Затвори">✕</button></header>
       <div class="aa-board" id="aa-board"></div>
@@ -179,6 +179,11 @@
     const exit = () => { store(); location.href = EXIT; };
     ["#aa-exit1", "#aa-close1", "#aa-close2"].forEach(s => $(s).onclick = exit);
     $("#aa-back").onclick = () => { store(); $("#aa-play").hidden = true; $("#aa-home").hidden = false; };
+    // нулиране: всички топчета в изходна позиция (записва се в сесията като „reset“)
+    $("#aa-zero").onclick = () => { if (!sess) return; const had = E.value(st) !== 0 || st.some(r => r.h || r.e); st = E.make(RODS); update(null, false);
+      if (had) { click(3); sess.moves.push({ t: Math.round(performance.now() - sess.t0), reset: true, v: 0 }); clearTimeout(storeT); storeT = setTimeout(store, 400); }
+      try { if (window.ABACUS_HOOK) window.ABACUS_HOOK(null); } catch (e) {}
+      if (DEBUG) { const l = $("#aa-log"); l.textContent = "↺ нулиране\n" + l.textContent; } };
     $("#aa-snd").onclick = () => { set.sound = !set.sound; save(SKEY, set); sndBtn(); if (set.sound) click(1); };
     sndBtn();
   }

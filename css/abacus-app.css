@@ -71,3 +71,4 @@ body[data-mode="mind"] .aa-val { color: #9FB0E8; letter-spacing: .3em; }
 .live-done { position: fixed; right: max(14px, env(safe-area-inset-right)); bottom: 50px; z-index: 5; font: 900 22px "Nunito", sans-serif; padding: 10px 26px; border-radius: 16px; background: #2E9E5B; color: #fff; box-shadow: 0 4px 0 #1F7A44; }
 
 .aa-log { position: fixed; left: 10px; bottom: 10px; margin: 0; max-width: 46vw; max-height: 34vh; overflow: hidden; font: 12px ui-monospace, Menlo, monospace; background: rgba(255,255,255,.92); border-radius: 10px; padding: 6px 8px; color: var(--ink); pointer-events: none; }
+.aa-ib.zero { background: #E3487A; font-size: 26px; } .aa-ib.close { background: #8B93B8; }
