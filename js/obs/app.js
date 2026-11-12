@@ -1175,7 +1175,8 @@
   hwReady.then(() => {
     if (Q.get("test") === "1" || Q.get("test") === "0") { TESTMODE = Q.get("test") === "1"; try { localStorage.setItem("obs.test", Q.get("test")); } catch (e) {} }
     // тест с деца: винаги изборът „Дете 1–6“, дори ако на устройството има влязло дете от платформата
-    if (CHILD && !TESTMODE) { DB[CHILD] = DB[CHILD] || { id: CHILD, name: "Аз", av: "a1", cur: 1, classAt: 1, b: {}, halo: {}, hw: {} }; P = DB[CHILD]; useGroup(P); fromServer(); applyMotion(); screenHome(); return; }
+    // изрично избран профил във връзката (?p=…) е с предимство пред влязлото дете от платформата
+    if (CHILD && !TESTMODE && !(Q.get("p") && ALLP.some(x => x.id === Q.get("p")))) { DB[CHILD] = DB[CHILD] || { id: CHILD, name: "Аз", av: "a1", cur: 1, classAt: 1, b: {}, halo: {}, hw: {} }; P = DB[CHILD]; useGroup(P); fromServer(); applyMotion(); screenHome(); return; }
     if (Q.get("p") && ALLP.some(x => x.id === Q.get("p"))) { P = prof(Q.get("p")); if (Q.get("class")) { P.classAt = +Q.get("class"); save(); } applyMotion(); Q.get("m") ? startMission(+Q.get("m")) : Q.get("map") ? screenMap() : screenHome(); } else screenProfiles();
   });
   // ======================= AI ТУТОР (етап 1, 12.11.2026) =======================
