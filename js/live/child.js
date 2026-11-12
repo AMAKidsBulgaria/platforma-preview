@@ -41,7 +41,7 @@
     for (const k of [3, 2, 1]) { show(String(k)); await wait(600); }
     show(""); await wait(300); cur.t0 = Date.now();
     const ms = (p.speed || 2) * 1000, gap = Math.min(250, Math.max(60, ms * 0.12));
-    for (let i = 0; i < p.nums.length; i++) { const n = p.nums[i]; show(i === 0 ? String(n) : (n > 0 ? "+" + n : "−" + -n), n < 0 && i > 0 ? "minus" : "plus"); await wait(ms - gap); show(""); await wait(gap); }
+    for (let i = 0; i < p.nums.length; i++) { const n = p.nums[i]; show(n > 0 ? "+" + n : "−" + -n, n < 0 && i > 0 ? "minus" : "plus"); await wait(ms - gap); show(""); await wait(gap); }
     show("= ?"); if (say) say.textContent = "Готово ли е? Натисни „Готово“."; ensureBtn().hidden = false;
   }
   function finish() {

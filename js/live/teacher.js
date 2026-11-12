@@ -90,7 +90,7 @@
   }
   const CODE = { ok: "✓", wrong_method: "верен отговор, друг път", set_result: "нагласи отговора без правилото", forgot_complement: "забрави брата", used_number_not_brother: "махна числото вместо брата",
     forgot_carry: "забрави едното " + ABACUS_ENGINE.SIDE, forgot_borrow: "забрави да махне едно " + ABACUS_ENGINE.SIDE, wrong_value: "грешно", not_reached: "не стигна до", impossible: "невъзможно движение" };
-  const fmtN = (nums) => nums.map((n, i) => i === 0 ? String(n) : (n > 0 ? "+" + n : "−" + -n)).join(" ");
+  const fmtN = (nums) => nums.map((n) => n > 0 ? "+" + n : "−" + -n).join(" ");
   function resBadge(k) { const r = k.result; if (!r) return ""; if (r.pending) return '<div class="lv-res wait">смята…</div>';
     return `<div class="lv-res ${r.ok ? "ok" : "no"}">${r.ok ? "✓ " : "✗ "}${r.value} · ${r.sec.toFixed(1)} с</div>`; }
   function resPanel(k) {
