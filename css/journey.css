@@ -1,0 +1,66 @@
+/* „Звездният път“ – интерфейсът над света (PixiJS) */
+:root { --gold: #FFC94A; --gold2: #F29A1E; --ink: #FFF7E6; --night: #0B0E2A; --glass: rgba(18, 22, 64, .72); --line: rgba(255, 233, 168, .35); --plus: #8FC7FF; --minus: #FF9C8A; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--night); color: var(--ink); font-family: "Nunito", system-ui, sans-serif; user-select: none; -webkit-user-select: none; overscroll-behavior: none; }
+#world { position: fixed; inset: 0; } #world canvas { display: block; }
+#ui { position: fixed; inset: 0; pointer-events: none; } #ui > * { pointer-events: auto; }
+button { font: inherit; color: inherit; border: 0; cursor: pointer; }
+.j-top { position: absolute; left: 0; right: 0; top: 0; display: flex; align-items: center; gap: 10px; padding: max(10px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) 8px max(14px, env(safe-area-inset-left)); pointer-events: none; }
+.j-top > * { pointer-events: auto; }
+.j-chip { display: flex; align-items: center; gap: 6px; height: 46px; padding: 0 14px 0 8px; border-radius: 99px; background: var(--glass); border: 2px solid var(--line); backdrop-filter: blur(6px); box-shadow: 0 4px 14px #0006; font: 800 20px "Baloo 2", "Nunito"; }
+.j-flame { font-size: 24px; } .j-gem { width: 22px; height: 22px; border-radius: 6px; transform: rotate(45deg); background: linear-gradient(135deg, #BFF3FF, #4FC3F7 55%, #1E7FD0); box-shadow: 0 0 12px #4FC3F7aa; display: inline-block; margin: 0 4px; }
+.j-title { flex: 1; text-align: center; display: grid; line-height: 1.05; } .j-title b { font: 800 26px "Baloo 2"; color: var(--gold); text-shadow: 0 2px 10px #000a; } .j-title small { font: 800 13px "Nunito"; opacity: .8; }
+.j-crea { padding: 0 8px; position: relative; width: 58px; justify-content: center; } .j-crea img { height: 40px; filter: drop-shadow(0 0 8px #FFC94A88); }
+.j-crea i { position: absolute; left: 8px; right: 8px; bottom: 4px; height: 4px; border-radius: 4px; background: #ffffff22; } .j-crea i::after { content: ""; position: absolute; inset: 0; width: calc(var(--p) * 100%); border-radius: 4px; background: var(--gold); }
+.j-zori { position: absolute; left: max(10px, env(safe-area-inset-left)); bottom: max(96px, calc(env(safe-area-inset-bottom) + 96px)); display: flex; flex-direction: column-reverse; align-items: flex-start; gap: 6px; pointer-events: none; }
+.j-zori img { height: min(22vh, 170px); filter: drop-shadow(0 8px 14px #0009); transform-origin: 50% 100%; }
+.j-bub { max-width: min(46vw, 300px); margin-left: 30px; background: #FFF7E6; color: #2B2140; font: 800 16px/1.3 "Nunito"; padding: 10px 14px; border-radius: 18px 18px 18px 4px; }
+.j-bub { border-radius: 18px 18px 18px 4px; box-shadow: 0 6px 16px #0007; transform-origin: 0 100%; }
+.j-bub[hidden] { display: none; }
+.j-bottom { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: center; padding: 0 16px max(16px, env(safe-area-inset-bottom)); pointer-events: none; }
+.j-go { pointer-events: auto; display: flex; align-items: center; gap: 14px; padding: 12px 30px 12px 18px; border-radius: 26px; background: linear-gradient(180deg, #FFD86A, #F5A623); color: #3A2400; box-shadow: 0 7px 0 #B36B00, 0 14px 30px #000a; text-align: left; }
+.j-go:active { transform: translateY(5px) !important; box-shadow: 0 2px 0 #B36B00; } .j-go-ic { font-size: 34px; } .j-go b { display: block; font: 800 26px/1 "Baloo 2"; } .j-go small { display: block; font: 800 14px "Nunito"; opacity: .8; }
+.j-done { font: 800 26px "Baloo 2"; color: var(--gold); text-shadow: 0 2px 14px #000; padding-bottom: 10px; }
+.j-card { position: absolute; left: 50%; top: 46%; transform: translateX(-50%); background: var(--glass); border: 2px solid var(--line); border-radius: 18px; padding: 10px 18px; text-align: center; display: grid; }
+.j-card b { font: 800 22px "Baloo 2"; color: var(--gold); } .j-card small { font: 800 13px "Nunito"; opacity: .85; } .j-card[hidden] { display: none; }
+/* мисията */
+.j-mbar { position: absolute; left: 0; right: 0; top: 0; padding: max(10px, env(safe-area-inset-top)) 16px 0; display: grid; gap: 8px; justify-items: center; }
+.j-route { position: relative; width: min(560px, 80vw); height: 40px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px 0 0; }
+.j-route::before { content: ""; position: absolute; left: 0; right: 30px; top: 50%; height: 4px; background: repeating-linear-gradient(90deg, #ffffff55 0 8px, transparent 8px 16px); }
+.j-route i { position: relative; width: 18px; height: 18px; border-radius: 50%; background: #2B2F66; border: 3px solid #8E8AD8; } .j-route i.now { border-color: var(--gold); box-shadow: 0 0 12px var(--gold); } .j-route i.done { background: var(--gold); border-color: #FFF3C4; }
+.j-mship { position: absolute; left: 0; top: -2px; font-size: 26px; transform: translateX(-50%) rotate(45deg); } .j-mstar { position: absolute; right: 0; top: 2px; font-size: 30px; color: var(--gold); text-shadow: 0 0 14px var(--gold); }
+.j-meter { position: relative; width: min(420px, 70vw); height: 16px; border-radius: 99px; background: #ffffff18; border: 2px solid var(--line); overflow: hidden; }
+.j-meter b { position: absolute; inset: 0 auto 0 0; background: linear-gradient(90deg, #4FC3F7, #BFF3FF); box-shadow: 0 0 14px #4FC3F7; border-radius: 99px; } .j-meter span { position: absolute; inset: 0; text-align: center; font: 800 11px/12px "Nunito"; letter-spacing: .1em; text-transform: uppercase; color: #fff; text-shadow: 0 1px 2px #000; }
+.j-panel { position: absolute; right: max(16px, env(safe-area-inset-right)); left: max(16px, 30vw); top: 104px; bottom: max(16px, env(safe-area-inset-bottom)); border-radius: 28px; background: var(--glass); border: 2px solid var(--line); backdrop-filter: blur(8px); box-shadow: 0 18px 50px #000a; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 14px; }
+.j-rt { font: 800 clamp(30px, 5vw, 46px) "Baloo 2"; color: var(--gold); text-shadow: 0 0 24px #FFC94A88; }
+.j-flash { height: 58%; display: flex; justify-content: center; } .j-ab { height: 100%; width: auto; filter: drop-shadow(0 10px 20px #0008); }
+.j-opts { display: flex; gap: 14px; } .j-opts button, .j-kp button { min-width: 84px; height: 84px; border-radius: 22px; font: 800 40px "Baloo 2"; background: linear-gradient(180deg, #3A4196, #262B6B); border: 3px solid #6B6FC8; box-shadow: 0 6px 0 #161A45; }
+.j-opts button.ok, .j-kp button.ok { background: linear-gradient(180deg, #5EE59A, #22A85E); border-color: #B6F5D0; } .j-opts button.no { background: linear-gradient(180deg, #FF8B8B, #D5455A); }
+.j-calc { display: grid; justify-items: center; } .j-num { font: 800 clamp(80px, 16vh, 150px)/1 "Baloo 2"; color: var(--plus); text-shadow: 0 0 34px currentColor; min-height: 1em; }
+.j-num.minus { color: var(--minus); } .j-num.ask { color: #fff; } .j-num.good { color: #7CF0AE; } .j-hint { font: 800 15px "Nunito"; opacity: .75; }
+.j-kp { display: grid; grid-template-columns: repeat(6, auto); gap: 8px; justify-content: center; align-items: center; } .j-kp button { min-width: 62px; height: 62px; font-size: 30px; }
+.j-kv { grid-column: 1 / -1; text-align: center; font: 800 40px "Baloo 2"; min-height: 44px; } .j-kv.no { color: var(--minus); }
+.j-combo { position: absolute; left: 50%; top: 40%; transform: translateX(-50%); font: 800 40px "Baloo 2"; color: #FFE08A; text-shadow: 0 0 20px #FF9F1C, 0 3px 0 #8A4B00; pointer-events: none; opacity: 0; }
+.j-spark { position: fixed; z-index: 50; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 4px; transform: rotate(45deg); background: radial-gradient(#fff, #4FC3F7); box-shadow: 0 0 14px #4FC3F7; pointer-events: none; }
+/* награди */
+.j-modal { position: fixed; inset: 0; z-index: 40; background: #05071acc; display: grid; place-items: center; padding: 16px; }
+.j-mbox { position: relative; width: min(460px, 100%); max-height: 100%; overflow: auto; border-radius: 30px; background: linear-gradient(180deg, #232A73, #141A4A); border: 3px solid var(--line); box-shadow: 0 30px 80px #000; padding: 20px 22px; text-align: center; display: grid; gap: 8px; justify-items: center; }
+.j-mbox h2 { margin: 0; font: 800 34px "Baloo 2"; color: var(--gold); text-shadow: 0 0 20px #FFC94A66; } .j-mbox p { margin: 0; font: 800 16px "Nunito"; }
+.j-rays { position: absolute; inset: -40%; background: repeating-conic-gradient(from 0deg, #FFC94A14 0 10deg, transparent 10deg 20deg); animation: j-spin 18s linear infinite; pointer-events: none; z-index: -1; }
+.j-rew { overflow: hidden; isolation: isolate; } @keyframes j-spin { to { transform: rotate(360deg); } }
+.j-st { opacity: .85; } .j-stars span { font-size: 54px; color: #3A3F80; display: inline-block; text-shadow: 0 3px 0 #0006; } .j-stars span.on { color: var(--gold); text-shadow: 0 0 18px #FFC94A, 0 3px 0 #8A5A00; }
+.j-creature { position: relative; width: 220px; height: 240px; } .j-creature.small { width: 160px; height: 175px; } .j-creature img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.j-creature .sil { filter: brightness(0) invert(.2) sepia(1) hue-rotate(200deg) saturate(2); opacity: .55; } .j-creature .fill { filter: drop-shadow(0 0 16px #FFC94Aaa); }
+.j-gain { display: flex; align-items: center; gap: 6px; font: 800 16px "Nunito"; }
+.j-btn { padding: 12px 26px; border-radius: 18px; background: linear-gradient(180deg, #FFD86A, #F5A623); color: #3A2400; font: 800 20px "Baloo 2"; box-shadow: 0 5px 0 #B36B00; } .j-big { font-size: 24px; padding: 14px 34px; }
+@media (orientation: portrait) { .j-panel { left: 12px; right: 12px; top: 96px; bottom: max(150px, calc(env(safe-area-inset-bottom) + 150px)); } .j-zori { bottom: max(10px, env(safe-area-inset-bottom)); } .j-zori img { height: 120px; } .j-go b { font-size: 22px; } .j-bottom { justify-content: flex-end; }
+  .j-bottom { padding-left: 130px; } .j-kp { grid-template-columns: repeat(4, auto); } }
+@media (max-height: 500px) { .j-zori { bottom: 10px; } .j-bub { max-width: 34vw; font-size: 14px; } .j-top { padding-top: 6px; } .j-chip { height: 38px; font-size: 17px; } .j-title b { font-size: 21px; } .j-zori img { height: 110px; } .j-go { padding: 8px 22px 8px 14px; } .j-go b { font-size: 21px; }
+  .j-panel { top: 82px; left: 32vw; } .j-route { height: 30px; } .j-opts button { height: 66px; min-width: 70px; font-size: 32px; } .j-kp button { height: 46px; min-width: 50px; font-size: 22px; } .j-num { font-size: 72px; } .j-kv { font-size: 28px; min-height: 30px; } }
+@media (prefers-reduced-motion: reduce) { .j-rays { animation: none; } }
+@media (max-height: 560px) and (orientation: landscape) {
+  .j-rew { width: min(720px, 100%); grid-template-columns: auto 1fr; grid-template-areas: "c h" "c t" "c s" "c p" "c g" "c b"; text-align: left; justify-items: start; column-gap: 22px; row-gap: 4px; padding: 16px 22px; }
+  .j-rew h2 { grid-area: h; font-size: 30px; } .j-rew .j-st { grid-area: t; } .j-rew .j-stars { grid-area: s; } .j-rew .j-stars span { font-size: 40px; }
+  .j-rew .j-creature { grid-area: c; align-self: center; width: 200px; height: 220px; } .j-rew > p:not(.j-st) { grid-area: p; } .j-rew .j-gain { grid-area: g; } .j-rew .j-btn { grid-area: b; margin-top: 6px; }
+}
+.j-flash { position: relative; } .j-q { position: absolute; inset: 0; display: grid; place-items: center; font: 800 90px "Baloo 2"; color: #ffffff55; }
