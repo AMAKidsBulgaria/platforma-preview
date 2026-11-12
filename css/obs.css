@@ -556,3 +556,17 @@ html.o-still .o-regbox { animation: none; }
 .o-trabk { flex: none; height: 100%; max-width: 50%; display: flex; align-items: center; justify-content: center; }
 .o-trabk .o-abhost { height: 100%; display: flex; align-items: center; } .o-trabk .o-ab { height: 100%; width: auto; max-height: 100%; }
 @media (orientation: portrait) { .o-trabk { height: auto; max-width: none; flex: 1 1 auto; min-height: 0; align-self: center; } }
+/* урок за ново число: групи звезди, писане по точки, пауза, кула, колекция */
+.o-grps { gap: 14px; } .o-grps button { padding: 6px; width: min(26vw, 190px); height: auto; } .o-grp { width: 100%; height: auto; display: block; }
+.o-trace { display: grid; justify-items: center; gap: 10px; height: 100%; } .o-trace canvas { height: min(58vh, 440px); width: auto; max-width: 100%; touch-action: none; background: #0d1030; border-radius: 22px; border: 2px solid #ffffff22; }
+.o-move { font-size: clamp(120px, 26vh, 240px) !important; animation: o-bounce .6s ease; } @keyframes o-bounce { 0% { transform: scale(.6); } 60% { transform: scale(1.12); } 100% { transform: scale(1); } }
+.o-tower { display: flex; flex-direction: column-reverse; align-items: center; gap: 2px; margin-left: 8px; } .o-tower i { display: block; width: 26px; height: 7px; border-radius: 2px; background: hsl(calc(30 + var(--h) * 22) 80% 60%); }
+.o-tower b { font: 900 13px "Nunito"; color: var(--gold); } .o-towerbig { display: grid; place-items: center; height: 100%; } .o-towerbig .o-tower { transform: scale(3); }
+.o-gift { display: grid; place-items: center; height: 100%; } .o-gift b { font: 900 min(34vh, 240px) "Nunito"; color: var(--gold); text-shadow: 0 0 40px #F5C04A88; animation: o-bounce .8s ease; }
+.o-coll div { display: flex; gap: 4px; } .o-coll b { width: 28px; height: 34px; display: grid; place-items: center; border-radius: 8px; font: 900 18px "Nunito"; background: #0d1030; color: #ffffff30; border: 1px solid #ffffff20; }
+.o-coll b.on { color: #2B2140; background: var(--gold); border-color: var(--gold); }
+html.o-still .o-move, html.o-still .o-gift b { animation: none; }
+.o-hubscr:has(.o-coll) .o-htitle { display: none; }
+.o-trace .o-sec { height: auto; padding: 10px 18px; align-self: start; }
+.o-hubscr:has(.o-coll) .o-hbadge { top: auto; bottom: 120px; left: auto; right: 16px; }
+@media (max-width: 520px) and (orientation: portrait) { .o-hubscr:has(.o-coll) .o-hbadge { display: none; } .o-coll b { width: 24px; height: 30px; font-size: 15px; } }
