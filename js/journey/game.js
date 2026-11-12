@@ -188,7 +188,7 @@
       gsap.to(".j-mship", { left: `${(r / ROUNDS.length) * 100}%`, duration: .8, ease: "power2.inOut" });
       await roundTitle(R.name);
       for (let q = 0; q < R.n; q++) {
-        const ok = R.kind === "flash" ? await flashQ(st) : await calcQ(st, R.longer);
+        const ok = R.kind === "flash" ? await flashQ(st, q === 0) : await calcQ(st, R.longer);
         all++; if (ok) { okAll++; combo++; SFX.good(combo); if (combo >= 3) showCombo(combo); } else { combo = 0; SFX.bad(); }
         gsap.to("#j-meter b", { width: `${(okAll / total) * 100}%`, duration: .5, ease: "power2.out" });
       }
@@ -209,16 +209,23 @@
     s += bead(st.h ? 112 : 48, !!st.h, true); for (let k = 1; k <= 4; k++) { const on = k <= st.e; s += bead(on ? 178 + (k - 1) * 48 : 398 - (4 - k) * 48, on); }
     return s + "</svg>"; }
   function choices3(v, max) { const s = new Set([v]); while (s.size < 3) s.add(Math.floor(Math.random() * (max + 1))); return [...s].sort(() => Math.random() - .5); }
-  async function flashQ(st) {
+  // Звездни сигнали: „Гледай!“ → абакусът за миг → „Кое число видя?“ (абакусът остава като бледа сянка); „↺ Покажи пак“ – веднъж, без звезда
+  async function flashQ(st, first) {
     const t = TOPIC(st.topic), max = t.opMax >= 5 ? 9 : t.opMax, v = Math.floor(Math.random() * (max + 1)), p = $("#j-panel");
-    p.innerHTML = `<div class="j-flash">${abSvg(v)}</div>`; gsap.fromTo(".j-flash", { scale: .8, opacity: 0 }, { scale: 1, opacity: 1, duration: .25 });
-    await wait(1600); gsap.to(".j-flash .j-ab", { opacity: .12, duration: .2 }); p.querySelector(".j-flash").insertAdjacentHTML("beforeend", `<span class="j-q">?</span>`); await wait(250);
-    const opts = choices3(v, max); p.insertAdjacentHTML("beforeend", `<div class="j-opts">${opts.map(o => `<button data-v="${o}">${o}</button>`).join("")}</div>`);
+    p.innerHTML = `<div class="j-ask">Гледай абакуса!</div><div class="j-flash"><div class="j-abw">${abSvg(0)}</div></div>`;
+    const show = async () => { const w = p.querySelector(".j-abw"); w.innerHTML = abSvg(v); w.style.opacity = 1; gsap.fromTo(w, { scale: .85 }, { scale: 1, duration: .25, ease: "back.out(2)" });
+      await wait(first ? 2200 : 1700); gsap.to(w, { opacity: .18, duration: .25 }); };
+    await wait(700); await show();
+    p.querySelector(".j-ask").textContent = "Кое число видя?"; speak("Кое число видя?");
+    const opts = choices3(v, max); p.insertAdjacentHTML("beforeend", `<div class="j-opts">${opts.map(o => `<button data-v="${o}">${o}</button>`).join("")}</div><button class="j-again" id="j-again">↺ Покажи пак</button>`);
     gsap.from(".j-opts button", { y: 30, opacity: 0, stagger: .06, duration: .3, ease: "back.out(2)" }); if (Q.get("fast") === "1") window.J_T = { v };
+    let again = false; $("#j-again").onclick = async () => { if (again) return; again = true; $("#j-again").disabled = true; await show(); };
     const pick = await new Promise(res => p.querySelectorAll(".j-opts button").forEach(b => b.onclick = () => res(b)));
-    const ok = +pick.dataset.v === v; p.querySelectorAll(".j-opts button").forEach(b => { b.disabled = true; if (+b.dataset.v === v) b.classList.add("ok"); });
-    if (ok) { energyFly(pick, 3); gsap.fromTo(pick, { scale: 1.25 }, { scale: 1, duration: .4, ease: "elastic.out(1,.4)" }); } else { pick.classList.add("no"); gsap.fromTo(pick, { x: -10 }, { x: 0, duration: .4, ease: "elastic.out(1,.3)" }); gsap.to(".j-flash .j-ab", { opacity: 1, duration: .3 }); }
-    await wait(ok ? 900 : 1600); return ok;
+    const ok = +pick.dataset.v === v && !again; p.querySelectorAll(".j-opts button").forEach(b => { b.disabled = true; if (+b.dataset.v === v) b.classList.add("ok"); }); $("#j-again").hidden = true;
+    gsap.to(".j-abw", { opacity: 1, duration: .3 });
+    if (+pick.dataset.v === v) { if (ok) energyFly(pick, 3); gsap.fromTo(pick, { scale: 1.25 }, { scale: 1, duration: .4, ease: "elastic.out(1,.4)" }); p.querySelector(".j-ask").textContent = ok ? `Точно така – ${v}!` : `Да – ${v}!`; }
+    else { pick.classList.add("no"); gsap.fromTo(pick, { x: -10 }, { x: 0, duration: .4, ease: "elastic.out(1,.3)" }); p.querySelector(".j-ask").textContent = `Беше ${v}.`; }
+    await wait(+pick.dataset.v === v ? 1000 : 1800); return ok;
   }
   async function calcQ(st, longer) {
     const t = TOPIC(st.topic), cnt = st.act[0] + (longer ? 2 : 0), ex = E.simpleExample({ ...t, count: cnt, must: st.must && Math.random() < .5 ? Math.min(st.must, t.opMax) : 0 }) || E.simpleExample({ ...t, count: cnt });

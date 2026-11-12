@@ -64,3 +64,8 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; }
   .j-rew .j-creature { grid-area: c; align-self: center; width: 200px; height: 220px; } .j-rew > p:not(.j-st) { grid-area: p; } .j-rew .j-gain { grid-area: g; } .j-rew .j-btn { grid-area: b; margin-top: 6px; }
 }
 .j-flash { position: relative; } .j-q { position: absolute; inset: 0; display: grid; place-items: center; font: 800 90px "Baloo 2"; color: #ffffff55; }
+.j-ask { font: 800 clamp(22px, 3.4vw, 32px) "Baloo 2"; color: var(--gold); text-shadow: 0 0 14px #FFC94A55; }
+.j-abw { height: 100%; display: flex; justify-content: center; } .j-q { display: none; }
+.j-again { pointer-events: auto; font: 800 15px "Nunito"; padding: 6px 14px; border-radius: 99px; background: #ffffff18; border: 1px solid #ffffff40; } .j-again:disabled { opacity: .4; } .j-again[hidden] { display: none; }
+@media (max-height: 500px) { .j-ask { font-size: 20px; } .j-flash { height: 48%; } }
+.j-flash { aspect-ratio: 220 / 440; max-width: 100%; } .j-abw, .j-flash .j-ab { width: 100%; height: 100%; }
