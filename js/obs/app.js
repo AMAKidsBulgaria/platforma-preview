@@ -246,6 +246,7 @@
     $("#o-rgh").onclick = () => screenHome(); $("#o-rgm").onclick = () => { mapRegion = "orion"; screenMap(); };
   }
   function screenHome() {
+    sceneOff();
     if (!REVIEW && classAt() > AURORA_N[groupOf(P)] && !(P.seen || {}).orion) return screenRegion("orion");
     gen++; M = null; P.cur = classAt();
     const all = Object.keys(STAR).filter(k => regionOf(+k) === regionOf(classAt())), lit = all.filter(k => (P.b[k] || 0) >= 3).length, L = hwCurrent(), older = hwOlder();
@@ -254,6 +255,7 @@
     const dots = LL ? `<span class="o-hdots">${LL.rounds.map((_, k) => `<i class="${st.done.includes(k) ? "on" : L && k === st.next ? "now" : ""}"></i>`).join("")}</span>` : "";
     let sub = L ? `Занятие ${L.n} · ${L.rounds[st.next].label} · кръг ${st.next + 1} от ${L.rounds.length}` : "Домашното е готово – виж звездите";
     if (isTutor()) { const tp = TU.plan(tutorState()); sub = "Урок със Зори · " + (tp.current ? TU.BY[tp.current].name : "модулът е завършен"); }
+    if (SCENE_ON && !sceneFailed && groupOf(P) === "5") return sceneHome({ L, LL, st, older, line, sub, dots });
     app.className = "o-scr o-hubscr";
     app.innerHTML = `<section class="o-hub">
       <header class="o-hhead"><a class="o-hh" href="index.html" aria-label="Към Моят свят">⌂</a><img class="o-hz" src="assets/img/zori/z_explain.png" alt=""><b>Ментална аритметика</b>${REVIEW ? '<span class="o-review">преглед</span>' : ""}<span class="o-sp"></span>
@@ -279,6 +281,48 @@
     const ob = $("#o-older"); if (ob) ob.onclick = () => { const O = older[older.length - 1]; runHw(O, hwState(O).next); };
     $("#o-map").onclick = () => screenMap(); $("#o-games").onclick = screenGames; $("#o-win").onclick = () => screenMap(); $("#o-me").onclick = screenAvatar; const kb = $("#o-kid"); if (kb) kb.onclick = screenAvatar;
     holdBtn($("#o-teach"), screenTeacher);
+  }
+
+  // ======================= ИНТЕРАКТИВНАТА ОБСЕРВАТОРИЯ (Фаза 1, ?scene=1, 13.11.2026) =======================
+  // Само за 5–6 г. (7–9 и 10+ остават със сегашния начален екран). Изгледът е в js/obs/scene.js (PixiJS + GSAP – зареждат се само тук);
+  // тук е само моделът от истинските данни (домашно, план на тутора, небето с P.b / P.halo) и действията на съществуващите екрани.
+  // Ако сцената не тръгне (няма WebGL, библиотеките не се заредят за 8 с, грешка) – сегашният начален екран, до края на посещението.
+  const SCENE_ON = Q.get("scene") === "1"; let sceneFailed = false, SC = null, sceneLibs = null;
+  function sceneOff() { if (SC) { try { SC.unmount(); } catch (e) {} SC = null; } }
+  function loadSceneLibs() {
+    if (sceneLibs) return sceneLibs;
+    const js = (src) => new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
+    if (!document.querySelector('link[href^="css/obs-scene.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-scene.css?v=1"; document.head.appendChild(l); }
+    const all = (window.PIXI ? Promise.resolve() : js("js/vendor/pixi.min.js")).then(() => window.gsap ? 0 : js("js/vendor/gsap.min.js")).then(() => window.ObsScene ? 0 : js("js/obs/scene.js?v=1"));
+    return sceneLibs = Promise.race([all, new Promise((_, rej) => setTimeout(() => rej(new Error("scene: timeout")), 8000))]).catch(e => { sceneLibs = null; throw e; });
+  }
+  function sceneHome(h) {
+    const { L, LL, st, older, line, sub, dots } = h, g = gen, tutor = isTutor();
+    app.className = "o-scr o-scene"; app.innerHTML = `<div class="os-loading"></div>`;
+    const fail = (e) => { if (g !== gen) return; sceneFailed = true; sceneOff(); console.warn("Обсерваторията (сцена) не тръгна – сегашният начален екран.", e); screenHome(); };
+    loadSceneLibs().then(() => { if (g !== gen) return;
+      // порталът: следващата истинска мисия (домашно / урок с тутора); без домашно – към картата. Нищо не се измисля – само текущото състояние.
+      const tp = tutor ? TU.plan(tutorState()) : null, round = L ? L.rounds[st.next] : null;
+      const portal = { svg: skySVG({ vb: regionOf(classAt()) === "orion" ? "1490 100 520 520" : "40 80 460 460" }),
+        kicker: tutor ? "Урок със Зори" : LL ? `Занятие ${LL.n}` : "", title: tutor ? (tp.current ? TU.BY[tp.current].name : "Модулът е завършен") : LL ? LL.title : "Звездна обсерватория",
+        sub: tutor ? "AI тутор" : round ? `${round.label} · кръг ${st.next + 1} от ${L.rounds.length}` : "Домашното е готово – виж звездите",
+        dots: tutor ? "" : dots, icon: L || tutor ? "▶" : "★", cta: L || tutor ? "Продължи" : "Звездна карта" };
+      portal.aria = `${portal.cta}: ${[portal.kicker, portal.title, portal.sub].filter(Boolean).join(", ")}`;
+      let seen = 0; try { const k = "obs.scene.v1." + P.id; seen = +(localStorage.getItem(k) || 0) + 1; localStorage.setItem(k, String(seen)); } catch (e) {}
+      const leave = (fn) => () => { sceneOff(); fn(); };
+      SC = window.ObsScene.mount(app, { portal, line, chips: seen <= 3 }, {
+        mission: () => { SC = null; tutor ? runTutor() : L ? runHw(L, st.next) : screenMap(); },
+        abacus: () => { SC = null; location.href = "abacus-app.html?p=" + encodeURIComponent(P.id); },
+        games: () => { SC = null; screenGames(); }, map: () => { SC = null; screenMap(); } });
+      SC.ui.insertAdjacentHTML("afterbegin", `<header class="os-head"><a class="o-hh" href="index.html" aria-label="Към Моят свят">⌂</a>
+          <div class="os-title"><b>Звездна обсерватория</b><small>${regionOf(classAt()) === "orion" ? "Област Орион" : "Област Аврора"}</small></div>${REVIEW ? '<span class="o-review">преглед</span>' : ""}<span class="o-sp"></span>
+          <button class="o-teach" id="o-teach" type="button" aria-label="За учителя (задръж)">👩‍🏫<i></i></button>
+          <button class="o-me" id="o-me" type="button"><img src="assets/img/world/avatars/${P.av}.webp" alt=""><b>${P.name}</b><span>смени</span></button></header>
+        ${older.length ? `<button class="os-older" id="o-older" type="button">Доиграй: занятие ${older[older.length - 1].n}</button>` : ""}`);
+      $("#o-me").onclick = leave(screenAvatar); holdBtn($("#o-teach"), leave(screenTeacher));
+      const ob = $("#o-older"); if (ob) ob.onclick = leave(() => { const O = older[older.length - 1]; runHw(O, hwState(O).next); });
+      SC.layout(); voice(line);
+    }).catch(fail);
   }
 
   // ---- кръг от домашното: играта с точните настройки от учителя; без „Настройки“ ----

@@ -1,0 +1,66 @@
+/* Интерактивната обсерватория – Фаза 1 (observatory.html?scene=1). Само при сцената; останалите екрани са в obs.css. */
+.o-scr.o-scene { padding: 0; background: #160F0A; overflow: hidden; }
+.os-stage { position: absolute; inset: 0; } .os-stage canvas { display: block; width: 100%; height: 100%; }
+.os-loading { position: absolute; inset: 0; background: radial-gradient(circle at 50% 40%, #2A1C10, #0B0806 70%); }
+.os-ui { position: absolute; inset: 0; pointer-events: none; } .os-ui > * { pointer-events: auto; }
+
+/* горната лента: ⌂, заглавието, учителят, профилът */
+.os-head { position: absolute; left: 0; right: 0; top: 0; display: flex; align-items: center; gap: 10px; pointer-events: none;
+  padding: max(10px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) 8px max(14px, env(safe-area-inset-left));
+  background: linear-gradient(180deg, rgba(8, 6, 4, .7), rgba(8, 6, 4, 0)); }
+.os-head > * { pointer-events: auto; } .os-head .o-sp { pointer-events: none; }
+.os-title { display: grid; line-height: 1.1; text-shadow: 0 2px 8px #000; } .os-title b { font: 900 clamp(18px, 2.4vw, 26px) "Nunito"; color: var(--gold, #F5C04A); } .os-title small { font: 800 13px "Nunito"; color: #FFF1D6cc; }
+
+/* предметите: невидима зона за докосване (DOM бутон), златиста рамка при фокус от клавиатурата */
+.os-hit { position: absolute; background: transparent; border: 0; padding: 0; border-radius: 28px; cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+.os-hit:focus-visible { outline: 3px solid #FFD86A; outline-offset: 2px; box-shadow: 0 0 28px rgba(255, 210, 110, .55); }
+.os-chip { position: absolute; transform: translate(-50%, -100%); display: flex; align-items: center; gap: 6px; padding: 5px 13px 5px 8px; border-radius: 99px; pointer-events: none;
+  background: rgba(20, 14, 8, .78); border: 1.5px solid rgba(255, 216, 106, .55); color: #FFF4DA; font: 800 15px "Nunito"; white-space: nowrap;
+  box-shadow: 0 0 14px rgba(255, 196, 90, .25), 0 4px 12px #0008; opacity: 0; transition: opacity .5s .8s, transform .3s; }
+.os-chip i { font-style: normal; font-size: 18px; line-height: 1; }
+.os-chip.on, .os-chip.hot { opacity: 1; } .os-chip.hot { transform: translate(-50%, -100%) scale(1.08); border-color: #FFD86A; }
+
+/* порталът: прозорецът с истинското небе на детето и следващата мисия */
+.os-portal { position: absolute; border-radius: 50%; padding: 0; border: 0; background: transparent; cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+.os-win { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; background: #0A0F33; box-shadow: inset 0 0 40px #000a, 0 0 0 3px rgba(255, 216, 106, .25), 0 0 40px rgba(120, 150, 255, .25);
+  animation: os-breathe 3.2s ease-in-out infinite; }
+.os-win .o-sky { position: absolute; inset: -6%; width: 112%; height: 112%; animation: orot 240s linear infinite; }
+@keyframes os-breathe { 0%, 100% { box-shadow: inset 0 0 40px #000a, 0 0 0 3px rgba(255, 216, 106, .25), 0 0 34px rgba(120, 150, 255, .22); } 50% { box-shadow: inset 0 0 40px #000a, 0 0 0 3px rgba(255, 216, 106, .55), 0 0 56px rgba(255, 210, 120, .35); } }
+.os-plaque { position: absolute; left: 50%; bottom: 4%; transform: translateX(-50%); display: grid; justify-items: center; gap: 2px; width: max-content; max-width: min(92vw, 360px);
+  padding: 10px 16px 12px; border-radius: 22px; text-align: center; color: #FFF4DA;
+  background: linear-gradient(180deg, rgba(36, 24, 12, .92), rgba(20, 13, 6, .94)); border: 2px solid rgba(255, 216, 106, .6); box-shadow: 0 8px 26px #000b, 0 0 22px rgba(255, 196, 90, .25); }
+.os-plaque em { font: 800 12px "Nunito"; font-style: normal; letter-spacing: .06em; text-transform: uppercase; color: #FFD86A; }
+.os-plaque b { font: 900 clamp(16px, 2vw, 21px)/1.15 "Nunito"; text-wrap: balance; } .os-plaque small { font: 800 13px "Nunito"; color: #FFEBC2cc; }
+.os-plaque .o-hdots { margin: 4px 0 2px; } .os-plaque .o-hdots i { background: #ffffff1a; border-color: #ffffff55; }
+.os-cta { margin-top: 6px; display: inline-flex; align-items: center; gap: 8px; padding: 8px 22px; border-radius: 99px; background: linear-gradient(180deg, #FFD86A, #F2A82A); color: #2B1A05;
+  font: 900 20px "Nunito"; box-shadow: 0 4px 0 #A8701A, 0 0 22px rgba(255, 200, 90, .5); }
+.os-cta i { font-style: normal; font-size: 18px; }
+.os-portal:hover .os-cta, .os-portal:focus-visible .os-cta { filter: brightness(1.08); transform: translateY(-1px); }
+.os-portal:focus-visible { outline: 3px solid #FFD86A; outline-offset: 4px; }
+.os-portal:active .os-cta { transform: translateY(3px); box-shadow: 0 1px 0 #A8701A; }
+.os-portal.small .os-plaque { bottom: -14%; padding: 8px 12px 10px; } .os-portal.small .os-plaque b { font-size: 15px; } .os-portal.small .os-cta { font-size: 17px; padding: 7px 18px; }
+
+/* по-старо незавършено домашно – по желание */
+.os-older { position: absolute; left: max(14px, env(safe-area-inset-left)); bottom: max(14px, env(safe-area-inset-bottom)); padding: 8px 16px; border-radius: 99px; color: #FFF4DA;
+  background: rgba(20, 14, 8, .82); border: 1.5px solid rgba(255, 216, 106, .5); font: 800 14px "Nunito"; }
+
+/* балонът на Зори */
+.os-bub { position: absolute; padding: 10px 14px; border-radius: 18px; background: #FFF7E6; color: #2B1A05; font: 800 16px/1.3 "Nunito"; box-shadow: 0 8px 22px #0009; pointer-events: none; transform-origin: 0 100%; }
+.os-bub.off { visibility: hidden; }
+
+/* преходите */
+.os-cover { position: fixed; inset: 0; z-index: 50; pointer-events: none; }
+.os-dark { background: #0B0806; }
+.os-lens { background: radial-gradient(circle at 50% 50%, #1B2263 0 30%, #0A0D2A 60%, #000 100%); }
+.os-stars { background: radial-gradient(circle at 50% 45%, #2B2F7A, #0B0E2A 70%); }
+.os-unroll { background: linear-gradient(90deg, #6B4A22, #E9D3A0 12%, #F4E3B5 50%, #E9D3A0 88%, #6B4A22); }
+.os-unroll.anim { animation: os-unroll .45s ease-out both; } @keyframes os-unroll { from { clip-path: inset(0 47% 0 47%); } to { clip-path: inset(0 0 0 0); } }
+
+/* малки екрани */
+@media (max-width: 760px) and (orientation: portrait) { .os-title small { display: none; } .os-chip { font-size: 13px; padding: 4px 10px 4px 6px; } .os-bub { font-size: 15px; } }
+@media (max-height: 520px) { .os-title small { display: none; } .os-plaque { padding: 6px 12px 8px; } .os-plaque b { font-size: 15px; } .os-cta { font-size: 16px; padding: 6px 16px; } .os-chip { font-size: 13px; } }
+
+/* намалено движение: без дишане и въртене */
+html.o-calm .os-win, html.o-still .os-win, html.o-calm .os-win .o-sky, html.o-still .os-win .o-sky { animation: none !important; }
+@media (prefers-reduced-motion: reduce) { .os-win, .os-win .o-sky, .os-unroll.anim { animation: none !important; } .os-chip { transition: none; } }
+.os-chip.hot { transition-delay: 0s; }
