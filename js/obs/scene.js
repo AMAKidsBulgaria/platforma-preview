@@ -92,7 +92,10 @@
       const m = $(".os-mission"), narrow = W < 600 && H0 > W; m.classList.toggle("dock", narrow); m.classList.toggle("tight", H0 < 520);
       if (narrow) Object.assign(m.style, { left: "50%", top: "auto", bottom: "max(14px, env(safe-area-inset-bottom))" });
       else { const mh = m.offsetHeight || 110; Object.assign(m.style, { left: c.x + "px", bottom: "auto", top: Math.min(H0 - mh - 12, c.y + d / 2 - mh * .22) + "px" }); }
-      if (zori) { const h = RM.zori.h * sc, zp = toScreen(RM.zori.x, zoriY()); Object.assign($(".os-zori").style, { left: zp.x - h * .3 + "px", top: zp.y - h + "px", width: h * .6 + "px", height: h + "px" }); }
+      if (zori) { const h = RM.zori.h * sc, zp = toScreen(RM.zori.x, zoriY()); Object.assign($(".os-zori").style, { left: zp.x - h * .3 + "px", top: zp.y - h + "px", width: h * .6 + "px", height: h + "px" });
+        // табелка, която се застъпва със Зори – над предмета
+        const zr = $(".os-zori").getBoundingClientRect(); ui.querySelectorAll(".os-chip").forEach(c => { const r = c.getBoundingClientRect();
+          if (r.left < zr.right && r.right > zr.left && r.top < zr.bottom && r.bottom > zr.top) c.style.top = Math.max(70, toScreen(0, RM.box[c.dataset.k][1]).y - (c.offsetHeight || 24) - 4) + "px"; }); }
       placeBubble(); }
     // Зори стои над табелата, когато тя е долу (тесен изправен екран)
     const zoriY = () => { const W = app.screen.width, H0 = app.screen.height; if (!(W < 600 && H0 > W)) return RM.zori.y; const mh = ($(".os-mission").offsetHeight || 120) + 22; return Math.min(RM.zori.y, (H0 - mh - off.y) / sc); };
