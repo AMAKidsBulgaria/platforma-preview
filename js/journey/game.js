@@ -47,9 +47,9 @@
   const audReady = Promise.all([
     fetch("config/abacus-audio.json?v=4").then(r => r.json()).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {}),
     fetch("config/abacus-audio-zori.json?v=12").then(r => r.json()).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {})]);
-  const talk = (on, a) => { if (a === curA) window.dispatchEvent(new CustomEvent("zori-talk", { detail: on })); };
+  const talk = (on, a) => { if (a === curA) window.dispatchEvent(new CustomEvent("zori-talk", { detail: { on, f: a._f } })); };
   function speak(t) { if (Q.get("voice") === "0") return; audReady.then(() => { const f = AUDZ[t] || AUD[t]; if (!f) return;
-    try { if (curA) { curA.pause(); talk(false, curA); } const a = curA = new Audio("assets/audio/abacus/" + f); pendingA = null;
+    try { if (curA) { curA.pause(); talk(false, curA); } const a = curA = new Audio("assets/audio/abacus/" + f); a._f = f.replace(/\.mp3$/, ""); pendingA = null;
       a.addEventListener("playing", () => talk(true, a)); a.addEventListener("pause", () => talk(false, a)); a.addEventListener("ended", () => talk(false, a));
       a.play().catch(() => { pendingA = a; }); } catch (e) {} }); }
   document.addEventListener("pointerdown", () => { const a = pendingA; pendingA = null; if (a && a === curA) a.play().catch(() => {}); }, true);
@@ -288,10 +288,12 @@
 
   // =================== ОБСЕРВАТОРИЯТА (началният екран, „домът“) ===================
   // Стаята е картина 1536×1024 с изрязан прозорец (x 400–1145, y 0–635); зад нея – живото небе със звездите на детето, падащи звезди и корабът.
-  // Предметите в стаята са менюто: телескопът → „Продължи“ (полет), картата на масата → пътят, планетата → игрите, лисичето → създанията.
+  // Предметите в стаята са менюто (входове в света, с малък надпис и икона за децата, които още не четат; всеки казва името си с гласа на Зори):
+  // телескопът → „Продължи“ (полет), абакусът на бюрото → дигиталният абакус, свитъкът → звездната карта, сандъкът → игрите, лисичето → създанията.
+  // Всичко останало също отговаря на докосване (фенерите пламват, в прозореца пада звезда) – децата изследват, като докосват.
   const RW = 1536, RH = 1024, WIN = { x: 772, y: 318, r: 380 };
-  const room = new PIXI.Container(), sky = new PIXI.Container(); homeScene.addChild(sky, room);
-  let roomSpr = null, teleSpr = null, foxSpr = null, planetSpr = null, homeShip = null, zoriSpr = null;
+  const room = new PIXI.Container(), sky = new PIXI.Container(); homeScene.addChild(sky, room); room.sortableChildren = true;
+  let roomSpr = null, teleSpr = null, foxSpr = null, homeShip = null, zoriSpr = null, abacSpr = null, scrollSpr = null, chestSpr = null; const chestTex = {};
   const skyBg = new PIXI.Sprite(); skyBg.anchor.set(.5); sky.addChild(skyBg);
   PIXI.Assets.load("assets/img/journey/bg_space.webp").then(t => { skyBg.texture = t; homeLayout(); });
   const skyStars = []; for (let i = 0; i < 140; i++) { const a = Math.random() * Math.PI * 2, r = Math.sqrt(Math.random()) * WIN.r, d = new PIXI.Sprite(dotTex); d.anchor.set(.5);
@@ -305,31 +307,41 @@
       miniGlow[i].visible = lit || cur; miniGlow[i].scale.set(lit ? .7 : .45); }); }
   const shoot = new PIXI.Graphics(); sky.addChild(shoot); let shootT = 3;
   PIXI.Assets.load("assets/img/journey/ship.webp").then(t => { homeShip = new PIXI.Sprite(t); homeShip.anchor.set(.5); homeShip.scale.set(.32); homeShip.position.set(WIN.x + 230, WIN.y - 150); homeShip.rotation = -.35; sky.addChild(homeShip); });
-  PIXI.Assets.load("assets/img/journey/room.webp").then(t => { roomSpr = new PIXI.Sprite(t); room.addChildAt(roomSpr, 0); homeLayout(); });
-  const lamps = [[268, 201, 1.4], [85, 623, 1.1], [1191, 495, 1.3]].map(([x, y, k]) => { const g = new PIXI.Sprite(glowTex); g.anchor.set(.5); g.position.set(x, y); g.tint = 0xFFB347; g.blendMode = PIXI.BLEND_MODES.ADD; g._k = k; room.addChild(g); return g; });
-  const motes = []; for (let i = 0; i < 40; i++) { const m = new PIXI.Sprite(dotTex); m.anchor.set(.5); m.tint = 0xFFD9A0; m.alpha = .35; m.scale.set(.3 + Math.random() * .5); m.position.set(Math.random() * RW, 200 + Math.random() * 700); m._v = .1 + Math.random() * .25; m._p = Math.random() * 6; room.addChild(m); motes.push(m); }
-  PIXI.Assets.load("assets/img/journey/creature_aurora.webp").then(t => { foxSpr = new PIXI.Sprite(t); foxSpr.anchor.set(.5, 1); foxSpr.position.set(905, 700); foxSpr.scale.set(.25); room.addChild(foxSpr); homeLayout(); });
-  PIXI.Assets.load("assets/img/journey/planet_games.webp").then(t => { planetSpr = new PIXI.Sprite(t); planetSpr.anchor.set(.5); planetSpr.position.set(1340, 150); planetSpr.scale.set(.42); room.addChild(planetSpr); homeLayout(); });
-  PIXI.Assets.load("assets/img/journey/telescope.webp").then(t => { teleSpr = new PIXI.Sprite(t); teleSpr.anchor.set(.42, 1); teleSpr.position.set(300, 800); teleSpr.scale.set(.82); room.addChild(teleSpr); homeLayout(); });
-  PIXI.Assets.load("assets/img/zori/z_explain.png").then(t => { zoriSpr = new PIXI.Sprite(t); zoriSpr.anchor.set(.5, 1); zoriSpr.position.set(600, 1010); zoriSpr.scale.set(380 / t.height); zoriSpr.visible = !zvReady; room.addChild(zoriSpr); homeLayout(); });
-  // жив Зори: прозрачни видеа (fal.ai Kling, 13.11.2026) над платното – HEVC с алфа за Safari/iPhone, VP9 с алфа за Chrome/Android.
-  // Покой – непрекъснато; поздрав – при влизане и при докосване; радост – след нова звезда. Ако видеото не тръгне (пестене на батерия) – остава картинката.
-  // Chrome/Android понякога приема HEVC, но без алфа (черен правоъгълник) – затова HEVC само за WebKit (Safari и всички браузъри на iPhone)
-  const ZV = {}, ZCLIP = ["idle", "wave", "joy"], ZEXT = /Apple/.test(navigator.vendor || "") ? "mov" : "webm"; let zvOn = null, zvReady = false;
+  PIXI.Assets.load("assets/img/journey/room.webp").then(t => { roomSpr = new PIXI.Sprite(t); roomSpr.zIndex = 0; room.addChild(roomSpr); homeLayout(); });
+  // докосване на прозореца – падаща звезда; на фенер – пламва
+  const winHit = new PIXI.Container(); winHit.hitArea = new PIXI.Circle(WIN.x, WIN.y, WIN.r * .8); winHit.eventMode = "static"; winHit.zIndex = 1; room.addChild(winHit);
+  winHit.on("pointertap", () => { shootT = 0; SFX.chime(); });
+  const lamps = [[268, 201, 1.4], [85, 623, 1.1], [1191, 495, 1.3]].map(([x, y, k]) => { const g = new PIXI.Sprite(glowTex); g.anchor.set(.5); g.position.set(x, y); g.tint = 0xFFB347; g.blendMode = PIXI.BLEND_MODES.ADD; g._k = k; g._f = 0; g.zIndex = 2; room.addChild(g);
+    const h = new PIXI.Container(); h.hitArea = new PIXI.Circle(x, y, 70); h.eventMode = "static"; h.zIndex = 2; h.on("pointertap", () => { tone(880, 0, .25, "sine", .06); gsap.fromTo(g, { _f: 1 }, { _f: 0, duration: 1.2, ease: "power2.out" }); }); room.addChild(h); return g; });
+  const motes = []; for (let i = 0; i < 40; i++) { const m = new PIXI.Sprite(dotTex); m.anchor.set(.5); m.tint = 0xFFD9A0; m.alpha = .35; m.scale.set(.3 + Math.random() * .5); m.position.set(Math.random() * RW, 200 + Math.random() * 700); m._v = .1 + Math.random() * .25; m._p = Math.random() * 6; m.zIndex = 8; room.addChild(m); motes.push(m); }
+  const prop = (url, ax, ay, z, fn) => PIXI.Assets.load(url).then(t => { const s = new PIXI.Sprite(t); s.anchor.set(ax, ay); s.zIndex = z; s.eventMode = "static"; s.cursor = "pointer"; s.on("pointertap", fn); room.addChild(s); homeLayout(); return s; });
+  prop("assets/img/journey/creature_aurora.webp", .5, 1, 4, () => go("fox")).then(s => { foxSpr = s; foxSpr.scale.set(.25); homeLayout(); });
+  prop("assets/img/journey/abacus.webp", .5, 1, 3, () => go("abac")).then(s => { abacSpr = s; homeLayout(); });
+  prop("assets/img/journey/scroll.webp", .5, 1, 4, () => go("map")).then(s => { scrollSpr = s; homeLayout(); });
+  Promise.all(["chest", "chest_open"].map(n => PIXI.Assets.load(`assets/img/journey/${n}.webp`).then(t => { chestTex[n] = t; })))
+    .then(() => prop("assets/img/journey/chest.webp", .5, 1, 4, () => go("games"))).then(s => { chestSpr = s; homeLayout(); });
+  prop("assets/img/journey/telescope.webp", .42, 1, 5, () => throughTelescope(true)).then(s => { teleSpr = s; homeLayout(); });
+  PIXI.Assets.load("assets/img/zori/z_calm.png").then(t => { zoriSpr = new PIXI.Sprite(t); zoriSpr.anchor.set(.5, 1); zoriSpr.zIndex = 6; zoriSpr.scale.set(380 / t.height); zoriSpr.visible = !zvReady; room.addChild(zoriSpr); homeLayout(); });
+
+  // жив Зори: прозрачни видеа (fal.ai Kling) над платното – HEVC с алфа за WebKit (Safari, всички браузъри на iPhone), VP9 с алфа за Chrome/Android
+  // (Chrome понякога приема HEVC, но без алфа – черен правоъгълник). Устата е затворена във всички клипове, освен докато Зори говори:
+  // за всяка постоянна реплика има клип с устата, синхронизирана с думите (Kling LipSync) – пуска се в мига, в който тръгне звукът, и свършва с него.
+  // Покой (rest, със затворена уста) – непрекъснато; махането с подсказката е говорещ клип, радостта след нова звезда – подскок и искри (синхронът разваля лицето при скок). Ако видеото не тръгне – остава картинката.
+  const ZEXT = /Apple/.test(navigator.vendor || "") ? "mov" : "webm", ZV = {};
+  const ZTALK = new Set(["zr_1b8a6af07a", "zr_67eba3aea2", "zr_3fc93ee148", "zr_4d91ff6f99", "zr_568c954995", "zr_82b1ccea7b", "zr_2d1d86edec", "zr_c0eecbb870", "zr_56758eff9f"]);
+  let zvOn = null, zvReady = false;
   const zvBox = document.createElement("div"); zvBox.className = "j-zv"; document.body.insertBefore(zvBox, $("#ui"));
-  ZCLIP.forEach(n => { const v = document.createElement("video"); v.muted = true; v.playsInline = true; v.preload = "auto"; v.loop = n === "idle"; v.setAttribute("playsinline", "");
-    v.src = `assets/video/journey/zori_${n}.${ZEXT}`;
-    v.addEventListener("ended", () => zTalk ? zoriPlay("idle") : zoriRest()); zvBox.appendChild(v); ZV[n] = v; });
-  Object.values(ZV).forEach(v => v.addEventListener("playing", () => { if (zvReady) return; zvReady = true; if (zoriSpr) zoriSpr.visible = false; zvBox.classList.add("on"); homeLayout(); }));
-  // Устата се движи само докато Зори говори: „idle“ (с говорене) върви, докато звучи репликата, после – спокоен кадър с дишане (CSS).
-  let zTalk = false;
-  function zoriPlay(n) { const v = ZV[n]; if (!v) return; if (zvOn && zvOn !== v) { zvOn.classList.remove("on"); zvOn.pause(); }
-    zvBox.classList.remove("rest"); v.classList.add("on"); zvOn = v; try { v.currentTime = 0; } catch (e) {} const p = v.play(); if (p && p.catch) p.catch(() => {}); }
-  function zoriRest() { const v = ZV.idle; if (zvOn && zvOn !== v) { zvOn.classList.remove("on"); zvOn.pause(); }
-    v.classList.add("on"); zvOn = v; v.pause(); try { v.currentTime = 0; } catch (e) {} zvBox.classList.add("rest"); }
-  window.addEventListener("zori-talk", e => { zTalk = e.detail; if (!homeScene.visible || ((zvOn === ZV.wave || zvOn === ZV.joy) && !zvOn.paused && !zvOn.ended)) return;
-    zTalk ? (zvOn === ZV.idle && !ZV.idle.paused ? 0 : zoriPlay("idle")) : zoriRest(); });
-  zvBox.onclick = () => { if (homeScene.visible && zvOn !== ZV.wave) { SFX.tap(); zoriPlay("wave"); } };
+  function zClip(n) { if (ZV[n]) return ZV[n]; const v = document.createElement("video"); v.muted = true; v.playsInline = true; v.setAttribute("playsinline", ""); v.preload = "auto"; v.loop = n === "rest";
+    v.src = `assets/video/journey/zori_${n}.${ZEXT}`; v.addEventListener("ended", () => { const f = v._then; v._then = null; if (zvOn === v) zoriRest(); if (f) f(); });
+    v.addEventListener("playing", () => { if (zvReady) return; zvReady = true; if (zoriSpr) zoriSpr.visible = false; zvBox.classList.add("on"); homeLayout(); });
+    zvBox.appendChild(v); return ZV[n] = v; }
+  zClip("rest"); ZTALK.forEach(f => zClip("talk_" + f));
+  function zoriPlay(n, then) { const v = zClip(n); if (zvOn && zvOn !== v) { zvOn.classList.remove("on"); zvOn.pause(); }
+    v.classList.add("on"); zvOn = v; v._then = then || null; try { v.currentTime = 0; } catch (e) {} const p = v.play(); if (p && p.catch) p.catch(() => {}); return v; }
+  function zoriRest() { zoriPlay("rest"); }
+  window.addEventListener("zori-talk", e => { const { on, f } = e.detail; if (!homeScene.visible) return;
+    if (on) { const v = ZTALK.has(f) && ZV["talk_" + f]; if (v && v.readyState >= 2 && !v.error) zoriPlay("talk_" + f); } else if (zvOn && zvOn !== ZV.rest) zoriRest(); });
+  zvBox.onclick = () => { if (homeScene.visible) { SFX.tap(); sayZ("Здравей! Аз съм Зори."); } };
   function placeZoriVideo() { if (!zoriSpr || !zoriSpr.texture.height) return;
     // кадърът на видеото (396×516): героят е 431 px висок (= цялата картинка), стъпалата на 93% от височината, центърът на 47% от ширината
     const h = zoriSpr.texture.height * zoriSpr.scale.x * homeSc * 516 / 431, w = h * 396 / 516, p = toScreen(zoriSpr.x, zoriSpr.y);
@@ -343,54 +355,83 @@
     const ox = portraitHome ? W / 2 - WIN.x * homeSc : (W - RW * homeSc) / 2, oy = portraitHome ? H - RH * homeSc : -(RH * homeSc - H) * .8;   // хоризонтално: режем повече от пода, не от прозореца
     homeOff = { x: ox, y: oy }; homeScene.scale.set(homeSc); homeScene.position.set(ox, oy);
     if (skyBg.texture && skyBg.texture.width > 1) { skyBg.position.set(WIN.x, WIN.y); skyBg.scale.set((WIN.r * 2.3) / Math.min(skyBg.texture.width, skyBg.texture.height)); }
-    // вертикален телефон: телескопът и масата не влизат в кадъра – поставяме телескопа в долния ляв ъгъл на екрана, планетата горе вдясно
-    if (teleSpr) teleSpr.position.set(portraitHome ? (W * .2 - ox) / homeSc : 300, portraitHome ? (H - oy) / homeSc - 10 : 800);
-    if (teleSpr) teleSpr.scale.set(portraitHome ? .62 : .82);
-    if (planetSpr) planetSpr.position.set(portraitHome ? (W * .82 - ox) / homeSc : 1340, portraitHome ? (H * .2 - oy) / homeSc : Math.max(150, (-oy + 95) / homeSc + 80));
-    if (zoriSpr) { zoriSpr.position.set(portraitHome ? (W * .66 - ox) / homeSc : 600, portraitHome ? 1010 : Math.min(1010, (H - oy) / homeSc + 20)); zoriSpr.scale.set((portraitHome ? 270 : 380) / zoriSpr.texture.height); }
+    // хоризонтално: абакусът и свитъкът – на бюрото (върху нарисуваните), сандъкът – на пода; вертикално бюрото не влиза в кадъра –
+    // телескопът долу вляво, сандъкът долу вдясно, абакусът и свитъкът – на пейката под прозореца
+    const px = f => (W * f - ox) / homeSc, floor = portraitHome ? RH - 12 : Math.min(1010, (H - oy) / homeSc + 20), set = (s, x, y, k) => { if (s) { s.position.set(x, y); s.scale.set(k); s._k = k; s._y = y; } };
+    set(teleSpr, portraitHome ? px(.17) : 300, portraitHome ? RH - 10 : 800, portraitHome ? .62 : .82);
+    set(abacSpr, portraitHome ? px(.8) : 1385, portraitHome ? 712 : 686, portraitHome ? .34 : .54);
+    set(scrollSpr, portraitHome ? px(.42) : 1175, portraitHome ? 712 : 726, portraitHome ? .27 : .32);
+    set(chestSpr, portraitHome ? px(.84) : 1010, portraitHome ? RH - 14 : Math.min(915, floor - 50), portraitHome ? .38 : .44);
+    if (zoriSpr) { zoriSpr.position.set(portraitHome ? px(.52) : 620, floor); zoriSpr.scale.set((portraitHome ? 260 : 380) / zoriSpr.texture.height); }
     if (homeShip) { homeShip.x = WIN.x + (portraitHome ? 150 : 230); homeShip._y = WIN.y + (portraitHome ? 120 : -150); }
-    if (foxSpr) { foxSpr.visible = S.parts > 0; foxSpr.alpha = .35 + .65 * Math.min(1, S.parts / N); }
+    if (foxSpr) { foxSpr.visible = S.parts > 0; foxSpr.alpha = .35 + .65 * Math.min(1, S.parts / N); set(foxSpr, portraitHome ? px(.25) : 905, 700, .25); }
     placeHotspots(); placeZoriVideo();
   }
   const toScreen = (x, y) => ({ x: homeOff.x + x * homeSc, y: homeOff.y + y * homeSc });
-  function placeHotspots() { const topY = (-homeOff.y + 120) / homeSc, hs = { tele: teleSpr && [teleSpr.x + 60, Math.max(topY, teleSpr.y - 640 * teleSpr.scale.y)], map: [1180, 600], games: planetSpr && [planetSpr.x, planetSpr.y + (portraitHome ? 90 : -100)], fox: foxSpr && foxSpr.visible && [foxSpr.x, foxSpr.y - 160] };
-    Object.entries(hs).forEach(([k, p]) => { const el = $(`#h-${k}`); if (!el) return; if (!p) { el.hidden = true; return; } el.hidden = false; const q = toScreen(p[0], p[1]); el.style.left = q.x + "px"; el.style.top = q.y + "px"; });
-    if (portraitHome) { const m = $("#h-map"); if (m) m.hidden = true; } }
+  // надписите стоят над предметите (не излизат извън екрана)
+  function placeHotspots() { const topY = (-homeOff.y + 120) / homeSc, above = (s, d) => s && s.visible !== false && [s.x, Math.max(topY, s.y - s.height - (d || 22))],
+      hs = { tele: teleSpr && [teleSpr.x + 60, Math.max(topY, teleSpr.y - 640 * teleSpr.scale.y)], abac: above(abacSpr), map: above(scrollSpr, 14), games: above(chestSpr), fox: foxSpr && foxSpr.visible && above(foxSpr) };
+    Object.entries(hs).forEach(([k, p]) => { const el = $(`#h-${k}`); if (!el) return; if (!p) { el.hidden = true; return; } el.hidden = false; const q = toScreen(p[0], p[1]); el.style.left = q.x + "px"; el.style.top = q.y + "px"; }); }
   window.addEventListener("resize", () => { if (homeScene.visible) homeLayout(); });
   app.ticker.add((dt) => { if (!homeScene.visible) return; const t = (performance.now() - t0) / 1000;
     skyStars.forEach(d => { d.alpha = .35 + .45 * (.5 + .5 * Math.sin(t * 1.6 + d._tw)); });
-    lamps.forEach((g, i) => { const f = .55 + .12 * Math.sin(t * 9 + i * 2) + .08 * Math.sin(t * 23 + i); g.alpha = f; g.scale.set(g._k * (1 + .04 * Math.sin(t * 5 + i))); });
+    lamps.forEach((g, i) => { const f = .55 + .12 * Math.sin(t * 9 + i * 2) + .08 * Math.sin(t * 23 + i); g.alpha = Math.min(1, f + g._f * .5); g.scale.set(g._k * (1 + .04 * Math.sin(t * 5 + i) + g._f * .8)); });
     motes.forEach(m => { m.y -= m._v * dt; m.x += Math.sin(t * .6 + m._p) * .2; m.alpha = .2 + .25 * (.5 + .5 * Math.sin(t * 1.3 + m._p)); if (m.y < 150) { m.y = 900; m.x = Math.random() * RW; } });
     MINI.forEach((p, i) => { if (i === S.lit) miniGlow[i].scale.set(.45 + .18 * (.5 + .5 * Math.sin(t * 3))); });
     if (homeShip) { homeShip.y = (homeShip._y || WIN.y - 150) + Math.sin(t * 1.4) * 10; homeShip.rotation = -.35 + Math.sin(t * 1.1) * .05; if (Math.random() < .4) emit(homeShip.x - 46 * Math.cos(.35) * .3 - 20, homeShip.y + 40, { layer: sky, angle: Math.PI * .62, spread: .4, speed: 1.2, life: 24, tint: Math.random() < .5 ? 0xFFB347 : 0xFF6B3D, scale: .9 }); }
     if (teleSpr && !teleSpr._busy) teleSpr.rotation = Math.sin(t * .5) * .012;
     if (zoriSpr) { const b = Math.sin(t * 2.2); zoriSpr.scale.y = zoriSpr.scale.x * (1 + b * .015); zoriSpr.skew.x = Math.sin(t * 1.1) * .015; }
-    if (foxSpr && foxSpr.visible) foxSpr.y = 700 + Math.abs(Math.sin(t * 1.2)) * -4;
-    if (planetSpr) { planetSpr.rotation = Math.sin(t * .4) * .08; planetSpr.y += Math.sin(t * 1.5) * .15; }
+    if (foxSpr && foxSpr.visible && !foxSpr._busy) foxSpr.y = 700 + Math.abs(Math.sin(t * 1.2)) * -4;
+    // входовете „дишат“ леко и от време на време проблясват – подсказка, че се докосват
+    [abacSpr, scrollSpr, chestSpr].forEach((s, i) => { if (!s || s._busy) return; s.scale.set(s._k * (1 + .012 * Math.sin(t * 2 + i * 2))); if (Math.random() < .015) emit(s.x + (Math.random() - .5) * s.width * .7, s.y - Math.random() * s.height, { layer: room, speed: .5, life: 40, tint: 0xFFE08A, scale: .7 }); });
     // падаща звезда в прозореца
     shootT -= dt / 60; shoot.clear(); if (shootT < 0) { if (shootT < -1) shootT = 4 + Math.random() * 5; const k = -shootT, x = WIN.x + 260 - k * 420, y = WIN.y - 260 + k * 200;
       shoot.lineStyle(3, 0xFFFFFF, 1 - k).moveTo(x, y).lineTo(x + 70, y - 34); }
+    // подсказка, ако детето не прави нищо: Зори маха и подсказва телескопа (веднъж за посещение)
+    if (homeIdle >= 0 && (!curA || curA.paused || curA.ended) && (homeIdle += dt / 60) > 10) { homeIdle = -1; sayZ("Докосни телескопа и да летим към звездите!"); if (teleSpr) gsap.fromTo(teleSpr, { rotation: -.06 }, { rotation: 0, duration: .8, ease: "elastic.out(1,.3)", delay: 1.2 }); }
   });
+  let homeIdle = -1; document.addEventListener("pointerdown", () => { if (homeIdle >= 0) homeIdle = 0; }, true);
+  function sayZ(t) { const b = $("#j-bub"); if (b) { b.textContent = t; gsap.fromTo(b, { scale: .6, opacity: 0 }, { scale: 1, opacity: 1, duration: .35, ease: "back.out(2)" }); } speak(t); }
+  // докосване на вход: предметът подскача и искри, Зори казва името; второ докосване (или краят на репликата) – влизаме
+  const GO = { abac: "Абакусът! Хайде да посметнем.", map: "Звездната карта! Да видим пътя.", games: "Сандъкът с игрите! Скоро тук ще има нови игри.", fox: "Моите звездни създания!" };
+  let goArm = null;
+  function go(k) { const s = { abac: abacSpr, map: scrollSpr, games: chestSpr, fox: foxSpr }[k]; if (!homeScene.visible) return;
+    if (homeIdle > 0) homeIdle = 0;
+    if (goArm && goArm.k === k) { const f = goArm.f; goArm = null; f(); return; }
+    SFX.tap(); if (s) { s._busy = 1; gsap.fromTo(s.scale, { x: s._k * 1.14, y: s._k * .88 }, { x: s._k, y: s._k, duration: .7, ease: "elastic.out(1,.35)", onComplete: () => { s._busy = 0; } });
+      for (let i = 0; i < 26; i++) emit(s.x, s.y - s.height * .5, { layer: room, speed: 2 + Math.random() * 3, life: 40, tint: [0xFFE08A, 0xFFFFFF, 0x8FC7FF][i % 3], scale: 1 }); }
+    sayZ(GO[k]);
+    const enter = { abac: () => { location.href = "abacus-app.html?back=journey" + (Q.get("p") ? "&p=" + encodeURIComponent(Q.get("p")) : ""); }, map: () => throughTelescope(false, scrollSpr), fox: album, games: () => {} }[k];
+    if (k === "abac") [0, .12, .24].forEach(d => tone(1400 + Math.random() * 300, d, .04, "square", .04));
+    if (k === "games" && chestSpr && chestTex.chest_open) { chestSpr.texture = chestTex.chest_open; SFX.chime(); for (let i = 0; i < 30; i++) emit(chestSpr.x, chestSpr.y - chestSpr.height * .7, { layer: room, angle: -Math.PI / 2, spread: 1.2, speed: 3 + Math.random() * 3, life: 60, tint: [0xFFE08A, 0xFF8FB1, 0x8FE3FF][i % 3], scale: 1.2 });
+      setTimeout(() => { if (chestSpr) chestSpr.texture = chestTex.chest; }, 4800); }
+    // абакусът отваря друга страница – изчакваме Зори да довърши; картата и създанията тръгват след миг (гласът продължава)
+    const wait = k === "abac" ? 4200 : k === "games" ? 0 : 1200; if (!wait) return;
+    const f = () => { clearTimeout(t); goArm = null; enter(); }, t = setTimeout(f, wait * FAST); goArm = { k, f };
+  }
   function homeHud(celebrate) {
     const nx = S.lit < N ? STARS[S.lit].t : "Аврора свети!";
     ui.innerHTML = `<header class="j-top"><div class="j-chip j-streak"><span class="j-flame">🔥</span><b>${S.streak}</b></div><div class="j-chip j-energy"><span class="j-gem"></span><b id="j-en">${S.energy}</b></div>
         <div class="j-title"><b>Звездна обсерватория</b><small>${S.lit} от ${N} звезди светят</small></div></header>
       <button class="j-hot j-hot-big" id="h-tele"><b>▶ Продължи</b><small>${nx}</small></button>
-      <button class="j-hot" id="h-map"><b>Звездна карта</b></button><button class="j-hot" id="h-games"><b>Игри</b></button><button class="j-hot" id="h-fox"><b>Създания</b></button>
+      <button class="j-hot j-hot-s" id="h-abac"><b><i>🧮</i>Абакус</b></button><button class="j-hot j-hot-s" id="h-map"><b><i>🗺️</i>Карта</b></button>
+      <button class="j-hot j-hot-s" id="h-games"><b><i>🧸</i>Игри</b></button><button class="j-hot j-hot-s" id="h-fox"><b><i>🦊</i>Създания</b></button>
       <div class="j-bub j-hbub" id="j-bub"></div><div class="j-lens" id="j-lens"></div>`;
-    $("#h-tele").onclick = () => throughTelescope(true); $("#h-map").onclick = () => throughTelescope(false); $("#h-fox").onclick = album; $("#h-games").onclick = () => { SFX.tap(); gsap.fromTo(planetSpr.scale, { x: .5, y: .5 }, { x: .42, y: .42, duration: .5, ease: "elastic.out(1,.4)" }); toast("Игрите идват скоро тук ✨"); };
+    $("#h-tele").onclick = () => throughTelescope(true); ["abac", "map", "games", "fox"].forEach(k => { $(`#h-${k}`).onclick = () => go(k); });
     gsap.from(".j-hot", { scale: .6, opacity: 0, stagger: .08, duration: .45, ease: "back.out(2)", delay: .3 }); gsap.to("#h-tele", { scale: 1.06, repeat: -1, yoyo: true, duration: .9, ease: "sine.inOut", delay: 1 });
     gsap.from(".j-top > *", { y: -30, opacity: 0, stagger: .07, duration: .5, ease: "back.out(1.6)" });
     const line = celebrate ? "Виж! Новата звезда свети в небето!" : S.lit === 0 ? "Здравей! Звездите са угаснали. Погледни през телескопа!" : "Здравей! Да продължим към следващата звезда?";
-    const b = $("#j-bub"); b.textContent = line; gsap.fromTo(b, { scale: .6, opacity: 0 }, { scale: 1, opacity: 1, duration: .4, ease: "back.out(2)", delay: .5 }); speak(line);
-    if (zoriSpr && !zvReady) { PIXI.Assets.load(`assets/img/zori/z_${celebrate ? "joy" : "explain"}.png`).then(t => { zoriSpr.texture = t; homeLayout(); }); }
-    zoriPlay(celebrate ? "joy" : "wave");
-    homeLayout();
+    if (zoriSpr && !zvReady) { PIXI.Assets.load(`assets/img/zori/z_${celebrate ? "joy" : "calm"}.png`).then(t => { zoriSpr.texture = t; homeLayout(); }); }
+    // нова звезда: Зори скача от радост, докато казва репликата (клипът е синхронизиран с нея); иначе – поздравът
+    zoriRest(); setTimeout(() => sayZ(line), celebrate ? 300 : 500);
+    if (celebrate) { gsap.fromTo(zvBox, { y: 0 }, { y: -38, duration: .22, ease: "power2.out", yoyo: true, repeat: 3, delay: .1 });
+      if (zoriSpr) for (let i = 0; i < 36; i++) emit(zoriSpr.x + (Math.random() - .5) * 160, zoriSpr.y - 200 - Math.random() * 160, { layer: room, speed: 2 + Math.random() * 2.5, life: 55, tint: [0xFFE08A, 0xFFFFFF, 0xFF8FB1][i % 3], scale: 1.1 }); }
+    homeIdle = 0; goArm = null; homeLayout();
   }
   function toast(t) { const d = document.createElement("div"); d.className = "j-toast"; d.textContent = t; document.body.appendChild(d); gsap.fromTo(d, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: .3 }); setTimeout(() => d.remove(), 1800); }
   // „през телескопа“: телескопът се накланя, кръгла леща расте до цял екран → небето (пътят); go = веднага мисия
-  function throughTelescope(go) {
-    SFX.tap(); SFX.whoosh(); const lens = $("#j-lens"), from = toScreen(teleSpr ? teleSpr.x + 120 : WIN.x, teleSpr ? teleSpr.y - 640 * teleSpr.scale.y : WIN.y);
+  function throughTelescope(go, src) {
+    SFX.tap(); SFX.whoosh(); homeIdle = -1; const lens = $("#j-lens"), from = src ? toScreen(src.x, src.y - src.height * .5) : toScreen(teleSpr ? teleSpr.x + 120 : WIN.x, teleSpr ? teleSpr.y - 640 * teleSpr.scale.y : WIN.y);
     if (teleSpr) { teleSpr._busy = 1; gsap.to(teleSpr, { rotation: .08, duration: .35, yoyo: true, repeat: 1 }); }
     lens.style.left = from.x + "px"; lens.style.top = from.y + "px";
     gsap.fromTo(lens, { width: 10, height: 10, opacity: 1 }, { width: Math.hypot(app.screen.width, app.screen.height) * 2.2, height: Math.hypot(app.screen.width, app.screen.height) * 2.2, duration: .9 * FAST, ease: "power2.in", onComplete: () => {
@@ -406,5 +447,5 @@
 
   // ---- старт ----
   drawPath(); nodes.forEach((_, i) => drawNode(i)); placeShip(S.lit, true); camY = camTarget; layout(); goHome(false);
-  window.JOURNEY = { S, app, mission, ignite, reward, album, goHome, throughTelescope };   // за автоматичните проверки
+  window.JOURNEY = { S, app, mission, ignite, reward, album, goHome, throughTelescope, go };   // за автоматичните проверки
 })();

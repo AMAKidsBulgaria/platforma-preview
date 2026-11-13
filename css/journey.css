@@ -84,7 +84,7 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; }
 
 /* жив Зори – прозрачно видео над стаята (под бутоните) */
 .j-zv { position: fixed; z-index: 1; opacity: 0; transition: opacity .25s; cursor: pointer; } .j-zv.on { opacity: 1; }
-.j-zv video { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; pointer-events: none; } .j-zv video.on { opacity: 1; }
+.j-zv video { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; pointer-events: none; transition: opacity .12s; } .j-zv video.on { opacity: 1; }
 #ui { z-index: 2; }
-.j-zv.rest { transform-origin: 50% 93%; animation: zbreath 3.2s ease-in-out infinite; }
-@keyframes zbreath { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.008, 1.022); } }
+/* малките надписи над предметите-входове: икона + дума (за децата, които още не четат – и гласът на Зори) */
+.j-hot-s { padding: 4px 12px 4px 6px; } .j-hot-s b { display: flex; align-items: center; gap: 6px; font-size: 16px; } .j-hot-s i { font-style: normal; font-size: 20px; line-height: 1; }

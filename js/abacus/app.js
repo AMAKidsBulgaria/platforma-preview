@@ -32,7 +32,8 @@
   if (!DESIGNS[set.design]) set.design = "emerald";
   // ✕ / ← връщат в началния екран на детето в платформата (профилът идва от бутона „Абакус“ там и се помни за отваряне от иконата)
   if (/^[a-z0-9_-]{1,32}$/i.test(Q.get("p") || "")) { set.p = Q.get("p"); save(SKEY, set); }
-  const EXIT = "observatory.html" + (set.p ? "?p=" + encodeURIComponent(set.p) : "");
+  // ?back=journey – отворен от абакуса в „Звездния път“: ✕ връща там
+  const EXIT = Q.get("back") === "journey" ? "journey.html" + (set.p ? "?p=" + encodeURIComponent(set.p) : "") : "observatory.html" + (set.p ? "?p=" + encodeURIComponent(set.p) : "");
   let st = E.make(RODS), mode = set.mode, sess = null;
 
   // ---- звук: кратко дървено щракване (Web Audio), без файлове ----
