@@ -41,10 +41,18 @@
   };
 
   // ---- глас: записаните реплики на Зори и числата („плюс 3“) ----
-  let AUD = {}, AUDZ = {}, curA = null;
-  fetch("config/abacus-audio.json?v=4").then(r => r.json()).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
-  fetch("config/abacus-audio-zori.json?v=11").then(r => r.json()).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
-  function speak(t) { if (Q.get("voice") === "0") return; const f = AUDZ[t] || AUD[t]; if (!f) return; try { if (curA) curA.pause(); curA = new Audio("assets/audio/abacus/" + f); curA.play().catch(() => {}); } catch (e) {} }
+  // Говоренето управлява устата на Зори: събитие „zori-talk“ (true, докато звучи репликата). Телефоните не пускат звук преди първото докосване –
+  // тогава репликата чака и тръгва при първото докосване; изчакваме и индексите, за да не се губи поздравът при отваряне.
+  let AUD = {}, AUDZ = {}, curA = null, pendingA = null;
+  const audReady = Promise.all([
+    fetch("config/abacus-audio.json?v=4").then(r => r.json()).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {}),
+    fetch("config/abacus-audio-zori.json?v=12").then(r => r.json()).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {})]);
+  const talk = (on, a) => { if (a === curA) window.dispatchEvent(new CustomEvent("zori-talk", { detail: on })); };
+  function speak(t) { if (Q.get("voice") === "0") return; audReady.then(() => { const f = AUDZ[t] || AUD[t]; if (!f) return;
+    try { if (curA) { curA.pause(); talk(false, curA); } const a = curA = new Audio("assets/audio/abacus/" + f); pendingA = null;
+      a.addEventListener("playing", () => talk(true, a)); a.addEventListener("pause", () => talk(false, a)); a.addEventListener("ended", () => talk(false, a));
+      a.play().catch(() => { pendingA = a; }); } catch (e) {} }); }
+  document.addEventListener("pointerdown", () => { const a = pendingA; pendingA = null; if (a && a === curA) a.play().catch(() => {}); }, true);
 
   // =================== СВЕТЪТ (PixiJS) ===================
   const app = new PIXI.Application({ resizeTo: window, backgroundColor: 0x0B0E2A, antialias: true, resolution: Math.min(2, window.devicePixelRatio || 1), autoDensity: true, preserveDrawingBuffer: Q.get("shot") === "1" });
@@ -213,7 +221,7 @@
   // Звездни сигнали: „Гледай!“ → абакусът за миг → „Кое число видя?“ (абакусът остава като бледа сянка); „↺ Покажи пак“ – веднъж, без звезда
   async function flashQ(st, first) {
     const t = TOPIC(st.topic), max = t.opMax >= 5 ? 9 : t.opMax, v = Math.floor(Math.random() * (max + 1)), p = $("#j-panel");
-    p.innerHTML = `<div class="j-ask">Гледай абакуса!</div><div class="j-flash"><div class="j-abw">${abSvg(0)}</div></div>`;
+    p.innerHTML = `<div class="j-ask">Гледай абакуса!</div><div class="j-flash"><div class="j-abw">${abSvg(0)}</div></div>`; speak("Гледай абакуса!");
     const show = async () => { const w = p.querySelector(".j-abw"); w.innerHTML = abSvg(v); w.style.opacity = 1; gsap.fromTo(w, { scale: .85 }, { scale: 1, duration: .25, ease: "back.out(2)" });
       await wait(first ? 2200 : 1700); gsap.to(w, { opacity: .18, duration: .25 }); };
     await wait(700); await show();
@@ -311,10 +319,16 @@
   const zvBox = document.createElement("div"); zvBox.className = "j-zv"; document.body.insertBefore(zvBox, $("#ui"));
   ZCLIP.forEach(n => { const v = document.createElement("video"); v.muted = true; v.playsInline = true; v.preload = "auto"; v.loop = n === "idle"; v.setAttribute("playsinline", "");
     v.src = `assets/video/journey/zori_${n}.${ZEXT}`;
-    v.addEventListener("ended", () => zoriPlay("idle")); zvBox.appendChild(v); ZV[n] = v; });
+    v.addEventListener("ended", () => zTalk ? zoriPlay("idle") : zoriRest()); zvBox.appendChild(v); ZV[n] = v; });
   Object.values(ZV).forEach(v => v.addEventListener("playing", () => { if (zvReady) return; zvReady = true; if (zoriSpr) zoriSpr.visible = false; zvBox.classList.add("on"); homeLayout(); }));
-  function zoriPlay(n) { const v = ZV[n]; if (!v) return; if (zvOn && zvOn !== v) { zvOn.classList.remove("on"); if (zvOn !== ZV.idle) zvOn.pause(); }
-    v.classList.add("on"); zvOn = v; try { v.currentTime = 0; } catch (e) {} const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+  // Устата се движи само докато Зори говори: „idle“ (с говорене) върви, докато звучи репликата, после – спокоен кадър с дишане (CSS).
+  let zTalk = false;
+  function zoriPlay(n) { const v = ZV[n]; if (!v) return; if (zvOn && zvOn !== v) { zvOn.classList.remove("on"); zvOn.pause(); }
+    zvBox.classList.remove("rest"); v.classList.add("on"); zvOn = v; try { v.currentTime = 0; } catch (e) {} const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+  function zoriRest() { const v = ZV.idle; if (zvOn && zvOn !== v) { zvOn.classList.remove("on"); zvOn.pause(); }
+    v.classList.add("on"); zvOn = v; v.pause(); try { v.currentTime = 0; } catch (e) {} zvBox.classList.add("rest"); }
+  window.addEventListener("zori-talk", e => { zTalk = e.detail; if (!homeScene.visible || ((zvOn === ZV.wave || zvOn === ZV.joy) && !zvOn.paused && !zvOn.ended)) return;
+    zTalk ? (zvOn === ZV.idle && !ZV.idle.paused ? 0 : zoriPlay("idle")) : zoriRest(); });
   zvBox.onclick = () => { if (homeScene.visible && zvOn !== ZV.wave) { SFX.tap(); zoriPlay("wave"); } };
   function placeZoriVideo() { if (!zoriSpr || !zoriSpr.texture.height) return;
     // кадърът на видеото (396×516): героят е 431 px висок (= цялата картинка), стъпалата на 93% от височината, центърът на 47% от ширината
