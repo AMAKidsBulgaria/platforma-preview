@@ -303,7 +303,24 @@
   PIXI.Assets.load("assets/img/journey/creature_aurora.webp").then(t => { foxSpr = new PIXI.Sprite(t); foxSpr.anchor.set(.5, 1); foxSpr.position.set(905, 700); foxSpr.scale.set(.25); room.addChild(foxSpr); homeLayout(); });
   PIXI.Assets.load("assets/img/journey/planet_games.webp").then(t => { planetSpr = new PIXI.Sprite(t); planetSpr.anchor.set(.5); planetSpr.position.set(1340, 150); planetSpr.scale.set(.42); room.addChild(planetSpr); homeLayout(); });
   PIXI.Assets.load("assets/img/journey/telescope.webp").then(t => { teleSpr = new PIXI.Sprite(t); teleSpr.anchor.set(.42, 1); teleSpr.position.set(300, 800); teleSpr.scale.set(.82); room.addChild(teleSpr); homeLayout(); });
-  PIXI.Assets.load("assets/img/zori/z_explain.png").then(t => { zoriSpr = new PIXI.Sprite(t); zoriSpr.anchor.set(.5, 1); zoriSpr.position.set(600, 1010); zoriSpr.scale.set(380 / t.height); room.addChild(zoriSpr); homeLayout(); });
+  PIXI.Assets.load("assets/img/zori/z_explain.png").then(t => { zoriSpr = new PIXI.Sprite(t); zoriSpr.anchor.set(.5, 1); zoriSpr.position.set(600, 1010); zoriSpr.scale.set(380 / t.height); zoriSpr.visible = !zvReady; room.addChild(zoriSpr); homeLayout(); });
+  // жив Зори: прозрачни видеа (fal.ai Kling, 13.11.2026) над платното – HEVC с алфа за Safari/iPhone, VP9 с алфа за Chrome/Android.
+  // Покой – непрекъснато; поздрав – при влизане и при докосване; радост – след нова звезда. Ако видеото не тръгне (пестене на батерия) – остава картинката.
+  // Chrome/Android понякога приема HEVC, но без алфа (черен правоъгълник) – затова HEVC само за WebKit (Safari и всички браузъри на iPhone)
+  const ZV = {}, ZCLIP = ["idle", "wave", "joy"], ZEXT = /Apple/.test(navigator.vendor || "") ? "mov" : "webm"; let zvOn = null, zvReady = false;
+  const zvBox = document.createElement("div"); zvBox.className = "j-zv"; document.body.insertBefore(zvBox, $("#ui"));
+  ZCLIP.forEach(n => { const v = document.createElement("video"); v.muted = true; v.playsInline = true; v.preload = "auto"; v.loop = n === "idle"; v.setAttribute("playsinline", "");
+    v.src = `assets/video/journey/zori_${n}.${ZEXT}`;
+    v.addEventListener("ended", () => zoriPlay("idle")); zvBox.appendChild(v); ZV[n] = v; });
+  Object.values(ZV).forEach(v => v.addEventListener("playing", () => { if (zvReady) return; zvReady = true; if (zoriSpr) zoriSpr.visible = false; zvBox.classList.add("on"); homeLayout(); }));
+  function zoriPlay(n) { const v = ZV[n]; if (!v) return; if (zvOn && zvOn !== v) { zvOn.classList.remove("on"); if (zvOn !== ZV.idle) zvOn.pause(); }
+    v.classList.add("on"); zvOn = v; try { v.currentTime = 0; } catch (e) {} const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+  zvBox.onclick = () => { if (homeScene.visible && zvOn !== ZV.wave) { SFX.tap(); zoriPlay("wave"); } };
+  function placeZoriVideo() { if (!zoriSpr || !zoriSpr.texture.height) return;
+    // кадърът на видеото (396×516): героят е 431 px висок (= цялата картинка), стъпалата на 93% от височината, центърът на 47% от ширината
+    const h = zoriSpr.texture.height * zoriSpr.scale.x * homeSc * 516 / 431, w = h * 396 / 516, p = toScreen(zoriSpr.x, zoriSpr.y);
+    Object.assign(zvBox.style, { width: w + "px", height: h + "px", left: (p.x - w * .472) + "px", top: (p.y - h * .931) + "px" });
+    zvBox.style.display = homeScene.visible ? "" : "none"; }
   window.addEventListener("orientationchange", () => setTimeout(homeLayout, 300));
   let homeSc = 1, homeOff = { x: 0, y: 0 }, portraitHome = false;
   function homeLayout() {
@@ -319,7 +336,7 @@
     if (zoriSpr) { zoriSpr.position.set(portraitHome ? (W * .66 - ox) / homeSc : 600, portraitHome ? 1010 : Math.min(1010, (H - oy) / homeSc + 20)); zoriSpr.scale.set((portraitHome ? 270 : 380) / zoriSpr.texture.height); }
     if (homeShip) { homeShip.x = WIN.x + (portraitHome ? 150 : 230); homeShip._y = WIN.y + (portraitHome ? 120 : -150); }
     if (foxSpr) { foxSpr.visible = S.parts > 0; foxSpr.alpha = .35 + .65 * Math.min(1, S.parts / N); }
-    placeHotspots();
+    placeHotspots(); placeZoriVideo();
   }
   const toScreen = (x, y) => ({ x: homeOff.x + x * homeSc, y: homeOff.y + y * homeSc });
   function placeHotspots() { const topY = (-homeOff.y + 120) / homeSc, hs = { tele: teleSpr && [teleSpr.x + 60, Math.max(topY, teleSpr.y - 640 * teleSpr.scale.y)], map: [1180, 600], games: planetSpr && [planetSpr.x, planetSpr.y + (portraitHome ? 90 : -100)], fox: foxSpr && foxSpr.visible && [foxSpr.x, foxSpr.y - 160] };
@@ -352,7 +369,8 @@
     gsap.from(".j-top > *", { y: -30, opacity: 0, stagger: .07, duration: .5, ease: "back.out(1.6)" });
     const line = celebrate ? "Виж! Новата звезда свети в небето!" : S.lit === 0 ? "Здравей! Звездите са угаснали. Погледни през телескопа!" : "Здравей! Да продължим към следващата звезда?";
     const b = $("#j-bub"); b.textContent = line; gsap.fromTo(b, { scale: .6, opacity: 0 }, { scale: 1, opacity: 1, duration: .4, ease: "back.out(2)", delay: .5 }); speak(line);
-    if (zoriSpr) { PIXI.Assets.load(`assets/img/zori/z_${celebrate ? "joy" : "explain"}.png`).then(t => { zoriSpr.texture = t; homeLayout(); }); }
+    if (zoriSpr && !zvReady) { PIXI.Assets.load(`assets/img/zori/z_${celebrate ? "joy" : "explain"}.png`).then(t => { zoriSpr.texture = t; homeLayout(); }); }
+    zoriPlay(celebrate ? "joy" : "wave");
     homeLayout();
   }
   function toast(t) { const d = document.createElement("div"); d.className = "j-toast"; d.textContent = t; document.body.appendChild(d); gsap.fromTo(d, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: .3 }); setTimeout(() => d.remove(), 1800); }
@@ -362,7 +380,7 @@
     if (teleSpr) { teleSpr._busy = 1; gsap.to(teleSpr, { rotation: .08, duration: .35, yoyo: true, repeat: 1 }); }
     lens.style.left = from.x + "px"; lens.style.top = from.y + "px";
     gsap.fromTo(lens, { width: 10, height: 10, opacity: 1 }, { width: Math.hypot(app.screen.width, app.screen.height) * 2.2, height: Math.hypot(app.screen.width, app.screen.height) * 2.2, duration: .9 * FAST, ease: "power2.in", onComplete: () => {
-      homeScene.visible = false; mapScene.visible = true; if (teleSpr) teleSpr._busy = 0; layout(); placeShip(S.lit, true); camY = camTarget; hud();
+      homeScene.visible = false; mapScene.visible = true; if (teleSpr) teleSpr._busy = 0; zvBox.style.display = "none"; Object.values(ZV).forEach(v => v.pause()); layout(); placeShip(S.lit, true); camY = camTarget; hud();
       const l2 = document.createElement("div"); l2.className = "j-lensout"; document.body.appendChild(l2); gsap.to(l2, { opacity: 0, duration: .7 * FAST, onComplete: () => l2.remove() });
       if (go && S.lit < N) setTimeout(() => { SFX.tap(); mission(); }, 900 * FAST); } });
   }
