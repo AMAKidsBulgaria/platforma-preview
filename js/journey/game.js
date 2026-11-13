@@ -46,7 +46,7 @@
   let AUD = {}, AUDZ = {}, curA = null, pendingA = null;
   const audReady = Promise.all([
     fetch("config/abacus-audio.json?v=4").then(r => r.json()).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {}),
-    fetch("config/abacus-audio-zori.json?v=12").then(r => r.json()).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {})]);
+    fetch("config/abacus-audio-zori.json?v=13").then(r => r.json()).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {})]);
   const talk = (on, a) => { if (a === curA) window.dispatchEvent(new CustomEvent("zori-talk", { detail: { on, f: a._f } })); };
   function speak(t) { if (Q.get("voice") === "0") return; audReady.then(() => { const f = AUDZ[t] || AUD[t]; if (!f) return;
     try { if (curA) { curA.pause(); talk(false, curA); } const a = curA = new Audio("assets/audio/abacus/" + f); a._f = f.replace(/\.mp3$/, ""); pendingA = null;
@@ -288,10 +288,13 @@
 
   // =================== ОБСЕРВАТОРИЯТА (началният екран, „домът“) ===================
   // Стаята е картина 1536×1024 с изрязан прозорец (x 400–1145, y 0–635); зад нея – живото небе със звездите на детето, падащи звезди и корабът.
-  // Стаята е ЕДНА картина (хоризонтална 1536×1024 или вертикална 1024×1536 за телефон) – предметите-входове са нарисувани в нея, всеки по веднъж:
-  // телескопът → „Продължи“ (полет), абакусът на бюрото → дигиталният абакус, звездната карта на стойката → пътят, сандъкът → игрите,
-  // възглавницата под прозореца – мястото на лисичето (създанията). Бутоните са самите нарисувани предмети: областта им леко свети и искри,
-  // при докосване „изрязано“ копие на същата област подскача (с меки ръбове), Зори казва името; над всеки има малък надпис с икона.
+  // Детето не влиза в „приложение със задачи“, а в своята обсерватория, откъдето изследва Вселената; математиката е инструментът.
+  // Стаята е ЕДНА картина (хоризонтална 1536×1024 или вертикална 1024×1536 за телефон); навигацията са нарисуваните предмети, всеки по веднъж:
+  //   звездната карта → пътят с мисиите (главният вход: свети най-силно, Зори насочва към нея; картата се „разгръща“ на цял екран),
+  //   телескопът → игри и предизвикателства (поглед през лещата: небесни обекти, всеки е игра), абакусът на бюрото → свободният тренажор
+  //   (камерата приближава бюрото), лисичето на възглавницата → създанията. Сандъкът е само част от стаята.
+  // Надписите не стоят постоянно: при първите посещения, в обиколката със Зори и при подсказка (иначе предметите само леко светят).
+  // При докосване „изрязано“ копие на същата област подскача (с меки ръбове) и светва.
   // В прозореца (маска по рамката) – звездите на детето, трептящи звезди, падащи звезди и корабът. Фенерите трептят и пламват при докосване.
   const ROOMS = {
     land: { url: "assets/img/journey/room_land.webp", w: 1536, h: 1024, win: { x: 780, y: 255, r: 285 }, zori: { x: 790, y: 930, h: 330 }, fox: { x: 906, y: 548, h: 120 },
@@ -331,10 +334,10 @@
   // предметите-бутони: меко „изрязано“ копие на областта от картината (подскача при докосване) + светлина + невидима зона за докосване
   const featherTex = (() => { const c = document.createElement("canvas"); c.width = c.height = 128; const g = c.getContext("2d"), r = g.createRadialGradient(64, 64, 40, 64, 64, 64);
     r.addColorStop(0, "#fff"); r.addColorStop(1, "rgba(255,255,255,0)"); g.fillStyle = r; g.fillRect(0, 0, 128, 128); return PIXI.Texture.from(c); })();
-  const PROPS = {}; ["tele", "map", "abac", "games", "fox"].forEach(k => { const p = PROPS[k] = { k, lift: new PIXI.Container(), pic: new PIXI.Sprite(), mask: new PIXI.Sprite(featherTex), glow: new PIXI.Sprite(glowTex), hit: new PIXI.Container() };
+  const PROPS = {}; ["tele", "map", "abac", "fox"].forEach(k => { const p = PROPS[k] = { k, lift: new PIXI.Container(), pic: new PIXI.Sprite(), mask: new PIXI.Sprite(featherTex), glow: new PIXI.Sprite(glowTex), hit: new PIXI.Container() };
     p.lift.addChild(p.pic, p.mask); p.pic.mask = p.mask; p.lift.zIndex = 4; p.lift.visible = false;
     p.glow.anchor.set(.5); p.glow.tint = 0xFFD27A; p.glow.blendMode = PIXI.BLEND_MODES.ADD; p.glow.zIndex = 4; p.glow.alpha = 0;
-    p.hit.eventMode = "static"; p.hit.cursor = "pointer"; p.hit.zIndex = 7; p.hit.on("pointertap", () => k === "tele" ? throughTelescope(true) : go(k));
+    p.hit.eventMode = "static"; p.hit.cursor = "pointer"; p.hit.zIndex = 7; p.hit.on("pointertap", () => go(k));
     room.addChild(p.glow, p.lift, p.hit); });
   let foxSpr = null, zoriSpr = null;
   PIXI.Assets.load("assets/img/journey/creature_aurora.webp").then(t => { foxSpr = new PIXI.Sprite(t); foxSpr.anchor.set(.5, 1); foxSpr.zIndex = 5; foxSpr.eventMode = "static"; foxSpr.cursor = "pointer"; foxSpr.on("pointertap", () => go("fox")); room.addChild(foxSpr); homeLayout(); });
@@ -409,28 +412,28 @@
   // надписите стоят над предметите (не излизат над горния край); лисичето – само след първата част
   function placeHotspots() { if (foxSpr) { foxSpr.visible = S.parts > 0; foxSpr.alpha = .4 + .6 * Math.min(1, S.parts / N); }
     const topY = (-homeOff.y + 112) / homeSc, b = RM.box, lbl = k => [(b[k][0] + b[k][2]) / 2, Math.max(topY, b[k][1] - 20)];
-    const port = RM === ROOMS.port, hs = { tele: [b.tele[0] + (b.tele[2] - b.tele[0]) * (port ? .55 : .5), b.tele[1] + (b.tele[3] - b.tele[1]) * (port ? .62 : .5)], abac: lbl("abac"), map: lbl("map"), games: [(b.games[0] + b.games[2]) / 2, b.games[1] + (b.games[3] - b.games[1]) * .3], fox: foxSpr && foxSpr.visible && lbl("fox") };
+    const hs = { tele: [b.tele[0] + (b.tele[2] - b.tele[0]) * .5, b.tele[1] + (b.tele[3] - b.tele[1]) * .5], abac: lbl("abac"), map: lbl("map"), fox: foxSpr && foxSpr.visible && lbl("fox") };
     PROPS.fox.hit.eventMode = foxSpr && foxSpr.visible ? "static" : "none";
     const W = app.screen.width;   // надписите не излизат извън екрана
-    Object.entries(hs).forEach(([k, p]) => { const el = $(`#h-${k}`); if (!el) return; if (!p) { el.hidden = true; return; } el.hidden = false; const q = toScreen(p[0], p[1]), hw = (el.offsetWidth || 120) / 2 + 8;
+    Object.entries(hs).forEach(([k, p]) => { const el = $(`#h-${k}`); if (!el) return; if (!p) { el.hidden = true; return; } el.hidden = false; el.classList.toggle("off", !labelsOn); const q = toScreen(p[0], p[1]), hw = (el.offsetWidth || 120) / 2 + 8;
       el.style.left = Math.min(W - hw, Math.max(hw, q.x)) + "px"; el.style.top = q.y + "px"; }); }
   window.addEventListener("resize", () => { if (homeScene.visible) homeLayout(); });
   app.ticker.add((dt) => { if (!homeScene.visible) return; const t = (performance.now() - t0) / 1000;
     skyStars.forEach(d => { d.alpha = .25 + .55 * (.5 + .5 * Math.sin(t * 1.6 + d._tw)); });
-    lamps.forEach((g, i) => { const f = .5 + .12 * Math.sin(t * 9 + i * 2) + .08 * Math.sin(t * 23 + i); g.alpha = Math.min(1, f + g._f * .5); g.scale.set((g._k || 1) * (1 + .04 * Math.sin(t * 5 + i) + g._f * .8)); });
+    lamps.forEach((g, i) => { const f = .5 + .12 * Math.sin(t * 9 + i * 2) + .08 * Math.sin(t * 23 + i), on = g._on == null ? 1 : g._on; g.alpha = Math.min(1, f + g._f * .5) * on; g.scale.set((g._k || 1) * (1 + .04 * Math.sin(t * 5 + i) + g._f * .8) * (.4 + .6 * on)); });
     motes.forEach(m => { m.y -= m._v * dt; m.x += Math.sin(t * .6 + m._p) * .2; m.alpha = .18 + .22 * (.5 + .5 * Math.sin(t * 1.3 + m._p)); if (m.y < RM.h * .2) { m.y = RM.h * .85; m.x = Math.random() * RM.w; } });
     MINI.forEach((p, i) => { if (i === S.lit) miniGlow[i].scale.set(.45 + .18 * (.5 + .5 * Math.sin(t * 3))); });
     if (homeShip) { homeShip.y = (homeShip._y || 0) + Math.sin(t * 1.4) * 8; homeShip.rotation = -.35 + Math.sin(t * 1.1) * .05; if (Math.random() < .35) emit(homeShip.x - 14, homeShip.y + 26, { layer: sky, angle: Math.PI * .62, spread: .4, speed: 1, life: 22, tint: Math.random() < .5 ? 0xFFB347 : 0xFF6B3D, scale: .7 }); }
     // входовете „дишат“ със светлина (вълна от единия към другия) и от време на време проблясват – подсказка, че се докосват
     Object.values(PROPS).forEach((p, i) => { if (p.k === "fox" && !(foxSpr && foxSpr.visible)) { p.glow.alpha = 0; return; }
-      p.glow.alpha = (p.k === "tele" ? .2 : .13) * (.55 + .45 * Math.sin(t * 1.8 - i * 1.1)) + (p._f || 0) * .5;
+      p.glow.alpha = (p.k === "map" ? .26 : .11) * (.55 + .45 * Math.sin(t * (p.k === "map" ? 2.6 : 1.8) - i * 1.1)) + (p._f || 0) * .5;
       if (Math.random() < .012) { const [x0, y0, x1, y1] = RM.box[p.k]; emit(x0 + Math.random() * (x1 - x0), y0 + Math.random() * (y1 - y0) * .8, { layer: room, speed: .5, life: 40, tint: 0xFFE08A, scale: .8 }); } });
     if (foxSpr && foxSpr.visible) foxSpr.y = (foxSpr._y || 0) - Math.abs(Math.sin(t * 1.2)) * 4;
     // падаща звезда в прозореца
     shootT -= dt / 60; shoot.clear(); if (shootT < 0) { if (shootT < -1) shootT = 4 + Math.random() * 5; const k = -shootT, W0 = RM.win, x = W0.x + W0.r * .7 - k * W0.r * 1.1, y = W0.y - W0.r * .7 + k * W0.r * .55;
       shoot.lineStyle(3, 0xFFFFFF, 1 - k).moveTo(x, y).lineTo(x + 70, y - 34); }
     // подсказка, ако детето не прави нищо: Зори маха и подсказва телескопа (веднъж за посещение, само когато мълчи)
-    if (homeIdle >= 0 && (!curA || curA.paused || curA.ended) && (homeIdle += dt / 60) > 10) { homeIdle = -1; sayZ("Докосни телескопа и да летим към звездите!"); setTimeout(() => press("tele", true), 1200); }
+    if (homeIdle >= 0 && !busyGo && (!curA || curA.paused || curA.ended) && (homeIdle += dt / 60) > 10) { homeIdle = -1; showLabels(true); sayZ("Докосни картата и да тръгваме!"); setTimeout(() => press("map", true), 1000); }
   });
   let homeIdle = -1; document.addEventListener("pointerdown", () => { if (homeIdle >= 0) homeIdle = 0; }, true);
   function sayZ(t) { const b = $("#j-bub"); if (b) { b.textContent = t; placeZoriVideo(); gsap.fromTo(b, { scale: .6, opacity: 0 }, { scale: 1, opacity: 1, duration: .35, ease: "back.out(2)" }); } speak(t); }
@@ -443,58 +446,91 @@
       .to(p.lift.scale, { x: 1, y: 1, duration: .7, ease: "elastic.out(1,.35)" }).to(p.lift, { y: y0, duration: .5, ease: "bounce.out" }, "<");
     gsap.fromTo(p, { _f: 1 }, { _f: 0, duration: 1.1, ease: "power2.out", onUpdate: () => p.cm.brightness(1 + p._f * .35, false) });
     if (!quiet) { const [x0, y0, x1, y1] = RM.box[k]; for (let i = 0; i < 26; i++) emit((x0 + x1) / 2, (y0 + y1) / 2, { layer: room, speed: 2 + Math.random() * 3, life: 40, tint: [0xFFE08A, 0xFFFFFF, 0x8FC7FF][i % 3], scale: 1 }); } }
-  // докосване на вход: предметът подскача и искри, Зори казва името; второ докосване (или краят на репликата) – влизаме
-  const GO = { abac: "Абакусът! Хайде да посметнем.", map: "Звездната карта! Да видим пътя.", games: "Сандъкът с игрите! Скоро тук ще има нови игри.", fox: "Моите звездни създания!" };
-  let goArm = null;
-  function go(k) { if (!homeScene.visible) return; if (homeIdle > 0) homeIdle = 0;
-    if (goArm && goArm.k === k) { const f = goArm.f; goArm = null; f(); return; }
-    SFX.tap(); if (k === "fox" && foxSpr) gsap.fromTo(foxSpr.scale, { x: foxSpr.scale.x * 1.15, y: foxSpr.scale.y * .85 }, { x: foxSpr.scale.x, y: foxSpr.scale.y, duration: .7, ease: "elastic.out(1,.35)" }); else press(k);
-    sayZ(GO[k]);
-    const enter = { abac: () => { location.href = "abacus-app.html?back=journey" + (Q.get("p") ? "&p=" + encodeURIComponent(Q.get("p")) : ""); }, map: () => throughTelescope(false, k), fox: album, games: () => {} }[k];
-    if (k === "abac") [0, .12, .24].forEach(d => tone(1400 + Math.random() * 300, d, .04, "square", .04));
-    if (k === "games") { SFX.chime(); const [x0, y0, x1] = RM.box.games; for (let i = 0; i < 30; i++) emit((x0 + x1) / 2, y0 + 20, { layer: room, angle: -Math.PI / 2, spread: 1.2, speed: 3 + Math.random() * 3, life: 60, tint: [0xFFE08A, 0xFF8FB1, 0x8FE3FF][i % 3], scale: 1.2 }); }
-    // абакусът отваря друга страница – изчакваме Зори да довърши; картата и създанията тръгват след миг (гласът продължава)
-    const wait = k === "abac" ? 4200 : k === "games" ? 0 : 1200; if (!wait) return;
-    const f = () => { clearTimeout(t); goArm = null; enter(); }, t = setTimeout(f, wait * FAST); goArm = { k, f };
+  // докосване на вход: предметът подскача и светва, после плавен преход (камерата приближава предмета)
+  let busyGo = false, labelsOn = false;
+  function showLabels(on) { labelsOn = on; document.querySelectorAll(".j-hot-s").forEach(e => e.classList.toggle("off", !on)); if (on) gsap.fromTo(".j-hot-s:not([hidden])", { scale: .6 }, { scale: 1, duration: .4, stagger: .08, ease: "back.out(2)" }); }
+  function go(k) { if (!homeScene.visible || busyGo) return; if (homeIdle > 0) homeIdle = 0;
+    if (k === "fox") { SFX.tap(); if (foxSpr) gsap.fromTo(foxSpr.scale, { x: foxSpr.scale.x * 1.15, y: foxSpr.scale.y * .85 }, { x: foxSpr.scale.x, y: foxSpr.scale.y, duration: .7, ease: "elastic.out(1,.35)" }); sayZ("Моите звездни създания!"); setTimeout(album, 900 * FAST); return; }
+    busyGo = true; SFX.tap(); press(k, true); homeIdle = -1;
+    if (k === "map") openMap(); else if (k === "abac") openAbacus(); else if (k === "tele") openScope(); }
+  // камерата: стаята се увеличава така, че областта на предмета запълва екрана (Зори и надписите изчезват)
+  function zoomTo(k, dur, fill) { const [x0, y0, x1, y1] = RM.box[k], W = app.screen.width, H = app.screen.height, sc = Math.min(W / (x1 - x0), H / (y1 - y0)) * (fill || .9), cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+    gsap.to(zvBox, { opacity: 0, duration: .2 }); gsap.to("#ui .j-hot, #j-bub, #ui .j-top", { opacity: 0, duration: .2 });
+    return new Promise(res => { gsap.to(homeScene.scale, { x: sc, y: sc, duration: dur * FAST, ease: "power2.inOut" }); gsap.to(homeScene.position, { x: W / 2 - cx * sc, y: H / 2 - cy * sc, duration: dur * FAST, ease: "power2.inOut", onComplete: res }); }); }
+  function curtain(color, dur) { const c = document.createElement("div"); c.className = "j-curtain"; c.style.background = color; document.body.appendChild(c); return new Promise(res => gsap.fromTo(c, { opacity: 0 }, { opacity: 1, duration: dur * FAST, onComplete: () => res(c) })); }
+  function leaveHome() { homeScene.visible = false; zvBox.style.display = "none"; Object.values(ZV).forEach(v => v.pause()); if (curA) curA.pause(); busyGo = false; }
+  // абакусът → свободният тренажор: камерата приближава бюрото, после се отваря дигиталният абакус
+  async function openAbacus() { [0, .1, .2].forEach(d => tone(1400 + Math.random() * 300, d, .04, "square", .04)); await zoomTo("abac", .75, .85); await curtain("#0B0E2A", .25);
+    location.href = "abacus-app.html?back=journey" + (Q.get("p") ? "&p=" + encodeURIComponent(Q.get("p")) : ""); }
+  // картата → пътят: камерата приближава картата, пергаментът „се разгръща“ (светла вълна), отваря се звездният път
+  async function openMap() { SFX.whoosh(); await zoomTo("map", .65, 1.05); const c = await curtain("radial-gradient(circle, #F4E3B5 0%, #C9A86A 60%, #6B4A22 100%)", .3);
+    leaveHome(); mapScene.visible = true; layout(); placeShip(S.lit, true); camY = camTarget; hud(); gsap.to(c, { opacity: 0, duration: .6 * FAST, onComplete: () => c.remove() }); }
+  // телескопът → игрите: телескопът се накланя, лещата расте до цял екран → небето с обектите-игри
+  async function openScope() { SFX.whoosh(); const [x0, y0, x1, y1] = RM.box.tele, from = toScreen(x0 + (x1 - x0) * .12, y0 + (y1 - y0) * .3), lens = $("#j-lens");
+    lens.style.left = from.x + "px"; lens.style.top = from.y + "px"; const D = Math.hypot(app.screen.width, app.screen.height) * 2.2;
+    await new Promise(res => gsap.fromTo(lens, { width: 10, height: 10, opacity: 1 }, { width: D, height: D, duration: .8 * FAST, ease: "power2.in", onComplete: res }));
+    leaveHome(); scope(); gsap.to(lens, { opacity: 0, duration: .3 }); }
+
+  // =================== ПРЕЗ ТЕЛЕСКОПА: игри и предизвикателства ===================
+  // Всеки небесен обект е игра. Играе се със звездите, които детето вече е запалило (нищо ново – само упражнение); „скоро“ – заключени.
+  const GAMES = [{ id: "flash", t: "Звездни сигнали", img: "comet", sub: "Виж за миг и познай числото" }, { id: "calc", t: "Звездни сметки", img: "planet", sub: "Смятай на абакуса" },
+    { id: "mem", t: "Нощна памет", img: "moon", soon: 1 }, { id: "fix", t: "Поправи телескопа", img: "galaxy", soon: 1 }];
+  function scope() {
+    ui.innerHTML = `<div class="j-scope" id="j-scope"><header class="j-top"><button class="j-chip j-home" id="j-sh" title="Към обсерваторията">⌂</button><div class="j-chip j-energy"><span class="j-gem"></span><b id="j-en">${S.energy}</b></div>
+        <div class="j-title"><b>През телескопа</b><small>Избери небесен обект</small></div></header>
+      <div class="j-sky">${GAMES.map((g, i) => `<button class="j-obj${g.soon ? " soon" : ""}" data-g="${g.id}" style="--i:${i}"><img src="assets/img/journey/sky_${g.img}.webp" alt=""><b>${g.t}</b><small>${g.soon ? "скоро" : g.sub}</small></button>`).join("")}</div></div>`;
+    gsap.from(".j-obj", { scale: .3, opacity: 0, stagger: .1, duration: .55, ease: "back.out(1.8)" }); speak("Какво виждаш? Избери игра!");
+    $("#j-sh").onclick = () => { SFX.tap(); goHome(false); };
+    document.querySelectorAll(".j-obj").forEach(b => b.onclick = () => { const g = GAMES.find(x => x.id === b.dataset.g); SFX.tap(); gsap.fromTo(b, { scale: 1.15 }, { scale: 1, duration: .5, ease: "elastic.out(1,.4)" });
+      if (g.soon) { speak("Тази игра идва скоро!"); toast("Тази игра идва скоро ✨"); return; } practice(g); });
   }
-  function homeHud(celebrate) {
+  // упражнение: 5 въпроса от вече запалените звезди; спокойно при грешка; накрая – енергия и „Още веднъж“
+  async function practice(g) { const st = STARS[Math.max(0, Math.min(S.lit, N) - 1)], sc = $("#j-scope"); let ok = 0;
+    sc.querySelector(".j-sky").remove(); sc.querySelector(".j-title small").textContent = g.t;
+    sc.insertAdjacentHTML("beforeend", `<div class="j-pdots">${[0, 1, 2, 3, 4].map(() => "<i></i>").join("")}</div><section class="j-panel" id="j-panel"></section>`);
+    for (let q = 0; q < 5; q++) { const r = g.id === "flash" ? await flashQ(st, q === 0) : await calcQ(st, false); if (r) { ok++; SFX.good(ok); } else SFX.bad();
+      sc.querySelectorAll(".j-pdots i")[q].className = r ? "ok" : "no"; }
+    save(); $("#j-panel").innerHTML = `<div class="j-pend"><div class="j-stars">${[0, 1, 2].map(x => `<span class="${x < (ok >= 5 ? 3 : ok >= 3 ? 2 : 1) ? "on" : ""}">★</span>`).join("")}</div><p>${ok} от 5 верни</p>
+      <div class="j-prow"><button class="j-btn" id="j-pa">Още веднъж</button><button class="j-btn j-ghost" id="j-pb">Други игри</button></div></div>`;
+    gsap.from(".j-pend .j-stars span", { scale: 0, rotation: -90, stagger: .15, duration: .4, ease: "back.out(3)" }); speak("Браво! Хайде пак?");
+    $("#j-pa").onclick = () => { SFX.tap(); scope(); practice(g); }; $("#j-pb").onclick = () => { SFX.tap(); scope(); }; }
+
+  function homeHud(celebrate) { if (!homeHud._v) { homeHud._v = 1; S.visits = (S.visits || 0) + 1; save(); }
     const nx = S.lit < N ? STARS[S.lit].t : "Аврора свети!";
     ui.innerHTML = `<header class="j-top"><div class="j-chip j-streak"><span class="j-flame">🔥</span><b>${S.streak}</b></div><div class="j-chip j-energy"><span class="j-gem"></span><b id="j-en">${S.energy}</b></div>
         <div class="j-title"><b>Звездна обсерватория</b><small>${S.lit} от ${N} звезди светят</small></div></header>
-      <button class="j-hot j-hot-big" id="h-tele"><b>▶ Продължи</b><small>${nx}</small></button>
-      <button class="j-hot j-hot-s" id="h-abac"><b><i>🧮</i>Абакус</b></button><button class="j-hot j-hot-s" id="h-map"><b><i>🗺️</i>Карта</b></button>
-      <button class="j-hot j-hot-s" id="h-games"><b><i>🧸</i>Игри</b></button><button class="j-hot j-hot-s" id="h-fox"><b><i>🦊</i>Създания</b></button>
+      <button class="j-hot j-hot-s j-hot-main" id="h-map"><b><i>🗺️</i>Звездна карта</b><small>${nx}</small></button><button class="j-hot j-hot-s" id="h-tele"><b><i>🔭</i>Игри</b></button>
+      <button class="j-hot j-hot-s" id="h-abac"><b><i>🧮</i>Абакус</b></button><button class="j-hot j-hot-s" id="h-fox"><b><i>🦊</i>Създания</b></button>
       <div class="j-bub j-hbub" id="j-bub"></div><div class="j-lens" id="j-lens"></div>`;
-    $("#h-tele").onclick = () => throughTelescope(true); ["abac", "map", "games", "fox"].forEach(k => { $(`#h-${k}`).onclick = () => go(k); });
-    gsap.from(".j-hot", { scale: .6, opacity: 0, stagger: .08, duration: .45, ease: "back.out(2)", delay: .3 }); gsap.to("#h-tele", { scale: 1.06, repeat: -1, yoyo: true, duration: .9, ease: "sine.inOut", delay: 1 });
+    ["tele", "abac", "map", "fox"].forEach(k => { $(`#h-${k}`).onclick = () => go(k); });
     gsap.from(".j-top > *", { y: -30, opacity: 0, stagger: .07, duration: .5, ease: "back.out(1.6)" });
-    const line = celebrate ? "Виж! Новата звезда свети в небето!" : S.lit === 0 ? "Здравей! Звездите са угаснали. Погледни през телескопа!" : "Здравей! Да продължим към следващата звезда?";
+    const first = !S.tour, line = celebrate ? "Виж! Новата звезда свети в небето!" : first ? "Здравей! Аз съм Зори. Това е нашата обсерватория." : "Здравей! Следващата звезда ни чака. Докосни картата!";
     if (zoriSpr && !zvReady) { PIXI.Assets.load(`assets/img/zori/z_${celebrate ? "joy" : "calm"}.png`).then(t => { zoriSpr.texture = t; homeLayout(); }); }
     // нова звезда: Зори подскача, около него искри, и казва репликата (клипът е синхронизиран с нея); иначе – поздравът
-    zoriRest(); setTimeout(() => sayZ(line), celebrate ? 300 : 500);
+    zoriRest(); lightsOn(); setTimeout(() => { if (first && !celebrate) tour(); else sayZ(line); }, celebrate ? 300 : 1300 * FAST);
     if (celebrate) { gsap.fromTo(zvBox, { y: 0 }, { y: -38, duration: .22, ease: "power2.out", yoyo: true, repeat: 3, delay: .1 });
       for (let i = 0; i < 36; i++) emit(RM.zori.x + (Math.random() - .5) * 160, RM.zori.y - RM.zori.h * .6 - Math.random() * 160, { layer: room, speed: 2 + Math.random() * 2.5, life: 55, tint: [0xFFE08A, 0xFFFFFF, 0xFF8FB1][i % 3], scale: 1.1 }); }
-    homeIdle = 0; goArm = null; homeLayout();
+    homeIdle = 0; busyGo = false; labelsOn = S.visits <= 3; homeLayout();
   }
+  // влизане: стаята е тъмна, фенерите светват един по един, телескопът леко се завърта
+  const dark = new PIXI.Graphics(); dark.beginFill(0x05040A).drawRect(-200, -200, 4000, 4000).endFill(); dark.zIndex = 8.5; dark.alpha = 0; room.addChild(dark);
+  function lightsOn() { dark.alpha = .78; gsap.to(dark, { alpha: 0, duration: 1.6 * FAST, ease: "power1.in", delay: .2 });
+    lamps.forEach((g, i) => { g._on = 0; gsap.to(g, { _on: 1, duration: .5, delay: (.25 + i * .3) * FAST, ease: "back.out(3)", onStart: () => tone(660 + i * 220, 0, .18, "sine", .04) }); });
+    setTimeout(() => press("tele", true), 900 * FAST); }
+  // първо посещение: Зори представя обсерваторията и показва всеки вход (с надпис и светване)
+  async function tour() { homeIdle = -1; showLabels(true); const say = async (t, k) => { if (k) press(k, true); sayZ(t); await new Promise(r => setTimeout(r, 400)); while (curA && !curA.paused && !curA.ended) await new Promise(r => setTimeout(r, 150)); await new Promise(r => setTimeout(r, 300)); };
+    await say("Здравей! Аз съм Зори. Това е нашата обсерватория."); await say("Това е абакусът. С него тренираме.", "abac");
+    await say("През телескопа ще видиш игрите.", "tele"); await say("А това е звездната карта. Оттук тръгваме на мисия.", "map");
+    S.tour = 1; save(); await say("Докосни картата и да тръгваме!", "map"); homeIdle = 0; }
   function toast(t) { const d = document.createElement("div"); d.className = "j-toast"; d.textContent = t; document.body.appendChild(d); gsap.fromTo(d, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: .3 }); setTimeout(() => d.remove(), 1800); }
-  // „през телескопа“: телескопът се накланя, кръгла леща расте до цял екран → небето (пътят); go = веднага мисия
-  function throughTelescope(go, src) {
-    // лещата расте от обектива на телескопа (горния ляв край на областта му) или от картата
-    SFX.tap(); SFX.whoosh(); homeIdle = -1; const lens = $("#j-lens"), bx = RM.box[src || "tele"], from = src ? toScreen((bx[0] + bx[2]) / 2, (bx[1] + bx[3]) / 2) : toScreen(bx[0] + (bx[2] - bx[0]) * .12, bx[1] + (bx[3] - bx[1]) * .3);
-    if (!src) press("tele", true);
-    lens.style.left = from.x + "px"; lens.style.top = from.y + "px";
-    gsap.fromTo(lens, { width: 10, height: 10, opacity: 1 }, { width: Math.hypot(app.screen.width, app.screen.height) * 2.2, height: Math.hypot(app.screen.width, app.screen.height) * 2.2, duration: .9 * FAST, ease: "power2.in", onComplete: () => {
-      homeScene.visible = false; mapScene.visible = true; zvBox.style.display = "none"; Object.values(ZV).forEach(v => v.pause()); layout(); placeShip(S.lit, true); camY = camTarget; hud();
-      const l2 = document.createElement("div"); l2.className = "j-lensout"; document.body.appendChild(l2); gsap.to(l2, { opacity: 0, duration: .7 * FAST, onComplete: () => l2.remove() });
-      if (go && S.lit < N) setTimeout(() => { SFX.tap(); mission(); }, 900 * FAST); } });
-  }
+  const throughTelescope = () => go("tele");   // старото име (за автоматичните проверки)
   function goHome(celebrate) {
-    mapScene.visible = false; homeScene.visible = true; drawMini(); homeHud(celebrate);
+    mapScene.visible = false; homeScene.visible = true; gsap.killTweensOf([homeScene.scale, homeScene.position]); zvBox.style.opacity = ""; drawMini(); homeHud(celebrate);
     if (celebrate && S.lit > 0) { const p = MINI[S.lit - 1]; for (let k = 0; k < 40; k++) emit(p.x, p.y, { layer: sky, speed: 2 + Math.random() * 3, life: 50, tint: [0xFFE08A, 0xFFFFFF, 0x8FC7FF][k % 3], scale: 1.2 });
       gsap.fromTo(miniGlow[S.lit - 1].scale, { x: 2.5, y: 2.5 }, { x: .7, y: .7, duration: 1.4, ease: "power2.out" }); SFX.ignite(); }
   }
 
   // ---- старт ----
   drawPath(); nodes.forEach((_, i) => drawNode(i)); placeShip(S.lit, true); camY = camTarget; layout(); goHome(false);
-  window.JOURNEY = { S, app, mission, ignite, reward, album, goHome, throughTelescope, go, PROPS, press };   // за автоматичните проверки
+  window.JOURNEY = { S, app, mission, ignite, reward, album, goHome, throughTelescope, go, PROPS, press, scope, practice, GAMES };   // за автоматичните проверки
 })();

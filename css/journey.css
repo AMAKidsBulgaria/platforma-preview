@@ -88,3 +88,24 @@ button { font: inherit; color: inherit; border: 0; cursor: pointer; }
 #ui { z-index: 2; }
 /* малките надписи над предметите-входове: икона + дума (за децата, които още не четат – и гласът на Зори) */
 .j-hot-s { padding: 4px 12px 4px 6px; } .j-hot-s b { display: flex; align-items: center; gap: 6px; font-size: 16px; } .j-hot-s i { font-style: normal; font-size: 20px; line-height: 1; }
+/* v4: надписите над предметите – меки, появяват се при първите посещения, в обиколката и при подсказка */
+.j-hot-s { transition: opacity .35s, visibility .35s; } .j-hot-s.off { opacity: 0; visibility: hidden; pointer-events: none; }
+.j-hot-main { background: rgba(60, 40, 10, .78); border-color: rgba(255, 216, 106, .7); box-shadow: 0 0 22px rgba(255, 201, 74, .45), 0 6px 18px #0008; }
+.j-hot-main small { display: block; color: #FFE6A6; }
+.j-curtain { position: fixed; inset: 0; z-index: 30; pointer-events: none; }
+/* през телескопа: кръгла леща с небето и небесните обекти-игри */
+.j-scope { position: fixed; inset: 0; background: radial-gradient(circle at 50% 55%, transparent 0 58%, rgba(0, 0, 0, .55) 70%, #000 82%), url("../assets/img/journey/bg_space.webp") center / cover; }
+.j-scope::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 55%, transparent 0 60%, rgba(201, 162, 74, .35) 61.5%, transparent 63%); }
+.j-sky { position: absolute; inset: 84px max(16px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; align-content: center; justify-items: center; }
+@media (min-aspect-ratio: 4/3) { .j-sky { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.j-obj { position: relative; z-index: 1; display: grid; justify-items: center; gap: 2px; padding: 6px; border-radius: 24px; color: var(--ink); animation: jfloat 4s ease-in-out infinite; animation-delay: calc(var(--i) * -1s); }
+.j-obj img { width: min(32vw, 24vh, 190px); aspect-ratio: 1; object-fit: contain; filter: drop-shadow(0 0 18px rgba(255, 220, 140, .45)); }
+.j-obj b { font: 800 19px "Baloo 2"; text-shadow: 0 2px 8px #000; } .j-obj small { font: 800 13px "Nunito"; opacity: .85; text-shadow: 0 2px 6px #000; }
+.j-obj.soon img { filter: grayscale(.7) brightness(.6); } .j-obj.soon b { opacity: .7; }
+@keyframes jfloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.j-scope .j-panel { left: max(16px, 10vw); right: max(16px, 10vw); top: 110px; }
+.j-pdots { position: absolute; top: 80px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px; } .j-pdots i { width: 14px; height: 14px; border-radius: 50%; background: #ffffff30; border: 2px solid var(--line); }
+.j-pdots i.ok { background: var(--gold); } .j-pdots i.no { background: #8F93C8; }
+.j-pend { display: grid; justify-items: center; gap: 10px; font: 800 20px "Baloo 2"; } .j-prow { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.j-ghost { background: var(--glass); color: var(--ink); border: 2px solid var(--line); box-shadow: none; }
+.j-obj { background: none; border: 0; font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
