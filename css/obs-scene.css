@@ -14,31 +14,46 @@
 /* предметите: невидима зона за докосване (DOM бутон), златиста рамка при фокус от клавиатурата */
 .os-hit { position: absolute; background: transparent; border: 0; padding: 0; border-radius: 28px; cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 .os-hit:focus-visible { outline: 3px solid #FFD86A; outline-offset: 2px; box-shadow: 0 0 28px rgba(255, 210, 110, .55); }
-.os-chip { position: absolute; transform: translate(-50%, -100%); display: flex; align-items: center; gap: 6px; padding: 5px 13px 5px 8px; border-radius: 99px; pointer-events: none;
-  background: rgba(20, 14, 8, .78); border: 1.5px solid rgba(255, 216, 106, .55); color: #FFF4DA; font: 800 15px "Nunito"; white-space: nowrap;
-  box-shadow: 0 0 14px rgba(255, 196, 90, .25), 0 4px 12px #0008; opacity: 0; transition: opacity .5s .8s, transform .3s; }
-.os-chip i { font-style: normal; font-size: 18px; line-height: 1; }
-.os-chip.on, .os-chip.hot { opacity: 1; } .os-chip.hot { transform: translate(-50%, -100%) scale(1.08); border-color: #FFD86A; }
+/* табелките: малки месингови плочки, закачени на предметите (гравиран текст и икона, винтчета) */
+.os-chip { position: absolute; transform: translate(-50%, 0); display: flex; align-items: center; gap: 6px; padding: 4px 12px 4px 10px; border-radius: 6px; pointer-events: none;
+  background: linear-gradient(180deg, #F1D78E 0%, #D9AE55 45%, #B8862F 100%); color: #3B2408; font: 900 13px/1.1 "Nunito"; letter-spacing: .02em; white-space: nowrap;
+  text-shadow: 0 1px 0 rgba(255, 240, 200, .65); border: 1px solid #6B4A1E;
+  box-shadow: inset 0 1px 0 rgba(255, 248, 220, .8), inset 0 -1px 0 rgba(90, 55, 10, .5), 0 3px 6px rgba(0, 0, 0, .55), 0 0 12px rgba(255, 196, 90, .18);
+  opacity: 0; transition: opacity .5s .8s, transform .3s; }
+.os-chip::before, .os-chip::after { content: ""; position: absolute; top: 50%; width: 4px; height: 4px; margin-top: -2px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #FFF1C8, #7A5418); }
+.os-chip::before { left: 3px; } .os-chip::after { right: 3px; }
+.os-chip i { display: grid; width: 16px; height: 16px; } .os-chip svg { width: 16px; height: 16px; }
+.os-chip.on, .os-chip.hot { opacity: 1; } .os-chip.hot { transform: translate(-50%, 0) scale(1.08); transition-delay: 0s; box-shadow: inset 0 1px 0 rgba(255, 248, 220, .8), 0 3px 6px rgba(0, 0, 0, .55), 0 0 18px rgba(255, 210, 110, .6); }
 
-/* порталът: прозорецът с истинското небе на детето и следващата мисия */
+/* прозорецът: истинското небе на детето (целият е докосваем – като бутона на табелата) */
 .os-portal { position: absolute; border-radius: 50%; padding: 0; border: 0; background: transparent; cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 .os-win { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; background: #0A0F33; box-shadow: inset 0 0 40px #000a, 0 0 0 3px rgba(255, 216, 106, .25), 0 0 40px rgba(120, 150, 255, .25);
   animation: os-breathe 3.2s ease-in-out infinite; }
 .os-win .o-sky { position: absolute; inset: -6%; width: 112%; height: 112%; animation: orot 240s linear infinite; }
-@keyframes os-breathe { 0%, 100% { box-shadow: inset 0 0 40px #000a, 0 0 0 3px rgba(255, 216, 106, .25), 0 0 34px rgba(120, 150, 255, .22); } 50% { box-shadow: inset 0 0 40px #000a, 0 0 0 3px rgba(255, 216, 106, .55), 0 0 56px rgba(255, 210, 120, .35); } }
-.os-plaque { position: absolute; left: 50%; bottom: 4%; transform: translateX(-50%); display: grid; justify-items: center; gap: 2px; width: max-content; max-width: min(92vw, 360px);
-  padding: 10px 16px 12px; border-radius: 22px; text-align: center; color: #FFF4DA;
-  background: linear-gradient(180deg, rgba(36, 24, 12, .92), rgba(20, 13, 6, .94)); border: 2px solid rgba(255, 216, 106, .6); box-shadow: 0 8px 26px #000b, 0 0 22px rgba(255, 196, 90, .25); }
-.os-plaque em { font: 800 12px "Nunito"; font-style: normal; letter-spacing: .06em; text-transform: uppercase; color: #FFD86A; }
-.os-plaque b { font: 900 clamp(16px, 2vw, 21px)/1.15 "Nunito"; text-wrap: balance; } .os-plaque small { font: 800 13px "Nunito"; color: #FFEBC2cc; }
-.os-plaque .o-hdots { margin: 4px 0 2px; } .os-plaque .o-hdots i { background: #ffffff1a; border-color: #ffffff55; }
-.os-cta { margin-top: 6px; display: inline-flex; align-items: center; gap: 8px; padding: 8px 22px; border-radius: 99px; background: linear-gradient(180deg, #FFD86A, #F2A82A); color: #2B1A05;
-  font: 900 20px "Nunito"; box-shadow: 0 4px 0 #A8701A, 0 0 22px rgba(255, 200, 90, .5); }
-.os-cta i { font-style: normal; font-size: 18px; }
-.os-portal:hover .os-cta, .os-portal:focus-visible .os-cta { filter: brightness(1.08); transform: translateY(-1px); }
-.os-portal:focus-visible { outline: 3px solid #FFD86A; outline-offset: 4px; }
-.os-portal:active .os-cta { transform: translateY(3px); box-shadow: 0 1px 0 #A8701A; }
-.os-portal.small .os-plaque { bottom: -14%; padding: 8px 12px 10px; } .os-portal.small .os-plaque b { font-size: 15px; } .os-portal.small .os-cta { font-size: 17px; padding: 7px 18px; }
+@keyframes os-breathe { 0%, 100% { box-shadow: inset 0 0 40px #000a, 0 0 0 3px rgba(255, 216, 106, .25), 0 0 34px rgba(120, 150, 255, .22); } 50% { box-shadow: inset 0 0 40px #000a, 0 0 0 3px rgba(255, 216, 106, .5), 0 0 52px rgba(255, 210, 120, .3); } }
+/* звездата на мисията: два меки пръстена, които се разширяват (само подчертаване) */
+.os-tring { fill: none; stroke: #FFE08A; stroke-width: 2.5; opacity: 0; transform-box: fill-box; transform-origin: center; animation: os-tring 2.6s ease-out infinite; }
+.os-tring2 { animation-delay: 1.3s; }
+@keyframes os-tring { 0% { transform: scale(.55); opacity: .9; } 100% { transform: scale(1.9); opacity: 0; } }
+.os-target .o-core { filter: drop-shadow(0 0 6px #FFE08A); }
+
+/* табелата на мисията: месингова, на перваза под прозореца */
+.os-mission { position: absolute; transform: translateX(-50%); display: flex; align-items: center; gap: 14px; padding: 10px 12px 10px 18px; border-radius: 16px; cursor: pointer; text-align: left;
+  max-width: min(94vw, 460px); color: #FFF4DA; -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+  background: linear-gradient(180deg, rgba(48, 32, 14, .95), rgba(26, 17, 7, .96)); border: 2px solid #C99A45;
+  box-shadow: inset 0 1px 0 rgba(255, 226, 160, .35), 0 0 0 1px #4A3010, 0 10px 26px rgba(0, 0, 0, .7), 0 0 26px rgba(255, 196, 90, .18); }
+.os-mtx { display: grid; gap: 1px; min-width: 0; } .os-mtx em { font: 800 11px "Nunito"; font-style: normal; letter-spacing: .08em; text-transform: uppercase; color: #F2C66A; }
+.os-mtx b { font: 900 18px/1.15 "Nunito"; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .os-mtx small { font: 800 12.5px "Nunito"; color: #FFEBC2cc; }
+.os-mtx .o-hdots { margin: 3px 0 0; gap: 4px; } .os-mtx .o-hdots i { width: 9px; height: 9px; background: #ffffff1a; border-color: #ffffff55; }
+.os-cta { flex: none; display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 12px; background: linear-gradient(180deg, #FFD86A, #F2A82A); color: #2B1A05;
+  font: 900 19px "Nunito"; box-shadow: 0 4px 0 #A8701A, 0 0 18px rgba(255, 200, 90, .45); }
+.os-cta i { font-style: normal; font-size: 16px; }
+.os-mission:hover .os-cta, .os-mission:focus-visible .os-cta { filter: brightness(1.08); }
+.os-mission:focus-visible, .os-zori:focus-visible { outline: 3px solid #FFD86A; outline-offset: 3px; }
+.os-mission:active .os-cta { transform: translateY(3px); box-shadow: 0 1px 0 #A8701A; }
+.os-mission.dock { width: calc(100vw - 24px); max-width: 440px; padding: 8px 8px 8px 14px; } .os-mission.dock .os-mtx b { font-size: 16px; }
+.os-mission.tight { padding: 6px 8px 6px 12px; gap: 10px; } .os-mission.tight .os-mtx small, .os-mission.tight .o-hdots { display: none; } .os-mission.tight .os-cta { padding: 7px 14px; font-size: 16px; }
+.os-zori { position: absolute; background: transparent; border: 0; padding: 0; cursor: pointer; border-radius: 40% 40% 20% 20%; -webkit-tap-highlight-color: transparent; }
 
 /* по-старо незавършено домашно – по желание */
 .os-older { position: absolute; left: max(14px, env(safe-area-inset-left)); bottom: max(14px, env(safe-area-inset-bottom)); padding: 8px 16px; border-radius: 99px; color: #FFF4DA;
@@ -57,10 +72,11 @@
 .os-unroll.anim { animation: os-unroll .45s ease-out both; } @keyframes os-unroll { from { clip-path: inset(0 47% 0 47%); } to { clip-path: inset(0 0 0 0); } }
 
 /* малки екрани */
-@media (max-width: 760px) and (orientation: portrait) { .os-title small { display: none; } .os-chip { font-size: 13px; padding: 4px 10px 4px 6px; } .os-bub { font-size: 15px; } }
-@media (max-height: 520px) { .os-title small { display: none; } .os-plaque { padding: 6px 12px 8px; } .os-plaque b { font-size: 15px; } .os-cta { font-size: 16px; padding: 6px 16px; } .os-chip { font-size: 13px; } }
+@media (max-width: 760px) and (orientation: portrait) { .os-title small { display: none; } .os-chip { font-size: 12px; padding: 3px 10px 3px 8px; } .os-bub { font-size: 15px; } }
+@media (max-height: 520px) { .os-title small { display: none; } .os-chip { font-size: 12px; } }
 
 /* намалено движение: без дишане и въртене */
-html.o-calm .os-win, html.o-still .os-win, html.o-calm .os-win .o-sky, html.o-still .os-win .o-sky { animation: none !important; }
-@media (prefers-reduced-motion: reduce) { .os-win, .os-win .o-sky, .os-unroll.anim { animation: none !important; } .os-chip { transition: none; } }
-.os-chip.hot { transition-delay: 0s; }
+html.o-calm .os-win, html.o-still .os-win, html.o-calm .os-win .o-sky, html.o-still .os-win .o-sky, html.o-calm .os-tring, html.o-still .os-tring { animation: none !important; }
+html.o-calm .os-tring1, html.o-still .os-tring1 { opacity: .8; transform: scale(1.1); }
+@media (prefers-reduced-motion: reduce) { .os-win, .os-win .o-sky, .os-unroll.anim, .os-tring { animation: none !important; } .os-tring1 { opacity: .8; transform: scale(1.1); } .os-chip { transition: none; } }
+@media (max-width: 600px) { .os-bub { font-size: 14px; padding: 8px 11px; } }

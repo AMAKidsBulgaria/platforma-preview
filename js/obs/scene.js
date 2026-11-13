@@ -10,12 +10,16 @@
   const ROOMS = {
     land: { url: "assets/img/journey/room_land.webp", w: 1536, h: 1024, win: { x: 780, y: 255, r: 285 }, zori: { x: 985, y: 945, h: 320 },
       box: { tele: [85, 150, 425, 855], map: [378, 348, 630, 762], abac: [1148, 328, 1368, 588] }, lens: [410, 190],
+      tag: { tele: [262, 610], map: [470, 600], abac: [1258, 590] },
       lamps: [[75, 505, 1.1], [1455, 92, 1], [1111, 482, .8]] },
     port: { url: "assets/img/journey/room_port.webp", w: 1024, h: 1536, win: { x: 510, y: 325, r: 240 }, zori: { x: 500, y: 1430, h: 380 },
       box: { tele: [50, 470, 385, 1235], map: [255, 625, 495, 1015], abac: [685, 568, 885, 812] }, lens: [372, 492],
+      tag: { tele: [168, 960], map: [376, 930], abac: [790, 812] },
       lamps: [[60, 270, 1], [985, 410, .9], [643, 735, .8]] } };
-  const OBJ = { abac: { icon: "🧮", name: "Абакус", aria: "Абакус – свободна тренировка" }, tele: { icon: "🔭", name: "Игри", aria: "Телескоп – игри" },
-    map: { icon: "🗺️", name: "Звездна карта", aria: "Звездна карта" } };
+  const svg = (d) => `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+  const OBJ = { abac: { icon: svg('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v16M12 4v16M16 4v16"/><circle cx="8" cy="6.5" r="1.2" fill="currentColor"/><circle cx="12" cy="13" r="1.2" fill="currentColor"/><circle cx="16" cy="15.5" r="1.2" fill="currentColor"/>'), name: "Абакус", aria: "Абакус – свободна тренировка" },
+    tele: { icon: svg('<path d="M3 13l13-6 2 4-13 6z"/><path d="M16 7l3-1.5 1.5 3L18 11"/><path d="M9 16l-3 5M10 15.5l3 5.5"/>'), name: "Игри", aria: "Телескоп – игри" },
+    map: { icon: svg('<rect x="4" y="3" width="16" height="13" rx="1.5"/><path d="M7 12l3-4 3 2 4-4M8 16l-2 5M16 16l2 5M12 16v5"/><circle cx="7" cy="12" r=".9" fill="currentColor"/><circle cx="17" cy="6" r=".9" fill="currentColor"/>'), name: "Звездна карта", aria: "Звездна карта" } };
   let glowTex = null;
   const radial = () => { if (glowTex && glowTex.valid) return glowTex; const c = document.createElement("canvas"); c.width = c.height = 128; const g = c.getContext("2d"), r = g.createRadialGradient(64, 64, 0, 64, 64, 64);
     r.addColorStop(0, "rgba(255,255,255,1)"); r.addColorStop(.35, "rgba(255,255,255,.45)"); r.addColorStop(1, "rgba(255,255,255,0)"); g.fillStyle = r; g.fillRect(0, 0, 128, 128); return glowTex = PIXI.Texture.from(c); };
@@ -24,12 +28,17 @@
   function mount(host, model, H) {
     if (!window.PIXI || !window.gsap || !PIXI.utils.isWebGLSupported()) throw new Error("scene: no WebGL/PIXI/GSAP");
     const root = document.documentElement, reduced = () => root.classList.contains("o-calm") || root.classList.contains("o-still") || matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const pm = model.portal;
     host.innerHTML = `<div class="os-stage"></div><div class="os-ui">
-        <button class="os-portal" type="button" aria-label="${esc(model.portal.aria)}"><span class="os-win">${model.portal.svg || ""}<span class="o-glass"></span></span>
-          <span class="os-plaque">${model.portal.kicker ? `<em>${esc(model.portal.kicker)}</em>` : ""}<b>${esc(model.portal.title)}</b><small>${esc(model.portal.sub)}</small>${model.portal.dots || ""}
-            <span class="os-cta"><i aria-hidden="true">${model.portal.icon}</i>${esc(model.portal.cta)}</span></span></button>
+        <button class="os-portal" type="button" tabindex="-1" aria-hidden="true"><span class="os-win">${pm.svg || ""}<span class="o-glass"></span></span></button>
         ${Object.entries(OBJ).map(([k, o]) => `<button class="os-hit" type="button" data-k="${k}" aria-label="${o.aria}"></button><span class="os-chip${model.chips ? " on" : ""}" data-k="${k}" aria-hidden="true"><i>${o.icon}</i>${o.name}</span>`).join("")}
+        <button class="os-zori" type="button" aria-label="Зори – чуй отново"></button>
+        <button class="os-mission" type="button" aria-label="${esc(pm.aria)}"><span class="os-mtx">${pm.kicker ? `<em>${esc(pm.kicker)}</em>` : ""}<b>${esc(pm.title)}</b><small>${esc(pm.sub)}</small>${pm.dots || ""}</span>
+          <span class="os-cta"><i aria-hidden="true">${pm.icon}</i>${esc(pm.cta)}</span></button>
         <div class="os-bub" role="status" aria-live="polite" hidden></div></div>`;
+    // звездата на мисията: нежно пулсиращ пръстен (само подчертаване на истинската следваща звезда)
+    if (pm.star != null) { const g = host.querySelector(`.os-win .o-star[data-n="${pm.star}"]`); if (g) { g.classList.add("os-target"); const ns = "http://www.w3.org/2000/svg";
+      [1, 2].forEach(i => { const c = document.createElementNS(ns, "circle"); c.setAttribute("r", "24"); c.setAttribute("class", "os-tring os-tring" + i); g.insertBefore(c, g.firstChild); }); } }
     const stage = host.querySelector(".os-stage"), ui = host.querySelector(".os-ui"), $ = (s) => ui.querySelector(s);
     const app = new PIXI.Application({ resizeTo: stage, backgroundColor: 0x160F0A, antialias: true, resolution: Math.min(2, window.devicePixelRatio || 1), autoDensity: true });
     stage.appendChild(app.view); app.view.setAttribute("aria-hidden", "true");
@@ -48,7 +57,11 @@
     const sheenMask = new PIXI.Graphics(); world.addChild(sheenMask); sheen.mask = sheenMask;
     const lensStar = new PIXI.Sprite(radial()); lensStar.anchor.set(.5); lensStar.tint = 0xBFE0FF; lensStar.blendMode = PIXI.BLEND_MODES.ADD; lensStar.zIndex = 5; world.addChild(lensStar);
     const shadow = new PIXI.Sprite(radial()); shadow.anchor.set(.5); shadow.tint = 0x000000; shadow.alpha = .5; shadow.zIndex = 5; world.addChild(shadow);
-    const zoriReady = PIXI.Assets.load(model.zori || "assets/img/zori/z_calm.png").then(t => { if (dead) return; zori = new PIXI.Sprite(t); zori.anchor.set(.5, 1); zori.zIndex = 6; world.addChild(zori); layout(); });
+    let zTex = null, zBlink = null, blinkT = null;
+    const zoriReady = Promise.all([PIXI.Assets.load(model.zori || "assets/img/zori/z_calm.png"), PIXI.Assets.load("assets/img/zori/z_calm_blink.png").catch(() => null)]).then(([t, b]) => { if (dead) return;
+      zTex = t; zBlink = b; zori = new PIXI.Sprite(t); zori.anchor.set(.5, 1); zori.zIndex = 6; zori._dy = 0; world.addChild(zori); layout(); blink(); });
+    // примигване: 120 ms, през 4–7 с (и при намалено движение – то е естествено, не е движение на сцената)
+    function blink() { if (dead || !zBlink) return; blinkT = later(() => { if (dead || !zori) return; zori.texture = zBlink; later(() => { if (!dead && zori) zori.texture = zTex; blink(); }, 110 + Math.random() * 40); }, 4000 + Math.random() * 3000); }
     const dark = new PIXI.Graphics(); dark.beginFill(0x05040A).drawRect(-4000, -4000, 12000, 12000).endFill(); dark.zIndex = 9; dark.alpha = reduced() ? 0 : 1; world.addChild(dark);
 
     // ---- подредба: картината запълва екрана, режем най-много ~20%; вертикалната – за изправен екран ----
@@ -63,37 +76,48 @@
       Object.entries(glow).forEach(([o, g]) => { const [x0, y0, x1, y1] = RM.box[o]; g.position.set((x0 + x1) / 2, (y0 + y1) / 2); g.width = (x1 - x0) * 1.5; g.height = (y1 - y0) * 1.25; });
       const [mx0, my0, mx1, my1] = RM.box.map; sheenMask.clear().beginFill(0xffffff).drawRect(mx0 + 10, my0 + 10, mx1 - mx0 - 20, (my1 - my0) * .62).endFill(); sheen.height = (my1 - my0) * .9; sheen.width = (mx1 - mx0) * .28;
       lensStar.position.set(RM.lens[0], RM.lens[1]);
-      if (zori) { zori.position.set(RM.zori.x, RM.zori.y); zori.scale.set(RM.zori.h / zori.texture.height); zori._s = zori.scale.x; }
-      shadow.position.set(RM.zori.x, RM.zori.y - 4); shadow.width = RM.zori.h * .55; shadow.height = RM.zori.h * .09;
+      const zy = zoriY(); if (zori) { zori.position.set(RM.zori.x, zy); zori._y = zy; zori.scale.set(RM.zori.h / zori.texture.height); zori._s = zori.scale.x; }
+      shadow.position.set(RM.zori.x, zy - 4); shadow.width = RM.zori.h * .55; shadow.height = RM.zori.h * .09;
       placeDom(); }
     // ---- DOM над платното: бутоните (зоните на предметите), надписите, порталът, балонът ----
     function placeDom() { const W = app.screen.width, H0 = app.screen.height;
       ui.querySelectorAll(".os-hit").forEach(b => { const [x0, y0, x1, y1] = RM.box[b.dataset.k], p = toScreen(x0, y0), q = toScreen(x1, y1), pad = 6;
         const L = Math.max(0, p.x - pad), Tp = Math.max(56, p.y - pad), R = Math.min(W, q.x + pad), B = Math.min(H0, q.y + pad);
         Object.assign(b.style, { left: L + "px", top: Tp + "px", width: Math.max(44, R - L) + "px", height: Math.max(44, B - Tp) + "px" }); });
-      ui.querySelectorAll(".os-chip").forEach(c => { const [x0, y0, x1, y1] = RM.box[c.dataset.k], cx = (x0 + x1) / 2, y = c.dataset.k === "tele" ? y0 + (y1 - y0) * .55 : y0, p = toScreen(cx, y), hw = (c.offsetWidth || 110) / 2 + 8;
-        c.style.left = Math.min(W - hw, Math.max(hw, p.x)) + "px"; c.style.top = Math.max(70, p.y - 8) + "px"; });
+      ui.querySelectorAll(".os-chip").forEach(c => { const [x, y] = RM.tag[c.dataset.k], p = toScreen(x, y), hw = (c.offsetWidth || 110) / 2 + 8;
+        c.style.left = Math.min(W - hw, Math.max(hw, p.x)) + "px"; c.style.top = Math.max(70, p.y) + "px"; });
       const w = RM.win, c = toScreen(w.x, w.y), d = w.r * 2 * sc * .94, po = $(".os-portal");
       Object.assign(po.style, { left: c.x - d / 2 + "px", top: c.y - d / 2 + "px", width: d + "px", height: d + "px" });
-      po.classList.toggle("small", d < 300); placeBubble(); }
-    function placeBubble() { const b = $(".os-bub"); if (!b || b.hidden || !zori) return; const W = app.screen.width, h = RM.zori.h * sc, p = toScreen(RM.zori.x, RM.zori.y), head = p.y - h * .97, side = h * .3;
+      // табелата на мисията: под прозореца (на перваза, леко върху долния ръб); тесен изправен екран – долу в средата
+      const m = $(".os-mission"), narrow = W < 600 && H0 > W; m.classList.toggle("dock", narrow); m.classList.toggle("tight", H0 < 520);
+      if (narrow) Object.assign(m.style, { left: "50%", top: "auto", bottom: "max(14px, env(safe-area-inset-bottom))" });
+      else { const mh = m.offsetHeight || 110; Object.assign(m.style, { left: c.x + "px", bottom: "auto", top: Math.min(H0 - mh - 12, c.y + d / 2 - mh * .22) + "px" }); }
+      if (zori) { const h = RM.zori.h * sc, zp = toScreen(RM.zori.x, zoriY()); Object.assign($(".os-zori").style, { left: zp.x - h * .3 + "px", top: zp.y - h + "px", width: h * .6 + "px", height: h + "px" }); }
+      placeBubble(); }
+    // Зори стои над табелата, когато тя е долу (тесен изправен екран)
+    const zoriY = () => { const W = app.screen.width, H0 = app.screen.height; if (!(W < 600 && H0 > W)) return RM.zori.y; const mh = ($(".os-mission").offsetHeight || 120) + 22; return Math.min(RM.zori.y, (H0 - mh - off.y) / sc); };
+    function placeBubble() { const b = $(".os-bub"); if (!b || b.hidden || !zori) return; const W = app.screen.width, h = RM.zori.h * sc, p = toScreen(RM.zori.x, zoriY()), head = p.y - h * .97, side = h * .3;
       const st = { left: "", right: "", top: "", bottom: "", maxWidth: "" }, spR = W - (p.x + side) - 12, spL = p.x - side - 12;
-      if (spR >= 170) Object.assign(st, { left: p.x + side + "px", top: Math.max(64, head) + "px", maxWidth: Math.min(280, spR) + "px" });
-      else if (spL >= 170) Object.assign(st, { right: W - (p.x - side) + "px", top: Math.max(64, head) + "px", maxWidth: Math.min(280, spL) + "px" });
+      if (spR >= 120) Object.assign(st, { left: p.x + side + "px", top: Math.max(64, head) + "px", maxWidth: Math.min(280, spR) + "px" });
+      else if (spL >= 120) Object.assign(st, { right: W - (p.x - side) + "px", top: Math.max(64, head) + "px", maxWidth: Math.min(280, spL) + "px" });
       else Object.assign(st, { left: "12px", right: "12px", top: Math.max(64, head - 70) + "px", maxWidth: "none" });
       Object.assign(b.style, st);
       // балонът не закрива портала и бутоните: ако се застъпва – скрива се (репликата се чува)
-      const r = b.getBoundingClientRect(), hit = [...ui.querySelectorAll(".os-portal, .os-chip.on, .os-head, .os-older")].some(e => { const q = e.getBoundingClientRect(); return q.width && r.left < q.right && r.right > q.left && r.top < q.bottom && r.bottom > q.top; });
+      const r = b.getBoundingClientRect(), hit = [...ui.querySelectorAll(".os-mission, .os-portal, .os-chip.on, .os-head, .os-older")].some(e => { const q = e.getBoundingClientRect(); return q.width && r.left < q.right && r.right > q.left && r.top < q.bottom && r.bottom > q.top; });
       b.classList.toggle("off", hit); }
-    function say(text) { const b = $(".os-bub"); if (!b || !text) return; b.textContent = text; b.hidden = false; placeBubble(); if (!reduced()) T(gsap.fromTo(b, { scale: .7, opacity: 0 }, { scale: 1, opacity: 1, duration: .35, ease: "back.out(2)" }));
-      later(() => { if (!dead) T(gsap.to(b, { opacity: 0, duration: .4, onComplete: () => { b.hidden = true; b.style.opacity = ""; } })); }, Math.max(6500, text.length * 110)); }
+    let bubT = null;
+    function say(text) { const b = $(".os-bub"); if (!b || !text) return; clearTimeout(bubT); gsap.killTweensOf(b); b.style.opacity = ""; b.textContent = text; b.hidden = false; placeBubble(); if (!reduced()) T(gsap.fromTo(b, { scale: .7, opacity: 0 }, { scale: 1, opacity: 1, duration: .35, ease: "back.out(2)" }));
+      bubT = later(() => { if (!dead) T(gsap.to(b, { opacity: 0, duration: .4, onComplete: () => { b.hidden = true; b.style.opacity = ""; } })); }, Math.max(7000, 2500 + text.length * 90)); }
 
     // ---- посочване / фокус: светлина и надпис ----
     const hot = (k, on) => { if (!glow[k]) return; glow[k]._hot = on ? 1 : 0; const c = ui.querySelector(`.os-chip[data-k="${k}"]`); if (c) c.classList.toggle("hot", on); };
     ui.querySelectorAll(".os-hit").forEach(b => { const k = b.dataset.k;
       b.addEventListener("pointerenter", () => hot(k, true)); b.addEventListener("pointerleave", () => hot(k, false)); b.addEventListener("focus", () => hot(k, true)); b.addEventListener("blur", () => hot(k, false));
       b.addEventListener("click", () => activate(k)); });
-    $(".os-portal").addEventListener("click", () => activate("mission"));
+    $(".os-portal").addEventListener("click", () => activate("mission")); $(".os-mission").addEventListener("click", () => activate("mission"));
+    $(".os-zori").addEventListener("click", () => { if (busy) return; say(model.line); if (model.voice) model.voice(); hop(.45); });
+    // поздрав: кратък подскок с наклон (без при намалено движение)
+    function hop(d) { if (!zori || reduced()) return; T(gsap.timeline().to(zori, { _dy: -22, rotation: -.05, duration: d * .45, ease: "power2.out" }).to(zori, { _dy: 0, rotation: 0, duration: d * .55, ease: "bounce.out" })); }
 
     // ---- камерата: приближава предмета; после – действието (екранът се сменя, сцената се освобождава) ----
     function focus(box, dur, fill) { const [x0, y0, x1, y1] = box, W = app.screen.width, H0 = app.screen.height, s = Math.min(W / (x1 - x0), H0 / (y1 - y0)) * fill, cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
@@ -102,13 +126,13 @@
       return new Promise(res => gsap.fromTo(c, { opacity: 0 }, { opacity: 1, duration: dur, ease: "power1.in", onComplete: () => res(c) })); }
     const reveal = (c) => { if (c) gsap.to(c, { opacity: 0, duration: .45, delay: .05, onComplete: () => c.remove() }); };
     async function activate(k) { if (busy || dead) return; busy = true; const calm = reduced(); hot(k, true);
-      T(gsap.to(ui.querySelectorAll(".os-hit, .os-chip, .os-bub, .os-head, .os-older"), { opacity: 0, duration: .2 }));
+      T(gsap.to(ui.querySelectorAll(".os-hit, .os-chip, .os-bub, .os-head, .os-older, .os-mission"), { opacity: 0, duration: .2 }));
       const win = RM.win, winBox = [win.x - win.r, win.y - win.r, win.x + win.r, win.y + win.r]; let c = null;
       try {
         if (k === "abac") { if (!calm) await focus(RM.box.abac, .7, .85); c = await cover("os-dark", calm ? .2 : .25); unmount(); H.abacus(); return; }   // друга страница – покривалото остава
         if (k === "tele") { if (!calm) { const [lx, ly] = RM.lens; await focus([lx - 150, ly - 120, lx + 150, ly + 120], .55, .9); } c = await cover("os-lens", calm ? .2 : .3); unmount(); H.games(); reveal(c); return; }
         if (k === "map") { if (!calm) await focus(RM.box.map, .55, 1); c = await cover("os-unroll" + (calm ? "" : " anim"), calm ? .2 : .45); unmount(); H.map(); reveal(c); return; }
-        if (k === "mission") { T(gsap.to(".os-portal", { opacity: 0, duration: .25 })); if (!calm) await focus(winBox, .6, 1.1); c = await cover("os-stars", calm ? .2 : .3); unmount(); H.mission(); reveal(c); return; }
+        if (k === "mission") { T(gsap.to(ui.querySelector(".os-portal .os-win"), { boxShadow: "0 0 80px rgba(255,220,140,.9)", duration: .3 })); if (!calm) await focus(winBox, .6, 1.1); c = await cover("os-stars", calm ? .2 : .3); unmount(); H.mission(); reveal(c); return; }
       } catch (e) { if (c) c.remove(); throw e; } }
 
     // ---- живот на стаята ----
@@ -119,21 +143,22 @@
       Object.entries(glow).forEach(([k, g], i) => { const base = calm ? .06 : .05 + .04 * (.5 + .5 * Math.sin(t * 1.4 - i * 1.2)); g.alpha += ((g._hot ? .42 : base) - g.alpha) * .15; });
       if (!calm) { sheenT -= dt / 60; if (sheenT < 0) { const [x0, , x1] = RM.box.map, k = Math.min(1, -sheenT / 1.4); sheen.position.set(x0 + (x1 - x0) * (-.2 + 1.4 * k), RM.box.map[1] + (RM.box.map[3] - RM.box.map[1]) * .32); sheen.alpha = Math.sin(k * Math.PI) * .55; if (k >= 1) { sheenT = 4 + Math.random() * 3; sheen.alpha = 0; } } }
       lensStar.alpha = calm ? .35 : .35 + .35 * Math.max(0, Math.sin(t * 1.7)); lensStar.scale.set(calm ? .35 : .3 + .12 * Math.sin(t * 1.7));
-      if (zori && zori._s) { const b = calm ? 0 : Math.sin(t * 2); zori.scale.set(zori._s * (1 - b * .004), zori._s * (1 + b * .012)); zori.rotation = calm ? 0 : Math.sin(t * .9) * .012; } });
+      if (zori && zori._s) { const b = calm ? 0 : Math.sin(t * 1.9); zori.scale.set(zori._s * (1 - b * .005), zori._s * (1 + b * .014)); zori.y = zori._y + zori._dy;
+        if (!gsap.isTweening(zori)) zori.rotation = calm ? 0 : Math.sin(t * .8) * .016; } });
     const onResize = () => layout(), onVis = () => { if (document.hidden) app.ticker.stop(); else if (!dead) app.ticker.start(); };
     window.addEventListener("resize", onResize); window.addEventListener("orientationchange", onResize); document.addEventListener("visibilitychange", onVis);
 
     // ---- влизане: стаята е тъмна, фенерите светват един по един, Зори поздравява ----
-    Promise.all(loadRoom).then(() => zoriReady).then(() => { if (dead) return; layout();
+    Promise.all(loadRoom).then(() => zoriReady).then(() => { if (dead) return; layout(); requestAnimationFrame(() => !dead && layout());
       if (!reduced()) { T(gsap.to(dark, { alpha: 0, duration: 1.1, ease: "power1.in", delay: .1 })); lamps.forEach((g, i) => T(gsap.to(g, { _on: 1, duration: .45, delay: .3 + i * .25, ease: "back.out(3)" })));
-        T(gsap.from(ui.querySelector(".os-portal"), { opacity: 0, scale: .92, duration: .55, delay: .7, ease: "back.out(1.6)" })); }
+        T(gsap.from(ui.querySelectorAll(".os-portal, .os-mission"), { opacity: 0, y: 14, duration: .55, delay: .7, stagger: .12, ease: "back.out(1.6)" })); later(() => hop(.6), 1100); }
       later(() => say(model.line), reduced() ? 200 : 1300); }).catch(() => {});
     layout();
 
     function unmount() { if (dead) return; dead = true; tweens.forEach(tw => tw.kill()); timers.forEach(clearTimeout);
       window.removeEventListener("resize", onResize); window.removeEventListener("orientationchange", onResize); document.removeEventListener("visibilitychange", onVis);
       try { app.destroy(true, { children: true, texture: false, baseTexture: false }); } catch (e) {} }
-    return { ui, unmount, say, layout, activate, get alive() { return !dead; } };
+    return { ui, unmount, say, layout, activate, get alive() { return !dead; }, get blinking() { return !!(zori && zBlink && zori.texture === zBlink); } };   // blinking – за автоматичните проверки
   }
   window.ObsScene = { mount };
 })();
