@@ -120,7 +120,7 @@
 
   // ---- глас: Зори (zr_*), иначе разказвачът (Калина) ----
   let AUDZ = {}, AUD = {}, cur = null;
-  fetch("config/abacus-audio-zori.json?v=11").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
+  fetch("config/abacus-audio-zori.json?v=12").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
   fetch("config/abacus-audio.json?v=4").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
   // „пораснал“ режим (7+, 11.11.2026): Зори е спътник – кратки реплики, само текст (гласът по избор: P.zv); рекорди и значки
   const grown = () => !!P && groupOf(P) !== "5";
@@ -292,27 +292,28 @@
   function loadSceneLibs() {
     if (sceneLibs) return sceneLibs;
     const js = (src) => new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
-    if (!document.querySelector('link[href^="css/obs-scene.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-scene.css?v=3"; document.head.appendChild(l); }
-    const all = (window.PIXI ? Promise.resolve() : js("js/vendor/pixi.min.js")).then(() => window.gsap ? 0 : js("js/vendor/gsap.min.js")).then(() => window.ObsScene ? 0 : js("js/obs/scene.js?v=4"));
+    if (!document.querySelector('link[href^="css/obs-scene.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-scene.css?v=4"; document.head.appendChild(l); }
+    const all = (window.PIXI ? Promise.resolve() : js("js/vendor/pixi.min.js")).then(() => window.gsap ? 0 : js("js/vendor/gsap.min.js")).then(() => window.ObsScene ? 0 : js("js/obs/scene.js?v=7"));
     return sceneLibs = Promise.race([all, new Promise((_, rej) => setTimeout(() => rej(new Error("scene: timeout")), 8000))]).catch(e => { sceneLibs = null; throw e; });
   }
   function sceneHome(h) {
     const { L, LL, st, older, line, sub, dots } = h, g = gen, tutor = isTutor();
     app.className = "o-scr o-scene"; app.innerHTML = `<div class="os-loading"></div>`;
-    const fail = (e) => { if (g !== gen) return; sceneFailed = true; sceneOff(); console.warn("Обсерваторията (сцена) не тръгна – сегашният начален екран.", e); screenHome(); };
+    const fail = (e) => { if (g !== gen) return; sceneFailed = true; window.__sceneErr = String(e && e.stack || e); sceneOff(); console.warn("Обсерваторията (сцена) не тръгна – сегашният начален екран.", e); screenHome(); };
     loadSceneLibs().then(() => { if (g !== gen) return;
       // порталът: следващата истинска мисия (домашно / урок с тутора); без домашно – към картата. Нищо не се измисля – само текущото състояние.
       const tp = tutor ? TU.plan(tutorState()) : null, round = L ? L.rounds[st.next] : null;
       // звездата на истинската мисия (занятието, което „Продължи“ стартира) – само подчертаване, яркостта е от P.b; небето се центрира около нея
       const star = !tutor && L && STAR[L.n] ? L.n : null, S0 = star ? STAR[star] : null;
-      const portal = { star, svg: skySVG({ vb: S0 ? `${S0.x - 230} ${S0.y - 210} 460 460` : regionOf(classAt()) === "orion" ? "1490 100 520 520" : "40 80 460 460" }),
-        kicker: tutor ? "Урок със Зори" : LL ? `Занятие ${LL.n}` : "", title: tutor ? (tp.current ? TU.BY[tp.current].name : "Модулът е завършен") : LL ? LL.title : "Звездна обсерватория",
-        sub: tutor ? "AI тутор" : round ? `${round.label} · кръг ${st.next + 1} от ${L.rounds.length}` : "Домашното е готово – виж звездите",
+      const portal = { star, svg: skySVG({ vb: S0 ? `${S0.x - 230} ${S0.y - 230} 460 460` : regionOf(classAt()) === "orion" ? "1490 100 520 520" : "40 80 460 460" }),
+        kicker: tutor ? "Урок със Зори" : LL ? `Занятие ${LL.n}` : "", title: tutor ? (tp.current ? TU.BY[tp.current].name : "Модулът е завършен") : LL ? LL.title : "Домашното е готово",
+        sub: tutor ? "AI тутор" : round ? `${round.label} · кръг ${st.next + 1} от ${L.rounds.length}` : "Виж звездите на картата",
         dots: tutor ? "" : dots, icon: L || tutor ? "▶" : "★", cta: L || tutor ? "Продължи" : "Звездна карта" };
       portal.aria = `${portal.cta}: ${[portal.kicker, portal.title, portal.sub].filter(Boolean).join(", ")}`;
       let seen = 0; try { const k = "obs.scene.v1." + P.id; seen = +(localStorage.getItem(k) || 0) + 1; localStorage.setItem(k, String(seen)); } catch (e) {}
       const leave = (fn) => () => { sceneOff(); fn(); };
-      SC = window.ObsScene.mount(app, { portal, line, chips: seen <= 3, voice: () => voice(line) }, {
+      const guide = seen === 1 && star != null && !grown() ? "Виж! Тази звезда ни чака днес." : null;
+      SC = window.ObsScene.mount(app, { portal, line, guide, voice: (t) => voice(t || line) }, {
         mission: () => { SC = null; tutor ? runTutor() : L ? runHw(L, st.next) : screenMap(); },
         abacus: () => { SC = null; location.href = "abacus-app.html?p=" + encodeURIComponent(P.id); },
         games: () => { SC = null; screenGames(); }, map: () => { SC = null; screenMap(); } });
@@ -323,7 +324,7 @@
         ${older.length ? `<button class="os-older" id="o-older" type="button">Доиграй: занятие ${older[older.length - 1].n}</button>` : ""}`);
       $("#o-me").onclick = leave(screenAvatar); holdBtn($("#o-teach"), leave(screenTeacher));
       const ob = $("#o-older"); if (ob) ob.onclick = leave(() => { const O = older[older.length - 1]; runHw(O, hwState(O).next); });
-      SC.layout(); voice(line);
+      SC.layout(); if (!guide) voice(line);
     }).catch(fail);
   }
 

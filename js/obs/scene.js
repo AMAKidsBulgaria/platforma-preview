@@ -31,9 +31,10 @@
     const pm = model.portal;
     host.innerHTML = `<div class="os-stage"></div><div class="os-ui">
         <button class="os-portal" type="button" tabindex="-1" aria-hidden="true"><span class="os-win">${pm.svg || ""}<span class="o-glass"></span></span></button>
-        ${Object.entries(OBJ).map(([k, o]) => `<button class="os-hit" type="button" data-k="${k}" aria-label="${o.aria}"></button><span class="os-chip${model.chips ? " on" : ""}" data-k="${k}" aria-hidden="true"><i>${o.icon}</i>${o.name}</span>`).join("")}
+        ${Object.entries(OBJ).map(([k, o]) => `<button class="os-hit" type="button" data-k="${k}" aria-label="${o.aria}"></button><span class="os-chip on" data-k="${k}" aria-hidden="true"><i>${o.icon}</i>${o.name}</span>`).join("")}
         <button class="os-zori" type="button" aria-label="Зори – чуй отново"></button>
-        <button class="os-mission" type="button" aria-label="${esc(pm.aria)}"><span class="os-mtx">${pm.kicker ? `<em>${esc(pm.kicker)}</em>` : ""}<b>${esc(pm.title)}</b><small>${esc(pm.sub)}</small>${pm.dots || ""}</span>
+        <svg class="os-beam" aria-hidden="true"><line/></svg>
+        <button class="os-mission" type="button" aria-label="${esc(pm.aria)}"><span class="os-mtx"><span class="os-m1">${pm.kicker ? `<em>${esc(pm.kicker)}</em>` : ""}<b>${esc(pm.title)}</b></span><span class="os-m2"><small>${esc(pm.sub)}</small>${pm.dots || ""}</span></span>
           <span class="os-cta"><i aria-hidden="true">${pm.icon}</i>${esc(pm.cta)}</span></button>
         <div class="os-bub" role="status" aria-live="polite" hidden></div></div>`;
     // звездата на мисията: нежно пулсиращ пръстен (само подчертаване на истинската следваща звезда)
@@ -74,10 +75,10 @@
       RM.lamps.forEach(([x, y, s], i) => { lamps[i].position.set(x, y); lamps[i]._k = s; });
       motes.forEach(m => { if (m._init !== k) { m._init = k; m.position.set(Math.random() * RM.w, RM.h * (.25 + Math.random() * .6)); } });
       Object.entries(glow).forEach(([o, g]) => { const [x0, y0, x1, y1] = RM.box[o]; g.position.set((x0 + x1) / 2, (y0 + y1) / 2); g.width = (x1 - x0) * 1.5; g.height = (y1 - y0) * 1.25; });
-      const [mx0, my0, mx1, my1] = RM.box.map; sheenMask.clear().beginFill(0xffffff).drawRect(mx0 + 10, my0 + 10, mx1 - mx0 - 20, (my1 - my0) * .62).endFill(); sheen.height = (my1 - my0) * .9; sheen.width = (mx1 - mx0) * .28;
+      const [mx0, my0, mx1, my1] = RM.box.map; const mw0 = mx1 - mx0; sheenMask.clear().beginFill(0xffffff).drawRect(mx0 + mw0 * .12, my0 + (my1 - my0) * .06, mw0 * .76, (my1 - my0) * .5).endFill();   // само върху пергамента sheen.height = (my1 - my0) * .9; sheen.width = (mx1 - mx0) * .28;
       lensStar.position.set(RM.lens[0], RM.lens[1]);
-      const zy = zoriY(); if (zori) { zori.position.set(RM.zori.x, zy); zori._y = zy; zori.scale.set(RM.zori.h / zori.texture.height); zori._s = zori.scale.x; }
-      shadow.position.set(RM.zori.x, zy - 4); shadow.width = RM.zori.h * .55; shadow.height = RM.zori.h * .09;
+      const zy = zoriY(), zx = zoriX(); if (zori) { zori.position.set(zx, zy); zori._y = zy; zori.scale.set(RM.zori.h / zori.texture.height); zori._s = zori.scale.x; }
+      shadow.position.set(zx, zy - 4); shadow.width = RM.zori.h * .55; shadow.height = RM.zori.h * .09;
       placeDom(); }
     // ---- DOM над платното: бутоните (зоните на предметите), надписите, порталът, балонът ----
     function placeDom() { const W = app.screen.width, H0 = app.screen.height;
@@ -89,17 +90,29 @@
       const w = RM.win, c = toScreen(w.x, w.y), d = w.r * 2 * sc * .94, po = $(".os-portal");
       Object.assign(po.style, { left: c.x - d / 2 + "px", top: c.y - d / 2 + "px", width: d + "px", height: d + "px" });
       // табелата на мисията: под прозореца (на перваза, леко върху долния ръб); тесен изправен екран – долу в средата
-      const m = $(".os-mission"), narrow = W < 600 && H0 > W; m.classList.toggle("dock", narrow); m.classList.toggle("tight", H0 < 520);
-      if (narrow) Object.assign(m.style, { left: "50%", top: "auto", bottom: "max(14px, env(safe-area-inset-bottom))" });
-      else { const mh = m.offsetHeight || 110; Object.assign(m.style, { left: c.x + "px", bottom: "auto", top: Math.min(H0 - mh - 12, c.y + d / 2 - mh * .22) + "px" }); }
-      if (zori) { const h = RM.zori.h * sc, zp = toScreen(RM.zori.x, zoriY()); Object.assign($(".os-zori").style, { left: zp.x - h * .3 + "px", top: zp.y - h + "px", width: h * .6 + "px", height: h + "px" });
+      const m = $(".os-mission"), narrow = H0 > W, low = !narrow && H0 < 520; m.classList.toggle("dock", narrow); m.classList.toggle("tight", low);
+      if (narrow) Object.assign(m.style, { left: "50%", top: "auto", bottom: "max(14px, env(safe-area-inset-bottom))", maxWidth: "" });
+      else if (low) { const mw = m.offsetWidth || 260, mr = toScreen(RM.box.tele[2], 0).x, zl = toScreen(zoriX(), 0).x - RM.zori.h * sc * .32 - 8;
+        Object.assign(m.style, { left: Math.max(mr + mw / 2 - 40, Math.min(zl - mw / 2, c.x)) + "px", top: "auto", bottom: "max(10px, env(safe-area-inset-bottom))", maxWidth: "" }); }
+      else { const mr = toScreen(RM.box.map[2], 0).x + 10, al = toScreen(RM.box.abac[0], 0).x - 10, mw = Math.max(240, Math.min(380, al - mr)); m.style.maxWidth = mw + "px";
+        const mh = m.offsetHeight || 90, cx = Math.min(al - mw / 2, Math.max(mr + mw / 2, c.x));
+        Object.assign(m.style, { left: cx + "px", bottom: "auto", top: Math.min(H0 - mh - 12, c.y + d / 2 - mh * .18) + "px" }); }
+      // лъчът: от звездата на мисията (в центъра на прозореца) към табелата – окото минава звезда → мисия → „Продължи“
+      const bm = $(".os-beam"), mr2 = m.getBoundingClientRect(), hr = ui.getBoundingClientRect(), tg = ui.querySelector(".os-target");
+      // при табела долу (изправен / нисък екран) лъчът би минал през Зори – без него
+      if (tg && mr2.height && !narrow && !low) { const x1 = c.x, y1 = c.y + d * .09, x2 = mr2.left - hr.left + mr2.width / 2, y2 = mr2.top - hr.top; Object.assign(bm.style, { display: y2 - y1 > 8 ? "" : "none" });
+        const ln = bm.querySelector("line"); ln.setAttribute("x1", x1); ln.setAttribute("y1", y1); ln.setAttribute("x2", x2); ln.setAttribute("y2", y2); } else bm.style.display = "none";
+      if (zori) { const h = RM.zori.h * sc, zp = toScreen(zoriX(), zoriY()); Object.assign($(".os-zori").style, { left: zp.x - h * .3 + "px", top: zp.y - h + "px", width: h * .6 + "px", height: h + "px" });
         // табелка, която се застъпва със Зори – над предмета
         const zr = $(".os-zori").getBoundingClientRect(); ui.querySelectorAll(".os-chip").forEach(c => { const r = c.getBoundingClientRect();
           if (r.left < zr.right && r.right > zr.left && r.top < zr.bottom && r.bottom > zr.top) c.style.top = Math.max(70, toScreen(0, RM.box[c.dataset.k][1]).y - (c.offsetHeight || 24) - 4) + "px"; }); }
+      const tags = [...ui.querySelectorAll(".os-chip")]; for (let i = 0; i < tags.length; i++) for (let j = 0; j < tags.length; j++) { if (i === j) continue; const a = tags[i].getBoundingClientRect(), b2 = tags[j].getBoundingClientRect();
+        if (j > i && a.left < b2.right && a.right > b2.left && a.top < b2.bottom && a.bottom > b2.top) tags[j].style.top = (parseFloat(tags[j].style.top) || 0) + (a.bottom - b2.top) + 4 + "px"; }
       placeBubble(); }
     // Зори стои над табелата, когато тя е долу (тесен изправен екран)
-    const zoriY = () => { const W = app.screen.width, H0 = app.screen.height; if (!(W < 600 && H0 > W)) return RM.zori.y; const mh = ($(".os-mission").offsetHeight || 120) + 22; return Math.min(RM.zori.y, (H0 - mh - off.y) / sc); };
-    function placeBubble() { const b = $(".os-bub"); if (!b || b.hidden || !zori) return; const W = app.screen.width, h = RM.zori.h * sc, p = toScreen(RM.zori.x, zoriY()), head = p.y - h * .97, side = h * .3;
+    const zoriX = () => { const W = app.screen.width, H0 = app.screen.height; return H0 <= W && H0 < 520 && RM === ROOMS.land ? 1215 : RM.zori.x; };
+    const zoriY = () => { const W = app.screen.width, H0 = app.screen.height; if (!(H0 > W)) return RM.zori.y; const mh = ($(".os-mission").offsetHeight || 120) + 22; return Math.min(RM.zori.y, (H0 - mh - off.y) / sc); };
+    function placeBubble() { const b = $(".os-bub"); if (!b || b.hidden || !zori) return; const W = app.screen.width, h = RM.zori.h * sc, p = toScreen(zoriX(), zoriY()), head = p.y - h * .97, side = h * .3;
       const st = { left: "", right: "", top: "", bottom: "", maxWidth: "" }, spR = W - (p.x + side) - 12, spL = p.x - side - 12;
       if (spR >= 120) Object.assign(st, { left: p.x + side + "px", top: Math.max(64, head) + "px", maxWidth: Math.min(280, spR) + "px" });
       else if (spL >= 120) Object.assign(st, { right: W - (p.x - side) + "px", top: Math.max(64, head) + "px", maxWidth: Math.min(280, spL) + "px" });
@@ -155,7 +168,15 @@
     Promise.all(loadRoom).then(() => zoriReady).then(() => { if (dead) return; layout(); requestAnimationFrame(() => !dead && layout());
       if (!reduced()) { T(gsap.to(dark, { alpha: 0, duration: 1.1, ease: "power1.in", delay: .1 })); lamps.forEach((g, i) => T(gsap.to(g, { _on: 1, duration: .45, delay: .3 + i * .25, ease: "back.out(3)" })));
         T(gsap.from(ui.querySelectorAll(".os-portal, .os-mission"), { opacity: 0, y: 14, duration: .55, delay: .7, stagger: .12, ease: "back.out(1.6)" })); later(() => hop(.6), 1100); }
-      later(() => say(model.line), reduced() ? 200 : 1300); }).catch(() => {});
+      later(() => model.guide ? guide() : say(model.line), reduced() ? 200 : 1300); }).catch(() => {});
+    function guide() { const tg = ui.querySelector(".os-target"); say(model.guide); if (model.voice) model.voice(model.guide); if (!tg) return;
+      tg.classList.add("os-flash"); later(() => tg.classList.remove("os-flash"), 2600);
+      if (reduced() || !zori) return; const dir = RM.zori.x > RM.win.x ? -1 : 1;
+      T(gsap.timeline().to(zori, { rotation: .07 * dir, _dy: -8, duration: .45, ease: "power2.out" }).to(zori, { rotation: 0, _dy: 0, duration: .6, ease: "power2.inOut", delay: 1.1 }));
+      const hand = toScreen(zoriX() + dir * RM.zori.h * .26, zoriY() - RM.zori.h * .45), w = RM.win, to = toScreen(w.x, w.y), sp = document.createElement("i"); sp.className = "os-spark"; ui.appendChild(sp);
+      const o = { t: 0 }, mx = (hand.x + to.x) / 2, my = Math.min(hand.y, to.y) - 60;
+      T(gsap.to(o, { t: 1, duration: 1.1, delay: .35, ease: "power1.inOut", onUpdate: () => { const t = o.t, x = (1 - t) * (1 - t) * hand.x + 2 * (1 - t) * t * mx + t * t * to.x, y = (1 - t) * (1 - t) * hand.y + 2 * (1 - t) * t * my + t * t * to.y;
+        sp.style.left = x + "px"; sp.style.top = y + "px"; sp.style.opacity = String(Math.min(1, t * 4, (1 - t) * 6 + .2)); }, onComplete: () => sp.remove() })); }
     layout();
 
     function unmount() { if (dead) return; dead = true; tweens.forEach(tw => tw.kill()); timers.forEach(clearTimeout);
