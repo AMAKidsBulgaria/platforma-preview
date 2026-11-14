@@ -32,7 +32,7 @@
     const pm = model.portal;
     host.innerHTML = `<div class="os-stage"></div><div class="os-ui">
         <button class="os-portal" type="button" tabindex="-1" aria-hidden="true"><span class="os-win">${pm.svg || ""}<span class="o-glass"></span></span></button>
-        ${Object.entries(OBJ).map(([k, o]) => `<button class="os-hit" type="button" data-k="${k}" aria-label="${o.aria}"></button><span class="os-chip on" data-k="${k}" aria-hidden="true"><i>${o.icon}</i>${o.name}</span>`).join("")}
+        ${Object.entries(OBJ).map(([k, o]) => `<button class="os-hit" type="button" data-k="${k}" aria-label="${o.aria}"></button><span class="os-chip on" data-k="${k}" aria-hidden="true"><i>${o.icon}</i>${o.name}<em class="os-tw"></em></span>`).join("")}
         <button class="os-zori" type="button" aria-label="Зори – чуй отново"></button>
         <svg class="os-beam" aria-hidden="true"><line/></svg>
         <button class="os-mission" type="button" aria-label="${esc(pm.aria)}"><span class="os-mtx"><span class="os-m1">${pm.kicker ? `<em>${esc(pm.kicker)}</em>` : ""}<b>${esc(pm.title)}</b></span><span class="os-m2"><small>${esc(pm.sub)}</small>${pm.dots || ""}</span></span>
@@ -61,6 +61,8 @@
     const sheen = new PIXI.Sprite(radial()); sheen.anchor.set(.5); sheen.tint = 0xFFF1C2; sheen.blendMode = PIXI.BLEND_MODES.ADD; sheen.alpha = 0; sheen.zIndex = 5; world.addChild(sheen);
     const sheenMask = new PIXI.Graphics(); world.addChild(sheenMask); sheen.mask = sheenMask;
     const lensStar = new PIXI.Sprite(radial()); lensStar.anchor.set(.5); lensStar.tint = 0xBFE0FF; lensStar.blendMode = PIXI.BLEND_MODES.ADD; lensStar.zIndex = 5; world.addChild(lensStar);
+    // поканата: мек златист отблясък минава през предмета
+    const glint = new PIXI.Sprite(radial()); glint.anchor.set(.5); glint.tint = 0xFFF0C8; glint.blendMode = PIXI.BLEND_MODES.ADD; glint.alpha = 0; glint.zIndex = 5; glint.rotation = -.6; world.addChild(glint);
     const shadow = new PIXI.Sprite(radial()); shadow.anchor.set(.5); shadow.tint = 0x000000; shadow.alpha = .5; shadow.zIndex = 5; world.addChild(shadow);
     let zTex = null, zBlink = null, blinkT = null;
     const zoriReady = Promise.all([PIXI.Assets.load(model.zori || "assets/img/zori/z_calm.png"), PIXI.Assets.load("assets/img/zori/z_calm_blink.png").catch(() => null)]).then(([t, b]) => { if (dead) return;
@@ -155,6 +157,8 @@
 
     // ---- посочване / фокус: светлина и надпис ----
     const hot = (k, on) => { if (!glow[k]) return; glow[k]._hot = on ? 1 : 0; const c = ui.querySelector(`.os-chip[data-k="${k}"]`); if (c) c.classList.toggle("hot", on); };
+    ui.querySelectorAll(".os-chip").forEach(b => { const k = b.dataset.k;   // табелката също отваря предмета (децата натискат надписите)
+      b.addEventListener("pointerenter", () => hot(k, true)); b.addEventListener("pointerleave", () => hot(k, false)); b.addEventListener("click", () => activate(k)); });
     ui.querySelectorAll(".os-hit").forEach(b => { const k = b.dataset.k;
       b.addEventListener("pointerenter", () => hot(k, true)); b.addEventListener("pointerleave", () => hot(k, false)); b.addEventListener("focus", () => hot(k, true)); b.addEventListener("blur", () => hot(k, false));
       b.addEventListener("click", () => activate(k)); });
@@ -169,7 +173,13 @@
     function cover(cls, dur) { const c = document.createElement("div"); c.className = "os-cover " + cls; document.body.appendChild(c);
       return new Promise(res => gsap.fromTo(c, { opacity: 0 }, { opacity: 1, duration: dur, ease: "power1.in", onComplete: () => res(c) })); }
     const reveal = (c) => { if (c) gsap.to(c, { opacity: 0, duration: .45, delay: .05, onComplete: () => c.remove() }); };
-    async function activate(k) { if (busy || dead) return; busy = true; const calm = reduced(); hot(k, true);
+    // кратко „дзън“ при докосване – детето разбира, че е уцелило
+    let actx = null;
+    function chime() { try { actx = actx || new (window.AudioContext || window.webkitAudioContext)(); const t = actx.currentTime;
+      [880, 1320].forEach((f, i) => { const o = actx.createOscillator(), g = actx.createGain(), t1 = t + i * .07; o.type = "sine"; o.frequency.value = f; g.gain.setValueAtTime(0, t1); g.gain.linearRampToValueAtTime(.07, t1 + .01); g.gain.exponentialRampToValueAtTime(.0001, t1 + .35); o.connect(g).connect(actx.destination); o.start(t1); o.stop(t1 + .4); });
+      const a = actx; setTimeout(() => { try { a.close(); } catch (e) {} }, 900); actx = null; } catch (e) {} }
+    async function activate(k) { if (busy || dead) return; busy = true; const calm = reduced(); hot(k, true); chime();
+      const ch = ui.querySelector(`.os-chip[data-k="${k}"]`); if (ch) ch.classList.add("press"); if (glow[k]) glow[k].alpha = .7;
       T(gsap.to(ui.querySelectorAll(".os-hit, .os-chip, .os-bub, .os-head, .os-older, .os-mission"), { opacity: 0, duration: .2 }));
       const win = RM.win, winBox = [win.x - win.r, win.y - win.r, win.x + win.r, win.y + win.r]; let c = null;
       try {
@@ -182,9 +192,10 @@
     // ---- живот на стаята ----
     let sheenT = 2;
     app.ticker.add((dt) => { if (dead) return; const t = (performance.now() - t0) / 1000, calm = reduced();
-      lamps.forEach((g, i) => { const f = calm ? .55 : .5 + .1 * Math.sin(t * 8 + i * 2) + .06 * Math.sin(t * 21 + i); g.alpha = f * g._on; g.scale.set((g._k || 1) * (1.6 + (calm ? 0 : .06 * Math.sin(t * 4 + i))) * (.4 + .6 * g._on)); });
+      // фенерите светят спокойно (само едва трептящ пламък) – движението остава за предметите, които се докосват
+      lamps.forEach((g, i) => { const f = calm ? .55 : .55 + .025 * Math.sin(t * 9 + i * 2) + .015 * Math.sin(t * 23 + i); g.alpha = f * g._on; g.scale.set((g._k || 1) * 1.6 * (.4 + .6 * g._on)); });
       motes.forEach(m => { if (calm) { m.alpha = 0; return; } m.y -= m._v * dt; m.x += Math.sin(t * .6 + m._p) * .2; m.alpha = .16 + .2 * (.5 + .5 * Math.sin(t * 1.3 + m._p)); if (m.y < RM.h * .2) { m.y = RM.h * .85; m.x = Math.random() * RM.w; } });
-      Object.entries(glow).forEach(([k, g], i) => { const base = calm ? .06 : .05 + .04 * (.5 + .5 * Math.sin(t * 1.4 - i * 1.2)); g.alpha += ((g._hot ? .42 : base) - g.alpha) * .15; });
+      Object.entries(glow).forEach(([k, g], i) => { const base = calm ? .12 : .05 + .03 * (.5 + .5 * Math.sin(t * 1.4 - i * 1.2)); g.alpha += ((g._hot ? .42 : base + (g._ping || 0) * .4) - g.alpha) * .15; });
       if (!calm) { sheenT -= dt / 60; if (sheenT < 0) { const [x0, , x1] = RM.box.map, k = Math.min(1, -sheenT / 1.4); sheen.position.set(x0 + (x1 - x0) * (-.2 + 1.4 * k), RM.box.map[1] + (RM.box.map[3] - RM.box.map[1]) * .32); sheen.alpha = Math.sin(k * Math.PI) * .55; if (k >= 1) { sheenT = 4 + Math.random() * 3; sheen.alpha = 0; } } }
       lensStar.alpha = calm ? .35 : .35 + .35 * Math.max(0, Math.sin(t * 1.7)); lensStar.scale.set(calm ? .35 : .3 + .12 * Math.sin(t * 1.7));
       if (zori && zori._s) { const b = calm ? 0 : Math.sin(t * 1.9); zori.scale.set(zori._s * (1 - b * .005), zori._s * (1 + b * .014)); zori.y = zori._y + zori._dy;
@@ -200,7 +211,16 @@
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => !dead && layout()); later(() => layout(), 900);
       if (!reduced()) { T(gsap.to(dark, { alpha: 0, duration: 1.1, ease: "power1.in", delay: .1 })); lamps.forEach((g, i) => T(gsap.to(g, { _on: 1, duration: .45, delay: .3 + i * .25, ease: "back.out(3)" })));
         T(gsap.from(ui.querySelectorAll(".os-portal, .os-mission"), { opacity: 0, y: 14, duration: .55, delay: .7, stagger: .12, ease: "back.out(1.6)" })); later(() => { if (!wave()) hop(.6); }, 1000); }
-      later(() => model.guide ? guide() : say(model.line), reduced() ? 200 : 1300); }).catch(() => {});
+      later(() => model.guide ? guide() : say(model.line), reduced() ? 200 : 1300);
+      if (!reduced()) later(invite, model.guide ? 6500 : 4000); }).catch(() => {});
+    // покана: на всеки ~6 с един от трите предмета проблясва (отблясък + светлина + табелката подскача) – подсказка, че се докосва
+    let invI = 0;
+    function invite() { if (dead) return; if (!busy && !document.hidden && !reduced()) ping(["tele", "map", "abac"][invI++ % 3]); later(invite, 5500 + Math.random() * 1500); }
+    function ping(k) { const g = glow[k], [x0, y0, x1, y1] = RM.box[k], w = x1 - x0, h = y1 - y0; if (!g) return;
+      T(gsap.fromTo(g, { _ping: 0 }, { _ping: 1, duration: .45, ease: "power2.out", yoyo: true, repeat: 1, repeatDelay: .3 }));
+      glint.width = Math.min(w, h) * .5; glint.height = Math.max(w, h) * .9;   // мек отблясък без твърди ръбове
+      const o = { t: 0 }; T(gsap.to(o, { t: 1, duration: 1, ease: "power1.inOut", onUpdate: () => { glint.position.set(x0 + w * (.1 + .8 * o.t), y0 + h * (.3 + .4 * o.t)); glint.alpha = Math.sin(o.t * Math.PI) * .4; }, onComplete: () => { glint.alpha = 0; } }));
+      const c = ui.querySelector(`.os-chip[data-k="${k}"]`); if (c) { c.classList.remove("ping"); void c.offsetWidth; c.classList.add("ping"); later(() => c.classList.remove("ping"), 1200); } }
     function guide() { const tg = ui.querySelector(".os-target"); say(model.guide); if (model.voice) model.voice(model.guide); if (!tg) return;
       if (waving) { afterWave = () => point(tg); return; } point(tg); }
     // жестът: пръстените пламват, Зори се обръща към прозореца, искра от ръката до звездата
@@ -216,7 +236,7 @@
     function unmount() { if (dead) return; dead = true; tweens.forEach(tw => tw.kill()); timers.forEach(clearTimeout); try { wv.pause(); wv.removeAttribute("src"); wv.load(); wv.remove(); } catch (e) {}
       window.removeEventListener("resize", onResize); window.removeEventListener("orientationchange", onResize); document.removeEventListener("visibilitychange", onVis); if (vv) vv.removeEventListener("resize", onResize);
       try { app.destroy(true, { children: true, texture: false, baseTexture: false }); } catch (e) {} }
-    return { ui, unmount, say, layout, activate, get alive() { return !dead; }, get blinking() { return !!(zori && zBlink && zori.texture === zBlink); }, get waving() { return waving; } };   // blinking – за автоматичните проверки
+    return { ui, unmount, say, layout, activate, get alive() { return !dead; }, get blinking() { return !!(zori && zBlink && zori.texture === zBlink); }, get waving() { return waving; }, ping };   // blinking – за автоматичните проверки
   }
   window.ObsScene = { mount };
 })();
