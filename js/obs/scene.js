@@ -233,7 +233,7 @@
       if (model.back) comeBack();
       else if (!reduced()) { T(gsap.to(dark, { alpha: 0, duration: 1.1, ease: "power1.in", delay: .1 })); lamps.forEach((g, i) => T(gsap.to(g, { _on: 1, duration: .45, delay: .3 + i * .25, ease: "back.out(3)" })));
         T(gsap.from(ui.querySelectorAll(".os-portal, .os-mission"), { opacity: 0, y: 14, duration: .55, delay: .7, stagger: .12, ease: "back.out(1.6)" })); later(() => { if (!wave()) hop(.6); }, 1000); }
-      later(() => model.intro ? intro() : model.guide ? guide() : say(model.line), model.back ? (model.back.ignite ? 2600 : 1100) : reduced() ? 200 : 1300);
+      later(() => { if (model.intro) intro(); else if (model.guide) guide(); else { say(model.line); if (model.back && model.voice) model.voice(model.line); } }, model.back ? (model.back.ignite ? 2600 : 1100) : reduced() ? 200 : 1300);
       if (!reduced()) later(invite, model.intro ? 13000 : model.guide ? 6500 : 4000); }).catch(() => {});
     // завръщане от мисията (RETURNING): камерата излиза от прозореца; ако системата е променила звездата – тя светва (само тогава)
     function comeBack() { const calm = reduced(); dark.alpha = 0; lamps.forEach(g => { g._on = 1; });
@@ -244,7 +244,10 @@
       const ig = model.back.ignite, st = ig && ui.querySelector(`.os-win .o-star[data-n="${ig.n}"]`);
       if (st) later(() => { if (dead) return; st.classList.add("os-ignite"); chime(); const ns = "http://www.w3.org/2000/svg", c = document.createElementNS(ns, "circle"); c.setAttribute("r", "30"); c.setAttribute("class", "os-iring"); st.insertBefore(c, st.firstChild);
         if (!calm && !wave()) hop(.6); }, calm ? 200 : 1000);
-      else if (!calm) later(() => hop(.5), 900); }
+      else { const fs = model.back.focus != null && ui.querySelector(`.os-win .o-star[data-n="${model.back.focus}"]`);
+        // без промяна в яркостта: само тих бял кръг около звездата на урока („тук работихме“) – без звън и без „светване“
+        if (fs && model.back.kind) later(() => { if (dead) return; const c = document.createElementNS("http://www.w3.org/2000/svg", "circle"); c.setAttribute("r", "26"); c.setAttribute("class", "os-seenring"); fs.classList.add("os-seen"); fs.insertBefore(c, fs.firstChild); }, calm ? 200 : 900);
+        if (!calm) later(() => hop(.5), 900); } }
     // първо влизане: Зори представя стаята; предметите проблясват, когато ги назовава (≈ по дължината на репликата, 10 с), накрая посочва звездата
     function intro() { const t = model.intro, dur = 10300, at = (w) => Math.max(0, t.indexOf(w)) / t.length * dur; say(t); if (model.voice) model.voice(t);
       later(() => ping("tele"), at("телескопа")); later(() => ping("abac"), at("абакуса")); const tg = ui.querySelector(".os-target");

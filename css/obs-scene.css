@@ -127,3 +127,8 @@ html.o-calm .os-tring1, html.o-still .os-tring1 { opacity: .8; transform: scale(
 html.o-calm .os-ignite .o-core, html.o-still .os-ignite .o-core, html.o-calm .os-iring, html.o-still .os-iring { animation: none !important; }
 html.o-calm .os-iring, html.o-still .os-iring { opacity: .9; }
 @media (prefers-reduced-motion: reduce) { .os-ignite .o-core, .os-iring { animation: none !important; } .os-iring { opacity: .9; } }
+/* Фаза 3: завръщане без промяна в яркостта – тих кръг около звездата на урока (без звън, без светване) */
+.os-seenring { fill: none; stroke: #DCE6FF; stroke-width: 2.5; opacity: 0; transform-box: fill-box; transform-origin: center; animation: os-seen 1.8s ease-out 2; }
+@keyframes os-seen { 0% { opacity: .9; transform: scale(.7); } 100% { opacity: 0; transform: scale(1.9); } }
+html.o-calm .os-seenring, html.o-still .os-seenring { animation: none !important; opacity: .7; }
+@media (prefers-reduced-motion: reduce) { .os-seenring { animation: none !important; opacity: .7; } }

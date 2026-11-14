@@ -120,7 +120,7 @@
 
   // ---- глас: Зори (zr_*), иначе разказвачът (Калина) ----
   let AUDZ = {}, AUD = {}, cur = null;
-  fetch("config/abacus-audio-zori.json?v=13").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
+  fetch("config/abacus-audio-zori.json?v=14").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
   fetch("config/abacus-audio.json?v=4").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
   // „пораснал“ режим (7+, 11.11.2026): Зори е спътник – кратки реплики, само текст (гласът по избор: P.zv); рекорди и значки
   const grown = () => !!P && groupOf(P) !== "5";
@@ -149,7 +149,13 @@
   // след похвала: следващият пример идва чак когато Зори е доизказала репликата (поне ms)
   function afterSay(ms) { const g = gen, a = cur; return new Promise((res, rej) => { const t0 = Date.now(), done = () => { const left = ms * FAST - (Date.now() - t0); setTimeout(() => g === gen ? res() : rej("stale"), Math.max(0, left) + 250 * FAST); };
     if (a && !a.paused && !a.ended && !FAST_ON) { let fin = false; const end = () => { if (!fin) { fin = true; done(); } }; a.addEventListener("ended", end); a.addEventListener("error", end); setTimeout(end, 6000); } else done(); }); }
-  function say(text, pose) { text = tone(text); const b = $(".o-say"); if (b) b.textContent = text; const z = $(".o-zori"); if (z && pose) z.src = `assets/img/zori/z_${pose}.png`; voice(text); }
+  function say(text, pose) { text = tone(text); const b = $(".o-say"); if (b) b.textContent = text; const z = $(".o-zori"); if (z && pose) z.src = `assets/img/zori/z_${pose}.png`; voice(text); react(pose, text); }
+  // Фаза 3: реакцията на Зори и рамката на работната зона – само изглед; три различни движения при „вярно“ (по ред), за да не е едно и също всеки път
+  const ZR = ["zr-ok1", "zr-ok2", "zr-ok3", "zr-no", "zr-help", "zr-hi", "zr-big"], HELP = /^(Нека|Ето|Гледай|Виж|Да погледнем)/; let zrI = 0;
+  function zr(cls) { const z = $(".o-zori"); if (!z) return; z.classList.remove("hop", ...ZR); if (cls) { void z.offsetWidth; z.classList.add(cls); } }
+  function react(pose, text) { if (!app.classList.contains("o-mis")) return;
+    const k = pose === "joy" ? ZR[zrI++ % 3] : pose === "wait" ? "zr-no" : (pose === "explain" || pose === "point") && HELP.test(text || "") ? "zr-help" : null; if (!k) return; zr(k);
+    const w = $("#o-work"); if (w && (pose === "joy" || pose === "wait")) { w.classList.remove("ol-ok", "ol-no"); void w.offsetWidth; w.classList.add(pose === "joy" ? "ol-ok" : "ol-no"); } }
 
   // рекорди (7+): серия верни подред (сигнали и сметки), най-бърза скорост с поне 3 верни подред – за абакуса и за сигналите
   const BADGES = [["s10", "Серия 10", (r) => r.streak >= 10], ["s25", "Серия 25", (r) => r.streak >= 25], ["s50", "Серия 50", (r) => r.streak >= 50],
@@ -292,14 +298,16 @@
   function loadSceneLibs() {
     if (sceneLibs) return sceneLibs;
     const js = (src) => new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
-    if (!document.querySelector('link[href^="css/obs-scene.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-scene.css?v=13"; document.head.appendChild(l); }
-    const all = (window.PIXI ? Promise.resolve() : js("js/vendor/pixi.min.js")).then(() => window.gsap ? 0 : js("js/vendor/gsap.min.js")).then(() => window.ObsScene ? 0 : js("js/obs/scene.js?v=34"))
+    if (!document.querySelector('link[href^="css/obs-scene.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-scene.css?v=14"; document.head.appendChild(l); }
+    const all = (window.PIXI ? Promise.resolve() : js("js/vendor/pixi.min.js")).then(() => window.gsap ? 0 : js("js/vendor/gsap.min.js")).then(() => window.ObsScene ? 0 : js("js/obs/scene.js?v=35"))
       .then(() => { if (!window.ObsJourney) js("js/obs/journey.js?v=3").catch(() => {}); });   // полетът – по желание: без него мисията тръгва направо
     if (!document.querySelector('link[href^="css/obs-journey.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-journey.css?v=2"; document.head.appendChild(l); }
     return sceneLibs = Promise.race([all, new Promise((_, rej) => setTimeout(() => rej(new Error("scene: timeout")), 8000))]).catch(e => { sceneLibs = null; throw e; });
   }
   function sceneHome(h) {
-    const { L, LL, st, older, line, sub, dots, back } = h, g = gen, tutor = isTutor(), ign = back && back.ignite;
+    const { L, LL, st, older, sub, dots, back } = h, g = gen, tutor = isTutor(), ign = back && back.ignite;
+    // завръщане (Фаза 3): репликата казва само истината – светнала звезда / готово домашно (без „по-ярка“) / записан кръг; прекъснат урок → обичайната реплика
+    const line = ign ? "Виж! Звездата ни светна по-ярко!" : back && back.kind === "hw" ? "Браво! Домашното е готово." : back && back.kind === "round" ? "Кръгът е запазен. Ще продължим, когато си готов." : h.line;
     app.className = "o-scr o-scene"; app.innerHTML = `<div class="os-loading"></div>`;
     const fail = (e) => { if (g !== gen) return; sceneFailed = true; window.__sceneErr = String(e && e.stack || e); sceneOff(); console.warn("Обсерваторията (сцена) не тръгна – сегашният начален екран.", e); screenHome(); };
     loadSceneLibs().then(() => { if (g !== gen) return;
@@ -307,7 +315,7 @@
       const tp = tutor ? TU.plan(tutorState()) : null, round = L ? L.rounds[st.next] : null;
       // звездата на истинската мисия (занятието, което „Продължи“ стартира) – само подчертаване, яркостта е от P.b; небето се центрира около нея
       const star = !tutor && L && STAR[L.n] ? L.n : null, S0 = star ? STAR[star] : null;
-      const SV = ign && STAR[ign.n] ? STAR[ign.n] : S0;   // при завръщане със светнала звезда – небето е около нея
+      const SV = ign && STAR[ign.n] ? STAR[ign.n] : back && STAR[back.focus] ? STAR[back.focus] : S0;   // при завръщане – небето е около звездата на урока (светнала или не)
       const portal = { star, svg: skySVG({ vb: SV ? `${SV.x - 230} ${SV.y - 230} 460 460` : regionOf(classAt()) === "orion" ? "1490 100 520 520" : "40 80 460 460" }),
         kicker: tutor ? "Урок със Зори" : LL ? `Занятие ${LL.n}` : "", title: tutor ? (tp.current ? TU.BY[tp.current].name : "Модулът е завършен") : LL ? LL.title.split(" · ")[0] : "Домашното е готово",
         sub: tutor ? "AI тутор" : round ? `${round.label} · кръг\u00a0${st.next + 1}\u00a0от\u00a0${L.rounds.length}` : "Виж звездите на картата",
@@ -333,7 +341,7 @@
       $("#o-me").onclick = leave(screenAvatar); holdBtn($("#o-teach"), leave(screenTeacher));
       const ob = $("#o-older"); if (ob) ob.onclick = leave(() => { const O = older[older.length - 1], nx = hwState(O).next;
         journey({ n: O.n, kicker: `Занятие ${O.n}`, title: O.title.split(" · ")[0], sub: `${O.rounds[nx].label} · кръг\u00a0${nx + 1}\u00a0от\u00a0${O.rounds.length}` }, () => { JS = starSnap(O.n); runHw(O, nx); }); });
-      SC.layout(); if (!guide && !intro) voice(line);
+      SC.layout(); if (!guide && !intro && !back) voice(line);
     }).catch(fail);
   }
 
@@ -356,16 +364,18 @@
     if (!a) return void setTimeout(end, 1000); a.addEventListener("ended", end); a.addEventListener("error", end);
     setTimeout(() => { if (a.paused && !a.ended && a.currentTime === 0) end(); }, 1200); setTimeout(end, 5000); }); }
   // завръщане след истински резултат: светва само звезда, която съществуващата система вече е променила (P.b / P.halo / P.rev)
-  function backHome() { const s = JS; JS = null; let ig = null; const H = P.halo || {}, V = P.rev || {};
+  const one = (f) => { let done = false; return () => { if (!done) { done = true; f(); } }; };   // двойно докосване → едно завръщане
+  function backHome(kind) { const s = JS; JS = null; let ig = null; const H = P.halo || {}, V = P.rev || {};
     if (s && s.tutor) { const n = Object.keys(STAR).map(Number).find(k => (P.b[k] || 0) > (s.b[k] || 0) || (H[k] && !s.halo[k]) || (V[k] && !s.rev[k])); if (n) ig = { n, from: s.b[n] || 0, to: P.b[n] || 0 }; }
     else if (s) { const b = P.b[s.n] || 0; if (b > s.b || (H[s.n] && !s.halo) || (V[s.n] && !s.rev)) ig = { n: s.n, from: s.b, to: b }; }
-    BACK = { ignite: ig }; screenHome(); }
+    // kind: "round" (кръгът е записан, домашното не е готово) | "hw" (домашното е готово) | "tutor"; без снимка (повторно) – без ефекти
+    BACK = { ignite: ig, kind: s ? kind || null : null, focus: s && !s.tutor ? s.n : null }; screenHome(); }
 
   // ---- кръг от домашното: играта с точните настройки от учителя; без „Настройки“ ----
   async function runHw(L, i) {
     gen++; const r = L.rounds[i], id = r.game, c = { ...defaults(id, true), ...r.set }; M = { free: true, hw: L.id, n: L.n, max: 9 };
     try {
-      gameShell(id, 0, c.rounds, `Занятие ${L.n} · кръг ${i + 1} от ${L.rounds.length}`); await talk(INTRO[id], "explain");
+      gameShell(id, 0, c.rounds, `Занятие ${L.n} · кръг ${i + 1} от ${L.rounds.length}`); zr("zr-hi"); await talk(INTRO[id], "explain");
       const t0 = Date.now(), [ok, tot] = await PLAY[id](c); sendRound(L, i, id, ok, tot, t0);
       P.hw = P.hw || {}; const d = P.hw[L.id] = P.hw[L.id] || []; if (!d.includes(i)) d.push(i);
       P.hwres = P.hwres || {}; (P.hwres[L.id] = P.hwres[L.id] || {})[i] = { game: id, mode: c.mode || null, ok, tot, t: Date.now() }; save();
@@ -373,31 +383,41 @@
     } catch (e) { if (e !== "stale") throw e; }
   }
   function screenHwRound(L, i, ok, tot) {
-    gen++; const st = hwState(L), nx = st.next;
+    gen++; const st = hwState(L), nx = st.next, N = L.rounds.length, n = st.done.length;
+    // Фаза 3: истинският брой готови кръгове; новата точка се показва веднъж (екранът се рисува само след изигран кръг); репликата – според кръга
+    const all = tot > 0 && ok === tot, line = all ? "Всичко вярно! Още един кръг е готов." : tot && ok / tot >= .5 ? "Браво! Още един кръг е готов." : "Кръгът е готов. Продължаваме заедно!";
     app.className = "o-scr o-end";
-    app.innerHTML = `<div class="o-endbox">${zori("joy")}<div class="o-say"></div>
-      <div class="o-gres">Занятие ${L.n} · ${L.rounds[i].label}: <b>${ok} от ${tot}</b></div>${M && M.recs && M.recs.length ? `<div class="o-newrec">★ Нов рекорд: ${M.recs.join(" · ")}</div>` : ""}
-      <div class="o-hdots big">${L.rounds.map((_, k) => `<i class="${st.done.includes(k) ? "on" : k === nx ? "now" : ""}"></i>`).join("")}</div>
-      <div class="o-sbar"><button class="o-sec" id="o-rh">Към обсерваторията</button><button class="o-go" id="o-next">▶ Продължи<small>${L.rounds[nx].label} · кръг ${nx + 1} от ${L.rounds.length}</small></button></div></div>`;
-    say("Браво! Още един кръг е готов.", "joy"); setTimeout(burst, 300);
-    $("#o-rh").onclick = backHome; $("#o-next").onclick = () => runHw(L, nx);   // следващият кръг – без полет
+    app.innerHTML = `<div class="o-endbox ol-round">${zori(tot && ok / tot >= .5 ? "joy" : "explain")}<div class="o-say"></div>
+      <div class="ol-count" role="status">Готови кръгове: <b>${n}</b> от ${N}</div>
+      <div class="o-hdots big" aria-hidden="true">${L.rounds.map((_, k) => `<i class="${st.done.includes(k) ? "on" : k === nx ? "now" : ""}${k === i ? " new" : ""}"></i>`).join("")}</div>
+      <div class="o-gres">${L.rounds[i].label}: <b>${ok} от ${tot}</b> верни</div>${M && M.recs && M.recs.length ? `<div class="o-newrec">★ Нов рекорд: ${M.recs.join(" · ")}</div>` : ""}
+      <div class="o-sbar"><button class="o-sec" id="o-rh">Към обсерваторията</button><button class="o-go" id="o-next">▶ Продължи<small>${L.rounds[nx].label} · кръг ${nx + 1} от ${N}</small></button></div></div>`;
+    say(line, tot && ok / tot >= .5 ? "joy" : "explain"); zr(all ? "zr-big" : "zr-ok2");
+    $("#o-rh").onclick = one(() => backHome("round")); $("#o-next").onclick = () => runHw(L, nx);   // следващият кръг – без полет
   }
   // домашното е готово → яркостта на звездата (занятие N = звезда N) от резултатите: Звездни сигнали ≥ 80%, абакус ≥ 75%, без телескоп ≥ 67% – по една точка
   function hwComplete(L) {
     gen++; const res = Object.values((P.hwres || {})[L.id] || {}), sum = (f) => res.filter(f).reduce((a, x) => [a[0] + x.ok, a[1] + x.tot], [0, 0]), q = (a) => a[1] ? a[0] / a[1] : null;
     const fl = q(sum(x => x.game === "flash")), ab = q(sum(x => x.game === "trainer" && x.mode === "ab")), im = q(sum(x => x.game === "trainer" && x.mode === "mind"));
     const met = (fl != null && fl >= .8 ? 1 : 0) + (ab != null && ab >= .75 ? 1 : 0) + (im != null && im >= .67 ? 1 : 0);
+    const hb = !!(P.halo || {})[L.n];   // (само за изгледа: имаше ли ореол преди)
     const n = L.n, before = P.b[n] || 0, after = Math.max(before, met); P.b[n] = after; if (im != null && im >= .67 && after >= 3) P.halo[n] = 1; save();
     const pc = (x) => x == null ? "—" : Math.round(x * 100) + "%";
+    // Фаза 3: точността (проценти) и яркостта на звездата (0–3, ореол) – отделно; текстът казва само това, което системата вече е записала
+    const up = after > before, haloNew = !hb && !!P.halo[n], N = L.rounds.length;
+    const crit = [["Звездни сигнали", fl, 80], ["Абакус", ab, 75], ["Без телескоп", im, 67]];
+    const cap = up ? [`Звездата стана по-ярка: ${before} → ${after} от 3`, haloNew ? "И получи ореол – за смятането без телескоп." : "Всяка точност над прага прави звездата по-ярка."]
+      : after >= 3 ? ["Звездата вече свети с пълна сила.", haloNew ? "И получи ореол – за смятането без телескоп." : "Яркостта ѝ остава 3 от 3."]
+      : [`Яркостта остава ${after} от 3.`, "Яркостта расте, когато точността стигне прага. Домашното е готово – браво!"];
     app.className = "o-scr o-end";
     app.innerHTML = `<div class="o-endsky">${STAR[n] ? skySVG({ vb: `${STAR[n].x - 300} ${STAR[n].y - 70} 600 360` }) : ""}</div>
-      <div class="o-endbox">${zori("joy")}<div class="o-say"></div>
-      <div class="o-gres">Домашното за занятие ${n} е готово!</div>
-      <div class="o-res"><div><b>${pc(fl)}</b>звездни сигнали</div><div><b>${pc(ab)}</b>абакус</div><div><b>${pc(im)}</b>без телескоп</div></div>
-      <div class="o-stars">${"★".repeat(after)}${"☆".repeat(3 - after)}</div>
+      <div class="o-endbox ol-hw">${zori("joy")}<div class="o-say"></div>
+      <h2 role="status">Домашното за занятие ${n} е готово!<small>Всички ${N} кръга са изиграни</small></h2>
+      <div class="ol-sec"><em>Точност</em><div class="ol-acc">${crit.map(([t, x, need]) => `<div><span>${t}<small>${x == null ? "няма такъв кръг" : `праг ${need}%`}</small></span><b>${pc(x)}</b><i class="${x != null && x * 100 >= need ? "on" : ""}" aria-label="${x != null && x * 100 >= need ? "над прага" : "под прага"}">${x == null ? "" : x * 100 >= need ? "✓" : "·"}</i></div>`).join("")}</div></div>
+      <div class="ol-sec"><em>Яркост на звездата</em><div class="ol-star"><div class="o-stars" aria-label="Яркост ${after} от 3">${[0, 1, 2].map(k => `<span class="${k < after ? "on" : ""}${up && k >= before && k < after ? " up" : ""}" style="animation-delay:${.5 + (k - before) * .25}s">★</span>`).join("")}</div><p>${cap[0]}<small>${cap[1]}</small></p></div></div>
       <div class="o-sbar"><button class="o-sec" id="o-tomap">Към картата</button><button class="o-go" id="o-home">Към обсерваторията</button></div></div>`;
-    say(after > before ? "Небето е подредено за тази вечер. Звездата стана по-ярка!" : "Браво! Домашното е готово.", "joy"); burst();
-    $("#o-tomap").onclick = () => screenMap(n); $("#o-home").onclick = backHome;
+    say(up ? "Небето е подредено за тази вечер. Звездата стана по-ярка!" : "Браво! Домашното е готово.", "joy"); zr(up ? "zr-big" : "zr-ok1"); if (up) burst();
+    $("#o-tomap").onclick = () => screenMap(n); $("#o-home").onclick = one(() => backHome("hw"));
   }
   // ---- „За учителя“ (демо, задръж): кое занятие е проведено, докъде е домашното; таблицата за отключване на игрите (за ревизия) ----
   function screenTeacher() {
@@ -532,7 +552,8 @@
       else { const k = +g.dataset.k; g.style.transform = `translate(${xOf(i)}px,${eY(k, r.e)}px)`; p.setAttribute("class", k <= r.e ? "on" : ""); } });
     let onChange = null;
     host.querySelectorAll(".o-b").forEach(g => g.addEventListener("pointerdown", ev => { ev.preventDefault(); if (!on) return;
-      const m = E.tapMove(st, +g.dataset.r, g.dataset.b, +g.dataset.k || 0), ns = E.apply(st, m); if (!ns) return; m.t = Math.round(performance.now()); st = ns; moves.push(m); upd(); if (onChange) onChange(m); }));
+      const m = E.tapMove(st, +g.dataset.r, g.dataset.b, +g.dataset.k || 0), ns = E.apply(st, m); if (!ns) return; m.t = Math.round(performance.now()); const lit = moving(m); st = ns; moves.push(m); upd();
+      lit.forEach(e => { if (!e) return; e.classList.remove("ol-tap"); void e.getBoundingClientRect(); e.classList.add("ol-tap"); setTimeout(() => e.classList.remove("ol-tap"), 340); }); if (onChange) onChange(m); }));
     upd();
     const svg = host.querySelector("svg"), NS = "http://www.w3.org/2000/svg";
     const moving = (m) => { const r = st[m.rod]; if (m.bead === "h") return [host.querySelector(`.o-b[data-r="${m.rod}"][data-b="h"]`)];
@@ -665,9 +686,9 @@
       once(first && k === 0 ? 0 : 1, "Кое число видя?", "explain"); if (first && k > 0) voice("Кое число видя?");
       const t0 = performance.now(), pick = await new Promise(res => w.querySelectorAll(".o-ch button").forEach(b => b.onclick = () => res(+b.dataset.v)));
       if (first) { rec.choice = pick; rec.rtMs = Math.round(performance.now() - t0); }
-      if (pick === v) { rec.correct = first; w.querySelector(`.o-ch button[data-v="${v}"]`).classList.add("ok"); say(thank(v), "joy"); const z = $(".o-zori"); if (z) { z.classList.remove("hop"); void z.offsetWidth; z.classList.add("hop"); } await afterSay(1300); return first; }
+      if (pick === v) { rec.correct = first; w.querySelector(`.o-ch button[data-v="${v}"]`).classList.add("ok"); say(thank(v), "joy"); await afterSay(1300); return first; }
       if (!first) { w.innerHTML = `${look.draw(v).replace(" o-sig", "")}<div class="o-cq">${v}</div>`; say("Ето кое число беше.", "explain"); await afterSay(1900); return false; }
-      first = false; rec.retries = 1; tried.add(pick); await talk("Нека го видим още веднъж.", "explain"); await show(true);
+      first = false; rec.retries = 1; tried.add(pick); const nb = w.querySelector(`.o-ch button[data-v="${pick}"]`); if (nb) nb.classList.add("no"); await talk("Нека го видим още веднъж.", "explain"); await show(true);
     }
   }
   // адаптивно време на сигналите (правило за методиста): ≥ 8 от последните 10 верни от първия опит в ≥ 2 различни дни → една стъпка по-бързо;
@@ -780,7 +801,6 @@
     for (let i = 0; i < 12; i++) { const a = i / 12 * Math.PI * 2, d = 90 + Math.random() * 70, sp = document.createElement("i");
       sp.style.setProperty("--dx", Math.cos(a) * d + "px"); sp.style.setProperty("--dy", Math.sin(a) * d + "px"); sp.style.animationDelay = (Math.random() * .12) + "s"; b.appendChild(sp); }
     host.appendChild(b); setTimeout(() => b.remove(), 1100);
-    const z = $(".o-zori"); if (z) { z.classList.remove("hop"); void z.offsetWidth; z.classList.add("hop"); }
   }
   const good = (t) => { burst(); say(t || "Браво! Точно така.", "joy"); };
   const bad = (t) => say(t || "Почти! Виж как е правилно.", "wait");
@@ -860,7 +880,7 @@
         const right = ans === target;
         P.log.trainer.push({ t: Date.now(), topic: t.id, nums, speed: c.speed, voice: !!clips, voiceRate: clips ? Math.max(...clips.map(x => x.rate)) : null, src: mind ? "mind" : digi ? "digi" : "phys", answer: ans, correct: right, rtMs: Date.now() - tq, shownMs: shown, rules, moves: digi ? abMoves.map(m => ({ ...m, ms: m.at - t0 })) : null });
         if (P.log.trainer.length > 400) P.log.trainer.splice(0, P.log.trainer.length - 400); if (!mind) track("ab", right, c.speed); save();
-        num.textContent = "= " + target; q.innerHTML = right ? "" : `<p class="o-trhint">Ти: ${ans}</p>`;
+        num.textContent = "= " + target; num.className = "o-trn " + (right ? "ok" : "no"); q.innerHTML = right ? "" : `<p class="o-trhint no">Ти: ${ans}</p>`;
         if (right) { ok++; pipStar(k); say(thank(target), "joy"); } else say("Почти! Ето колко стана.", "wait"); await afterSay(right ? 1300 : 2400);
       }
     } finally { ABMSG = null; }
@@ -1150,10 +1170,10 @@
         const pick = await new Promise(res => w.querySelectorAll(".o-ch button").forEach(b => b.onclick = () => res(+b.dataset.v)));
         if (first) { rec.choice = pick; rec.rtMs = Math.round(performance.now() - t0); }
         if (pick === v) { rec.correct = first; if (first) { ok++; pipStar(k); } w.querySelector(`.o-ch button[data-v="${v}"]`).classList.add("ok");
-          say("Браво!", "joy"); const z = $(".o-zori"); if (z) { z.classList.remove("hop"); void z.offsetWidth; z.classList.add("hop"); } await afterSay(1000); break; }
+          say("Браво!", "joy"); await afterSay(1000); break; }
         if (rec.retries >= 1) { w.innerHTML = `<div class="o-cbox">${countSVG(v)}</div><div class="o-cq">${v}</div>`; say("Ето колко бяха.", "explain"); await wait(1800); break; }
         first = false; rec.retries++; tried.add(pick);
-        w.querySelector(`.o-ch button[data-v="${pick}"]`).classList.add("tried"); w.querySelectorAll(".o-ch button").forEach(b => b.disabled = true);
+        w.querySelector(`.o-ch button[data-v="${pick}"]`).classList.add("tried", "no"); w.querySelectorAll(".o-ch button").forEach(b => b.disabled = true);
         await talk("Да погледнем пак!", "explain"); await look(true);
       }
       P.log.count.push(rec); if (P.log.count.length > 300) P.log.count.splice(0, P.log.count.length - 300); save();
@@ -1571,7 +1591,7 @@
       ${rep.learned.length ? `<div class="o-newrec">★ Научи: ${rep.learned.join(" · ")}</div>` : ""}${rep.check ? `<div class="o-newrec">Звездна проверка: ${rep.check.good} от 10${rep.check.star ? " ★" : ""}</div>` : ""}
       <div class="o-sbar"><button class="o-sec" id="o-tomap">Към картата</button><button class="o-go" id="o-home">Към обсерваторията</button></div></div>`;
     say(rep.learned.length ? "Браво! Днес научи нещо ново!" : "Браво! Утре продължаваме.", "joy"); burst();
-    $("#o-tomap").onclick = () => screenMap(); $("#o-home").onclick = backHome;
+    $("#o-tomap").onclick = () => screenMap(); $("#o-home").onclick = one(() => backHome("tutor"));
   }
   // отчетът за родителя (последните уроци + седмицата)
   function screenParentReport() {
