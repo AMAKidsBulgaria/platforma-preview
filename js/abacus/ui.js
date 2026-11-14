@@ -74,19 +74,22 @@
     try { if (window.ABACUS_HOOK) setTimeout(((m) => () => window.ABACUS_HOOK(m))(pendingMove), 0); } catch (e) {}
     if (EMBED && window.parent !== window) try { window.parent.postMessage({ src: "abacus", value: E.value(st), move: pendingMove ? { rod: pendingMove.rod, bead: pendingMove.bead, d: pendingMove.d, t: pendingMove.t } : null }, "*"); } catch (e) {}
     pendingMove = null;
-    const flash = [];
+    const flash = [], lit = [];
     $("#ab-board").querySelectorAll(".ab-bead").forEach(g => {
       const i = +g.dataset.rod, r = st[i], o = prevSt && prevSt[i], x = X0 + E.col(i, RODS) * W, p = g.querySelector(".b");
       if (g.dataset.bead === "h") {
         const on = !!r.h; g.style.transform = `translate(${x}px,${hY(touch ? 0 : r.h)}px)`;
         p.setAttribute("fill", on && !touch ? "var(--heaven-on)" : "var(--heaven-off)"); if (touch && o && o.h !== r.h) flash.push([p, "var(--heaven-on)"]);
+        if (!touch && o && o.h !== r.h) lit.push(g);
       } else {
         const k = +g.dataset.k, on = k <= r.e; g.style.transform = `translate(${x}px,${eY(k, touch ? 0 : r.e)}px)`;
         p.setAttribute("fill", on && !touch ? "var(--bead-on)" : "var(--bead-off)");
         if (touch && o && (k <= r.e) !== (k <= o.e)) flash.push([p, "var(--bead-on)"]);
+        if (!touch && o && (k <= r.e) !== (k <= o.e)) lit.push(g);
       }
     });
     prevSt = st.map(r => ({ h: r.h, e: r.e }));
+    lit.forEach(g => { g.classList.remove("ab-lit"); void g.getBoundingClientRect(); g.classList.add("ab-lit"); setTimeout(() => g.classList.remove("ab-lit"), 340); });   // докоснатото топче просветва за миг
     if (flash.length) { flash.forEach(([p, c]) => p.setAttribute("fill", c)); setTimeout(() => flash.forEach(([p, c]) => { if (touch) p.setAttribute("fill", c.includes("heaven") ? "var(--heaven-off)" : "var(--bead-off)"); }), 350); }
     $("#ab-nums").querySelectorAll("text").forEach((t, j) => { t.textContent = E.rodVal(st[j]); });   // надпис j стои под пръчка j
   }
@@ -105,7 +108,9 @@
   function tap(g) {
     if (busy || hidden) return;
     const m = E.tapMove(st, +g.dataset.rod, g.dataset.bead, +g.dataset.k || 0), ns = E.apply(st, m); if (!ns) return;
-    m.t = Math.round(performance.now()); st = ns; moves.push(m); pendingMove = m;   // t: за измерване на техниката (щипка/двете ръце = движения почти едновременно) update(); log("move", { m, value: E.value(st) });
+    // t: за измерване на техниката (щипка/двете ръце = движения почти едновременно)
+    // (14.11.2026: update() и log() бяха попаднали в коментара от 9.11 – топчето не се местеше и обсерваторията не получаваше движението)
+    m.t = Math.round(performance.now()); st = ns; moves.push(m); pendingMove = m; update(); log("move", { m, value: E.value(st) });
     if (mode === "free") { say(T.number(E.value(st)), "info"); return; }
     if (awaiting) return;   // памет/наум: чакаме „Готово“
     if (!task) return;

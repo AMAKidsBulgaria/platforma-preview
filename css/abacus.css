@@ -41,3 +41,8 @@ body.ab-embed { margin: 0; background: transparent; overflow: hidden; }
 .ab-embed .ab-app { padding: 0; height: 100vh; height: 100dvh; display: flex; align-items: center; justify-content: center; }
 .ab-embed .ab-top, .ab-embed .ab-task, .ab-embed .ab-say, .ab-embed .ab-row, .ab-embed .ab-stats, .ab-embed .ab-pad { display: none !important; }
 .ab-embed .ab-board svg { height: calc(100dvh - 8px); min-height: 0; }
+
+/* 14.11.2026: преместеното топче просветва за миг (само цветът; позицията я мести update()) */
+.ab-bead.ab-lit .b { animation: ab-lit .32s ease-out 1; }
+@keyframes ab-lit { 0% { filter: brightness(1.35) drop-shadow(0 0 8px #F5C04A); } 100% { filter: none; } }
+@media (prefers-reduced-motion: reduce) { .ab-bead.ab-lit .b { animation: none; } }
