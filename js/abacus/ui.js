@@ -51,7 +51,8 @@
   const hY = (h) => h ? BEAM - 34 : 52;
   function draw() {
     const wTot = X0 * 2 + (RODS - 1) * W;
-    let s = `<svg viewBox="0 0 ${wTot} ${H + 70}" role="img" aria-label="Соробан"><g id="ab-body"><rect x="8" y="8" width="${wTot - 16}" height="${H - 16}" rx="26" fill="#FBF3E4" stroke="var(--wood)" stroke-width="16"/>`;
+    // вграден (без цифрите отдолу): рамката запълва целия прозорец, без празна ивица
+    let s = `<svg viewBox="0 0 ${wTot} ${H + (EMBED ? 0 : 70)}" role="img" aria-label="Соробан"><g id="ab-body"><rect x="8" y="8" width="${wTot - 16}" height="${H - 16}" rx="26" fill="#FBF3E4" stroke="var(--wood)" stroke-width="16"/>`;
     for (let i = 0; i < RODS; i++) { const x = X0 + E.col(i, RODS) * W; s += `<line x1="${x}" y1="20" x2="${x}" y2="${H - 20}" stroke="var(--rod)" stroke-width="8"/>`; }
     s += `<rect x="16" y="${BEAM - 6}" width="${wTot - 32}" height="14" fill="var(--wood-d)"/>`;
     for (let i = 0; i < RODS; i++) { const x = X0 + E.col(i, RODS) * W; s += `<circle cx="${x}" cy="${BEAM + 1}" r="5" fill="#FBF3E4"/>`; }

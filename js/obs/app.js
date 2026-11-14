@@ -857,9 +857,9 @@
   let ABMSG = null; window.addEventListener("message", (e) => { const d = e.data || {}; if (d.src === "abacus" && ABMSG) ABMSG(d); });
   async function playTrainer(c) {
     const t = topicFor(c.topic), mind = c.mode === "mind", digi = !mind && usesDigital(), talkN = c.voice === "on"; let ok = 0;   // „наум“ – само като кръг „Без телескоп“ в домашното
-    P.log = P.log || {}; P.log.trainer = P.log.trainer || []; const w = $("#o-work"); w.classList.add("o-trw");
+    P.log = P.log || {}; P.log.trainer = P.log.trainer || []; const w = $("#o-work"); w.classList.add("o-trw"); w.classList.toggle("o-digi", digi); w.dataset.rods = t.rods;
     w.innerHTML = `<div class="o-trl${digi ? "" : " solo"}"><div class="o-trn" id="o-num"></div><div class="o-trq" id="o-trq"></div></div>` +
-      (digi ? `<div class="o-trab" style="aspect-ratio:${220 + 180 * (t.rods - 1)} / 630"><iframe id="o-abf" title="Дигитален абакус" src="abacus.html?embed=1&mode=free&voice=0&rods=${t.rods}${P.touch ? "&touch=1" : ""}"></iframe></div>` : "");
+      (digi ? `<div class="o-trab" style="aspect-ratio:${220 + 180 * (t.rods - 1)} / 560"><iframe id="o-abf" title="Дигитален абакус" src="abacus.html?embed=1&mode=free&voice=0&rods=${t.rods}${P.touch ? "&touch=1" : ""}"></iframe></div>` : "");
     const abf = digi ? $("#o-abf") : null; let abVal = 0, abMoves = [];
     if (digi) { await new Promise(r => { abf.addEventListener("load", r, { once: true }); setTimeout(r, 4000); }); ABMSG = (d) => { abVal = d.value; if (d.move) abMoves.push({ ...d.move, at: Date.now() }); if (ABMSG.on) ABMSG.on(); }; }
     const abReset = () => { abVal = 0; abMoves = []; try { abf.contentWindow.postMessage({ src: "obs", type: "reset" }, "*"); } catch (e) {} };

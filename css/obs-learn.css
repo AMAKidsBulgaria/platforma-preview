@@ -144,3 +144,25 @@ html.o-still .o-zori[class*="zr-"], html.o-still .o-hdots.big i.new, html.o-stil
 @keyframes ol-ready { 50% { box-shadow: 0 4px 0 #1d6b3c, 0 0 30px 4px #5FD38Aaa; } }
 @media (prefers-reduced-motion: reduce) { .o-kpv.pop, .o-kpk button.ok:not(:disabled) { animation: none; } }
 html.o-calm .o-kpv.pop, html.o-calm .o-kpk button.ok, html.o-still .o-kpk button.ok { animation: none !important; }
+
+/* „Звездни сметки“ с дигитален абакус на телефон: примерът и абакусът – на един екран, абакусът – колкото може по-голям */
+.o-trw.o-digi .o-trab { background: transparent; box-shadow: none; border-radius: 22px; }
+@media (max-width: 760px) and (orientation: portrait) {
+  /* 1 пръчка (тесен абакус): числото вляво, абакусът вдясно на цялата височина */
+  .o-game .o-mwork.o-trw.o-digi { flex-direction: row; align-items: stretch; gap: 6px; padding: 8px; }
+  .o-game .o-trw.o-digi .o-trl { flex: 1 1 0; min-width: 0; gap: 8px; }
+  .o-game .o-trw.o-digi .o-trn { font-size: clamp(44px, 15vw, 72px); white-space: nowrap; }
+  .o-game .o-trw.o-digi .o-trhint { font-size: 15px; text-align: center; }
+  .o-game .o-trw.o-digi .o-trab { flex: none; height: 100%; width: auto; max-width: 62%; align-self: center; }
+  /* 2–3 пръчки (широк абакус): числото – тясна ивица отгоре, абакусът – цялата останала височина */
+  .o-game .o-mwork.o-trw.o-digi:not([data-rods="1"]) { flex-direction: column; }
+  .o-game .o-trw.o-digi:not([data-rods="1"]) .o-trl { flex: none; align-self: stretch; width: auto; flex-direction: row; justify-content: center; }
+  .o-game .o-trw.o-digi:not([data-rods="1"]) .o-trn { font-size: clamp(44px, 8dvh, 64px); }
+  .o-game .o-trw.o-digi:not([data-rods="1"]) .o-trab { flex: 1 1 auto; min-height: 0; height: auto; width: auto; max-width: 100%; align-self: center; }
+}
+@media (max-height: 520px) {   /* легнал телефон: числото вляво, абакусът вдясно на цялата височина */
+  .o-game .o-mbody { align-items: stretch; } .o-game .o-mwork { flex: 1 1 auto; align-self: stretch; min-width: 0; }
+  .o-game .o-mwork.o-trw.o-digi { flex-direction: row; padding: 6px 10px; }
+  .o-game .o-trw.o-digi .o-trab { height: 100%; width: auto; max-width: 62%; }
+}
+@media (max-width: 760px) and (orientation: portrait) { .o-game .o-trw.o-digi:not([data-rods="1"]) .o-trn { flex: 1; text-align: center; } }
