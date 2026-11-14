@@ -133,3 +133,14 @@ html.o-still .o-zori[class*="zr-"], html.o-still .o-hdots.big i.new, html.o-stil
 .ol-round .o-sbar .o-go { flex-direction: column; align-items: center; gap: 2px; } .ol-round .o-sbar .o-go small { font-size: 13px; opacity: .85; }
 /* изправен таблет: работната зона – по цялата ширина (Зори остава отгоре, както досега) */
 @media (min-width: 761px) and (orientation: portrait) { .o-game .o-mbody { align-items: stretch; } .o-game .o-mz { align-self: center; } .o-game .o-mwork { align-self: stretch; } }
+
+/* клавиатурата: какво е избрано (златисто – „избрано“, не „вярно“); ✓ свети, щом има отговор */
+.o-kpv { transition: color .15s, border-color .15s, box-shadow .15s; }
+.o-kpv.sel { color: #FFD86A; border-color: #F5C04A; box-shadow: 0 0 0 2px #F5C04A55, 0 0 22px #F5C04A55; }
+.o-kpv.pop { animation: ol-ok .28s cubic-bezier(.3, 1.6, .5, 1) 1; }
+.o-kpk button.hit { background: #F5C04A; border-color: #FFE29A; color: #2B2140; transition: none; }
+.o-kpk button { transition: background .25s, color .25s, border-color .25s; }
+.o-kpk button.ok:not(:disabled) { background: #34B36A; border-color: #7EE2A4; color: #fff; box-shadow: 0 4px 0 #1d6b3c, 0 0 18px #5FD38A88; animation: ol-ready 1.6s ease-in-out infinite; }
+@keyframes ol-ready { 50% { box-shadow: 0 4px 0 #1d6b3c, 0 0 30px 4px #5FD38Aaa; } }
+@media (prefers-reduced-motion: reduce) { .o-kpv.pop, .o-kpk button.ok:not(:disabled) { animation: none; } }
+html.o-calm .o-kpv.pop, html.o-calm .o-kpk button.ok, html.o-still .o-kpk button.ok { animation: none !important; }

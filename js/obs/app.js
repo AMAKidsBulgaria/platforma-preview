@@ -848,8 +848,10 @@
   }
   function keypad(host, maxLen) {   // голяма клавиатура за отговора: 0–9, ⌫, ✓
     host.innerHTML = `<div class="o-kp"><div class="o-kpv" id="o-kpv">?</div><div class="o-kpk">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(d => `<button data-d="${d}">${d}</button>`).join("")}<button data-d="back" aria-label="Изтрий">⌫</button><button data-d="0">0</button><button data-d="ok" class="ok" aria-label="Готово" disabled>✓</button></div></div>`;
-    let v = ""; const show = () => { host.querySelector("#o-kpv").textContent = v || "?"; host.querySelector('[data-d="ok"]').disabled = !v; };
-    return new Promise(res => host.querySelectorAll("button").forEach(b => b.onclick = () => { const d = b.dataset.d;
+    // избраното: натиснатият клавиш просветва златисто, полето с отговора свети златисто, ✓ „оживява“; зелено остава само за „вярно“
+    let v = ""; const show = () => { const o = host.querySelector("#o-kpv"); o.textContent = v || "?"; o.classList.toggle("sel", !!v); o.classList.remove("pop"); void o.offsetWidth; if (v) o.classList.add("pop"); host.querySelector('[data-d="ok"]').disabled = !v; };
+    const hit = (b) => { b.classList.remove("hit"); void b.offsetWidth; b.classList.add("hit"); setTimeout(() => b.classList.remove("hit"), 260); };
+    return new Promise(res => host.querySelectorAll("button").forEach(b => b.onclick = () => { const d = b.dataset.d; if (d !== "ok") hit(b);
       if (d === "back") v = v.slice(0, -1); else if (d === "ok") { if (v) { host.querySelectorAll("button").forEach(x => x.disabled = true); return res(+v); } } else if (v.length < maxLen) v = (v === "0" ? "" : v) + d; show(); }));
   }
   let ABMSG = null; window.addEventListener("message", (e) => { const d = e.data || {}; if (d.src === "abacus" && ABMSG) ABMSG(d); });
