@@ -56,6 +56,8 @@
     for (let i = 0; i < RODS; i++) { const x = X0 + E.col(i, RODS) * W; s += `<line x1="${x}" y1="20" x2="${x}" y2="${H - 20}" stroke="var(--rod)" stroke-width="8"/>`; }
     s += `<rect x="16" y="${BEAM - 6}" width="${wTot - 32}" height="14" fill="var(--wood-d)"/>`;
     for (let i = 0; i < RODS; i++) { const x = X0 + E.col(i, RODS) * W; s += `<circle cx="${x}" cy="${BEAM + 1}" r="5" fill="#FBF3E4"/>`; }
+    // по-голяма площ за докосване (малки пръсти на телефон): цялата колона на пръчката – мести най-близкото топче; самите топчета са отгоре
+    for (let i = 0; i < RODS; i++) { const x = X0 + E.col(i, RODS) * W; s += `<rect class="ab-zone" data-rod="${i}" x="${x - W / 2}" y="16" width="${W}" height="${H - 32}" fill="transparent"/>`; }
     for (let i = 0; i < RODS; i++) {
       const x = X0 + E.col(i, RODS) * W;
       s += `<g class="ab-bead" data-rod="${i}" data-bead="h"><path class="b" d="${beadPath(0, 0, 130, 56)}"/></g>`;
@@ -65,8 +67,15 @@
     s += `<g id="ab-nums">${Array.from({ length: RODS }, (_, i) => `<text class="ab-num" x="${X0 + E.col(i, RODS) * W}" y="${H + 50}" text-anchor="middle">0</text>`).join("")}</g></svg>`;
     $("#ab-board").innerHTML = s;
     $("#ab-board").querySelectorAll(".ab-bead").forEach(g => g.addEventListener("pointerdown", ev => { ev.preventDefault(); tap(g); }));
+    $("#ab-board").querySelectorAll(".ab-zone").forEach(z => z.addEventListener("pointerdown", ev => { ev.preventDefault(); const g = nearBead(+z.dataset.rod, ev); if (g) tap(g); }));
     update(); applyView();
   }
+  // докосване в колоната: над гредата – горното топче; под нея – долното топче, чийто център е най-близо до пръста
+  function nearBead(i, ev) { const svg = $("#ab-board svg"), m = svg && svg.getScreenCTM(); if (!m) return null;
+    const p = svg.createSVGPoint(); p.x = ev.clientX; p.y = ev.clientY; const y = p.matrixTransform(m.inverse()).y, r = st[i];
+    if (y < BEAM) return $(`#ab-board .ab-bead[data-rod="${i}"][data-bead="h"]`);
+    let best = 1, d = 1e9; for (let k = 1; k <= 4; k++) { const dk = Math.abs(eY(k, touch ? 0 : r.e) - y); if (dk < d) { d = dk; best = k; } }
+    return $(`#ab-board .ab-bead[data-rod="${i}"][data-bead="e"][data-k="${best}"]`); }
   let pendingMove = null;   // онлайн занятие: всяка промяна на абакуса (с движението, ако е от детето) отива при учителя – js/live/child.js
   // два вида дигитално сметало (9.11.2026): „плъзгане“ – като истинско: топчето се мести и свети, докато е до гредата (иначе сиво);
   // „докосване“ – опора за въображаемото: топчетата стоят на място и са сиви, при докосване светват за миг; стойността се пази (учителят я вижда)

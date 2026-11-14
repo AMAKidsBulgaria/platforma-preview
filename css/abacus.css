@@ -46,3 +46,4 @@ body.ab-embed { margin: 0; background: transparent; overflow: hidden; }
 .ab-bead.ab-lit .b { animation: ab-lit .32s ease-out 1; }
 @keyframes ab-lit { 0% { filter: brightness(1.35) drop-shadow(0 0 8px #F5C04A); } 100% { filter: none; } }
 @media (prefers-reduced-motion: reduce) { .ab-bead.ab-lit .b { animation: none; } }
+.ab-zone { cursor: pointer; }
