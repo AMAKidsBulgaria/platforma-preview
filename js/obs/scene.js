@@ -12,10 +12,12 @@
     land: { url: "assets/img/journey/room_land.webp?v=3", w: 1536, h: 1024, win: { x: 779, y: 327, r: 246 }, zori: { x: 1322, y: 957, h: 255 },
       box: { tele: [187, 281, 477, 880], map: [437, 445, 630, 760], abac: [1084, 562, 1233, 664] }, lens: [464, 315], occ: [[[437, 468], [616, 472], [628, 610], [633, 700], [437, 700]]],
       tag: { tele: [338, 672], map: [532, 700], abac: [1159, 667] },
+      glim: { tele: [[457, 282], [204, 437], [343, 397], [330, 340], [261, 699], [425, 699]], map: [[441, 446], [621, 446], [441, 650], [621, 650], [531, 429]], abac: [[1096, 552], [1219, 552], [1096, 626], [1219, 626], [1158, 548]] },
       lamps: [[179, 583, .94], [1352, 232, .85], [1060, 563, .68]] },
     port: { url: "assets/img/journey/room_port.webp?v=2", w: 1024, h: 1536, win: { x: 510, y: 325, r: 238 }, zori: { x: 500, y: 1430, h: 380 },
       box: { tele: [50, 470, 385, 1235], map: [255, 625, 495, 1015], abac: [695, 690, 872, 822] }, lens: [372, 492],
       tag: { tele: [150, 1075], map: [372, 905], abac: [784, 826] },
+      glim: { tele: [[370, 490], [60, 790], [215, 640], [190, 720], [110, 1000], [300, 1000]], map: [[262, 665], [480, 665], [262, 925], [480, 925], [371, 650]], abac: [[700, 695], [868, 695], [700, 815], [868, 815], [784, 690]] },
       lamps: [[60, 270, 1], [985, 410, .9], [643, 735, .8]] } };
   const svg = (d) => `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
   const OBJ = { abac: { icon: svg('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v16M12 4v16M16 4v16"/><circle cx="8" cy="6.5" r="1.2" fill="currentColor"/><circle cx="12" cy="13" r="1.2" fill="currentColor"/><circle cx="16" cy="15.5" r="1.2" fill="currentColor"/>'), name: "Абакус", aria: "Абакус – свободна тренировка" },
@@ -61,6 +63,11 @@
     const sheen = new PIXI.Sprite(radial()); sheen.anchor.set(.5); sheen.tint = 0xFFF1C2; sheen.blendMode = PIXI.BLEND_MODES.ADD; sheen.alpha = 0; sheen.zIndex = 5; world.addChild(sheen);
     const sheenMask = new PIXI.Graphics(); world.addChild(sheenMask); sheen.mask = sheenMask;
     const lensStar = new PIXI.Sprite(radial()); lensStar.anchor.set(.5); lensStar.tint = 0xBFE0FF; lensStar.blendMode = PIXI.BLEND_MODES.ADD; lensStar.zIndex = 5; world.addChild(lensStar);
+    // „вълшебен прашец“: искрици, които проблясват около предметите, на които се кликва (постоянно – подсказка за докосване)
+    const sparkTex = (() => { const c = document.createElement("canvas"); c.width = c.height = 64; const g = c.getContext("2d"), r = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+      r.addColorStop(0, "rgba(255,255,255,1)"); r.addColorStop(.25, "rgba(255,236,170,.8)"); r.addColorStop(1, "rgba(255,210,110,0)"); g.fillStyle = r; g.fillRect(0, 0, 64, 64);
+      g.fillStyle = "rgba(255,250,225,.95)"; g.beginPath(); g.moveTo(32, 0); g.quadraticCurveTo(35, 29, 64, 32); g.quadraticCurveTo(35, 35, 32, 64); g.quadraticCurveTo(29, 35, 0, 32); g.quadraticCurveTo(29, 29, 32, 0); g.fill(); return PIXI.Texture.from(c); })();
+    const sparks = []; Object.keys(OBJ).forEach((k, j) => { for (let i = 0; i < 4; i++) { const p = new PIXI.Sprite(sparkTex); p.anchor.set(.5); p.blendMode = PIXI.BLEND_MODES.ADD; p.zIndex = 7; p.alpha = 0; p._k = k; p._ph = Math.random() * 6.28; p._sp = .9 + Math.random() * .6; p._u = Math.random(); p._v = Math.random(); world.addChild(p); sparks.push(p); } });
     // поканата: мек златист отблясък минава през предмета
     const glint = new PIXI.Sprite(radial()); glint.anchor.set(.5); glint.tint = 0xFFF0C8; glint.blendMode = PIXI.BLEND_MODES.ADD; glint.alpha = 0; glint.zIndex = 5; glint.rotation = -.6; world.addChild(glint);
     const shadow = new PIXI.Sprite(radial()); shadow.anchor.set(.5); shadow.tint = 0x000000; shadow.alpha = .5; shadow.zIndex = 5; world.addChild(shadow);
@@ -201,7 +208,12 @@
       // фенерите светят спокойно (само едва трептящ пламък) – движението остава за предметите, които се докосват
       lamps.forEach((g, i) => { const f = calm ? .55 : .55 + .025 * Math.sin(t * 9 + i * 2) + .015 * Math.sin(t * 23 + i); g.alpha = f * g._on; g.scale.set((g._k || 1) * 1.6 * (.4 + .6 * g._on)); });
       motes.forEach(m => { if (calm) { m.alpha = 0; return; } m.y -= m._v * dt; m.x += Math.sin(t * .6 + m._p) * .2; m.alpha = .16 + .2 * (.5 + .5 * Math.sin(t * 1.3 + m._p)); if (m.y < RM.h * .2) { m.y = RM.h * .85; m.x = Math.random() * RM.w; } });
-      Object.entries(glow).forEach(([k, g], i) => { const base = calm ? .12 : .05 + .03 * (.5 + .5 * Math.sin(t * 1.4 - i * 1.2)); g.alpha += ((g._hot ? .42 : base + (g._ping || 0) * .4) - g.alpha) * .15; });
+      Object.entries(glow).forEach(([k, g], i) => { const base = calm ? .18 : .12 + .16 * (.5 + .5 * Math.sin(t * 2.6 - i * 2.1)); g.alpha += ((g._hot ? .45 : base + (g._ping || 0) * .35) - g.alpha) * .15; });
+      // искриците: всяка се появява на нова точка върху предмета (ъгли, обектив, крака), проблясва и изчезва
+      sparks.forEach(p => { const [x0, y0, x1, y1] = RM.box[p._k], w = x1 - x0, h = y1 - y0; if (calm || busy) { p.alpha = 0; return; }
+        const ph = t * p._sp + p._ph, cyc = Math.floor(ph / 6.283), f = (ph % 6.283) / 6.283;
+        if (p._c !== cyc || p._r !== RM) { p._c = cyc; p._r = RM; const pts = RM.glim[p._k], q = pts[Math.floor(Math.random() * pts.length)]; p._x = q[0] + (Math.random() - .5) * 24; p._y = q[1] + (Math.random() - .5) * 24; }
+        p.position.set(p._x, p._y); const a = Math.max(0, Math.sin(f * Math.PI)); p.alpha = a * .95; const sz = Math.min(w, h) * .16 * (.5 + .5 * a); p.width = p.height = Math.max(14, sz); p.rotation = f * .8; });
       if (!calm) { sheenT -= dt / 60; if (sheenT < 0) { const [x0, , x1] = RM.box.map, k = Math.min(1, -sheenT / 1.4); sheen.position.set(x0 + (x1 - x0) * (-.2 + 1.4 * k), RM.box.map[1] + (RM.box.map[3] - RM.box.map[1]) * .32); sheen.alpha = Math.sin(k * Math.PI) * .55; if (k >= 1) { sheenT = 4 + Math.random() * 3; sheen.alpha = 0; } } }
       lensStar.alpha = calm ? .35 : .35 + .35 * Math.max(0, Math.sin(t * 1.7)); lensStar.scale.set(calm ? .35 : .3 + .12 * Math.sin(t * 1.7));
       if (zori && zori._s) { const b = calm ? 0 : Math.sin(t * 1.9); zori.scale.set(zori._s * (1 - b * .005), zori._s * (1 + b * .014)); zori.y = zori._y + zori._dy;
