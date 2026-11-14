@@ -8,13 +8,13 @@
    mount(host, model, handlers) → { ui, unmount() }; при грешка хвърля – app.js показва стария начален екран. */
 (function () {
   const ROOMS = {
-    land: { url: "assets/img/journey/room_land.webp", w: 1536, h: 1024, win: { x: 780, y: 255, r: 285 }, zori: { x: 985, y: 945, h: 320 },
-      box: { tele: [85, 150, 425, 855], map: [378, 348, 630, 762], abac: [1148, 328, 1368, 588] }, lens: [410, 190],
-      tag: { tele: [262, 610], map: [470, 600], abac: [1258, 590] },
+    land: { url: "assets/img/journey/room_land.webp?v=2", w: 1536, h: 1024, win: { x: 780, y: 255, r: 285 }, zori: { x: 985, y: 945, h: 320 },
+      box: { tele: [85, 150, 425, 855], map: [378, 348, 630, 762], abac: [1140, 480, 1315, 600] }, lens: [410, 190],
+      tag: { tele: [262, 610], map: [470, 600], abac: [1228, 604] },
       lamps: [[75, 505, 1.1], [1455, 92, 1], [1111, 482, .8]] },
-    port: { url: "assets/img/journey/room_port.webp", w: 1024, h: 1536, win: { x: 510, y: 325, r: 240 }, zori: { x: 500, y: 1430, h: 380 },
-      box: { tele: [50, 470, 385, 1235], map: [255, 625, 495, 1015], abac: [685, 568, 885, 812] }, lens: [372, 492],
-      tag: { tele: [150, 1075], map: [372, 905], abac: [790, 812] },
+    port: { url: "assets/img/journey/room_port.webp?v=2", w: 1024, h: 1536, win: { x: 510, y: 325, r: 240 }, zori: { x: 500, y: 1430, h: 380 },
+      box: { tele: [50, 470, 385, 1235], map: [255, 625, 495, 1015], abac: [695, 690, 872, 822] }, lens: [372, 492],
+      tag: { tele: [150, 1075], map: [372, 905], abac: [784, 826] },
       lamps: [[60, 270, 1], [985, 410, .9], [643, 735, .8]] } };
   const svg = (d) => `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
   const OBJ = { abac: { icon: svg('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v16M12 4v16M16 4v16"/><circle cx="8" cy="6.5" r="1.2" fill="currentColor"/><circle cx="12" cy="13" r="1.2" fill="currentColor"/><circle cx="16" cy="15.5" r="1.2" fill="currentColor"/>'), name: "Абакус", aria: "Абакус – свободна тренировка" },
