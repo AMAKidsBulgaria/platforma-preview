@@ -254,7 +254,7 @@
     $("#o-rgh").onclick = () => screenHome(); $("#o-rgm").onclick = () => { mapRegion = "orion"; screenMap(); };
   }
   function screenHome() {
-    sceneOff(); const back = BACK; BACK = null; if (!back) JS = null;   // изход по средата / друг път към дома – снимката отпада, без празнуване
+    sceneOff(); const back = BACK; BACK = null; if (!back || back.kind === "exit") JS = null;   // изход по средата / друг път към дома – снимката отпада, без празнуване
     if (!REVIEW && classAt() > AURORA_N[groupOf(P)] && !(P.seen || {}).orion) return screenRegion("orion");
     gen++; M = null; P.cur = classAt();
     const all = Object.keys(STAR).filter(k => regionOf(+k) === regionOf(classAt())), lit = all.filter(k => (P.b[k] || 0) >= 3).length, L = hwCurrent(), older = hwOlder();
@@ -301,15 +301,15 @@
     if (sceneLibs) return sceneLibs;
     const js = (src) => new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
     if (!document.querySelector('link[href^="css/obs-scene.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-scene.css?v=15"; document.head.appendChild(l); }
-    const all = (window.PIXI ? Promise.resolve() : js("js/vendor/pixi.min.js")).then(() => window.gsap ? 0 : js("js/vendor/gsap.min.js")).then(() => window.ObsScene ? 0 : js("js/obs/scene.js?v=35"))
-      .then(() => { if (!window.ObsJourney) js("js/obs/journey.js?v=3").catch(() => {}); });   // полетът – по желание: без него мисията тръгва направо
-    if (!document.querySelector('link[href^="css/obs-journey.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-journey.css?v=2"; document.head.appendChild(l); }
+    const all = (window.PIXI ? Promise.resolve() : js("js/vendor/pixi.min.js")).then(() => window.gsap ? 0 : js("js/vendor/gsap.min.js")).then(() => window.ObsScene ? 0 : js("js/obs/scene.js?v=36"))
+      .then(() => { if (!window.ObsJourney) js("js/obs/journey.js?v=4").catch(() => {}); });   // полетът – по желание: без него мисията тръгва направо
+    if (!document.querySelector('link[href^="css/obs-journey.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-journey.css?v=4"; document.head.appendChild(l); }
     return sceneLibs = Promise.race([all, new Promise((_, rej) => setTimeout(() => rej(new Error("scene: timeout")), 8000))]).catch(e => { sceneLibs = null; throw e; });
   }
   function sceneHome(h) {
     const { L, LL, st, older, sub, dots, back } = h, g = gen, tutor = isTutor(), ign = back && back.ignite;
     // завръщане (Фаза 3): репликата казва само истината – светнала звезда / готово домашно (без „по-ярка“) / записан кръг; прекъснат урок → обичайната реплика
-    const line = ign ? "Виж! Звездата ни светна по-ярко!" : back && back.kind === "hw" ? "Браво! Домашното е готово." : back && back.kind === "round" ? "Кръгът е запазен. Ще продължим, когато си готов." : h.line;
+    const line = ign ? "Виж! Звездата ни светна по-ярко!" : back && back.kind === "hw" ? "Браво! Домашното е готово." : back && back.kind === "round" ? "Кръгът е запазен. Ще продължим, когато си готов." : back && back.kind === "exit" ? "" : h.line;
     app.className = "o-scr o-scene"; app.innerHTML = `<div class="os-loading"></div>`;
     const fail = (e) => { if (g !== gen) return; sceneFailed = true; window.__sceneErr = String(e && e.stack || e); sceneOff(); console.warn("Обсерваторията (сцена) не тръгна – сегашният начален екран.", e); screenHome(); };
     loadSceneLibs().then(() => { if (g !== gen) return;
@@ -334,7 +334,8 @@
       SC = window.ObsScene.mount(app, { portal, line, guide, intro, back: back || null, voice: (t) => voice(t || line) }, {
         mission: () => { SC = null; if (tutor) journey({ ...tgt, n: tutorStar(tp) }, () => { JS = snapAll(); runTutor(); }); else if (L) journey(tgt, () => { JS = starSnap(L.n); runHw(L, st.next); }); else screenMap(); },
         abacus: () => { SC = null; location.href = "abacus-app.html?p=" + encodeURIComponent(P.id); },
-        games: () => { SC = null; screenGames(); }, map: () => { SC = null; screenMap(); } });
+        games: () => { SC = null; screenGames(); }, map: () => { SC = null; screenMap(); },
+        seamless: () => !!window.ObsJourney && !FAST_ON && !!(tutor || L) });
       SC.ui.insertAdjacentHTML("afterbegin", `<header class="os-head"><a class="o-hh" href="index.html" aria-label="Към Моят свят">⌂</a>
           <div class="os-title"><b><span class="os-tl">Звездна обсерватория</span><span class="os-ts">Обсерватория</span></b><small>${regionOf(classAt()) === "orion" ? "Област Орион" : "Област Аврора"}</small></div>${REVIEW ? '<span class="o-review">преглед</span>' : ""}<span class="o-sp"></span>
           <button class="o-teach" id="o-teach" type="button" aria-label="За учителя (задръж)">👩‍🏫<i></i></button>
@@ -359,7 +360,7 @@
     const J = window.ObsJourney, R = document.documentElement, calm = R.classList.contains("o-calm") || R.classList.contains("o-still") || matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!J || FAST_ON) return launch();   // резервен път: без полета – урокът направо
     let first = false; try { const k = "obs.journey.v1." + P.id; first = !localStorage.getItem(k); localStorage.setItem(k, "1"); } catch (e) {}
-    try { window.__journey = J.start({ target: t, first, reduced: calm, say: sayP, launch }); } catch (e) { console.warn("Полетът не тръгна – урокът направо.", e); launch(); }
+    try { window.__journey = J.start({ target: t, first, reduced: calm, say: sayP, launch, fadeIn: true }); } catch (e) { console.warn("Полетът не тръгна – урокът направо.", e); launch(); }
   }
   // репликата като обещание: изпълнява се, когато гласът свърши (или ако няма/не тръгне звук) – автоматичното продължение не я прекъсва
   function sayP(text) { return new Promise(res => { const was = cur; voice(text); const a = cur !== was ? cur : null; let fin = false; const end = () => { if (!fin) { fin = true; res(); } };
@@ -603,7 +604,7 @@
     app.className = "o-scr o-mis";
     app.innerHTML = `<div class="o-mtop"><button class="o-back" id="o-quit">✕ Изход</button><div class="o-pips">${STAGES.map((t, j) => `<b class="${j < i ? "d" : j === i ? "c" : ""}" title="${t}"></b>`).join("")}</div><div class="o-mname">${title}</div></div>
       <div class="o-mbody"><div class="o-mz">${zori("explain")}<div class="o-say"></div></div><div class="o-mwork" id="o-work"></div></div>`;
-    $("#o-quit").onclick = () => { gen++; screenHome(); };
+    $("#o-quit").onclick = () => { gen++; BACK = { kind: "exit" }; screenHome(); };
   }
   const NEWSTAR = {
     1: ["Броим само топчетата до гредата. Палецът вдига, показалецът сваля.", [[0, "+", 1], [1, "+", 1], [2, "-", 2]], [[0, "+", 2], [2, "-", 1], [1, "+", 1]]],
@@ -815,7 +816,7 @@
     app.innerHTML = `<div class="o-mtop"><button class="o-back" id="o-gx">✕ Изход</button>${hwTitle ? "" : `<button class="o-back o-adult" id="o-gs"><i></i>⚙ <small>задръж</small></button>`}
       <div class="o-pips">${Array.from({ length: total }, (_, j) => `<b class="${j < round ? "d" : j === round ? "c" : ""}"></b>`).join("")}</div><div class="o-mname">${GAMES[id].name}${hwTitle ? `<small>${hwTitle}</small>` : ""}</div></div>
       <div class="o-mbody"><div class="o-mz">${zori("explain")}<div class="o-say"></div></div><div class="o-mwork" id="o-work"></div></div>`;
-    $("#o-gx").onclick = () => { gen++; hwTitle ? screenHome() : screenGames(); }; if (!hwTitle) holdBtn($("#o-gs"), () => { gen++; screenSettings(id); });
+    $("#o-gx").onclick = () => { gen++; if (hwTitle) { BACK = { kind: "exit" }; screenHome(); } else screenGames(); };   // доброволен изход – спокойно завръщане, без празнуване if (!hwTitle) holdBtn($("#o-gs"), () => { gen++; screenSettings(id); });
   }
   const inMission = () => !!M && !M.free;
   function pip(round) { const b = app.querySelectorAll(".o-game .o-pips b"); b.forEach((x, j) => { const st = x.classList.contains("star"); x.className = j < round ? "d" : j === round ? "c" : ""; if (st) x.classList.add("star"); }); }
@@ -1453,7 +1454,7 @@
     app.className = "o-scr o-mis o-tutor";
     app.innerHTML = `<div class="o-mtop"><button class="o-back" id="o-quit">✕ Изход</button><div class="o-pips">${blocks.map((t, j) => `<b class="${j < i ? "d" : j === i ? "c" : ""}" title="${t}"></b>`).join("")}</div><div class="o-mname">${title}</div></div>
       <div class="o-mbody"><div class="o-mz">${zori("explain")}<div class="o-say"></div></div><div class="o-mwork" id="o-work"></div></div>`;
-    $("#o-quit").onclick = () => { gen++; screenHome(); };
+    $("#o-quit").onclick = () => { gen++; BACK = { kind: "exit" }; screenHome(); };
   }
   const TBLOCKS = ["Поздрав", "Загрявка", "Повторение", "Урок", "Наум", "Игра", "Край"];
   function tStep(i) { app.querySelectorAll(".o-pips b").forEach((b, j) => { b.className = j < i ? "d" : j === i ? "c" : ""; }); }

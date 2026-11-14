@@ -1,6 +1,7 @@
 /* Полетът до звездата (js/obs/journey.js) – над всичко, под покривалото на прехода (.os-cover, z-index 50) */
 .oj { position: fixed; inset: 0; z-index: 45; background: #070A22; color: #FFF4DA; font-family: "Nunito", system-ui, sans-serif; overflow: hidden; transition: opacity .4s; }
 .oj.oj-out { opacity: 0; pointer-events: none; }
+.oj.oj-in { opacity: 0; } .oj { transition: opacity .55s ease-out; }
 .oj-stage { position: absolute; inset: 0; } .oj-stage canvas { display: block; width: 100%; height: 100%; }
 .oj-skip { position: absolute; top: calc(max(10px, env(safe-area-inset-top)) + 6px); right: max(14px, env(safe-area-inset-right)); z-index: 2; padding: 9px 16px; border-radius: 99px; cursor: pointer;
   background: rgba(10, 12, 40, .6); color: #FFF1D6; border: 1.5px solid rgba(255, 216, 106, .55); font: 800 15px "Nunito"; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
@@ -32,3 +33,5 @@
 html.o-calm .oj-go, html.o-still .oj-go { animation: none; }
 /* нисък екран (легнал телефон): по-компактна табела и бутон */
 @media (max-height: 520px) and (orientation: landscape) { .oj-arrive { gap: 8px; } .oj-plaque { padding: 6px 18px 8px; } .oj-plaque b { font-size: 20px; } .oj-plaque small { font-size: 13px; } .oj-go { padding: 9px 26px; font-size: 19px; } }
+/* скритите елементи остават скрити (display на бутона иначе надделява над атрибута hidden) */
+.oj [hidden] { display: none !important; }

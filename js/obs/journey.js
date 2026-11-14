@@ -26,6 +26,8 @@
       <div class="oj-arrive" hidden><div class="oj-plaque">${t.kicker ? `<em>${esc(t.kicker)}</em>` : ""}<b>${esc(t.title)}</b>${t.sub ? `<small>${esc(t.sub)}</small>` : ""}</div>
         <button class="oj-go" type="button" hidden><i aria-hidden="true">▶</i> Започни</button></div>
       <div class="oj-bub" role="status" aria-live="polite" hidden></div>${reduced ? `<img class="oj-szori" src="assets/img/zori/z_fly.png" alt="" aria-hidden="true">` : ""}`;
+    // fadeIn: полетът се появява плавно върху прозореца на стаята (без тъмен междинен кадър)
+    if (o.fadeIn && !reduced) { root.classList.add("oj-in"); requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove("oj-in"))); }
     document.body.appendChild(root);
     const $ = (s) => root.querySelector(s), set = (s) => { state = s; root.dataset.state = s; if (o.onState) try { o.onState(s); } catch (e) {} };
     set(S.DEPARTING);
