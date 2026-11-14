@@ -1321,6 +1321,12 @@
     if (CHILD && !TESTMODE && !(Q.get("p") && ALLP.some(x => x.id === Q.get("p")))) { DB[CHILD] = DB[CHILD] || { id: CHILD, name: "Аз", av: "a1", cur: 1, classAt: 1, b: {}, halo: {}, hw: {} }; P = DB[CHILD]; useGroup(P); fromServer(); applyMotion(); screenHome(); return; }
     // ?reset=1 (за проверки на телефона): демо профилът започва отначало – и първият полет, и представянето на стаята; параметърът се маха от адреса
     if (Q.get("reset") === "1" && DEMO.some(x => x.id === Q.get("p"))) { resetDemo(Q.get("p")); save(); try { const u = new URL(location.href); u.searchParams.delete("reset"); history.replaceState(null, "", u); } catch (e) {} }
+    // ?demo=g1 (за проверка на Г1 на телефона): демо профилът отначало, звездите 1–8 – с пълна яркост, от домашното на занятие 9 остава последният кръг
+    if (Q.get("demo") === "g1" && DEMO.some(x => x.id === Q.get("p"))) { const id = Q.get("p"); resetDemo(id); const p0 = prof(id); p0.classAt = p0.cur = 9; for (let k = 1; k <= 8; k++) p0.b[k] = 3; p0.b[9] = 0; delete p0.disc;
+      HW.lessons.filter(L => L.n < 9).forEach(L => { p0.hw[L.id] = L.rounds.map((_, i) => i); }); const L9 = HW.lessons.find(x => x.n === 9);
+      if (L9) { p0.hw[L9.id] = L9.rounds.slice(0, -1).map((_, i) => i); p0.hwres = p0.hwres || {}; p0.hwres[L9.id] = {}; L9.rounds.slice(0, -1).forEach((r, i) => { p0.hwres[L9.id][i] = { game: r.game, mode: (r.set || {}).mode || null, ok: 10, tot: 10, t: Date.now() }; }); }
+      try { localStorage.setItem("obs.scene.v1." + id, "5"); localStorage.setItem("obs.journey.v1." + id, "1"); } catch (e) {} save();
+      try { const u = new URL(location.href); u.searchParams.delete("demo"); history.replaceState(null, "", u); } catch (e) {} }
     if (Q.get("p") && ALLP.some(x => x.id === Q.get("p"))) { P = prof(Q.get("p")); if (Q.get("class")) { P.classAt = +Q.get("class"); save(); } applyMotion(); Q.get("m") ? startMission(+Q.get("m")) : Q.get("map") ? screenMap() : screenHome(); } else screenProfiles();
   });
   // ======================= AI ТУТОР (етап 1, 12.11.2026) =======================
