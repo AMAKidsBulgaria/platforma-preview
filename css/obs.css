@@ -366,11 +366,14 @@ html.o-still .o-focus { animation: none; }
 .o-cbox2.o-dim .o-const { opacity: .5; } .o-cbox2.o-dim > span { position: absolute; font: 900 clamp(48px, 7vw, 80px) "Nunito"; color: #FFE9A8aa; }
 .o-cbox2:has(.o-const[viewBox^="0 0 360"]) { aspect-ratio: 360 / 500; } .o-cbox2:has(.o-const[viewBox^="0 0 530"]) { aspect-ratio: 530 / 500; }
 .o-csky { position: relative; width: 100%; height: clamp(90px, 16dvh, 150px); flex: none; }
-.o-comet { position: absolute; top: 18%; left: -8%; display: flex; align-items: center; transform: translateX(-50%); }
-.o-comet i { width: clamp(90px, 14vw, 180px); height: 18px; border-radius: 99px; background: linear-gradient(90deg, transparent, #8FC7FF66, #FFE9A8cc); margin-right: -12px; }
-.o-comet b { width: clamp(64px, 8vw, 96px); height: clamp(64px, 8vw, 96px); border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 40% 35%, #FFF6D6, #F5C04A 70%); color: #2B2140;
-  font: 900 clamp(30px, 4vw, 46px) "Nunito"; box-shadow: 0 0 30px #F5C04Aaa, 0 0 70px #F5C04A55; }
-.o-comet.caught b { background: radial-gradient(circle at 40% 35%, #E4FFE9, #5FD38A 70%); box-shadow: 0 0 40px #5FD38Aaa; } .o-comet.gone { opacity: .35; }
+.o-comet { position: absolute; top: 18%; left: -8%; display: flex; align-items: center; transform: translateX(-50%) rotate(-8deg); --h: clamp(64px, 8vw, 96px); }
+.o-ctail { flex: none; width: clamp(150px, 26vw, 300px); height: calc(var(--h) * .94); margin-right: calc(var(--h) * -.6); overflow: visible; filter: blur(.7px) drop-shadow(0 0 8px #9FCBFF66);
+  transform-origin: 100% 50%; animation: oc-tail .45s ease-in-out infinite alternate; }
+.o-comet b { position: relative; z-index: 1; width: var(--h); height: var(--h); border-radius: 50%; display: grid; place-items: center; transform: rotate(8deg); color: #2B2140; font: 900 clamp(30px, 4vw, 46px) "Nunito";
+  background: radial-gradient(circle at 42% 40%, #FFFFFF, #FFF1B8 38%, #FFD45E 68%, #F5B83A 100%); box-shadow: 0 0 0 6px #FFF1C440, 0 0 0 14px #FFE08A1f, 0 0 34px #FFE08A, 0 0 80px #F5C04A99; }
+@keyframes oc-tail { from { transform: scaleY(.88); opacity: .85; } to { transform: scaleY(1.05); opacity: 1; } }
+.o-comet.caught b { background: radial-gradient(circle at 42% 40%, #F2FFF4, #8EE6A8 55%, #5FD38A); box-shadow: 0 0 0 6px #5FD38A40, 0 0 40px #5FD38Aaa; } .o-comet.caught .o-ctail { opacity: .35; animation: none; } .o-comet.gone { opacity: .35; }
+.o-still .o-ctail, .o-calm .o-ctail { animation: none; } @media (prefers-reduced-motion: reduce) { .o-ctail { animation: none; } }
 .o-cbar { position: absolute; left: 10%; right: 10%; bottom: 6px; height: 8px; border-radius: 99px; background: #ffffff1a; overflow: hidden; } .o-cbar i { display: block; height: 100%; width: 100%; background: #8FC7FF; border-radius: 99px; }
 .o-cab { height: clamp(180px, calc(100dvh - 420px), 480px) !important; }
 .o-yn button { width: auto !important; height: auto !important; padding: 14px 26px; font-size: clamp(22px, 3vw, 30px) !important; }

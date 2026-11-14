@@ -972,6 +972,11 @@
 
   // ---- „Комета“: числото лети на кометата; детето го нарежда, преди кометата да излезе от небето. Скоростта се нагласява в играта:
   // хванато → следващата комета малко по-бърза; изпусната → по-бавна. Няма „живот“ и наказание – изпуснатата комета просто показва числото.
+  // опашката на кометата: широка при главата, стеснява се назад и се разсейва в синкав прах (числото е в главата)
+  const CTAIL = `<svg class="o-ctail" viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="ocg1"><stop offset="0" stop-color="#7FB2FF" stop-opacity="0"/><stop offset=".55" stop-color="#9FCBFF" stop-opacity=".45"/><stop offset="1" stop-color="#FFE9A8" stop-opacity=".95"/></linearGradient>
+    <linearGradient id="ocg2"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#FFFBEA"/></linearGradient></defs>
+    <path class="oc-t1" d="M300 4 C 210 22 110 48 0 60 C 110 72 210 98 300 116 Z" fill="url(#ocg1)"/><path class="oc-t2" d="M300 34 C 220 46 130 56 40 60 C 130 64 220 74 300 86 Z" fill="url(#ocg2)" opacity=".75"/>
+    <circle cx="150" cy="40" r="2.2" fill="#FFF4CC"/><circle cx="95" cy="74" r="1.6" fill="#FFF4CC" opacity=".7"/><circle cx="205" cy="88" r="1.8" fill="#FFF4CC" opacity=".8"/></svg>`;
   function cometFly(el, bar, ms) {   // движение с rAF (не зависи от CSS анимациите); при „без анимации“ кометата стои, а лентата намалява
     const still = document.documentElement.classList.contains("o-still"), t0 = performance.now(), g = gen; let stop = false;
     const step = (now) => { if (stop || g !== gen) return; const p = Math.min(1, (now - t0) / (ms * FAST));
@@ -983,7 +988,7 @@
     P.log = P.log || {}; P.log.comet = P.log.comet || [];
     for (let k = 0; k < c.rounds; k++) {
       pip(k); const v = randVal(t) || 1, w = $("#o-work"); w.classList.add("o-skyfield");
-      w.innerHTML = `<div class="o-csky"><div class="o-comet" id="o-comet"><i></i><b>${v}</b></div><div class="o-cbar"><i id="o-cbar"></i></div></div><div class="o-abhost o-cab" id="o-abh"></div>`;
+      w.innerHTML = `<div class="o-csky"><div class="o-comet" id="o-comet">${CTAIL}<b>${v}</b></div><div class="o-cbar"><i id="o-cbar"></i></div></div><div class="o-abhost o-cab" id="o-abh"></div>`;
       const ab = abacus($("#o-abh"), t.rods); ab.enable(false); if (FAST_ON) window.OBS_T = { ab, v };
       if (!k) await talk("Нареди числото, преди кометата да отлети!", "point"); else { say("Ето още една комета!", "point"); await wait(700); }
       ab.enable(true); const t0 = performance.now(), stopFly = cometFly($("#o-comet"), $("#o-cbar"), dur);
@@ -991,7 +996,7 @@
         ab.onChange(() => { if (ab.value() === v) setTimeout(() => end(true), 250 * FAST); }); wait(dur).then(() => end(ab.value() === v), () => {}); });
       stopFly(); ab.enable(false); const rt = Math.round(performance.now() - t0);
       P.log.comet.push({ t: Date.now(), topic: t.id, n: v, ms: Math.round(dur), caught, rtMs: caught ? rt : null }); if (P.log.comet.length > 300) P.log.comet.splice(0, P.log.comet.length - 300); save();
-      if (caught) { ok++; pipStar(k); $("#o-comet").classList.add("caught"); burst(); say(thank(v), "joy"); dur = Math.max(min, dur * .88); await afterSay(1400); }
+      if (caught) { ok++; pipStar(k); $("#o-comet").classList.add("caught"); burst(); say(k % 2 ? "Точно така!" : "Браво!", "joy"); dur = Math.max(min, dur * .88); await afterSay(700); }   // кратка похвала – следващата комета идва веднага (числото вече се вижда на кометата)
       else { $("#o-comet").classList.add("gone"); ab.set(v); say("Кометата отлетя. Ето числото.", "explain"); dur = Math.min(max, dur * 1.15); await afterSay(2400); }
     }
     return [ok, c.rounds];
