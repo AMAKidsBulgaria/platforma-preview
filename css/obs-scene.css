@@ -71,6 +71,7 @@
 .os-m1 b { font: 900 17px/1.15 "Nunito"; white-space: nowrap; }
 .os-m2 { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 8px; } .os-m2 small { font: 700 12px/1.25 "Nunito"; color: #F3DFB6c0; }
 .os-m2 .o-hdots { margin: 0; gap: 3px; } .os-m2 .o-hdots i { width: 7px; height: 7px; border-width: 1.5px; background: #ffffff14; border-color: #ffffff4d; }
+.os-m2 .o-hdots i.on { background: #4CC27A; border-color: #4CC27A; } .os-m2 .o-hdots i.now { background: #F5C04A; border-color: #F5C04A; }   /* изиграните кръгове – запълнени */
 .os-cta { flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 9px; background: linear-gradient(180deg, #FFD86A, #F2A82A); color: #2B1A05;
   font: 900 16px "Nunito"; box-shadow: 0 3px 0 #A8701A; }
 .os-cta i { font-style: normal; font-size: 13px; }

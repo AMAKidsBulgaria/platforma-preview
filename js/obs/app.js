@@ -74,6 +74,8 @@
       DB[id].hw = {}; HW.lessons.filter(L => L.n <= (d.hwTo || 0)).forEach(L => { DB[id].hw[L.id] = L.rounds.map((_, i) => i); }); save(); }   // демо: по-старите домашни са изиграни
     return DB[id]; };
   let P = null;
+  // демо профилът – отначало: прогресът и бележките „видяно“ (първи полет, представяне на стаята)
+  const resetDemo = (id) => { delete DB[id]; try { ["obs.journey.v1.", "obs.scene.v1."].forEach(k => localStorage.removeItem(k + id)); } catch (e) {} };
 
   // ---- домашно (както в ПУ и АЕ): учителят възлага занятие от своя профил (офис → „Пилот“ → „Домашни“, lesson_id MA01…MA21);
   // „Продължи“ води към следващия незавършен кръг на НАЙ-НОВОТО възложено незавършено домашно (детето остава с групата);
@@ -200,7 +202,7 @@
         return `<button class="o-pcard" data-id="${d.id}"><img src="assets/img/world/avatars/${p.av}.webp" alt=""><b>${p.name}</b><span>★ ${lit} звезди</span></button>`; }).join("")}</div>
       <p class="o-note">${TESTMODE ? "Тест с деца · " : "Прототип · демо профили · "}<button class="o-link" id="o-tmode">${TESTMODE ? "към демо профилите" : "тестови профили (Дете 1–6)"}</button>${TESTMODE ? "" : ' · <button class="o-link" id="o-reset">нулирай демото</button>'}</p>`;
     app.querySelectorAll(".o-pcard").forEach(b => b.onclick = () => { P = prof(b.dataset.id); applyMotion(); screenHome(); });
-    const rs = $("#o-reset"); if (rs) rs.onclick = () => { DEMO.forEach(d => delete DB[d.id]); save(); screenProfiles(); };
+    const rs = $("#o-reset"); if (rs) rs.onclick = () => { DEMO.forEach(d => resetDemo(d.id)); save(); screenProfiles(); };
     $("#o-tmode").onclick = () => { TESTMODE = !TESTMODE; try { localStorage.setItem("obs.test", TESTMODE ? "1" : "0"); } catch (e) {} screenProfiles(); };
   }
 
@@ -298,7 +300,7 @@
   function loadSceneLibs() {
     if (sceneLibs) return sceneLibs;
     const js = (src) => new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
-    if (!document.querySelector('link[href^="css/obs-scene.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-scene.css?v=14"; document.head.appendChild(l); }
+    if (!document.querySelector('link[href^="css/obs-scene.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-scene.css?v=15"; document.head.appendChild(l); }
     const all = (window.PIXI ? Promise.resolve() : js("js/vendor/pixi.min.js")).then(() => window.gsap ? 0 : js("js/vendor/gsap.min.js")).then(() => window.ObsScene ? 0 : js("js/obs/scene.js?v=35"))
       .then(() => { if (!window.ObsJourney) js("js/obs/journey.js?v=3").catch(() => {}); });   // полетът – по желание: без него мисията тръгва направо
     if (!document.querySelector('link[href^="css/obs-journey.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-journey.css?v=2"; document.head.appendChild(l); }
@@ -1277,6 +1279,8 @@
     // тест с деца: винаги изборът „Дете 1–6“, дори ако на устройството има влязло дете от платформата
     // изрично избран профил във връзката (?p=…) е с предимство пред влязлото дете от платформата
     if (CHILD && !TESTMODE && !(Q.get("p") && ALLP.some(x => x.id === Q.get("p")))) { DB[CHILD] = DB[CHILD] || { id: CHILD, name: "Аз", av: "a1", cur: 1, classAt: 1, b: {}, halo: {}, hw: {} }; P = DB[CHILD]; useGroup(P); fromServer(); applyMotion(); screenHome(); return; }
+    // ?reset=1 (за проверки на телефона): демо профилът започва отначало – и първият полет, и представянето на стаята; параметърът се маха от адреса
+    if (Q.get("reset") === "1" && DEMO.some(x => x.id === Q.get("p"))) { resetDemo(Q.get("p")); save(); try { const u = new URL(location.href); u.searchParams.delete("reset"); history.replaceState(null, "", u); } catch (e) {} }
     if (Q.get("p") && ALLP.some(x => x.id === Q.get("p"))) { P = prof(Q.get("p")); if (Q.get("class")) { P.classAt = +Q.get("class"); save(); } applyMotion(); Q.get("m") ? startMission(+Q.get("m")) : Q.get("map") ? screenMap() : screenHome(); } else screenProfiles();
   });
   // ======================= AI ТУТОР (етап 1, 12.11.2026) =======================
