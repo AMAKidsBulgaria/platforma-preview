@@ -199,7 +199,10 @@
         if (k === "abac") { if (!calm) await focus(RM.box.abac, .7, .85); c = await cover("os-dark", calm ? .2 : .25); unmount(); H.abacus(); return; }   // друга страница – покривалото остава
         if (k === "tele") { if (!calm) { const [lx, ly] = RM.lens; await focus([lx - 150, ly - 120, lx + 150, ly + 120], .55, .9); } c = await cover("os-lens", calm ? .2 : .3); unmount(); H.games(); reveal(c); return; }
         if (k === "map") { if (!calm) await focus(RM.box.map, .55, 1); c = await cover("os-unroll" + (calm ? "" : " anim"), calm ? .2 : .45); unmount(); H.map(); reveal(c); return; }
-        if (k === "mission") { T(gsap.to(ui.querySelector(".os-portal .os-win"), { boxShadow: "0 0 80px rgba(255,220,140,.9)", duration: .3 })); if (!calm) await focus(winBox, .6, 1.1); c = await cover("os-stars", calm ? .2 : .3); unmount(); H.mission(); reveal(c); return; }
+        if (k === "mission") { T(gsap.to(ui.querySelector(".os-portal .os-win"), { boxShadow: "0 0 80px rgba(255,220,140,.9)", duration: .3 }));
+          // тръгване: звездата-цел пламва, Зори се обръща към прозореца – после камерата влиза в него
+          const tg = ui.querySelector(".os-target"); if (tg) tg.classList.add("os-flash");
+          if (!calm) { if (zori) { const dir = zoriX() > RM.win.x ? -1 : 1; await new Promise(r => T(gsap.to(zori, { rotation: .09 * dir, _dy: -12, duration: .22, ease: "power2.out", onComplete: r }))); } await focus(winBox, .5, 1.1); } c = await cover("os-stars", calm ? .2 : .3); unmount(); H.mission(); reveal(c); return; }
       } catch (e) { if (c) c.remove(); throw e; } }
 
     // ---- живот на стаята ----
@@ -227,10 +230,21 @@
     Promise.all(loadRoom).then(() => zoriReady).then(() => { if (dead) return; layout(); requestAnimationFrame(() => !dead && layout());
       // размерите на табелите зависят от шрифта – след зареждането му подреждаме отново
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => !dead && layout()); later(() => layout(), 900);
-      if (!reduced()) { T(gsap.to(dark, { alpha: 0, duration: 1.1, ease: "power1.in", delay: .1 })); lamps.forEach((g, i) => T(gsap.to(g, { _on: 1, duration: .45, delay: .3 + i * .25, ease: "back.out(3)" })));
+      if (model.back) comeBack();
+      else if (!reduced()) { T(gsap.to(dark, { alpha: 0, duration: 1.1, ease: "power1.in", delay: .1 })); lamps.forEach((g, i) => T(gsap.to(g, { _on: 1, duration: .45, delay: .3 + i * .25, ease: "back.out(3)" })));
         T(gsap.from(ui.querySelectorAll(".os-portal, .os-mission"), { opacity: 0, y: 14, duration: .55, delay: .7, stagger: .12, ease: "back.out(1.6)" })); later(() => { if (!wave()) hop(.6); }, 1000); }
-      later(() => model.intro ? intro() : model.guide ? guide() : say(model.line), reduced() ? 200 : 1300);
+      later(() => model.intro ? intro() : model.guide ? guide() : say(model.line), model.back ? (model.back.ignite ? 2600 : 1100) : reduced() ? 200 : 1300);
       if (!reduced()) later(invite, model.intro ? 13000 : model.guide ? 6500 : 4000); }).catch(() => {});
+    // завръщане от мисията (RETURNING): камерата излиза от прозореца; ако системата е променила звездата – тя светва (само тогава)
+    function comeBack() { const calm = reduced(); dark.alpha = 0; lamps.forEach(g => { g._on = 1; });
+      if (!calm) { const w = RM.win, W = app.screen.width, H0 = app.screen.height, s0 = Math.min(W, H0) / (w.r * 2) * 1.1; busy = true;
+        world.scale.set(s0); world.position.set(W / 2 - w.x * s0, H0 / 2 - w.y * s0);
+        T(gsap.to(world.scale, { x: sc, y: sc, duration: .9, ease: "power2.out" })); T(gsap.to(world.position, { x: off.x, y: off.y, duration: .9, ease: "power2.out", onComplete: () => { busy = false; layout(); } }));
+        T(gsap.from(ui.querySelectorAll(".os-mission, .os-chip, .os-head, .os-older"), { opacity: 0, duration: .5, delay: .5 })); }
+      const ig = model.back.ignite, st = ig && ui.querySelector(`.os-win .o-star[data-n="${ig.n}"]`);
+      if (st) later(() => { if (dead) return; st.classList.add("os-ignite"); chime(); const ns = "http://www.w3.org/2000/svg", c = document.createElementNS(ns, "circle"); c.setAttribute("r", "30"); c.setAttribute("class", "os-iring"); st.insertBefore(c, st.firstChild);
+        if (!calm && !wave()) hop(.6); }, calm ? 200 : 1000);
+      else if (!calm) later(() => hop(.5), 900); }
     // първо влизане: Зори представя стаята; предметите проблясват, когато ги назовава (≈ по дължината на репликата, 10 с), накрая посочва звездата
     function intro() { const t = model.intro, dur = 10300, at = (w) => Math.max(0, t.indexOf(w)) / t.length * dur; say(t); if (model.voice) model.voice(t);
       later(() => ping("tele"), at("телескопа")); later(() => ping("abac"), at("абакуса")); const tg = ui.querySelector(".os-target");
@@ -258,7 +272,7 @@
     function unmount() { if (dead) return; dead = true; tweens.forEach(tw => tw.kill()); timers.forEach(clearTimeout); try { wv.pause(); wv.removeAttribute("src"); wv.load(); wv.remove(); } catch (e) {}
       window.removeEventListener("resize", onResize); window.removeEventListener("orientationchange", onResize); document.removeEventListener("visibilitychange", onVis); if (vv) vv.removeEventListener("resize", onResize);
       try { app.destroy(true, { children: true, texture: false, baseTexture: false }); } catch (e) {} }
-    return { ui, unmount, say, layout, activate, get alive() { return !dead; }, get blinking() { return !!(zori && zBlink && zori.texture === zBlink); }, get waving() { return waving; }, ping };   // blinking – за автоматичните проверки
+    return { ui, unmount, say, layout, activate, get alive() { return !dead; }, get blinking() { return !!(zori && zBlink && zori.texture === zBlink); }, get waving() { return waving; }, ping, get busy() { return busy; } };   // blinking – за автоматичните проверки
   }
   window.ObsScene = { mount };
 })();

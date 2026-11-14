@@ -119,3 +119,11 @@ html.o-calm .os-tring1, html.o-still .os-tring1 { opacity: .8; transform: scale(
 @media (max-width: 600px) { .os-bub { font-size: 14px; padding: 8px 11px; } }
 /* Зори маха (видео с прозрачен фон върху сцената; после – отново картинката) */
 .os-zwave { position: absolute; pointer-events: none; opacity: 0; transition: opacity .12s; } .os-zwave.on { opacity: 1; }
+/* завръщане: звездата светва, когато системата я е направила по-ярка (истински резултат) */
+.os-ignite .o-core { animation: os-ign 1.8s ease-out 1; transform-box: fill-box; transform-origin: center; }
+@keyframes os-ign { 0% { transform: scale(.5); filter: brightness(.5); } 35% { transform: scale(1.6); filter: brightness(2.2) drop-shadow(0 0 16px #FFE08A); } 100% { transform: scale(1); filter: drop-shadow(0 0 8px #FFE08A); } }
+.os-iring { fill: none; stroke: #FFE08A; stroke-width: 4; opacity: 0; transform-box: fill-box; transform-origin: center; animation: os-iring 1.6s ease-out 3; }
+@keyframes os-iring { 0% { transform: scale(.4); opacity: 1; } 100% { transform: scale(3); opacity: 0; } }
+html.o-calm .os-ignite .o-core, html.o-still .os-ignite .o-core, html.o-calm .os-iring, html.o-still .os-iring { animation: none !important; }
+html.o-calm .os-iring, html.o-still .os-iring { opacity: .9; }
+@media (prefers-reduced-motion: reduce) { .os-ignite .o-core, .os-iring { animation: none !important; } .os-iring { opacity: .9; } }

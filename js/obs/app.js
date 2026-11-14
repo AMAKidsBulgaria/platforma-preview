@@ -246,7 +246,7 @@
     $("#o-rgh").onclick = () => screenHome(); $("#o-rgm").onclick = () => { mapRegion = "orion"; screenMap(); };
   }
   function screenHome() {
-    sceneOff();
+    sceneOff(); const back = BACK; BACK = null; if (!back) JS = null;   // изход по средата / друг път към дома – снимката отпада, без празнуване
     if (!REVIEW && classAt() > AURORA_N[groupOf(P)] && !(P.seen || {}).orion) return screenRegion("orion");
     gen++; M = null; P.cur = classAt();
     const all = Object.keys(STAR).filter(k => regionOf(+k) === regionOf(classAt())), lit = all.filter(k => (P.b[k] || 0) >= 3).length, L = hwCurrent(), older = hwOlder();
@@ -255,7 +255,7 @@
     const dots = LL ? `<span class="o-hdots">${LL.rounds.map((_, k) => `<i class="${st.done.includes(k) ? "on" : L && k === st.next ? "now" : ""}"></i>`).join("")}</span>` : "";
     let sub = L ? `Занятие ${L.n} · ${L.rounds[st.next].label} · кръг ${st.next + 1} от ${L.rounds.length}` : "Домашното е готово – виж звездите";
     if (isTutor()) { const tp = TU.plan(tutorState()); sub = "Урок със Зори · " + (tp.current ? TU.BY[tp.current].name : "модулът е завършен"); }
-    if (SCENE_ON && !sceneFailed && groupOf(P) === "5") return sceneHome({ L, LL, st, older, line, sub, dots });
+    if (SCENE_ON && !sceneFailed && groupOf(P) === "5") return sceneHome({ L, LL, st, older, line, sub, dots, back });
     app.className = "o-scr o-hubscr";
     app.innerHTML = `<section class="o-hub">
       <header class="o-hhead"><a class="o-hh" href="index.html" aria-label="Към Моят свят">⌂</a><img class="o-hz" src="assets/img/zori/z_explain.png" alt=""><b>Ментална аритметика</b>${REVIEW ? '<span class="o-review">преглед</span>' : ""}<span class="o-sp"></span>
@@ -292,12 +292,14 @@
   function loadSceneLibs() {
     if (sceneLibs) return sceneLibs;
     const js = (src) => new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
-    if (!document.querySelector('link[href^="css/obs-scene.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-scene.css?v=12"; document.head.appendChild(l); }
-    const all = (window.PIXI ? Promise.resolve() : js("js/vendor/pixi.min.js")).then(() => window.gsap ? 0 : js("js/vendor/gsap.min.js")).then(() => window.ObsScene ? 0 : js("js/obs/scene.js?v=32"));
+    if (!document.querySelector('link[href^="css/obs-scene.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-scene.css?v=13"; document.head.appendChild(l); }
+    const all = (window.PIXI ? Promise.resolve() : js("js/vendor/pixi.min.js")).then(() => window.gsap ? 0 : js("js/vendor/gsap.min.js")).then(() => window.ObsScene ? 0 : js("js/obs/scene.js?v=34"))
+      .then(() => { if (!window.ObsJourney) js("js/obs/journey.js?v=3").catch(() => {}); });   // полетът – по желание: без него мисията тръгва направо
+    if (!document.querySelector('link[href^="css/obs-journey.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-journey.css?v=2"; document.head.appendChild(l); }
     return sceneLibs = Promise.race([all, new Promise((_, rej) => setTimeout(() => rej(new Error("scene: timeout")), 8000))]).catch(e => { sceneLibs = null; throw e; });
   }
   function sceneHome(h) {
-    const { L, LL, st, older, line, sub, dots } = h, g = gen, tutor = isTutor();
+    const { L, LL, st, older, line, sub, dots, back } = h, g = gen, tutor = isTutor(), ign = back && back.ignite;
     app.className = "o-scr o-scene"; app.innerHTML = `<div class="os-loading"></div>`;
     const fail = (e) => { if (g !== gen) return; sceneFailed = true; window.__sceneErr = String(e && e.stack || e); sceneOff(); console.warn("Обсерваторията (сцена) не тръгна – сегашният начален екран.", e); screenHome(); };
     loadSceneLibs().then(() => { if (g !== gen) return;
@@ -305,7 +307,8 @@
       const tp = tutor ? TU.plan(tutorState()) : null, round = L ? L.rounds[st.next] : null;
       // звездата на истинската мисия (занятието, което „Продължи“ стартира) – само подчертаване, яркостта е от P.b; небето се центрира около нея
       const star = !tutor && L && STAR[L.n] ? L.n : null, S0 = star ? STAR[star] : null;
-      const portal = { star, svg: skySVG({ vb: S0 ? `${S0.x - 230} ${S0.y - 230} 460 460` : regionOf(classAt()) === "orion" ? "1490 100 520 520" : "40 80 460 460" }),
+      const SV = ign && STAR[ign.n] ? STAR[ign.n] : S0;   // при завръщане със светнала звезда – небето е около нея
+      const portal = { star, svg: skySVG({ vb: SV ? `${SV.x - 230} ${SV.y - 230} 460 460` : regionOf(classAt()) === "orion" ? "1490 100 520 520" : "40 80 460 460" }),
         kicker: tutor ? "Урок със Зори" : LL ? `Занятие ${LL.n}` : "", title: tutor ? (tp.current ? TU.BY[tp.current].name : "Модулът е завършен") : LL ? LL.title.split(" · ")[0] : "Домашното е готово",
         sub: tutor ? "AI тутор" : round ? `${round.label} · кръг\u00a0${st.next + 1}\u00a0от\u00a0${L.rounds.length}` : "Виж звездите на картата",
         dots: tutor ? "" : dots, icon: L || tutor ? "▶" : "★", cta: L || tutor ? "Продължи" : "Звездна карта" };
@@ -314,10 +317,12 @@
       let seen = 0; try { const k = "obs.scene.v1." + P.id; seen = +(localStorage.getItem(k) || 0) + 1; localStorage.setItem(k, String(seen)); } catch (e) {}
       const leave = (fn) => () => { sceneOff(); fn(); };
       // първо влизане: Зори представя стаята (проблясват телескопът и абакусът); второ – посочва звездата на мисията
-      const intro = seen === 1 && !grown() ? "Виж! Това е нашата обсерватория! Докосни телескопа, за да откриеш игрите, или абакуса, за да упражняваш числата!" : null;
-      const guide = seen === 2 && star != null && !grown() ? "Виж! Тази звезда ни чака днес." : null;
-      SC = window.ObsScene.mount(app, { portal, line, guide, intro, voice: (t) => voice(t || line) }, {
-        mission: () => { SC = null; tutor ? runTutor() : L ? runHw(L, st.next) : screenMap(); },
+      const intro = !back && seen === 1 && !grown() ? "Виж! Това е нашата обсерватория! Докосни телескопа, за да откриеш игрите, или абакуса, за да упражняваш числата!" : null;
+      const guide = !back && seen === 2 && star != null && !grown() ? "Виж! Тази звезда ни чака днес." : null;
+      // мисията: полетът до истинската звезда-цел, после съществуващият урок (снимката на звездата – точно преди старта)
+      const tgt = { n: star, kicker: portal.kicker, title: portal.title, sub: portal.sub };
+      SC = window.ObsScene.mount(app, { portal, line, guide, intro, back: back || null, voice: (t) => voice(t || line) }, {
+        mission: () => { SC = null; if (tutor) journey({ ...tgt, n: tutorStar(tp) }, () => { JS = snapAll(); runTutor(); }); else if (L) journey(tgt, () => { JS = starSnap(L.n); runHw(L, st.next); }); else screenMap(); },
         abacus: () => { SC = null; location.href = "abacus-app.html?p=" + encodeURIComponent(P.id); },
         games: () => { SC = null; screenGames(); }, map: () => { SC = null; screenMap(); } });
       SC.ui.insertAdjacentHTML("afterbegin", `<header class="os-head"><a class="o-hh" href="index.html" aria-label="Към Моят свят">⌂</a>
@@ -326,10 +331,35 @@
           <button class="o-me" id="o-me" type="button"><img src="assets/img/world/avatars/${P.av}.webp" alt=""><b>${P.name}</b><span>смени</span></button></header>
         ${older.length ? `<button class="os-older" id="o-older" type="button">Доиграй: занятие ${older[older.length - 1].n}</button>` : ""}`);
       $("#o-me").onclick = leave(screenAvatar); holdBtn($("#o-teach"), leave(screenTeacher));
-      const ob = $("#o-older"); if (ob) ob.onclick = leave(() => { const O = older[older.length - 1]; runHw(O, hwState(O).next); });
+      const ob = $("#o-older"); if (ob) ob.onclick = leave(() => { const O = older[older.length - 1], nx = hwState(O).next;
+        journey({ n: O.n, kicker: `Занятие ${O.n}`, title: O.title.split(" · ")[0], sub: `${O.rounds[nx].label} · кръг\u00a0${nx + 1}\u00a0от\u00a0${O.rounds.length}` }, () => { JS = starSnap(O.n); runHw(O, nx); }); });
       SC.layout(); if (!guide && !intro) voice(line);
     }).catch(fail);
   }
+
+  // ======================= ПОЛЕТЪТ ДО ЗВЕЗДАТА (Фаза 2, 14.11.2026) =======================
+  // js/obs/journey.js е само изглед: получава истинската цел и launch(); тук не се променя нищо в прогреса.
+  // Снимката на звездата (яркост, ореол, проверка след време) се прави точно преди старта на урока и се сравнява само в backHome() –
+  // а backHome() се вика единствено от екраните с резултат (кръгът / домашното / урокът са приключили и записани). Изход по средата → screenHome без сравнение.
+  let JS = null, BACK = null;
+  const starSnap = (n) => ({ n, b: P.b[n] || 0, halo: !!(P.halo || {})[n], rev: !!(P.rev || {})[n] });
+  const snapAll = () => ({ tutor: true, b: { ...P.b }, halo: { ...(P.halo || {}) }, rev: { ...(P.rev || {}) } });
+  const tutorStar = (tp) => { const c = tp && tp.current; return c ? SKILL_LESSON[c] || SKILL_LESSON["P" + c.slice(1)] || null : null; };
+  function journey(t, launch) {
+    const J = window.ObsJourney, R = document.documentElement, calm = R.classList.contains("o-calm") || R.classList.contains("o-still") || matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!J || FAST_ON) return launch();   // резервен път: без полета – урокът направо
+    let first = false; try { const k = "obs.journey.v1." + P.id; first = !localStorage.getItem(k); localStorage.setItem(k, "1"); } catch (e) {}
+    try { window.__journey = J.start({ target: t, first, reduced: calm, say: sayP, launch }); } catch (e) { console.warn("Полетът не тръгна – урокът направо.", e); launch(); }
+  }
+  // репликата като обещание: изпълнява се, когато гласът свърши (или ако няма/не тръгне звук) – автоматичното продължение не я прекъсва
+  function sayP(text) { return new Promise(res => { const was = cur; voice(text); const a = cur !== was ? cur : null; let fin = false; const end = () => { if (!fin) { fin = true; res(); } };
+    if (!a) return void setTimeout(end, 1000); a.addEventListener("ended", end); a.addEventListener("error", end);
+    setTimeout(() => { if (a.paused && !a.ended && a.currentTime === 0) end(); }, 1200); setTimeout(end, 5000); }); }
+  // завръщане след истински резултат: светва само звезда, която съществуващата система вече е променила (P.b / P.halo / P.rev)
+  function backHome() { const s = JS; JS = null; let ig = null; const H = P.halo || {}, V = P.rev || {};
+    if (s && s.tutor) { const n = Object.keys(STAR).map(Number).find(k => (P.b[k] || 0) > (s.b[k] || 0) || (H[k] && !s.halo[k]) || (V[k] && !s.rev[k])); if (n) ig = { n, from: s.b[n] || 0, to: P.b[n] || 0 }; }
+    else if (s) { const b = P.b[s.n] || 0; if (b > s.b || (H[s.n] && !s.halo) || (V[s.n] && !s.rev)) ig = { n: s.n, from: s.b, to: b }; }
+    BACK = { ignite: ig }; screenHome(); }
 
   // ---- кръг от домашното: играта с точните настройки от учителя; без „Настройки“ ----
   async function runHw(L, i) {
@@ -350,7 +380,7 @@
       <div class="o-hdots big">${L.rounds.map((_, k) => `<i class="${st.done.includes(k) ? "on" : k === nx ? "now" : ""}"></i>`).join("")}</div>
       <div class="o-sbar"><button class="o-sec" id="o-rh">Към обсерваторията</button><button class="o-go" id="o-next">▶ Продължи<small>${L.rounds[nx].label} · кръг ${nx + 1} от ${L.rounds.length}</small></button></div></div>`;
     say("Браво! Още един кръг е готов.", "joy"); setTimeout(burst, 300);
-    $("#o-rh").onclick = screenHome; $("#o-next").onclick = () => runHw(L, nx);
+    $("#o-rh").onclick = backHome; $("#o-next").onclick = () => runHw(L, nx);   // следващият кръг – без полет
   }
   // домашното е готово → яркостта на звездата (занятие N = звезда N) от резултатите: Звездни сигнали ≥ 80%, абакус ≥ 75%, без телескоп ≥ 67% – по една точка
   function hwComplete(L) {
@@ -367,7 +397,7 @@
       <div class="o-stars">${"★".repeat(after)}${"☆".repeat(3 - after)}</div>
       <div class="o-sbar"><button class="o-sec" id="o-tomap">Към картата</button><button class="o-go" id="o-home">Към обсерваторията</button></div></div>`;
     say(after > before ? "Небето е подредено за тази вечер. Звездата стана по-ярка!" : "Браво! Домашното е готово.", "joy"); burst();
-    $("#o-tomap").onclick = () => screenMap(n); $("#o-home").onclick = screenHome;
+    $("#o-tomap").onclick = () => screenMap(n); $("#o-home").onclick = backHome;
   }
   // ---- „За учителя“ (демо, задръж): кое занятие е проведено, докъде е домашното; таблицата за отключване на игрите (за ревизия) ----
   function screenTeacher() {
@@ -1541,7 +1571,7 @@
       ${rep.learned.length ? `<div class="o-newrec">★ Научи: ${rep.learned.join(" · ")}</div>` : ""}${rep.check ? `<div class="o-newrec">Звездна проверка: ${rep.check.good} от 10${rep.check.star ? " ★" : ""}</div>` : ""}
       <div class="o-sbar"><button class="o-sec" id="o-tomap">Към картата</button><button class="o-go" id="o-home">Към обсерваторията</button></div></div>`;
     say(rep.learned.length ? "Браво! Днес научи нещо ново!" : "Браво! Утре продължаваме.", "joy"); burst();
-    $("#o-tomap").onclick = () => screenMap(); $("#o-home").onclick = () => screenHome();
+    $("#o-tomap").onclick = () => screenMap(); $("#o-home").onclick = backHome;
   }
   // отчетът за родителя (последните уроци + седмицата)
   function screenParentReport() {
