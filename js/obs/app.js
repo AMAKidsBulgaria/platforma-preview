@@ -122,7 +122,7 @@
 
   // ---- глас: Зори (zr_*), иначе разказвачът (Калина) ----
   let AUDZ = {}, AUD = {}, cur = null;
-  fetch("config/abacus-audio-zori.json?v=14").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
+  fetch("config/abacus-audio-zori.json?v=15").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
   fetch("config/abacus-audio.json?v=4").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
   // „пораснал“ режим (7+, 11.11.2026): Зори е спътник – кратки реплики, само текст (гласът по избор: P.zv); рекорди и значки
   const grown = () => !!P && groupOf(P) !== "5";
@@ -223,6 +223,7 @@
       s += `<g class="o-mist"><ellipse cx="${cx}" cy="${cy}" rx="${(Math.max(...xs) - Math.min(...xs)) / 2 + 60}" ry="${(Math.max(...ys) - Math.min(...ys)) / 2 + 50}" fill="url(#mist)" filter="url(#blur)"/>${o.labels ? `<text x="${cx}" y="${cy + 12}" text-anchor="middle">?</text>` : ""}</g>`; });
     Object.entries(LINES).forEach(([c, ls]) => { if (!visibleC(c)) return; ls.forEach(([a, z]) => { const A = STAR[a], Z = STAR[z], lit = (b[a] || 0) >= 3 && (b[z] || 0) >= 1;
       s += `<line x1="${A.x}" y1="${A.y}" x2="${Z.x}" y2="${Z.y}" class="o-ln${lit ? " lit" : ""}"/>`; }); });
+    DF().forEach(id => { if (visibleC(id) && figShown(id)) s += window.ObsDiscover.figure(id, { hit: !!o.labels }); });   // Г1: фигурата на съзвездието – зад звездите
     Object.values(STAR).forEach(st => { if (!visibleC(st.c)) return;
       const lv = b[st.n] || 0, isCur = st.n === P.cur, avail = st.n <= P.cur, r = (st.big ? 13 : 9) + lv * 2.5;
       // състояния: отключена (тъмна) · упражнява се (лв 1–2) · усвоена (лв 3) · проверена след време (двоен пръстен); ✦ – и наум
@@ -254,7 +255,7 @@
     $("#o-rgh").onclick = () => screenHome(); $("#o-rgm").onclick = () => { mapRegion = "orion"; screenMap(); };
   }
   function screenHome() {
-    sceneOff(); const back = BACK; BACK = null; if (!back || back.kind === "exit") JS = null;   // изход по средата / друг път към дома – снимката отпада, без празнуване
+    sceneOff(); const back = BACK; BACK = null; if (!back || back.kind === "exit") JS = null; discMigrate();   // изход по средата / друг път към дома – снимката отпада, без празнуване
     if (!REVIEW && classAt() > AURORA_N[groupOf(P)] && !(P.seen || {}).orion) return screenRegion("orion");
     gen++; M = null; P.cur = classAt();
     const all = Object.keys(STAR).filter(k => regionOf(+k) === regionOf(classAt())), lit = all.filter(k => (P.b[k] || 0) >= 3).length, L = hwCurrent(), older = hwOlder();
@@ -281,7 +282,7 @@
         <button class="o-hcard" id="o-map"><img src="assets/img/obs/card_map.webp" alt=""><span class="o-htx"><b>Звездна карта</b><small>Моите открития</small><small class="o-hcount">★ ${lit} от ${all.length} звезди светят</small></span><i>›</i></button>
         <button class="o-hcard" id="o-games"><img src="assets/img/obs/card_games.webp" alt=""><span class="o-htx"><b>Игри</b><small>Тренирай уменията си</small></span><i>›</i></button>
       </div></section>`;
-    voice(line);
+    const dp0 = discPending(); if (dp0) { const g0 = gen; setTimeout(() => { if (g0 === gen) discover(dp0); }, 1200); } else voice(line);
     if (grown()) { const zb = document.createElement("button"); zb.className = "o-zv"; zb.setAttribute("aria-pressed", P.zv ? "true" : "false"); zb.textContent = P.zv ? "🔊 Зори" : "🔈 Зори";
       zb.title = "Гласът на Зори"; zb.onclick = () => { P.zv = !P.zv; save(); zb.textContent = P.zv ? "🔊 Зори" : "🔈 Зори"; zb.setAttribute("aria-pressed", P.zv ? "true" : "false"); if (P.zv) voice(tone(line)); };
       $(".o-hstage").appendChild(zb); }
@@ -301,7 +302,7 @@
     if (sceneLibs) return sceneLibs;
     const js = (src) => new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
     if (!document.querySelector('link[href^="css/obs-scene.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-scene.css?v=15"; document.head.appendChild(l); }
-    const all = (window.PIXI ? Promise.resolve() : js("js/vendor/pixi.min.js")).then(() => window.gsap ? 0 : js("js/vendor/gsap.min.js")).then(() => window.ObsScene ? 0 : js("js/obs/scene.js?v=36"))
+    const all = (window.PIXI ? Promise.resolve() : js("js/vendor/pixi.min.js")).then(() => window.gsap ? 0 : js("js/vendor/gsap.min.js")).then(() => window.ObsScene ? 0 : js("js/obs/scene.js?v=37"))
       .then(() => { if (!window.ObsJourney) js("js/obs/journey.js?v=4").catch(() => {}); });   // полетът – по желание: без него мисията тръгва направо
     if (!document.querySelector('link[href^="css/obs-journey.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-journey.css?v=4"; document.head.appendChild(l); }
     return sceneLibs = Promise.race([all, new Promise((_, rej) => setTimeout(() => rej(new Error("scene: timeout")), 8000))]).catch(e => { sceneLibs = null; throw e; });
@@ -309,7 +310,8 @@
   function sceneHome(h) {
     const { L, LL, st, older, sub, dots, back } = h, g = gen, tutor = isTutor(), ign = back && back.ignite;
     // завръщане (Фаза 3): репликата казва само истината – светнала звезда / готово домашно (без „по-ярка“) / записан кръг; прекъснат урок → обичайната реплика
-    const line = ign ? "Виж! Звездата ни светна по-ярко!" : back && back.kind === "hw" ? "Браво! Домашното е готово." : back && back.kind === "round" ? "Кръгът е запазен. Ще продължим, когато си готов." : back && back.kind === "exit" ? "" : h.line;
+    const dp = discPending();
+    const line = dp ? "" : ign ? "Виж! Звездата ни светна по-ярко!" : back && back.kind === "hw" ? "Браво! Домашното е готово." : back && back.kind === "round" ? "Кръгът е запазен. Ще продължим, когато си готов." : back && back.kind === "exit" ? "" : h.line;
     app.className = "o-scr o-scene"; app.innerHTML = `<div class="os-loading"></div>`;
     const fail = (e) => { if (g !== gen) return; sceneFailed = true; window.__sceneErr = String(e && e.stack || e); sceneOff(); console.warn("Обсерваторията (сцена) не тръгна – сегашният начален екран.", e); screenHome(); };
     loadSceneLibs().then(() => { if (g !== gen) return;
@@ -327,11 +329,11 @@
       let seen = 0; try { const k = "obs.scene.v1." + P.id; seen = +(localStorage.getItem(k) || 0) + 1; localStorage.setItem(k, String(seen)); } catch (e) {}
       const leave = (fn) => () => { sceneOff(); fn(); };
       // първо влизане: Зори представя стаята (проблясват телескопът и абакусът); второ – посочва звездата на мисията
-      const intro = !back && seen === 1 && !grown() ? "Виж! Това е нашата обсерватория! Докосни телескопа, за да откриеш игрите, или абакуса, за да упражняваш числата!" : null;
-      const guide = !back && seen === 2 && star != null && !grown() ? "Виж! Тази звезда ни чака днес." : null;
+      const intro = !dp && !back && seen === 1 && !grown() ? "Виж! Това е нашата обсерватория! Докосни телескопа, за да откриеш игрите, или абакуса, за да упражняваш числата!" : null;
+      const guide = !dp && !back && seen === 2 && star != null && !grown() ? "Виж! Тази звезда ни чака днес." : null;
       // мисията: полетът до истинската звезда-цел, после съществуващият урок (снимката на звездата – точно преди старта)
       const tgt = { n: star, kicker: portal.kicker, title: portal.title, sub: portal.sub };
-      SC = window.ObsScene.mount(app, { portal, line, guide, intro, back: back || null, voice: (t) => voice(t || line) }, {
+      SC = window.ObsScene.mount(app, { portal, line, guide, intro, back: back || null, quiet: !!dp, voice: (t) => voice(t || line) }, {
         mission: () => { SC = null; if (tutor) journey({ ...tgt, n: tutorStar(tp) }, () => { JS = snapAll(); runTutor(); }); else if (L) journey(tgt, () => { JS = starSnap(L.n); runHw(L, st.next); }); else screenMap(); },
         abacus: () => { SC = null; location.href = "abacus-app.html?p=" + encodeURIComponent(P.id); },
         games: () => { SC = null; screenGames(); }, map: () => { SC = null; screenMap(); },
@@ -344,7 +346,8 @@
       $("#o-me").onclick = leave(screenAvatar); holdBtn($("#o-teach"), leave(screenTeacher));
       const ob = $("#o-older"); if (ob) ob.onclick = leave(() => { const O = older[older.length - 1], nx = hwState(O).next;
         journey({ n: O.n, kicker: `Занятие ${O.n}`, title: O.title.split(" · ")[0], sub: `${O.rounds[nx].label} · кръг\u00a0${nx + 1}\u00a0от\u00a0${O.rounds.length}` }, () => { JS = starSnap(O.n); runHw(O, nx); }); });
-      SC.layout(); if (!guide && !intro && !back) voice(line);
+      SC.layout(); if (!guide && !intro && !back && !dp) voice(line);
+      if (dp) { const g0 = gen; setTimeout(() => { if (g0 === gen) discover(dp); }, ign ? 3000 : back ? 1500 : 1700); }
     }).catch(fail);
   }
 
@@ -353,6 +356,36 @@
   // Снимката на звездата (яркост, ореол, проверка след време) се прави точно преди старта на урока и се сравнява само в backHome() –
   // а backHome() се вика единствено от екраните с резултат (кръгът / домашното / урокът са приключили и записани). Изход по средата → screenHome без сравнение.
   let JS = null, BACK = null;
+  // ======================= Г1 „НЕБЕТО ОЖИВЯВА“ (14.11.2026) =======================
+  // Фигурата на съзвездието идва само от записаната пълна яркост (P.b ≥ 3 за всички звезди). P.disc[id]: „pending“ – завършено при истински урок, откриването
+  // още не е видяно (оцелява при прекъсване); „seen“ – видяно (финалният кадър или „Пропусни“). Стар напредък без отметка → тихо „seen“ (без церемония).
+  const DF = () => window.ObsDiscover && groupOf(P) === "5" ? Object.keys(window.ObsDiscover.FIG) : [];
+  const cStars = (id) => (CONST.find(c => c.id === id) || { stars: [] }).stars;
+  const cDone = (id, b) => { const st = cStars(id); return st.length > 0 && st.every(x => (b[x[0]] || 0) >= 3); };
+  const discOf = () => (P.disc = P.disc || {});
+  function discMark(before) { DF().forEach(id => { if (!discOf()[id] && !cDone(id, before || {}) && cDone(id, P.b)) { P.disc[id] = "pending"; save(); } }); }
+  function discMigrate() { let ch = false; DF().forEach(id => { if (cDone(id, P.b) && !discOf()[id]) { P.disc[id] = "seen"; ch = true; } }); if (ch) save(); }
+  const discPending = () => DF().find(id => (P.disc || {})[id] === "pending" && cDone(id, P.b)) || null;
+  const figShown = (id) => cDone(id, P.b) && (P.disc || {})[id] !== "pending";
+  const DLINE = { A: "Уау! Открихме съзвездието Първи светлини! Виж как засияха всички звезди!" };
+  let DRUN = false;
+  function discover(id) {
+    if (DRUN || !window.ObsDiscover || (P.disc || {})[id] !== "pending") return; DRUN = true; const g = gen, c = CONST.find(x => x.id === id), R = document.documentElement;
+    const calm = R.classList.contains("o-calm") || R.classList.contains("o-still") || matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.ObsDiscover.play({ id, stars: c.stars.map(x => [x[0], x[2], x[3], x[4]]), lines: LINES[id], line: DLINE[id], reduced: calm,
+      say: (t) => Promise.all([sayP(t), new Promise(r => setTimeout(r, 2600))]), stop: () => { try { if (cur) cur.pause(); } catch (e) {} },
+      sound: Q.get("voice") !== "0" && !(grown() && !P.zv),
+      onSeen: () => { P.disc[id] = "seen"; save(); },
+      onDone: () => { DRUN = false; if (g === gen) document.querySelectorAll(".os-win .o-sky, .o-proj .o-sky").forEach(w => window.ObsDiscover.addTo(w, id)); } });
+  }
+  // картата: докосване на завършено съзвездие – разглеждане на фигурата и името (без нова награда)
+  function ccard(id) { const c = CONST.find(x => x.id === id), F = window.ObsDiscover.FIG[id], el = $("#o-card"); if (!c || !F || !el) return;
+    app.querySelectorAll(".o-fig.hl").forEach(f => f.classList.remove("hl")); app.querySelectorAll(`.o-mapwrap .o-fig[data-c="${id}"]`).forEach(f => f.classList.add("hl"));
+    el.classList.add("o-ccard");
+    el.innerHTML = `<button class="o-x" aria-label="Затвори">✕</button><div class="o-ct">${F.name}</div><div class="o-cs">Съзвездие · всички ${c.stars.length} звезди светят с пълна яркост</div>
+      <svg class="o-cfig" viewBox="${F.vb}" aria-hidden="true">${LINES[id].map(([a, z]) => `<line class="cln" x1="${STAR[a].x}" y1="${STAR[a].y}" x2="${STAR[z].x}" y2="${STAR[z].y}"/>`).join("")}${window.ObsDiscover.figure(id)}${c.stars.map(x => `<circle class="cst" cx="${x[2]}" cy="${x[3]}" r="${x[4] ? 8 : 6}"/>`).join("")}</svg>
+      <ol>${c.stars.map(x => `<li><b>${x[1]}</b></li>`).join("")}</ol>`;
+    el.hidden = false; el.querySelector(".o-x").onclick = () => { el.hidden = true; el.classList.remove("o-ccard"); app.querySelectorAll(".o-fig.hl").forEach(f => f.classList.remove("hl")); }; }
   const starSnap = (n) => ({ n, b: P.b[n] || 0, halo: !!(P.halo || {})[n], rev: !!(P.rev || {})[n] });
   const snapAll = () => ({ tutor: true, b: { ...P.b }, halo: { ...(P.halo || {}) }, rev: { ...(P.rev || {}) } });
   const tutorStar = (tp) => { const c = tp && tp.current; return c ? SKILL_LESSON[c] || SKILL_LESSON["P" + c.slice(1)] || null : null; };
@@ -369,6 +402,7 @@
   // завръщане след истински резултат: светва само звезда, която съществуващата система вече е променила (P.b / P.halo / P.rev)
   const one = (f) => { let done = false; return () => { if (!done) { done = true; f(); } }; };   // двойно докосване → едно завръщане
   function backHome(kind) { const s = JS; JS = null; let ig = null; const H = P.halo || {}, V = P.rev || {};
+    if (s && s.tutor) discMark(s.b);
     if (s && s.tutor) { const n = Object.keys(STAR).map(Number).find(k => (P.b[k] || 0) > (s.b[k] || 0) || (H[k] && !s.halo[k]) || (V[k] && !s.rev[k])); if (n) ig = { n, from: s.b[n] || 0, to: P.b[n] || 0 }; }
     else if (s) { const b = P.b[s.n] || 0; if (b > s.b || (H[s.n] && !s.halo) || (V[s.n] && !s.rev)) ig = { n: s.n, from: s.b, to: b }; }
     // kind: "round" (кръгът е записан, домашното не е готово) | "hw" (домашното е готово) | "tutor"; без снимка (повторно) – без ефекти
@@ -405,6 +439,7 @@
     const met = (fl != null && fl >= .8 ? 1 : 0) + (ab != null && ab >= .75 ? 1 : 0) + (im != null && im >= .67 ? 1 : 0);
     const hb = !!(P.halo || {})[L.n];   // (само за изгледа: имаше ли ореол преди)
     const n = L.n, before = P.b[n] || 0, after = Math.max(before, met); P.b[n] = after; if (im != null && im >= .67 && after >= 3) P.halo[n] = 1; save();
+    discMark({ ...P.b, [n]: before });   // Г1: ако това домашно завърши съзвездие – откриването чака завръщането в обсерваторията
     const pc = (x) => x == null ? "—" : Math.round(x * 100) + "%";
     // Фаза 3: точността (проценти) и яркостта на звездата (0–3, ореол) – отделно; текстът казва само това, което системата вече е записала
     const up = after > before, haloNew = !hb && !!P.halo[n], N = L.rounds.length;
@@ -523,10 +558,12 @@
     app.querySelectorAll(".o-regs button").forEach(b => b.onclick = () => { mapRegion = b.dataset.r; screenMap(); });
     $("#o-back").onclick = () => { mapRegion = null; screenHome(); }; $("#o-mg").onclick = screenGames; const mc = $("#o-mc"); if (mc) mc.onclick = () => { const L = hwCurrent(); runHw(L, hwState(L).next); };
     app.querySelectorAll(".o-star").forEach(g => g.addEventListener("click", () => card(+g.dataset.n)));
+    app.querySelectorAll(".o-fighit").forEach(h => h.addEventListener("click", () => ccard(h.dataset.c)));
     if (focus) card(focus);
     app.querySelectorAll(".o-star").forEach(g => g.addEventListener("click", () => { app.querySelectorAll(".o-lab.tmp").forEach(t => t.remove()); }));
   }
   function card(n) {
+    app.querySelectorAll(".o-fig.hl").forEach(f => f.classList.remove("hl")); if ($("#o-card")) $("#o-card").classList.remove("o-ccard");
     const st = STAR[n], lv = P.b[n] || 0, el = $("#o-card"), locked = n > classAt() || (groupOf(P) === "5" && st.c === "C" && (P.b[17] || 0) < 3);
     const bars = ["Точност", "Начин", "Сам/а"].map((t, i) => `<div class="o-bar"><span>${t}</span><b class="${i < lv ? "on" : ""}"></b></div>`).join("");
     el.innerHTML = `<button class="o-x" aria-label="Затвори">✕</button><div class="o-ct">${st.title}</div>
@@ -1619,6 +1656,6 @@
       </div>`;
     $("#o-back").onclick = screenTeacher;
   }
-  window.OBS = { _scene: () => SC, _intro: (n) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return digitIntro(n); }, _trace: (n) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return traceDigit(n); }, _tchain: (id, mind) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return tChain(TU.BY[id], { count: 5, speed: 2 }, mind); }, runTutor, screenParentReport, screenRegion, _track: (k, r, s) => track(k, r, s), _const: (v, r, d) => constSVG(v, r, d), _hw: () => HW, runHw, screenTeacher, _hwComplete: (n) => hwComplete(HW.lessons.find(x => x.n === n)), _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
+  window.OBS = { _scene: () => SC, _discover: (id) => discover(id), _discPending: () => discPending(), _intro: (n) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return digitIntro(n); }, _trace: (n) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return traceDigit(n); }, _tchain: (id, mind) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return tChain(TU.BY[id], { count: 5, speed: 2 }, mind); }, runTutor, screenParentReport, screenRegion, _track: (k, r, s) => track(k, r, s), _const: (v, r, d) => constSVG(v, r, d), _hw: () => HW, runHw, screenTeacher, _hwComplete: (n) => hwComplete(HW.lessons.find(x => x.n === n)), _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
     testFinish: (n, r) => { M = Object.assign({ n, ex: [], par: PAR[n], max: MAXN[n], flash: [5, 6], ab: [3, 4], meth: [3, 4], im: [2, 3], help: 0 }, r || {}); return finish(); } };   // само за проверки
 })();

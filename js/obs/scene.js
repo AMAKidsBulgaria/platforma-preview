@@ -240,7 +240,7 @@
         T(gsap.from(ui.querySelectorAll(".os-portal, .os-mission"), { opacity: 0, y: 14, duration: .55, delay: .7, stagger: .12, ease: "back.out(1.6)" })); later(() => { if (!wave()) hop(.6); }, 1000); }
       later(() => { if (model.intro) intro(); else if (model.guide) guide(); else { say(model.line); if (model.back && model.voice) model.voice(model.line); } }, model.back ? (model.back.ignite ? 2600 : 1100) : reduced() ? 200 : 1300);
       // след завръщане (доброволно или с резултат) – без допълнителни покани; ореолът и искриците около предметите остават
-      if (!reduced() && !model.back) later(invite, model.intro ? 13000 : model.guide ? 6500 : 4000); }).catch(() => {});
+      if (!reduced() && !model.back && !model.quiet) later(invite, model.intro ? 13000 : model.guide ? 6500 : 4000); }).catch(() => {});
     // завръщане от мисията (RETURNING): камерата излиза от прозореца; ако системата е променила звездата – тя светва (само тогава)
     function comeBack() { const calm = reduced(); dark.alpha = 0; lamps.forEach(g => { g._on = 1; });
       if (!calm) { const w = RM.win, W = app.screen.width, H0 = app.screen.height, s0 = Math.min(W, H0) / (w.r * 2) * 1.1; busy = true;

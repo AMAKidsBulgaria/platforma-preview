@@ -1,0 +1,84 @@
+/* Г1 „Небето оживява“: постоянната фигура на съзвездието (карта, прозорец) и сцената на откриването (js/obs/discover.js) */
+
+/* ---- постоянната фигура: деликатна, зад звездите, не ги конкурира ---- */
+.o-fig { pointer-events: none; transition: opacity .35s; }
+.o-fig .f-beam, .o-fig .f-glow, .o-fig .f-under, .o-fig .f-chain { display: none; }
+.o-fig .f-out { fill: none; stroke: #F5C04A; stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; opacity: .42; transition: opacity .35s, stroke-width .35s; }
+.o-fig .f-glass { fill: #F5C04A; opacity: .05; } .o-fig .f-metal { fill: #F5C04A; opacity: .1; }
+.o-fig .f-bars { fill: none; stroke: #F5C04A; stroke-width: 1.4; opacity: .2; }
+.o-fig .f-fl1 { fill: #FFE7A0; opacity: .35; } .o-fig .f-fl2 { fill: #FFB43A; opacity: .3; }
+/* докоснато (картичката е отворена) – временно подчертано */
+.o-fig.hl .f-out { opacity: .95; stroke-width: 3.2; } .o-fig.hl .f-glass { opacity: .16; } .o-fig.hl .f-metal { opacity: .3; } .o-fig.hl .f-fl1, .o-fig.hl .f-fl2 { opacity: .9; } .o-fig.hl .f-bars { opacity: .45; }
+.o-fighit { fill: transparent; cursor: pointer; pointer-events: all; }
+.o-fig.o-fig-new { animation: of-in 1.2s ease-out both; } @keyframes of-in { from { opacity: 0; } }
+/* картичката на съзвездието (картата) */
+.o-ccard .o-cfig { width: 100%; max-height: 190px; display: block; margin: 4px 0 6px; }
+.o-ccard .o-cfig .o-fig .f-out { opacity: .95; stroke-width: 3.4; } .o-ccard .o-cfig .o-fig .f-glass { opacity: .18; } .o-ccard .o-cfig .o-fig .f-metal { opacity: .32; } .o-ccard .o-cfig .o-fig .f-fl1, .o-ccard .o-cfig .o-fig .f-fl2 { opacity: .95; } .o-ccard .o-cfig .o-fig .f-bars { opacity: .45; }
+.o-ccard .o-cfig .cst { fill: #FFE9A8; } .o-ccard .o-cfig .cln { stroke: #FFE6A0; stroke-width: 2; opacity: .45; }
+.o-ccard ol { margin: 6px 0 0; padding-left: 22px; columns: 2; column-gap: 18px; font: 700 13.5px/1.45 "Nunito"; color: var(--muted); }
+.o-ccard ol b { color: var(--ink); font-weight: 800; }
+
+/* ---- сцената на откриването ---- */
+.od { position: fixed; inset: 0; z-index: 46; display: grid; grid-template-rows: minmax(0, 1fr) auto auto; justify-items: center; align-items: center; gap: 6px;
+  padding: max(56px, calc(env(safe-area-inset-top) + 48px)) 16px max(14px, env(safe-area-inset-bottom));
+  background: radial-gradient(circle at 50% 40%, #28327E, #0D1030 62%, #070A22); color: #FFF4DA; font-family: "Nunito", system-ui, sans-serif; opacity: 0; transition: opacity .45s ease-out; }
+.od.on { opacity: 1; } .od.out { opacity: 0; pointer-events: none; }
+.od-skip { position: absolute; top: calc(max(10px, env(safe-area-inset-top)) + 6px); right: max(14px, env(safe-area-inset-right)); padding: 9px 16px; border-radius: 99px; cursor: pointer;
+  background: rgba(10, 12, 40, .6); color: #FFF1D6; border: 1.5px solid rgba(255, 216, 106, .55); font: 800 15px "Nunito"; touch-action: manipulation; z-index: 2; }
+.od-skip:focus-visible { outline: 3px solid #FFD86A; outline-offset: 3px; }
+.od-sky { width: min(100%, 760px); height: 100%; max-height: 100%; min-height: 0; transform: scale(.84); transition: transform .8s cubic-bezier(.2, .8, .2, 1); overflow: visible; }
+.od.on .od-sky { transform: none; }
+.od-field circle { fill: #fff; }
+/* линиите – една по една */
+.od-ln { stroke: #FFE6A0; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; filter: drop-shadow(0 0 4px #F5C04A); transition: stroke-dashoffset .13s linear var(--d), opacity .6s; }
+.od.on .od-ln { stroke-dashoffset: 0; }
+.od.figon .od-ln { opacity: .22; }
+/* звездите припламват, когато линията стигне до тях */
+.od-sg { fill: url(#odg); opacity: .55; } .od-sc { fill: #FFE9A8; }
+.od-st { transform-box: fill-box; }
+.od.on .od-st .od-sc, .od.on .od-st .od-sg { animation: od-pop .5s ease-out var(--d) both; transform-box: fill-box; transform-origin: center; }
+@keyframes od-pop { 0% { transform: scale(1); } 40% { transform: scale(1.7); filter: brightness(1.5); } 100% { transform: scale(1); } }
+/* фенерът: контурът се изрисува, после стъклото и пламъкът светват */
+.od-fig .f-beam { fill: url(#odbeam); opacity: 0; transition: opacity .6s .4s; }
+.od-fig .f-glow { fill: url(#odf); opacity: 0; transition: opacity .6s .3s; }
+.od-fig .f-chain { fill: none; stroke: #F5C04A; stroke-width: 2; stroke-dasharray: 3 5; opacity: 0; transition: opacity .4s .5s; }
+.od-fig .f-under { fill: none; stroke: #5A3A10; stroke-width: 9; opacity: 0; transition: opacity .4s; }
+.od-fig .f-glass { fill: url(#odglass); opacity: 0; transition: opacity .5s .35s; }
+.od-fig .f-metal { fill: #C9963A; opacity: 0; transition: opacity .5s .35s; }
+.od-fig .f-bars { fill: none; stroke: #F5C04A; stroke-width: 1.8; opacity: 0; transition: opacity .5s .4s; }
+.od-fig .f-out { fill: none; stroke: #F5C04A; stroke-width: 4.5; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; filter: drop-shadow(0 0 6px #F5C04Aaa); transition: stroke-dashoffset .7s ease-out; }
+.od-fig .f-flame { opacity: 0; transform-box: fill-box; transform-origin: 50% 100%; transition: opacity .4s .45s; }
+.od-fig .f-fl1 { fill: #FFF3C4; stroke: #FFB43A; stroke-width: 2; } .od-fig .f-fl2 { fill: #FFB43A; }
+.od.figon .od-fig .f-out { stroke-dashoffset: 0; }
+.od.figon .od-fig .f-beam, .od.figon .od-fig .f-glow, .od.figon .od-fig .f-flame, .od.figon .od-fig .f-glass, .od.figon .od-fig .f-metal { opacity: 1; }
+.od.figon .od-fig .f-chain { opacity: .85; } .od.figon .od-fig .f-bars { opacity: .7; } .od.figon .od-fig .f-under { opacity: .55; }
+.od.figon .od-fig .f-flame { animation: od-flick 1.1s ease-in-out .9s infinite alternate; }
+@keyframes od-flick { from { transform: scale(1, 1); } to { transform: scale(.94, 1.06); } }
+/* докосване на фенера: люлее се на веригата, пламъкът припламва */
+.od-fig.swing { animation: od-swing .9s ease-in-out 1; transform-box: view-box; }
+.od-fig.swing .f-glow { animation: od-flare .9s ease-out 1; }
+@keyframes od-swing { 20% { transform: rotate(5deg); } 50% { transform: rotate(-4deg); } 75% { transform: rotate(2deg); } 100% { transform: none; } }
+@keyframes od-flare { 25% { opacity: 1; transform: scale(1.12); } }
+.od-hit { fill: transparent; cursor: pointer; pointer-events: all; }
+/* името и Зори */
+.od-name { display: grid; justify-items: center; opacity: 0; transform: translateY(8px); transition: opacity .5s, transform .5s; text-align: center; }
+.od-name em { font: 800 13px "Nunito"; font-style: normal; letter-spacing: .1em; text-transform: uppercase; color: #E9BC62; }
+.od-name b { font: 900 clamp(26px, 6vw, 40px)/1.1 "Nunito"; color: #FFE08A; text-shadow: 0 0 18px #F5C04A88; }
+.od.named .od-name { opacity: 1; transform: none; }
+.od-z { display: flex; align-items: flex-end; gap: 8px; width: min(100%, 560px); min-height: 96px; opacity: 0; transition: opacity .4s; }
+.od-z img { height: clamp(80px, 13dvh, 120px); flex: none; filter: drop-shadow(0 6px 10px #0009); }
+.od-bub { background: #FFF7E6; color: #2B1A05; font: 800 16px/1.3 "Nunito"; border-radius: 18px; padding: 10px 14px; box-shadow: 0 8px 22px #0009; margin-bottom: 18px; }
+.od.talk .od-z { opacity: 1; }
+/* крайният кадър (и „Пропусни“): всичко на мястото си, без преходи */
+.od.od-final .od-ln { stroke-dashoffset: 0; opacity: .22; transition: none; }
+.od.od-final .od-st .od-sc, .od.od-final .od-st .od-sg { animation: none; }
+.od.od-final .od-fig .f-out { stroke-dashoffset: 0; transition: none; }
+.od.od-final .od-fig .f-beam, .od.od-final .od-fig .f-glow, .od.od-final .od-fig .f-glass, .od.od-final .od-fig .f-metal, .od.od-final .od-fig .f-flame { opacity: 1; transition: none; }
+.od.od-final .od-name { opacity: 1; transform: none; transition: none; }
+/* легнал телефон: Зори до името */
+@media (max-height: 520px) and (orientation: landscape) { .od { grid-template-rows: minmax(0, 1fr) auto; grid-template-columns: 1fr auto; padding-top: 48px; } .od-sky { grid-row: 1 / 3; }
+  .od-name { grid-column: 2; align-self: end; } .od-z { grid-column: 2; width: 260px; min-height: 0; } .od-z img { height: 80px; } .od-bub { font-size: 15px; } }
+/* намалено движение: без изрисуване, приближаване, люлеене и трептене – всичко се появява плавно */
+.od.od-red .od-sky { transform: none; transition: none; }
+.od.od-red .od-fig .f-flame, .od.od-red .od-fig.swing { animation: none; }
+@media (prefers-reduced-motion: reduce) { .od-sky, .od-ln, .od-fig .f-out { transition: none !important; } .od-st .od-sc, .od-st .od-sg, .od-fig .f-flame, .od-fig.swing, .od-fig.swing .f-glow, .o-fig.o-fig-new { animation: none !important; } }
