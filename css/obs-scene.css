@@ -43,6 +43,9 @@
 @keyframes os-gring { 0%, 100% { opacity: .7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.08); } }
 .os-tring { stroke: #FFD86A; stroke-width: 2; }
 .os-target .o-core { filter: drop-shadow(0 0 5px rgba(255, 216, 106, .7)); }
+/* йерархия в прозореца: вече запалените звезди – по-тихо сияние; текущата – топъл, по-ярък пръстен (прогресът не се променя) */
+.os-win .o-star:not(.os-target) > circle[fill] { opacity: .14; } .os-win .o-star:not(.os-target) .o-core { opacity: .8; }
+.os-win .os-target { filter: drop-shadow(0 0 10px rgba(255, 210, 110, .75)); } .os-win .os-target .o-ring { stroke-width: 4; stroke: #FFE08A; }
 .os-target.os-flash .os-tring { animation-duration: 1.1s; stroke-width: 4; }
 
 /* табелата на мисията: компактна месингова табела на перваза; йерархия – звезда (най-ярка) → име на мисията → „Продължи“ */

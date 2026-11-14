@@ -9,8 +9,8 @@
 (function () {
   const ROOMS = {
     // хоризонталната стая е разширена (14.11): целият прозорец се вижда; occ – нарисуваното пред стъклото (стойката с картата), там небето не се рисува
-    land: { url: "assets/img/journey/room_land.webp?v=3", w: 1536, h: 1024, win: { x: 779, y: 327, r: 246 }, zori: { x: 1148, y: 957, h: 255 },
-      box: { tele: [187, 281, 477, 880], map: [437, 445, 630, 760], abac: [1084, 562, 1233, 664] }, lens: [464, 315], occ: [[437, 468, 632, 700]],
+    land: { url: "assets/img/journey/room_land.webp?v=3", w: 1536, h: 1024, win: { x: 779, y: 327, r: 246 }, zori: { x: 1322, y: 957, h: 255 },
+      box: { tele: [187, 281, 477, 880], map: [437, 445, 630, 760], abac: [1084, 562, 1233, 664] }, lens: [464, 315], occ: [[[437, 468], [616, 472], [628, 610], [633, 700], [437, 700]]],
       tag: { tele: [338, 672], map: [532, 700], abac: [1159, 667] },
       lamps: [[179, 583, .94], [1352, 232, .85], [1060, 563, .68]] },
     port: { url: "assets/img/journey/room_port.webp?v=2", w: 1024, h: 1536, win: { x: 510, y: 325, r: 238 }, zori: { x: 500, y: 1430, h: 380 },
@@ -74,7 +74,7 @@
     let lowF = false;   // резервно: широк, но нисък екран, където табелата под прозореца би застъпила Зори – табелата долу, Зори вдясно
     function layout(force) { if (dead) return; lowF = !!force; const W = app.screen.width, H0 = app.screen.height, k = H0 > W * 1.05 ? "port" : "land"; RM = ROOMS[k];
       const cover = Math.max(W / RM.w, H0 / RM.h), contain = Math.min(W / RM.w, H0 / RM.h); sc = Math.min(cover, contain * 1.25);
-      const vh = H0 / sc; off = { x: (W - RM.w * sc) / 2, y: k === "port" ? H0 - RM.h * sc : vh >= RM.h ? (H0 - RM.h * sc) / 2 : -Math.min(RM.h - vh, Math.max(0, RM.win.y - RM.win.r * 1.15)) * sc };   // режем отдолу – прозорецът остава цял
+      const vh = H0 / sc; off = { x: (W - RM.w * sc) / 2, y: k === "port" ? H0 - RM.h * sc : vh >= RM.h ? (H0 - RM.h * sc) / 2 : -Math.min(RM.h - vh, Math.max(0, RM.win.y - RM.win.r * 1.04)) * sc };   // режем отдолу – прозорецът остава цял
       if (!busy) { world.scale.set(sc); world.position.set(off.x, off.y); }
       if (k !== key && TEX[RM.url]) { key = k; room.texture = TEX[RM.url]; }
       RM.lamps.forEach(([x, y, s], i) => { lamps[i].position.set(x, y); lamps[i]._k = s; });
@@ -106,8 +106,8 @@
       const w = RM.win, c = toScreen(w.x, w.y), d = w.r * 2 * sc, po = $(".os-portal");   // точно по стъклото на нарисувания прозорец
       Object.assign(po.style, { left: c.x - d / 2 + "px", top: c.y - d / 2 + "px", width: d + "px", height: d + "px" });
       // нарисуваното пред стъклото (стойката с картата) остава отпред: изрязваме го от небето
-      const occ = (RM.occ || []).map(([x0, y0, x1, y1]) => { const p = toScreen(x0, y0), q = toScreen(x1, y1); return [p.x - c.x + d / 2, p.y - c.y + d / 2, q.x - p.x, q.y - p.y]; });
-      $(".os-win").style.clipPath = occ.length ? `path(evenodd, "M0 ${d / 2} a${d / 2} ${d / 2} 0 1 0 ${d} 0 a${d / 2} ${d / 2} 0 1 0 ${-d} 0 Z ${occ.map(([x, y, ow, oh]) => `M${x} ${y} h${ow} v${oh} h${-ow} Z`).join(" ")}")` : "";
+      const occ = (RM.occ || []).map(pts => pts.map(([x, y]) => { const p = toScreen(x, y); return `${(p.x - c.x + d / 2).toFixed(1)} ${(p.y - c.y + d / 2).toFixed(1)}`; }));
+      $(".os-win").style.clipPath = occ.length ? `path(evenodd, "M0 ${d / 2} a${d / 2} ${d / 2} 0 1 0 ${d} 0 a${d / 2} ${d / 2} 0 1 0 ${-d} 0 Z ${occ.map(pp => "M" + pp.join(" L") + " Z").join(" ")}")` : "";
       const m = $(".os-mission"), narrow = H0 > W, low = !narrow && (H0 < 520 || lowF); m.classList.toggle("dock", !low); m.classList.toggle("wide", !narrow && !low); m.classList.toggle("tight", low);
       // табелата – долу в средата (както на телефона); на хоризонтален екран Зори стои вдясно, пред сандъка
       if (!low) Object.assign(m.style, { left: "50%", top: "auto", bottom: "max(14px, env(safe-area-inset-bottom))", maxWidth: "" });
