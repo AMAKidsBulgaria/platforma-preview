@@ -170,3 +170,14 @@ html.o-calm .o-kpv.pop, html.o-calm .o-kpk button.ok, html.o-still .o-kpk button
 @media (max-width: 760px) and (orientation: portrait) { .o-game .o-trw.o-digi:not([data-rods="1"]) .o-trl { justify-content: center; align-items: center; } .o-game .o-trw.o-digi:not([data-rods="1"]) .o-trn { flex: none; text-align: center; } .o-game .o-mwork.o-trw.o-digi:not([data-rods="1"]) { justify-content: center; } }
 .o-game .o-trq:empty { display: none; }
 @media (max-width: 760px) and (orientation: portrait) { .o-game .o-trw.o-digi:not([data-rods="1"]) .o-trl { flex-wrap: wrap; column-gap: 12px; row-gap: 0; } .o-game .o-trw.o-digi:not([data-rods="1"]) .o-trq { width: auto; } }
+
+/* краят на домашното: кратък момент на радост преди отчета */
+.ol-cheer { position: absolute; inset: 0; z-index: 5; display: grid; place-items: center; align-content: center; gap: 12px; padding: 16px; text-align: center; cursor: pointer;
+  background: radial-gradient(circle at 50% 42%, rgba(52, 62, 150, .92), rgba(11, 14, 42, .96) 70%); transition: opacity .45s ease-out; }
+.ol-cheer .o-zori { height: min(36dvh, 280px); filter: drop-shadow(0 12px 20px #0009); }
+.ol-cheer b { font: 900 clamp(28px, 7vw, 46px)/1.15 "Nunito"; color: #FFE08A; text-shadow: 0 0 22px #F5C04A88; text-wrap: balance; animation: ol-cheer-in .5s cubic-bezier(.3, 1.5, .5, 1) .15s both; }
+@keyframes ol-cheer-in { from { opacity: 0; transform: scale(.7); } }
+.ol-cheer.gone { opacity: 0; pointer-events: none; }
+.o-end .ol-hw { transition: opacity .5s .1s, transform .5s .1s; }
+.o-end.ol-pre .ol-hw { opacity: 0; transform: translateY(18px); }
+@media (prefers-reduced-motion: reduce) { .ol-cheer b { animation: none; } .o-end .ol-hw { transition: opacity .3s; transform: none !important; } }

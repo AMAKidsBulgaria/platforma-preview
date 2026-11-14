@@ -36,7 +36,10 @@
     function cleanup() { dead = true; tweens.forEach(tw => tw && tw.kill && tw.kill()); timers.forEach(clearTimeout); if (tl) tl.kill();
       document.removeEventListener("keydown", onKey, true); window.removeEventListener("resize", onResize);
       try { if (app) app.destroy(true, { children: true, texture: false, baseTexture: false }); } catch (e) {} app = null; }
-    function go() { if (launched) return; launched = true; set(S.LEARNING); cleanup();
+    // към урока: първо меко златисто сияние от звездата, после урокът (без рязко прекъсване)
+    let leaving = false;
+    function go() { if (launched) return; if (!reduced && app && !leaving) { leaving = true; root.classList.add("oj-glow"); T(gsap.to(fx, { leave: 1, duration: .43, ease: "power1.in" })); later(go2, 430); return; } go2(); }
+    function go2() { if (launched) return; launched = true; set(S.LEARNING); cleanup();
       try { o.launch(); } catch (e) { console.warn("Полетът: стартът на мисията", e); }
       root.classList.add("oj-out"); setTimeout(() => root.remove(), 420); }
     function cancel() { if (launched || dead) return; set(S.CANCELLED); cleanup(); root.remove(); }
@@ -44,6 +47,8 @@
 
     // ---- пристигане: табелата с истинската мисия, „Пристигнахме!“; първи полет / намалено движение – бутон „Започни“, иначе – след репликата ----
     function arrive() { if (dead || state === S.ARRIVING) return; set(S.ARRIVING); $(".oj-skip").hidden = true;
+      // светлинен импулс при достигане на звездата: звездата припламва, вълна и кратко сияние; после лъчите бавно се въртят, докато чакаме
+      if (!reduced) { fx.pulse = 0; T(gsap.to(fx, { pulse: 1, duration: .8, ease: "power2.out" })); fx.wave = 1; root.classList.add("oj-hit"); later(() => root.classList.remove("oj-hit"), 800); }
       const box = $(".oj-arrive"); box.hidden = false; requestAnimationFrame(() => box.classList.add("on"));
       const bub = $(".oj-bub"); bub.textContent = ARRIVE_LINE; bub.hidden = false; requestAnimationFrame(() => bub.classList.add("on"));
       if (!reduced && relayout) relayout();
@@ -64,7 +69,7 @@
 
     // ---- полетът: PixiJS ----
     let W = 0, H = 0, cx = 0, cy = 0, R = 0;
-    const fx = { p: 0, spd: .15, boost: 0 }, stars = [], dust = [], trail = [];
+    const fx = { p: 0, spd: .15, boost: 0, pulse: 1, wave: 0, leave: 0, rays: 0 }, stars = [], dust = [], trail = [];
     try {
       app = new PIXI.Application({ resizeTo: $(".oj-stage"), backgroundColor: 0x070A22, antialias: true, resolution: Math.min(2, window.devicePixelRatio || 1), autoDensity: true });
       $(".oj-stage").appendChild(app.view);
@@ -73,6 +78,9 @@
       const field = new PIXI.Container(); app.stage.addChild(field);
       for (let i = 0; i < 180; i++) { const s = new PIXI.Sprite(radial()); s.anchor.set(.5); s.blendMode = PIXI.BLEND_MODES.ADD; s.tint = i % 9 ? 0xFFFFFF : 0xFFE3A0; s._a = Math.random() * 6.283; s._z = .05 + Math.random(); s._l = i % 3; field.addChild(s); stars.push(s); }
       for (let i = 0; i < 36; i++) { const d = new PIXI.Sprite(radial()); d.anchor.set(.5); d.blendMode = PIXI.BLEND_MODES.ADD; d.tint = 0xFFC95A; d._x = Math.random(); d._y = Math.random(); d._v = .02 + Math.random() * .05; d._p = Math.random() * 6; field.addChild(d); dust.push(d); }
+      // лъчи зад звездата (при пристигане): 12 тесни триъгълника, бавно въртене
+      const rays = new PIXI.Graphics(); for (let k = 0; k < 12; k++) { const a = k * Math.PI / 6; rays.beginFill(0xFFE29A, 1).moveTo(0, 0).lineTo(Math.cos(a - .07), Math.sin(a - .07)).lineTo(Math.cos(a + .07), Math.sin(a + .07)).closePath().endFill(); }
+      rays.alpha = 0; rays.blendMode = PIXI.BLEND_MODES.ADD; app.stage.addChild(rays);
       const halo = new PIXI.Sprite(radial()); halo.anchor.set(.5); halo.tint = 0xFFD27A; halo.blendMode = PIXI.BLEND_MODES.ADD; app.stage.addChild(halo);
       const target = new PIXI.Sprite(starShape()); target.anchor.set(.5); app.stage.addChild(target);
       const wave = new PIXI.Graphics(); app.stage.addChild(wave); let waveT = 1;
@@ -83,7 +91,7 @@
       if (o.first) { target.eventMode = "static"; target.cursor = "pointer"; target.on("pointertap", () => { if (state !== S.FLYING) return; waveT = 0; if (tl) tl.timeScale(3.2); }); }
       function resize() { if (!app) return; W = app.screen.width; H = app.screen.height; const port = H > W, low = !port && H < 520; cx = W / 2; cy = H * (port ? .34 : low ? .27 : .40); R = Math.min(W, H) * (port ? .2 : low ? .13 : .17);
         if (bg.texture && bg.texture.width > 1) { const k = Math.max(W / bg.texture.width, H / bg.texture.height) * 1.12; bg.scale.set(k); bg.position.set(cx, H / 2); }
-        placeDom(); }
+        root.style.setProperty("--sx", cx + "px"); root.style.setProperty("--sy", cy + "px"); placeDom(); }
       // Зори и балонът не застъпват табелата и бутона: на изправен екран Зори е под тях (по-малък, ако трябва)
       function zoriBox() { const port = H > W; let zh = Math.min(H * (port ? .30 : .42), 330), zx = port ? W * .22 : W * .2, zcy = port ? H * .74 : H * .66;
         const box = $(".oj-arrive"); if (port && !box.hidden) { const bb = box.getBoundingClientRect().bottom + 12, room = H - bb - 16; if (room < zh) zh = Math.max(110, room); zcy = Math.max(zcy, bb + zh / 2); }
@@ -116,9 +124,12 @@
           if (x < -40 || x > W + 40 || y < -40 || y > H + 40) s._z = 1; });
         dust.forEach(d => { d._y -= d._v * dt * .01 * (1 + warp * 3); if (d._y < -0.05) { d._y = 1.05; d._x = Math.random(); } d.position.set(d._x * W + Math.sin(now * .7 + d._p) * 12, d._y * H); d.width = d.height = 10 + 6 * Math.sin(now * 2 + d._p); d.alpha = .25 + .2 * Math.sin(now * 1.6 + d._p); });
         // звездата-цел: расте от далечна точка до близо (при пристигане – меко пулсира)
-        const e = p * p * (3 - 2 * p), size = R * 2 * (.08 + .92 * e) * (arr ? 1 + .04 * Math.sin(now * 3) : 1);
+        const punch = fx.pulse < 1 ? Math.sin(fx.pulse * Math.PI) * .22 : 0;
+        const e = p * p * (3 - 2 * p), size = R * 2 * (.08 + .92 * e) * (arr ? 1 + .04 * Math.sin(now * 3) + punch : 1);
         target.position.set(cx, cy); target.width = target.height = size; target.rotation = Math.sin(now * .6) * .06;
-        halo.position.set(cx, cy); halo.width = halo.height = size * 2.6; halo.alpha = .45 + .15 * Math.sin(now * 2.4);
+        halo.position.set(cx, cy); halo.width = halo.height = size * (2.6 + fx.leave * 4 + punch * 3); halo.alpha = Math.min(1, .45 + .15 * Math.sin(now * 2.4) + punch * 2 + fx.leave * .5);
+        if (arr) { rays.alpha = Math.min(.07 + punch * .25, rays.alpha + dt * .004); rays.rotation += dt * .0012; rays.position.set(cx, cy); rays.scale.set(size * (1.15 + punch * 1.5)); }
+        if (fx.wave) { fx.wave = 0; waveT = 0; }
         if (waveT < 1) { waveT = Math.min(1, waveT + dt / 40); wave.clear().lineStyle(6 * (1 - waveT) + 1, 0xFFE08A, 1 - waveT).drawCircle(cx, cy, size * (.6 + waveT * 1.6)); } else wave.clear();
         if (zori.texture && zori.texture.height > 1) { const bob = Math.sin(now * 2.2) * 8; zori.position.set(zori._x + (arr ? 0 : Math.sin(now * 1.3) * 6), zori._y + bob); zori.rotation = -.08 + Math.sin(now * 1.1) * .04;
           // златиста следа зад Зори

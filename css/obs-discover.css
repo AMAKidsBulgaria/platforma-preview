@@ -30,9 +30,9 @@
 .od.on .od-sky { transform: none; }
 .od-field circle { fill: #fff; }
 /* линиите – една по една */
-.od-ln { stroke: #FFE6A0; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; filter: drop-shadow(0 0 4px #F5C04A); transition: stroke-dashoffset .13s linear var(--d), opacity .6s; }
+.od-ln { stroke: #FFF1C8; stroke-width: 2.4; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; filter: drop-shadow(0 0 4px #F5C04A); transition: stroke-dashoffset .12s linear var(--d), opacity .6s; }
 .od.on .od-ln { stroke-dashoffset: 0; }
-.od.figon .od-ln { opacity: .22; }
+.od.figon .od-ln { opacity: .45; } .od-ln.od-tr { stroke-dasharray: .04 .06; stroke-dashoffset: 0; opacity: 0; transition: opacity .3s var(--d); } .od.on .od-ln.od-tr { opacity: .7; } .od.figon .od-ln.od-tr { opacity: .45; }
 /* звездите припламват, когато линията стигне до тях */
 .od-sg { fill: url(#odg); opacity: .55; } .od-sc { fill: #FFE9A8; }
 .od-st { transform-box: fill-box; }
@@ -46,7 +46,7 @@
 .od-fig .f-glass { fill: url(#odglass); opacity: 0; transition: opacity .5s .35s; }
 .od-fig .f-metal { fill: #C9963A; opacity: 0; transition: opacity .5s .35s; }
 .od-fig .f-bars { fill: none; stroke: #F5C04A; stroke-width: 1.8; opacity: 0; transition: opacity .5s .4s; }
-.od-fig .f-out { fill: none; stroke: #F5C04A; stroke-width: 4.5; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; filter: drop-shadow(0 0 6px #F5C04Aaa); transition: stroke-dashoffset .7s ease-out; }
+.od-fig .f-out { fill: none; stroke: #F5C04A; stroke-width: 4.5; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; filter: drop-shadow(0 0 6px #F5C04Aaa); transition: stroke-dashoffset .75s ease-in-out; }
 .od-fig .f-flame { opacity: 0; transform-box: fill-box; transform-origin: 50% 100%; transition: opacity .4s .45s; }
 .od-fig .f-fl1 { fill: #FFF3C4; stroke: #FFB43A; stroke-width: 2; } .od-fig .f-fl2 { fill: #FFB43A; }
 .od.figon .od-fig .f-out { stroke-dashoffset: 0; }
@@ -70,7 +70,7 @@
 .od-bub { background: #FFF7E6; color: #2B1A05; font: 800 16px/1.3 "Nunito"; border-radius: 18px; padding: 10px 14px; box-shadow: 0 8px 22px #0009; margin-bottom: 18px; }
 .od.talk .od-z { opacity: 1; }
 /* крайният кадър (и „Пропусни“): всичко на мястото си, без преходи */
-.od.od-final .od-ln { stroke-dashoffset: 0; opacity: .22; transition: none; }
+.od.od-final .od-ln { stroke-dashoffset: 0; opacity: .45; transition: none; } .od.od-final .od-ln.od-tr { stroke-dashoffset: 0; }
 .od.od-final .od-st .od-sc, .od.od-final .od-st .od-sg { animation: none; }
 .od.od-final .od-fig .f-out { stroke-dashoffset: 0; transition: none; }
 .od.od-final .od-fig .f-beam, .od.od-final .od-fig .f-glow, .od.od-final .od-fig .f-glass, .od.od-final .od-fig .f-metal, .od.od-final .od-fig .f-flame { opacity: 1; transition: none; }

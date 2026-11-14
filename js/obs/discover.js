@@ -22,7 +22,9 @@
       <circle class="f-out" pathLength="1" cx="325" cy="150" r="7"/>
       <g class="f-flame"><path class="f-fl1" d="M325 270 C 348 298 348 330 325 344 C 302 330 302 298 325 270 Z"/><path class="f-fl2" d="M325 293 C 335 307 335 324 325 332 C 315 324 315 307 325 293 Z"/></g>`;
   }
-  const FIG = { A: { name: "Първи светлини", vb: "60 112 420 356", pivot: [325, 150], svg: lantern, hit: GLOBE } };
+  // skel – „скелетът“ на фигурата между истинските звезди (като на звездна карта); trail – светлината към 1 и 2; flame – звездата-пламък
+  const FIG = { A: { name: "Първи светлини", vb: "60 112 420 356", pivot: [325, 150], svg: lantern, hit: GLOBE,
+    skel: [[8, 7], [7, 6], [6, 5], [5, 3], [3, 8], [9, 8]], trail: [[3, 2], [2, 1]], flame: 4 } };
   const NS = "http://www.w3.org/2000/svg";
   // постоянната фигура (на картата и в прозореца): деликатна, зад звездите; hit – зона за докосване (само на картата)
   function figure(id, opts) { const F = FIG[id]; if (!F) return ""; const o = opts || {};
@@ -33,7 +35,7 @@
 
   // ---- сцената на откриването ----
   // o: { id, stars: [[n, x, y, big]], lines: [[a, b]], line, say(text) → Promise, stop(), sound, reduced, onSeen(), onDone() }
-  const SEG = 130, T0 = 400;
+  const T0 = 380, STEP = 90, EDGE = 110;   // звездите светват една по една; после нишките между тях – по една
   let running = null;
   function play(o) {
     if (running) return running;   // никога две сцени наведнъж
@@ -41,8 +43,9 @@
     const red = !!o.reduced, timers = [], later = (fn, ms) => timers.push(setTimeout(() => { if (!dead) fn(); }, ms));
     let dead = false, seen = false, closing = false;
     const P = {}; o.stars.forEach(s => { P[s[0]] = s; });
-    const order = o.stars.map(s => s[0]), at = {}; order.forEach((n, i) => { at[n] = T0 + Math.max(0, i - 1) * SEG + (i ? SEG : 0); });
-    const linesEnd = T0 + o.lines.length * SEG, figAt = linesEnd + 60, finalAt = red ? 250 : figAt + 800, sayAt = red ? 350 : linesEnd + 320;   // последната нота заглъхва за ≈ 0,3 с – гласът тръгва след нея
+    const order = o.stars.map(s => s[0]), at = {}; order.forEach((n, i) => { at[n] = T0 + i * STEP; });
+    const starsEnd = T0 + order.length * STEP, edges = F.skel.concat(F.trail || []), sk0 = starsEnd + 200, skEnd = sk0 + F.skel.length * EDGE;
+    const figAt = skEnd + (F.trail ? F.trail.length * EDGE : 0) + 80, finalAt = red ? 250 : figAt + 650, sayAt = red ? 350 : figAt + 150;   // Зори – след като фигурата е разпозната (нотите отдавна са заглъхнали)
     const star = (s) => { const r = s[3] ? 15 : 10; return `<g class="od-st" style="--d:${at[s[0]]}ms" transform="translate(${s[1]} ${s[2]})"><circle class="od-sg" r="${r * 2.6}"/>
       <path class="od-sc" d="M0 ${-r}L${r * .3} ${-r * .3}L${r} 0L${r * .3} ${r * .3}L0 ${r}L${-r * .3} ${r * .3}L${-r} 0L${-r * .3} ${-r * .3}Z"/></g>`; };
     const field = Array.from({ length: 70 }, (_, i) => `<circle cx="${60 + (i * 137) % 420}" cy="${112 + (i * 89) % 356}" r="${(i % 3) * .5 + .5}" opacity="${.2 + (i % 4) * .12}"/>`).join("");
@@ -55,7 +58,7 @@
         <linearGradient id="odbeam" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE29A" stop-opacity=".4"/><stop offset="1" stop-color="#FFE29A" stop-opacity="0"/></linearGradient></defs>
         <g class="od-field">${field}</g>
         <g class="od-fig" style="transform-origin:${F.pivot[0]}px ${F.pivot[1]}px">${F.svg()}</g>
-        ${o.lines.map(([a, b], i) => `<line class="od-ln" pathLength="1" style="--d:${T0 + i * SEG}ms" x1="${P[a][1]}" y1="${P[a][2]}" x2="${P[b][1]}" y2="${P[b][2]}"/>`).join("")}
+        ${edges.map(([a, b], i) => `<line class="od-ln${i >= F.skel.length ? " od-tr" : ""}" pathLength="1" style="--d:${sk0 + i * EDGE}ms" x1="${P[a][1]}" y1="${P[a][2]}" x2="${P[b][1]}" y2="${P[b][2]}"/>`).join("")}
         ${o.stars.map(star).join("")}
         <path class="od-hit" d="${F.hit}"/></svg>
       <div class="od-name"><em>Ново съзвездие</em><b>${F.name}</b></div>
@@ -67,9 +70,9 @@
     if (o.sound && !red) try { const ac = new (window.AudioContext || window.webkitAudioContext)(), f0 = [523, 587, 659, 784, 880, 1047, 1175, 1319, 1568];
       order.forEach((n, i) => { const t = ac.currentTime + at[n] / 1000 + .05, os = ac.createOscillator(), g = ac.createGain(); os.type = "sine"; os.frequency.value = f0[i % f0.length];
         g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.035, t + .02); g.gain.exponentialRampToValueAtTime(.0001, t + .28); os.connect(g).connect(ac.destination); os.start(t); os.stop(t + .3); });
-      later(() => { try { ac.close(); } catch (e) {} }, linesEnd + 600); } catch (e) {}
+      later(() => { try { ac.close(); } catch (e) {} }, starsEnd + 700); } catch (e) {}
     later(() => root.classList.add("figon"), red ? 0 : figAt);
-    later(() => root.classList.add("named"), red ? 0 : figAt + 300);
+    later(() => root.classList.add("named"), red ? 0 : figAt + 420);
     later(final, finalAt);
     // репликата: след нотите; автоматичното затваряне чака гласа да свърши (не го прекъсва)
     later(() => { const b = $(".od-bub"); b.textContent = o.line; root.classList.add("talk");

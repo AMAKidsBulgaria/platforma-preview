@@ -133,3 +133,8 @@ html.o-calm .os-iring, html.o-still .os-iring { opacity: .9; }
 @keyframes os-seen { 0% { opacity: .9; transform: scale(.7); } 100% { opacity: 0; transform: scale(1.9); } }
 html.o-calm .os-seenring, html.o-still .os-seenring { animation: none !important; opacity: .7; }
 @media (prefers-reduced-motion: reduce) { .os-seenring { animation: none !important; opacity: .7; } }
+/* завръщане с по-ярка звезда: светлинен акцент – всичко друго за миг притъмнява */
+.os-spot { position: fixed; inset: 0; z-index: 30; pointer-events: none; opacity: 0; transition: opacity .5s ease-out;
+  background: radial-gradient(circle at var(--x) var(--y), rgba(255, 230, 160, .18) 0, rgba(255, 230, 160, 0) var(--r), rgba(4, 5, 18, .62) calc(var(--r) * 2.2)); }
+.os-spot.on { opacity: 1; }
+html.o-calm .os-spot, html.o-still .os-spot { transition: opacity .2s; }

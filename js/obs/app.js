@@ -122,7 +122,7 @@
 
   // ---- глас: Зори (zr_*), иначе разказвачът (Калина) ----
   let AUDZ = {}, AUD = {}, cur = null;
-  fetch("config/abacus-audio-zori.json?v=15").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
+  fetch("config/abacus-audio-zori.json?v=16").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
   fetch("config/abacus-audio.json?v=4").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
   // „пораснал“ режим (7+, 11.11.2026): Зори е спътник – кратки реплики, само текст (гласът по избор: P.zv); рекорди и значки
   const grown = () => !!P && groupOf(P) !== "5";
@@ -221,7 +221,7 @@
       s += `<g class="o-far"><ellipse cx="${f[2]}" cy="${f[3]}" rx="70" ry="44" fill="url(#mist)"/><text x="${f[2]}" y="${f[3] + 8}" text-anchor="middle">${known ? f[0] : "?"}</text></g>`; });
     CONST.forEach(c => { if (visibleC(c.id)) return; const xs = c.stars.map(x => x[2]), ys = c.stars.map(x => x[3]), cx = (Math.min(...xs) + Math.max(...xs)) / 2, cy = (Math.min(...ys) + Math.max(...ys)) / 2;
       s += `<g class="o-mist"><ellipse cx="${cx}" cy="${cy}" rx="${(Math.max(...xs) - Math.min(...xs)) / 2 + 60}" ry="${(Math.max(...ys) - Math.min(...ys)) / 2 + 50}" fill="url(#mist)" filter="url(#blur)"/>${o.labels ? `<text x="${cx}" y="${cy + 12}" text-anchor="middle">?</text>` : ""}</g>`; });
-    Object.entries(LINES).forEach(([c, ls]) => { if (!visibleC(c)) return; ls.forEach(([a, z]) => { const A = STAR[a], Z = STAR[z], lit = (b[a] || 0) >= 3 && (b[z] || 0) >= 1;
+    Object.entries(LINES).forEach(([c, ls0]) => { if (!visibleC(c)) return; const ls = figShown(c) ? window.ObsDiscover.FIG[c].skel : ls0; ls.forEach(([a, z]) => { const A = STAR[a], Z = STAR[z], lit = (b[a] || 0) >= 3 && (b[z] || 0) >= 1;
       s += `<line x1="${A.x}" y1="${A.y}" x2="${Z.x}" y2="${Z.y}" class="o-ln${lit ? " lit" : ""}"/>`; }); });
     DF().forEach(id => { if (visibleC(id) && figShown(id)) s += window.ObsDiscover.figure(id, { hit: !!o.labels }); });   // Г1: фигурата на съзвездието – зад звездите
     Object.values(STAR).forEach(st => { if (!visibleC(st.c)) return;
@@ -301,10 +301,10 @@
   function loadSceneLibs() {
     if (sceneLibs) return sceneLibs;
     const js = (src) => new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
-    if (!document.querySelector('link[href^="css/obs-scene.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-scene.css?v=15"; document.head.appendChild(l); }
-    const all = (window.PIXI ? Promise.resolve() : js("js/vendor/pixi.min.js")).then(() => window.gsap ? 0 : js("js/vendor/gsap.min.js")).then(() => window.ObsScene ? 0 : js("js/obs/scene.js?v=37"))
-      .then(() => { if (!window.ObsJourney) js("js/obs/journey.js?v=4").catch(() => {}); });   // полетът – по желание: без него мисията тръгва направо
-    if (!document.querySelector('link[href^="css/obs-journey.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-journey.css?v=4"; document.head.appendChild(l); }
+    if (!document.querySelector('link[href^="css/obs-scene.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-scene.css?v=16"; document.head.appendChild(l); }
+    const all = (window.PIXI ? Promise.resolve() : js("js/vendor/pixi.min.js")).then(() => window.gsap ? 0 : js("js/vendor/gsap.min.js")).then(() => window.ObsScene ? 0 : js("js/obs/scene.js?v=38"))
+      .then(() => { if (!window.ObsJourney) js("js/obs/journey.js?v=6").catch(() => {}); });   // полетът – по желание: без него мисията тръгва направо
+    if (!document.querySelector('link[href^="css/obs-journey.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-journey.css?v=5"; document.head.appendChild(l); }
     return sceneLibs = Promise.race([all, new Promise((_, rej) => setTimeout(() => rej(new Error("scene: timeout")), 8000))]).catch(e => { sceneLibs = null; throw e; });
   }
   function sceneHome(h) {
@@ -366,13 +366,13 @@
   function discMark(before) { DF().forEach(id => { if (!discOf()[id] && !cDone(id, before || {}) && cDone(id, P.b)) { P.disc[id] = "pending"; save(); } }); }
   function discMigrate() { let ch = false; DF().forEach(id => { if (cDone(id, P.b) && !discOf()[id]) { P.disc[id] = "seen"; ch = true; } }); if (ch) save(); }
   const discPending = () => DF().find(id => (P.disc || {})[id] === "pending" && cDone(id, P.b)) || null;
-  const figShown = (id) => cDone(id, P.b) && (P.disc || {})[id] !== "pending";
-  const DLINE = { A: "Уау! Открихме съзвездието Първи светлини! Виж как засияха всички звезди!" };
+  const figShown = (id) => DF().includes(id) && cDone(id, P.b) && (P.disc || {})[id] !== "pending";   // само съзвездия с фигура
+  const DLINE = { A: "Уау! Открихме съзвездието Първи светлини!" };
   let DRUN = false;
   function discover(id) {
     if (DRUN || !window.ObsDiscover || (P.disc || {})[id] !== "pending") return; DRUN = true; const g = gen, c = CONST.find(x => x.id === id), R = document.documentElement;
     const calm = R.classList.contains("o-calm") || R.classList.contains("o-still") || matchMedia("(prefers-reduced-motion: reduce)").matches;
-    window.ObsDiscover.play({ id, stars: c.stars.map(x => [x[0], x[2], x[3], x[4]]), lines: LINES[id], line: DLINE[id], reduced: calm,
+    window.ObsDiscover.play({ id, stars: c.stars.map(x => [x[0], x[2], x[3], x[4]]), line: DLINE[id], reduced: calm,
       say: (t) => Promise.all([sayP(t), new Promise(r => setTimeout(r, 2600))]), stop: () => { try { if (cur) cur.pause(); } catch (e) {} },
       sound: Q.get("voice") !== "0" && !(grown() && !P.zv),
       onSeen: () => { P.disc[id] = "seen"; save(); },
@@ -383,7 +383,7 @@
     app.querySelectorAll(".o-fig.hl").forEach(f => f.classList.remove("hl")); app.querySelectorAll(`.o-mapwrap .o-fig[data-c="${id}"]`).forEach(f => f.classList.add("hl"));
     el.classList.add("o-ccard");
     el.innerHTML = `<button class="o-x" aria-label="Затвори">✕</button><div class="o-ct">${F.name}</div><div class="o-cs">Съзвездие · всички ${c.stars.length} звезди светят с пълна яркост</div>
-      <svg class="o-cfig" viewBox="${F.vb}" aria-hidden="true">${LINES[id].map(([a, z]) => `<line class="cln" x1="${STAR[a].x}" y1="${STAR[a].y}" x2="${STAR[z].x}" y2="${STAR[z].y}"/>`).join("")}${window.ObsDiscover.figure(id)}${c.stars.map(x => `<circle class="cst" cx="${x[2]}" cy="${x[3]}" r="${x[4] ? 8 : 6}"/>`).join("")}</svg>
+      <svg class="o-cfig" viewBox="${F.vb}" aria-hidden="true">${F.skel.map(([a, z]) => `<line class="cln" x1="${STAR[a].x}" y1="${STAR[a].y}" x2="${STAR[z].x}" y2="${STAR[z].y}"/>`).join("")}${window.ObsDiscover.figure(id)}${c.stars.map(x => `<circle class="cst" cx="${x[2]}" cy="${x[3]}" r="${x[4] ? 8 : 6}"/>`).join("")}</svg>
       <ol>${c.stars.map(x => `<li><b>${x[1]}</b></li>`).join("")}</ol>`;
     el.hidden = false; el.querySelector(".o-x").onclick = () => { el.hidden = true; el.classList.remove("o-ccard"); app.querySelectorAll(".o-fig.hl").forEach(f => f.classList.remove("hl")); }; }
   const starSnap = (n) => ({ n, b: P.b[n] || 0, halo: !!(P.halo || {})[n], rev: !!(P.rev || {})[n] });
@@ -448,13 +448,19 @@
       : after >= 3 ? ["Звездата вече свети с пълна сила.", haloNew ? "И получи ореол – за смятането без телескоп." : "Яркостта ѝ остава 3 от 3."]
       : [`Яркостта остава ${after} от 3.`, "Яркостта расте, когато точността стигне прага. Домашното е готово – браво!"];
     app.className = "o-scr o-end";
+    // кратък момент на радост преди отчета (без награда и без „усвоено“): голям радостен Зори и името на готовото; докосване – веднага към отчета
+    const head = STAR[n] && STAR[n].big ? "Звездната нощ е готова!" : "Домашното е готово!";
+    app.className = "o-scr o-end ol-pre";
     app.innerHTML = `<div class="o-endsky">${STAR[n] ? skySVG({ vb: `${STAR[n].x - 300} ${STAR[n].y - 70} 600 360` }) : ""}</div>
+      <div class="ol-cheer" id="ol-cheer" role="status">${zori("joy")}<b>${head}</b></div>
       <div class="o-endbox ol-hw">${zori("joy")}<div class="o-say"></div>
       <h2 role="status">Домашното за занятие ${n} е готово!<small>Всички ${N} кръга са изиграни</small></h2>
       <div class="ol-sec"><em>Точност</em><div class="ol-acc">${crit.map(([t, x, need]) => `<div><span>${t}<small>${x == null ? "няма такъв кръг" : `праг ${need}%`}</small></span><b>${pc(x)}</b><i class="${x != null && x * 100 >= need ? "on" : ""}" aria-label="${x != null && x * 100 >= need ? "над прага" : "под прага"}">${x == null ? "" : x * 100 >= need ? "✓" : "·"}</i></div>`).join("")}</div></div>
-      <div class="ol-sec"><em>Яркост на звездата</em><div class="ol-star"><div class="o-stars" aria-label="Яркост ${after} от 3">${[0, 1, 2].map(k => `<span class="${k < after ? "on" : ""}${up && k >= before && k < after ? " up" : ""}" style="animation-delay:${.5 + (k - before) * .25}s">★</span>`).join("")}</div><p>${cap[0]}<small>${cap[1]}</small></p></div></div>
+      <div class="ol-sec"><em>Яркост на звездата</em><div class="ol-star"><div class="o-stars" aria-label="Яркост ${after} от 3">${[0, 1, 2].map(k => `<span class="${k < after ? "on" : ""}${up && k >= before && k < after ? " up" : ""}" style="animation-delay:${2.1 + (k - before) * .25}s">★</span>`).join("")}</div><p>${cap[0]}<small>${cap[1]}</small></p></div></div>
       <div class="o-sbar"><button class="o-sec" id="o-tomap">Към картата</button><button class="o-go" id="o-home">Към обсерваторията</button></div></div>`;
-    say(up ? "Небето е подредено за тази вечер. Звездата стана по-ярка!" : "Браво! Домашното е готово.", "joy"); zr(up ? "zr-big" : "zr-ok1"); if (up) burst();
+    say(up ? "Небето е подредено за тази вечер. Звездата стана по-ярка!" : "Браво! Домашното е готово.", "joy"); zr("zr-big"); if (up) burst();
+    const g0 = gen, cheer = $("#ol-cheer"), toReport = () => { if (g0 !== gen || !cheer.isConnected || cheer.classList.contains("gone")) return; cheer.classList.add("gone"); app.classList.remove("ol-pre"); setTimeout(() => cheer.remove(), 500); };
+    cheer.onclick = toReport; setTimeout(toReport, matchMedia("(prefers-reduced-motion: reduce)").matches ? 1200 : 1800);
     $("#o-tomap").onclick = () => screenMap(n); $("#o-home").onclick = one(() => backHome("hw"));
   }
   // ---- „За учителя“ (демо, задръж): кое занятие е проведено, докъде е домашното; таблицата за отключване на игрите (за ревизия) ----

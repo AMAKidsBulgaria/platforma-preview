@@ -35,3 +35,10 @@ html.o-calm .oj-go, html.o-still .oj-go { animation: none; }
 @media (max-height: 520px) and (orientation: landscape) { .oj-arrive { gap: 8px; } .oj-plaque { padding: 6px 18px 8px; } .oj-plaque b { font-size: 20px; } .oj-plaque small { font-size: 13px; } .oj-go { padding: 9px 26px; font-size: 19px; } }
 /* скритите елементи остават скрити (display на бутона иначе надделява над атрибута hidden) */
 .oj [hidden] { display: none !important; }
+/* пристигане: кратко сияние от звездата; към урока: меко златисто сияние, после урокът */
+.oj::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 3; opacity: 0;
+  background: radial-gradient(circle at var(--sx, 50%) var(--sy, 38%), rgba(255, 236, 180, .95), rgba(255, 205, 110, .45) 28%, rgba(11, 14, 42, 0) 70%); }
+.oj.oj-hit::after { animation: oj-hit .8s ease-out 1; }
+@keyframes oj-hit { 0% { opacity: 0; } 18% { opacity: .55; } 100% { opacity: 0; } }
+.oj.oj-glow::after { opacity: 1; transition: opacity .43s ease-in; }
+@media (prefers-reduced-motion: reduce) { .oj.oj-hit::after { animation: none; } .oj.oj-glow::after { transition: none; opacity: 0; } }
