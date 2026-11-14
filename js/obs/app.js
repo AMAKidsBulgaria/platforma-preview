@@ -120,7 +120,7 @@
 
   // ---- глас: Зори (zr_*), иначе разказвачът (Калина) ----
   let AUDZ = {}, AUD = {}, cur = null;
-  fetch("config/abacus-audio-zori.json?v=12").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
+  fetch("config/abacus-audio-zori.json?v=13").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
   fetch("config/abacus-audio.json?v=4").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
   // „пораснал“ режим (7+, 11.11.2026): Зори е спътник – кратки реплики, само текст (гласът по избор: P.zv); рекорди и значки
   const grown = () => !!P && groupOf(P) !== "5";
@@ -293,7 +293,7 @@
     if (sceneLibs) return sceneLibs;
     const js = (src) => new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
     if (!document.querySelector('link[href^="css/obs-scene.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-scene.css?v=11"; document.head.appendChild(l); }
-    const all = (window.PIXI ? Promise.resolve() : js("js/vendor/pixi.min.js")).then(() => window.gsap ? 0 : js("js/vendor/gsap.min.js")).then(() => window.ObsScene ? 0 : js("js/obs/scene.js?v=23"));
+    const all = (window.PIXI ? Promise.resolve() : js("js/vendor/pixi.min.js")).then(() => window.gsap ? 0 : js("js/vendor/gsap.min.js")).then(() => window.ObsScene ? 0 : js("js/obs/scene.js?v=30"));
     return sceneLibs = Promise.race([all, new Promise((_, rej) => setTimeout(() => rej(new Error("scene: timeout")), 8000))]).catch(e => { sceneLibs = null; throw e; });
   }
   function sceneHome(h) {
@@ -313,8 +313,10 @@
       portal.aria = `${portal.cta}: ${[portal.kicker, !tutor && LL ? LL.title : portal.title, portal.sub].filter(Boolean).join(", ")}`;
       let seen = 0; try { const k = "obs.scene.v1." + P.id; seen = +(localStorage.getItem(k) || 0) + 1; localStorage.setItem(k, String(seen)); } catch (e) {}
       const leave = (fn) => () => { sceneOff(); fn(); };
-      const guide = seen === 1 && star != null && !grown() ? "Виж! Тази звезда ни чака днес." : null;
-      SC = window.ObsScene.mount(app, { portal, line, guide, voice: (t) => voice(t || line) }, {
+      // първо влизане: Зори представя стаята (проблясват телескопът и абакусът); второ – посочва звездата на мисията
+      const intro = seen === 1 && !grown() ? "Виж! Това е нашата обсерватория! Докосни телескопа, за да откриеш игрите, или абакуса, за да упражняваш числата!" : null;
+      const guide = seen === 2 && star != null && !grown() ? "Виж! Тази звезда ни чака днес." : null;
+      SC = window.ObsScene.mount(app, { portal, line, guide, intro, voice: (t) => voice(t || line) }, {
         mission: () => { SC = null; tutor ? runTutor() : L ? runHw(L, st.next) : screenMap(); },
         abacus: () => { SC = null; location.href = "abacus-app.html?p=" + encodeURIComponent(P.id); },
         games: () => { SC = null; screenGames(); }, map: () => { SC = null; screenMap(); } });
@@ -325,7 +327,7 @@
         ${older.length ? `<button class="os-older" id="o-older" type="button">Доиграй: занятие ${older[older.length - 1].n}</button>` : ""}`);
       $("#o-me").onclick = leave(screenAvatar); holdBtn($("#o-teach"), leave(screenTeacher));
       const ob = $("#o-older"); if (ob) ob.onclick = leave(() => { const O = older[older.length - 1]; runHw(O, hwState(O).next); });
-      SC.layout(); if (!guide) voice(line);
+      SC.layout(); if (!guide && !intro) voice(line);
     }).catch(fail);
   }
 

@@ -140,17 +140,23 @@
     const zoriX = () => RM === ROOMS.land && app.screen.height < 520 ? 1290 : RM.zori.x;
     // краката на Зори винаги се виждат (широкият екран реже картината отдолу)
     const zoriY = () => { const W = app.screen.width, H0 = app.screen.height; if (!(H0 > W)) return Math.min(RM.zori.y, (H0 - off.y) / sc - 10 / sc); const mh = ($(".os-mission").offsetHeight || 120) + 22; return Math.min(RM.zori.y, (H0 - mh - off.y) / sc); };
-    function placeBubble() { const b = $(".os-bub"); if (!b || b.hidden || !zori) return; const W = app.screen.width, h = RM.zori.h * sc, p = toScreen(zoriX(), zoriY()), head = p.y - h * .97, side = h * .3;
-      const st = { left: "", right: "", top: "", bottom: "", maxWidth: "" }, spR = W - (p.x + side) - 12, spL = p.x - side - 12;
-      if (spR >= 120) Object.assign(st, { left: p.x + side + "px", top: Math.max(64, head) + "px", maxWidth: Math.min(280, spR) + "px" });
-      else if (spL >= 120) Object.assign(st, { right: W - (p.x - side) + "px", top: Math.max(64, head) + "px", maxWidth: Math.min(280, spL) + "px" });
-      else Object.assign(st, { left: "12px", right: "12px", top: Math.max(64, head - 70) + "px", maxWidth: "none" });
-      Object.assign(b.style, st);
-      // балонът не закрива портала и бутоните: ако се застъпва – скрива се (репликата се чува)
-      const hits = () => { const r = b.getBoundingClientRect(); return [...ui.querySelectorAll(".os-mission, .os-portal, .os-chip.on, .os-head, .os-older")].map(e => e.getBoundingClientRect()).filter(q => q.width && r.left < q.right && r.right > q.left && r.top < q.bottom && r.bottom > q.top); };
-      // застъпва ли се – първо малко по-надолу (под табелката), иначе се скрива (репликата се чува)
-      let hs = hits(); if (hs.length && st.top) { b.style.top = Math.max(...hs.map(q => q.bottom)) - ui.getBoundingClientRect().top + 6 + "px"; const r = b.getBoundingClientRect(); if (r.bottom > p.y - h * .25) hs = [1]; else hs = hits(); }
-      b.classList.toggle("off", hs.length > 0); }
+    // балонът: пробваме няколко места до Зори (вдясно, вляво, над главата му, по-ниско до него) и взимаме първото, което не закрива
+    // портала, табелата, табелките и горната лента; ако няма такова – скрива се (репликата се чува)
+    function placeBubble() { const b = $(".os-bub"); if (!b || b.hidden || !zori) return; const W = app.screen.width, H0 = app.screen.height, h = RM.zori.h * sc, p = toScreen(zoriX(), zoriY()), head = p.y - h * .97, side = h * .3;
+      // дълга реплика – не в тясна колона (поне 230 px)
+      const need = b.textContent.length > 60 ? 230 : 110, spR = W - (p.x + side) - 12, spL = p.x - side - 12, mw = (sp) => Math.min(320, sp) + "px", cands = [];
+      if (spR >= need) cands.push({ left: p.x + side + "px", top: head, maxWidth: mw(spR) }, { left: p.x + side + "px", top: head + h * .35, maxWidth: mw(spR) });
+      if (spL >= need) cands.push({ right: W - (p.x - side) + "px", top: head, maxWidth: mw(spL) }, { right: W - (p.x - side) + "px", top: head + h * .35, maxWidth: mw(spL) });
+      cands.push({ above: true, maxWidth: mw(W - 24) }, { above: true, maxWidth: mw(W - 24), loose: true }, { above: true, maxWidth: mw(W - 24), loose: true, overTags: true });   // последно: над главата, може да мине над долния край на прозореца
+      const hits = (loose) => { const r = b.getBoundingClientRect(); return r.top < 60 || r.bottom > H0 - 4 || r.left < 4 || r.right > W - 4 ||
+        [...ui.querySelectorAll(loose ? ".os-mission, .os-chip.on, .os-head, .os-older" : ".os-mission, .os-portal, .os-chip.on, .os-head, .os-older")].some(e => { const q = e.getBoundingClientRect(); return q.width && r.left < q.right && r.right > q.left && r.top < q.bottom && r.bottom > q.top; }); };
+      let ok = false;
+      for (const c of cands) { Object.assign(b.style, { left: "", right: "", top: "", bottom: "", maxWidth: c.maxWidth });
+        if (c.above) { const bw = Math.min(b.offsetWidth, W - 24); const tt = c.overTags ? Math.min(head, ...[...ui.querySelectorAll(".os-chip.on")].map(e => e.getBoundingClientRect().top)) : head;
+          Object.assign(b.style, { left: Math.max(12, Math.min(W - bw - 12, p.x - bw / 2)) + "px", top: tt - b.offsetHeight - 8 + "px" }); }
+        else Object.assign(b.style, { left: c.left || "", right: c.right || "", top: Math.min(H0 - b.offsetHeight - 8, Math.max(64, c.top)) + "px" });
+        if (!hits(c.loose)) { ok = true; break; } }
+      b.classList.toggle("off", !ok); }
     let bubT = null;
     function say(text) { const b = $(".os-bub"); if (!b || !text) return; clearTimeout(bubT); gsap.killTweensOf(b); b.style.opacity = ""; b.textContent = text; b.hidden = false; placeBubble(); if (!reduced()) T(gsap.fromTo(b, { scale: .7, opacity: 0 }, { scale: 1, opacity: 1, duration: .35, ease: "back.out(2)" }));
       bubT = later(() => { if (!dead) T(gsap.to(b, { opacity: 0, duration: .4, onComplete: () => { b.hidden = true; b.style.opacity = ""; } })); }, Math.max(7000, 2500 + text.length * 90)); }
@@ -211,15 +217,19 @@
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => !dead && layout()); later(() => layout(), 900);
       if (!reduced()) { T(gsap.to(dark, { alpha: 0, duration: 1.1, ease: "power1.in", delay: .1 })); lamps.forEach((g, i) => T(gsap.to(g, { _on: 1, duration: .45, delay: .3 + i * .25, ease: "back.out(3)" })));
         T(gsap.from(ui.querySelectorAll(".os-portal, .os-mission"), { opacity: 0, y: 14, duration: .55, delay: .7, stagger: .12, ease: "back.out(1.6)" })); later(() => { if (!wave()) hop(.6); }, 1000); }
-      later(() => model.guide ? guide() : say(model.line), reduced() ? 200 : 1300);
-      if (!reduced()) later(invite, model.guide ? 6500 : 4000); }).catch(() => {});
+      later(() => model.intro ? intro() : model.guide ? guide() : say(model.line), reduced() ? 200 : 1300);
+      if (!reduced()) later(invite, model.intro ? 13000 : model.guide ? 6500 : 4000); }).catch(() => {});
+    // първо влизане: Зори представя стаята; предметите проблясват, когато ги назовава (≈ по дължината на репликата, 10 с), накрая посочва звездата
+    function intro() { const t = model.intro, dur = 10300, at = (w) => Math.max(0, t.indexOf(w)) / t.length * dur; say(t); if (model.voice) model.voice(t);
+      later(() => ping("tele"), at("телескопа")); later(() => ping("abac"), at("абакуса")); const tg = ui.querySelector(".os-target");
+      if (tg) later(() => { if (dead) return; if (waving) afterWave = () => point(tg); else point(tg); }, dur); }
     // покана: на всеки ~6 с един от трите предмета проблясва (отблясък + светлина + табелката подскача) – подсказка, че се докосва
     let invI = 0;
     function invite() { if (dead) return; if (!busy && !document.hidden && !reduced()) ping(["tele", "map", "abac"][invI++ % 3]); later(invite, 5500 + Math.random() * 1500); }
-    function ping(k) { const g = glow[k], [x0, y0, x1, y1] = RM.box[k], w = x1 - x0, h = y1 - y0; if (!g) return;
+    function ping(k) { if (dead) return; const g = glow[k], [x0, y0, x1, y1] = RM.box[k], w = x1 - x0, h = y1 - y0; if (!g) return;
       T(gsap.fromTo(g, { _ping: 0 }, { _ping: 1, duration: .45, ease: "power2.out", yoyo: true, repeat: 1, repeatDelay: .3 }));
       glint.width = Math.min(w, h) * .5; glint.height = Math.max(w, h) * .9;   // мек отблясък без твърди ръбове
-      const o = { t: 0 }; T(gsap.to(o, { t: 1, duration: 1, ease: "power1.inOut", onUpdate: () => { glint.position.set(x0 + w * (.1 + .8 * o.t), y0 + h * (.3 + .4 * o.t)); glint.alpha = Math.sin(o.t * Math.PI) * .4; }, onComplete: () => { glint.alpha = 0; } }));
+      const o = { t: 0 }; if (!reduced()) T(gsap.to(o, { t: 1, duration: 1, ease: "power1.inOut", onUpdate: () => { glint.position.set(x0 + w * (.1 + .8 * o.t), y0 + h * (.3 + .4 * o.t)); glint.alpha = Math.sin(o.t * Math.PI) * .4; }, onComplete: () => { glint.alpha = 0; } }));
       const c = ui.querySelector(`.os-chip[data-k="${k}"]`); if (c) { c.classList.remove("ping"); void c.offsetWidth; c.classList.add("ping"); later(() => c.classList.remove("ping"), 1200); } }
     function guide() { const tg = ui.querySelector(".os-target"); say(model.guide); if (model.voice) model.voice(model.guide); if (!tg) return;
       if (waving) { afterWave = () => point(tg); return; } point(tg); }
