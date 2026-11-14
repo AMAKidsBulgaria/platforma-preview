@@ -8,10 +8,11 @@
    mount(host, model, handlers) → { ui, unmount() }; при грешка хвърля – app.js показва стария начален екран. */
 (function () {
   const ROOMS = {
-    land: { url: "assets/img/journey/room_land.webp?v=2", w: 1536, h: 1024, win: { x: 781, y: 204, r: 290 }, zori: { x: 1215, y: 945, h: 300 },
-      box: { tele: [85, 150, 425, 855], map: [378, 348, 630, 762], abac: [1140, 480, 1315, 600] }, lens: [410, 190],
-      tag: { tele: [262, 610], map: [470, 600], abac: [1228, 604] },
-      lamps: [[75, 505, 1.1], [1455, 92, 1], [1111, 482, .8]] },
+    // хоризонталната стая е разширена (14.11): целият прозорец се вижда; occ – нарисуваното пред стъклото (стойката с картата), там небето не се рисува
+    land: { url: "assets/img/journey/room_land.webp?v=3", w: 1536, h: 1024, win: { x: 779, y: 327, r: 246 }, zori: { x: 1148, y: 957, h: 255 },
+      box: { tele: [187, 281, 477, 880], map: [437, 445, 630, 760], abac: [1084, 562, 1233, 664] }, lens: [464, 315], occ: [[437, 468, 632, 700]],
+      tag: { tele: [338, 672], map: [532, 700], abac: [1159, 667] },
+      lamps: [[179, 583, .94], [1352, 232, .85], [1060, 563, .68]] },
     port: { url: "assets/img/journey/room_port.webp?v=2", w: 1024, h: 1536, win: { x: 510, y: 325, r: 238 }, zori: { x: 500, y: 1430, h: 380 },
       box: { tele: [50, 470, 385, 1235], map: [255, 625, 495, 1015], abac: [695, 690, 872, 822] }, lens: [372, 492],
       tag: { tele: [150, 1075], map: [372, 905], abac: [784, 826] },
@@ -73,7 +74,7 @@
     let lowF = false;   // резервно: широк, но нисък екран, където табелата под прозореца би застъпила Зори – табелата долу, Зори вдясно
     function layout(force) { if (dead) return; lowF = !!force; const W = app.screen.width, H0 = app.screen.height, k = H0 > W * 1.05 ? "port" : "land"; RM = ROOMS[k];
       const cover = Math.max(W / RM.w, H0 / RM.h), contain = Math.min(W / RM.w, H0 / RM.h); sc = Math.min(cover, contain * 1.25);
-      const vh = H0 / sc; off = { x: (W - RM.w * sc) / 2, y: k === "port" ? H0 - RM.h * sc : vh >= RM.h ? (H0 - RM.h * sc) / 2 : -(RM.h - vh) * .45 * sc };
+      const vh = H0 / sc; off = { x: (W - RM.w * sc) / 2, y: k === "port" ? H0 - RM.h * sc : vh >= RM.h ? (H0 - RM.h * sc) / 2 : -Math.min(RM.h - vh, Math.max(0, RM.win.y - RM.win.r * 1.15)) * sc };   // режем отдолу – прозорецът остава цял
       if (!busy) { world.scale.set(sc); world.position.set(off.x, off.y); }
       if (k !== key && TEX[RM.url]) { key = k; room.texture = TEX[RM.url]; }
       RM.lamps.forEach(([x, y, s], i) => { lamps[i].position.set(x, y); lamps[i]._k = s; });
@@ -104,11 +105,14 @@
         c.style.left = Math.min(W - hw, Math.max(hw, p.x)) + "px"; c.style.top = Math.max(70, p.y) + "px"; });
       const w = RM.win, c = toScreen(w.x, w.y), d = w.r * 2 * sc, po = $(".os-portal");   // точно по стъклото на нарисувания прозорец
       Object.assign(po.style, { left: c.x - d / 2 + "px", top: c.y - d / 2 + "px", width: d + "px", height: d + "px" });
+      // нарисуваното пред стъклото (стойката с картата) остава отпред: изрязваме го от небето
+      const occ = (RM.occ || []).map(([x0, y0, x1, y1]) => { const p = toScreen(x0, y0), q = toScreen(x1, y1); return [p.x - c.x + d / 2, p.y - c.y + d / 2, q.x - p.x, q.y - p.y]; });
+      $(".os-win").style.clipPath = occ.length ? `path(evenodd, "M0 ${d / 2} a${d / 2} ${d / 2} 0 1 0 ${d} 0 a${d / 2} ${d / 2} 0 1 0 ${-d} 0 Z ${occ.map(([x, y, ow, oh]) => `M${x} ${y} h${ow} v${oh} h${-ow} Z`).join(" ")}")` : "";
       const m = $(".os-mission"), narrow = H0 > W, low = !narrow && (H0 < 520 || lowF); m.classList.toggle("dock", !low); m.classList.toggle("wide", !narrow && !low); m.classList.toggle("tight", low);
       // табелата – долу в средата (както на телефона); на хоризонтален екран Зори стои вдясно, пред сандъка
       if (!low) Object.assign(m.style, { left: "50%", top: "auto", bottom: "max(14px, env(safe-area-inset-bottom))", maxWidth: "" });
-      else { const mw = m.offsetWidth || 260, mr = toScreen(RM.box.tele[2], 0).x, zl = toScreen(zoriX(), 0).x - RM.zori.h * sc * .32 - 8;
-        Object.assign(m.style, { left: Math.max(mr + mw / 2 - 40, Math.min(zl - mw / 2, c.x)) + "px", top: "auto", bottom: "max(10px, env(safe-area-inset-bottom))", maxWidth: "" }); }
+      else { const mw = m.offsetWidth || 260, zl = toScreen(zoriX(), 0).x - RM.zori.h * sc * .32 - 8;
+        Object.assign(m.style, { left: Math.max(mw / 2 + 8, Math.min(zl - mw / 2, W / 2)) + "px", top: "auto", bottom: "max(10px, env(safe-area-inset-bottom))", maxWidth: "" }); }
       // лъчът: от звездата на мисията (в центъра на прозореца) към табелата – окото минава звезда → мисия → „Продължи“
       const bm = $(".os-beam"), mr2 = m.getBoundingClientRect(), hr = ui.getBoundingClientRect(), tg = ui.querySelector(".os-target");
       // табелата е долу (както на телефона) – лъчът би минал през цялата стая, затова е изключен
@@ -116,16 +120,22 @@
         const ln = bm.querySelector("line"); ln.setAttribute("x1", x1); ln.setAttribute("y1", y1); ln.setAttribute("x2", x2); ln.setAttribute("y2", y2); } else bm.style.display = "none";
       if (zori) { const h = RM.zori.h * sc, zp = toScreen(zoriX(), zoriY()); Object.assign($(".os-zori").style, { left: zp.x - h * .3 + "px", top: zp.y - h + "px", width: h * .6 + "px", height: h + "px" });
         // табелка, която се застъпва със Зори – над предмета
-        const zr = $(".os-zori").getBoundingClientRect(); ui.querySelectorAll(".os-chip").forEach(c => { const r = c.getBoundingClientRect();
+        // (същото и при застъпване с табелата на мисията)
+        [$(".os-zori").getBoundingClientRect(), m.getBoundingClientRect()].forEach(zr => ui.querySelectorAll(".os-chip").forEach(c => { const r = c.getBoundingClientRect();
           if (!(r.left < zr.right && r.right > zr.left && r.top < zr.bottom && r.bottom > zr.top)) return;
-          // първо – по-нагоре по самия предмет (табелката остава закачена на него); ако не стига – над предмета
+          // първо – по-нагоре по самия предмет (табелката остава закачена на него); ако не стига – на горния му ръб
           const by = toScreen(0, RM.box[c.dataset.k][1]).y, hh = c.offsetHeight || 24, need = r.bottom - zr.top + 6, ny = r.top - need;
-          c.style.top = Math.max(70, ny >= by + hh * .5 ? ny : by - hh - 4) + "px"; }); }
+          const onTop = by + 2 + hh < zr.top || by + 2 > zr.bottom;   // иначе – на горния ръб на предмета, а ако и там се застъпва – над него
+          c.style.top = Math.max(70, ny >= by + hh * .5 ? ny : onTop ? by + 2 : by - hh - 4) + "px"; })); }
       const tags = [...ui.querySelectorAll(".os-chip")]; for (let i = 0; i < tags.length; i++) for (let j = 0; j < tags.length; j++) { if (i === j) continue; const a = tags[i].getBoundingClientRect(), b2 = tags[j].getBoundingClientRect();
-        if (j > i && a.left < b2.right && a.right > b2.left && a.top < b2.bottom && a.bottom > b2.top) tags[j].style.top = (parseFloat(tags[j].style.top) || 0) + (a.bottom - b2.top) + 4 + "px"; }
+        if (!(j > i && a.left < b2.right && a.right > b2.left && a.top < b2.bottom && a.bottom > b2.top)) continue;
+        // под другата табелка; ако там е табелата на мисията или Зори – над нея
+        const t0 = parseFloat(tags[j].style.top) || 0, down = t0 + (a.bottom - b2.top) + 4, hh = b2.height, mz = [m.getBoundingClientRect(), $(".os-zori").getBoundingClientRect()];
+        tags[j].style.top = (mz.some(q => q.width && a.bottom + 4 < q.bottom && a.bottom + 4 + hh > q.top && b2.left < q.right && b2.right > q.left) ? t0 - (b2.bottom - a.top) - 4 : down) + "px"; }
       placeBubble(); }
     // Зори стои над табелата, когато тя е долу (тесен изправен екран)
-    const zoriX = () => { const W = app.screen.width, H0 = app.screen.height; return H0 <= W && (H0 < 520 || lowF) && RM === ROOMS.land ? 1215 : RM.zori.x; };
+    // легнал телефон: табелата е долу в средата, Зори – по-вдясно, пред рафтовете
+    const zoriX = () => RM === ROOMS.land && app.screen.height < 520 ? 1290 : RM.zori.x;
     // краката на Зори винаги се виждат (широкият екран реже картината отдолу)
     const zoriY = () => { const W = app.screen.width, H0 = app.screen.height; if (!(H0 > W)) return Math.min(RM.zori.y, (H0 - off.y) / sc - 10 / sc); const mh = ($(".os-mission").offsetHeight || 120) + 22; return Math.min(RM.zori.y, (H0 - mh - off.y) / sc); };
     function placeBubble() { const b = $(".os-bub"); if (!b || b.hidden || !zori) return; const W = app.screen.width, h = RM.zori.h * sc, p = toScreen(zoriX(), zoriY()), head = p.y - h * .97, side = h * .3;
@@ -186,6 +196,8 @@
 
     // ---- влизане: стаята е тъмна, фенерите светват един по един, Зори поздравява ----
     Promise.all(loadRoom).then(() => zoriReady).then(() => { if (dead) return; layout(); requestAnimationFrame(() => !dead && layout());
+      // размерите на табелите зависят от шрифта – след зареждането му подреждаме отново
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => !dead && layout()); later(() => layout(), 900);
       if (!reduced()) { T(gsap.to(dark, { alpha: 0, duration: 1.1, ease: "power1.in", delay: .1 })); lamps.forEach((g, i) => T(gsap.to(g, { _on: 1, duration: .45, delay: .3 + i * .25, ease: "back.out(3)" })));
         T(gsap.from(ui.querySelectorAll(".os-portal, .os-mission"), { opacity: 0, y: 14, duration: .55, delay: .7, stagger: .12, ease: "back.out(1.6)" })); later(() => { if (!wave()) hop(.6); }, 1000); }
       later(() => model.guide ? guide() : say(model.line), reduced() ? 200 : 1300); }).catch(() => {});
