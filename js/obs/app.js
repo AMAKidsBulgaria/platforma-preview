@@ -292,8 +292,8 @@
   function loadSceneLibs() {
     if (sceneLibs) return sceneLibs;
     const js = (src) => new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
-    if (!document.querySelector('link[href^="css/obs-scene.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-scene.css?v=6"; document.head.appendChild(l); }
-    const all = (window.PIXI ? Promise.resolve() : js("js/vendor/pixi.min.js")).then(() => window.gsap ? 0 : js("js/vendor/gsap.min.js")).then(() => window.ObsScene ? 0 : js("js/obs/scene.js?v=10"));
+    if (!document.querySelector('link[href^="css/obs-scene.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-scene.css?v=8"; document.head.appendChild(l); }
+    const all = (window.PIXI ? Promise.resolve() : js("js/vendor/pixi.min.js")).then(() => window.gsap ? 0 : js("js/vendor/gsap.min.js")).then(() => window.ObsScene ? 0 : js("js/obs/scene.js?v=13"));
     return sceneLibs = Promise.race([all, new Promise((_, rej) => setTimeout(() => rej(new Error("scene: timeout")), 8000))]).catch(e => { sceneLibs = null; throw e; });
   }
   function sceneHome(h) {
@@ -306,10 +306,11 @@
       // звездата на истинската мисия (занятието, което „Продължи“ стартира) – само подчертаване, яркостта е от P.b; небето се центрира около нея
       const star = !tutor && L && STAR[L.n] ? L.n : null, S0 = star ? STAR[star] : null;
       const portal = { star, svg: skySVG({ vb: S0 ? `${S0.x - 230} ${S0.y - 230} 460 460` : regionOf(classAt()) === "orion" ? "1490 100 520 520" : "40 80 460 460" }),
-        kicker: tutor ? "Урок със Зори" : LL ? `Занятие ${LL.n}` : "", title: tutor ? (tp.current ? TU.BY[tp.current].name : "Модулът е завършен") : LL ? LL.title : "Домашното е готово",
+        kicker: tutor ? "Урок със Зори" : LL ? `Занятие ${LL.n}` : "", title: tutor ? (tp.current ? TU.BY[tp.current].name : "Модулът е завършен") : LL ? LL.title.split(" · ")[0] : "Домашното е готово",
         sub: tutor ? "AI тутор" : round ? `${round.label} · кръг\u00a0${st.next + 1}\u00a0от\u00a0${L.rounds.length}` : "Виж звездите на картата",
         dots: tutor ? "" : dots, icon: L || tutor ? "▶" : "★", cta: L || tutor ? "Продължи" : "Звездна карта" };
-      portal.aria = `${portal.cta}: ${[portal.kicker, portal.title, portal.sub].filter(Boolean).join(", ")}`;
+      // на табелата – краткото име на занятието (до „ · “); пълното име се чете от екранния четец
+      portal.aria = `${portal.cta}: ${[portal.kicker, !tutor && LL ? LL.title : portal.title, portal.sub].filter(Boolean).join(", ")}`;
       let seen = 0; try { const k = "obs.scene.v1." + P.id; seen = +(localStorage.getItem(k) || 0) + 1; localStorage.setItem(k, String(seen)); } catch (e) {}
       const leave = (fn) => () => { sceneOff(); fn(); };
       const guide = seen === 1 && star != null && !grown() ? "Виж! Тази звезда ни чака днес." : null;

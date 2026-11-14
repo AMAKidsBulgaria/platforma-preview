@@ -8,7 +8,7 @@
    mount(host, model, handlers) → { ui, unmount() }; при грешка хвърля – app.js показва стария начален екран. */
 (function () {
   const ROOMS = {
-    land: { url: "assets/img/journey/room_land.webp?v=2", w: 1536, h: 1024, win: { x: 780, y: 255, r: 285 }, zori: { x: 985, y: 945, h: 320 },
+    land: { url: "assets/img/journey/room_land.webp?v=2", w: 1536, h: 1024, win: { x: 780, y: 255, r: 285 }, zori: { x: 1080, y: 945, h: 300 },
       box: { tele: [85, 150, 425, 855], map: [378, 348, 630, 762], abac: [1140, 480, 1315, 600] }, lens: [410, 190],
       tag: { tele: [262, 610], map: [470, 600], abac: [1228, 604] },
       lamps: [[75, 505, 1.1], [1455, 92, 1], [1111, 482, .8]] },
@@ -70,7 +70,8 @@
 
     // ---- подредба: картината запълва екрана, режем най-много ~20%; вертикалната – за изправен екран ----
     const toScreen = (x, y) => ({ x: off.x + x * sc, y: off.y + y * sc });
-    function layout() { if (dead) return; const W = app.screen.width, H0 = app.screen.height, k = H0 > W * 1.05 ? "port" : "land"; RM = ROOMS[k];
+    let lowF = false;   // резервно: широк, но нисък екран, където табелата под прозореца би застъпила Зори – табелата долу, Зори вдясно
+    function layout(force) { if (dead) return; lowF = !!force; const W = app.screen.width, H0 = app.screen.height, k = H0 > W * 1.05 ? "port" : "land"; RM = ROOMS[k];
       const cover = Math.max(W / RM.w, H0 / RM.h), contain = Math.min(W / RM.w, H0 / RM.h); sc = Math.min(cover, contain * 1.25);
       const vh = H0 / sc; off = { x: (W - RM.w * sc) / 2, y: k === "port" ? H0 - RM.h * sc : vh >= RM.h ? (H0 - RM.h * sc) / 2 : -(RM.h - vh) * .45 * sc };
       if (!busy) { world.scale.set(sc); world.position.set(off.x, off.y); }
@@ -84,6 +85,7 @@
       lensStar.position.set(RM.lens[0], RM.lens[1]);
       const zy = zoriY(), zx = zoriX(); if (zori) { zori.position.set(zx, zy); zori._y = zy; zori.scale.set(RM.zori.h / zori.texture.height); zori._s = zori.scale.x; }
       shadow.position.set(zx, zy - 4); shadow.width = RM.zori.h * .55; shadow.height = RM.zori.h * .09;
+      ui.style.setProperty("--k", Math.max(.9, Math.min(1.3, sc * 1.15)).toFixed(2));   // табелките растат с картината (на голям екран не са дребни)
       placeDom(); placeWave(); }
     // видеото: героят в кадъра е от y 49 до 482 (от 516) и центриран при x 186 (от 396) – напасваме го върху картинката
     function placeWave() { if (!wv.parentNode) return; const h = RM.zori.h * sc, p = toScreen(zoriX(), zoriY()), vh = h * 516 / 433;
@@ -103,13 +105,16 @@
       const w = RM.win, c = toScreen(w.x, w.y), d = w.r * 2 * sc * .94, po = $(".os-portal");
       Object.assign(po.style, { left: c.x - d / 2 + "px", top: c.y - d / 2 + "px", width: d + "px", height: d + "px" });
       // табелата на мисията: под прозореца (на перваза, леко върху долния ръб); тесен изправен екран – долу в средата
-      const m = $(".os-mission"), narrow = H0 > W, low = !narrow && H0 < 520; m.classList.toggle("dock", narrow); m.classList.toggle("tight", low);
+      const m = $(".os-mission"), narrow = H0 > W, low = !narrow && (H0 < 520 || lowF); m.classList.toggle("dock", narrow); m.classList.toggle("tight", low); m.classList.remove("col");
       if (narrow) Object.assign(m.style, { left: "50%", top: "auto", bottom: "max(14px, env(safe-area-inset-bottom))", maxWidth: "" });
       else if (low) { const mw = m.offsetWidth || 260, mr = toScreen(RM.box.tele[2], 0).x, zl = toScreen(zoriX(), 0).x - RM.zori.h * sc * .32 - 8;
         Object.assign(m.style, { left: Math.max(mr + mw / 2 - 40, Math.min(zl - mw / 2, c.x)) + "px", top: "auto", bottom: "max(10px, env(safe-area-inset-bottom))", maxWidth: "" }); }
-      else { const mr = toScreen(RM.box.map[2], 0).x + 10, al = toScreen(RM.box.abac[0], 0).x - 10, mw = Math.max(240, Math.min(380, al - mr)); m.style.maxWidth = mw + "px";
-        const mh = m.offsetHeight || 90, cx = Math.min(al - mw / 2, Math.max(mr + mw / 2, c.x));
-        Object.assign(m.style, { left: cx + "px", bottom: "auto", top: Math.min(H0 - mh - 12, c.y + d / 2 - mh * .18) + "px" }); }
+      else { // компактна табела в колона: на перваза точно под прозореца (не закрива небето), между картата и Зори
+        m.classList.add("col"); const mw = m.offsetWidth || 260, mh = m.offsetHeight || 120, mr = toScreen(RM.box.map[2], 0).x + 6, zl = toScreen(zoriX(), 0).x - RM.zori.h * sc * .3 - 10;
+        const cx = Math.max(mr + mw / 2, Math.min(zl - mw / 2, c.x));
+        const top = Math.max(64, Math.min(H0 - mh - 12, c.y + w.r * sc * .97 + 4)), zt = toScreen(0, zoriY() - RM.zori.h).y;
+        if (!lowF && zori && cx + mw / 2 > zl && top + mh > zt) return layout(true);
+        Object.assign(m.style, { left: cx + "px", bottom: "auto", maxWidth: "", top: top + "px" }); }
       // лъчът: от звездата на мисията (в центъра на прозореца) към табелата – окото минава звезда → мисия → „Продължи“
       const bm = $(".os-beam"), mr2 = m.getBoundingClientRect(), hr = ui.getBoundingClientRect(), tg = ui.querySelector(".os-target");
       // при табела долу (изправен / нисък екран) лъчът би минал през Зори – без него
@@ -126,8 +131,9 @@
         if (j > i && a.left < b2.right && a.right > b2.left && a.top < b2.bottom && a.bottom > b2.top) tags[j].style.top = (parseFloat(tags[j].style.top) || 0) + (a.bottom - b2.top) + 4 + "px"; }
       placeBubble(); }
     // Зори стои над табелата, когато тя е долу (тесен изправен екран)
-    const zoriX = () => { const W = app.screen.width, H0 = app.screen.height; return H0 <= W && H0 < 520 && RM === ROOMS.land ? 1215 : RM.zori.x; };
-    const zoriY = () => { const W = app.screen.width, H0 = app.screen.height; if (!(H0 > W)) return RM.zori.y; const mh = ($(".os-mission").offsetHeight || 120) + 22; return Math.min(RM.zori.y, (H0 - mh - off.y) / sc); };
+    const zoriX = () => { const W = app.screen.width, H0 = app.screen.height; return H0 <= W && (H0 < 520 || lowF) && RM === ROOMS.land ? 1215 : RM.zori.x; };
+    // краката на Зори винаги се виждат (широкият екран реже картината отдолу)
+    const zoriY = () => { const W = app.screen.width, H0 = app.screen.height; if (!(H0 > W)) return Math.min(RM.zori.y, (H0 - off.y) / sc - 10 / sc); const mh = ($(".os-mission").offsetHeight || 120) + 22; return Math.min(RM.zori.y, (H0 - mh - off.y) / sc); };
     function placeBubble() { const b = $(".os-bub"); if (!b || b.hidden || !zori) return; const W = app.screen.width, h = RM.zori.h * sc, p = toScreen(zoriX(), zoriY()), head = p.y - h * .97, side = h * .3;
       const st = { left: "", right: "", top: "", bottom: "", maxWidth: "" }, spR = W - (p.x + side) - 12, spL = p.x - side - 12;
       if (spR >= 120) Object.assign(st, { left: p.x + side + "px", top: Math.max(64, head) + "px", maxWidth: Math.min(280, spR) + "px" });
@@ -135,8 +141,10 @@
       else Object.assign(st, { left: "12px", right: "12px", top: Math.max(64, head - 70) + "px", maxWidth: "none" });
       Object.assign(b.style, st);
       // балонът не закрива портала и бутоните: ако се застъпва – скрива се (репликата се чува)
-      const r = b.getBoundingClientRect(), hit = [...ui.querySelectorAll(".os-mission, .os-portal, .os-chip.on, .os-head, .os-older")].some(e => { const q = e.getBoundingClientRect(); return q.width && r.left < q.right && r.right > q.left && r.top < q.bottom && r.bottom > q.top; });
-      b.classList.toggle("off", hit); }
+      const hits = () => { const r = b.getBoundingClientRect(); return [...ui.querySelectorAll(".os-mission, .os-portal, .os-chip.on, .os-head, .os-older")].map(e => e.getBoundingClientRect()).filter(q => q.width && r.left < q.right && r.right > q.left && r.top < q.bottom && r.bottom > q.top); };
+      // застъпва ли се – първо малко по-надолу (под табелката), иначе се скрива (репликата се чува)
+      let hs = hits(); if (hs.length && st.top) { b.style.top = Math.max(...hs.map(q => q.bottom)) - ui.getBoundingClientRect().top + 6 + "px"; const r = b.getBoundingClientRect(); if (r.bottom > p.y - h * .25) hs = [1]; else hs = hits(); }
+      b.classList.toggle("off", hs.length > 0); }
     let bubT = null;
     function say(text) { const b = $(".os-bub"); if (!b || !text) return; clearTimeout(bubT); gsap.killTweensOf(b); b.style.opacity = ""; b.textContent = text; b.hidden = false; placeBubble(); if (!reduced()) T(gsap.fromTo(b, { scale: .7, opacity: 0 }, { scale: 1, opacity: 1, duration: .35, ease: "back.out(2)" }));
       bubT = later(() => { if (!dead) T(gsap.to(b, { opacity: 0, duration: .4, onComplete: () => { b.hidden = true; b.style.opacity = ""; } })); }, Math.max(7000, 2500 + text.length * 90)); }
@@ -177,7 +185,7 @@
       lensStar.alpha = calm ? .35 : .35 + .35 * Math.max(0, Math.sin(t * 1.7)); lensStar.scale.set(calm ? .35 : .3 + .12 * Math.sin(t * 1.7));
       if (zori && zori._s) { const b = calm ? 0 : Math.sin(t * 1.9); zori.scale.set(zori._s * (1 - b * .005), zori._s * (1 + b * .014)); zori.y = zori._y + zori._dy;
         if (!gsap.isTweening(zori)) zori.rotation = calm ? 0 : Math.sin(t * .8) * .016; } });
-    const onResize = () => layout(), onVis = () => { if (document.hidden) app.ticker.stop(); else if (!dead) app.ticker.start(); };
+    const onResize = () => layout(false), onVis = () => { if (document.hidden) app.ticker.stop(); else if (!dead) app.ticker.start(); };
     window.addEventListener("resize", onResize); window.addEventListener("orientationchange", onResize); document.addEventListener("visibilitychange", onVis);
     // мобилните браузъри: лентата с адреса се свива/разгъва – височината се променя без „resize“ на прозореца
     const vv = window.visualViewport; if (vv) vv.addEventListener("resize", onResize);
