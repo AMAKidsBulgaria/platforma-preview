@@ -1364,6 +1364,13 @@
         if (L.n === 8 && r.game === "flash") p0.log.flash.push({ t: t - 20000, topic: "s9", n: 7, correct: false }); }); });
       try { localStorage.setItem("obs.scene.v1." + id, "5"); localStorage.setItem("obs.journey.v1." + id, "1"); localStorage.removeItem("obs.zmem.v1." + id); } catch (e) {} save();
       try { const u = new URL(location.href); u.searchParams.delete("demo"); history.replaceState(null, "", u); } catch (e) {} }
+    // ?demo=tb / tt – AI тутор: „Просто 0–9“ (и при tb – „Просто 11–19“) е минато, следва „Брат на 4“ (tb) или „Числата 10–19“ (tt)
+    const TUN = { tb: "B4", tt: "T1" }[Q.get("demo")];
+    if (TUN && TU && DEMO.some(x => x.id === Q.get("p"))) { const id = Q.get("p"); resetDemo(id); const p0 = prof(id); p0.format = "ai"; p0.formatSet = true; p0.group = "5"; p0.tutor = TU.newState();
+      const o = TU.BY[TUN].order, far = Date.now() + 30 * 864e5; TU.SKILLS.forEach(s => { p0.tutor.skills[s.id] = { id: s.id, status: s.order < o ? "mastered" : "locked", tries: [], tried: [], strategy: null, errRun: 0, sessionsNoProgress: 0, nextReview: s.order < o ? far : null }; });
+      p0.tutor.lastCheck = Date.now(); TU.refresh(p0.tutor); for (let k = 1; k <= 9; k++) p0.b[k] = 3; if (TUN === "B4") { p0.b[11] = 3; p0.classAt = p0.cur = 21; p0.seen = { ...(p0.seen || {}), orion: 1 }; }
+      try { localStorage.setItem("obs.scene.v1." + id, "5"); localStorage.setItem("obs.journey.v1." + id, "1"); } catch (e) {} save();
+      try { const u = new URL(location.href); u.searchParams.delete("demo"); history.replaceState(null, "", u); } catch (e) {} }
     if (Q.get("p") && ALLP.some(x => x.id === Q.get("p"))) { P = prof(Q.get("p")); if (Q.get("class")) { P.classAt = +Q.get("class"); save(); } applyMotion(); Q.get("m") ? startMission(+Q.get("m")) : Q.get("map") ? screenMap() : screenHome(); } else screenProfiles();
   });
   // ======================= AI ТУТОР (етап 1, 12.11.2026) =======================
