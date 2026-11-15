@@ -413,6 +413,7 @@
   // ---- кръг от домашното: играта с точните настройки от учителя; без „Настройки“ ----
   async function runHw(L, i) {
     gen++; const r = L.rounds[i], id = r.game, c = { ...defaults(id, true), ...r.set }; M = { free: true, hw: L.id, n: L.n, max: 9 };
+    const zf = zmGet().focus; if (zf && zf.L === L.id && (id === "flash" || id === "comet")) c.focus = zf.n;   // Г4: „Днес ще го хванем!“ – числото наистина идва
     try {
       gameShell(id, 0, c.rounds, `Занятие ${L.n} · кръг ${i + 1} от ${L.rounds.length}`); zr("zr-hi"); await talk(INTRO[id], "explain");
       const t0 = Date.now(), [ok, tot] = await PLAY[id](c); sendRound(L, i, id, ok, tot, t0);
@@ -726,9 +727,9 @@
   const thank = (v) => v <= 99 ? `Точно така! Това беше ${v}!` : "Точно така!";
   const dimAb = (rods) => `<div class="o-flash r${rods} o-dim">${abImg(0, rods)}<span>?</span></div>`;   // изгасен абакус с дискретно „?“
   // един „звезден сигнал“: число на абакуса за sec секунди → изгасен абакус → „Кое число видя?“ (3 бутона) → вярно / повторно показване и нов опит
-  async function signalRound(t, sec, k, rec, look) {   // look = вид „сигнал“: абакус (по подразбиране) или съзвездие
+  async function signalRound(t, sec, k, rec, look, force) {   // look = вид „сигнал“: абакус (по подразбиране) или съзвездие; force – числото е зададено (Г4)
     look = look || { draw: (v) => `<div class="o-flash r${t.rods} o-sig">${abImg(v, t.rods)}</div>`, dim: () => dimAb(t.rods), say: "Погледни абакуса!", again: "↺ Същият сигнал – още веднъж" };
-    const w = $("#o-work"), v = randVal(t); rec.n = v; rec.showMs = Math.round(sec * 1000); if (FAST_ON) window.OBS_T = { v };
+    const w = $("#o-work"), v = force != null ? force : randVal(t); rec.n = v; rec.showMs = Math.round(sec * 1000); if (FAST_ON) window.OBS_T = { v };
     const show = async (again) => { once(k || again ? 1 : 0, look.say, "point"); if (!again) await wait(900);
       w.innerHTML = `${again ? `<div class="o-again">${look.again}</div>` : ""}${look.draw(v)}`; await wait(sec * 1000); };
     await show(false);
@@ -840,6 +841,9 @@
     return TOP.findIndex(t => t.id === id) <= mx; };
   const lessonTopic = (n) => (HW.lessons.find(L => L.n === n) || {}).topic || TOPIC_OF[n] || "s9";
   // случайно число, позволено от темата (цифрите ≤ stateMax; кръгли/11–19)
+  // Г4: запомненото от Зори число идва 2 пъти в кръга (задачи 2 и 4; при по-къс кръг – веднъж) – само ако е в темата; бройката, скоростта и праговете са същите
+  const zfFits = (t, n) => t && t.rods === 1 && n >= 0 && n <= t.stateMax;
+  const zfAt = (c, t, k) => c.focus != null && zfFits(t, c.focus) && (c.rounds >= 4 ? [1, 3] : [1]).includes(k) ? c.focus : null;
   function randVal(t) {
     for (let g = 0; g < 200; g++) { const max = Math.pow(10, t.rods) - 1, v = Math.floor(Math.random() * (max + 1));
       const d = String(v).padStart(t.rods, "0").split("").map(Number);
@@ -946,7 +950,7 @@
     P.log = P.log || {}; P.log.flash = P.log.flash || [];
     for (let k = 0; k < c.rounds; k++) {
       pip(k); const rec = { t: Date.now(), topic: t.id, choice: null, correct: false, retries: 0, rtMs: null };
-      const first = await signalRound(t, sec, k, rec); if (first) { ok++; pipStar(k); } res.push(first);
+      const first = await signalRound(t, sec, k, rec, null, zfAt(c, t, k)); if (first) { ok++; pipStar(k); } res.push(first);
       track("fl", first, sec); P.log.flash.push(rec); if (P.log.flash.length > 300) P.log.flash.splice(0, P.log.flash.length - 300); save();
     }
     if (auto) sigAdapt(t.id, res);
@@ -994,7 +998,7 @@
     const t = topicFor(c.topic); let ok = 0, dur = +c.speed * 1000; const min = 2500, max = +c.speed * 1000 * 1.4;
     P.log = P.log || {}; P.log.comet = P.log.comet || [];
     for (let k = 0; k < c.rounds; k++) {
-      pip(k); const v = randVal(t) || 1, w = $("#o-work"); w.classList.add("o-skyfield");
+      pip(k); const zv = zfAt(c, t, k), v = zv != null ? zv : randVal(t) || 1, w = $("#o-work"); w.classList.add("o-skyfield");
       w.innerHTML = `<div class="o-csky"><div class="o-comet" id="o-comet">${CTAIL}<b>${v}</b></div><div class="o-cbar"><i id="o-cbar"></i></div></div><div class="o-abhost o-cab" id="o-abh"></div>`;
       const ab = abacus($("#o-abh"), t.rods); ab.enable(false); if (FAST_ON) window.OBS_T = { ab, v };
       if (!k) await talk("Нареди числото, преди кометата да отлети!", "point"); else { say("Ето още една комета!", "point"); await wait(700); }
@@ -1748,8 +1752,9 @@
   // начало на ново (още незапочнато) домашно → реплика или null
   function zmStart(L) {
     if (groupOf(P) !== "5" || !L) return null; const p = zmPrev(L.n); if (!p) return null; const key = L.id + "<" + p.L.id; if (zmGet().start === key) return null;
-    const m = zmOf(p.L), line = m.n != null ? ZM.nStart(m.n) : m.gaps.length ? ZM.start[m.gaps[0]] : m.good ? ZM.start.ok : null;
-    if (line) zmSet("start", key); return line;
+    const m = zmOf(p.L), canN = m.n != null && L.rounds.some(r => (r.game === "flash" || r.game === "comet") && zfFits(topicFor((r.set || {}).topic || L.topic), m.n));
+    const line = canN ? ZM.nStart(m.n) : m.gaps.length ? ZM.start[m.gaps[0]] : m.good ? ZM.start.ok : null;
+    if (line) { zmSet("start", key); zmSet("focus", canN ? { L: L.id, n: m.n } : null); } return line;
   }
   // край на домашното → реплика, ако днес е затворен пропуск от предишното (числото е познато, областта е над целта)
   function zmEnd(L) {
