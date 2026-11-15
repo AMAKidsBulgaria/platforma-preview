@@ -1,0 +1,104 @@
+/* Г3 „Дневник на наблюденията“ (js/obs/app.js → screenDiary): тетрадка на наблюдателя – кремава хартия с бледа мрежа, мастило, звезда-стикер.
+   Слоят за родителя (.dz-adult) се показва само при .dz-par – на синкава хартия, за да личи, че е друг читател. */
+:root { --dz-paper: #F7EFDD; --dz-paper2: #EFE4CB; --dz-ink: #262A5C; --dz-ink2: #5C5F86; --dz-rule: #262A5C14; --dz-gold: #D9A12B; --dz-adult: #E9EDF7; --dz-ok: #2E8A57; }
+
+/* бутонът в заглавието (сцената и стария начален екран) */
+.o-diarybtn { display: flex; align-items: center; gap: 6px; height: 48px; padding: 0 14px 0 10px; border-radius: 99px; background: #0d1030cc; border: 2px solid #ffffff30; color: var(--ink); font: 800 16px "Nunito"; cursor: pointer; flex: none; }
+.o-diarybtn svg { width: 26px; height: 26px; color: var(--gold); }
+.o-diarybtn:focus-visible, .dz-nav:focus-visible, .dz-pbtn:focus-visible, .dz-link:focus-visible, .dz-play:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+@media (max-width: 760px) { .o-diarybtn { height: 40px; width: 40px; padding: 0; justify-content: center; } .o-diarybtn b { display: none; } .o-diarybtn svg { width: 22px; height: 22px; } }
+.o-hhead .o-diarybtn { height: 44px; }
+/* краят на домашното: тиха връзка под бутоните */
+.dz-link { display: inline-flex; align-items: center; gap: 6px; margin: 10px auto 0; background: none; border: 0; color: var(--muted); font: 800 15px "Nunito"; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.dz-link svg { width: 20px; height: 20px; color: var(--gold); }
+
+/* екранът */
+.o-diary { background: radial-gradient(ellipse at 50% 20%, var(--night2), var(--night) 75%); display: flex; flex-direction: column; gap: 8px; }
+.dz-top { flex: none; }
+.dz-sum { flex: none; align-self: center; width: min(100%, 940px); box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; padding: 8px 14px; border-radius: 14px; background: var(--dz-adult); color: var(--dz-ink); font: 700 15px "Nunito"; }
+.dz-sum b { font-weight: 900; } .dz-sum[hidden] { display: none; }
+.dz-book { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 10px; width: min(100%, 860px); margin: 0 auto; touch-action: pan-y; }
+.dz-par .dz-book { width: min(100%, 1060px); }
+.dz-nav { width: 52px; height: 52px; border-radius: 50%; border: 2px solid #ffffff40; background: #0d1030cc; color: var(--gold); cursor: pointer; display: grid; place-items: center; padding: 0; }
+.dz-nav svg { width: 24px; height: 24px; }
+.dz-nav:disabled { opacity: .25; cursor: default; }
+.dz-dots { flex: none; display: flex; justify-content: center; gap: 7px; min-height: 12px; color: var(--muted); font: 800 14px "Nunito"; }
+.dz-dots i { width: 9px; height: 9px; border-radius: 50%; background: #ffffff33; } .dz-dots i.on { background: var(--gold); transform: scale(1.25); }
+.dz-foot { flex: none; display: flex; justify-content: center; }
+.dz-pbtn { position: relative; overflow: hidden; display: inline-flex; align-items: baseline; gap: 8px; padding: 9px 18px; border-radius: 99px; background: #0d1030cc; border: 2px solid #ffffff30; color: var(--muted); font: 800 15px "Nunito"; cursor: pointer; touch-action: none; }
+.dz-pbtn small { font-weight: 700; opacity: .75; } .dz-pbtn.on small { display: none; } .dz-pbtn.on { color: var(--ink); border-color: #ffffff60; }
+.dz-pbtn i { position: absolute; left: 0; bottom: 0; height: 3px; width: 0; background: var(--gold); } .dz-pbtn.hold i { width: 100%; transition: width 1s linear; }
+
+/* страницата */
+.dz-page { position: relative; height: 100%; max-height: 100%; min-height: 0; overflow: auto; overscroll-behavior: contain; box-sizing: border-box; padding: 18px 20px 20px 34px; border-radius: 10px 18px 18px 10px; color: var(--dz-ink);
+  background: linear-gradient(90deg, #00000014, transparent 26px), repeating-linear-gradient(0deg, transparent 0 27px, var(--dz-rule) 27px 28px), repeating-linear-gradient(90deg, transparent 0 27px, var(--dz-rule) 27px 28px), var(--dz-paper);
+  box-shadow: 0 1px 0 #fff8 inset, 0 18px 40px #0008, -6px 0 0 -2px #8A5A2B, -8px 0 0 -2px #5E3A19; user-select: text; }
+.dz-page::before { content: ""; position: absolute; left: 14px; top: 16px; bottom: 16px; border-left: 2px dashed #8A5A2B55; }
+.dz-page.gold { box-shadow: 0 0 0 3px var(--dz-gold) inset, 0 0 0 7px var(--dz-paper) inset, 0 0 0 8px #D9A12B88 inset, 0 18px 40px #0008, 0 0 40px #F5C04A33, -6px 0 0 -2px #8A5A2B, -8px 0 0 -2px #5E3A19; }
+.dz-ph { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font: 700 26px/1 "Caveat", "Nunito", cursive; color: var(--dz-ink2); border-bottom: 2px solid var(--dz-rule); padding-bottom: 6px; }
+.dz-ph time { font-size: 24px; }
+.dz-kid { display: flex; flex-direction: column; align-items: center; gap: 10px; padding-top: 6px; }
+.dz-hero { display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; }
+.dz-hero h2 { margin: 0; font: 900 clamp(22px, 5.4vw, 30px)/1.12 "Nunito"; color: var(--dz-ink); text-wrap: balance; }
+.dz-st { width: clamp(96px, 26vw, 140px); height: auto; overflow: visible; }
+.dz-st .dz-sg { fill: #F5C04A; opacity: 0; } .dz-st .dz-sh { fill: none; stroke: var(--dz-gold); stroke-width: 3; stroke-dasharray: 2 7; stroke-linecap: round; }
+.dz-st .dz-sp { fill: none; stroke: var(--dz-ink); stroke-width: 3; stroke-linejoin: round; stroke-dasharray: 5 6; }
+.dz-st.b1 .dz-sp { fill: #F5C04A55; stroke: #B8861E; stroke-dasharray: none; } .dz-st.b2 .dz-sp { fill: #F5C04Aaa; stroke: #B8861E; stroke-dasharray: none; }
+.dz-st.b3 .dz-sp { fill: #F5C04A; stroke: #A87414; stroke-dasharray: none; } .dz-st.b3 .dz-sg { opacity: .22; }
+.dz-st.b1 .dz-sg { opacity: .06; } .dz-st.b2 .dz-sg { opacity: .12; }
+.dz-bright { display: flex; align-items: center; gap: 2px; font-size: 22px; color: #C9BFA4; } .dz-bright span.on { color: var(--dz-gold); }
+.dz-bright em { margin-left: 8px; font: 800 14px "Nunito"; font-style: normal; color: #A87414; }
+.dz-const { display: grid; justify-items: center; gap: 2px; width: min(100%, 360px); padding: 6px 10px 10px; border-radius: 14px; background: #1A1F52; }
+.dz-const svg { width: 100%; height: auto; max-height: 150px; } .dz-const .dz-cst { fill: #FFE9A8; } .dz-const b { color: #FFE08A; font: 900 16px "Nunito"; }
+.dz-games { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.dz-games span { width: 46px; height: 46px; border-radius: 12px; background: #1E2350; padding: 4px; box-sizing: border-box; box-shadow: 0 2px 0 #0003; } .dz-games svg { width: 100%; height: 100%; display: block; }
+.dz-zori { display: flex; align-items: flex-end; gap: 6px; width: min(100%, 520px); }
+.dz-zori .o-zori { width: clamp(64px, 17vw, 92px); height: auto; flex: none; }
+.dz-note { position: relative; flex: 1; min-width: 0; margin: 0 0 14px; padding: 10px 14px; border-radius: 16px 16px 16px 4px; background: #fff; color: #2B1A05; font: 800 17px/1.35 "Nunito"; box-shadow: 0 3px 10px #0002; }
+.dz-play { flex: none; align-self: center; width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--dz-rule); background: #fff; font-size: 20px; cursor: pointer; margin-bottom: 14px; }
+
+/* слоят за родителя */
+.dz-adult { display: none; margin-top: 14px; padding: 12px 14px 14px; border-radius: 12px; background: var(--dz-adult); font: 600 15px/1.45 "Nunito"; color: var(--dz-ink); position: relative; }
+.dz-adult::before { content: "За родителя"; position: absolute; top: -11px; left: 12px; padding: 2px 10px; border-radius: 99px; background: var(--dz-ink); color: #fff; font: 800 12px "Nunito"; letter-spacing: .04em; }
+.dz-par .dz-adult { display: block; }
+.dz-adult h3 { margin: 10px 0 2px; font: 900 12px "Nunito"; letter-spacing: .08em; text-transform: uppercase; color: var(--dz-ink2); }
+.dz-adult p { margin: 0; max-width: 62ch; }
+.dz-acc { display: grid; gap: 4px; }
+.dz-acc div { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 10px; padding: 6px 10px; border-radius: 10px; background: #ffffffb0; }
+.dz-acc span { font-weight: 800; } .dz-acc small { display: block; font-weight: 700; font-size: 12px; color: var(--dz-ink2); }
+.dz-acc b { font: 900 18px "Nunito"; } .dz-acc i { font-style: normal; font-weight: 800; font-size: 13px; color: var(--dz-ink2); } .dz-acc i.on { color: var(--dz-ok); }
+.dz-tip { margin-top: 12px; padding: 10px 12px; border-left: 4px solid var(--dz-gold); border-radius: 0 10px 10px 0; background: #FFF8E6; }
+.dz-tip b { display: block; font: 900 13px "Nunito"; letter-spacing: .04em; color: #8A5A10; margin-bottom: 2px; }
+
+/* празен дневник */
+.dz-empty { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center; }
+.dz-empty .o-zori { width: 120px; } .dz-empty p { max-width: 30ch; margin: 0; font: 800 19px/1.4 "Nunito"; color: var(--ink); }
+
+/* прелистване */
+.dz-in-r { animation: dz-r .32s ease-out; } .dz-in-l { animation: dz-l .32s ease-out; }
+@keyframes dz-r { from { opacity: 0; transform: translateX(26px) rotate(.6deg); } } @keyframes dz-l { from { opacity: 0; transform: translateX(-26px) rotate(-.6deg); } }
+.o-calm .dz-in-r, .o-calm .dz-in-l, .o-still .dz-in-r, .o-still .dz-in-l { animation: none; }
+@media (prefers-reduced-motion: reduce) { .dz-in-r, .dz-in-l { animation: none; } .dz-pbtn.hold i { transition: none; } }
+
+/* телефон: стрелките – под страницата */
+@media (max-width: 640px) {
+  .dz-book { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; gap: 8px; }
+  .dz-page { grid-column: 1 / 3; grid-row: 1; padding: 14px 14px 16px 28px; } .dz-page::before { left: 11px; }
+  #dz-prev { grid-row: 2; grid-column: 1; justify-self: end; } #dz-next { grid-row: 2; grid-column: 2; justify-self: start; }
+  .dz-nav { width: 46px; height: 46px; }
+  /* с бележките за родителя детската част се свива, за да се виждат бележките */
+  .dz-par .dz-st { width: 64px; } .dz-par .dz-hero h2 { font-size: 20px; } .dz-par .dz-games span { width: 36px; height: 36px; } .dz-par .dz-zori .o-zori { width: 54px; } .dz-par .dz-note { font-size: 15px; }
+  .dz-par .dz-kid { gap: 6px; }
+  .dz-acc div { grid-template-columns: minmax(0, 1fr) auto; row-gap: 0; } .dz-acc i { grid-column: 2; justify-self: end; font-size: 12px; } .dz-acc span { grid-row: 1 / 3; }
+  .dz-dots { order: 0; } .dz-ph { font-size: 23px; } .dz-ph time { font-size: 21px; }
+}
+/* широк екран с бележките за родителя: детето вляво, родителят вдясно */
+@media (min-width: 900px) and (min-height: 560px) {
+  .dz-par .dz-page { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); grid-template-rows: auto 1fr; column-gap: 26px; align-items: start; }
+  .dz-par .dz-ph { grid-column: 1 / 3; } .dz-par .dz-adult { margin-top: 18px; }
+}
+/* легнал телефон: звездата до текста */
+@media (max-height: 520px) and (orientation: landscape) {
+  .dz-kid { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; column-gap: 16px; }
+  .dz-hero { grid-row: 1 / 4; } .dz-st { width: 90px; } .dz-zori .o-zori { width: 60px; }
+}

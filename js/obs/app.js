@@ -122,7 +122,7 @@
 
   // ---- глас: Зори (zr_*), иначе разказвачът (Калина) ----
   let AUDZ = {}, AUD = {}, cur = null;
-  fetch("config/abacus-audio-zori.json?v=16").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
+  fetch("config/abacus-audio-zori.json?v=17").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
   fetch("config/abacus-audio.json?v=4").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
   // „пораснал“ режим (7+, 11.11.2026): Зори е спътник – кратки реплики, само текст (гласът по избор: P.zv); рекорди и значки
   const grown = () => !!P && groupOf(P) !== "5";
@@ -269,7 +269,7 @@
     app.innerHTML = `<section class="o-hub">
       <header class="o-hhead"><a class="o-hh" href="index.html" aria-label="Към Моят свят">⌂</a><img class="o-hz" src="assets/img/zori/z_explain.png" alt=""><b>Ментална аритметика</b>${REVIEW ? '<span class="o-review">преглед</span>' : ""}<span class="o-sp"></span>
         <a class="o-abac" href="abacus-app.html?p=${encodeURIComponent(P.id)}" aria-label="Абакус"><svg viewBox="0 0 40 32" aria-hidden="true"><rect x="2" y="2" width="36" height="28" rx="5" fill="none" stroke="currentColor" stroke-width="3"/><path d="M2 12h36M12 2v28M20 2v28M28 2v28" stroke="currentColor" stroke-width="2"/><g fill="#5BE08A"><rect x="7.5" y="5" width="9" height="5" rx="2.5"/><rect x="15.5" y="14" width="9" height="5" rx="2.5"/><rect x="23.5" y="14" width="9" height="5" rx="2.5"/><rect x="23.5" y="20" width="9" height="5" rx="2.5"/></g></svg><b>Абакус</b></a>
-        <button class="o-teach" id="o-teach" aria-label="За учителя (задръж)">👩‍🏫<i></i></button><button class="o-me" id="o-me"><img src="assets/img/world/avatars/${P.av}.webp" alt=""><b>${P.name}</b><span>смени</span></button></header>
+        <button class="o-diarybtn" id="o-diary" type="button" aria-label="Дневник на наблюденията">${BOOK}<b>Дневник</b></button><button class="o-teach" id="o-teach" aria-label="За учителя (задръж)">👩‍🏫<i></i></button><button class="o-me" id="o-me"><img src="assets/img/world/avatars/${P.av}.webp" alt=""><b>${P.name}</b><span>смени</span></button></header>
       <div class="o-hgrid">
         <div class="o-hero">
           <div class="o-hbg"></div><button class="o-hwin" id="o-win" aria-label="Звездна карта"><div class="o-proj">${skySVG({ vb: regionOf(classAt()) === "orion" ? "1490 100 520 520" : "40 80 460 460" })}</div><div class="o-glass"></div></button>
@@ -289,7 +289,7 @@
     $("#o-go").onclick = () => isTutor() ? runTutor() : L ? runHw(L, st.next) : screenMap();
     const ob = $("#o-older"); if (ob) ob.onclick = () => { const O = older[older.length - 1]; runHw(O, hwState(O).next); };
     $("#o-map").onclick = () => screenMap(); $("#o-games").onclick = screenGames; $("#o-win").onclick = () => screenMap(); $("#o-me").onclick = screenAvatar; const kb = $("#o-kid"); if (kb) kb.onclick = screenAvatar;
-    holdBtn($("#o-teach"), screenTeacher);
+    holdBtn($("#o-teach"), screenTeacher); $("#o-diary").onclick = () => screenDiary();
   }
 
   // ======================= ИНТЕРАКТИВНАТА ОБСЕРВАТОРИЯ (Фаза 1, ?scene=1, 13.11.2026) =======================
@@ -340,10 +340,11 @@
         seamless: () => !!window.ObsJourney && !FAST_ON && !!(tutor || L) });
       SC.ui.insertAdjacentHTML("afterbegin", `<header class="os-head"><a class="o-hh" href="index.html" aria-label="Към Моят свят">⌂</a>
           <div class="os-title"><b><span class="os-tl">Звездна обсерватория</span><span class="os-ts">Обсерватория</span></b><small>${regionOf(classAt()) === "orion" ? "Област Орион" : "Област Аврора"}</small></div>${REVIEW ? '<span class="o-review">преглед</span>' : ""}<span class="o-sp"></span>
+          <button class="o-diarybtn" id="o-diary" type="button" aria-label="Дневник на наблюденията">${BOOK}<b>Дневник</b></button>
           <button class="o-teach" id="o-teach" type="button" aria-label="За учителя (задръж)">👩‍🏫<i></i></button>
           <button class="o-me" id="o-me" type="button"><img src="assets/img/world/avatars/${P.av}.webp" alt=""><b>${P.name}</b><span>смени</span></button></header>
         ${older.length ? `<button class="os-older" id="o-older" type="button">Доиграй: занятие ${older[older.length - 1].n}</button>` : ""}`);
-      $("#o-me").onclick = leave(screenAvatar); holdBtn($("#o-teach"), leave(screenTeacher));
+      $("#o-me").onclick = leave(screenAvatar); holdBtn($("#o-teach"), leave(screenTeacher)); $("#o-diary").onclick = leave(() => screenDiary());
       const ob = $("#o-older"); if (ob) ob.onclick = leave(() => { const O = older[older.length - 1], nx = hwState(O).next;
         journey({ n: O.n, kicker: `Занятие ${O.n}`, title: O.title.split(" · ")[0], sub: `${O.rounds[nx].label} · кръг\u00a0${nx + 1}\u00a0от\u00a0${O.rounds.length}` }, () => { JS = starSnap(O.n); runHw(O, nx); }); });
       SC.layout(); if (!guide && !intro && !back && !dp) voice(line);
@@ -457,11 +458,13 @@
       <h2 role="status">Домашното за занятие ${n} е готово!<small>Всички ${N} кръга са изиграни</small></h2>
       <div class="ol-sec"><em>Точност</em><div class="ol-acc">${crit.map(([t, x, need]) => `<div><span>${t}<small>${x == null ? "няма такъв кръг" : `праг ${need}%`}</small></span><b>${pc(x)}</b><i class="${x != null && x * 100 >= need ? "on" : ""}" aria-label="${x != null && x * 100 >= need ? "над прага" : "под прага"}">${x == null ? "" : x * 100 >= need ? "✓" : "·"}</i></div>`).join("")}</div></div>
       <div class="ol-sec"><em>Яркост на звездата</em><div class="ol-star"><div class="o-stars" aria-label="Яркост ${after} от 3">${[0, 1, 2].map(k => `<span class="${k < after ? "on" : ""}${up && k >= before && k < after ? " up" : ""}" style="animation-delay:${2.1 + (k - before) * .25}s">★</span>`).join("")}</div><p>${cap[0]}<small>${cap[1]}</small></p></div></div>
-      <div class="o-sbar"><button class="o-sec" id="o-tomap">Към картата</button><button class="o-go" id="o-home">Към обсерваторията</button></div></div>`;
+      <div class="o-sbar"><button class="o-sec" id="o-tomap">Към картата</button><button class="o-go" id="o-home">Към обсерваторията</button></div>
+      <button class="dz-link" id="o-todiary" type="button">${BOOK}Виж страницата в дневника</button></div>`;
     say(up ? "Небето е подредено за тази вечер. Звездата стана по-ярка!" : "Браво! Домашното е готово.", "joy"); zr("zr-big"); if (up) burst();
     const g0 = gen, cheer = $("#ol-cheer"), toReport = () => { if (g0 !== gen || !cheer.isConnected || cheer.classList.contains("gone")) return; cheer.classList.add("gone"); app.classList.remove("ol-pre"); setTimeout(() => cheer.remove(), 500); };
     cheer.onclick = toReport; setTimeout(toReport, matchMedia("(prefers-reduced-motion: reduce)").matches ? 1200 : 1800);
-    $("#o-tomap").onclick = () => screenMap(n); $("#o-home").onclick = one(() => backHome("hw"));
+    $("#o-tomap").onclick = () => screenMap(n); const home = one(() => backHome("hw")); $("#o-home").onclick = home;
+    $("#o-todiary").onclick = () => screenDiary({ at: n, back: home });   // от дневника – към обсерваторията (откриването, ако чака, идва там)
   }
   // ---- „За учителя“ (демо, задръж): кое занятие е проведено, докъде е домашното; таблицата за отключване на игрите (за ревизия) ----
   function screenTeacher() {
@@ -557,12 +560,12 @@
     gen++; const reg = mapRegion || regionOf(focus || classAt()); mapRegion = reg; const orionOpen = visibleC("O");
     app.className = "o-scr o-map";
     app.innerHTML = `<div class="o-maptop"><button class="o-back" id="o-back">← Към обсерваторията</button><div class="o-grow"><div class="o-mt">${reg === "orion" ? "Орион" : "Аврора"}</div><div class="o-ms">${reg === "orion" ? "втората област · модул „Братя“" : "първата област от небето · модул „Просто“"}</div></div>
-      <div class="o-regs" role="tablist"><button role="tab" data-r="aurora" aria-selected="${reg === "aurora"}">Аврора</button><button role="tab" data-r="orion" aria-selected="${reg === "orion"}">${orionOpen ? "" : "🔒 "}Орион</button></div><button class="o-sec" id="o-mg">Игри ✦</button>${hwCurrent() ? `<button class="o-go sm" id="o-mc">▶ Продължи</button>` : ""}</div>
+      <div class="o-regs" role="tablist"><button role="tab" data-r="aurora" aria-selected="${reg === "aurora"}">Аврора</button><button role="tab" data-r="orion" aria-selected="${reg === "orion"}">${orionOpen ? "" : "🔒 "}Орион</button></div><button class="o-sec" id="o-mg">Игри ✦</button><button class="o-sec" id="o-md">Дневник</button>${hwCurrent() ? `<button class="o-go sm" id="o-mc">▶ Продължи</button>` : ""}</div>
       <div class="o-mapwrap">${skySVG({ labels: 1, far: 1, focus, vb: REGION_VB[reg] })}${reg === "orion" && !orionOpen ? `<div class="o-regnote"><b>Орион · Братя</b>Следващата област. Отваря се след „Просто“.</div>` : ""}</div>
       <div class="o-card" id="o-card" hidden></div>
       <div class="o-legend"><span><i class="lk"></i>предстои</span><span><i class="lv1"></i>упражняваме</span><span><i class="lv3"></i>научено</span><span><i class="rv"></i>проверено след време</span><span><i class="mind">✦</i>и наум</span></div>`;
     app.querySelectorAll(".o-regs button").forEach(b => b.onclick = () => { mapRegion = b.dataset.r; screenMap(); });
-    $("#o-back").onclick = () => { mapRegion = null; screenHome(); }; $("#o-mg").onclick = screenGames; const mc = $("#o-mc"); if (mc) mc.onclick = () => { const L = hwCurrent(); runHw(L, hwState(L).next); };
+    $("#o-back").onclick = () => { mapRegion = null; screenHome(); }; $("#o-mg").onclick = screenGames; $("#o-md").onclick = () => screenDiary({ back: () => screenMap() }); const mc = $("#o-mc"); if (mc) mc.onclick = () => { const L = hwCurrent(); runHw(L, hwState(L).next); };
     app.querySelectorAll(".o-star").forEach(g => g.addEventListener("click", () => card(+g.dataset.n)));
     app.querySelectorAll(".o-fighit").forEach(h => h.addEventListener("click", () => ccard(h.dataset.c)));
     if (focus) card(focus);
@@ -859,7 +862,8 @@
     app.innerHTML = `<div class="o-mtop"><button class="o-back" id="o-gx">✕ Изход</button>${hwTitle ? "" : `<button class="o-back o-adult" id="o-gs"><i></i>⚙ <small>задръж</small></button>`}
       <div class="o-pips">${Array.from({ length: total }, (_, j) => `<b class="${j < round ? "d" : j === round ? "c" : ""}"></b>`).join("")}</div><div class="o-mname">${GAMES[id].name}${hwTitle ? `<small>${hwTitle}</small>` : ""}</div></div>
       <div class="o-mbody"><div class="o-mz">${zori("explain")}<div class="o-say"></div></div><div class="o-mwork" id="o-work"></div></div>`;
-    $("#o-gx").onclick = () => { gen++; if (hwTitle) { BACK = { kind: "exit" }; screenHome(); } else screenGames(); };   // доброволен изход – спокойно завръщане, без празнуване if (!hwTitle) holdBtn($("#o-gs"), () => { gen++; screenSettings(id); });
+    // доброволен изход – спокойно завръщане, без празнуване
+    $("#o-gx").onclick = () => { gen++; if (hwTitle) { BACK = { kind: "exit" }; screenHome(); } else screenGames(); }; if (!hwTitle) holdBtn($("#o-gs"), () => { gen++; screenSettings(id); });
   }
   const inMission = () => !!M && !M.free;
   function pip(round) { const b = app.querySelectorAll(".o-game .o-pips b"); b.forEach((x, j) => { const st = x.classList.contains("star"); x.className = j < round ? "d" : j === round ? "c" : ""; if (st) x.classList.add("star"); }); }
@@ -1673,6 +1677,76 @@
       </div>`;
     $("#o-back").onclick = screenTeacher;
   }
-  window.OBS = { _scene: () => SC, _discover: (id) => discover(id), _discPending: () => discPending(), _intro: (n) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return digitIntro(n); }, _trace: (n) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return traceDigit(n); }, _tchain: (id, mind) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return tChain(TU.BY[id], { count: 5, speed: 2 }, mind); }, runTutor, screenParentReport, screenRegion, _track: (k, r, s) => track(k, r, s), _const: (v, r, d) => constSVG(v, r, d), _hw: () => HW, runHw, screenTeacher, _hwComplete: (n) => hwComplete(HW.lessons.find(x => x.n === n)), _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
+
+  // ======================= Г3 „ДНЕВНИК НА НАБЛЮДЕНИЯТА“ (15.11.2026) =======================
+  // По една страница за всяко завършено домашно – само от вече записаното (hwres, P.b, ореол, проверка след време). Дневникът нищо не записва.
+  // Детето вижда звездата, игрите и бележката на Зори; родителят (задържане) вижда и какво е упражнено, точността спрямо праговете и идея за вкъщи.
+  let DIARY = {}; fetch("config/ma-diary.json?v=1").then(r => r.ok ? r.json() : {}).then(j => { DIARY = j.lessons || {}; }).catch(() => {});
+  const DZ_EMPTY = "Тук ще пишем какво сме открили. Първата страница идва след първото домашно.";
+  const BOOK = `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v15H5.5C4.7 19 4 19.7 4 20.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v15h5.5c.8 0 1.5.7 1.5 1.5z"/><path d="M16.5 7.5l.5 1.2 1.3.1-1 .8.3 1.3-1.1-.7-1.1.7.3-1.3-1-.8 1.3-.1z" fill="currentColor" stroke="none"/></svg>`;
+  function diaryPages() {
+    return HW.lessons.filter(L => hwState(L).complete).map(L => {
+      const res = Object.values((P.hwres || {})[L.id] || {}), t = Math.max(0, ...res.map(x => x.t || 0));
+      const sum = (f) => res.filter(f).reduce((a, x) => [a[0] + x.ok, a[1] + x.tot], [0, 0]), q = (a) => a[1] ? a[0] / a[1] : null;
+      const acc = [["Звездни сигнали", q(sum(x => x.game === "flash")), 80], ["Абакус", q(sum(x => x.game === "trainer" && x.mode === "ab")), 75], ["Без телескоп", q(sum(x => x.game === "trainer" && x.mode === "mind")), 67]];
+      const c = STAR[L.n] && STAR[L.n].big ? STAR[L.n].c : null;
+      return { L, n: L.n, t, acc, games: [...new Set(L.rounds.map(r => r.game))].filter(id => ICON[id]), fig: c && figShown(c) ? c : null };
+    }).sort((a, b) => (a.t || 0) - (b.t || 0) || a.n - b.n);
+  }
+  function screenDiary(o) {
+    o = o || {}; sceneOff(); gen++; const g = gen, back = o.back || screenHome, pages = diaryPages(), five = groupOf(P) === "5";
+    let i = pages.length - 1, par = false, parAt = 0; if (o.at != null) { const k = pages.findIndex(p => p.n === o.at); if (k >= 0) i = k; }
+    const day = (t) => new Date(t).toLocaleDateString("bg-BG", { day: "numeric", month: "long" }), pc = (x) => Math.round(x * 100) + "%";
+    const starIc = (b, halo) => `<svg class="dz-st b${b}${halo ? " halo" : ""}" viewBox="-60 -60 120 120" aria-hidden="true"><circle class="dz-sg" r="54"/>${halo ? '<circle class="dz-sh" r="50"/>' : ""}
+      <path class="dz-sp" d="M0 -40L11 -12L40 -10L17 8L25 38L0 21L-25 38L-17 8L-40 -10L-11 -12Z"/></svg>`;
+    const page = (p) => { const n = p.n, D = five ? DIARY[n] || null : null, b = P.b[n] || 0, halo = !!(P.halo || {})[n], rev = !!(P.rev || {})[n];
+      const note = D ? D.zori : `Упражнявахме: ${p.L.title}.`, F = p.fig && window.ObsDiscover ? window.ObsDiscover.FIG[p.fig] : null, C = p.fig ? CONST.find(c => c.id === p.fig) : null;
+      const acc = p.acc.filter(a => a[1] != null);
+      return `<header class="dz-ph"><span>Занятие ${n}</span>${p.t ? `<time>${day(p.t)}</time>` : ""}</header>
+        <div class="dz-kid"><div class="dz-hero">${starIc(b, halo)}<h2>${p.L.title.replace(" · ", "<br>")}</h2>
+          <div class="dz-bright" aria-label="Яркост на звездата: ${b} от 3">${[0, 1, 2].map(k => `<span class="${k < b ? "on" : ""}">★</span>`).join("")}${halo ? "<em>✦ и наум</em>" : ""}</div></div>
+          ${F ? `<div class="dz-const"><svg viewBox="${F.vb}" aria-hidden="true">${window.ObsDiscover.figure(p.fig, { cls: "hl" })}${cStars(p.fig).map(s => `<circle class="dz-cst" cx="${s[2]}" cy="${s[3]}" r="${s[4] ? 9 : 6}"/>`).join("")}</svg><b>Ново съзвездие: ${C.name}</b></div>` : ""}
+          <div class="dz-games" aria-label="Изиграни игри">${p.games.map(id => `<span title="${GAMES[id].name}">${ICON[id]}</span>`).join("")}</div>
+          <div class="dz-zori">${zori("joy")}<p class="dz-note">${note}</p>${D ? '<button class="dz-play" type="button" aria-label="Чуй отново">🔊</button>' : ""}</div></div>
+        <section class="dz-adult" aria-label="За родителя">
+          <h3>Какво е упражнено</h3><p>${D ? D.learned : p.L.title}</p>
+          ${acc.length ? `<h3>Точност</h3><div class="dz-acc">${acc.map(([t, x, need]) => `<div><span>${t}<small>праг ${need}%</small></span><b>${pc(x)}</b><i class="${x * 100 >= need ? "on" : ""}">${x * 100 >= need ? "✓ над прага" : "още упражнение"}</i></div>`).join("")}</div>` : ""}
+          <h3>Звездата сега</h3><p>Яркост ${b} от 3${halo ? " · смята и наум (ореол)" : ""}${rev ? " · проверена след време" : ""}</p>
+          ${D ? `<div class="dz-tip"><b>Идея за вкъщи</b>${D.home}</div>` : ""}</section>`; };
+    const sum7 = () => { const wk = Date.now() - 7 * 864e5, days = new Set(), L = P.log || {};
+      Object.values(P.hwres || {}).forEach(r => Object.values(r || {}).forEach(x => { if (x && x.t > wk) days.add(new Date(x.t).toDateString()); }));
+      Object.values(L).forEach(a => (Array.isArray(a) ? a : []).forEach(x => { if (x && x.t > wk) days.add(new Date(x.t).toDateString()); }));
+      const done = pages.filter(p => p.t > wk).length;
+      return `<b>Последните 7 дни</b><span>${done} ${done === 1 ? "готово домашно" : "готови домашни"} · упражнения в ${days.size} ${days.size === 1 ? "ден" : "дни"}</span>`; };
+    app.className = "o-scr o-diary";
+    app.innerHTML = `<div class="o-maptop dz-top"><button class="o-back" id="o-back">← Назад</button><div class="o-grow"><div class="o-mt">Дневник на наблюденията</div><div class="o-ms">${P.name}${pages.length ? ` · ${pages.length} ${pages.length === 1 ? "страница" : "страници"}` : ""}</div></div></div>
+      <div class="dz-sum" id="dz-sum" hidden></div>
+      ${pages.length ? `<div class="dz-book"><button class="dz-nav" id="dz-prev" type="button" aria-label="Предишна страница"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><article class="dz-page" id="dz-page"></article><button class="dz-nav" id="dz-next" type="button" aria-label="Следваща страница"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button></div>
+      <div class="dz-dots" id="dz-dots" aria-hidden="true"></div>` : `<div class="dz-empty">${zori("explain")}<p>${DZ_EMPTY}</p></div>`}
+      <div class="dz-foot">${pages.length ? `<button class="dz-pbtn" id="dz-par" type="button"><i></i><span>За родителя</span><small>задръж</small></button>` : ""}</div>`;
+    const stop = () => { try { if (cur) cur.pause(); } catch (e) {} };
+    $("#o-back").onclick = () => { gen++; stop(); document.removeEventListener("keydown", onKey); back(); };
+    const onKey = (e) => { if (g !== gen) return document.removeEventListener("keydown", onKey); if (e.key === "ArrowLeft") go(-1); if (e.key === "ArrowRight") go(1); };
+    if (!pages.length) { voice(DZ_EMPTY); return; }
+    document.addEventListener("keydown", onKey);
+    function render(dir, silent) { const p = pages[i], el = $("#dz-page");
+      el.className = "dz-page" + (p.fig ? " gold" : "") + (dir ? (dir > 0 ? " dz-in-r" : " dz-in-l") : ""); el.innerHTML = page(p); el.setAttribute("aria-label", `Страница ${i + 1} от ${pages.length}`);
+      $("#dz-prev").disabled = i === 0; $("#dz-next").disabled = i === pages.length - 1;
+      $("#dz-dots").innerHTML = pages.length <= 12 ? pages.map((_, k) => `<i class="${k === i ? "on" : ""}"></i>`).join("") : `<span>${i + 1} / ${pages.length}</span>`;
+      app.classList.toggle("dz-par", par); const sm = $("#dz-sum"); sm.hidden = !par; if (par) sm.innerHTML = sum7();
+      const pb = $("#dz-par"); pb.querySelector("span").textContent = par ? "Скрий бележките за родителя" : "За родителя"; pb.classList.toggle("on", par);
+      const pl = el.querySelector(".dz-play"), D = five ? DIARY[p.n] : null; if (pl) pl.onclick = () => voice(D.zori);
+      if (par && dir) toAdult(); if (!silent && !par && D) voice(D.zori); }
+    function go(d) { const k = i + d; if (k < 0 || k >= pages.length) return; i = k; render(d); }
+    $("#dz-prev").onclick = () => go(-1); $("#dz-next").onclick = () => go(1);
+    let sx = null; const bk = $(".dz-book");
+    bk.addEventListener("pointerdown", (e) => { sx = e.clientX; }); bk.addEventListener("pointerup", (e) => { if (sx == null) return; const dx = e.clientX - sx; sx = null; if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1); });
+    // за родителя: задържане (не е защита – само да не се отваря случайно от детето); скриването – с едно докосване
+    const pb = $("#dz-par"); holdBtn(pb, () => { if (!par) { par = true; parAt = Date.now(); render(0, true); toAdult(); } });
+    const toAdult = () => { const ad = $(".dz-adult"), pg = $("#dz-page"); if (ad && pg && getComputedStyle(pg).display !== "grid") pg.scrollTop = ad.offsetTop - 24; };   // телефон: бележките – в полезрението
+    pb.addEventListener("click", () => { if (par && Date.now() - parAt > 700) { par = false; render(0, true); } });
+    render(0);
+  }
+  window.OBS = { screenDiary, _diaryPages: () => diaryPages(), _scene: () => SC, _discover: (id) => discover(id), _discPending: () => discPending(), _intro: (n) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return digitIntro(n); }, _trace: (n) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return traceDigit(n); }, _tchain: (id, mind) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return tChain(TU.BY[id], { count: 5, speed: 2 }, mind); }, runTutor, screenParentReport, screenRegion, _track: (k, r, s) => track(k, r, s), _const: (v, r, d) => constSVG(v, r, d), _hw: () => HW, runHw, screenTeacher, _hwComplete: (n) => hwComplete(HW.lessons.find(x => x.n === n)), _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
     testFinish: (n, r) => { M = Object.assign({ n, ex: [], par: PAR[n], max: MAXN[n], flash: [5, 6], ab: [3, 4], meth: [3, 4], im: [2, 3], help: 0 }, r || {}); return finish(); } };   // само за проверки
 })();
