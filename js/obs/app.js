@@ -122,7 +122,7 @@
 
   // ---- глас: Зори (zr_*), иначе разказвачът (Калина) ----
   let AUDZ = {}, AUD = {}, cur = null;
-  fetch("config/abacus-audio-zori.json?v=18").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
+  fetch("config/abacus-audio-zori.json?v=19").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
   fetch("config/abacus-audio.json?v=4").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
   // „пораснал“ режим (7+, 11.11.2026): Зори е спътник – кратки реплики, само текст (гласът по избор: P.zv); рекорди и значки
   const grown = () => !!P && groupOf(P) !== "5";
@@ -1695,7 +1695,7 @@
   // ======================= Г3 „ДНЕВНИК НА НАБЛЮДЕНИЯТА“ (15.11.2026) =======================
   // По една страница за всяко завършено домашно – само от вече записаното (hwres, P.b, ореол, проверка след време). Дневникът нищо не записва.
   // Детето вижда звездата, игрите и бележката на Зори; родителят (задържане) вижда и какво е упражнено, точността спрямо праговете и идея за вкъщи.
-  let DIARY = {}, DZA = {}, DZG = ""; fetch("config/ma-diary.json?v=2").then(r => r.ok ? r.json() : {}).then(j => { DIARY = j.lessons || {}; DZA = j.areas || {}; DZG = j.general || ""; }).catch(() => {});
+  let DIARY = {}, DZA = {}, DZG = ""; fetch("config/ma-diary.json?v=3").then(r => r.ok ? r.json() : {}).then(j => { DIARY = j.lessons || {}; DZA = j.areas || {}; DZG = j.general || ""; }).catch(() => {});
   const DZNEED = { fl: 80, ab: 75, im: 67 };
   // резултатите по области от кръговете на домашното (hwres) + подробности от записа на всяка задача (P.log) в прозореца на всеки кръг:
   // кои числа е объркало при разпознаването / кометата и кои примери не е решило. Само четене.
