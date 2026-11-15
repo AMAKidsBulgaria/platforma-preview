@@ -1345,6 +1345,13 @@
       if (L9) { p0.hw[L9.id] = L9.rounds.slice(0, -1).map((_, i) => i); p0.hwres = p0.hwres || {}; p0.hwres[L9.id] = {}; L9.rounds.slice(0, -1).forEach((r, i) => { p0.hwres[L9.id][i] = { game: r.game, mode: (r.set || {}).mode || null, ok: 10, tot: 10, t: Date.now() }; }); }
       try { localStorage.setItem("obs.scene.v1." + id, "5"); localStorage.setItem("obs.journey.v1." + id, "1"); } catch (e) {} save();
       try { const u = new URL(location.href); u.searchParams.delete("demo"); history.replaceState(null, "", u); } catch (e) {} }
+    // ?demo=g4 – „Зори помни“: занятия 1–8 изиграни (в занятие 8 детето обърка 7 два пъти), занятие 9 – незапочнато
+    if (Q.get("demo") === "g4" && DEMO.some(x => x.id === Q.get("p"))) { const id = Q.get("p"); resetDemo(id); const p0 = prof(id), now = Date.now(); p0.classAt = p0.cur = 9; p0.b = { 1: 3, 2: 3, 3: 2, 4: 3, 5: 3, 6: 3, 7: 3, 8: 3, 9: 0 }; p0.halo = {}; delete p0.disc;
+      p0.hw = {}; p0.hwres = {}; p0.log = { flash: [], trainer: [], comet: [] };
+      HW.lessons.filter(L => L.n < 9).forEach(L => { p0.hw[L.id] = L.rounds.map((_, i) => i); p0.hwres[L.id] = {}; L.rounds.forEach((r, i) => { const t = now - (9 - L.n) * 2 * 864e5 + i * 6e4; p0.hwres[L.id][i] = { game: r.game, mode: (r.set || {}).mode || null, ok: 9, tot: 10, t };
+        if (L.n === 8 && r.game === "flash") p0.log.flash.push({ t: t - 20000, topic: "s9", n: 7, correct: false }); }); });
+      try { localStorage.setItem("obs.scene.v1." + id, "5"); localStorage.setItem("obs.journey.v1." + id, "1"); localStorage.removeItem("obs.zmem.v1." + id); } catch (e) {} save();
+      try { const u = new URL(location.href); u.searchParams.delete("demo"); history.replaceState(null, "", u); } catch (e) {} }
     if (Q.get("p") && ALLP.some(x => x.id === Q.get("p"))) { P = prof(Q.get("p")); if (Q.get("class")) { P.classAt = +Q.get("class"); save(); } applyMotion(); Q.get("m") ? startMission(+Q.get("m")) : Q.get("map") ? screenMap() : screenHome(); } else screenProfiles();
   });
   // ======================= AI ТУТОР (етап 1, 12.11.2026) =======================
