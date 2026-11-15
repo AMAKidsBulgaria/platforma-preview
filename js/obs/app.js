@@ -480,14 +480,14 @@
     app.className = "o-scr o-map o-gamesbg o-tscr";
     app.innerHTML = `<div class="o-maptop"><button class="o-back" id="o-back">← Към обсерваторията</button><div class="o-grow"><div class="o-mt">За учителя</div><div class="o-ms">${/^t\d$/.test(P.id) ? "тест" : "демо"} · ${P.name} · проведени занятия: ${at} от ${max}</div></div>
         <label class="o-tfmt">Форма на обучение <select id="o-t-fmt">${FORMATS.map(([k, v]) => `<option value="${k}" ${(P.format || "center") === k ? "selected" : ""}>${v}</option>`).join("")}</select></label>
-        <button class="o-sec" id="o-t-rep">📄 Отчет за родителя</button><button class="o-sec" id="o-t-obs">📝 Наблюдение</button><button class="o-sec" id="o-t-exp">📤 Данни от теста</button><button class="o-sec" id="o-t-reset">Започни отначало</button><label class="o-tfmt">Възраст <select id="o-t-grp">${[["5", "5–6 г."], ["7", "7–9 г."], ["10", "10+"]].map(([k, v]) => `<option value="${k}" ${groupOf(P) === k ? "selected" : ""}>${v}</option>`).join("")}</select></label><label class="o-tfmt">Детето е на <select id="o-t-at">${HW.lessons.map(L => `<option value="${L.n}" ${L.n === at ? "selected" : ""}>занятие ${L.n}</option>`).join("")}</select></label><button class="o-go sm" id="o-t-next" ${at >= max ? "disabled" : ""}>Проведи занятие ${Math.min(max, at + 1)}</button></div>
+        <button class="o-sec" id="o-t-rep">📄 Отчет за родителя</button><button class="o-sec" id="o-t-week">🌙 Седмицата</button><button class="o-sec" id="o-t-obs">📝 Наблюдение</button><button class="o-sec" id="o-t-exp">📤 Данни от теста</button><button class="o-sec" id="o-t-reset">Започни отначало</button><label class="o-tfmt">Възраст <select id="o-t-grp">${[["5", "5–6 г."], ["7", "7–9 г."], ["10", "10+"]].map(([k, v]) => `<option value="${k}" ${groupOf(P) === k ? "selected" : ""}>${v}</option>`).join("")}</select></label><label class="o-tfmt">Детето е на <select id="o-t-at">${HW.lessons.map(L => `<option value="${L.n}" ${L.n === at ? "selected" : ""}>занятие ${L.n}</option>`).join("")}</select></label><button class="o-go sm" id="o-t-next" ${at >= max ? "disabled" : ""}>Проведи занятие ${Math.min(max, at + 1)}</button></div>
       <div class="o-teachbox"><p class="o-tnote">Формата на обучение определя абакуса в „Звездни сметки“: присъствено – физически (отговорът с клавиатурата), онлайн и с AI тутор – дигиталният абакус до примерите. В платформата идва от профила на детето. В истинската платформа учителят възлага домашното от своя профил (офис → „Пилот“ → „Домашни“). Тук: всяко проведено занятие = възложено домашно. „Продължи“ води към най-новото незавършено; по-старите – „Доиграй“, по желание.</p>
         <table class="o-ttbl"><thead><tr><th>Код</th><th>Занятие</th><th>Кръгове на домашното</th><th>Състояние</th></tr></thead><tbody>${rows}</tbody></table>
         <h3>Свободни игри – отключване <small>(${HW.unlock_status || ""})</small></h3><table class="o-ttbl"><tbody>${un}</tbody></table></div>`;
     $("#o-back").onclick = screenHome;
     $("#o-t-fmt").onchange = (e) => { P.format = e.target.value; P.formatSet = true; save(); };
     $("#o-t-next").onclick = () => { P.classAt = Math.min(max, at + 1); save(); screenHome(); };
-    $("#o-t-rep").onclick = () => TU ? screenParentReport() : null;
+    $("#o-t-rep").onclick = () => TU ? screenParentReport() : null; $("#o-t-week").onclick = () => screenWeek({ back: screenTeacher });
     $("#o-t-exp").onclick = exportData; $("#o-t-obs").onclick = () => screenObserve();
     // тест: детето започва от занятието, на което е в групата – по-старите домашни се броят за изиграни (както при демо профилите)
     // смяна на възрастовата група: друг план (21 или 13 занятия) – започва отначало
@@ -1802,7 +1802,7 @@
       Object.values(P.hwres || {}).forEach(r => Object.values(r || {}).forEach(x => { if (x && x.t > wk) days.add(new Date(x.t).toDateString()); }));
       Object.values(L).forEach(a => (Array.isArray(a) ? a : []).forEach(x => { if (x && x.t > wk) days.add(new Date(x.t).toDateString()); }));
       const done = pages.filter(p => p.t > wk).length;
-      return `<b>Последните 7 дни</b><span>${done} ${done === 1 ? "готово домашно" : "готови домашни"} · упражнения в ${days.size} ${days.size === 1 ? "ден" : "дни"}</span>`; };
+      return `<b>Последните 7 дни</b><span>${done} ${done === 1 ? "готово домашно" : "готови домашни"} · упражнения в ${days.size} ${days.size === 1 ? "ден" : "дни"}</span><button class="wk-open" id="wk-open" type="button">Нощното небе на седмицата ›</button>`; };
     app.className = "o-scr o-diary";
     app.innerHTML = `<div class="o-maptop dz-top"><button class="o-back" id="o-back">← Назад</button><div class="o-grow"><div class="o-mt">Дневник на наблюденията</div><div class="o-ms">${P.name}${pages.length ? ` · ${pages.length} ${pages.length === 1 ? "страница" : "страници"}` : ""}</div></div></div>
       <div class="dz-sum" id="dz-sum" hidden></div>
@@ -1818,7 +1818,7 @@
       el.className = "dz-page" + (p.fig ? " gold" : "") + (dir ? (dir > 0 ? " dz-in-r" : " dz-in-l") : ""); el.innerHTML = page(p); el.setAttribute("aria-label", `Страница ${i + 1} от ${pages.length}`);
       $("#dz-prev").disabled = i === 0; $("#dz-next").disabled = i === pages.length - 1;
       $("#dz-dots").innerHTML = pages.length <= 12 ? pages.map((_, k) => `<i class="${k === i ? "on" : ""}"></i>`).join("") : `<span>${i + 1} / ${pages.length}</span>`;
-      app.classList.toggle("dz-par", par); const sm = $("#dz-sum"); sm.hidden = !par; if (par) sm.innerHTML = sum7();
+      app.classList.toggle("dz-par", par); const sm = $("#dz-sum"); sm.hidden = !par; if (par) { sm.innerHTML = sum7(); $("#wk-open").onclick = () => { stop(); document.removeEventListener("keydown", onKey); screenWeek({ back: () => screenDiary({ at: pages[i].n, back }) }); }; }
       const pb = $("#dz-par"); pb.querySelector("span").textContent = par ? "Скрий бележките за родителя" : "За родителя"; pb.classList.toggle("on", par);
       const pl = el.querySelector(".dz-play"), D = five ? DIARY[p.n] : null; if (pl) pl.onclick = () => voice(D.zori);
       el.querySelectorAll(".dz-gogame").forEach(x => x.onclick = () => { stop(); document.removeEventListener("keydown", onKey); runGame(x.dataset.g, JSON.parse(x.dataset.o)); });
@@ -1833,6 +1833,48 @@
     pb.addEventListener("click", () => { if (par && Date.now() - parAt > 700) { par = false; render(0, true); } });
     render(0);
   }
-  window.OBS = { screenDiary, _zm: { start: (n) => zmStart(HW.lessons.find(x => x.n === n)), end: (n) => zmEnd(HW.lessons.find(x => x.n === n)) }, _diaryPages: () => diaryPages(), _scene: () => SC, _discover: (id) => discover(id), _discPending: () => discPending(), _intro: (n) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return digitIntro(n); }, _trace: (n) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return traceDigit(n); }, _tchain: (id, mind) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return tChain(TU.BY[id], { count: 5, speed: 2 }, mind); }, runTutor, screenParentReport, screenRegion, _track: (k, r, s) => track(k, r, s), _const: (v, r, d) => constSVG(v, r, d), _hw: () => HW, runHw, screenTeacher, _hwComplete: (n) => hwComplete(HW.lessons.find(x => x.n === n)), _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
+  // ======================= Г5 „НОЩНОТО НЕБЕ НА СЕДМИЦАТА“ (15.11.2026) =======================
+  // За родителя (от дневника) и учителя: последните 7 дни – в кои дни е упражнявано, кои звезди, готовите домашни с резултатите,
+  // пропуските за седмицата (области под целта, обърканите числа) и какво да се упражни. Само от записаното; нищо не се записва.
+  function screenWeek(o) {
+    o = o || {}; sceneOff(); gen++; const back = o.back || screenHome, now = Date.now(), d0 = new Date(now); d0.setHours(0, 0, 0, 0); const from = d0.getTime() - 6 * 864e5;
+    const days = [...Array(7)].map((_, i) => new Date(from + i * 864e5)), dkey = (t) => new Date(t).toDateString(), act = {}, G = P.log || {};
+    Object.values(P.hwres || {}).forEach(r => Object.values(r || {}).forEach(x => { if (x && x.t >= from) act[dkey(x.t)] = (act[dkey(x.t)] || 0) + 1; }));
+    Object.values(G).forEach(a => (Array.isArray(a) ? a : []).forEach(x => { if (x && x.t >= from) act[dkey(x.t)] = (act[dkey(x.t)] || 0) + 1; }));
+    const nDays = days.filter(d => act[d.toDateString()]).length, pages = diaryPages().filter(p => p.t >= from), wd = ["нд", "пн", "вт", "ср", "чт", "пт", "сб"];
+    // обобщението по области за седмицата: сбор от домашните; обърканите числа – от записа на задачите в домашните
+    const sum = {}, miss = []; pages.forEach(p => { const det = dzDetail(p.L); ["fl", "ab", "im"].forEach(k => { if (det[k] && det[k].tot) { const a = sum[k] = sum[k] || { ok: 0, tot: 0, L: p.L, set: det[k].set }; a.ok += det[k].ok; a.tot += det[k].tot; a.L = p.L; a.set = det[k].set; } });
+      [].concat((det.fl || {}).miss || [], (det.comet || {}).miss || []).forEach(n => miss.push(n)); });
+    const gaps = Object.keys(sum).filter(k => sum[k].ok * 100 < sum[k].tot * DZNEED[k]), A = (k) => DZA[k] || { name: k, help: "" }, c = {};
+    miss.forEach(n => { c[n] = (c[n] || 0) + 1; }); const hard = Object.keys(c).filter(n => c[n] >= 2).sort((x, y) => c[y] - c[x] || x - y);
+    const rng = `${days[0].toLocaleDateString("bg-BG", { day: "numeric", month: "long" })} – ${days[6].toLocaleDateString("bg-BG", { day: "numeric", month: "long" })}`;
+    const lastL = pages.length ? pages[pages.length - 1].L : null;
+    const recs = !lastL ? "" : (gaps.length ? gaps : ["ok"]).map(k => { const r = dzRec(k, (sum[k] || {}).set || {}, (sum[k] || {}).L || lastL); if (!r.length) return "";
+      return `<div class="dz-rec"><p>${k === "ok" ? "Без пропуски тази седмица. За поддържане – 5 минути на ден с:" : `<b>${A(k).name}</b> – ${sum[k].ok} от ${sum[k].tot} верни за седмицата (целта е поне ${DZNEED[k]}%):`}</p>
+        ${r.map(x => `<div class="dz-game"><span class="dz-gi">${ICON[x.id]}</span><span class="dz-gt"><b>${GAMES[x.id].name}</b><small>${dzSet(x)}</small></span><button class="dz-gogame" type="button" data-g="${x.id}" data-o='${JSON.stringify(x.over)}'>▶ Упражни</button></div>`).join("")}</div>`; }).join("");
+    const reg = regionOf(lastL ? lastL.n : classAt());
+    const day = (t) => new Date(t).toLocaleDateString("bg-BG", { day: "numeric", month: "long" });
+    // небето – приближено до съзвездията на седмицата (иначе цялата област и звездите са дребни)
+    const cs = [...new Set(pages.map(p => STAR[p.n] && STAR[p.n].c).filter(Boolean))], pts = [].concat(...cs.map(c => cStars(c))).map(x => [x[2], x[3]]);
+    const wkVB = pts.length ? (() => { const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]), x0 = Math.min(...xs) - 70, y0 = Math.min(...ys) - 60, w = Math.max(...xs) - x0 + 70, h = Math.max(...ys) - y0 + 60, W = Math.max(w, h * 1.6); return `${x0 - (W - w) / 2} ${y0} ${W} ${h}`; })() : REGION_VB[reg];
+    app.className = "o-scr o-diary o-week";
+    app.innerHTML = `<div class="o-maptop dz-top"><button class="o-back" id="o-back">← Назад</button><div class="o-grow"><div class="o-mt">Нощното небе на седмицата</div><div class="o-ms">${P.name} · ${rng}</div></div></div>
+      <div class="wk-scroll"><article class="dz-page wk-page">
+        <section class="wk-days" aria-label="Дни с упражнения">${days.map(d => `<span class="${act[d.toDateString()] ? "on" : ""}"><i></i><small>${wd[d.getDay()]}</small></span>`).join("")}<p><b>${nDays} от 7 дни</b> с упражнения</p></section>
+        <div class="wk-sky">${skySVG({ vb: wkVB })}</div>
+        <p class="wk-cap">${pages.length ? `Звездите на домашните от седмицата са в кръг: ${pages.map(p => p.n).join(", ")}.` : "Тази седмица още няма завършено домашно."}</p>
+        ${pages.length ? `<h3>Готови домашни</h3><div class="dz-resl">${pages.map(p => { const det = dzDetail(p.L), ks = ["fl", "ab", "im"].filter(k => det[k] && det[k].tot);
+          return `<div class="dz-res${ks.some(k => det[k].ok * 100 < det[k].tot * DZNEED[k]) ? " gap" : ""}"><div class="dz-rh"><span><b>Занятие ${p.n} · ${p.L.title.split(" · ")[0]}</b><small>${p.t ? day(p.t) : ""}</small></span><em></em><i></i></div>
+            <p class="wk-chips">${ks.map(k => `<span class="${det[k].ok * 100 >= det[k].tot * DZNEED[k] ? "ok" : "gap"}">${A(k).name}: ${det[k].ok} от ${det[k].tot}</span>`).join("")}</p></div>`; }).join("")}</div>` : ""}
+        ${pages.length ? `<h3>${gaps.length || hard.length ? "За упражнение" : "Следваща стъпка"}</h3>
+          ${hard.length ? `<p class="dz-missn">Объркани числа тази седмица: <b>${hard.map(n => c[n] > 1 ? `${n} (${c[n]}×)` : n).join(", ")}</b></p>` : ""}${recs}
+          <h3>Как да помогнете</h3><ul class="dz-help">${gaps.map(k => `<li><b>${A(k).name}:</b> ${A(k).help}</li>`).join("")}${DZG ? `<li>${DZG}</li>` : ""}</ul>` : `<p>Дневникът и този обзор се попълват след първото завършено домашно.</p>`}
+      </article></div>`;
+    // звездите от седмицата – в кръг (само подчертаване; яркостта е записаната)
+    const ns = "http://www.w3.org/2000/svg"; pages.forEach(p => { const g = app.querySelector(`.wk-sky .o-star[data-n="${p.n}"]`); if (g) { const r = document.createElementNS(ns, "circle"); r.setAttribute("r", "26"); r.setAttribute("class", "wk-ring"); g.insertBefore(r, g.firstChild); } });
+    $("#o-back").onclick = () => { gen++; back(); };
+    app.querySelectorAll(".dz-gogame").forEach(x => x.onclick = () => runGame(x.dataset.g, JSON.parse(x.dataset.o)));
+  }
+  window.OBS = { screenWeek, screenDiary, _zm: { start: (n) => zmStart(HW.lessons.find(x => x.n === n)), end: (n) => zmEnd(HW.lessons.find(x => x.n === n)) }, _diaryPages: () => diaryPages(), _scene: () => SC, _discover: (id) => discover(id), _discPending: () => discPending(), _intro: (n) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return digitIntro(n); }, _trace: (n) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return traceDigit(n); }, _tchain: (id, mind) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return tChain(TU.BY[id], { count: 5, speed: 2 }, mind); }, runTutor, screenParentReport, screenRegion, _track: (k, r, s) => track(k, r, s), _const: (v, r, d) => constSVG(v, r, d), _hw: () => HW, runHw, screenTeacher, _hwComplete: (n) => hwComplete(HW.lessons.find(x => x.n === n)), _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
     testFinish: (n, r) => { M = Object.assign({ n, ex: [], par: PAR[n], max: MAXN[n], flash: [5, 6], ab: [3, 4], meth: [3, 4], im: [2, 3], help: 0 }, r || {}); return finish(); } };   // само за проверки
 })();

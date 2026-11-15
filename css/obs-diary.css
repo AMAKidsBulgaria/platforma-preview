@@ -116,3 +116,20 @@
   .dz-kid { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; column-gap: 16px; }
   .dz-hero { grid-row: 1 / 4; } .dz-st { width: 90px; } .dz-zori .o-zori { width: 60px; }
 }
+
+/* ---- Г5 „Нощното небе на седмицата“ (screenWeek): една дълга страница, превърта се ---- */
+.wk-open { margin-left: auto; border: 0; background: var(--dz-ink); color: #fff; border-radius: 99px; padding: 6px 12px; font: 800 13px "Nunito"; cursor: pointer; }
+.o-week .wk-scroll { flex: 1 1 auto; min-height: 0; overflow: auto; overscroll-behavior: contain; padding-bottom: 8px; }
+.o-week .wk-page { height: auto; max-height: none; overflow: visible; width: min(100%, 860px); margin: 0 auto; display: grid; gap: 8px; align-content: start; }
+.wk-page h3 { margin: 8px 0 0; font: 900 12px "Nunito"; letter-spacing: .08em; text-transform: uppercase; color: var(--dz-ink2); }
+.wk-days { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.wk-days span { display: grid; justify-items: center; gap: 2px; font: 800 12px "Nunito"; color: var(--dz-ink2); }
+.wk-days i { width: 26px; height: 26px; border-radius: 50%; border: 2px dashed #262A5C44; box-sizing: border-box; }
+.wk-days span.on i { border: 0; background: radial-gradient(circle at 40% 35%, #FFF6D6, #F5C04A 70%); box-shadow: 0 0 10px #F5C04A88; }
+.wk-days p { margin: 0 0 0 6px; font: 700 15px "Nunito"; } .wk-days b { font-weight: 900; }
+.wk-sky { border-radius: 14px; background: radial-gradient(ellipse at 40% 30%, var(--night2), var(--night) 75%); padding: 4px; }
+.wk-sky svg { width: 100%; height: auto; max-height: 300px; display: block; }
+.wk-ring { fill: none; stroke: #9FE3B8; stroke-width: 3; stroke-dasharray: 4 5; }
+.wk-cap { margin: 0; font: 700 13.5px "Nunito"; color: var(--dz-ink2); }
+.wk-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0 !important; } .wk-chips span { padding: 2px 9px; border-radius: 99px; font: 800 12.5px "Nunito"; background: #E3F3E9; color: #1F5E3B; } .wk-chips span.gap { background: #FFEFD2; color: #7A4508; }
+@media (max-width: 640px) { .wk-open { margin-left: 0; } }
