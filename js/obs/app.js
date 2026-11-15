@@ -1290,8 +1290,8 @@
     $("#o-back").onclick = () => screenStart(id); $("#o-home2").onclick = screenHome; $("#o-start").onclick = () => runGame(id);
     app.querySelectorAll(".o-motion").forEach(b => b.onclick = () => { P.motion = b.dataset.m; save(); applyMotion(); app.querySelectorAll(".o-motion").forEach(x => x.classList.toggle("on", x === b)); });
   }
-  async function runGame(id) {
-    gen++; const c = defaults(id); M = { free: true, n: Math.min(P.cur, 9), max: 9 };
+  async function runGame(id, over) {
+    gen++; const c = { ...defaults(id), ...(over || {}) };   // over – препоръчаните настройки от дневника (само за тази игра, не се запомнят) M = { free: true, n: Math.min(P.cur, 9), max: 9 };
     try {
       gameShell(id, 0, c.rounds); await talk(INTRO[id], "explain");
       const [ok, tot] = await PLAY[id](c); screenResult(id, ok, tot);
@@ -1681,7 +1681,34 @@
   // ======================= Г3 „ДНЕВНИК НА НАБЛЮДЕНИЯТА“ (15.11.2026) =======================
   // По една страница за всяко завършено домашно – само от вече записаното (hwres, P.b, ореол, проверка след време). Дневникът нищо не записва.
   // Детето вижда звездата, игрите и бележката на Зори; родителят (задържане) вижда и какво е упражнено, точността спрямо праговете и идея за вкъщи.
-  let DIARY = {}; fetch("config/ma-diary.json?v=1").then(r => r.ok ? r.json() : {}).then(j => { DIARY = j.lessons || {}; }).catch(() => {});
+  let DIARY = {}, DZA = {}, DZG = ""; fetch("config/ma-diary.json?v=2").then(r => r.ok ? r.json() : {}).then(j => { DIARY = j.lessons || {}; DZA = j.areas || {}; DZG = j.general || ""; }).catch(() => {});
+  const DZNEED = { fl: 80, ab: 75, im: 67 };
+  // резултатите по области от кръговете на домашното (hwres) + подробности от записа на всяка задача (P.log) в прозореца на всеки кръг:
+  // кои числа е объркало при разпознаването / кометата и кои примери не е решило. Само четене.
+  function dzDetail(L) {
+    const R = (P.hwres || {})[L.id] || {}, G = P.log || {}, out = {}, idx = Object.keys(R).map(Number).filter(i => R[i]).sort((a, b) => (R[a].t || 0) - (R[b].t || 0));
+    idx.forEach((i, k) => { const r = R[i], rd = L.rounds[i] || {}, key = r.game === "flash" ? "fl" : r.game === "trainer" ? (r.mode === "mind" ? "im" : "ab") : r.game;
+      const a = out[key] = out[key] || { key, ok: 0, tot: 0, miss: [], set: rd.set || {} }; a.ok += r.ok || 0; a.tot += r.tot || 0;
+      if (!r.t) return; const from = Math.max(k ? R[idx[k - 1]].t || 0 : 0, r.t - 15 * 60e3), inW = (x) => x && x.t > from && x.t <= r.t + 1000;
+      if (key === "fl") (G.flash || []).filter(inW).forEach(x => { if (!x.correct && x.n != null) a.miss.push(x.n); });
+      else if (key === "ab" || key === "im") (G.trainer || []).filter(inW).filter(x => (x.src === "mind") === (key === "im")).forEach(x => { if (!x.correct && x.nums) a.miss.push(x); });
+      else if (key === "comet") (G.comet || []).filter(inW).forEach(x => { if (!x.caught) a.miss.push(x.n); }); });
+    return out;
+  }
+  // препоръка: отключена игра с по-леки настройки за областта с пропуск (по-бавно, по-кратко); без пропуск – поддържане
+  function dzRec(key, set, L) {
+    const topic = topicOpen(L.topic) ? L.topic : lessonTopic(classAt()), slower = (arr, v) => { const a = arr.filter(x => typeof x === "number").sort((x, y) => x - y); return a.find(x => x > (+v || 2)) || a[a.length - 1]; };
+    const fl = { id: "flash", over: { topic, speed: slower(GAMES.flash.opts.speed, set.speed), rounds: 8 } };
+    const tr = { id: "trainer", over: { topic, count: [3, 5, 7, 10].filter(x => x <= Math.max(3, (set.count || 5) - 2)).pop(), speed: slower(SPEEDS, set.speed), rounds: 5 } };
+    const R = { fl: [fl, { id: "constel", over: { topic, speed: 3, rounds: 5 } }], ab: [tr, { id: "fix", over: { topic, rounds: 5 } }],
+      im: [{ id: "memory", over: { topic, speed: 2.5, rounds: 5 } }, { id: "constel", over: { topic, speed: 3, rounds: 5 } }, tr],
+      ok: [{ id: "comet", over: { topic, speed: 8, rounds: 5 } }, { id: "flash", over: { topic, speed: "auto", rounds: 8 } }] }[key] || [];
+    return R.filter(r => isOpen(r.id)).slice(0, 2);
+  }
+  const dzSet = (r) => { const o = r.over, t = TOP.find(x => x.id === o.topic), m = /^s(\d)$/.exec(o.topic || "");
+    return [m ? `числата до ${m[1]}` : t && t.name, o.count && `${o.count} числа в пример`, o.speed && (o.speed === "auto" ? "скорост: авто" : `${String(o.speed).replace(".", ",")} сек.`), o.rounds && `${o.rounds} кръга`].filter(Boolean).join(" · "); };
+  const dzEx = (x) => x.nums.map((n, j) => j ? (n > 0 ? " + " + n : " − " + -n) : String(n)).join("") + " = " + x.nums.reduce((a, b) => a + b, 0) + (x.answer != null && x.answer !== "" ? ` (отговор: ${x.answer})` : "");
+  const dzNums = (a) => { const c = {}; a.forEach(n => { c[n] = (c[n] || 0) + 1; }); return Object.keys(c).sort((x, y) => c[y] - c[x] || x - y).map(n => c[n] > 1 ? `${n} (${c[n]}×)` : n).join(", "); };
   const DZ_EMPTY = "Тук ще пишем какво сме открили. Първата страница идва след първото домашно.";
   const BOOK = `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v15H5.5C4.7 19 4 19.7 4 20.5z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H13v15h5.5c.8 0 1.5.7 1.5 1.5z"/><path d="M16.5 7.5l.5 1.2 1.3.1-1 .8.3 1.3-1.1-.7-1.1.7.3-1.3-1-.8 1.3-.1z" fill="currentColor" stroke="none"/></svg>`;
   function diaryPages() {
@@ -1701,18 +1728,31 @@
       <path class="dz-sp" d="M0 -40L11 -12L40 -10L17 8L25 38L0 21L-25 38L-17 8L-40 -10L-11 -12Z"/></svg>`;
     const page = (p) => { const n = p.n, D = five ? DIARY[n] || null : null, b = P.b[n] || 0, halo = !!(P.halo || {})[n], rev = !!(P.rev || {})[n];
       const note = D ? D.zori : `Упражнявахме: ${p.L.title}.`, F = p.fig && window.ObsDiscover ? window.ObsDiscover.FIG[p.fig] : null, C = p.fig ? CONST.find(c => c.id === p.fig) : null;
-      const acc = p.acc.filter(a => a[1] != null);
       return `<header class="dz-ph"><span>Занятие ${n}</span>${p.t ? `<time>${day(p.t)}</time>` : ""}</header>
         <div class="dz-kid"><div class="dz-hero">${starIc(b, halo)}<h2>${p.L.title.replace(" · ", "<br>")}</h2>
           <div class="dz-bright" aria-label="Яркост на звездата: ${b} от 3">${[0, 1, 2].map(k => `<span class="${k < b ? "on" : ""}">★</span>`).join("")}${halo ? "<em>✦ и наум</em>" : ""}</div></div>
           ${F ? `<div class="dz-const"><svg viewBox="${F.vb}" aria-hidden="true">${window.ObsDiscover.figure(p.fig, { cls: "hl" })}${cStars(p.fig).map(s => `<circle class="dz-cst" cx="${s[2]}" cy="${s[3]}" r="${s[4] ? 9 : 6}"/>`).join("")}</svg><b>Ново съзвездие: ${C.name}</b></div>` : ""}
           <div class="dz-games" aria-label="Изиграни игри">${p.games.map(id => `<span title="${GAMES[id].name}">${ICON[id]}</span>`).join("")}</div>
           <div class="dz-zori">${zori("joy")}<p class="dz-note">${note}</p>${D ? '<button class="dz-play" type="button" aria-label="Чуй отново">🔊</button>' : ""}</div></div>
-        <section class="dz-adult" aria-label="За родителя">
-          <h3>Какво е упражнено</h3><p>${D ? D.learned : p.L.title}</p>
-          ${acc.length ? `<h3>Точност</h3><div class="dz-acc">${acc.map(([t, x, need]) => `<div><span>${t}<small>праг ${need}%</small></span><b>${pc(x)}</b><i class="${x * 100 >= need ? "on" : ""}">${x * 100 >= need ? "✓ над прага" : "още упражнение"}</i></div>`).join("")}</div>` : ""}
-          <h3>Звездата сега</h3><p>Яркост ${b} от 3${halo ? " · смята и наум (ореол)" : ""}${rev ? " · проверена след време" : ""}</p>
-          ${D ? `<div class="dz-tip"><b>Идея за вкъщи</b>${D.home}</div>` : ""}</section>`; };
+        <section class="dz-adult" aria-label="За родителя">${adult(p, D, b, halo, rev)}</section>`; };
+    // слоят за родителя: какво е упражнено → резултатите (с объркваните числа/примери) → какво да упражнява (игра с настройки) → как да помогне
+    const adult = (p, D, b, halo, rev) => { const det = dzDetail(p.L), main = ["fl", "ab", "im"].filter(k => det[k] && det[k].tot), other = Object.values(det).filter(a => !DZNEED[a.key] && a.tot && GAMES[a.key]);
+      const gaps = main.filter(k => det[k].ok * 100 < det[k].tot * DZNEED[k]), A = (k) => DZA[k] || { name: k, what: "", help: "" };
+      const missTxt = (a) => !a.miss.length ? "" : a.key === "ab" || a.key === "im" ? `<ul class="dz-miss">${(() => { const c = {}; a.miss.forEach(x => { const e = dzEx(x); c[e] = (c[e] || 0) + 1; }); return Object.keys(c).slice(0, 3).map(e => `<li>${e}${c[e] > 1 ? ` – ${c[e]}×` : ""}</li>`).join(""); })()}</ul>` : `<p class="dz-missn">Обърка: <b>${dzNums(a.miss)}</b></p>`;
+      const res = main.map(k => { const a = det[k], good = a.ok * 100 >= a.tot * DZNEED[k];
+        return `<div class="dz-res${good ? "" : " gap"}"><div class="dz-rh"><span><b>${A(k).name}</b><details><summary>${A(k).game} · какво измерва</summary>${A(k).what}</details></span><em>${a.ok} от ${a.tot} верни</em><i>${good ? "✓ добре" : "за упражнение"}</i></div>${missTxt(a)}</div>`; }).join("")
+        + other.map(a => `<div class="dz-res sm"><div class="dz-rh"><span><b>${GAMES[a.key].name}</b><small>игра · ${GAMES[a.key].skill}</small></span><em>${a.ok} от ${a.tot}</em><i></i></div>${missTxt(a)}</div>`).join("");
+      const recs = (gaps.length ? gaps : ["ok"]).map(k => { const r = dzRec(k, (det[k] || {}).set || {}, p.L); if (!r.length) return "";
+        return `<div class="dz-rec"><p>${k === "ok" ? "Няма пропуски в това домашно. За поддържане – 5 минути на ден с:" : `<b>${A(k).name}</b> – ${det[k].ok} от ${det[k].tot} верни (целта е поне ${DZNEED[k]}%). Упражнете с по-леки настройки:`}</p>
+          ${r.map(x => `<div class="dz-game"><span class="dz-gi">${ICON[x.id]}</span><span class="dz-gt"><b>${GAMES[x.id].name}</b><small>${dzSet(x)}</small></span><button class="dz-gogame" type="button" data-g="${x.id}" data-o='${JSON.stringify(x.over)}'>▶ Упражни</button></div>`).join("")}</div>`; }).join("");
+      const helps = gaps.map(k => `<li><b>${A(k).name}:</b> ${A(k).help}</li>`).join("");
+      const verdict = !main.length ? "" : gaps.length ? `<div class="dz-verdict gap"><b>За упражнение:</b> ${gaps.map(k => A(k).name.toLowerCase()).join(", ")}. Виж препоръките по-долу.</div>` : `<div class="dz-verdict"><b>✓ Без пропуски</b> в това домашно – всички области са над целта.</div>`;
+      return `${verdict}<h3>Какво е упражнено</h3><p>${D ? D.learned : p.L.title}</p>
+        ${res ? `<h3>Резултати в домашното</h3><div class="dz-resl">${res}</div>` : ""}
+        <h3>${gaps.length ? "Къде да наблегне" : "Следваща стъпка"}</h3>${recs}
+        <h3>Как да помогнете</h3><ul class="dz-help">${helps}${D ? `<li><b>Гледайте техниката:</b> ${D.watch}</li>` : ""}${DZG ? `<li>${DZG}</li>` : ""}</ul>
+        ${D ? `<div class="dz-tip"><b>Идея за вкъщи (без екран)</b>${D.home}</div>` : ""}
+        <p class="dz-now">Звездата сега: яркост ${b} от 3${halo ? " · смята и наум (ореол)" : ""}${rev ? " · проверена след време" : ""}</p>`; };
     const sum7 = () => { const wk = Date.now() - 7 * 864e5, days = new Set(), L = P.log || {};
       Object.values(P.hwres || {}).forEach(r => Object.values(r || {}).forEach(x => { if (x && x.t > wk) days.add(new Date(x.t).toDateString()); }));
       Object.values(L).forEach(a => (Array.isArray(a) ? a : []).forEach(x => { if (x && x.t > wk) days.add(new Date(x.t).toDateString()); }));
@@ -1736,6 +1776,7 @@
       app.classList.toggle("dz-par", par); const sm = $("#dz-sum"); sm.hidden = !par; if (par) sm.innerHTML = sum7();
       const pb = $("#dz-par"); pb.querySelector("span").textContent = par ? "Скрий бележките за родителя" : "За родителя"; pb.classList.toggle("on", par);
       const pl = el.querySelector(".dz-play"), D = five ? DIARY[p.n] : null; if (pl) pl.onclick = () => voice(D.zori);
+      el.querySelectorAll(".dz-gogame").forEach(x => x.onclick = () => { stop(); document.removeEventListener("keydown", onKey); runGame(x.dataset.g, JSON.parse(x.dataset.o)); });
       if (par && dir) toAdult(); if (!silent && !par && D) voice(D.zori); }
     function go(d) { const k = i + d; if (k < 0 || k >= pages.length) return; i = k; render(d); }
     $("#dz-prev").onclick = () => go(-1); $("#dz-next").onclick = () => go(1);
