@@ -22,9 +22,39 @@
       <circle class="f-out" pathLength="1" cx="325" cy="150" r="7"/>
       <g class="f-flame"><path class="f-fl1" d="M325 270 C 348 298 348 330 325 344 C 302 330 302 298 325 270 Z"/><path class="f-fl2" d="M325 293 C 335 307 335 324 325 332 C 315 324 315 307 325 293 Z"/></g>`;
   }
+  // ---- „Двете ръце“ (звезди 10–17): хвърчило, което се държи с двете ръце. Ромбът – 14, 15, 16 и 13; опашката с панделки – през 12, 11 и 10; 17 – звездата, към която лети.
+  const KITE = "M760 178 L852 240 L735 332 L678 250 Z", BOWS = "M703 381 l-12 -10 l2 16 Z M711 389 l14 -6 l-12 14 Z M641 357 l-14 -6 l6 15 Z M649 362 l12 -10 l-2 17 Z M584 398 l-14 -2 l9 13 Z M590 405 l9 -12 l2 16 Z";
+  function kite() {
+    return `<path class="f-under" d="${KITE}"/>
+      <path class="f-fill f-glass" d="${KITE}"/>
+      <path class="f-fill f-metal" d="M760 178 L852 240 L756 252 Z M735 332 L678 250 L756 252 Z"/>
+      <path class="f-bars" d="M760 178 L735 332 M678 250 L852 240"/>
+      <path class="f-fill f-metal" d="${BOWS}"/>
+      <path class="f-out" pathLength="1" d="${KITE}"/>
+      <path class="f-out f-tail" pathLength="1" d="M735 332 C 722 366 706 392 690 395 C 664 400 648 352 620 360 C 592 368 584 418 560 420"/>
+      <path class="f-out" pathLength="1" d="${BOWS}"/>`;
+  }
+  // ---- „Далечни звезди“ (звезди 18–21): ракета към далечните звезди. 21 – в илюминатора, 20 – пламъкът, следата – към 19 и 18.
+  const ROCKET = "M0 -62 C 22 -40 24 0 20 44 L -20 44 C -24 0 -22 -40 0 -62 Z";
+  function rocket() {
+    return `<g transform="translate(975 270) rotate(12) scale(1.25) translate(0 14)">
+      <circle class="f-glow" cx="0" cy="66" r="30"/>
+      <path class="f-under" d="${ROCKET}"/>
+      <path class="f-fill f-glass" d="${ROCKET}"/>
+      <path class="f-fill f-metal" d="M-20 18 L -36 50 L -20 44 Z M20 18 L 36 50 L 20 44 Z M -8 44 L 8 44 L 6 52 L -6 52 Z"/>
+      <path class="f-bars" d="M-19 -26 C -6 -30 6 -30 19 -26 M-21 30 L 21 30"/>
+      <path class="f-out" pathLength="1" d="${ROCKET}"/>
+      <path class="f-out" pathLength="1" d="M-20 18 L -36 50 L -20 44 M20 18 L 36 50 L 20 44"/>
+      <circle class="f-out" pathLength="1" cx="0" cy="-14" r="11"/>
+      <g class="f-flame down"><path class="f-fl1" d="M -9 54 C -12 72 -4 88 0 98 C 4 88 12 72 9 54 Z"/><path class="f-fl2" d="M -4 56 C -6 68 -2 78 0 84 C 2 78 6 68 4 56 Z"/></g></g>`;
+  }
   // skel – „скелетът“ на фигурата между истинските звезди (като на звездна карта); trail – светлината към 1 и 2; flame – звездата-пламък
   const FIG = { A: { name: "Първи светлини", vb: "60 112 420 356", pivot: [325, 150], svg: lantern, hit: GLOBE,
-    skel: [[8, 7], [7, 6], [6, 5], [5, 3], [3, 8], [9, 8]], trail: [[3, 2], [2, 1]], flame: 4 } };
+    skel: [[8, 7], [7, 6], [6, 5], [5, 3], [3, 8], [9, 8]], trail: [[3, 2], [2, 1]], flame: 4 },
+    B: { name: "Двете ръце", vb: "530 120 390 330", pivot: [735, 332], svg: kite, hit: KITE,
+      skel: [[13, 14], [14, 15], [15, 16], [16, 13], [13, 12], [12, 11], [11, 10]], trail: [[16, 17]] },
+    C: { name: "Далечни звезди", vb: "770 190 300 310", pivot: [968, 300], svg: rocket, hit: "M989 206 L1020 285 L1003 365 L958 412 L933 407 L910 346 L927 265 Z",
+      skel: [[21, 20]], trail: [[20, 19], [19, 18]] } };
   const NS = "http://www.w3.org/2000/svg";
   // постоянната фигура (на картата и в прозореца): деликатна, зад звездите; hit – зона за докосване (само на картата)
   function figure(id, opts) { const F = FIG[id]; if (!F) return ""; const o = opts || {};

@@ -13,12 +13,14 @@
       box: { tele: [187, 281, 477, 880], map: [437, 445, 630, 760], abac: [1084, 562, 1233, 664] }, lens: [464, 315], occ: [[[437, 468], [616, 472], [628, 610], [633, 700], [437, 700]]],
       tag: { tele: [338, 672], map: [532, 700], abac: [1159, 667] },
       glim: { tele: [[457, 282], [204, 437], [343, 397], [330, 340], [261, 699], [425, 699]], map: [[441, 446], [621, 446], [441, 650], [621, 650], [531, 429]], abac: [[1096, 552], [1219, 552], [1096, 626], [1219, 626], [1158, 548]] },
-      lamps: [[179, 583, .94], [1352, 232, .85], [1060, 563, .68]] },
+      lamps: [[179, 583, .94], [1352, 232, .85], [1060, 563, .68]],
+      items: { lantern: { x: 395, y: 8, h: 250, top: 1, fl: .62 }, kite: { x: 1152, y: 110, h: 340, top: 1 }, rocket: { x: 1003, y: 612, h: 125 } } },
     port: { url: "assets/img/journey/room_port.webp?v=2", w: 1024, h: 1536, win: { x: 510, y: 325, r: 238 }, zori: { x: 500, y: 1430, h: 380 },
       box: { tele: [50, 470, 385, 1235], map: [255, 625, 495, 1015], abac: [695, 690, 872, 822] }, lens: [372, 492],
       tag: { tele: [150, 1075], map: [372, 905], abac: [784, 826] },
       glim: { tele: [[370, 490], [60, 790], [215, 640], [190, 720], [110, 1000], [300, 1000]], map: [[262, 665], [480, 665], [262, 925], [480, 925], [371, 650]], abac: [[700, 695], [868, 695], [700, 815], [868, 815], [784, 690]] },
-      lamps: [[60, 270, 1], [985, 410, .9], [643, 735, .8]] } };
+      lamps: [[60, 270, 1], [985, 410, .9], [643, 735, .8]],
+      items: { lantern: { x: 872, y: 150, h: 230, top: 1, fl: .62 }, kite: { x: 165, y: 170, h: 320, top: 1 }, rocket: { x: 735, y: 990, h: 170 } } } };
   const svg = (d) => `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
   const OBJ = { abac: { icon: svg('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v16M12 4v16M16 4v16"/><circle cx="8" cy="6.5" r="1.2" fill="currentColor"/><circle cx="12" cy="13" r="1.2" fill="currentColor"/><circle cx="16" cy="15.5" r="1.2" fill="currentColor"/>'), name: "Абакус", aria: "Абакус – свободна тренировка" },
     tele: { icon: svg('<path d="M3 13l13-6 2 4-13 6z"/><path d="M16 7l3-1.5 1.5 3L18 11"/><path d="M9 16l-3 5M10 15.5l3 5.5"/>'), name: "Игри", aria: "Телескоп – игри" },
@@ -57,6 +59,18 @@
     const TEX = {}; let zori = null;
     const loadRoom = Object.values(ROOMS).map(r => PIXI.Assets.load(r.url).then(t => { TEX[r.url] = t; }));
     const lamps = [0, 1, 2].map(() => { const g = new PIXI.Sprite(radial()); g.anchor.set(.5); g.tint = 0xFFB347; g.blendMode = PIXI.BLEND_MODES.ADD; g.zIndex = 3; g._on = reduced() ? 1 : 0; world.addChild(g); return g; });
+    // Г2 „Обсерваторията расте“: предметите от откритите съзвездия (model.items – само от записаното състояние; новият се появява веднъж с проблясване)
+    const ITEM_TINT = { lantern: 0xF2E6D2, kite: 0xC8BCA8, rocket: 0xCFC2AC }, items = {};
+    function addItem(id, fresh) { if (items[id] || dead) return; const url = "assets/img/obs/room_" + id + ".webp?v=1";
+      PIXI.Assets.load(url).then(tex => { if (dead || items[id]) return; const sp = new PIXI.Sprite(tex); sp.zIndex = 2; sp.tint = ITEM_TINT[id] || 0xFFFFFF; sp._id = id; world.addChild(sp); items[id] = sp;
+        if (id === "lantern") { const g = new PIXI.Sprite(radial()); g.anchor.set(.5); g.tint = 0xFFB347; g.blendMode = PIXI.BLEND_MODES.ADD; g.zIndex = 3; g.alpha = 0; world.addChild(g); sp._glow = g; }
+        layout();
+        if (fresh && !reduced()) { sp.alpha = 0; const s0 = sp.scale.x; sp.scale.set(s0 * .82); T(gsap.to(sp, { alpha: 1, duration: 1.1, ease: "power2.out" })); T(gsap.to(sp.scale, { x: s0, y: s0, duration: 1.2, ease: "back.out(2)" }));
+          const fx = new PIXI.Sprite(radial()); fx.anchor.set(.5); fx.tint = 0xFFF0C8; fx.blendMode = PIXI.BLEND_MODES.ADD; fx.zIndex = 7; fx.position.set(sp.x + sp.width / 2, sp.y + sp.height / 2); fx.width = fx.height = Math.max(sp.width, sp.height) * 1.8; fx.alpha = 0; world.addChild(fx);
+          T(gsap.to(fx, { alpha: .9, duration: .35, yoyo: true, repeat: 1, ease: "sine.inOut", onComplete: () => fx.destroy() })); } }).catch(() => {}); }
+    function placeItems() { Object.values(items).forEach(sp => { const p = (RM.items || {})[sp._id]; if (!p) { sp.visible = false; return; } sp.visible = true;
+      const k = p.h / sp.texture.height; if (!gsap.isTweening(sp.scale)) sp.scale.set(k); const w = sp.texture.width * k; sp.position.set(p.x - w / 2, p.top ? p.y : p.y - p.h);
+      if (sp._glow) { sp._glow.position.set(p.x, (p.top ? p.y : p.y - p.h) + p.h * (p.fl || .6)); sp._glow._s = p.h / 128 * 1.1; } }); }
     const motes = []; for (let i = 0; i < 26; i++) { const m = new PIXI.Sprite(radial()); m.anchor.set(.5); m.tint = 0xFFD9A0; m.scale.set(.05 + Math.random() * .06); m._v = .12 + Math.random() * .25; m._p = Math.random() * 6; m.zIndex = 8; world.addChild(m); motes.push(m); }
     // светлината на предметите: мека (ADD) – по-силна при посочване/фокус; карта: отблясък, който минава по пергамента; телескоп: искра в обектива
     const glow = {}; Object.keys(OBJ).forEach(k => { const g = new PIXI.Sprite(radial()); g.anchor.set(.5); g.tint = 0xFFD27A; g.blendMode = PIXI.BLEND_MODES.ADD; g.alpha = 0; g.zIndex = 4; g._hot = 0; world.addChild(g); glow[k] = g; });
@@ -96,7 +110,7 @@
       const zy = zoriY(), zx = zoriX(); if (zori) { zori.position.set(zx, zy); zori._y = zy; zori.scale.set(RM.zori.h / zori.texture.height); zori._s = zori.scale.x; }
       shadow.position.set(zx, zy - 4); shadow.width = RM.zori.h * .55; shadow.height = RM.zori.h * .09;
       ui.style.setProperty("--k", Math.max(.9, Math.min(1.3, sc * 1.15)).toFixed(2));   // табелките растат с картината (на голям екран не са дребни)
-      placeDom(); placeWave(); }
+      placeItems(); placeDom(); placeWave(); }
     // видеото: героят в кадъра е от y 49 до 482 (от 516) и центриран при x 186 (от 396) – напасваме го върху картинката
     function placeWave() { if (!wv.parentNode) return; const h = RM.zori.h * sc, p = toScreen(zoriX(), zoriY()), vh = h * 516 / 433;
       Object.assign(wv.style, { height: vh + "px", width: vh * 396 / 516 + "px", left: p.x - h * 186 / 433 + "px", top: p.y - h * 482 / 433 + "px" }); }
@@ -215,6 +229,7 @@
     app.ticker.add((dt) => { if (dead) return; const t = (performance.now() - t0) / 1000, calm = reduced();
       // фенерите светят спокойно (само едва трептящ пламък) – движението остава за предметите, които се докосват
       lamps.forEach((g, i) => { const f = calm ? .55 : .55 + .025 * Math.sin(t * 9 + i * 2) + .015 * Math.sin(t * 23 + i); g.alpha = f * g._on; g.scale.set((g._k || 1) * 1.6 * (.4 + .6 * g._on)); });
+      const lg = items.lantern && items.lantern._glow; if (lg) { const f = calm ? .5 : .5 + .04 * Math.sin(t * 8) + .02 * Math.sin(t * 21); lg.alpha = f * (items.lantern.alpha || 0) * (lamps[0]._on || 0); lg.scale.set(lg._s || 1); }
       motes.forEach(m => { if (calm) { m.alpha = 0; return; } m.y -= m._v * dt; m.x += Math.sin(t * .6 + m._p) * .2; m.alpha = .16 + .2 * (.5 + .5 * Math.sin(t * 1.3 + m._p)); if (m.y < RM.h * .2) { m.y = RM.h * .85; m.x = Math.random() * RM.w; } });
       Object.entries(glow).forEach(([k, g], i) => { const base = calm ? .18 : .12 + .16 * (.5 + .5 * Math.sin(t * 2.6 - i * 2.1)); g.alpha += ((g._hot ? .45 : base + (g._ping || 0) * .35) - g.alpha) * .15; });
       // искриците: всяка се появява на нова точка върху предмета (ъгли, обектив, крака), проблясва и изчезва
@@ -285,7 +300,8 @@
     function unmount() { if (dead) return; dead = true; tweens.forEach(tw => tw.kill()); timers.forEach(clearTimeout); try { wv.pause(); wv.removeAttribute("src"); wv.load(); wv.remove(); } catch (e) {}
       window.removeEventListener("resize", onResize); window.removeEventListener("orientationchange", onResize); document.removeEventListener("visibilitychange", onVis); if (vv) vv.removeEventListener("resize", onResize);
       try { app.destroy(true, { children: true, texture: false, baseTexture: false }); } catch (e) {} }
-    return { ui, unmount, say, layout, activate, get alive() { return !dead; }, get blinking() { return !!(zori && zBlink && zori.texture === zBlink); }, get waving() { return waving; }, ping, get busy() { return busy; } };   // blinking – за автоматичните проверки
+    (model.items || []).forEach(it => addItem(it.id, it.fresh));
+    return { ui, unmount, say, layout, activate, addItem, get items() { return Object.keys(items); }, get alive() { return !dead; }, get blinking() { return !!(zori && zBlink && zori.texture === zBlink); }, get waving() { return waving; }, ping, get busy() { return busy; } };   // blinking – за автоматичните проверки
   }
   window.ObsScene = { mount };
 })();

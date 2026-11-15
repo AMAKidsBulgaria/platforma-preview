@@ -122,7 +122,7 @@
 
   // ---- глас: Зори (zr_*), иначе разказвачът (Калина) ----
   let AUDZ = {}, AUD = {}, cur = null;
-  fetch("config/abacus-audio-zori.json?v=19").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
+  fetch("config/abacus-audio-zori.json?v=20").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
   fetch("config/abacus-audio.json?v=4").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
   // „пораснал“ режим (7+, 11.11.2026): Зори е спътник – кратки реплики, само текст (гласът по избор: P.zv); рекорди и значки
   const grown = () => !!P && groupOf(P) !== "5";
@@ -303,7 +303,7 @@
     if (sceneLibs) return sceneLibs;
     const js = (src) => new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
     if (!document.querySelector('link[href^="css/obs-scene.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-scene.css?v=16"; document.head.appendChild(l); }
-    const all = (window.PIXI ? Promise.resolve() : js("js/vendor/pixi.min.js")).then(() => window.gsap ? 0 : js("js/vendor/gsap.min.js")).then(() => window.ObsScene ? 0 : js("js/obs/scene.js?v=38"))
+    const all = (window.PIXI ? Promise.resolve() : js("js/vendor/pixi.min.js")).then(() => window.gsap ? 0 : js("js/vendor/gsap.min.js")).then(() => window.ObsScene ? 0 : js("js/obs/scene.js?v=39"))
       .then(() => { if (!window.ObsJourney) js("js/obs/journey.js?v=6").catch(() => {}); });   // полетът – по желание: без него мисията тръгва направо
     if (!document.querySelector('link[href^="css/obs-journey.css"]')) { const l = document.createElement("link"); l.rel = "stylesheet"; l.href = "css/obs-journey.css?v=5"; document.head.appendChild(l); }
     return sceneLibs = Promise.race([all, new Promise((_, rej) => setTimeout(() => rej(new Error("scene: timeout")), 8000))]).catch(e => { sceneLibs = null; throw e; });
@@ -334,7 +334,7 @@
       const guide = !dp && !back && seen === 2 && star != null && !grown() ? "Виж! Тази звезда ни чака днес." : null;
       // мисията: полетът до истинската звезда-цел, после съществуващият урок (снимката на звездата – точно преди старта)
       const tgt = { n: star, kicker: portal.kicker, title: portal.title, sub: portal.sub };
-      SC = window.ObsScene.mount(app, { portal, line, guide, intro, back: back || null, quiet: !!dp, voice: (t) => voice(t || line) }, {
+      SC = window.ObsScene.mount(app, { portal, line, guide, intro, back: back || null, quiet: !!dp, voice: (t) => voice(t || line), items: roomItems() }, {
         mission: () => { SC = null; if (tutor) journey({ ...tgt, n: tutorStar(tp) }, () => { JS = snapAll(); runTutor(); }); else if (L) journey(tgt, () => { JS = starSnap(L.n); runHw(L, st.next); }); else screenMap(); },
         abacus: () => { SC = null; location.href = "abacus-app.html?p=" + encodeURIComponent(P.id); },
         games: () => { SC = null; screenGames(); }, map: () => { SC = null; screenMap(); },
@@ -369,7 +369,11 @@
   function discMigrate() { let ch = false; DF().forEach(id => { if (cDone(id, P.b) && !discOf()[id]) { P.disc[id] = "seen"; ch = true; } }); if (ch) save(); }
   const discPending = () => DF().find(id => (P.disc || {})[id] === "pending" && cDone(id, P.b)) || null;
   const figShown = (id) => DF().includes(id) && cDone(id, P.b) && (P.disc || {})[id] !== "pending";   // само съзвездия с фигура
-  const DLINE = { A: "Уау! Открихме съзвездието Първи светлини!" };
+  const DLINE = { A: "Уау! Открихме съзвездието Първи светлини!", B: "Уау! Открихме съзвездието Двете ръце!", C: "Уау! Открихме съзвездието Далечни звезди!" };
+  // Г2 „Обсерваторията расте“: предметът от фигурата на всяко открито съзвездие идва в стаята (само при „видяно“ откритие); новият – с проблясване, веднъж
+  const ROOM_ITEM = { A: "lantern", B: "kite", C: "rocket" }, rmKey = () => "obs.room.v1." + P.id;
+  const rmSeen = () => { try { return JSON.parse(localStorage.getItem(rmKey()) || "[]"); } catch (e) { return []; } }, rmMark = (id) => { try { const a = rmSeen(); if (!a.includes(id)) { a.push(id); localStorage.setItem(rmKey(), JSON.stringify(a)); } } catch (e) {} };
+  function roomItems() { const seen = rmSeen(); return DF().filter(c => ROOM_ITEM[c] && figShown(c)).map(c => { const id = ROOM_ITEM[c], fresh = !seen.includes(id); rmMark(id); return { id, fresh }; }); }
   let DRUN = false;
   function discover(id) {
     if (DRUN || !window.ObsDiscover || (P.disc || {})[id] !== "pending") return; DRUN = true; const g = gen, c = CONST.find(x => x.id === id), R = document.documentElement;
@@ -378,7 +382,8 @@
       say: (t) => Promise.all([sayP(t), new Promise(r => setTimeout(r, 2600))]), stop: () => { try { if (cur) cur.pause(); } catch (e) {} },
       sound: Q.get("voice") !== "0" && !(grown() && !P.zv),
       onSeen: () => { P.disc[id] = "seen"; save(); },
-      onDone: () => { DRUN = false; if (g === gen) document.querySelectorAll(".os-win .o-sky, .o-proj .o-sky").forEach(w => window.ObsDiscover.addTo(w, id)); } });
+      onDone: () => { DRUN = false; if (g === gen) { document.querySelectorAll(".os-win .o-sky, .o-proj .o-sky").forEach(w => window.ObsDiscover.addTo(w, id));
+        if (SC && SC.addItem && ROOM_ITEM[id]) { rmMark(ROOM_ITEM[id]); SC.addItem(ROOM_ITEM[id], true); } } } });   // Г2: предметът идва в стаята след откриването
   }
   // картата: докосване на завършено съзвездие – разглеждане на фигурата и името (без нова награда)
   function ccard(id) { const c = CONST.find(x => x.id === id), F = window.ObsDiscover.FIG[id], el = $("#o-card"); if (!c || !F || !el) return;
@@ -1344,8 +1349,11 @@
     // ?reset=1 (за проверки на телефона): демо профилът започва отначало – и първият полет, и представянето на стаята; параметърът се маха от адреса
     if (Q.get("reset") === "1" && DEMO.some(x => x.id === Q.get("p"))) { resetDemo(Q.get("p")); save(); try { const u = new URL(location.href); u.searchParams.delete("reset"); history.replaceState(null, "", u); } catch (e) {} }
     // ?demo=g1 (за проверка на Г1 на телефона): демо профилът отначало, звездите 1–8 – с пълна яркост, от домашното на занятие 9 остава последният кръг
-    if (Q.get("demo") === "g1" && DEMO.some(x => x.id === Q.get("p"))) { const id = Q.get("p"); resetDemo(id); const p0 = prof(id); p0.classAt = p0.cur = 9; for (let k = 1; k <= 8; k++) p0.b[k] = 3; p0.b[9] = 0; delete p0.disc;
-      HW.lessons.filter(L => L.n < 9).forEach(L => { p0.hw[L.id] = L.rounds.map((_, i) => i); }); const L9 = HW.lessons.find(x => x.n === 9);
+    // ?demo=g1 / g1b / g1c – един кръг до откриването на „Първи светлини“ (9) / „Двете ръце“ (17) / „Далечни звезди“ (21); по-ранните съзвездия – вече открити
+    const G1N = { g1: 9, g1b: 17, g1c: 21 }[Q.get("demo")];
+    if (G1N && DEMO.some(x => x.id === Q.get("p"))) { const id = Q.get("p"); resetDemo(id); const p0 = prof(id); p0.classAt = p0.cur = G1N; for (let k = 1; k < G1N; k++) p0.b[k] = 3; p0.b[G1N] = 0;
+      p0.disc = {}; if (G1N > 9) p0.disc.A = "seen"; if (G1N > 17) p0.disc.B = "seen";
+      HW.lessons.filter(L => L.n < G1N).forEach(L => { p0.hw[L.id] = L.rounds.map((_, i) => i); }); const L9 = HW.lessons.find(x => x.n === G1N);
       if (L9) { p0.hw[L9.id] = L9.rounds.slice(0, -1).map((_, i) => i); p0.hwres = p0.hwres || {}; p0.hwres[L9.id] = {}; L9.rounds.slice(0, -1).forEach((r, i) => { p0.hwres[L9.id][i] = { game: r.game, mode: (r.set || {}).mode || null, ok: 10, tot: 10, t: Date.now() }; }); }
       try { localStorage.setItem("obs.scene.v1." + id, "5"); localStorage.setItem("obs.journey.v1." + id, "1"); } catch (e) {} save();
       try { const u = new URL(location.href); u.searchParams.delete("demo"); history.replaceState(null, "", u); } catch (e) {} }

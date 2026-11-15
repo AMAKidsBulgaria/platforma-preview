@@ -82,3 +82,6 @@
 .od.od-red .od-sky { transform: none; transition: none; }
 .od.od-red .od-fig .f-flame, .od.od-red .od-fig.swing { animation: none; }
 @media (prefers-reduced-motion: reduce) { .od-sky, .od-ln, .od-fig .f-out { transition: none !important; } .od-st .od-sc, .od-st .od-sg, .od-fig .f-flame, .od-fig.swing, .od-fig.swing .f-glow, .o-fig.o-fig-new { animation: none !important; } }
+/* хвърчилото: опашката – тънка линия; ракетата: пламъкът е отдолу и трепти от горния си край */
+.o-fig .f-tail { stroke-width: 1.6; } .o-fig.hl .f-tail { stroke-width: 2.2; } .od-fig .f-tail { stroke-width: 2.6; }
+.f-flame.down { transform-origin: 50% 0 !important; }
