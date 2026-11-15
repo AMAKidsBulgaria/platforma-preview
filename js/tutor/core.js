@@ -20,7 +20,11 @@
     if (n === 5) SKILLS.push({ id: "PN", name: "Щипката: небесното и земните наведнъж", kind: "pinch", pre: ["P5"], n: 6, topic: "s6" });
     SKILLS.push({ id: "M" + n, name: `±${n} наум`, kind: "mind", pre: ["P" + n], n, topic: TOPIC[n] });
   }
-  SKILLS.push({ id: "CH", name: "Звездна нощ: вериги 0–9 наум", kind: "chain", pre: ["M9"], topic: "s9" });
+  // вариант Б (само едноцифрени действия, 15.11.2026): „Просто 11–19“ – втората пръчка (десетицата) и действия само с единиците; после Звездната нощ
+  SKILLS.push({ id: "T1", name: "Числата 10–19 на две пръчки", kind: "set", pre: ["M9"], rods: 2, topic: "t19" });
+  SKILLS.push({ id: "PT", name: "Просто в 11–19 на абакуса", kind: "ab", pre: ["T1"], rods: 2, topic: "t19", teen: true, mind: "MT" });
+  SKILLS.push({ id: "MT", name: "Просто в 11–19 наум", kind: "mind", pre: ["PT"], rods: 2, topic: "t19", teen: true, ab: "PT" });
+  SKILLS.push({ id: "CH", name: "Звездна нощ: вериги наум", kind: "chain", pre: ["MT"], topic: "s9" });
   const BY = {}; SKILLS.forEach((s, i) => { s.order = i; BY[s.id] = s; });
 
   // ---- (2) модел на усвояването ----
@@ -58,10 +62,10 @@
     k.status = s.kind === "ready" || s.kind === "intro" ? "mastered" : s.kind === "ab" || s.kind === "set" || s.kind === "pinch" ? "practiced" : "pending";
     k.strategy = null; k.tried = []; k.errRun = 0; k.sessionsNoProgress = 0; k.progressedAt = t;
     // отново научено действие, чийто „наум“ вече е минат → направо в проверка след дни (иначе остава „practiced“ завинаги)
-    if (s.kind === "ab" && ["pending", "mastered"].includes(S(st, "M" + s.n).status)) k.status = "pending";
+    if (s.kind === "ab" && ["pending", "mastered"].includes(S(st, s.mind || "M" + s.n).status)) k.status = "pending";
     if (k.status === "pending") { k.reviewStep = 0; k.nextReview = t + RULE.review[0] * DAY; }
     // наумът потвърждава и действието на абакуса: и то минава в проверка след дни
-    if (s.kind === "mind") { const a = S(st, "P" + s.n); if (a.status === "practiced") { a.status = "pending"; a.reviewStep = 0; a.nextReview = t + RULE.review[0] * DAY; } }
+    if (s.kind === "mind") { const a = S(st, s.ab || "P" + s.n); if (a.status === "practiced") { a.status = "pending"; a.reviewStep = 0; a.nextReview = t + RULE.review[0] * DAY; } }
   }
   // проверка „помни ли“ (в друга сесия, без подсказки)
   function review(st, id, ok, t) {
