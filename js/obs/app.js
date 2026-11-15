@@ -122,7 +122,7 @@
 
   // ---- глас: Зори (zr_*), иначе разказвачът (Калина) ----
   let AUDZ = {}, AUD = {}, cur = null;
-  fetch("config/abacus-audio-zori.json?v=17").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
+  fetch("config/abacus-audio-zori.json?v=18").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
   fetch("config/abacus-audio.json?v=4").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
   // „пораснал“ режим (7+, 11.11.2026): Зори е спътник – кратки реплики, само текст (гласът по избор: P.zv); рекорди и значки
   const grown = () => !!P && groupOf(P) !== "5";
@@ -260,7 +260,8 @@
     gen++; M = null; P.cur = classAt();
     const all = Object.keys(STAR).filter(k => regionOf(+k) === regionOf(classAt())), lit = all.filter(k => (P.b[k] || 0) >= 3).length, L = hwCurrent(), older = hwOlder();
     const LL = L || assignedL().slice(-1)[0], st = LL ? hwState(LL) : { done: [] };
-    const line = isTutor() ? "Здравей! Да продължим урока." : tone(!L ? "Браво! Домашното е готово." : st.done.length ? "Здравей! Да продължим домашното." : "Здравей! Днес имаме ново домашно.");
+    const zm = !isTutor() && L && !st.done.length && !(back && back.kind) ? zmStart(L) : null;   // Г4: Зори помни последното домашно (веднъж)
+    const line = isTutor() ? "Здравей! Да продължим урока." : tone(zm || (!L ? "Браво! Домашното е готово." : st.done.length ? "Здравей! Да продължим домашното." : "Здравей! Днес имаме ново домашно."));
     const dots = LL ? `<span class="o-hdots">${LL.rounds.map((_, k) => `<i class="${st.done.includes(k) ? "on" : L && k === st.next ? "now" : ""}"></i>`).join("")}</span>` : "";
     let sub = L ? `Занятие ${L.n} · ${L.rounds[st.next].label} · кръг ${st.next + 1} от ${L.rounds.length}` : "Домашното е готово – виж звездите";
     if (isTutor()) { const tp = TU.plan(tutorState()); sub = "Урок със Зори · " + (tp.current ? TU.BY[tp.current].name : "модулът е завършен"); }
@@ -460,7 +461,9 @@
       <div class="ol-sec"><em>Яркост на звездата</em><div class="ol-star"><div class="o-stars" aria-label="Яркост ${after} от 3">${[0, 1, 2].map(k => `<span class="${k < after ? "on" : ""}${up && k >= before && k < after ? " up" : ""}" style="animation-delay:${2.1 + (k - before) * .25}s">★</span>`).join("")}</div><p>${cap[0]}<small>${cap[1]}</small></p></div></div>
       <div class="o-sbar"><button class="o-sec" id="o-tomap">Към картата</button><button class="o-go" id="o-home">Към обсерваторията</button></div>
       <button class="dz-link" id="o-todiary" type="button">${BOOK}Виж страницата в дневника</button></div>`;
-    say(up ? "Небето е подредено за тази вечер. Звездата стана по-ярка!" : "Браво! Домашното е готово.", "joy"); zr("zr-big"); if (up) burst();
+    const first = up ? "Небето е подредено за тази вечер. Звездата стана по-ярка!" : "Браво! Домашното е готово.", zme = zmEnd(L), gz = gen;
+    say(first, "joy"); if (zme) afterSay(400).then(() => { if (gz === gen) say(zme, "joy"); }, () => {});   // Г4: затворен пропуск – след обичайната реплика
+    zr("zr-big"); if (up) burst();
     const g0 = gen, cheer = $("#ol-cheer"), toReport = () => { if (g0 !== gen || !cheer.isConnected || cheer.classList.contains("gone")) return; cheer.classList.add("gone"); app.classList.remove("ol-pre"); setTimeout(() => cheer.remove(), 500); };
     cheer.onclick = toReport; setTimeout(toReport, matchMedia("(prefers-reduced-motion: reduce)").matches ? 1200 : 1800);
     $("#o-tomap").onclick = () => screenMap(n); const home = one(() => backHome("hw")); $("#o-home").onclick = home;
@@ -1688,11 +1691,11 @@
   function dzDetail(L) {
     const R = (P.hwres || {})[L.id] || {}, G = P.log || {}, out = {}, idx = Object.keys(R).map(Number).filter(i => R[i]).sort((a, b) => (R[a].t || 0) - (R[b].t || 0));
     idx.forEach((i, k) => { const r = R[i], rd = L.rounds[i] || {}, key = r.game === "flash" ? "fl" : r.game === "trainer" ? (r.mode === "mind" ? "im" : "ab") : r.game;
-      const a = out[key] = out[key] || { key, ok: 0, tot: 0, miss: [], set: rd.set || {} }; a.ok += r.ok || 0; a.tot += r.tot || 0;
+      const a = out[key] = out[key] || { key, ok: 0, tot: 0, miss: [], hit: [], set: rd.set || {} }; a.ok += r.ok || 0; a.tot += r.tot || 0;
       if (!r.t) return; const from = Math.max(k ? R[idx[k - 1]].t || 0 : 0, r.t - 15 * 60e3), inW = (x) => x && x.t > from && x.t <= r.t + 1000;
-      if (key === "fl") (G.flash || []).filter(inW).forEach(x => { if (!x.correct && x.n != null) a.miss.push(x.n); });
+      if (key === "fl") (G.flash || []).filter(inW).forEach(x => { if (x.n != null) (x.correct ? a.hit : a.miss).push(x.n); });
       else if (key === "ab" || key === "im") (G.trainer || []).filter(inW).filter(x => (x.src === "mind") === (key === "im")).forEach(x => { if (!x.correct && x.nums) a.miss.push(x); });
-      else if (key === "comet") (G.comet || []).filter(inW).forEach(x => { if (!x.caught) a.miss.push(x.n); }); });
+      else if (key === "comet") (G.comet || []).filter(inW).forEach(x => { (x.caught ? a.hit : a.miss).push(x.n); }); });
     return out;
   }
   // препоръка: отключена игра с по-леки настройки за областта с пропуск (по-бавно, по-кратко); без пропуск – поддържане
@@ -1719,6 +1722,36 @@
       const c = STAR[L.n] && STAR[L.n].big ? STAR[L.n].c : null;
       return { L, n: L.n, t, acc, games: [...new Set(L.rounds.map(r => r.game))].filter(id => ICON[id]), fig: c && figShown(c) ? c : null };
     }).sort((a, b) => (a.t || 0) - (b.t || 0) || a.n - b.n);
+  }
+  // ======================= Г4 „ЗОРИ ПОМНИ“ (15.11.2026) =======================
+  // Една реплика от последното завършено домашно – само от записаното (същият анализ като в дневника); нищо не променя ученето.
+  // Начало на ново домашно: какво беше трудно / че всичко вървеше; край на домашното: ако старият пропуск е затворен днес. Всяка – веднъж.
+  const ZM = { start: { fl: "Миналия път някои числа се криеха. Днес ще ги хванем!", ab: "Миналия път абакусът беше труден. Днес ще смятаме бавно и точно!",
+      im: "Миналия път смятането наум беше трудно. Днес ще си представяме топчетата заедно!", ok: "Миналия път всичко вървеше отлично! Да продължим." },
+    end: { fl: "Миналия път числата се криеха, а днес ги позна!", ab: "Миналия път абакусът беше труден, а днес смяташе точно!", im: "Миналия път наум беше трудно, а днес се справи!" },
+    nStart: (n) => `Миналия път числото ${n} се криеше. Днес ще го хванем!`, nEnd: (n) => `Миналия път ${n} се криеше, а днес го позна!` };
+  const zmKey = () => "obs.zmem.v1." + P.id, zmGet = () => { try { return JSON.parse(localStorage.getItem(zmKey()) || "{}"); } catch (e) { return {}; } },
+    zmSet = (k, v) => { try { const m = zmGet(); m[k] = v; localStorage.setItem(zmKey(), JSON.stringify(m)); } catch (e) {} };
+  // какво е запомнила Зори от едно домашно: най-често объркваното число (поне 2 пъти) и областите под целта
+  function zmOf(L) { const det = dzDetail(L), miss = [].concat((det.fl || {}).miss || [], (det.comet || {}).miss || []), c = {};
+    miss.forEach(n => { if (n >= 0 && n <= 9) c[n] = (c[n] || 0) + 1; }); const top = Object.keys(c).map(Number).sort((a, b) => c[b] - c[a] || a - b)[0];
+    const main = ["fl", "ab", "im"].filter(k => det[k] && det[k].tot), gaps = main.filter(k => det[k].ok * 100 < det[k].tot * DZNEED[k]);
+    return { det, n: top != null && c[top] >= 2 ? top : null, gaps, good: main.length > 0 && !gaps.length }; }
+  const zmPrev = (exceptN) => { const ps = diaryPages().filter(p => p.n !== exceptN); return ps.length ? ps[ps.length - 1] : null; };
+  // начало на ново (още незапочнато) домашно → реплика или null
+  function zmStart(L) {
+    if (groupOf(P) !== "5" || !L) return null; const p = zmPrev(L.n); if (!p) return null; const key = L.id + "<" + p.L.id; if (zmGet().start === key) return null;
+    const m = zmOf(p.L), line = m.n != null ? ZM.nStart(m.n) : m.gaps.length ? ZM.start[m.gaps[0]] : m.good ? ZM.start.ok : null;
+    if (line) zmSet("start", key); return line;
+  }
+  // край на домашното → реплика, ако днес е затворен пропуск от предишното (числото е познато, областта е над целта)
+  function zmEnd(L) {
+    if (groupOf(P) !== "5") return null; const p = zmPrev(L.n); if (!p || (p.t && p.t > Date.now())) return null; const key = L.id + "<" + p.L.id; if (zmGet().end === key) return null;
+    const m = zmOf(p.L), now = dzDetail(L), hit = [].concat((now.fl || {}).hit || [], (now.comet || {}).hit || []), miss = [].concat((now.fl || {}).miss || [], (now.comet || {}).miss || []);
+    let line = null;
+    if (m.n != null && hit.includes(m.n) && !miss.includes(m.n)) line = ZM.nEnd(m.n);
+    else { const k = m.gaps.find(k => now[k] && now[k].tot && now[k].ok * 100 >= now[k].tot * DZNEED[k]); if (k) line = ZM.end[k]; }
+    if (line) zmSet("end", key); return line;
   }
   function screenDiary(o) {
     o = o || {}; sceneOff(); gen++; const g = gen, back = o.back || screenHome, pages = diaryPages(), five = groupOf(P) === "5";
@@ -1788,6 +1821,6 @@
     pb.addEventListener("click", () => { if (par && Date.now() - parAt > 700) { par = false; render(0, true); } });
     render(0);
   }
-  window.OBS = { screenDiary, _diaryPages: () => diaryPages(), _scene: () => SC, _discover: (id) => discover(id), _discPending: () => discPending(), _intro: (n) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return digitIntro(n); }, _trace: (n) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return traceDigit(n); }, _tchain: (id, mind) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return tChain(TU.BY[id], { count: 5, speed: 2 }, mind); }, runTutor, screenParentReport, screenRegion, _track: (k, r, s) => track(k, r, s), _const: (v, r, d) => constSVG(v, r, d), _hw: () => HW, runHw, screenTeacher, _hwComplete: (n) => hwComplete(HW.lessons.find(x => x.n === n)), _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
+  window.OBS = { screenDiary, _zm: { start: (n) => zmStart(HW.lessons.find(x => x.n === n)), end: (n) => zmEnd(HW.lessons.find(x => x.n === n)) }, _diaryPages: () => diaryPages(), _scene: () => SC, _discover: (id) => discover(id), _discPending: () => discPending(), _intro: (n) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return digitIntro(n); }, _trace: (n) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return traceDigit(n); }, _tchain: (id, mind) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return tChain(TU.BY[id], { count: 5, speed: 2 }, mind); }, runTutor, screenParentReport, screenRegion, _track: (k, r, s) => track(k, r, s), _const: (v, r, d) => constSVG(v, r, d), _hw: () => HW, runHw, screenTeacher, _hwComplete: (n) => hwComplete(HW.lessons.find(x => x.n === n)), _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
     testFinish: (n, r) => { M = Object.assign({ n, ex: [], par: PAR[n], max: MAXN[n], flash: [5, 6], ab: [3, 4], meth: [3, 4], im: [2, 3], help: 0 }, r || {}); return finish(); } };   // само за проверки
 })();
