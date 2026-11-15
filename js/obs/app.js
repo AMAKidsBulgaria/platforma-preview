@@ -122,7 +122,7 @@
 
   // ---- глас: Зори (zr_*), иначе разказвачът (Калина) ----
   let AUDZ = {}, AUD = {}, cur = null;
-  fetch("config/abacus-audio-zori.json?v=20").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
+  fetch("config/abacus-audio-zori.json?v=21").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
   fetch("config/abacus-audio.json?v=4").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
   // „пораснал“ режим (7+, 11.11.2026): Зори е спътник – кратки реплики, само текст (гласът по избор: P.zv); рекорди и значки
   const grown = () => !!P && groupOf(P) !== "5";
@@ -1372,16 +1372,19 @@
   const TU = window.MA_TUTOR;
   const isTutor = () => !!(TU && P && P.format === "ai" && groupOf(P) === "5");
   function tutorState() { if (!P.tutor) P.tutor = TU.newState(); TU.refresh(P.tutor); return P.tutor; }
-  const SKILL_LESSON = { P1: 1, P2: 1, P3: 2, P4: 3, P5: 4, PN: 5, P6: 5, P7: 6, P8: 7, P9: 8, T1: 11, PT: 11, CH: 9 };   // звездата на картата за всяко умение
+  const SKILL_LESSON = { P1: 1, P2: 1, P3: 2, P4: 3, P5: 4, PN: 5, P6: 5, P7: 6, P8: 7, P9: 8, T1: 11, PT: 11, CH: 9,
+    B4: 22, MB4: 24, B3: 25, MB3: 27, B2: 28, MB2: 30, B1: 31, MB1: 33, BN: 34 };   // звездата на картата за всяко умение
   function tutorStars() {   // яркостта на звездите от състоянието на уменията (усвоено → 3, чака проверка → 2, учи се → 1)
     const st = P.tutor; if (!st) return; const lv = { mastered: 3, pending: 2, practiced: 2, learning: 1, stalled: 1 };
     Object.entries(SKILL_LESSON).forEach(([id, n]) => { const k = st.skills[id]; if (!k) return; const v = lv[k.status] || 0; P.b[n] = Math.max(P.b[n] || 0, v); });
-    ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "MT"].forEach(id => { const k = st.skills[id]; if (k && k.status === "mastered") P.halo[SKILL_LESSON[(TU.BY[id] || {}).ab || "P" + id.slice(1)]] = 1; });
+    ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "MT", "MB4", "MB3", "MB2", "MB1"].forEach(id => { const k = st.skills[id]; if (k && k.status === "mastered") P.halo[SKILL_LESSON[(TU.BY[id] || {}).ab || "P" + id.slice(1)]] = 1; });
     P.classAt = Math.max(P.classAt || 1, ...Object.entries(SKILL_LESSON).filter(([id]) => st.skills[id] && st.skills[id].status !== "locked").map(([, n]) => n));
   }
   const INTRO_T = { G: "Да видим кои цифри познаваш!", A1: "Това е абакусът. Броим само топчетата до гредата.", C1: "Земните топчета струват по едно. Палецът ги вдига.",
     C2: "Небесното топче е пет! Мести го с показалеца.", PN: "Щипка: небесното и земните топчета – заедно, с едно движение.", CH: "Звездна нощ! Смятаме наум с всички числа.",
-    T1: "Десетиците са на втората пръчка вляво.", PT: "Смятаме с числата от 11 до 19!", MT: "Сега от 11 до 19 наум!" };
+    T1: "Десетиците са на втората пръчка вляво.", PT: "Смятаме с числата от 11 до 19!", MT: "Сега от 11 до 19 наум!",
+    B4: "Брат на четири!", B3: "Брат на три!", B2: "Брат на две!", B1: "Брат на едно!", MB4: "Брат на четири – наум!", MB3: "Брат на три – наум!", MB2: "Брат на две – наум!", MB1: "Брат на едно – наум!",
+    BN: "Звездна нощ! Всички братя – наум." };
   const introOf = (s) => INTRO_T[s.id] || (s.kind === "mind" ? `Сега ±${s.n} наум – представи си абакуса!` : `Учим ±${s.n}!`);
   // „покажи и обясни“ преди детето да опита само: ново умение = обяснение → Зори показва → заедно → сам
   const TEACH_P = { 1: "Плюс едно: палецът вдига едно топче до гредата. Минус едно: показалецът го сваля.", 2: "Плюс две: палецът вдига две топчета наведнъж.",
@@ -1395,6 +1398,12 @@
       for (let i = 1; i < count; i++) { const opts = []; for (let n = 1; n <= 9; n++) ["+", "-"].forEach(op => { const b = op === "+" ? u + n : u - n; if (b < 0 || b > 9) return; if (E.plan(u, op, n, 1).rule === "Просто") opts.push(op === "+" ? n : -n); });
         if (!opts.length) break; const x = opts[Math.floor(Math.random() * opts.length)]; nums.push(x); u += x; }
       if (nums.length === count) return { nums, answer: 10 + u }; } return { nums: [12, 2], answer: 14 }; }
+  // „Братя“: верига от двигателя (започва от 0, научените братя, новият – в поне една трета от действията); за Звездната нощ новият е случаен
+  function broChain(s, count) { const fresh = s.kind === "chain" ? s.allowed[Math.floor(Math.random() * s.allowed.length)] : s.bro;
+    return E.brothersExample({ rods: 1, count: Math.max(3, count), allowed: s.allowed, fresh }) || E.brothersExample({ rods: 1, count: 3, allowed: s.allowed, fresh }) || { nums: [4, 1], answer: 5 }; }
+  // една задача, която иска точно този брат: при „+“ от 5−k…4, при „−“ от 5…4+k
+  function broTask(k, easy) { const op = easy || Math.random() < .55 ? "+" : "-", a = op === "+" ? 5 - k + Math.floor(Math.random() * k) : 5 + Math.floor(Math.random() * k);
+    return { a, op, n: k, target: op === "+" ? a + k : a - k, moves: E.plan(a, op, k, 1).moves }; }
   function teenTask() { const c = teenChain(2), a = c.nums[0], x = c.nums[1], op = x > 0 ? "+" : "-"; return { a, op, n: Math.abs(x), target: c.answer, moves: E.plan(a, op, Math.abs(x), 2).moves }; }
   // „заедно“: туторът осветява следващото движение; следим състоянието на абакуса (бърза щипка = двете движения почти наведнъж – не се губи);
   // ако детето се отклони – връщаме началото и показваме отново
@@ -1410,7 +1419,7 @@
   // ---- упражнение като в плановете (младша група, „Просто“): вериги, които растат по брой действия и скорост ----
   // [начало и таван на действията на абакуса, начало и таван наум] за всяко число; скорост от 2,0 с надолу до 1,0 с (наум от 2,2 с)
   const TPAR = { 1: [5, 10, 4, 10], 2: [5, 10, 4, 10], 3: [6, 15, 4, 10], 4: [6, 15, 4, 10], 5: [6, 15, 4, 10], 6: [6, 15, 4, 10], 7: [7, 20, 5, 15], 8: [7, 20, 5, 17], 9: [7, 25, 5, 20] };
-  function tPar(id) { const s = TU.BY[id], k = P.tutor.skills[id]; if (!k.par) { const p = TPAR[s.n || (s.teen ? 5 : 9)] || TPAR[9]; k.par = s.kind === "mind" || s.kind === "chain" ? { count: p[2], max: p[3], speed: 2.2 } : { count: p[0], max: p[1], speed: 2.0 }; } return k.par; }
+  function tPar(id) { const s = TU.BY[id], k = P.tutor.skills[id]; if (!k.par) { const p = TPAR[s.n || (s.teen || s.bro ? 5 : 9)] || TPAR[9]; k.par = s.kind === "mind" || s.kind === "chain" ? { count: p[2], max: p[3], speed: 2.2 } : { count: p[0], max: p[1], speed: 2.0 }; } return k.par; }
   function tParStep(par, ok) {   // 2 успеха подред → едно действие повече (до тавана), после по-бързо; грешка → по-кратко и по-бавно
     if (ok) { par.wins = (par.wins || 0) + 1; if (par.wins >= 2) { par.wins = 0; if (par.count < par.max) par.count++; else par.speed = Math.max(1.0, Math.round((par.speed - .1) * 10) / 10); } }
     else { par.wins = 0; par.count = Math.max(3, par.count - 1); par.speed = Math.min(2.5, Math.round((par.speed + .1) * 10) / 10); }
@@ -1434,7 +1443,7 @@
   }
   // верига: числата се показват едно по едно със зададената скорост; детето смята на абакуса докато ги вижда (или наум, после въвежда)
   async function tChain(s, par, mind) {
-    const rods = s.rods || 1, t = topicFor(s.topic || "s9"), ex = s.teen ? teenChain(par.count) : E.simpleExample({ ...t, count: par.count, must: s.kind === "chain" ? 0 : s.id === "PN" ? 6 : s.n }) || E.simpleExample({ ...t, count: par.count });
+    const rods = s.rods || 1, t = topicFor(s.topic || "s9"), ex = s.teen ? teenChain(par.count) : s.bro ? broChain(s, par.count) : E.simpleExample({ ...t, count: par.count, must: s.kind === "chain" ? 0 : s.id === "PN" ? 6 : s.n }) || E.simpleExample({ ...t, count: par.count });
     const nums = ex.nums, w = $("#o-work"), t0 = Date.now();
     w.classList.add("o-trw"); w.innerHTML = `<div class="o-trl${mind ? " solo" : ""}"><div class="o-trn" id="o-num"></div><div class="o-trq" id="o-trq"></div></div>${mind ? "" : `<div class="o-trabk"><div class="o-abhost" id="o-abh"></div></div>`}`;
     const ab = mind ? null : abacus($("#o-abh"), rods); if (ab) ab.enable(true);
@@ -1522,6 +1531,15 @@
     if (s.id === "C2") { await talk("Небесното топче е пет! Мести го с показалеца.", "explain");
       for (const v of [5, 7, 9]) { const ab = abHere(0, v); say(v === 5 ? "Това е 5." : `Това е ${v}: пет и още ${v - 5}.`, "point"); await ab.demo(fingered(E.plan(0, "+", v, 1).moves), true, true); await afterSay(600); }
       await talk("Да покажем шест заедно!", "joy"); const ab = abHere(0, 6); await togetherDo(ab, E.plan(0, "+", 6, 1).moves); await talk("Браво! Сега сам.", "joy"); return; }
+    if (s.bro && s.kind === "ab") { const k = s.bro, b = 5 - k, demo = async (a, op, n, line) => { const ab = abHere(a, `${a} ${op === "+" ? "+" : "−"} ${n}`); say(line, "point"); await ab.demo(fingered(E.plan(a, op, n, 1).moves), E.plan(a, op, n, 1).moves.length > 1, true); $("#o-num").textContent += ` = ${op === "+" ? a + n : a - n}`; await afterSay(700); };
+      if (k === 4) { await talk("Понякога долу няма достатъчно топчета. Тогава ни помага петицата – и брат на числото.", "explain");
+        await demo(4, "+", 1, "Четири и още едно: земните топчета свършиха! Взимаме петицата и връщаме четири.");
+        await talk("Четири и едно са братя – заедно правят пет. Три и две – също.", "explain");
+        await demo(0, "+", 4, "От нула: плюс четири – просто, всички земни топчета нагоре.");
+        await demo(2, "+", 4, "От две – не стигат! Плюс пет, минус едно. Братът на четири е едно."); }
+      else { await talk(`Братът на ${k} е ${b}: плюс ${k} е плюс пет, минус ${b}.`, "explain"); await demo(5 - k, "+", k, `Плюс ${k}: петицата надолу, ${b} земни – махаме.`); }
+      await demo(5 + Math.floor(k / 2), "-", k, `Минус ${k}: минус пет, плюс ${b}.`);
+      const a = 4 - Math.floor((k - 1) / 2); await talk("Да опитаме заедно!", "joy"); const ab = abHere(a, `${a} + ${k}`); await togetherDo(ab, E.plan(a, "+", k, 1).moves); await talk("Браво! Сега сам.", "joy"); return; }
     if (s.id === "T1") { await talk("Десетиците са на втората пръчка вляво. Едно земно топче там е десет.", "explain");
       for (const v of [10, 13, 17]) { const ab = abHere(0, v, 2); say(v === 10 ? "Това е 10: едно топче на десетиците." : `Това е ${v}: десет и още ${v - 10}.`, "point"); await ab.demo(fingered(E.plan(0, "+", v, 2).moves), false, true); await afterSay(600); }
       await talk("Да покажем дванадесет заедно!", "joy"); const ab = abHere(0, 12, 2); await togetherDo(ab, E.plan(0, "+", 12, 2).moves); await talk("Браво! Сега сам.", "joy"); return; }
@@ -1541,7 +1559,7 @@
     if (s.kind === "mind") { const t = opTask(TU.BY[s.ab || "P" + s.n], false), ab = abHere(t.a, `${t.a} ${t.op === "+" ? "+" : "−"} ${t.n}`, (TU.BY[s.ab] || {}).rods || 1);
       await talk("Сега наум: представи си абакуса.", "explain"); await ab.demo(fingered(t.moves), t.moves.length > 1, true); $("#o-num").textContent += ` = ${t.target}`;
       await talk("Сега смятай без абакус – само в главата си.", "point"); return; }
-    if (s.kind === "chain") { await talk("Звездна нощ! Смятаме наум с всички числа.", "explain"); return; }
+    if (s.kind === "chain") { await talk(s.bro ? "Звездна нощ! Всички братя – наум." : "Звездна нощ! Смятаме наум с всички числа.", "explain"); return; }
   }
   function tShell(title, blocks, i) {
     app.className = "o-scr o-mis o-tutor";
@@ -1553,7 +1571,7 @@
   function tStep(i) { app.querySelectorAll(".o-pips b").forEach((b, j) => { b.className = j < i ? "d" : j === i ? "c" : ""; }); }
   // задача за умение: a ± n с едно действие по правилото „Просто“ (числата до 9)
   function opTask(s, easy) {
-    if (s.teen) return teenTask();
+    if (s.teen) return teenTask(); if (s.bro) return broTask(s.bro, easy);
     const ns = s.id === "PN" ? [6, 7, 8, 9] : s.n === 1 ? [1] : s.n === 2 ? [1, 2] : [s.n];
     for (let g = 0; g < 200; g++) { const n = ns[Math.floor(Math.random() * ns.length)], op = easy || Math.random() < .55 ? "+" : "-";
       const a = easy ? (op === "+" ? 0 : n) : Math.floor(Math.random() * 10), b = op === "+" ? a + n : a - n; if (b < 0 || b > 9) continue;
@@ -1610,7 +1628,7 @@
     const st = r.strategy;
     if (st === "demo" || st === "video" || st === "split") {   // видео още няма → бавна демонстрация; „разделяне“ – движение по движение с обяснение
       if (!task) { await talk("Гледай как се прави.", "point"); return; }
-      w.innerHTML = `<div class="o-num">${task.a} ${task.op === "+" ? "+" : "−"} ${task.n}</div><div class="o-abhost" id="o-abh"></div>`; const ab = abacus($("#o-abh"), 1); ab.enable(false); ab.set(task.a);
+      w.innerHTML = `<div class="o-num">${task.a} ${task.op === "+" ? "+" : "−"} ${task.n}</div><div class="o-abhost" id="o-abh"></div>`; const ab = abacus($("#o-abh"), s.rods || 1); ab.enable(false); ab.set(task.a);
       await talk(st === "split" ? "Ще го направим на части. Гледай!" : "Гледай как го правя!", "point");
       if (st === "split") for (const m of task.moves) { say(fixSay(m), "explain"); await ab.demo([m], false, true); await wait(500); }
       else await ab.demo(task.moves.map(m => ({ ...m, finger: fixFinger(m) })), task.moves.length > 1, true);
@@ -1618,13 +1636,13 @@
     }
     if (st === "explain") { const v = last.target; if (v != null) { $("#o-work").innerHTML = `<div class="o-num" style="font-size:min(30vh,200px)">${v}</div>`; say(`Това е числото ${v}.`, "explain"); voice(String(v)); await wait(2200); } return; }
     if (st === "compare" && !task && last.target != null && s.kind !== "ready") {   // наум: картината на отговора
-      $("#o-work").innerHTML = `<div class="o-cmp"><div><small>отговорът</small>${abImg(last.target, 1)}<b>${last.target}</b></div></div>`; await talk("Ето как изглежда отговорът на абакуса.", "explain"); await wait(1800); return; }
+      $("#o-work").innerHTML = `<div class="o-cmp"><div><small>отговорът</small>${abImg(last.target, s.rods || 1)}<b>${last.target}</b></div></div>`; await talk("Ето как изглежда отговорът на абакуса.", "explain"); await wait(1800); return; }
     if (st === "together") { await talk("Да го направим заедно!", "joy"); const x = await tItem(s, { task, together: true }); TU.record(P.tutor, s.id, { ok: x.ok, method: x.method, helped: true, rtMs: x.rt }); await talk("Браво! Сега сам.", "joy"); return; }
     if (st === "compare" && task) {   // преди и след
-      w.innerHTML = `<div class="o-cmp"><div><small>преди</small>${abImg(task.a, 1)}<b>${task.a}</b></div><div class="o-cmpa">${task.op === "+" ? "+" : "−"} ${task.n} →</div><div><small>след</small>${abImg(task.target, 1)}<b>${task.target}</b></div></div>`;
+      w.innerHTML = `<div class="o-cmp"><div><small>преди</small>${abImg(task.a, s.rods || 1)}<b>${task.a}</b></div><div class="o-cmpa">${task.op === "+" ? "+" : "−"} ${task.n} →</div><div><small>след</small>${abImg(task.target, s.rods || 1)}<b>${task.target}</b></div></div>`;
       await talk("Виж какво се променя. Кои топчета се местят?", "explain"); await wait(2600); return;
     }
-    if (st === "game") { await talk("Да поиграем с това движение!", "joy"); const keep = $("#o-work").innerHTML; try { await PLAY.fix({ topic: s.topic || "s4", rounds: 2 }); } catch (e) { if (e === "stale") throw e; } return; }
+    if (st === "game") { await talk("Да поиграем с това движение!", "joy"); const keep = $("#o-work").innerHTML; try { await (s.bro || s.teen ? PLAY.flash({ topic: "s9", speed: 2.5, rounds: 3 }) : PLAY.fix({ topic: s.topic || "s4", rounds: 2 })); } catch (e) { if (e === "stale") throw e; } return; }
     if (st === "easier") { sess.easy = 2; await talk("Да опитаме с по-лесен пример.", "explain"); return; }
   }
   async function runTutor() {
@@ -1669,7 +1687,7 @@
         cur = nx;
       }
       // игра за награда с текущото движение
-      tStep(5); const gs = TU.BY[cur || "P1"]; if (FAST_ON) {} else if (gs && (gs.kind === "ab" || gs.kind === "mind")) await PLAY.fix({ topic: gs.topic || "s4", rounds: 2 }); else if (known) await PLAY.flash({ topic: "s" + Math.max(2, known), speed: 2.5, rounds: 3 });
+      tStep(5); const gs = TU.BY[cur || "P1"]; if (FAST_ON) {} else if (gs && (gs.kind === "ab" || gs.kind === "mind") && !gs.bro && !gs.teen) await PLAY.fix({ topic: gs.topic || "s4", rounds: 2 }); else if (gs && (gs.bro || gs.teen)) await PLAY.flash({ topic: "s9", speed: 2.5, rounds: 3 }); else if (known) await PLAY.flash({ topic: "s" + Math.max(2, known), speed: 2.5, rounds: 3 });
       TU.endSession(st, Date.now()); tutorStars();
       if (sess.tower) { unTrw(); $("#o-work").innerHTML = `<div class="o-towerbig">${towerHtml(sess.tower)}</div>`; await talk("Виж колко висока е кулата ти!", "joy"); }
       const rep = tutorReport(sess); (P.treports = P.treports || []).push(rep); if (P.treports.length > 60) P.treports.shift(); save();

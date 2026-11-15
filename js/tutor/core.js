@@ -25,6 +25,12 @@
   SKILLS.push({ id: "PT", name: "Просто в 11–19 на абакуса", kind: "ab", pre: ["T1"], rods: 2, topic: "t19", teen: true, mind: "MT" });
   SKILLS.push({ id: "MT", name: "Просто в 11–19 наум", kind: "mind", pre: ["PT"], rods: 2, topic: "t19", teen: true, ab: "PT" });
   SKILLS.push({ id: "CH", name: "Звездна нощ: вериги наум", kind: "chain", pre: ["MT"], topic: "s9" });
+  // „Братя“ (вариант Б: само едноцифрени действия, една пръчка), ред ±4 → ±3 → ±2 → ±1 (15.11.2026, препоръката от анализа; чака методиста);
+  // научените братя се натрупват (както в тренажора на AMAKids); всеки брат – на абакуса, после наум; накрая Звездна нощ с всички братя
+  [4, 3, 2, 1].forEach((k, i, A) => { const allowed = A.slice(0, i + 1);
+    SKILLS.push({ id: "B" + k, name: `Брат на ${k}: ±${k} на абакуса`, kind: "ab", pre: [i ? "MB" + A[i - 1] : "CH"], bro: k, allowed, topic: "b" + k, mind: "MB" + k });
+    SKILLS.push({ id: "MB" + k, name: `Брат на ${k}: ±${k} наум`, kind: "mind", pre: ["B" + k], bro: k, allowed, topic: "b" + k, ab: "B" + k }); });
+  SKILLS.push({ id: "BN", name: "Звездна нощ: всички братя наум", kind: "chain", pre: ["MB1"], bro: 1, allowed: [4, 3, 2, 1], topic: "b1" });
   const BY = {}; SKILLS.forEach((s, i) => { s.order = i; BY[s.id] = s; });
 
   // ---- (2) модел на усвояването ----
@@ -95,6 +101,7 @@
   // кое умение липсва, ако грешката е такава (от кода на ядрото: wrong_value, forgot_complement, … или от вида на движението)
   function prereqFor(id, err) {
     const s = BY[id]; if (!s || s.kind !== "ab") return null;
+    if (s.bro) return err === "heaven" || err === "combined" ? "P5" : null;   // братята: бърка небесното топче → ±5
     if (err === "heaven" && s.n <= 5) return "C2";   // бърка небесното топче → да нареди 5–9
     if (err === "earth") return "C1";
     if (err === "combined" && s.n >= 6) return "PN";  // щипката
