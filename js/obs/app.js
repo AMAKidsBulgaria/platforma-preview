@@ -49,6 +49,20 @@
     return [{ id: "O", name: "Орион", sub: "Братя", region: "orion", stars }, ORION_FIG.filter(([a, z]) => num[a] && num[z]).map(([a, z]) => [num[a], num[z]])];
   }
   const AURORA_N = { 5: 21, 7: 13, 10: 13 };
+  // ---- небето по вариант Б (AI тутор, 5–6 г., 15.11.2026): всяко ниво – своя област; звездите следват уменията на тутора ----
+  // Аврора: „Първи светлини“ (1–9, фенерът остава) + „Втората пръчка“ (10–11); Орион: Братя (12–20); Плеяди: Приятели (21–34)
+  const isVB = (p) => !!(p && p.format === "ai" && groupOf(p) === "5"), VB_END = { aurora: 11, orion: 20 };
+  const PLEI = [[21, "Числата до 99", 2620, 520], [22, "Приятели 9 и 8", 2700, 465], [23, "9 и 8 · наум", 2785, 500], [24, "Приятели 7 и 6", 2860, 430], [25, "7 и 6 · наум", 2800, 365],
+    [26, "Приятел 5", 2900, 320], [27, "5 · наум", 2990, 365], [28, "Приятели 4 и 3", 3060, 300], [29, "4 и 3 · наум", 3000, 230], [30, "Приятели 2 и 1", 3105, 185],
+    [31, "2 и 1 · наум", 3190, 240], [32, "Преход през 50", 3250, 330], [33, "Преход · наум", 3180, 405], [34, "Звездна нощ", 3300, 150, 1]];
+  function constVB() {
+    const seq = ["club", "betel", "meissa", "bella", "mint", "alnil", "alnit", "saiph", "rigel"], num = {}; seq.forEach((k, i) => { num[k] = 12 + i; });
+    const tt = ["Брат 4", "Брат 4 · наум", "Брат 3", "Брат 3 · наум", "Брат 2", "Брат 2 · наум", "Брат 1", "Брат 1 · наум", "Звездна нощ"];
+    const O = { id: "O", name: "Орион", sub: "Братя", region: "orion", stars: seq.map((k, i) => [12 + i, tt[i], ORION_PT[k][0], ORION_PT[k][1], i === 8 ? 1 : 0]) };
+    const C = [CONST5[0], { id: "T", name: "Втората пръчка", sub: "11–19", stars: [[10, "Числата 10–19", 530, 330], [11, "Просто 11–19", 610, 260, 1]] }, O,
+      { id: "PL", name: "Плеяди", sub: "Приятели", region: "pleiades", stars: PLEI }];
+    const L = { A: LINES5.A, T: [[10, 11]], O: ORION_FIG.filter(([a, z]) => num[a] && num[z]).map(([a, z]) => [num[a], num[z]]), PL: PLEI.slice(1).map((x, i) => [PLEI[i][0], x[0]]) };
+    return [C, L]; }
   // параметри на мисията по занятие (от картата на модула): скорост на абакуса, на флашкартите, на въображаемия
   const PAR = { 1: [2.5, 1.8, 2.5], 2: [2.0, 1.8, 2.5], 3: [2.0, 1.6, 2.0], 4: [2.0, 1.6, 2.0], 5: [2.2, 1.5, 2.0], 6: [2.0, 1.4, 2.0], 7: [2.0, 1.4, 2.0], 8: [2.0, 1.2, 2.0], 9: [1.8, 1.2, 2.0] };
   const MAXN = { 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 6: 7, 7: 8, 8: 9, 9: 9 };
@@ -86,7 +100,8 @@
   const hwReady = Promise.all([["5", "config/ma-homework.json?v=2"], ["7", "config/ma-homework-7.json?v=1"], ["10", "config/ma-homework-10.json?v=1"]].map(([g, u]) =>
     fetch(u).then(r => r.json()).then(j => { HWS[g] = j; }).catch(() => {}))).then(() => { HW = HWS[5]; });
   const groupOf = (p) => p && p.group ? String(p.group) : p && p.age >= 10 ? "10" : p && p.age >= 7 ? "7" : "5";
-  function useGroup(p) { const g = groupOf(p); HW = HWS[g] || HWS[5]; const [oc, ol] = orionConst(g, AURORA_N[g]);
+  function useGroup(p) { const g = groupOf(p); HW = HWS[g] || HWS[5]; if (isVB(p)) { [CONST, LINES] = constVB(); buildStars(); document.documentElement.classList.remove("o-g7", "o-g10"); return g; }
+    const [oc, ol] = orionConst(g, AURORA_N[g]);
     CONST = (g === "5" ? CONST5 : CONST7).concat([oc]); LINES = Object.assign({}, g === "5" ? LINES5 : LINES7, { O: ol }); buildStars();
     document.documentElement.classList.toggle("o-g7", g !== "5"); document.documentElement.classList.toggle("o-g10", g === "10"); return g; }
   const REVIEW = (() => { const r = Q.get("review"); try { if (r === "1") sessionStorage.setItem("obs.review", "1"); if (r === "0") sessionStorage.removeItem("obs.review"); return sessionStorage.getItem("obs.review") === "1"; } catch (e) { return r === "1"; } })();
@@ -122,7 +137,7 @@
 
   // ---- глас: Зори (zr_*), иначе разказвачът (Калина) ----
   let AUDZ = {}, AUD = {}, cur = null;
-  fetch("config/abacus-audio-zori.json?v=21").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
+  fetch("config/abacus-audio-zori.json?v=22").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUDZ[x.t] = x.f; })).catch(() => {});
   fetch("config/abacus-audio.json?v=4").then(r => r.ok ? r.json() : []).then(a => a.forEach(x => { AUD[x.t] = x.f; })).catch(() => {});
   // „пораснал“ режим (7+, 11.11.2026): Зори е спътник – кратки реплики, само текст (гласът по избор: P.zv); рекорди и значки
   const grown = () => !!P && groupOf(P) !== "5";
@@ -209,15 +224,15 @@
   const starPath = (R) => { let d = ""; for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? R * .45 : R; d += (i ? "L" : "M") + (rr * Math.cos(a)).toFixed(1) + " " + (rr * Math.sin(a)).toFixed(1); } return d + "Z"; };
   // ---- небето като SVG (използва се и в прозореца на обсерваторията, и в картата) ----
   // видими съзвездия: А винаги; Б – щом детето стигне до него; В – след „Двете ръце“ (по желание). Останалите – мъглявини „?“
-  const visibleC = (c) => c === "O" ? (REVIEW || classAt() > AURORA_N[groupOf(P)]) : groupOf(P) !== "5" ? (c === "A" || (c === "B" && classAt() >= 9)) : c === "A" || (c === "B" && P.cur >= 10) || (c === "C" && (P.b[17] || 0) >= 3);
+  const visibleC = (c) => isVB(P) ? (c === "A" || REVIEW || (c === "T" && classAt() >= 10) || (c === "O" && classAt() > VB_END.aurora) || (c === "PL" && classAt() > VB_END.orion)) : c === "O" ? (REVIEW || classAt() > AURORA_N[groupOf(P)]) : groupOf(P) !== "5" ? (c === "A" || (c === "B" && classAt() >= 9)) : c === "A" || (c === "B" && P.cur >= 10) || (c === "C" && (P.b[17] || 0) >= 3);
   function skySVG(opts) {
     const o = opts || {}, b = P.b || {}, halo = P.halo || {}, rev = P.rev || {};
     let s = `<svg viewBox="${o.vb || "0 60 1440 520"}" class="o-sky" role="img" aria-label="Небето на ${P.name}">`;
     s += `<defs><radialGradient id="gl"><stop offset="0" stop-color="#FFF6D8"/><stop offset=".45" stop-color="#F5C04A"/><stop offset="1" stop-color="#F5C04A" stop-opacity="0"/></radialGradient>
       <radialGradient id="mist"><stop offset="0" stop-color="#8E7BD8" stop-opacity=".45"/><stop offset="1" stop-color="#8E7BD8" stop-opacity="0"/></radialGradient><filter id="blur"><feGaussianBlur stdDeviation="8"/></filter></defs>`;
-    s += `<g class="o-field">`; for (let i = 0; i < 190; i++) { const x = (i * 337) % 2440, y = 40 + (i * 211) % 560, r = (i % 3) * .5 + .6; s += `<circle cx="${x}" cy="${y}" r="${r}" fill="#fff" opacity="${.15 + (i % 5) * .07}" class="${i % 7 ? "" : "tw"}"/>`; } s += `</g>`;
+    const fw = isVB(P) ? 3560 : 2440, fn = isVB(P) ? 280 : 190; s += `<g class="o-field">`; for (let i = 0; i < fn; i++) { const x = (i * 337) % fw, y = 40 + (i * 211) % 560, r = (i % 3) * .5 + .6; s += `<circle cx="${x}" cy="${y}" r="${r}" fill="#fff" opacity="${.15 + (i % 5) * .07}" class="${i % 7 ? "" : "tw"}"/>`; } s += `</g>`;
     if (o.labels) { s += `<g class="o-astro">${[160, 300, 440, 580].map(r => `<circle cx="560" cy="330" r="${r}"/>`).join("")}${Array.from({ length: 12 }, (_, i) => `<line x1="560" y1="330" x2="${560 + 700 * Math.cos(i * Math.PI / 6)}" y2="${330 + 700 * Math.sin(i * Math.PI / 6)}"/>`).join("")}</g>`; }
-    if (o.far) FAR.forEach((f, i) => { const known = false;
+    if (o.far) FAR.filter(f => !(isVB(P) && f[0] === "Плеяди")).forEach((f, i) => { const known = false;
       s += `<g class="o-far"><ellipse cx="${f[2]}" cy="${f[3]}" rx="70" ry="44" fill="url(#mist)"/><text x="${f[2]}" y="${f[3] + 8}" text-anchor="middle">${known ? f[0] : "?"}</text></g>`; });
     CONST.forEach(c => { if (visibleC(c.id)) return; const xs = c.stars.map(x => x[2]), ys = c.stars.map(x => x[3]), cx = (Math.min(...xs) + Math.max(...xs)) / 2, cy = (Math.min(...ys) + Math.max(...ys)) / 2;
       s += `<g class="o-mist"><ellipse cx="${cx}" cy="${cy}" rx="${(Math.max(...xs) - Math.min(...xs)) / 2 + 60}" ry="${(Math.max(...ys) - Math.min(...ys)) / 2 + 50}" fill="url(#mist)" filter="url(#blur)"/>${o.labels ? `<text x="${cx}" y="${cy + 12}" text-anchor="middle">?</text>` : ""}</g>`; });
@@ -246,6 +261,11 @@
   // вляво голямото поле с обсерваторията и „Продължи“ (с реалния напредък); вдясно две карти – „Звездна карта“ и „Игри“
   // пристигане в нова област (веднъж): Орион след „Просто“
   function screenRegion(reg) {
+    if (reg === "pleiades") { gen++; P.seen = P.seen || {}; P.seen[reg] = 1; save(); const n = (CONST.find(c => c.id === "PL") || { stars: [] }).stars.length; app.className = "o-scr o-region";
+      app.innerHTML = `<div class="o-regsky">${skySVG({ vb: "2570 110 780 470" })}</div>
+        <div class="o-regbox"><i>Нова област</i><b>Плеяди</b><small>Модул „Приятели“ · ${n} звезди</small>
+          <div class="o-sbar"><button class="o-sec" id="o-rgh">Към обсерваторията</button><button class="o-go" id="o-rgm">★ Към Плеядите</button></div></div>`;
+      voice(tone("Нова област! Това са Плеядите. Тук ще научим приятелите на числата.")); $("#o-rgh").onclick = () => screenHome(); $("#o-rgm").onclick = () => { mapRegion = "pleiades"; screenMap(); }; return; }
     gen++; P.seen = P.seen || {}; P.seen[reg] = 1; save(); const g = groupOf(P), n = (CONST.find(c => c.id === "O") || { stars: [] }).stars.length;
     app.className = "o-scr o-region";
     app.innerHTML = `<img class="o-regimg" src="assets/img/obs/${g === "10" ? "orion_arrival_plain" : "orion_arrival"}.webp" alt="">
@@ -255,8 +275,10 @@
     $("#o-rgh").onclick = () => screenHome(); $("#o-rgm").onclick = () => { mapRegion = "orion"; screenMap(); };
   }
   function screenHome() {
+    if (isTutor() && P.tutor) tutorStars();   // небето на тутора – винаги от уменията
     sceneOff(); const back = BACK; BACK = null; if (!back || back.kind === "exit") JS = null; discMigrate();   // изход по средата / друг път към дома – снимката отпада, без празнуване
-    if (!REVIEW && classAt() > AURORA_N[groupOf(P)] && !(P.seen || {}).orion) return screenRegion("orion");
+    if (!REVIEW && isVB(P) && classAt() > VB_END.orion && !(P.seen || {}).pleiades) return screenRegion("pleiades");
+    if (!REVIEW && classAt() > (isVB(P) ? VB_END.aurora : AURORA_N[groupOf(P)]) && !(P.seen || {}).orion) return screenRegion("orion");
     gen++; M = null; P.cur = classAt();
     const all = Object.keys(STAR).filter(k => regionOf(+k) === regionOf(classAt())), lit = all.filter(k => (P.b[k] || 0) >= 3).length, L = hwCurrent(), older = hwOlder();
     const LL = L || assignedL().slice(-1)[0], st = LL ? hwState(LL) : { done: [] };
@@ -273,8 +295,8 @@
         <button class="o-diarybtn" id="o-diary" type="button" aria-label="Дневник на наблюденията">${BOOK}<b>Дневник</b></button><button class="o-teach" id="o-teach" aria-label="За учителя (задръж)">👩‍🏫<i></i></button><button class="o-me" id="o-me"><img src="assets/img/world/avatars/${P.av}.webp" alt=""><b>${P.name}</b><span>смени</span></button></header>
       <div class="o-hgrid">
         <div class="o-hero">
-          <div class="o-hbg"></div><button class="o-hwin" id="o-win" aria-label="Звездна карта"><div class="o-proj">${skySVG({ vb: regionOf(classAt()) === "orion" ? "1490 100 520 520" : "40 80 460 460" })}</div><div class="o-glass"></div></button>
-          <div class="o-htitle"><b>Звездна обсерватория</b><small>Област Аврора</small></div>
+          <div class="o-hbg"></div><button class="o-hwin" id="o-win" aria-label="Звездна карта"><div class="o-proj">${skySVG({ vb: regWin(regionOf(classAt())) })}</div><div class="o-glass"></div></button>
+          <div class="o-htitle"><b>Звездна обсерватория</b><small>Област ${REG_NAME[regionOf(classAt())]}</small></div>
           ${isTutor() ? `<div class="o-hbadge"><b>Урок със Зори</b><small>AI тутор · ${(() => { const c = TU.plan(tutorState()).current; return c ? TU.BY[c].name : "модулът е завършен"; })()}</small></div>` : LL ? `<div class="o-hbadge"><b>Занятие ${LL.n}</b><small>${LL.title}</small>${dots}</div>` : ""}
           <div class="o-hstage"><div class="o-say">${line}</div>${zori(L ? "explain" : "joy")}${grown() ? "" : `<button class="o-kidb" id="o-kid"><img class="o-kid" src="assets/img/world/avatars/${P.av}.webp" alt=""><span>${P.name} · ти</span></button>`}</div>${groupOf(P) === "10" ? statsPanel() : grown() ? recLine() : isTutor() ? `<div class="o-hrec o-coll"><i>Моята колекция</i><div>${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(d => `<b class="${(P.digits || []).includes(d) ? "on" : ""}">${d}</b>`).join("")}</div></div>` : ""}
           ${older.length ? `<button class="o-hold" id="o-older">Доиграй: занятие ${older[older.length - 1].n}</button>` : ""}
@@ -321,7 +343,7 @@
       // звездата на истинската мисия (занятието, което „Продължи“ стартира) – само подчертаване, яркостта е от P.b; небето се центрира около нея
       const star = !tutor && L && STAR[L.n] ? L.n : null, S0 = star ? STAR[star] : null;
       const SV = ign && STAR[ign.n] ? STAR[ign.n] : back && STAR[back.focus] ? STAR[back.focus] : S0;   // при завръщане – небето е около звездата на урока (светнала или не)
-      const portal = { star, svg: skySVG({ vb: SV ? `${SV.x - 230} ${SV.y - 230} 460 460` : regionOf(classAt()) === "orion" ? "1490 100 520 520" : "40 80 460 460" }),
+      const portal = { star, svg: skySVG({ vb: SV ? `${SV.x - 230} ${SV.y - 230} 460 460` : regWin(regionOf(classAt())) }),
         kicker: tutor ? "Урок със Зори" : LL ? `Занятие ${LL.n}` : "", title: tutor ? (tp.current ? TU.BY[tp.current].name : "Модулът е завършен") : LL ? LL.title.split(" · ")[0] : "Домашното е готово",
         sub: tutor ? "AI тутор" : round ? `${round.label} · кръг\u00a0${st.next + 1}\u00a0от\u00a0${L.rounds.length}` : "Виж звездите на картата",
         dots: tutor ? "" : dots, icon: L || tutor ? "▶" : "★", cta: L || tutor ? "Продължи" : "Звездна карта" };
@@ -340,7 +362,7 @@
         games: () => { SC = null; screenGames(); }, map: () => { SC = null; screenMap(); },
         seamless: () => !!window.ObsJourney && !FAST_ON && !!(tutor || L) });
       SC.ui.insertAdjacentHTML("afterbegin", `<header class="os-head"><a class="o-hh" href="index.html" aria-label="Към Моят свят">⌂</a>
-          <div class="os-title"><b><span class="os-tl">Звездна обсерватория</span><span class="os-ts">Обсерватория</span></b><small>${regionOf(classAt()) === "orion" ? "Област Орион" : "Област Аврора"}</small></div>${REVIEW ? '<span class="o-review">преглед</span>' : ""}<span class="o-sp"></span>
+          <div class="os-title"><b><span class="os-tl">Звездна обсерватория</span><span class="os-ts">Обсерватория</span></b><small>Област ${REG_NAME[regionOf(classAt())]}</small></div>${REVIEW ? '<span class="o-review">преглед</span>' : ""}<span class="o-sp"></span>
           <button class="o-diarybtn" id="o-diary" type="button" aria-label="Дневник на наблюденията">${BOOK}<b>Дневник</b></button>
           <button class="o-teach" id="o-teach" type="button" aria-label="За учителя (задръж)">👩‍🏫<i></i></button>
           <button class="o-me" id="o-me" type="button"><img src="assets/img/world/avatars/${P.av}.webp" alt=""><b>${P.name}</b><span>смени</span></button></header>
@@ -490,7 +512,7 @@
         <table class="o-ttbl"><thead><tr><th>Код</th><th>Занятие</th><th>Кръгове на домашното</th><th>Състояние</th></tr></thead><tbody>${rows}</tbody></table>
         <h3>Свободни игри – отключване <small>(${HW.unlock_status || ""})</small></h3><table class="o-ttbl"><tbody>${un}</tbody></table></div>`;
     $("#o-back").onclick = screenHome;
-    $("#o-t-fmt").onchange = (e) => { P.format = e.target.value; P.formatSet = true; save(); };
+    $("#o-t-fmt").onchange = (e) => { P.format = e.target.value; P.formatSet = true; useGroup(P); if (isTutor()) { tutorState(); tutorStars(); } save(); };
     $("#o-t-next").onclick = () => { P.classAt = Math.min(max, at + 1); save(); screenHome(); };
     $("#o-t-rep").onclick = () => TU ? screenParentReport() : null; $("#o-t-week").onclick = () => screenWeek({ back: screenTeacher });
     $("#o-t-exp").onclick = exportData; $("#o-t-obs").onclick = () => screenObserve();
@@ -562,15 +584,18 @@
   }
 
   // ---- екран 3: звездната карта ----
-  const REGION_VB = { aurora: "40 60 1400 580", orion: "1360 60 1080 580" };
-  const regionOf = (n) => n > AURORA_N[groupOf(P)] ? "orion" : "aurora";
+  const REGION_VB = { aurora: "40 60 1400 580", orion: "1360 60 1080 580", pleiades: "2500 70 920 560" };
+  const REG_NAME = { aurora: "Аврора", orion: "Орион", pleiades: "Плеяди" }, REG_SUB = { aurora: "първата област от небето · модул „Просто“", orion: "втората област · модул „Братя“", pleiades: "третата област · модул „Приятели“" };
+  const regWin = (r) => r === "orion" ? "1490 100 520 520" : r === "pleiades" ? "2700 100 520 520" : "40 80 460 460";
+  const regionOf = (n) => isVB(P) ? (n > VB_END.orion ? "pleiades" : n > VB_END.aurora ? "orion" : "aurora") : n > AURORA_N[groupOf(P)] ? "orion" : "aurora";
   let mapRegion = null;
   function screenMap(focus) {
     gen++; const reg = mapRegion || regionOf(focus || classAt()); mapRegion = reg; const orionOpen = visibleC("O");
     app.className = "o-scr o-map";
-    app.innerHTML = `<div class="o-maptop"><button class="o-back" id="o-back">← Към обсерваторията</button><div class="o-grow"><div class="o-mt">${reg === "orion" ? "Орион" : "Аврора"}</div><div class="o-ms">${reg === "orion" ? "втората област · модул „Братя“" : "първата област от небето · модул „Просто“"}</div></div>
-      <div class="o-regs" role="tablist"><button role="tab" data-r="aurora" aria-selected="${reg === "aurora"}">Аврора</button><button role="tab" data-r="orion" aria-selected="${reg === "orion"}">${orionOpen ? "" : "🔒 "}Орион</button></div><button class="o-sec" id="o-mg">Игри ✦</button><button class="o-sec" id="o-md">Дневник</button>${hwCurrent() ? `<button class="o-go sm" id="o-mc">▶ Продължи</button>` : ""}</div>
-      <div class="o-mapwrap">${skySVG({ labels: 1, far: 1, focus, vb: REGION_VB[reg] })}${reg === "orion" && !orionOpen ? `<div class="o-regnote"><b>Орион · Братя</b>Следващата област. Отваря се след „Просто“.</div>` : ""}</div>
+    const regs = isVB(P) ? ["aurora", "orion", "pleiades"] : ["aurora", "orion"], open = (r) => r === "aurora" || visibleC(r === "orion" ? "O" : "PL");
+    app.innerHTML = `<div class="o-maptop"><button class="o-back" id="o-back">← Към обсерваторията</button><div class="o-grow"><div class="o-mt">${REG_NAME[reg]}</div><div class="o-ms">${REG_SUB[reg]}</div></div>
+      <div class="o-regs" role="tablist">${regs.map(r => `<button role="tab" data-r="${r}" aria-selected="${reg === r}">${open(r) ? "" : "🔒 "}${REG_NAME[r]}</button>`).join("")}</div><button class="o-sec" id="o-mg">Игри ✦</button><button class="o-sec" id="o-md">Дневник</button>${hwCurrent() ? `<button class="o-go sm" id="o-mc">▶ Продължи</button>` : ""}</div>
+      <div class="o-mapwrap">${skySVG({ labels: 1, far: 1, focus, vb: REGION_VB[reg] })}${reg !== "aurora" && !open(reg) ? `<div class="o-regnote"><b>${REG_NAME[reg]} · ${reg === "orion" ? "Братя" : "Приятели"}</b>Следващата област. Отваря се след „${reg === "orion" ? "Просто" : "Братя"}“.</div>` : ""}</div>
       <div class="o-card" id="o-card" hidden></div>
       <div class="o-legend"><span><i class="lk"></i>предстои</span><span><i class="lv1"></i>упражняваме</span><span><i class="lv3"></i>научено</span><span><i class="rv"></i>проверено след време</span><span><i class="mind">✦</i>и наум</span></div>`;
     app.querySelectorAll(".o-regs button").forEach(b => b.onclick = () => { mapRegion = b.dataset.r; screenMap(); });
@@ -1365,10 +1390,10 @@
       try { localStorage.setItem("obs.scene.v1." + id, "5"); localStorage.setItem("obs.journey.v1." + id, "1"); localStorage.removeItem("obs.zmem.v1." + id); } catch (e) {} save();
       try { const u = new URL(location.href); u.searchParams.delete("demo"); history.replaceState(null, "", u); } catch (e) {} }
     // ?demo=tb / tt – AI тутор: „Просто 0–9“ (и при tb – „Просто 11–19“) е минато, следва „Брат на 4“ (tb) или „Числата 10–19“ (tt)
-    const TUN = { tb: "B4", tt: "T1" }[Q.get("demo")];
+    const TUN = { tb: "B4", tt: "T1", tf: "F0" }[Q.get("demo")];
     if (TUN && TU && DEMO.some(x => x.id === Q.get("p"))) { const id = Q.get("p"); resetDemo(id); const p0 = prof(id); p0.format = "ai"; p0.formatSet = true; p0.group = "5"; p0.tutor = TU.newState();
       const o = TU.BY[TUN].order, far = Date.now() + 30 * 864e5; TU.SKILLS.forEach(s => { p0.tutor.skills[s.id] = { id: s.id, status: s.order < o ? "mastered" : "locked", tries: [], tried: [], strategy: null, errRun: 0, sessionsNoProgress: 0, nextReview: s.order < o ? far : null }; });
-      p0.tutor.lastCheck = Date.now(); TU.refresh(p0.tutor); for (let k = 1; k <= 9; k++) p0.b[k] = 3; if (TUN === "B4") { p0.b[11] = 3; p0.classAt = p0.cur = 21; p0.seen = { ...(p0.seen || {}), orion: 1 }; }
+      p0.tutor.lastCheck = Date.now(); TU.refresh(p0.tutor); for (let k = 1; k <= 9; k++) p0.b[k] = 3; if (TUN !== "T1") p0.seen = { ...(p0.seen || {}), orion: 1 };
       try { localStorage.setItem("obs.scene.v1." + id, "5"); localStorage.setItem("obs.journey.v1." + id, "1"); } catch (e) {} save();
       try { const u = new URL(location.href); u.searchParams.delete("demo"); history.replaceState(null, "", u); } catch (e) {} }
     if (Q.get("p") && ALLP.some(x => x.id === Q.get("p"))) { P = prof(Q.get("p")); if (Q.get("class")) { P.classAt = +Q.get("class"); save(); } applyMotion(); Q.get("m") ? startMission(+Q.get("m")) : Q.get("map") ? screenMap() : screenHome(); } else screenProfiles();
@@ -1379,19 +1404,23 @@
   const TU = window.MA_TUTOR;
   const isTutor = () => !!(TU && P && P.format === "ai" && groupOf(P) === "5");
   function tutorState() { if (!P.tutor) P.tutor = TU.newState(); TU.refresh(P.tutor); return P.tutor; }
-  const SKILL_LESSON = { P1: 1, P2: 1, P3: 2, P4: 3, P5: 4, PN: 5, P6: 5, P7: 6, P8: 7, P9: 8, T1: 11, PT: 11, CH: 9,
-    B4: 22, MB4: 24, B3: 25, MB3: 27, B2: 28, MB2: 30, B1: 31, MB1: 33, BN: 34 };   // звездата на картата за всяко умение
-  function tutorStars() {   // яркостта на звездите от състоянието на уменията (усвоено → 3, чака проверка → 2, учи се → 1)
-    const st = P.tutor; if (!st) return; const lv = { mastered: 3, pending: 2, practiced: 2, learning: 1, stalled: 1 };
-    Object.entries(SKILL_LESSON).forEach(([id, n]) => { const k = st.skills[id]; if (!k) return; const v = lv[k.status] || 0; P.b[n] = Math.max(P.b[n] || 0, v); });
-    ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "MT", "MB4", "MB3", "MB2", "MB1"].forEach(id => { const k = st.skills[id]; if (k && k.status === "mastered") P.halo[SKILL_LESSON[(TU.BY[id] || {}).ab || "P" + id.slice(1)]] = 1; });
-    P.classAt = Math.max(P.classAt || 1, ...Object.entries(SKILL_LESSON).filter(([id]) => st.skills[id] && st.skills[id].status !== "locked").map(([, n]) => n));
+  const SKILL_LESSON = { P1: 1, P2: 1, P3: 2, P4: 3, P5: 4, PN: 5, P6: 5, P7: 6, P8: 7, P9: 8, CH: 9, T1: 10, PT: 11,
+    B4: 12, MB4: 13, B3: 14, MB3: 15, B2: 16, MB2: 17, B1: 18, MB1: 19, BN: 20,
+    F0: 21, F98: 22, MF98: 23, F76: 24, MF76: 25, F5: 26, MF5: 27, F43: 28, MF43: 29, F21: 30, MF21: 31, FX: 32, MFX: 33, FN: 34 };   // звездата на картата за всяко умение
+  function tutorStars() {   // яркостта на звездите от състоянието на уменията (усвоено → 3, чака проверка → 2, учи се → 1); небето на тутора е по вариант Б
+    const st = P.tutor; if (!st) return; const lv = { mastered: 3, pending: 2, practiced: 2, learning: 1, stalled: 1 }, nb = {}, nh = {};
+    Object.entries(SKILL_LESSON).forEach(([id, n]) => { const k = st.skills[id]; if (!k) return; nb[n] = Math.max(nb[n] || 0, lv[k.status] || 0); });
+    ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "MT"].forEach(id => { const k = st.skills[id]; if (k && k.status === "mastered") nh[SKILL_LESSON[(TU.BY[id] || {}).ab || "P" + id.slice(1)]] = 1; });
+    P.b = nb; P.halo = nh;
+    P.classAt = Math.max(1, ...Object.entries(SKILL_LESSON).filter(([id]) => st.skills[id] && st.skills[id].status !== "locked").map(([, n]) => n));
   }
   const INTRO_T = { G: "Да видим кои цифри познаваш!", A1: "Това е абакусът. Броим само топчетата до гредата.", C1: "Земните топчета струват по едно. Палецът ги вдига.",
     C2: "Небесното топче е пет! Мести го с показалеца.", PN: "Щипка: небесното и земните топчета – заедно, с едно движение.", CH: "Звездна нощ! Смятаме наум с всички числа.",
     T1: "Десетиците са на втората пръчка вляво.", PT: "Смятаме с числата от 11 до 19!", MT: "Сега от 11 до 19 наум!",
     B4: "Брат на четири!", B3: "Брат на три!", B2: "Брат на две!", B1: "Брат на едно!", MB4: "Брат на четири – наум!", MB3: "Брат на три – наум!", MB2: "Брат на две – наум!", MB1: "Брат на едно – наум!",
-    BN: "Звездна нощ! Всички братя – наум." };
+    BN: "Звездна нощ! Всички братя – наум.", F0: "Числата до 99!", F98: "Приятели девет и осем!", F76: "Приятели седем и шест!", F5: "Приятел пет!", F43: "Приятели четири и три!", F21: "Приятели две и едно!",
+    MF98: "Приятели девет и осем – наум!", MF76: "Приятели седем и шест – наум!", MF5: "Приятел пет – наум!", MF43: "Приятели четири и три – наум!", MF21: "Приятели две и едно – наум!",
+    FX: "Преход през петдесет!", MFX: "Преход през петдесет – наум!", FN: "Звездна нощ! Всички приятели – наум." };
   const introOf = (s) => INTRO_T[s.id] || (s.kind === "mind" ? `Сега ±${s.n} наум – представи си абакуса!` : `Учим ±${s.n}!`);
   // „покажи и обясни“ преди детето да опита само: ново умение = обяснение → Зори показва → заедно → сам
   const TEACH_P = { 1: "Плюс едно: палецът вдига едно топче до гредата. Минус едно: показалецът го сваля.", 2: "Плюс две: палецът вдига две топчета наведнъж.",
@@ -1411,6 +1440,24 @@
   // една задача, която иска точно този брат: при „+“ от 5−k…4, при „−“ от 5…4+k
   function broTask(k, easy) { const op = easy || Math.random() < .55 ? "+" : "-", a = op === "+" ? 5 - k + Math.floor(Math.random() * k) : 5 + Math.floor(Math.random() * k);
     return { a, op, n: k, target: op === "+" ? a + k : a - k, moves: E.plan(a, op, k, 1).moves }; }
+  // „Приятели“ (вариант Б): едноцифрени действия на две пръчки (0–99); позволени: Просто, Братя, научените Приятели; „Преход през 50“ – само от FX нататък;
+  // „Приятели и братя“ – изключени (следващото ниво). Новата група приятели (или Преходът) – в поне една трета от действията, насочено (2 от 3), както при братята.
+  const frRule = (v, x) => { const t = v + x; if (t < 0 || t > 99) return null; const p = E.plan(v, x > 0 ? "+" : "-", Math.abs(x), 2); return p.ok === false ? null : p.rule; };
+  function frKind(s, v, x) { const r = frRule(v, x), n = Math.abs(x); if (!r) return null;
+    if (r === "Просто" || r === "Братя") return "s"; if (r === "Приятели" && s.allowed.includes(n)) return s.fr && s.fr.includes(n) ? "new" : (s.kind === "chain" ? "new" : "f");
+    if (r === "Преход" && s.trans && s.allowed.includes(n)) return s.trans && !s.fr ? "new" : "f"; return null; }
+  function friendChain(s, count) { count = Math.max(3, count); const need = Math.max(1, Math.floor(count / 3)), xs = []; for (let n = 1; n <= 9; n++) xs.push(n, -n);
+    const ready = (t) => xs.some(x => frKind(s, t, x) === "new");
+    for (let g = 0; g < 400; g++) { let v = s.trans && !s.fr && s.kind !== "chain" ? [41, 42, 43, 44, 45, 46, 47, 48, 49, 51, 52, 53, 54, 55, 56][Math.floor(Math.random() * 15)] : 0, used = 0; const nums = v ? [v] : [];
+      while (nums.length < count) { const i = nums.length, prev = nums[i - 1], last = i === count - 1, A = [], B = [], C = [];
+        for (const x of xs) { if (i === 0 && x < 0) continue; if (x === prev || (x === -prev && !last)) continue; const k = frKind(s, v, x); if (!k) continue; (k === "new" ? A : ready(v + x) ? B : C).push(x); }
+        const r = Math.random(), pool = A.length && r < 2 / 3 ? A : B.length && r < 2 / 3 ? B : A.concat(B, C); if (!pool.length) break;
+        const x = pool[Math.floor(Math.random() * pool.length)]; if (A.includes(x)) used++; nums.push(x); v += x; }
+      if (nums.length === count && used >= need) return { nums, answer: v }; }
+    return { nums: [7, 5], answer: 12 }; }
+  function friendTask(s) { for (let g = 0; g < 500; g++) { const v = s.trans && !s.fr ? 40 + Math.floor(Math.random() * 20) : Math.floor(Math.random() * 90), x = (1 + Math.floor(Math.random() * 9)) * (Math.random() < .55 ? 1 : -1);
+      if (frKind(s, v, x) === "new") { const op = x > 0 ? "+" : "-"; return { a: v, op, n: Math.abs(x), target: v + x, moves: E.plan(v, op, Math.abs(x), 2).moves }; } }
+    return { a: 7, op: "+", n: 5, target: 12, moves: E.plan(7, "+", 5, 2).moves }; }
   function teenTask() { const c = teenChain(2), a = c.nums[0], x = c.nums[1], op = x > 0 ? "+" : "-"; return { a, op, n: Math.abs(x), target: c.answer, moves: E.plan(a, op, Math.abs(x), 2).moves }; }
   // „заедно“: туторът осветява следващото движение; следим състоянието на абакуса (бърза щипка = двете движения почти наведнъж – не се губи);
   // ако детето се отклони – връщаме началото и показваме отново
@@ -1426,7 +1473,7 @@
   // ---- упражнение като в плановете (младша група, „Просто“): вериги, които растат по брой действия и скорост ----
   // [начало и таван на действията на абакуса, начало и таван наум] за всяко число; скорост от 2,0 с надолу до 1,0 с (наум от 2,2 с)
   const TPAR = { 1: [5, 10, 4, 10], 2: [5, 10, 4, 10], 3: [6, 15, 4, 10], 4: [6, 15, 4, 10], 5: [6, 15, 4, 10], 6: [6, 15, 4, 10], 7: [7, 20, 5, 15], 8: [7, 20, 5, 17], 9: [7, 25, 5, 20] };
-  function tPar(id) { const s = TU.BY[id], k = P.tutor.skills[id]; if (!k.par) { const p = TPAR[s.n || (s.teen || s.bro ? 5 : 9)] || TPAR[9]; k.par = s.kind === "mind" || s.kind === "chain" ? { count: p[2], max: p[3], speed: 2.2 } : { count: p[0], max: p[1], speed: 2.0 }; } return k.par; }
+  function tPar(id) { const s = TU.BY[id], k = P.tutor.skills[id]; if (!k.par) { const p = TPAR[s.n || (s.teen || s.bro || s.fr || s.trans ? 5 : 9)] || TPAR[9]; k.par = s.kind === "mind" || s.kind === "chain" ? { count: p[2], max: p[3], speed: 2.2 } : { count: p[0], max: p[1], speed: 2.0 }; } return k.par; }
   function tParStep(par, ok) {   // 2 успеха подред → едно действие повече (до тавана), после по-бързо; грешка → по-кратко и по-бавно
     if (ok) { par.wins = (par.wins || 0) + 1; if (par.wins >= 2) { par.wins = 0; if (par.count < par.max) par.count++; else par.speed = Math.max(1.0, Math.round((par.speed - .1) * 10) / 10); } }
     else { par.wins = 0; par.count = Math.max(3, par.count - 1); par.speed = Math.min(2.5, Math.round((par.speed + .1) * 10) / 10); }
@@ -1450,7 +1497,7 @@
   }
   // верига: числата се показват едно по едно със зададената скорост; детето смята на абакуса докато ги вижда (или наум, после въвежда)
   async function tChain(s, par, mind) {
-    const rods = s.rods || 1, t = topicFor(s.topic || "s9"), ex = s.teen ? teenChain(par.count) : s.bro ? broChain(s, par.count) : E.simpleExample({ ...t, count: par.count, must: s.kind === "chain" ? 0 : s.id === "PN" ? 6 : s.n }) || E.simpleExample({ ...t, count: par.count });
+    const rods = s.rods || 1, t = topicFor(s.topic || "s9"), ex = s.teen ? teenChain(par.count) : s.bro ? broChain(s, par.count) : s.fr || s.trans ? friendChain(s, par.count) : E.simpleExample({ ...t, count: par.count, must: s.kind === "chain" ? 0 : s.id === "PN" ? 6 : s.n }) || E.simpleExample({ ...t, count: par.count });
     const nums = ex.nums, w = $("#o-work"), t0 = Date.now();
     w.classList.add("o-trw"); w.innerHTML = `<div class="o-trl${mind ? " solo" : ""}"><div class="o-trn" id="o-num"></div><div class="o-trq" id="o-trq"></div></div>${mind ? "" : `<div class="o-trabk"><div class="o-abhost" id="o-abh"></div></div>`}`;
     const ab = mind ? null : abacus($("#o-abh"), rods); if (ab) ab.enable(true);
@@ -1547,6 +1594,21 @@
       else { await talk(`Братът на ${k} е ${b}: плюс ${k} е плюс пет, минус ${b}.`, "explain"); await demo(5 - k, "+", k, `Плюс ${k}: петицата надолу, ${b} земни – махаме.`); }
       await demo(5 + Math.floor(k / 2), "-", k, `Минус ${k}: минус пет, плюс ${b}.`);
       const a = 4 - Math.floor((k - 1) / 2); await talk("Да опитаме заедно!", "joy"); const ab = abHere(a, `${a} + ${k}`); await togetherDo(ab, E.plan(a, "+", k, 1).moves); await talk("Браво! Сега сам.", "joy"); return; }
+    if (s.id === "F0") { await talk("Числата до 99: десетиците са на втората пръчка вляво, единиците – вдясно.", "explain");
+      for (const v of [23, 47, 85]) { const ab = abHere(0, v, 2); say(`Това е ${v}.`, "point"); await ab.demo(fingered(E.plan(0, "+", v, 2).moves), false, true); await afterSay(600); }
+      await talk("Да покажем тридесет и шест заедно!", "joy"); const ab = abHere(0, 36, 2); await togetherDo(ab, E.plan(0, "+", 36, 2).moves); await talk("Браво! Сега сам.", "joy"); return; }
+    if ((s.fr || s.trans) && s.kind === "ab") { const fs = { ...s, fr: s.fr, trans: s.trans }, demo = async (a, x, line) => { const op = x > 0 ? "+" : "-", n = Math.abs(x), p = E.plan(a, op, n, 2), ab = abHere(a, `${a} ${op === "+" ? "+" : "−"} ${n}`, 2);
+        say(line, "point"); await ab.demo(fingered(p.moves), p.moves.length > 1, true); $("#o-num").textContent += ` = ${a + x}`; await afterSay(700); };
+      const find = (x, lo, hi) => { for (let v = lo; v <= hi; v++) if (frKind(fs, v, x) === "new") return v; return null; };
+      if (s.trans) { await talk("Понякога и десетиците имат нужда от помощ – около петдесет.", "explain");
+        await demo(47, 5, "Четиридесет и седем и пет: плюс десет, минус пет. А на десетиците четири и едно иска брат!"); await demo(52, -5, "Петдесет и две минус пет: минус десет, плюс пет – а на десетиците помага братът.");
+        await talk("Да опитаме заедно!", "joy"); const ab = abHere(46, "46 + 5", 2); await togetherDo(ab, E.plan(46, "+", 5, 2).moves); await talk("Браво! Сега сам.", "joy"); return; }
+      if (s.id === "F98") { await talk("Понякога на пръчката не стигат топчетата. Тогава помага десетицата – и приятел на числото.", "explain");
+        await talk("Девет и едно са приятели – заедно правят десет. Осем и две – също.", "explain");
+        await demo(0, 9, "От нула: плюс девет – просто."); }
+      for (const n of s.fr) { const a = find(n, 1, 9); if (a != null) await demo(a, n, `Плюс ${n}: плюс десет, минус ${10 - n}. Приятелят на ${n} е ${10 - n}.`); }
+      const n0 = s.fr[0], m = find(-n0, 10, 19); if (m != null) await demo(m, -n0, `Минус ${n0}: минус десет, плюс ${10 - n0}.`);
+      const a2 = find(n0, 1, 9); await talk("Да опитаме заедно!", "joy"); const ab = abHere(a2, `${a2} + ${n0}`, 2); await togetherDo(ab, E.plan(a2, "+", n0, 2).moves); await talk("Браво! Сега сам.", "joy"); return; }
     if (s.id === "T1") { await talk("Десетиците са на втората пръчка вляво. Едно земно топче там е десет.", "explain");
       for (const v of [10, 13, 17]) { const ab = abHere(0, v, 2); say(v === 10 ? "Това е 10: едно топче на десетиците." : `Това е ${v}: десет и още ${v - 10}.`, "point"); await ab.demo(fingered(E.plan(0, "+", v, 2).moves), false, true); await afterSay(600); }
       await talk("Да покажем дванадесет заедно!", "joy"); const ab = abHere(0, 12, 2); await togetherDo(ab, E.plan(0, "+", 12, 2).moves); await talk("Браво! Сега сам.", "joy"); return; }
@@ -1566,7 +1628,7 @@
     if (s.kind === "mind") { const t = opTask(TU.BY[s.ab || "P" + s.n], false), ab = abHere(t.a, `${t.a} ${t.op === "+" ? "+" : "−"} ${t.n}`, (TU.BY[s.ab] || {}).rods || 1);
       await talk("Сега наум: представи си абакуса.", "explain"); await ab.demo(fingered(t.moves), t.moves.length > 1, true); $("#o-num").textContent += ` = ${t.target}`;
       await talk("Сега смятай без абакус – само в главата си.", "point"); return; }
-    if (s.kind === "chain") { await talk(s.bro ? "Звездна нощ! Всички братя – наум." : "Звездна нощ! Смятаме наум с всички числа.", "explain"); return; }
+    if (s.kind === "chain") { await talk(s.bro ? "Звездна нощ! Всички братя – наум." : s.trans ? "Звездна нощ! Всички приятели – наум." : "Звездна нощ! Смятаме наум с всички числа.", "explain"); return; }
   }
   function tShell(title, blocks, i) {
     app.className = "o-scr o-mis o-tutor";
@@ -1578,7 +1640,7 @@
   function tStep(i) { app.querySelectorAll(".o-pips b").forEach((b, j) => { b.className = j < i ? "d" : j === i ? "c" : ""; }); }
   // задача за умение: a ± n с едно действие по правилото „Просто“ (числата до 9)
   function opTask(s, easy) {
-    if (s.teen) return teenTask(); if (s.bro) return broTask(s.bro, easy);
+    if (s.teen) return teenTask(); if (s.bro) return broTask(s.bro, easy); if (s.fr || s.trans) return friendTask(s);
     const ns = s.id === "PN" ? [6, 7, 8, 9] : s.n === 1 ? [1] : s.n === 2 ? [1, 2] : [s.n];
     for (let g = 0; g < 200; g++) { const n = ns[Math.floor(Math.random() * ns.length)], op = easy || Math.random() < .55 ? "+" : "-";
       const a = easy ? (op === "+" ? 0 : n) : Math.floor(Math.random() * 10), b = op === "+" ? a + n : a - n; if (b < 0 || b > 9) continue;
@@ -1601,7 +1663,7 @@
     if (FAST_ON) window.OBS_T = { tutor: 1, kind: s.kind, ab };
     if (s.kind === "intro") { const v = 1 + Math.floor(Math.random() * 9); ab.set(v); if (FAST_ON) window.OBS_T.target = 0; $("#o-num").textContent = "→ 0"; say("Нулирай абакуса.", "point");
       await untilIdle(ab, 0); ab.enable(false); return { ok: ab.value() === 0, method: true, helped: !!opts.helped, rt: Date.now() - t0 }; }
-    if (s.kind === "set") { const v = s.id === "C1" ? 1 + Math.floor(Math.random() * 4) : s.id === "T1" ? 10 + Math.floor(Math.random() * 10) : 5 + Math.floor(Math.random() * 5); ab.reset(); $("#o-num").textContent = v; say(`Покажи ${v}.`, "point"); if (FAST_ON) window.OBS_T.target = v;
+    if (s.kind === "set") { const v = s.id === "C1" ? 1 + Math.floor(Math.random() * 4) : s.id === "T1" ? 10 + Math.floor(Math.random() * 10) : s.id === "F0" ? 10 + Math.floor(Math.random() * 90) : 5 + Math.floor(Math.random() * 5); ab.reset(); $("#o-num").textContent = v; say(`Покажи ${v}.`, "point"); if (FAST_ON) window.OBS_T.target = v;
       await untilIdle(ab, v); ab.enable(false); return { ok: ab.value() === v, method: true, helped: !!opts.helped, rt: Date.now() - t0, v }; }
     const task = opts.task || opTask(s, opts.easy), ex = `${task.a} ${task.op === "+" ? "+" : "−"} ${task.n}`;
     if (s.kind === "mind" || s.kind === "chain") {
@@ -1649,7 +1711,7 @@
       w.innerHTML = `<div class="o-cmp"><div><small>преди</small>${abImg(task.a, s.rods || 1)}<b>${task.a}</b></div><div class="o-cmpa">${task.op === "+" ? "+" : "−"} ${task.n} →</div><div><small>след</small>${abImg(task.target, s.rods || 1)}<b>${task.target}</b></div></div>`;
       await talk("Виж какво се променя. Кои топчета се местят?", "explain"); await wait(2600); return;
     }
-    if (st === "game") { await talk("Да поиграем с това движение!", "joy"); const keep = $("#o-work").innerHTML; try { await (s.bro || s.teen ? PLAY.flash({ topic: "s9", speed: 2.5, rounds: 3 }) : PLAY.fix({ topic: s.topic || "s4", rounds: 2 })); } catch (e) { if (e === "stale") throw e; } return; }
+    if (st === "game") { await talk("Да поиграем с това движение!", "joy"); const keep = $("#o-work").innerHTML; try { await (s.bro || s.teen || s.fr || s.trans ? PLAY.flash({ topic: "s9", speed: 2.5, rounds: 3 }) : PLAY.fix({ topic: s.topic || "s4", rounds: 2 })); } catch (e) { if (e === "stale") throw e; } return; }
     if (st === "easier") { sess.easy = 2; await talk("Да опитаме с по-лесен пример.", "explain"); return; }
   }
   async function runTutor() {
@@ -1694,7 +1756,7 @@
         cur = nx;
       }
       // игра за награда с текущото движение
-      tStep(5); const gs = TU.BY[cur || "P1"]; if (FAST_ON) {} else if (gs && (gs.kind === "ab" || gs.kind === "mind") && !gs.bro && !gs.teen) await PLAY.fix({ topic: gs.topic || "s4", rounds: 2 }); else if (gs && (gs.bro || gs.teen)) await PLAY.flash({ topic: "s9", speed: 2.5, rounds: 3 }); else if (known) await PLAY.flash({ topic: "s" + Math.max(2, known), speed: 2.5, rounds: 3 });
+      tStep(5); const gs = TU.BY[cur || "P1"]; if (FAST_ON) {} else if (gs && (gs.kind === "ab" || gs.kind === "mind") && !gs.bro && !gs.teen && !gs.fr && !gs.trans) await PLAY.fix({ topic: gs.topic || "s4", rounds: 2 }); else if (gs && (gs.bro || gs.teen || gs.fr || gs.trans)) await PLAY.flash({ topic: gs.fr || gs.trans ? "d99" : "s9", speed: 2.5, rounds: 3 }); else if (known) await PLAY.flash({ topic: "s" + Math.max(2, known), speed: 2.5, rounds: 3 });
       TU.endSession(st, Date.now()); tutorStars();
       if (sess.tower) { unTrw(); $("#o-work").innerHTML = `<div class="o-towerbig">${towerHtml(sess.tower)}</div>`; await talk("Виж колко висока е кулата ти!", "joy"); }
       const rep = tutorReport(sess); (P.treports = P.treports || []).push(rep); if (P.treports.length > 60) P.treports.shift(); save();
@@ -1922,6 +1984,6 @@
     $("#o-back").onclick = () => { gen++; back(); };
     app.querySelectorAll(".dz-gogame").forEach(x => x.onclick = () => runGame(x.dataset.g, JSON.parse(x.dataset.o)));
   }
-  window.OBS = { _teen: (c) => teenChain(c), screenWeek, screenDiary, _zm: { start: (n) => zmStart(HW.lessons.find(x => x.n === n)), end: (n) => zmEnd(HW.lessons.find(x => x.n === n)) }, _diaryPages: () => diaryPages(), _scene: () => SC, _discover: (id) => discover(id), _discPending: () => discPending(), _intro: (n) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return digitIntro(n); }, _trace: (n) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return traceDigit(n); }, _tchain: (id, mind) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return tChain(TU.BY[id], { count: 5, speed: 2 }, mind); }, runTutor, screenParentReport, screenRegion, _track: (k, r, s) => track(k, r, s), _const: (v, r, d) => constSVG(v, r, d), _hw: () => HW, runHw, screenTeacher, _hwComplete: (n) => hwComplete(HW.lessons.find(x => x.n === n)), _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
+  window.OBS = { _consts: () => CONST.map(c => c.id), _fr: (id, c) => friendChain(TU.BY[id], c), _teen: (c) => teenChain(c), screenWeek, screenDiary, _zm: { start: (n) => zmStart(HW.lessons.find(x => x.n === n)), end: (n) => zmEnd(HW.lessons.find(x => x.n === n)) }, _diaryPages: () => diaryPages(), _scene: () => SC, _discover: (id) => discover(id), _discPending: () => discPending(), _intro: (n) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return digitIntro(n); }, _trace: (n) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return traceDigit(n); }, _tchain: (id, mind) => { tutorState(); tShell("Урок със Зори", TBLOCKS, 3); return tChain(TU.BY[id], { count: 5, speed: 2 }, mind); }, runTutor, screenParentReport, screenRegion, _track: (k, r, s) => track(k, r, s), _const: (v, r, d) => constSVG(v, r, d), _hw: () => HW, runHw, screenTeacher, _hwComplete: (n) => hwComplete(HW.lessons.find(x => x.n === n)), _countSVG: (v) => countSVG(v), screenHome, screenMap, startMission, screenGames, screenSettings, screenResult, runGame, profile: () => P,
     testFinish: (n, r) => { M = Object.assign({ n, ex: [], par: PAR[n], max: MAXN[n], flash: [5, 6], ab: [3, 4], meth: [3, 4], im: [2, 3], help: 0 }, r || {}); return finish(); } };   // само за проверки
 })();

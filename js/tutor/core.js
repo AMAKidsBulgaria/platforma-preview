@@ -31,6 +31,16 @@
     SKILLS.push({ id: "B" + k, name: `Брат на ${k}: ±${k} на абакуса`, kind: "ab", pre: [i ? "MB" + A[i - 1] : "CH"], bro: k, allowed, topic: "b" + k, mind: "MB" + k });
     SKILLS.push({ id: "MB" + k, name: `Брат на ${k}: ±${k} наум`, kind: "mind", pre: ["B" + k], bro: k, allowed, topic: "b" + k, ab: "B" + k }); });
   SKILLS.push({ id: "BN", name: "Звездна нощ: всички братя наум", kind: "chain", pre: ["MB1"], bro: 1, allowed: [4, 3, 2, 1], topic: "b1" });
+  // „Приятели“ (вариант Б: едноцифрени действия, две пръчки – резултатът минава над 9), ред като в онлайн плана на AMAKids: 9 и 8 → 7 и 6 → 5 → 4 и 3 → 2 и 1;
+  // научените приятели се натрупват; всяка група – на абакуса, после наум; после „Преход през 50“ и Звездна нощ. „Приятели и братя“ – в следващото ниво.
+  const FR = [[9, 8], [7, 6], [5], [4, 3], [2, 1]], FALL = [9, 8, 7, 6, 5, 4, 3, 2, 1];
+  SKILLS.push({ id: "F0", name: "Числата до 99 на абакуса", kind: "set", pre: ["BN"], rods: 2, topic: "d99" });
+  FR.forEach((g, i) => { const id = g.join(""), allowed = [].concat(...FR.slice(0, i + 1)), nm = g.length > 1 ? `Приятели ${g.join(" и ")}` : `Приятел ${g[0]}`;
+    SKILLS.push({ id: "F" + id, name: nm + ": на абакуса", kind: "ab", pre: [i ? "MF" + FR[i - 1].join("") : "F0"], rods: 2, fr: g, allowed, topic: "d99", mind: "MF" + id });
+    SKILLS.push({ id: "MF" + id, name: nm + ": наум", kind: "mind", pre: ["F" + id], rods: 2, fr: g, allowed, topic: "d99", ab: "F" + id }); });
+  SKILLS.push({ id: "FX", name: "Преход през 50: на абакуса", kind: "ab", pre: ["MF21"], rods: 2, trans: true, allowed: FALL, topic: "d99", mind: "MFX" });
+  SKILLS.push({ id: "MFX", name: "Преход през 50: наум", kind: "mind", pre: ["FX"], rods: 2, trans: true, allowed: FALL, topic: "d99", ab: "FX" });
+  SKILLS.push({ id: "FN", name: "Звездна нощ: всички приятели наум", kind: "chain", pre: ["MFX"], rods: 2, trans: true, allowed: FALL, topic: "d99" });
   const BY = {}; SKILLS.forEach((s, i) => { s.order = i; BY[s.id] = s; });
 
   // ---- (2) модел на усвояването ----
@@ -102,6 +112,7 @@
   function prereqFor(id, err) {
     const s = BY[id]; if (!s || s.kind !== "ab") return null;
     if (s.bro) return err === "heaven" || err === "combined" ? "P5" : null;   // братята: бърка небесното топче → ±5
+    if (s.fr || s.trans) return null;   // приятелите: без връщане назад (стратегиите показват движението)
     if (err === "heaven" && s.n <= 5) return "C2";   // бърка небесното топче → да нареди 5–9
     if (err === "earth") return "C1";
     if (err === "combined" && s.n >= 6) return "PN";  // щипката
